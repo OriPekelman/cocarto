@@ -1,0 +1,10 @@
+CREATE ROLE gxis;
+ALTER ROLE gxis WITH PASSWORD 'gxis';
+ALTER ROLE gxis WITH LOGIN;
+CREATE DATABASE gxis WITH OWNER=gxis;
+
+CREATE ROLE gxis_test;
+ALTER ROLE gxis_test WITH PASSWORD 'gxis_test';
+ALTER ROLE gxis_test WITH LOGIN;
+CREATE DATABASE gxis_test WITH OWNER=gxis_test;
+
