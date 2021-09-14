@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_13_102932) do
+ActiveRecord::Schema.define(version: 2021_09_14_110026) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -32,7 +32,6 @@ ActiveRecord::Schema.define(version: 2021_09_13_102932) do
   create_table "attributes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "label"
     t.uuid "table_id"
-    t.enum "geography_type", enum_name: "attribute_type_enum"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["table_id"], name: "index_attributes_on_table_id"
@@ -50,7 +49,7 @@ ActiveRecord::Schema.define(version: 2021_09_13_102932) do
 
   create_table "tables", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
-    t.enum "geography_type", enum_name: "geometry_type_enum"
+    t.enum "geometry_type", enum_name: "geometry_type_enum"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
