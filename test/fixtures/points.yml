@@ -1,13 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  geog: 
+  geog:
   table: one
   revision: 1
-  attributes: 
+  fields:
 
 two:
-  geog: 
+  geog:
   table: two
   revision: 1
-  attributes: 
+  fields:

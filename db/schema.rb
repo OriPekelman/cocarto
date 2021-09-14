@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_14_110026) do
+ActiveRecord::Schema.define(version: 2021_09_14_134932) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
   enable_extension "postgis"
 
-  create_enum :attribute_type_enum, [
+  create_enum :fields_type_enum, [
     "text",
     "float",
     "integer",
@@ -29,19 +29,19 @@ ActiveRecord::Schema.define(version: 2021_09_14_110026) do
     "polygon",
   ], force: :cascade
 
-  create_table "attributes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "fields", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "label"
     t.uuid "table_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["table_id"], name: "index_attributes_on_table_id"
+    t.index ["table_id"], name: "index_fields_on_table_id"
   end
 
   create_table "points", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.geometry "geog", limit: {:srid=>0, :type=>"st_point"}
     t.uuid "table_id", null: false
     t.integer "revision"
-    t.jsonb "attributes"
+    t.jsonb "fields"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["table_id"], name: "index_points_on_table_id"
@@ -54,6 +54,6 @@ ActiveRecord::Schema.define(version: 2021_09_14_110026) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "attributes", "tables"
+  add_foreign_key "fields", "tables"
   add_foreign_key "points", "tables"
 end
