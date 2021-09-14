@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 2021_09_13_102932) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+  enable_extension "postgis"
 
   create_enum :attribute_type_enum, [
     "text",
@@ -37,6 +38,16 @@ ActiveRecord::Schema.define(version: 2021_09_13_102932) do
     t.index ["table_id"], name: "index_attributes_on_table_id"
   end
 
+  create_table "points", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.geometry "geog", limit: {:srid=>0, :type=>"st_point"}
+    t.uuid "table_id", null: false
+    t.integer "revision"
+    t.jsonb "attributes"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["table_id"], name: "index_points_on_table_id"
+  end
+
   create_table "tables", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.enum "geography_type", enum_name: "geometry_type_enum"
@@ -45,4 +56,5 @@ ActiveRecord::Schema.define(version: 2021_09_13_102932) do
   end
 
   add_foreign_key "attributes", "tables"
+  add_foreign_key "points", "tables"
 end
