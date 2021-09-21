@@ -1,0 +1,8 @@
+<p id="notice"><%= notice %></p>
+<div>
+    <h2>Table <%= @table.name %></h2>
+    Type: <%= @table.geometry_type %>
+</div>
+
+<%= link_to 'Edit', edit_table_path(@table) %> |
+<%= link_to 'Back', tables_path %>
