@@ -48,4 +48,8 @@ class TablesController < ApplicationController
   def table_params
     params.require(:table).permit(:name, :geometry_type)
   end
+<<<<<<< HEAD
 end
+=======
+end
+>>>>>>> b916480... supp/add spaces in tables_controller.rb
