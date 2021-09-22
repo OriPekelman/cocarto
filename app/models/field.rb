@@ -1,3 +1,3 @@
-class Attribute < ApplicationRecord
+class Field < ApplicationRecord
     belongs_to :table
 end
