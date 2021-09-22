@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_14_134932) do
+ActiveRecord::Schema.define(version: 2021_09_14_143945) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 2021_09_14_134932) do
     t.uuid "table_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.enum "field_type", enum_name: "fields_type_enum"
     t.index ["table_id"], name: "index_fields_on_table_id"
   end
 
