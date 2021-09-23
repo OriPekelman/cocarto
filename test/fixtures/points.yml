@@ -2,12 +2,12 @@
 
 one:
   geog:
-  table: one
+  layer: one
   revision: 1
   fields:
 
 two:
   geog:
-  table: two
+  layer: two
   revision: 1
   fields:
