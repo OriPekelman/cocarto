@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_14_143945) do
+ActiveRecord::Schema.define(version: 2021_09_23_093035) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -31,30 +31,30 @@ ActiveRecord::Schema.define(version: 2021_09_14_143945) do
 
   create_table "fields", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "label"
-    t.uuid "table_id"
+    t.uuid "layer_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.enum "field_type", enum_name: "fields_type_enum"
-    t.index ["table_id"], name: "index_fields_on_table_id"
+    t.index ["layer_id"], name: "index_fields_on_layer_id"
   end
 
-  create_table "points", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.geometry "geog", limit: {:srid=>0, :type=>"st_point"}
-    t.uuid "table_id", null: false
-    t.integer "revision"
-    t.jsonb "fields"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["table_id"], name: "index_points_on_table_id"
-  end
-
-  create_table "tables", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "layers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.enum "geometry_type", enum_name: "geometry_type_enum"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "fields", "tables"
-  add_foreign_key "points", "tables"
+  create_table "points", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.geometry "geog", limit: {:srid=>0, :type=>"st_point"}
+    t.uuid "layer_id", null: false
+    t.integer "revision"
+    t.jsonb "fields"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["layer_id"], name: "index_points_on_layer_id"
+  end
+
+  add_foreign_key "fields", "layers"
+  add_foreign_key "points", "layers"
 end

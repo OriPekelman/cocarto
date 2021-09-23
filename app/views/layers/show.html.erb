@@ -1,0 +1,8 @@
+<p id="notice"><%= notice %></p>
+<div>
+    <h2>Layer <%= @layer.name %></h2>
+    Type: <%= @layer.geometry_type %>
+</div>
+
+<%= link_to 'Edit', edit_layer_path(@layer) %> |
+<%= link_to 'Back', layers_path %>

@@ -19,7 +19,7 @@ class FieldsController < ApplicationController
     def create
       @field = Field.new(field_params)
       if @field.save
-        redirect_to @field.table
+        redirect_to @field.layer
       else
         # This line overrides the default rendering behavior, which
         # would have been to render the "create" view.
@@ -38,6 +38,6 @@ class FieldsController < ApplicationController
       end
 
       def field_params
-        params.require(:field).permit(:label, :table_id, :field_type)
+        params.require(:field).permit(:label, :layer_id, :field_type)
       end
   end
