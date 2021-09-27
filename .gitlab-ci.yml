@@ -19,7 +19,7 @@ lint:
   script:
     - make lint
 
-lint:
+test:
   stage: test
   script:
     - make test
