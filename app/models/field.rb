@@ -1,3 +1,3 @@
 class Field < ApplicationRecord
-    belongs_to :layer
+  belongs_to :layer
 end

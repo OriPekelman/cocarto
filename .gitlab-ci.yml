@@ -1,0 +1,25 @@
+default:
+  image: ruby:3.0.2
+# Cache gems in between builds
+cache:
+  paths:
+    - vendor/ruby
+    - node_modules
+
+before_script:
+  - bundle config set --local path 'vendor/ruby'
+
+install:
+  stage: build
+  script:
+    - make install
+
+lint:
+  stage: test
+  script:
+    - make lint
+
+test:
+  stage: test
+  script:
+    - make test
