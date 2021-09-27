@@ -2,7 +2,7 @@
 
 install: ## Install or update dependencies
 	bundle install
-#    bundle exec rake db:migrate
+    bundle exec rake db:migrate
 
 run: ## Start the app server
 	bundle exec rails server

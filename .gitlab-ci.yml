@@ -17,4 +17,9 @@ install:
 lint:
   stage: test
   script:
+    - make lint
+
+lint:
+  stage: test
+  script:
     - make test
