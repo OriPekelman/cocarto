@@ -1,5 +1,5 @@
 class LayersController < ApplicationController
-  before_action :set_layer, only: %i[ show edit update destroy ]
+  before_action :set_layer, only: %i[show edit update destroy]
 
   def index
     @layers = Layer.all
@@ -40,11 +40,12 @@ class LayersController < ApplicationController
   end
 
   private
-    def set_layer
-      @layer = Layer.find(params[:id])
-    end
 
-    def layer_params
-      params.require(:layer).permit(:name, :geometry_type)
-    end
+  def set_layer
+    @layer = Layer.find(params[:id])
+  end
+
+  def layer_params
+    params.require(:layer).permit(:name, :geometry_type)
+  end
 end
