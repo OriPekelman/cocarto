@@ -2,6 +2,12 @@
 <div>
     <h2>Layer <%= @layer.name %></h2>
     Type: <%= @layer.geometry_type %>
+    <h3>Fields</h2>
+    <ul>
+    <% @layer.fields.each do |field| %>
+        <li> <%= render field %> </li>
+    <% end %>
+    </ul>
 </div>
 
 <%= link_to 'Edit', edit_layer_path(@layer) %> |
