@@ -17,14 +17,9 @@ class FieldsController < ApplicationController
   end
 
   def create
-    @field = Field.new(field_params)
-    if @field.save
-      redirect_to @field.layer
-    else
-      # This line overrides the default rendering behavior, which
-      # would have been to render the "create" view.
-      render "new"
-    end
+    @layer = Layer.find(params[:layer_id])
+    @field = @layer.fields.create(field_params)
+    redirect_to @layer
   end
 
   def destroy
