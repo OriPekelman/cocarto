@@ -24,7 +24,7 @@ class FieldsController < ApplicationController
 
   def destroy
     @field.destroy
-    redirect_to fields_url, notice: "Field was successfully destroyed."
+    redirect_to @field.layer, notice: "Field was successfully destroyed."
   end
 
   private
