@@ -2,11 +2,13 @@
 
 <%= render 'form', layer: @layer %>
 
-<h3>Fields</h2>
+<h3>Fields</h3>
 <ul>
-<% @layer.fields.each do |field| %>
-    <li> <%= render field %> </li>
-<% end %>
+  <%= turbo_frame_tag "fields" do %>
+    <% @layer.fields.each do |field| %>
+      <li id="<%= dom_id(field) %>"> <%= render field %> </li>
+    <% end %>
+  <% end %>
 </ul>
 
 <h3>Add a new field:</h3>

@@ -19,12 +19,18 @@ class FieldsController < ApplicationController
   def create
     @layer = Layer.find(params[:layer_id])
     @field = @layer.fields.create(field_params)
-    redirect_to @layer
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to @layer }
+    end
   end
 
   def destroy
     @field.destroy
-    redirect_to @field.layer, notice: "Field was successfully destroyed."
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to @field.layer, notice: "Field was successfully destroyed." }
+    end
   end
 
   private
