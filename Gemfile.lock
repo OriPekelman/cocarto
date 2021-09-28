@@ -108,8 +108,6 @@ GEM
     minitest (5.14.4)
     msgpack (1.4.2)
     nio4r (2.5.8)
-    nokogiri (1.12.4-x86_64-darwin)
-      racc (~> 1.4)
     nokogiri (1.12.4-x86_64-linux)
       racc (~> 1.4)
     parallel (1.21.0)
@@ -206,9 +204,8 @@ GEM
       rubocop-performance (= 1.11.5)
     thor (1.1.0)
     tilt (2.0.10)
-    turbolinks (5.2.1)
-      turbolinks-source (~> 5.2)
-    turbolinks-source (5.2.0)
+    turbo-rails (0.8.1)
+      rails (>= 6.0.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.1.0)
@@ -255,7 +252,7 @@ DEPENDENCIES
   selenium-webdriver
   spring
   standard
-  turbolinks (~> 5)
+  turbo-rails
   tzinfo-data
   vite_rails
   web-console (>= 4.1.0)
