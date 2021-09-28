@@ -5,9 +5,7 @@
 <h3>Fields</h3>
 <ul>
   <%= turbo_frame_tag "fields" do %>
-    <% @layer.fields.each do |field| %>
-      <li id="<%= dom_id(field) %>"> <%= render field %> </li>
-    <% end %>
+    <%= render @layer.fields %>
   <% end %>
 </ul>
 

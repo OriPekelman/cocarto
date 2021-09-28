@@ -1,3 +1,1 @@
-<%= turbo_stream.append "fields" do %>
-  <li id="<%= dom_id(@field) %>"> <%= render @field %> </li>
-<% end %>
+<%= turbo_stream.append "fields", @field %>
