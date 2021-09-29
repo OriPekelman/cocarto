@@ -53,6 +53,11 @@
   dependencies:
     spark-md5 "^3.0.0"
 
+"@types/rails__activestorage@^6.0.1":
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/@types/rails__activestorage/-/rails__activestorage-6.0.1.tgz#edabdb81fd19dae291334f2cefc4c7d4e5283683"
+  integrity sha512-3BuX2qYTNVMaGtt+9qy1AUB4Y3jCEPkHPnNDf7mPY2M6dOTGcFKKJeXWiAYMYF7u4ll9JnC/hXTyjkwgAk3Z/A==
+
 braces@^3.0.1:
   version "3.0.2"
   resolved "https://registry.npmjs.org/braces/-/braces-3.0.2.tgz"
