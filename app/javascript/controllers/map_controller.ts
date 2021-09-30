@@ -12,7 +12,6 @@ export default class extends Controller {
         'https://api.maptiler.com/maps/basic/style.json?key=rF1iMNeNc3Eh3ES7Ke8H',
       center: [0, 0],
       zoom: 1,
-      accessToken: null,
     })
   }
 }
