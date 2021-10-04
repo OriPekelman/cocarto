@@ -1,5 +1,5 @@
 <div id="flexbox-container">
-    <div id="data-editor">
+    <div id="metadata-editor">
     <h1>Editing Layer</h1>
 
     <%= render 'form', layer: @layer %>
@@ -16,6 +16,10 @@
 
     <%= link_to 'Show', @layer %> |
     <%= link_to 'Back', layers_path %>
+    </div>
+
+    <div id="data-editor">
+        <%= render 'points/form' %>
     </div>
 
     <div id="map" data-controller="map"></div>

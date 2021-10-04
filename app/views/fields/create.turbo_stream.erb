@@ -1,1 +1,4 @@
 <%= turbo_stream.append "fields", @field %>
+<%= turbo_stream.append "fields-form" do %>
+    <%= render "fields/field_in_form", field: @field, geometry_type: "point" %>
+<% end %>
