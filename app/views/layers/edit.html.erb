@@ -20,6 +20,11 @@
 
     <div id="data-editor">
         <%= render 'points/form' %>
+        <turbo-frame id="points">
+            <% @layer.points.each do |point| %>
+                <%= render point %>
+            <% end %>
+        </turbo-frame>
     </div>
 
     <div id="map" data-controller="map"></div>
