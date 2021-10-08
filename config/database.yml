@@ -8,8 +8,10 @@ default: &default
 development:
   <<: *default
   database: gxis
-  username: gxis
-  password: gxis
+  <% if ENV['POSTGRES_USER'].present? %>
+  username: <%= ENV['POSTGRES_USER'] %>
+  password: <%= ENV['POSTGRES_PASSWORD'] %>
+  <% end %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -17,8 +19,10 @@ development:
 test:
   <<: *default
   database: gxis_test
-  username: gxis_test
-  password: gxis_test
+  <% if ENV['POSTGRES_USER'].present? %>
+  username: <%= ENV['POSTGRES_USER'] %>
+  password: <%= ENV['POSTGRES_PASSWORD'] %>
+  <% end %>
 
 
 production:
