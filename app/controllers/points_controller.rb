@@ -6,6 +6,7 @@ class PointsController < ApplicationController
     @layer = Layer.find(layer_id)
     field_keys = @layer.fields.map { |field| field.label }
     fields = params.require(:point).permit(field_keys)
+    point = params.require(:point).permit(:longitude, :latitude)
 
     attributes = {
       layer_id: layer_id,
