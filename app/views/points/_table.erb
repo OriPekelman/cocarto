@@ -9,7 +9,7 @@
             <th id="delete-column">Delete</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody id="points-tbody">
     <% points.each do |point| %>
         <%= render point, fields: fields %>
     <% end %>

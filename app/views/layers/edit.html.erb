@@ -19,7 +19,9 @@
     </div>
 
     <div id="data-editor">
-        <%= render 'points/form' %>
+        <div id="points-form">
+            <%= render 'points/form' %>
+        </div>
         <turbo-frame id="points">
             <%= render "points/table", points: @layer.points, fields: @layer.fields %>
         </turbo-frame>

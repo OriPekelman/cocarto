@@ -5,11 +5,11 @@ import Map from 'maplibre-gl/types/ui/map'
 import LngLat from 'maplibre-gl/types/geo/lng_lat'
 
 function popup(lngLat: LngLat) {
-  const markerHeight = 50, markerRadius = 10, linearOffset = 25;
+  const form = window.document.getElementById('points-form')
 
-  return new maplibregl.Popup({offset: [0, -markerHeight], className: 'my-class', anchor: 'bottom'})
+  return new maplibregl.Popup({anchor: 'bottom', closeButton: false })
   .setLngLat(lngLat)
-  .setHTML("<h1>Hello World!</h1>")
+  .setDOMContent(form)
   .setMaxWidth("300px");
 }
 
@@ -24,5 +24,7 @@ export default class extends Controller {
       center: [0, 0],
       zoom: 1,
     })
+
+    this.map.on('click', e => popup(e.lngLat).addTo(this.map));
   }
 }
