@@ -6,6 +6,7 @@ import LngLat from 'maplibre-gl/types/geo/lng_lat'
 
 function popup(lngLat: LngLat) {
   const form = window.document.getElementById('points-form')
+  form.classList.remove("hidden");
 
   return new maplibregl.Popup({anchor: 'bottom', closeButton: false })
   .setLngLat(lngLat)
