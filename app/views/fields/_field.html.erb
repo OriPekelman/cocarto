@@ -1,3 +1,1 @@
-<turbo-frame id="<%= field %>">
-    <%= field.label %> (<%= field.field_type %>)
-</turbo-frame>
+<%= field.label %> (<%= field.field_type %>) <%= link_to 'Destroy', @layer, method: :delete, data: { confirm: 'Are you sure?' } %>
