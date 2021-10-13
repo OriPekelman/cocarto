@@ -1,8 +1,7 @@
 <div id="<%="#{field.id}-form" %>">
-  <%= label_tag field.label %>
   <% if ["float", "integer"].include?(field.field_type) then %>
-    <%= number_field_tag "#{geometry_type}[#{field.label}]", field.label %>
+    <%= number_field_tag "#{geometry_type}[#{field.label}]", nil, id: field.id, placeholder: field.label  %>
   <% else %>
-    <%= text_field_tag "#{geometry_type}[#{field.label}]", field.label %>
+    <%= text_field_tag "#{geometry_type}[#{field.label}]", nil, id: field.id, placeholder: field.label %>
   <% end %>
 </div>

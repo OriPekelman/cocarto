@@ -14,7 +14,15 @@ function popup(lngLat: LngLat) {
   .setMaxWidth("300px");
 }
 
-export default class extends Controller {
+class MapBaseController extends Controller {
+  public longitudeDisplayTarget!: HTMLInputElement;
+  public longitudeFieldTarget!: HTMLInputElement;
+  public latitudeDisplayTarget!: HTMLInputElement;
+  public latitudeFieldTarget!: HTMLInputElement;
+}
+
+export default class extends (Controller  as typeof MapBaseController) {
+  static targets = [ "longitudeDisplay", "longitudeField", "latitudeDisplay", "latitudeField" ]
   map: Map
 
   connect() {
@@ -26,6 +34,12 @@ export default class extends Controller {
       zoom: 1,
     })
 
-    this.map.on('click', e => popup(e.lngLat).addTo(this.map));
+    this.map.on('click', e => {
+      this.longitudeDisplayTarget.innerText = e.lngLat.lng.toFixed(5);
+      this.longitudeFieldTarget.value = e.lngLat.lng;
+      this.latitudeDisplayTarget.innerText = e.lngLat.lat.toFixed(5);
+      this.latitudeFieldTarget.value = e.lngLat.lat;
+      popup(e.lngLat).addTo(this.map);
+    });
   }
 }
