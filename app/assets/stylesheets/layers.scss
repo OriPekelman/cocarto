@@ -1,0 +1,15 @@
+#flexbox-container {
+    display: flex;
+    #metadata-editor {
+        width: 20%;
+    }
+
+    #data-editor {
+        width: 30%;
+    }
+
+    #map {
+        width: 50%;
+        height: 500px;
+    }
+}

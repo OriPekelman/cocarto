@@ -1,0 +1,17 @@
+<table>
+    <thead>
+        <tr>
+            <th>Longitude</th>
+            <th>Latitude</th>
+            <% fields.each do |field| %>
+                <th class="field-<%= field.id %>"><%= field.label %></th>
+            <% end %>
+            <th id="delete-column">Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+    <% points.each do |point| %>
+        <%= render point, fields: fields %>
+    <% end %>
+    </tbody>
+</table>

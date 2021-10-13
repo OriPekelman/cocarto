@@ -1,16 +1,29 @@
-<h1>Editing Layer</h1>
+<div id="flexbox-container">
+    <div id="metadata-editor">
+    <h1>Editing Layer</h1>
 
-<%= render 'form', layer: @layer %>
+    <%= render 'form', layer: @layer %>
 
-<h3>Fields</h3>
-<ul>
-  <%= turbo_frame_tag "fields" do %>
-    <%= render @layer.fields %>
-  <% end %>
-</ul>
+    <h3>Fields</h3>
+    <ul>
+    <%= turbo_frame_tag "fields" do %>
+        <%= render @layer.fields %>
+    <% end %>
+    </ul>
 
-<h3>Add a new field:</h3>
-<%= render 'fields/form' %>
+    <h3>Add a new field:</h3>
+    <%= render 'fields/form' %>
 
-<%= link_to 'Show', @layer %> |
-<%= link_to 'Back', layers_path %>
+    <%= link_to 'Show', @layer %> |
+    <%= link_to 'Back', layers_path %>
+    </div>
+
+    <div id="data-editor">
+        <%= render 'points/form' %>
+        <turbo-frame id="points">
+            <%= render "points/table", points: @layer.points, fields: @layer.fields %>
+        </turbo-frame>
+    </div>
+
+    <div id="map" data-controller="map"></div>
+</div>

@@ -1,1 +1,10 @@
 <%= turbo_stream.append "fields", @field %>
+<%= turbo_stream.append "fields-form" do %>
+    <%= render "fields/field_in_form", field: @field, geometry_type: "point" %>
+<% end %>
+<%= turbo_stream.before "delete-column" do %>
+    <th class="field-<%= @field.id %>"><%= @field.label %></th>
+<% end %>
+<%= turbo_stream.before_all ".delete-point" do %>
+  <td class=""></td>
+<% end %>

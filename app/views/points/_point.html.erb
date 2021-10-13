@@ -1,0 +1,8 @@
+<tr id="<%= dom_id(point) %>" class="point-row">
+    <td><%= point.geog.x %></td>
+    <td><%= point.geog.y %></td>
+    <% fields.each do |field| %>
+        <td class="field-<%= field.id %>"><%= point.fields[field.label] %></td>
+    <% end %>
+    <td class="delete-point"><%= button_to 'Destroy', point, method: :delete %></td>
+</tr>

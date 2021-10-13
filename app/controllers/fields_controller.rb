@@ -17,11 +17,11 @@ class FieldsController < ApplicationController
   end
 
   def create
-    @layer = Layer.find(params[:layer_id])
+    @layer = Layer.find(field_params[:layer_id])
     @field = @layer.fields.create(field_params)
     respond_to do |format|
       format.turbo_stream
-      format.html { redirect_to @layer }
+      format.html { redirect_to @field.layer }
     end
   end
 

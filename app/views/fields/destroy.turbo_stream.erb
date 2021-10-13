@@ -1,1 +1,3 @@
 <%= turbo_stream.remove dom_id(@field) %>
+<%= turbo_stream.remove "#{@field.id}-form" %>
+<%= turbo_stream.remove_all ".field-#{@field.id}" %>
