@@ -13,12 +13,10 @@ console.log('Vite ⚡️ Rails')
 
 console.log('Visit the guide for more information: ', 'https://vite-ruby.netlify.app/guide/rails')
 
-import Rails from "@rails/ujs"
-import Turbolinks from "turbolinks"
+import "@hotwired/turbo-rails"
+import "./controllers"
 import * as ActiveStorage from "@rails/activestorage"
 
-Rails.start()
-Turbolinks.start()
 ActiveStorage.start()
 
 // Example: Import a stylesheet in app/frontend/index.css

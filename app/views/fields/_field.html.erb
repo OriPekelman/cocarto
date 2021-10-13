@@ -1,1 +1,3 @@
-<%= field.label %> (<%= field.field_type %>) <%= link_to 'Destroy', @layer, method: :delete, data: { confirm: 'Are you sure?' } %>
+<li id="<%= dom_id(field) %>">
+    <%= field.label %> (<%= field.field_type %>) <%= button_to 'Destroy', field, method: :delete %>
+</li>

@@ -15,7 +15,7 @@
         <td><%= layer.name %></td>
         <td><%= link_to 'Show', layer %></td>
         <td><%= link_to 'Edit', edit_layer_path(layer) %></td>
-        <td><%= link_to 'Destroy', layer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= button_to 'Destroy', layer, method: :delete %></td>
       </tr>
     <% end %>
   </tbody>
