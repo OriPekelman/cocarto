@@ -1,6 +1,5 @@
 <tr id="<%= dom_id(point) %>" class="point-row">
-    <td><%= point.geog.x %></td>
-    <td><%= point.geog.y %></td>
+    <td><%= point.geog.x.truncate(5) %>; <%= point.geog.y.truncate(5) %></td>
     <% fields.each do |field| %>
         <td class="field-<%= field.id %>"><%= point.fields[field.id] %></td>
     <% end %>
