@@ -3,14 +3,15 @@ import maplibregl from 'maplibre-gl'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import Map from 'maplibre-gl/types/ui/map'
 import LngLat from 'maplibre-gl/types/geo/lng_lat'
+import Popup from 'maplibre-gl/types/ui/popup'
 
 function popup(lngLat: LngLat) {
-  const form = window.document.getElementById('points-form')
-  form.classList.remove("hidden");
+  const formTemplate = <HTMLTemplateElement>document.getElementById('points-form-template')
+  const clone = document.importNode(formTemplate.content, true)
 
-  return new maplibregl.Popup({anchor: 'bottom', closeButton: false })
+  return new maplibregl.Popup({anchor: 'bottom', })
   .setLngLat(lngLat)
-  .setDOMContent(form)
+  .setDOMContent(clone)
   .setMaxWidth("300px");
 }
 
@@ -35,11 +36,11 @@ export default class extends (Controller  as typeof MapBaseController) {
     })
 
     this.map.on('click', e => {
+      popup(e.lngLat).addTo(this.map);
       this.longitudeDisplayTarget.innerText = e.lngLat.lng.toFixed(5);
       this.longitudeFieldTarget.value = e.lngLat.lng;
       this.latitudeDisplayTarget.innerText = e.lngLat.lat.toFixed(5);
       this.latitudeFieldTarget.value = e.lngLat.lat;
-      popup(e.lngLat).addTo(this.map);
     });
   }
 }
