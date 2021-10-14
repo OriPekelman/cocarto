@@ -12,10 +12,22 @@
   },
   "version": "0.1.0",
   "devDependencies": {
+    "@babel/core": "^7.15.8",
+    "@babel/eslint-parser": "^7.15.8",
     "postcss": "^8.3.9",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-import": "^14.0.2",
     "postcss-preset-env": "^6.7.0",
+    "standard": "^16.0.4",
     "vite-plugin-stimulus-hmr": "^1.0.1"
-  }
+  },
+  "standard": {
+    "parser": "@babel/eslint-parser"
+  },
+  "eslintConfig": {
+    "parserOptions": {
+      "requireConfigFile": false
+    }
+  },
+  "babel": {}
 }

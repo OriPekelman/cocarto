@@ -1,8 +1,8 @@
-console.log("Starting ĝis")
+import '@hotwired/turbo-rails'
+import '../controllers'
+import * as ActiveStorage from '@rails/activestorage'
 
-import "@hotwired/turbo-rails"
-import "../controllers"
-import * as ActiveStorage from "@rails/activestorage"
+console.log('Starting ĝis')
 
 ActiveStorage.start()
 
