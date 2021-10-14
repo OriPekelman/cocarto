@@ -10,8 +10,8 @@ run: ## Start the app server
 lint-ruby: ## Run the ruby linter standardrb
 	bundle exec standardrb
 
-#lint-js: ## Run the js linter standardjs
-#	npm run lint
+lint-js: ## Run the js linter standardjs
+	yarn run lint
 
 lint: lint-ruby lint-js ## Run all the linters
 

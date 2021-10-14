@@ -29,5 +29,7 @@
       "requireConfigFile": false
     }
   },
-  "babel": {}
+  "scripts": {
+    "lint": "standard"
+  }
 }

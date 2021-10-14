@@ -20,7 +20,7 @@ function marker (point) {
 }
 
 export default class extends Controller {
-  static targets = [ "longitudeDisplay", "longitudeField", "latitudeDisplay", "latitudeField", "map", "point" ]
+  static targets = ['longitudeDisplay', 'longitudeField', 'latitudeDisplay', 'latitudeField', 'map', 'point']
 
   initialize () {
     this.markers = new Map()
