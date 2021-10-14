@@ -5,7 +5,7 @@
     data-lat="<%= point.geog.y %>"
 >
     <td><%= point.geog.x.truncate(5) %>; <%= point.geog.y.truncate(5) %></td>
-    <% fields.each do |field| %>
+    <% point.layer.fields.each do |field| %>
         <td class="field-<%= field.id %>"><%= point.fields[field.id] %></td>
     <% end %>
     <td class="delete-point"><%= button_to 'Destroy', point, method: :delete %></td>
