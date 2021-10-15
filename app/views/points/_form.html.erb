@@ -6,7 +6,7 @@
 
   <div id="fields-form">
     <% @layer.fields.each do |field| %>
-      <%= render "fields/field_in_form", field: field, geometry_type: "point" %>
+      <%= render "fields/field_in_form", field: field %>
     <% end %>
   </div>
 

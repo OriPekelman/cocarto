@@ -2,15 +2,15 @@
     <thead>
         <tr>
             <th>Coordinates</th>
-            <% fields.each do |field| %>
+            <% @layer.fields.each do |field| %>
                 <th class="field-<%= field.id %>"><%= field.label %></th>
             <% end %>
             <th id="delete-column">Delete</th>
         </tr>
     </thead>
     <tbody id="points-tbody">
-    <% points.each do |point| %>
-        <%= render point, fields: fields %>
+    <% @layer.points.each do |point| %>
+        <%= render point %>
     <% end %>
     </tbody>
 </table>

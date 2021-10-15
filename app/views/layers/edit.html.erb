@@ -6,10 +6,8 @@
     <%= render 'form', layer: @layer %>
 
     <h3>Fields</h3>
-    <ul>
-    <%= turbo_frame_tag "fields" do %>
+    <ul id="fields">
         <%= render @layer.fields %>
-    <% end %>
     </ul>
 
     <h3>Add a new field:</h3>
@@ -21,16 +19,12 @@
 
     <div id="datas" data-controller="map">
         <div id="data-editor">
-            <turbo-frame id="points">
-                <%= render "points/table", points: @layer.points, fields: @layer.fields %>
-            </turbo-frame>
+            <%= render "points/table" %>
         </div>
 
         <div id="map" data-map-target="map">
             <template id="points-form-template">
-                <div id="points-form">
-                    <%= render 'points/form' %>
-                </div>
+                <%= render 'points/form' %>
             </template>
         </div>
     </div>
