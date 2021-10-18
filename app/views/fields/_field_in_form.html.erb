@@ -1,4 +1,4 @@
-<div id="<%="#{field.id}-form" %>">
+<div class="field-<%= field.id %>">
   <% if ["float", "integer"].include?(field.field_type) then %>
     <%= number_field_tag "#{field.geometry_type}[#{field.id}]", nil, id: field.id, placeholder: field.label  %>
   <% else %>

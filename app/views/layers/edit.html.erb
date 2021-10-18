@@ -23,9 +23,7 @@
         </div>
 
         <div id="map" data-map-target="map">
-            <template id="points-form-template">
-                <%= render 'points/form' %>
-            </template>
+            <%= render 'points/form_template', layer: @layer %>
         </div>
     </div>
 </div>
