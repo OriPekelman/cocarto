@@ -19,11 +19,16 @@
     </div>
 
     <div id="data-editor">
-        <%= render 'points/form' %>
         <turbo-frame id="points">
             <%= render "points/table", points: @layer.points, fields: @layer.fields %>
         </turbo-frame>
     </div>
 
-    <div id="map" data-controller="map"></div>
+    <div id="map" data-controller="map">
+        <template id="points-form-template">
+            <div id="points-form">
+                <%= render 'points/form' %>
+            </div>
+        </template>
+    </div>
 </div>
