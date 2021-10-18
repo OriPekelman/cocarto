@@ -4,12 +4,17 @@
         width: 20%;
     }
 
+    #datas {
+        width: 80%;
+        display: flex;
+    }
+
     #data-editor {
-        width: 30%;
+        width: 40%;
     }
 
     #map {
-        width: 50%;
+        width: 60%;
         height: 500px;
     }
 }

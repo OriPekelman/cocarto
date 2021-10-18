@@ -18,17 +18,19 @@
     <%= link_to 'Back', layers_path %>
     </div>
 
-    <div id="data-editor">
-        <turbo-frame id="points">
-            <%= render "points/table", points: @layer.points, fields: @layer.fields %>
-        </turbo-frame>
-    </div>
+    <div id="datas" data-controller="map">
+        <div id="data-editor">
+            <turbo-frame id="points">
+                <%= render "points/table", points: @layer.points, fields: @layer.fields %>
+            </turbo-frame>
+        </div>
 
-    <div id="map" data-controller="map">
-        <template id="points-form-template">
-            <div id="points-form">
-                <%= render 'points/form' %>
-            </div>
-        </template>
+        <div id="map" data-map-target="map">
+            <template id="points-form-template">
+                <div id="points-form">
+                    <%= render 'points/form' %>
+                </div>
+            </template>
+        </div>
     </div>
 </div>
