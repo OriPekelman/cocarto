@@ -2,15 +2,11 @@
     <thead>
         <tr>
             <th>Coordinates</th>
-            <% fields.each do |field| %>
-                <th class="field-<%= field.id %>"><%= field.label %></th>
-            <% end %>
+            <%= render partial: "fields/th", collection: @layer.fields, as: :field %>
             <th id="delete-column">Delete</th>
         </tr>
     </thead>
     <tbody id="points-tbody">
-    <% points.each do |point| %>
-        <%= render point, fields: fields %>
-    <% end %>
+    <%= render @layer.points %>
     </tbody>
 </table>
