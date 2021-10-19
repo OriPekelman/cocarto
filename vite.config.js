@@ -5,6 +5,6 @@ import StimulusHMR from 'vite-plugin-stimulus-hmr'
 export default defineConfig({
   plugins: [
     RubyPlugin(),
-    StimulusHMR(),
-  ],
+    StimulusHMR()
+  ]
 })
