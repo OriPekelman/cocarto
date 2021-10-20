@@ -4,25 +4,29 @@
 
 ***L’édition collaborative et historisée de données géographiques***
 
-L’objectif est de créer un logiciel utilisé par le web (SaaS) pour pouvoir saisir et modifier à plusieurs des données géographiques ainsi que leurs attributs.
+Ĝis est un logiciel utilisé par le web (SaaS) pour pouvoir saisir et modifier à plusieurs des données géographiques ainsi que leurs attributs.
 
 Le rendu, import/export, la gestion de *grosse donnée* ou encore l’annotation de fond de carte ne sont pas le cœur du projet.
 
 On pourrait dire qu’il s’agit du « google spreadsheet de la donnée cartographique » : un outil ni très beau ni puissant, mais qui couvre l’essentiel des besoins.
 
-Les utilisateurs ne sont ni informaticiens, ni géomaticiens, mais des débrouillards. Après tout, ce ne sont que des données tabulaires avec une colonne de type géométrie.
+Vous n’avez pas besoin d’être informaticien·ne ou géomaticien·ne, mais juste un peu débrouillard·e. Après tout, ce ne sont que des données tabulaires avec une colonne de type géométrie.
 
 ### Comment contribuer ?
 
 L’utilisation, modification et diffusion de Ĝis sont restreintes.
 Les conditions sont définies par la [licence publique generale GNU Affero v3](https://www.gnu.org/licenses/agpl-3.0.html).
 
-Si vous souhaitez y apporter des changements ou des améliorations, envoyez-nous un email à bonjour@codeursenliberté.fr (avec ou sans accent).
+Si vous souhaitez y apporter des changements ou des améliorations,
+ouvrez une _issue_, une _merge request_ ou envoyez-nous un email à bonjour@codeursenliberté.fr (avec ou sans accent).
 
 ## Installation pour le développement
 
 ### Dépendances techniques
 
+Ĝis est une application [Ruby on rails](https://rubyonrails.org/) monolitique assez classique.
+
+Avant de travailler dessus, vous aurez besoin de :
 - postgresql et postgis
 - [rbenv](https://github.com/rbenv/rbenv-installer#rbenv-installer--doctor-scripts)
 - [Yarn](https://yarnpkg.com/en/docs/install)
@@ -36,7 +40,6 @@ Pour créer cet utilisateur, exécutez
 
     make create-pg-users
 
-
 Alternativement, ces valeurs peuvent être modifiées dans le fichier `config/database.yml`.
 
 ### Initialisation de l'environnement de développement
@@ -45,7 +48,8 @@ Alternativement, ces valeurs peuvent être modifiées dans le fichier `config/da
 
     make setup
 
-Cette commande installera la gem `bundler` installera les dépendance et initialisera la base de données.
+Cette commande installera la gem `bundler`, installera les dépendances et initialisera la base de données.
+
 ## Lancement de l'application
 
 ### Lancement du server
