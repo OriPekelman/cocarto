@@ -29,29 +29,32 @@ Si vous souhaitez y apporter des changements ou des améliorations, envoyez-nous
 
 ### Création des rôles de la base de données
 
-Les informations nécessaire à l'initialisation de la base doivent être pré-configurées à la main grâce à la procédure suivante :
+Par défaut, l’application essaye de se connecter avec l’utilisateur `gxis`
+et le mot de passe `gxis`.
 
-Si vous êtes sous Linux :
+Pour créer cet utilisateur, exécutez
 
-    sudo su postgres -c  'psql -c "create user gxis with password \'gxis\' superuser"'
+    make create-pg-users
 
-Si vous êtes sous macOS :
 
-    psql -c "create user gxis with password 'gxis' superuser"
+Alternativement, ces valeurs peuvent être modifiées dans le fichier `config/database.yml`.
 
 ### Initialisation de l'environnement de développement
 
-    gem install bundler
-    bundle install
-    rails db:setup
+À la premier installation, executez
 
+    make setup
+
+Cette commande installera la gem `bundler` installera les dépendance et initialisera la base de données.
 ## Lancement de l'application
 
 ### Lancement du server
 
 On lance le serveur d'application ainsi :
 
-    bin/rails server
+    make run
+
+Cette commande exécutera automatiquement `make install` pour installer d’éventuelles mises à jour et effectuer les migrations.
 
 L'application tourne alors à l'adresse `http://localhost:3000`.
 
