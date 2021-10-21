@@ -18,7 +18,7 @@ L’utilisation, modification et diffusion de Ĝis sont restreintes.
 Les conditions sont définies par la [licence publique generale GNU Affero v3](https://www.gnu.org/licenses/agpl-3.0.html).
 
 Si vous souhaitez y apporter des changements ou des améliorations,
-ouvrez une _issue_, une _merge request_ ou envoyez-nous un email à bonjour@codeursenliberté.fr (avec ou sans accent).
+ouvrez une [issue](https://gitlab.com/CodeursEnLiberte/gxis/-/issues/new?issue%5Bmilestone_id%5D=), une [merge request](https://gitlab.com/CodeursEnLiberte/gxis/-/merge_requests/new) ou envoyez-nous un email à bonjour@codeursenliberte.fr (avec ou sans accent).
 
 ## Installation pour le développement
 
