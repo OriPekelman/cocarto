@@ -14,7 +14,8 @@ Les utilisateurs ne sont ni informaticiens, ni géomaticiens, mais des débrouil
 
 ### Comment contribuer ?
 
-La licence du logiciel Ĝis reste à déterminer.
+L’utilisation, modification et diffusion de Ĝis sont restreintes.
+Les conditions sont définies par la [licence publique generale GNU Affero v3](https://www.gnu.org/licenses/agpl-3.0.html).
 
 Si vous souhaitez y apporter des changements ou des améliorations, envoyez-nous un email à bonjour@codeursenliberté.fr (avec ou sans accent).
 
