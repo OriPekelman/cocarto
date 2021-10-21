@@ -10,7 +10,7 @@ Le rendu, import/export, la gestion de *grosse donnée* ou encore l’annotation
 
 On pourrait dire qu’il s’agit du « google spreadsheet de la donnée cartographique » : un outil ni très beau ni puissant, mais qui couvre l’essentiel des besoins.
 
-Vous n’avez pas besoin d’être informaticien·ne ou géomaticien·ne, mais juste un peu débrouillard·e. Après tout, ce ne sont que des données tabulaires avec une colonne de type géométrie.
+Vous n’avez pas besoin de connaitre l’informatique ou la géomatique, mais juste d’un peu de débrouillardise. Vous pouvez voir cet outil comme un tableur dans lequel vous pouvez mettre des objets géographiques.
 
 ### Comment contribuer ?
 
