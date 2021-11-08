@@ -6,7 +6,7 @@
 >
     <td><%= point.geog.x.truncate(5) %>; <%= point.geog.y.truncate(5) %></td>
     <% point.layer.fields.each do |field| %>
-        <td class="field-<%= field.id %>"><%= point.fields[field.id] %></td>
+        <td class="field-<%= field.id %> <%= "numerical" if field.numerical? %>"><%= point.fields[field.id] %></td>
     <% end %>
     <td class="delete-point"><%= button_to point, method: :delete do %><%= fa_icon "trash-o" %> <% end %></td>
 </tr>

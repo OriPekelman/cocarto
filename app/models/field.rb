@@ -19,4 +19,8 @@ class Field < ApplicationRecord
   def geometry_type
     layer.geometry_type
   end
+
+  def numerical?
+    ["float", "integer"].include?(field_type)
+  end
 end
