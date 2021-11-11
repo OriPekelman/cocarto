@@ -6,7 +6,7 @@
 >
     <td><%= point.geog.x.truncate(5) %>; <%= point.geog.y.truncate(5) %></td>
     <% point.layer.fields.each do |field| %>
-        <td class="field-<%= field.id %> <%= "numerical" if field.numerical? %>"><%= point.fields[field.id] %></td>
+        <td class="field-<%= field.id %> <%= "numerical" if field.numerical? %>"><%= render partial: "fields/field_in_form", locals: {field: field, value: point.fields[field.id]} %></td>
     <% end %>
     <td>
         <%= button_to point, method: :delete, class: "button is-white p-2" do %>
