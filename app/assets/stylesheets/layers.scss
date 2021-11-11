@@ -1,29 +1,5 @@
-#flexbox-container {
+.is-full-height {
     height: 100%;
-    display: flex;
-    #metadata-editor {
-        padding: 1em;
-        width: 20%;
-    }
-
-    #datas {
-        width: 80%;
-        display: flex;
-    }
-
-    #data-editor {
-        height: 100%;
-        width: 40%;
-    }
-
-    #map {
-        width: 60%;
-        height: 100%;
-    }
-}
-
-.hidden {
-    display: none;
 }
 
 #data-editor table {
