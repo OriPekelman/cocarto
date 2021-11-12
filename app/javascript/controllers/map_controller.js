@@ -2,16 +2,6 @@ import { Controller } from '@hotwired/stimulus'
 import maplibregl from 'maplibre-gl'
 import 'maplibre-gl/dist/maplibre-gl.css'
 
-function popup (lngLat) {
-  const formTemplate = document.getElementById('points-form-template')
-  const clone = document.importNode(formTemplate.content, true)
-
-  return new maplibregl.Popup({ anchor: 'bottom' })
-    .setLngLat(lngLat)
-    .setDOMContent(clone)
-    .setMaxWidth('300px')
-}
-
 function marker (point) {
   const lng = +point.getAttribute('data-lng')
   const lat = +point.getAttribute('data-lat')
@@ -20,7 +10,7 @@ function marker (point) {
 }
 
 export default class extends Controller {
-  static targets = ['longitudeDisplay', 'longitudeField', 'latitudeDisplay', 'latitudeField', 'map', 'point']
+  static targets = ['longitudeField', 'latitudeField', 'newPointForm', 'map', 'point']
 
   initialize () {
     this.markers = new Map()
@@ -38,11 +28,9 @@ export default class extends Controller {
     this.markers.forEach(marker => marker.addTo(this.map))
 
     this.map.on('click', e => {
-      popup(e.lngLat).addTo(this.map)
-      this.longitudeDisplayTarget.innerText = e.lngLat.lng.toFixed(5)
       this.longitudeFieldTarget.value = e.lngLat.lng
-      this.latitudeDisplayTarget.innerText = e.lngLat.lat.toFixed(5)
       this.latitudeFieldTarget.value = e.lngLat.lat
+      this.newPointFormTarget.requestSubmit()
     })
   }
 
