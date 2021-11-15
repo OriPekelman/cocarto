@@ -8,5 +8,9 @@
     <% point.layer.fields.each do |field| %>
         <td class="field-<%= field.id %> <%= "numerical" if field.numerical? %>"><%= point.fields[field.id] %></td>
     <% end %>
-    <td class="delete-point"><%= button_to point, method: :delete do %><%= fa_icon "trash-o" %> <% end %></td>
+    <td>
+        <%= button_to point, method: :delete, class: "button is-white p-2" do %>
+            <span class="icon"><%= fa_icon "trash-o" %></span>
+        <% end %>
+    </td>
 </tr>

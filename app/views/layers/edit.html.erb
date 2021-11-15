@@ -1,6 +1,6 @@
 <%= turbo_stream_from @layer %>
-<div id="flexbox-container">
-    <div id="metadata-editor">
+<div class="columns is-full-height m-0" data-controller="map">
+    <div class="is-2 column">
     <h1>Editing Layer</h1>
 
     <%= render 'form', layer: @layer %>
@@ -17,13 +17,11 @@
     <%= link_to 'Back', layers_path %>
     </div>
 
-    <div id="datas" data-controller="map">
-        <div id="data-editor">
-            <%= render "points/table" %>
-        </div>
+    <div class="is-3 column" id="data-editor">
+        <%= render "points/table" %>
+    </div>
 
-        <div id="map" data-map-target="map">
-            <%= render 'points/form_template', layer: @layer %>
-        </div>
+    <div class="is-full-height column" id="map" data-map-target="map">
+        <%= render 'points/form_template', layer: @layer %>
     </div>
 </div>
