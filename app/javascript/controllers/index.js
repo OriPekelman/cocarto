@@ -4,4 +4,7 @@
 import { application } from './application'
 
 import MapController from './map_controller'
+
+import RowController from './row_controller'
 application.register('map', MapController)
+application.register('row', RowController)
