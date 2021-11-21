@@ -12,7 +12,7 @@
                 <%= render partial: "fields/field_in_form", locals: {field: field, value: point.fields[field.id], form: point.id} %>
             </td>
         <% end %>
-        <td>
+        <td class="row-actions">
             <div>
                 <%= form_with method: :patch, model: point, id: point.id, data: {"row-target": "form"} do |form| %>
                     <%= form.hidden_field :layer_id, value: point.layer.id %>
