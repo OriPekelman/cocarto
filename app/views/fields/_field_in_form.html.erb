@@ -1,5 +1,5 @@
 <% if ["float", "integer"].include?(field.field_type) then %>
-  <%= number_field_tag "#{field.geometry_type}[#{field.id}]", nil, id: field.id, placeholder: field.label, value: value || "" %>
+  <%= number_field_tag "#{field.geometry_type}[#{field.id}]", nil, id: field.id, placeholder: field.label, class: "input", value: value, data: {action: "row#setModified focusin->row#focusIn"}, form: form %>
 <% else %>
-  <%= text_field_tag "#{field.geometry_type}[#{field.id}]", nil, id: field.id, placeholder: field.label, value: value || "" %>
+  <%= text_field_tag "#{field.geometry_type}[#{field.id}]", nil, id: field.id, placeholder: field.label, class: "input", value: value, data: {action: "row#setModified focusin->row#focusIn"}, form: form %>
 <% end %>
