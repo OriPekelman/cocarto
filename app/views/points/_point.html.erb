@@ -3,14 +3,25 @@
     data-map-target="point"
     data-lng="<%= point.geog.x %>"
     data-lat="<%= point.geog.y %>"
+    data-controller="row"
 >
-    <td><%= point.geog.x.truncate(5) %>; <%= point.geog.y.truncate(5) %></td>
-    <% point.layer.fields.each do |field| %>
-        <td class="field-<%= field.id %> <%= "numerical" if field.numerical? %>"><%= point.fields[field.id] %></td>
-    <% end %>
-    <td>
-        <%= button_to point, method: :delete, class: "button is-white p-2" do %>
-            <span class="icon"><%= fa_icon "trash-o" %></span>
+
+        <% point.layer.fields.each do |field| %>
+            <td class="field field-<%= field.id %> <%= "numerical" if field.numerical? %>">
+                <%= render partial: "fields/field_in_form", locals: {field: field, value: point.fields[field.id], form: point.id} %>
+            </td>
         <% end %>
-    </td>
+        <td>
+            <div>
+                <%= form_with method: :patch, model: point, id: point.id do |form| %>
+                    <%= form.hidden_field :layer_id, value: point.layer.id %>
+                    <%= form.submit method: :update, class: "button is-white p-2" do %>
+                        <span class="icon"><%= fa_icon "save" %></span>
+                    <% end %>
+                <% end %>
+                <%= button_to point, method: :delete, class: "button is-white p-2" do %>
+                    <span class="icon"><%= fa_icon "trash-o" %></span>
+                <% end %>
+            </div>
+        </td>
 </tr>

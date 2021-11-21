@@ -1,15 +1,12 @@
 class PointsController < ApplicationController
-  before_action :set_point, only: %i[destroy]
+  before_action :set_point, only: %i[destroy update]
+  before_action :set_layer, only: %i[create update]
 
   def create
-    layer_id = params[:point][:layer_id]
-    @layer = Layer.find(layer_id)
-    field_keys = @layer.fields.map { |field| field.id }
-    fields = params.require(:point).permit(field_keys)
-    point = params.require(:point).permit(:longitude, :latitude)
+    point = params.require(:point).permit(:longitude, :latitude, :layer_id)
 
     attributes = {
-      layer_id: layer_id,
+      layer_id: @layer.id,
       geog: RGEO_FACTORY.point(point[:longitude], point[:latitude]),
       fields: fields
     }
@@ -29,9 +26,27 @@ class PointsController < ApplicationController
     end
   end
 
+  def update
+    @point.update(fields: fields)
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to @layer, notice: "Point was successfully updated." }
+    end
+  end
+
   private
 
   def set_point
     @point = Point.find(params[:id])
+  end
+
+  def set_layer
+    layer_id = params[:point][:layer_id]
+    @layer = Layer.find(layer_id)
+  end
+
+  def fields
+    field_keys = @layer.fields.map { |field| field.id }
+    params.require(:point).permit(field_keys)
   end
 end
