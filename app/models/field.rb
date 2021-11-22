@@ -5,14 +5,12 @@ class Field < ApplicationRecord
 
   after_create_commit -> do
     broadcast_append_to layer, target: "fields"
-    broadcast_replace_to layer, target: "points-form-template", partial: "points/form_template", locals: {layer: layer}
     broadcast_before_to layer, target: "delete-column", partial: "fields/th"
-    Turbo::StreamsChannel.broadcast_before_to layer, targets: ".delete-point", inline: "<td class=\"field-#{id}\"></td>"
+    Turbo::StreamsChannel.broadcast_before_to layer, targets: ".row-actions", inline: "<td class=\"field-#{id}\"></td>"
   end
 
   after_destroy_commit -> do
     broadcast_remove_to layer
-    broadcast_replace_to layer, target: "points-form-template", partial: "points/form_template", locals: {layer: layer}
     Turbo::StreamsChannel.broadcast_remove_to layer, targets: ".field-#{id}"
   end
 
