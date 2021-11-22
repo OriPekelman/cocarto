@@ -13,15 +13,15 @@
             </td>
         <% end %>
         <td class="row-actions">
-            <div>
+            <div class="is-flex row-action-buttons">
                 <%= form_with method: :patch, model: point, id: point.id, data: {"row-target": "form"} do |form| %>
                     <%= form.hidden_field :layer_id, value: point.layer.id %>
-                    <%= form.button method: :update, class: "button is-primary p-2", disabled: true, data: {"row-target": "save", "action": "row#setLoading"} do %>
-                        <span class="icon"><%= fa_icon "save" %></span>
+                    <%= form.button method: :update, class: "button icon is-primary p-2", disabled: true, data: {"row-target": "save", "action": "row#setLoading"} do %>
+                        <span class="fas fa-fw"><%= fa_icon "save" %></span>
                     <% end %>
                 <% end %>
-                <%= button_to point, method: :delete, class: "button is-danger p-2" do %>
-                    <span class="icon"><%= fa_icon "trash-o" %></span>
+                <%= button_to point, method: :delete, class: "button icon is-danger p-2" do %>
+                    <span class="fas fa-fw"><%= fa_icon "trash-o" %></span>
                 <% end %>
             </div>
         </td>
