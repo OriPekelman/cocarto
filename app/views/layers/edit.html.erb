@@ -1,12 +1,18 @@
 <%= turbo_stream_from @layer %>
-<div class="columns is-full-height m-0" data-controller="map">
-    <div class="is-2 column">
-    <h1>Editing Layer</h1>
-
-    <%= render 'form', layer: @layer %>
+<nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <%= link_to "Ĝis", "/layers", class: "navbar-item" %>
     </div>
-
-    <div class="is-5 column" id="data-editor">
+    <div class="navbar-item">
+        <%= form_with(model: @layer) do |form| %>
+          <div class="field">
+            <%= form.text_field :name %>
+          </div>
+        <% end %>
+    </div>
+</nav>
+<div class="columns is-full-height m-0" data-controller="map">
+    <div class="is-6 column" id="data-editor">
         <%= render "points/table" %>
     </div>
 
