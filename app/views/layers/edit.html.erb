@@ -4,17 +4,6 @@
     <h1>Editing Layer</h1>
 
     <%= render 'form', layer: @layer %>
-
-    <h3>Fields</h3>
-    <ul id="fields">
-        <%= render @layer.fields %>
-    </ul>
-
-    <h3>Add a new field:</h3>
-    <%= render 'fields/form' %>
-
-    <%= link_to 'Show', @layer %> |
-    <%= link_to 'Back', layers_path %>
     </div>
 
     <div class="is-5 column" id="data-editor">

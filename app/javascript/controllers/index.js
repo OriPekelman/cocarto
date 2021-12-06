@@ -3,8 +3,11 @@
 
 import { application } from './application'
 
+import DropdownController from './dropdown_controller'
+
 import MapController from './map_controller'
 
 import RowController from './row_controller'
+application.register('dropdown', DropdownController)
 application.register('map', MapController)
 application.register('row', RowController)
