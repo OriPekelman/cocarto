@@ -8,11 +8,9 @@
 >
 
         <% point.layer.fields.each do |field| %>
-            <td class="field field-<%= field.id %> <%= "numerical" if field.numerical? %>">
-                <%= render partial: "fields/field_in_form", locals: {field: field, value: point.fields[field.id], form: point.id} %>
-            </td>
+            <%= render partial: "fields/field_in_form", locals: {field: field, value: point.fields[field.id], form: point.id} %>
         <% end %>
-        <td class="row-actions">
+        <td class="row-actions" id="<%= point.id %>-action">
             <div class="is-flex row-action-buttons">
                 <%= form_with method: :patch, model: point, id: point.id, data: {"row-target": "form"} do |form| %>
                     <%= form.hidden_field :layer_id, value: point.layer.id %>
