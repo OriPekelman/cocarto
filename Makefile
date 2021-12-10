@@ -1,20 +1,15 @@
 .DEFAULT_GOAL := help
 
-setup: ## Initial setup of dependencies
-	gem install bundler
-	bundle install
-	rails db:setup
-
-create-pg-users: ## Creates the required postgresql users
-	./setup_pg_users.sh
-
 install: ## Install or update dependencies
-	yarn install
-	bundle install
-    bundle exec rake db:migrate
+	bin/setup
 
-run: install ## Start the app server
-	bundle exec rails server
+setup: install
+
+setup-pg-users: ## Creates the required postgresql users
+	bin/setup_pg_users
+
+run: ## Start the app server
+	bin/rails server
 
 lint-ruby: ## Run the ruby linter standardrb
 	bundle exec standardrb
@@ -24,10 +19,10 @@ lint-js: ## Run the js linter standardjs
 
 lint: lint-ruby lint-js ## Run all the linters
 
-.PHONY: setup create-pg-users install run lint-ruby lint-js lint help
+test: ## Run tests
+	bin/rails db:prepare test
 
 help: ## Display this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-test: ## Run tests
-	bin/rails test
+.PHONY: install setup setup-pg-users run lint-ruby lint-js lint test help

@@ -1,5 +1,15 @@
 default:
   image: ruby:3.0.2
+
+services:
+  - postgis/postgis:latest
+
+variables:
+  GITLAB_CI_POSTGRES_HOST: postgis-postgis
+  GITLAB_CI_POSTGRES_DB: gxis_test
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: postgres
+
 # Cache gems in between builds
 cache:
   paths:
