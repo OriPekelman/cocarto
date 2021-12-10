@@ -41,7 +41,7 @@ and the password `gxis`.
 
 To create that user, run:
 
-    make create-pg-users
+    make setup-pg-users
 
 Those values can also be modified in `config/database.yml`.
 
@@ -55,7 +55,7 @@ That command will install the gem `bundler`, the dependencies and will initializ
 
 ## Run the app
 
-### Start the serveur
+### Start the server
 
 To run the server, run:
 
