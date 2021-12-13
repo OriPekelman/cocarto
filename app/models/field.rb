@@ -6,9 +6,9 @@ class Field < ApplicationRecord
   after_create_commit -> do
     broadcast_append_to layer, target: "fields"
     broadcast_before_to layer, target: "delete-column", partial: "fields/th"
-    layer.points.each do |point|
-      target = [point.id, "action"].join("-")
-      broadcast_before_to layer, target: target, partial: "fields/field_in_form", locals: {field: self, form: point.id, value: nil}
+    layer.row_contents.each do |row_content|
+      target = [row_content.id, "action"].join("-")
+      broadcast_before_to layer, target: target, partial: "fields/field_in_form", locals: {field: self, form: row_content.id, value: nil}
     end
   end
 
