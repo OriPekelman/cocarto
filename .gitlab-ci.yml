@@ -14,16 +14,16 @@ variables:
 cache:
   paths:
     - vendor/ruby
-    - node_modules
+#    - node_modules
 
 before_script:
-  - curl -fsSL https://deb.nodesource.com/setup_14.x | bash -
-  - apt-get install -y nodejs
-  - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-  - echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-  - apt-get update -qy
-  - apt-get install -y yarn
-  - yarn install
+#  - curl -fsSL https://deb.nodesource.com/setup_14.x | bash -
+#  - apt-get install -y nodejs
+#  - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+#  - echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+#  - apt-get update -qy
+#  - apt-get install -y yarn
+#  - yarn install
   - bundle config set --local path 'vendor/ruby'
 
 install:
