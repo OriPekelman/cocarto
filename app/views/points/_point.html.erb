@@ -1,26 +1,9 @@
-<tr id="<%= dom_id(point) %>"
-    class="point-row"
+<tr id="<%= dom_id(row_content) %>"
     data-map-target="point"
-    data-lng="<%= point.geog.x %>"
-    data-lat="<%= point.geog.y %>"
+    data-lng="<%= row_content.geometry.geog.x %>"
+    data-lat="<%= row_content.geometry.geog.y %>"
     data-controller="row"
     data-action="focusout->row#focusOut"
 >
-
-        <% point.layer.fields.each do |field| %>
-            <%= render partial: "fields/field_in_form", locals: {field: field, value: point.fields[field.id], form: point.id} %>
-        <% end %>
-        <td class="row-actions" id="<%= point.id %>-action">
-            <div class="is-flex row-action-buttons">
-                <%= form_with method: :patch, model: point, id: point.id, data: {"row-target": "form"} do |form| %>
-                    <%= form.hidden_field :layer_id, value: point.layer.id %>
-                    <%= form.button method: :update, class: "button icon is-primary p-2", disabled: true, data: {"row-target": "save", "action": "row#setLoading"} do %>
-                        <span class="fas fa-fw"><%= fa_icon "save" %></span>
-                    <% end %>
-                <% end %>
-                <%= button_to point, method: :delete, class: "button icon is-danger p-2" do %>
-                    <span class="fas fa-fw"><%= fa_icon "trash-o" %></span>
-                <% end %>
-            </div>
-        </td>
+    <%= yield %>
 </tr>
