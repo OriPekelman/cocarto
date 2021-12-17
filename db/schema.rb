@@ -17,6 +17,11 @@ ActiveRecord::Schema.define(version: 2021_12_10_114047) do
   enable_extension "plpgsql"
   enable_extension "postgis"
 
+  # Custom types defined in this database.
+  # Note that some types may not work with other database engines. Be careful if changing database.
+  create_enum "fields_type_enum", ["text", "float", "integer"]
+  create_enum "geometry_type_enum", ["point", "linestring", "polygon"]
+
   create_enum :fields_type_enum, [
     "text",
     "float",
@@ -34,13 +39,13 @@ ActiveRecord::Schema.define(version: 2021_12_10_114047) do
     t.uuid "layer_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.enum "field_type", enum_name: "fields_type_enum"
+    t.enum "field_type", enum_type: "fields_type_enum", enum_name: "fields_type_enum"
     t.index ["layer_id"], name: "index_fields_on_layer_id"
   end
 
   create_table "layers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
-    t.enum "geometry_type", enum_name: "geometry_type_enum"
+    t.enum "geometry_type", enum_type: "geometry_type_enum", enum_name: "geometry_type_enum"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
