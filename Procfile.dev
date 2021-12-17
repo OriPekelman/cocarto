@@ -1,1 +1,2 @@
 web: bin/rails s
+css: yarn build:css --watch
