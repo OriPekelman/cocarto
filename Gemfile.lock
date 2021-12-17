@@ -92,7 +92,6 @@ GEM
     childprocess (4.1.0)
     concurrent-ruby (1.1.9)
     crass (1.0.6)
-    dry-cli (0.7.0)
     erubi (1.10.0)
     ffi (1.15.4)
     font-awesome-rails (3.1.1.0)
@@ -135,8 +134,6 @@ GEM
     rack (2.2.3)
     rack-mini-profiler (2.3.3)
       rack (>= 1.2.0)
-    rack-proxy (0.7.0)
-      rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (7.0.0)
@@ -228,13 +225,6 @@ GEM
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.1.0)
-    vite_rails (3.0.2)
-      railties (>= 5.1, < 8)
-      vite_ruby (~> 3.0)
-    vite_ruby (3.0.3)
-      dry-cli (~> 0.7.0)
-      rack-proxy (~> 0.6, >= 0.6.1)
-      zeitwerk (~> 2.2)
     web-console (4.2.0)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -275,7 +265,6 @@ DEPENDENCIES
   standard
   turbo-rails
   tzinfo-data
-  vite_rails
   web-console (>= 4.1.0)
   webdrivers
 
