@@ -1,4 +1,12 @@
 GIT
+  remote: https://github.com/cseelus/font-awesome-rails
+  revision: b3d268514fa43b9657cbb1e8c9a29b63ffe491e9
+  branch: rails-7-compatibility
+  specs:
+    font-awesome-rails (4.7.0.7)
+      railties (>= 3.2, < 7.1)
+
+GIT
   remote: https://github.com/rgeo/activerecord-postgis-adapter
   revision: cff2b913ea23989e14aaefe2398f9173501b2efc
   branch: activerecord-7
@@ -94,8 +102,6 @@ GEM
     crass (1.0.6)
     erubi (1.10.0)
     ffi (1.15.4)
-    font-awesome-rails (3.1.1.0)
-      railties (>= 3.1)
     globalid (1.0.0)
       activesupport (>= 5.0)
     hotwire-rails (0.1.3)
@@ -104,6 +110,9 @@ GEM
       turbo-rails
     i18n (1.8.11)
       concurrent-ruby (~> 1.0)
+    importmap-rails (1.0.1)
+      actionpack (>= 6.0.0)
+      railties (>= 6.0.0)
     jbuilder (2.11.3)
       activesupport (>= 5.0.0)
     listen (3.7.0)
@@ -250,8 +259,9 @@ DEPENDENCIES
   bootsnap (>= 1.4.4)
   byebug
   capybara (>= 3.26)
-  font-awesome-rails
+  font-awesome-rails!
   hotwire-rails
+  importmap-rails
   jbuilder (~> 2.7)
   listen (~> 3.3)
   pg (~> 1.2)

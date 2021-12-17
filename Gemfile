@@ -8,8 +8,8 @@ gem "rails", "~> 7.0"
 # Use postgresql as the database for Active Record
 gem "pg", "~> 1.2"
 gem "activerecord-postgres_enum"
-gem "activerecord-postgis-adapter", git: "https://github.com/rgeo/activerecord-postgis-adapter", branch: 'activerecord-7'
-gem "font-awesome-rails"
+gem "activerecord-postgis-adapter", git: "https://github.com/rgeo/activerecord-postgis-adapter", branch: "activerecord-7"
+gem "font-awesome-rails", git: "https://github.com/cseelus/font-awesome-rails", branch: "rails-7-compatibility"
 # Use Puma as the app server
 gem "puma", "~> 5.0"
 # Use SCSS for stylesheets
