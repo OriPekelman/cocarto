@@ -35,13 +35,12 @@
 yarn-debug.log*
 .yarn-integrity
 
-# Vite Ruby
-/public/vite
-/public/vite-dev
-/public/vite-test
 node_modules
 *.local
 .DS_Store
 
 # Ignore .idea/ from RubyMine
 .idea/
+
+/app/assets/builds/*
+!/app/assets/builds/.keep

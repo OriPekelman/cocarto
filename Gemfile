@@ -4,12 +4,12 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "3.0.2"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 6.1.4", ">= 6.1.4.1"
+gem "rails", "~> 7.0"
 # Use postgresql as the database for Active Record
-gem "pg", "~> 1.1"
+gem "pg", "~> 1.2"
 gem "activerecord-postgres_enum"
-gem "activerecord-postgis-adapter"
-gem "font-awesome-rails"
+gem "activerecord-postgis-adapter", git: "https://github.com/rgeo/activerecord-postgis-adapter", branch: "activerecord-7"
+gem "font-awesome-rails", git: "https://github.com/cseelus/font-awesome-rails", branch: "rails-7-compatibility"
 # Use Puma as the app server
 gem "puma", "~> 5.0"
 # Use SCSS for stylesheets
@@ -26,8 +26,8 @@ gem "jbuilder", "~> 2.7"
 gem "redis", "~> 4.0"
 # Use Active Model has_secure_password
 # gem "bcrypt", "~> 3.1.7"
-gem "vite_rails"
-
+gem "importmap-rails"
+gem "cssbundling-rails"
 # Use Active Storage variant
 # gem "image_processing", "~> 1.2"
 

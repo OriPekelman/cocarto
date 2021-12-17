@@ -1,12 +1,11 @@
+import maplibre from 'maplibre-gl'
 import { Controller } from '@hotwired/stimulus'
-import maplibregl from 'maplibre-gl'
-import 'maplibre-gl/dist/maplibre-gl.css'
 
 function marker (point) {
   const lng = +point.getAttribute('data-lng')
   const lat = +point.getAttribute('data-lat')
 
-  return new maplibregl.Marker().setLngLat({ lng, lat })
+  return new maplibre.Marker().setLngLat({ lng, lat })
 }
 
 export default class extends Controller {
@@ -17,7 +16,7 @@ export default class extends Controller {
   }
 
   connect () {
-    this.map = new maplibregl.Map({
+    this.map = new maplibre.Map({
       container: this.mapTarget.id,
       style:
         'https://api.maptiler.com/maps/basic/style.json?key=rF1iMNeNc3Eh3ES7Ke8H',
