@@ -1,6 +1,7 @@
 .DEFAULT_GOAL := help
 
 install: ## Install or update dependencies
+	yarn install
 	bin/setup
 
 setup: install
