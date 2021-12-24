@@ -62,6 +62,7 @@ export default class extends Controller {
       },
       received(data) {
         if(data.sessionId !== _this.sessionId) {
+          data.timeout = true
           if (_this.otherPositions.has (data.sessionId)) {
             _this.updateOtherPosition(data)
           } else {
@@ -96,18 +97,23 @@ export default class extends Controller {
     this.markers.delete(id)
   }
 
-  updateOtherPosition ({sessionId, lngLat, name}) {
-    let other = this.otherPositions.get(sessionId)
-    if (other.name !== name) {
-      other.marker.remove()
-      this.otherPositions.delete(sessionId)
-      this.addOtherPosition({sessionId, lngLat, name})
+  updateOtherPosition (params) {
+    let other = this.otherPositions.get(params.sessionId)
+    if (other.name !== params.name) {
+      this.deleteOtherPosition(params.sessionId)
+      this.addOtherPosition(params)
     } else {
-      other.marker.setLngLat(lngLat)
+      other.marker.setLngLat(params.lngLat)
     }
   }
 
-  addOtherPosition ({sessionId, lngLat, name}) {
+  deleteOtherPosition (sessionId) {
+    let other = this.otherPositions.get(sessionId)
+    other.marker.remove()
+    this.otherPositions.delete(sessionId)
+  }
+
+  addOtherPosition ({sessionId, lngLat, name, timeout}) {
     if (this.map) {
       const marker = otherPointer(lngLat, name)
       marker.addTo(this.map)
@@ -115,6 +121,19 @@ export default class extends Controller {
         name,
         marker,
       })
+
+      if (timeout) {
+        window.setTimeout(() => this.markOutdated(sessionId), 10 * 1000);
+      }
     }
+  }
+
+  markOutdated (sessionId) {
+    console.log('outadet', sessionId)
+    const other = this.otherPositions.get(sessionId)
+    const lngLat = other.marker.getLngLat()
+    const name = other.name + ' (lost)'
+    this.updateOtherPosition({sessionId, lngLat, name, timeout: false})
+    window.setTimeout( () => this.deleteOtherPosition(sessionId), 10 * 000);
   }
 }
