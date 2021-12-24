@@ -25,6 +25,7 @@ export default class extends Controller {
     this.otherPositions = new Map()
     this.sessionId = this.sessionIdTarget.value
     this.layerId = this.layerIdTarget.value
+    this.lastMoveSent = Date.now()
   }
 
   connect () {
@@ -44,7 +45,12 @@ export default class extends Controller {
       this.newPointFormTarget.requestSubmit()
     })
 
-    this.map.on('mousemove', e => this.channel.mouse_moved(e.lngLat))
+    this.map.on('mousemove', e => {
+      if ( Date.now() - this.lastMoveSent > 20) {
+        this.channel.mouse_moved(e.lngLat)
+        this.lastMoveSent = Date.now()
+      }
+    })
 
     const _this = this
     this.channel = consumer.subscriptions.create({channel: 'SharePositionChannel', layer: this.layerId}, {
