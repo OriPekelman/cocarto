@@ -1,3 +1,5 @@
+require "securerandom"
+
 class LayersController < ApplicationController
   before_action :set_layer, only: %i[show edit update destroy]
 
@@ -13,6 +15,9 @@ class LayersController < ApplicationController
   end
 
   def edit
+    # Every time we open a new tab, we create this session id
+    # It allows to keep track what
+    @session_id = SecureRandom.alphanumeric
   end
 
   def update
