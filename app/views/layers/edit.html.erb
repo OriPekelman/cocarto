@@ -13,6 +13,11 @@
 </nav>
 <div class="columns is-full-height m-0" data-controller="map">
     <div class="is-6 column" id="data-editor">
+        <div class="field">
+          <%= text_field :user_name, nil, data: {map_target: "userName"}, placeholder: "your name" %>
+          <%= hidden_field_tag :session_id, @session_id, data: {map_target: "sessionId"} %>
+          <%= hidden_field_tag :session_id, @layer.id, data: {map_target: "layerId"} %>
+        </div>
         <%= render "row_contents/table" %>
     </div>
 
