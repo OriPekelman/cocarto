@@ -134,6 +134,6 @@ export default class extends Controller {
     const lngLat = other.marker.getLngLat()
     const name = other.name + ' (lost)'
     this.updateOtherPosition({sessionId, lngLat, name, timeout: false})
-    window.setTimeout( () => this.deleteOtherPosition(sessionId), 10 * 000);
+    window.setTimeout( () => this.deleteOtherPosition(sessionId), 10 * 1000);
   }
 }
