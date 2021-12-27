@@ -2,7 +2,7 @@ import maplibre from 'maplibre-gl'
 import { Controller } from '@hotwired/stimulus'
 
 import consumer from "channels/consumer"
-import Trackers from '../trackers'
+import Trackers from 'lib/trackers'
 
 function marker (point) {
   const lng = +point.getAttribute('data-lng')

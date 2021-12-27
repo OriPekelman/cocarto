@@ -7,9 +7,18 @@ class Tracker {
         this.lost = false
 
         this.el = document.createElement('div')
-        this.el.innerText = this.name
+        this.el.className = 'tracker'
+        this.el.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10">
+            <path d="m0 10 v-10 h10" fill="transparent" stroke-width="5px" stroke="black" />
+        </svg>
+        <span></span>`
+        this.setName(name)
+        this.marker = new maplibre.Marker(this.el, {anchor: 'top-left'}).setLngLat(lngLat)
+    }
 
-        this.marker = new maplibre.Marker(this.el).setLngLat(lngLat)
+    setName(name) {
+        const el = this.el.getElementsByTagName('span')[0]
+        el.innerText = name
     }
 
     timeout(trackers) {
@@ -19,14 +28,14 @@ class Tracker {
         }
         else {
             this.lost = true
-            this.el.innerText = this.name + ' (lost)'
+            this.setName(this.name + ' (lost)')
             this.resetTimeout(trackers)
         }
     }
 
     update({name, lngLat}) {
         this.name = name  ? name : 'Anonymous'
-        this.el.innerText = this.name
+        this.setName(this.name)
         this.marker.setLngLat(lngLat)
         this.lost = false
     }
