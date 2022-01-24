@@ -9,8 +9,8 @@ setup: install
 setup-pg-users: ## Creates the required postgresql users
 	bin/setup_pg_users
 
-run: ## Start the app server
-	bin/rails server
+dev: install## Start the app server for development purpose
+	bin/dev
 
 lint-ruby: ## Run the ruby linter standardrb
 	bundle exec standardrb

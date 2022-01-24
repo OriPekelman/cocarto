@@ -59,11 +59,11 @@ That command will install the gem `bundler`, the dependencies and will initializ
 
 To run the server, run:
 
-    make run
+    make dev
 
 That command will automatically run `make install` to install new dependencies and run database migrations.
 
-The app then runs at `http://localhost:3000`.
+The app then runs at `http://localhost:5000`.
 
 ### Run the tests
 
