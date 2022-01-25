@@ -1,6 +1,6 @@
 <%= form_with model: @point do |form| %>
     <%= form.hidden_field :layer_id, value: @layer.id %>
-    <%= form.hidden_field :annonymous, value: "true" if @annonymous %>
+    <%= form.hidden_field :anonymous, value: "true" if @anonymous %>
     <% @layer.fields.each do |field| %>
         <div class="field">
             <%= form.label field.id, field.label, class: "label" %>
