@@ -1,5 +1,9 @@
 class PointsController < ApplicationController
-  before_action :set_layer, only: %i[create]
+  before_action :set_layer, only: %i[create new]
+
+  def new
+    @point = @layer.points.new
+  end
 
   def create
     point = params.require(:point).permit(:longitude, :latitude, :layer_id)
@@ -27,7 +31,7 @@ class PointsController < ApplicationController
   end
 
   def set_layer
-    layer_id = params[:point][:layer_id]
+    layer_id = params[:layer_id] || params[:point][:layer_id]
     @layer = Layer.find(layer_id)
   end
 end
