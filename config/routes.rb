@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   resources :fields
   resources :points
   resources :row_contents
+  get "/layers/:id/schema" => "layers#schema"
 end
