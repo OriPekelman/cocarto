@@ -1,12 +1,27 @@
 class PointsController < ApplicationController
-  before_action :set_layer, only: %i[create new]
+  before_action :set_layer, only: %i[create new update]
 
   def new
     @point = @layer.points.new
+    # The form is filled by someone that shouldn’t be redirected to the main page
+    @annonymous = true
+    @values = {}
+  end
+
+  def edit
+    @point = Point.find(params[:id])
+    @layer = @point.layer
+    @values = @point.row_content.values
+  end
+
+  def update
+    @point = Point.find(params[:id])
+    @point.row_content.update({values: fields})
+    redirect_to action: :edit, id: @point
   end
 
   def create
-    point = params.require(:point).permit(:longitude, :latitude, :layer_id)
+    point = params.require(:point).permit(:longitude, :latitude, :layer_id, :annonymous)
 
     @point = @layer.points.create({
       layer: @layer,
@@ -17,9 +32,13 @@ class PointsController < ApplicationController
       })
     })
 
-    respond_to do |format|
-      format.turbo_stream
-      format.html { redirect_to @point.layer }
+    if point[:annonymous] == "true"
+      redirect_to action: :edit, id: @point
+    else
+      respond_to do |format|
+        format.turbo_stream
+        format.html { redirect_to @point.layer }
+      end
     end
   end
 
