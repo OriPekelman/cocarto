@@ -1,7 +1,7 @@
 require "securerandom"
 
 class LayersController < ApplicationController
-  before_action :set_layer, only: %i[show edit update destroy]
+  before_action :set_layer, only: %i[show edit update destroy schema]
 
   def index
     @layers = Layer.all
@@ -44,6 +44,15 @@ class LayersController < ApplicationController
     redirect_to layers_url, notice: "Layer was successfully destroyed."
   end
 
+  def schema
+    properties = @layer.fields.all.map { |f| field_schema(f) }.to_h
+
+    render json: {
+      type: :object,
+      properties: properties
+    }.to_json
+  end
+
   private
 
   def set_layer
@@ -52,5 +61,15 @@ class LayersController < ApplicationController
 
   def layer_params
     params.require(:layer).permit(:name, :geometry_type)
+  end
+
+  def field_schema(field)
+    mapping = {
+      "text" => :string,
+      "float" => :number,
+      "integer" => :integer
+    }
+
+    [field.id, type: mapping[field.field_type], title: field.label]
   end
 end

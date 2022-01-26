@@ -4,7 +4,7 @@ class PointsController < ApplicationController
   def new
     @point = @layer.points.new
     # The form is filled by someone that shouldn’t be redirected to the main page
-    @annonymous = true
+    @anonymous = true
     @values = {}
   end
 
@@ -21,7 +21,7 @@ class PointsController < ApplicationController
   end
 
   def create
-    point = params.require(:point).permit(:longitude, :latitude, :layer_id, :annonymous)
+    point = params.require(:point).permit(:longitude, :latitude, :layer_id, :anonymous)
 
     @point = @layer.points.create({
       layer: @layer,
@@ -32,7 +32,7 @@ class PointsController < ApplicationController
       })
     })
 
-    if point[:annonymous] == "true"
+    if point[:anonymous] == "true"
       redirect_to action: :edit, id: @point
     else
       respond_to do |format|
