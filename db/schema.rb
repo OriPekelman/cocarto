@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_26_215131) do
+ActiveRecord::Schema.define(version: 2022_02_27_210950) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -67,27 +67,15 @@ ActiveRecord::Schema.define(version: 2022_01_26_215131) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "points", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.geometry "geog", limit: {:srid=>0, :type=>"st_point"}
-    t.uuid "layer_id", null: false
-    t.integer "revision"
-    t.jsonb "fields"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "row_content_type"
-    t.index ["layer_id"], name: "index_points_on_layer_id"
-  end
-
   create_table "row_contents", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.jsonb "values"
     t.uuid "layer_id"
-    t.string "geometry_type", null: false
-    t.uuid "geometry_id", null: false
-    t.index ["geometry_type", "geometry_id"], name: "index_row_contents_on_geometry"
+    t.geometry "point", limit: {:srid=>0, :type=>"st_point"}
+    t.datetime "created_at", precision: 6, default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "updated_at", precision: 6, default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.index ["layer_id"], name: "index_row_contents_on_layer_id"
   end
 
   add_foreign_key "communes", "departements"
   add_foreign_key "fields", "layers"
-  add_foreign_key "points", "layers"
 end
