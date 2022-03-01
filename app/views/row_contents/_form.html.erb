@@ -1,4 +1,4 @@
-<%= form_with model: @point do |form| %>
+<%= form_with model: @row do |form| %>
     <%= form.hidden_field :layer_id, value: @layer.id %>
     <%= form.hidden_field :anonymous, value: "true" if @anonymous %>
     <% @layer.fields.each do |field| %>

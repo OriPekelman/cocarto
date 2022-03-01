@@ -1,10 +1,7 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  resources :layers do
-    resources :points
-  end
+  resources :layers
   resources :fields
-  resources :points
   resources :row_contents
   get "/layers/:id/schema" => "layers#schema"
 end

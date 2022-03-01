@@ -7,7 +7,7 @@ class AddPointToRowContents < ActiveRecord::Migration[7.0]
     add_column :row_contents, :point, :st_point, geography: true
 
     # Oups, we forgot that one earlier
-    add_timestamps :row_contents, default: -> { 'CURRENT_TIMESTAMP' }
+    add_timestamps :row_contents, default: -> { "CURRENT_TIMESTAMP" }
 
     RowContent.all.each do |r|
       p = Point.find(r.geometry_id)
@@ -18,7 +18,6 @@ class AddPointToRowContents < ActiveRecord::Migration[7.0]
     # Remove the complicated relationships management
     remove_columns(:row_contents, :geometry_id, :geometry_type)
 
-
     # Tada, this table is no longer needed
     drop_table :points
   end
@@ -26,7 +25,7 @@ class AddPointToRowContents < ActiveRecord::Migration[7.0]
   def down
     add_belongs_to :row_contents, :geometry, polymorphic: true, type: :uuid
 
-    create_table :points,  id: :uuid, default: -> { "gen_random_uuid()" } do |t|
+    create_table :points, id: :uuid, default: -> { "gen_random_uuid()" } do |t|
       t.st_point :geog, geography: true
       t.references :layer, null: false, foreign_key: true, type: :uuid
 

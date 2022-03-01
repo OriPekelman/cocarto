@@ -1,4 +1,10 @@
-<%= render row_content.geometry, row_content: row_content do %>
+<tr id="<%= dom_id(row_content) %>"
+    data-map-target="point"
+    data-lng="<%= row_content.point.x %>"
+    data-lat="<%= row_content.point.y %>"
+    data-controller="row"
+    data-action="focusout->row#focusOut"
+>
     <% row_content.layer.fields.each do |field| %>
         <%= render partial: "fields/field_in_form", locals: {field: field, value: row_content.values[field.id], form: row_content.id} %>
     <% end %>
@@ -14,4 +20,4 @@
             <% end %>
         </div>
     </td>
-<% end %>
+</tr>
