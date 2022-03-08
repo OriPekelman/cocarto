@@ -9,11 +9,11 @@ class AddPointToRowContents < ActiveRecord::Migration[7.0]
     # Oups, we forgot that one earlier
     add_timestamps :row_contents, default: -> { "CURRENT_TIMESTAMP" }
 
-    RowContent.all.each do |r|
-      p = Point.find(r.geometry_id)
-      r.point = p.geog
-      r.save!
-    end
+    execute <<-SQL
+    UPDATE row_contents SET point = point_table.geog
+    FROM points AS point_table
+    WHERE row_contents.geometry_id = point_table.id
+    SQL
 
     # Remove the complicated relationships management
     remove_columns(:row_contents, :geometry_id, :geometry_type)
@@ -28,16 +28,21 @@ class AddPointToRowContents < ActiveRecord::Migration[7.0]
     create_table :points, id: :uuid, default: -> { "gen_random_uuid()" } do |t|
       t.st_point :geog, geography: true
       t.references :layer, null: false, foreign_key: true, type: :uuid
-
+      t.uuid :row_content_id
       t.timestamps
     end
 
-    RowContent.all.each do |r|
-      p = Point.create(geog: r.point, layer_id: r.layer_id)
-      r.geometry = p
-      r.save!
-    end
+    execute <<-SQL
+    WITH new_ids AS (INSERT INTO points (geog, layer_id, created_at, updated_at, row_content_id)
+    SELECT point, layer_id, now(), now(), id FROM row_contents
+    RETURNING id, row_content_id)
 
+    UPDATE row_contents SET geometry_id = new_ids.id
+    FROM new_ids
+    WHERE row_contents.id = row_content_id
+    SQL
+
+    remove_column :points, :row_content_id
     remove_column :row_contents, :point
     remove_timestamps :row_contents
   end
