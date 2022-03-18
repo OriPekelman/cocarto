@@ -8,7 +8,7 @@
     <% row_content.layer.fields.each do |field| %>
         <%= render partial: "fields/field_in_form", locals: {field: field, value: row_content.values[field.id], form: row_content.id} %>
     <% end %>
-    <td class="row-actions" id="<%= row_content.id %>-action">
+    <td id="<%= row_content.id %>-action">
         <div class="actions">
             <%= form_with method: :patch, model: row_content, id: row_content.id, data: {"row-target": "form"} do |form| %>
                 <%= form.button method: :update, disabled: true, data: {"row-target": "save", "action": "row#setLoading"} do %>

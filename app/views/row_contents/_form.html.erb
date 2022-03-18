@@ -2,14 +2,14 @@
     <%= form.hidden_field :layer_id, value: @layer.id %>
     <%= form.hidden_field :anonymous, value: "true" if @anonymous %>
     <% @layer.fields.each do |field| %>
-        <div class="field">
-            <%= form.label field.id, field.label, class: "label" %>
-            <div class="control">
-                <%= form.text_field field.id, class: "input", value: @values[field.id] %>
+        <div>
+            <%= form.label field.id, field.label  %>
+            <div>
+                <%= form.text_field field.id, value: @values[field.id] %>
             </div>
         </div>
     <% end %>
-    <div class="control">
-        <%= form.submit "Sauvegarder", class: "button is-link" %>
+    <div>
+        <%= form.submit "Sauvegarder" %>
     </div>
 <% end %>

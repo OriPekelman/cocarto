@@ -3,10 +3,10 @@
     <div>
       <%= link_to "Ĝis", "/layers", class: "navbar-item" %>
     </div>
-    <div class="field">
+    <div>
       <%= text_field :user_name, nil, data: {map_target: "userName"}, placeholder: "your name" %>
       <%= hidden_field_tag :session_id, @session_id, data: {map_target: "sessionId"} %>
-      <%= hidden_field_tag :session_id, @layer.id, data: {map_target: "layerId"} %>
+      <%= hidden_field_tag :layer_id, @layer.id, data: {map_target: "layerId"} %>
     </div>
     <div>
       <%= form_with(model: @layer) do |form| %>

@@ -6,7 +6,7 @@
   </div>
 
   <div>
-    <%= form.label "Field name", class: "label" %>
+    <%= form.label "Field name" %>
     <div>
       <%= form.collection_radio_buttons(:field_type, Field.enum_field_types.keys, :to_s, :titlecase) do |b| %>
         <%= b.label(class: "radio") do %>
@@ -18,6 +18,6 @@
   </div>
 
   <div>
-    <%= form.submit class: "button is-link" %>
+    <%= form.submit %>
   </div>
 <% end %>

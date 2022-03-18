@@ -1,7 +1,7 @@
-<li id="<%= dom_id(field) %>" class="level mb-1">
-    <div class="level-left">
-        <span class="level-item"><%= field.label %> (<%= field.field_type %>)</span>
-    <%= button_to field, method: :delete, form_class: "level-item", class: "button is-ghost p-2" do %>
-        <span class="icon"><%= fa_icon "trash-o" %></span>
+<li id="<%= dom_id(field) %>">
+    <div>
+        <span><%= field.label %> (<%= field.field_type %>)</span>
+    <%= button_to field, method: :delete, form_class: "level-item" do %>
+        <span>delete</span>
     <% end %>
 </li>
