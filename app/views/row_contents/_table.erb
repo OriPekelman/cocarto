@@ -19,6 +19,6 @@
         </tr>
     </thead>
     <tbody id="rows-tbody">
-      <%= render @layer.row_contents %>
+      <%= render @layer.row_contents.order(:created_at) %>
     </tbody>
 </table>
