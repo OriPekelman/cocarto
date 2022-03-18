@@ -1,27 +1,24 @@
 <%= turbo_stream_from @layer %>
-<nav class="navbar" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
-        <%= link_to "Ĝis", "/layers", class: "navbar-item" %>
+<nav role="navigation" aria-label="main navigation">
+    <div>
+      <%= link_to "Ĝis", "/layers", class: "navbar-item" %>
     </div>
-    <div class="navbar-item">
-        <%= form_with(model: @layer) do |form| %>
-          <div class="field">
-            <%= form.text_field :name %>
-          </div>
-        <% end %>
+    <div class="field">
+      <%= text_field :user_name, nil, data: {map_target: "userName"}, placeholder: "your name" %>
+      <%= hidden_field_tag :session_id, @session_id, data: {map_target: "sessionId"} %>
+      <%= hidden_field_tag :session_id, @layer.id, data: {map_target: "layerId"} %>
+    </div>
+    <div>
+      <%= form_with(model: @layer) do |form| %>
+        <%= form.text_field :name %>
+      <% end %>
     </div>
 </nav>
-<div class="columns is-full-height m-0" data-controller="map">
-    <div class="is-6 column" id="data-editor">
-        <div class="field">
-          <%= text_field :user_name, nil, data: {map_target: "userName"}, placeholder: "your name" %>
-          <%= hidden_field_tag :session_id, @session_id, data: {map_target: "sessionId"} %>
-          <%= hidden_field_tag :session_id, @layer.id, data: {map_target: "layerId"} %>
-        </div>
+<div id="layer_edit" data-controller="map">
+    <div id="data_editor" id="data-editor">
         <%= render "row_contents/table" %>
     </div>
-
-    <div class="is-full-height column p-0" id="map" data-map-target="map">
+    <div id="map" data-map-target="map">
         <%= render "row_contents/new", layer: @layer %>
     </div>
 </div>

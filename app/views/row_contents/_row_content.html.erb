@@ -9,14 +9,14 @@
         <%= render partial: "fields/field_in_form", locals: {field: field, value: row_content.values[field.id], form: row_content.id} %>
     <% end %>
     <td class="row-actions" id="<%= row_content.id %>-action">
-        <div class="is-flex row-action-buttons">
+        <div class="actions">
             <%= form_with method: :patch, model: row_content, id: row_content.id, data: {"row-target": "form"} do |form| %>
-                <%= form.button method: :update, class: "button icon is-primary p-2", disabled: true, data: {"row-target": "save", "action": "row#setLoading"} do %>
-                    <span class="fas fa-fw"><%= fa_icon "save" %></span>
+                <%= form.button method: :update, disabled: true, data: {"row-target": "save", "action": "row#setLoading"} do %>
+                    Save
                 <% end %>
             <% end %>
-            <%= button_to row_content, method: :delete, class: "button icon is-danger p-2" do %>
-                <span class="fas fa-fw"><%= fa_icon "trash-o" %></span>
+            <%= button_to row_content, method: :delete do %>
+                Delete
             <% end %>
         </div>
     </td>
