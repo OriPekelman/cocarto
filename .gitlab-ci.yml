@@ -1,5 +1,5 @@
 default:
-  image: ruby:3.0.2
+  image: ruby:3.1.1
 
 services:
   - postgis/postgis:latest
