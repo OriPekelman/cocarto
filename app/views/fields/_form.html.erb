@@ -1,13 +1,13 @@
 <%= form_with model: Field.new, data: {action: "dropdown#toggle"} do |form| %>
   <%= form.hidden_field :layer_id, value: @layer.id %>
-  <div class="field">
+  <div>
     <%= form.label "Field label", class: "label" %>
     <%= form.text_field :label, class: "input" %>
   </div>
 
-  <div class="field">
-    <%= form.label "Field name", class: "label" %>
-    <div class="control radio-list">
+  <div>
+    <%= form.label "Field name" %>
+    <div>
       <%= form.collection_radio_buttons(:field_type, Field.enum_field_types.keys, :to_s, :titlecase) do |b| %>
         <%= b.label(class: "radio") do %>
           <%= b.text %>
@@ -17,7 +17,7 @@
     </div>
   </div>
 
-  <div class="control">
-    <%= form.submit class: "button is-link" %>
+  <div>
+    <%= form.submit %>
   </div>
 <% end %>
