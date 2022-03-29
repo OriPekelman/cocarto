@@ -11,7 +11,7 @@ gem "activerecord-postgres_enum"
 gem "activerecord-postgis-adapter"
 # Use Puma as the app server
 gem "puma", "~> 5.0"
-gem "sass-rails", ">= 6"
+gem "sprockets-rails", require: "sprockets/railtie"
 gem "turbo-rails"
 gem "hotwire-rails"
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
