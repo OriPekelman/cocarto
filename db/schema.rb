@@ -10,17 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_27_210950) do
-
+ActiveRecord::Schema[7.0].define(version: 2022_02_27_210950) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
   enable_extension "postgis"
-
-  # Custom types defined in this database.
-  # Note that some types may not work with other database engines. Be careful if changing database.
-  create_enum "fields_type_enum", ["text", "float", "integer"]
-  create_enum "geometry_type_enum", ["point", "linestring", "polygon"]
 
   create_enum :fields_type_enum, [
     "text",
@@ -39,40 +33,40 @@ ActiveRecord::Schema.define(version: 2022_02_27_210950) do
     t.string "libelle"
     t.integer "year"
     t.uuid "departement_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["departement_id"], name: "index_communes_on_departement_id"
   end
 
   create_table "departements", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "code"
     t.string "libelle"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "fields", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "label"
     t.uuid "layer_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.enum "field_type", enum_type: "fields_type_enum", enum_name: "fields_type_enum"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.enum "field_type", enum_type: "fields_type_enum"
     t.index ["layer_id"], name: "index_fields_on_layer_id"
   end
 
   create_table "layers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
-    t.enum "geometry_type", enum_type: "geometry_type_enum", enum_name: "geometry_type_enum"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.enum "geometry_type", enum_type: "geometry_type_enum"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "row_contents", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.jsonb "values"
     t.uuid "layer_id"
     t.geometry "point", limit: {:srid=>0, :type=>"st_point"}
-    t.datetime "created_at", precision: 6, default: -> { "CURRENT_TIMESTAMP" }, null: false
-    t.datetime "updated_at", precision: 6, default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.index ["layer_id"], name: "index_row_contents_on_layer_id"
   end
 
