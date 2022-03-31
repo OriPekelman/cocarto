@@ -1,8 +1,11 @@
 default:
   image: ruby:3.1.1
+  tags:
+    - xuan # We use our own runner: faster and the shared seem to have a network issue
 
 services:
   - postgis/postgis:latest
+  - browserless/chrome:latest
 
 variables:
   GITLAB_CI_POSTGRES_HOST: postgis-postgis
@@ -32,3 +35,12 @@ test:
   stage: test
   script:
     - make test
+  variables:
+    # This is needed so that chrome can access to rails server
+    FF_NETWORK_PER_BUILD: 1
+  # We always save the screenshots to help the debugs
+  artifacts:
+    paths:
+    - /builds/CodeursEnLiberte/gxis/tmp/screenshots
+    when: always
+    expire_in: 1 week
