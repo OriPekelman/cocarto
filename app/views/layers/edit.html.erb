@@ -4,11 +4,6 @@
       <%= link_to "Ĝis", "/layers", class: "navbar-item" %>
     </div>
     <div>
-      <%= text_field :user_name, nil, data: {map_target: "userName"}, placeholder: "your name" %>
-      <%= hidden_field_tag :session_id, @session_id, data: {map_target: "sessionId"} %>
-      <%= hidden_field_tag :layer_id, @layer.id, data: {map_target: "layerId"} %>
-    </div>
-    <div>
       <%= form_with(model: @layer) do |form| %>
         <%= form.text_field :name %>
       <% end %>
@@ -16,6 +11,11 @@
 </nav>
 <div id="layer_edit" data-controller="map">
     <div id="data_editor" id="data-editor">
+        <div>
+          <%= text_field :user_name, nil, data: {map_target: "userName"}, placeholder: "your name" %>
+          <%= hidden_field_tag :session_id, @session_id, data: {map_target: "sessionId"} %>
+          <%= hidden_field_tag :layer_id, @layer.id, data: {map_target: "layerId"} %>
+        </div>
         <%= render "row_contents/table" %>
     </div>
     <div id="map" data-map-target="map">
