@@ -1,0 +1,2 @@
+class TerritoryCategory < ApplicationRecord
+end
