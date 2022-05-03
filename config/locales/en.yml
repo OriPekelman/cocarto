@@ -30,4 +30,13 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  layers: "Layers"
+  layer: "Layer"
+  fields: "Fields"
+  show: "Show"
+  edit: "Edit"
+  destroy: "Destroy"
+  new_layer: "New Layer"
+  layer_name: "Layer Name"
+  back: "Back"
+  t_geometry_type: "Geometry Type"
