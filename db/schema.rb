@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_03_093023) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_03_133033) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -53,6 +53,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_03_093023) do
     t.index ["layer_id"], name: "index_row_contents_on_layer_id"
   end
 
+  create_table "territories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.geography "geography", limit: {:srid=>4326, :type=>"st_polygon", :geographic=>true}
+    t.uuid "territory_category_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["territory_category_id"], name: "index_territories_on_territory_category_id"
+  end
+
   create_table "territory_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "revision"
@@ -61,4 +70,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_03_093023) do
   end
 
   add_foreign_key "fields", "layers"
+  add_foreign_key "territories", "territory_categories"
 end

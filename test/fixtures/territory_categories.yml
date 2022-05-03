@@ -1,9 +1,9 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+regions:
   name: Régions de France
   revision: 2022
 
-two:
-  name: Intercommunalités
+communes:
+  name: Communes
   revision: 2021
