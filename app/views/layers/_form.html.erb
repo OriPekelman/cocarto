@@ -12,12 +12,12 @@
   <% end %>
 
   <div class="field">
-    <%= form.label "Layer name" %>
+    <%= form.label t :layer_name %>
     <%= form.text_field :name %>
   </div>
 
   <div class="field radio">
-    <h3>Geometry type</h3>
+    <h3><%= t :t_geometry_type %></h3>
     <%= form.collection_radio_buttons :geometry_type, Layer.enum_geometry_types.keys, :to_s, :titlecase %>
   </div>
 

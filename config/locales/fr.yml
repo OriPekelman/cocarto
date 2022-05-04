@@ -1,0 +1,12 @@
+fr:
+  layers: "Couches"
+  layer: "Couche "
+  fields: "Champ"
+  show: "Voir"
+  edit: "Éditer"
+  destroy: "Détruire"
+  new_layer: "Nouvelle couche"
+  layer_name: "Nom de couche "
+  back: "Retour"
+  t_geometry_type: "Type de géometrie"
+  type: "Type : "
