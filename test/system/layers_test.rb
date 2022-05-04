@@ -5,8 +5,8 @@ class LayersTest < ApplicationSystemTestCase
     visit("fr/layers")
     assert_selector "h1", text: "Couche"
   end
-    test "visiting the index in en" do
-      visit("en/layers")
-      assert_selector "h1", text:"Layers"
+  test "visiting the index in en" do
+    visit("en/layers")
+    assert_selector "h1", text: "Layers"
   end
 end
