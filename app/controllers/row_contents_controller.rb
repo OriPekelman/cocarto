@@ -38,7 +38,7 @@ class RowContentsController < ApplicationController
     @row_content.destroy
     respond_to do |format|
       format.turbo_stream
-      format.html { redirect_to @row_content.layer, notice: "Geometry was successfully destroyed." }
+      format.html { redirect_to @row_content.layer, notice: t("error_message_row_contents_destroy") }
     end
   end
 
@@ -46,7 +46,7 @@ class RowContentsController < ApplicationController
     @row_content.update(values: fields(@row_content.layer))
     respond_to do |format|
       format.turbo_stream
-      format.html { redirect_to @row_content.layer, notice: "Geometry properties were successfully updated." }
+      format.html { redirect_to @row_content.layer, notice: t("error_message_row_contents_update") }
     end
   end
 

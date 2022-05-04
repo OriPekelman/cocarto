@@ -10,7 +10,7 @@ class FieldsController < ApplicationController
 
   def update
     if @field.update(field_params)
-      redirect_to @field, notice: "Field was successfully updated."
+      redirect_to @field, notice: t("error_message_field_update")
     else
       render :edit, status: :unprocessable_entity
     end
@@ -29,7 +29,7 @@ class FieldsController < ApplicationController
     @field.destroy
     respond_to do |format|
       format.turbo_stream
-      format.html { redirect_to @field.layer, notice: "Field was successfully destroyed." }
+      format.html { redirect_to @field.layer, notice: t("error_message_field_destroy") }
     end
   end
 
