@@ -40,3 +40,4 @@ en:
   layer_name: "Layer Name"
   back: "Back"
   t_geometry_type: "Geometry Type"
+  type: "Type : "

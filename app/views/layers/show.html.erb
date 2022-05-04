@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
 <div>
-    <h2><%=t :layer %></h2>
-    Type: <%= @layer.geometry_type %>
-    <h2><%=t :fields %></h2>
+    <h2><%= t :layer%><%= @layer.name %></h2>
+    <%= t :type%><%= @layer.geometry_type %>
+    <h3><%= t :fields %></h2>
     <ul>
     <% @layer.fields.each do |field| %>
         <li> <%= render field %> </li>

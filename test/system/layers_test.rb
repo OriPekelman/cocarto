@@ -2,8 +2,8 @@ require "application_system_test_case"
 
 class LayersTest < ApplicationSystemTestCase
   test "visiting the index" do
-    visit layers_url
+    visit ('fr/layers')
 
-    assert_selector "h1", text: "Layers"
+    assert_selector text: "Couche"
   end
 end
