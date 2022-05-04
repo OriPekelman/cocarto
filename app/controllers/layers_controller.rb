@@ -22,7 +22,7 @@ class LayersController < ApplicationController
 
   def update
     if @layer.update(layer_params)
-      redirect_to @layer, notice: "Layer was successfully updated."
+      redirect_to @layer, notice: t("error_message_layer_update")
     else
       render :edit, status: :unprocessable_entity
     end
@@ -41,7 +41,7 @@ class LayersController < ApplicationController
 
   def destroy
     @layer.destroy
-    redirect_to layers_url, notice: "Layer was successfully destroyed."
+    redirect_to layers_url, notice: t("error_message_layer_destroy")
   end
 
   def schema
