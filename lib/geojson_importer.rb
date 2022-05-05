@@ -14,7 +14,7 @@ module GeojsonImporter
     geojson = RGeo::GeoJSON.decode(file)
     puts "Reading #{uri} with #{geojson.size} features" unless silent
 
-    factory = RGeo::Geos.factory(srid: 4326)
+    factory = RGeo::Cartesian.factory(srid: 4326)
     ActiveRecord::Base.transaction do
       cat = TerritoryCategory.create(name: category, revision: revision)
 
