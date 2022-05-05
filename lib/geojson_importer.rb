@@ -5,14 +5,14 @@ require "open-uri"
 ACCEPTED_TYPE = ["Polygon", "MultiPolygon"]
 
 module GeojsonImporter
-  def self.import(uri, category, revision)
+  def self.import(uri, category, revision, silent = false)
     file = if uri.starts_with?("http")
       URI.parse(uri).open.read
     else
       File.read(uri)
     end
     geojson = RGeo::GeoJSON.decode(file)
-    puts "Reading #{uri} with #{geojson.size} features"
+    puts "Reading #{uri} with #{geojson.size} features" unless silent
 
     factory = RGeo::Geos.factory(srid: 4326)
     ActiveRecord::Base.transaction do
@@ -31,7 +31,7 @@ module GeojsonImporter
           raise "Invalide geometry type #{geometry.type} for feature with name: #{name} and code: #{code}"
         end
 
-        puts "  Processing geometry #{name} (#{code})"
+        puts "  Processing geometry #{name} (#{code})" unless silent
         {name: name, geometry: geometry.as_text, territory_category_id: cat.id, code: code}
       end
 
