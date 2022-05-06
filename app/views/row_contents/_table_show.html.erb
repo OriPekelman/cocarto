@@ -1,0 +1,12 @@
+<table>
+    <thead>
+        <tr>
+        <%= render partial: "fields/th_show", collection: @layer.fields, as: :field %>
+            <th class="row-actions"> 
+            </th>
+        </tr>
+    </thead>
+    <tbody id="rows-tbody">
+      <%= render partial: "row_contents/show" , collection: @layer.row_contents , as: :row_content %>
+    </tbody>
+</table>
