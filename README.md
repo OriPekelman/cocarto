@@ -84,8 +84,15 @@ The territories are grouped into TerritoryCategories that have each a revision t
 
 A `rake` task allows to import them, either from an url, either from a local file:
 
-`rake import:geojson[http://etalab-datasets.geo.data.gouv.fr/contours-administratifs/2022/geojson/departements-100m.geojson,Départements de France,2022]`
-
 `rake import:geojson[regions.json,Régions de France,2022]`
 
+`rake import:geojson[http://etalab-datasets.geo.data.gouv.fr/contours-administratifs/2022/geojson/departements-100m.geojson,Départements de France,2022]`
+
+
 Expect a processing time of about 1s per Mb of geojson.
+
+If you want to set the parent of a territories, you need to pass as an extra-parameter:
+* the name of the parent category (`Régions de France`)
+* the code of that parent in the dataset feature properties (`region`)
+
+`rake import:geojson[http://etalab-datasets.geo.data.gouv.fr/contours-administratifs/2022/geojson/departements-100m.geojson,Départements de France,2022,Régions de France,region]`
