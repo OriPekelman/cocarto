@@ -62,6 +62,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_05_145814) do
     t.string "code"
     t.uuid "parent_id"
     t.index ["code", "territory_category_id"], name: "index_territories_on_code_and_territory_category_id", unique: true
+    t.index ["parent_id"], name: "index_territories_on_parent_id"
     t.index ["territory_category_id"], name: "index_territories_on_territory_category_id"
   end
 
