@@ -32,7 +32,6 @@
 en:
   layers: "Layers"
   layer: "Layer "
-  fields: "Fields"
   show: "Show"
   edit: "Edit"
   destroy: "Destroy"

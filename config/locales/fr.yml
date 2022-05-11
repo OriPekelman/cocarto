@@ -1,7 +1,6 @@
 fr:
   layers: "Couches"
   layer: "Couche "
-  fields: "Champ"
   show: "Voir"
   edit: "Éditer"
   destroy: "Détruire"
