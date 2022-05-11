@@ -1,6 +1,6 @@
 <h2><%= @category.name %></h2>
-<div id="territories-list" data-controller="territory">
-  <div id="list">
+<div class="data-with-map" data-controller="territory">
+  <div class="data">
     <ul>
       <% @category.territories.each do |territory| %>
         <li>
@@ -12,6 +12,6 @@
       <% end %>
     </ul>
   </div>
-  <div id="map" data-territory-target="map">
+  <div class="map" data-territory-target="map">
   </div>
 </div>

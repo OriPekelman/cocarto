@@ -6,7 +6,7 @@ export default class extends Controller {
 
   connect () {
     this.map = new maplibre.Map({
-      container: this.mapTarget.id,
+      container: this.mapTarget,
       style:
         'https://api.maptiler.com/maps/basic/style.json?key=rF1iMNeNc3Eh3ES7Ke8H',
       center: [0, 0],

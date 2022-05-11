@@ -486,24 +486,6 @@ nav > div {
   height: 2rem;
 }
 
-#layer_edit {
-  height: calc(100vh - var(--nav-height));
-  display: flex;
-}
-
-#layer_edit > #data_editor {
-  width: 60%;
-}
-
-#layer_edit > #data_editor table {
-  height: 100%;
-}
-
-#layer_edit > #map {
-  height: 100%;
-  width: 40%;
-}
-
 .dropdown {
   position: relative;
   display: inline-block;
@@ -539,16 +521,21 @@ nav > div {
   right: 0;
 }
 
-#territories-list {
-    display: flex;
-    height: 100%;
+.data-with-map {
+  height: calc(100vh - var(--nav-height));
+  display: flex;
+  height: 100%;
 }
 
-#territories-list > #list {
-    width: 40%;
+.data-with-map > .data {
+  width: 50%;
 }
 
-#territories-list > #map {
-    height: 100%;
-    width: 60%;
+.data-with-map > .data > table {
+  height: 100%;
+}
+
+.data-with-map > .map {
+  width: 50%;
+  height: 100%;
 }

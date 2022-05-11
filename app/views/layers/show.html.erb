@@ -12,11 +12,11 @@
     <%= t :type%><%= @layer.geometry_type %>
 </div>
 
-<div id="layer_edit" data-controller="map">
-    <div id="data_editor" id="data-editor">
+<div id="data-with-map" data-controller="map">
+    <div class="data">
         <%= render "row_contents/table_show" %>
     </div>
-    <div id="map" data-map-target="map">
+    <div class="map" data-map-target="map">
     </div>
 </div>
 
