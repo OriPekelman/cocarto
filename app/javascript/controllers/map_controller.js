@@ -2,6 +2,7 @@ import maplibre from 'maplibre-gl'
 import { Controller } from '@hotwired/stimulus'
 
 import consumer from "channels/consumer"
+import { new_map } from "lib/map_helpers"
 import Trackers from 'lib/trackers'
 
 function marker (point) {
@@ -25,17 +26,7 @@ export default class extends Controller {
   }
 
   connect () {
-    this.map = new maplibre.Map({
-      container: this.mapTarget,
-      style:
-        'https://api.maptiler.com/maps/basic/style.json?key=rF1iMNeNc3Eh3ES7Ke8H',
-      center: [0, 0],
-      zoom: 1,
-      attributionControl: false,
-    }).addControl(new maplibre.AttributionControl({
-      customAttribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
-      compact: false
-    }));
+    this.map = new_map(this.mapTarget)
 
     this.trackers = new Trackers(this.map)
     this.markers.forEach(marker => marker.addTo(this.map))
