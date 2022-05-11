@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :layers
     resources :fields
     resources :row_contents
+    resources :territory_categories
     get "/layers/:id/schema" => "layers#schema"
     get "/:locale" => "dashboard#index"
   end
