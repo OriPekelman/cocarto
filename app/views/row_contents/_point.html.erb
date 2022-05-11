@@ -1,9 +1,0 @@
-<tr id="<%= dom_id(@row) %>"
-    data-map-target="point"
-    data-lng="<%= row_content.point.geog.x %>"
-    data-lat="<%= row_content.point.geog.y %>"
-    data-controller="row"
-    data-action="focusout->row#focusOut"
->
-    <%= yield %>
-</tr>
