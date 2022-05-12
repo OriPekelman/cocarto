@@ -14,9 +14,6 @@
 
 <div id="layer_edit" data-controller="map">
     <div id="data_editor" id="data-editor">
-        <div>
-          <%= hidden_field_tag :layer_id, @layer.id, data: {map_target: "layerId"} %>
-        </div>
         <%= render "row_contents/table_show" %>
     </div>
     <div id="map" data-map-target="map">
