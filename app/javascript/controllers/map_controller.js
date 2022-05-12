@@ -17,9 +17,9 @@ export default class extends Controller {
   initialize () {
     this.markers = new Map()
     this.editable = this.element.getAttribute('data-editable') === "true"
-    this.layerId = this.element.getAttribute('layers_id')
+    this.layerId = this.element.getAttribute('data-layer-id')
     if (this.editable){
-      this.sessionId = this.element.getAttribute('sessions_id')
+      this.sessionId = this.element.getAttribute('data-session-id')
       this.lastMoveSent = Date.now()
     }
   }
