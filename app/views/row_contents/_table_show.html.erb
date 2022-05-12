@@ -1,8 +1,9 @@
 <table>
     <thead>
         <tr>
-        <%= render partial: "fields/th_show", collection: @layer.fields, as: :field %>
-            </th>
+        <% @layer.fields.each do |field| %>
+            <th> <%= field.label %> </th>
+        <% end %>
         </tr>
     </thead>
     <tbody id="rows-tbody">
