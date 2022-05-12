@@ -1,0 +1,12 @@
+<table>
+    <thead>
+        <tr>
+        <% @layer.fields.each do |field| %>
+            <th> <%= field.label %> </th>
+        <% end %>
+        </tr>
+    </thead>
+    <tbody id="rows-tbody">
+      <%= render partial: "row_contents/show" , collection: @layer.row_contents , as: :row_content %>
+    </tbody>
+</table>
