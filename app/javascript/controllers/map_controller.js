@@ -16,9 +16,12 @@ export default class extends Controller {
 
   initialize () {
     this.markers = new Map()
-    this.sessionId = this.sessionIdTarget.value
+    this.editable = this.element.getAttribute('data-editable') === "true"
     this.layerId = this.layerIdTarget.value
-    this.lastMoveSent = Date.now()
+    if (this.editable){
+      this.sessionId = this.sessionIdTarget.value
+      this.lastMoveSent = Date.now()
+    }
   }
 
   connect () {
@@ -37,18 +40,22 @@ export default class extends Controller {
     this.trackers = new Trackers(this.map)
     this.markers.forEach(marker => marker.addTo(this.map))
 
-    this.map.on('click', e => {
-      this.longitudeFieldTarget.value = e.lngLat.lng
-      this.latitudeFieldTarget.value = e.lngLat.lat
-      this.newPointFormTarget.requestSubmit()
-    })
 
-    this.map.on('mousemove', e => {
-      if ( Date.now() - this.lastMoveSent > 20) {
-        this.channel.mouse_moved(e.lngLat)
-        this.lastMoveSent = Date.now()
-      }
-    })
+    if (this.editable){
+      this.map.on('click', e => {
+        this.longitudeFieldTarget.value = e.lngLat.lng
+        this.latitudeFieldTarget.value = e.lngLat.lat
+        this.newPointFormTarget.requestSubmit()
+      })
+  
+      this.map.on('mousemove', e => {
+        if ( Date.now() - this.lastMoveSent > 20) {
+          this.channel.mouse_moved(e.lngLat)
+          this.lastMoveSent = Date.now()
+        }
+      })
+    }
+  
 
     const _this = this
     this.channel = consumer.subscriptions.create({channel: 'SharePositionChannel', layer: this.layerId}, {
