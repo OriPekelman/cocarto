@@ -207,6 +207,8 @@ GEM
     rgeo-activerecord (7.0.1)
       activerecord (>= 5.0)
       rgeo (>= 1.0.0)
+    rgeo-geojson (2.1.1)
+      rgeo (>= 1.0.0)
     rubocop (1.28.2)
       parallel (~> 1.10)
       parser (>= 3.1.0.0)
@@ -272,6 +274,7 @@ DEPENDENCIES
   rack-mini-profiler (~> 2.0)
   rails (~> 7.0)
   redis (~> 4.0)
+  rgeo-geojson
   rubyzip
   spring
   standard
