@@ -1,0 +1,17 @@
+<h2><%= @category.name %></h2>
+<div class="data-with-map" data-controller="territory">
+  <div class="data">
+    <ul>
+      <% @category.territories.each do |territory| %>
+        <li>
+          <%= territory.name %> (<%= territory.code %>)
+          <script id="<%= territory.id %>" type="text/template" data-territory-target="geometry" >
+            <%= JSON.dump(RGeo::GeoJSON.encode(territory.geometry)).html_safe %>
+          </script>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="map" data-territory-target="map">
+  </div>
+</div>

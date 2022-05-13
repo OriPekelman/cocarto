@@ -9,14 +9,14 @@
       <% end %>
     </div>
 </nav>
-<div id="layer_edit" data-controller="map" data-editable="true" data-layer-id="<%=@layer.id%>" data-session-id="<%=@session_id%>" >
-    <div id="data_editor" id="data-editor">
+<div class="data-with-map" data-controller="map" data-editable="true" data-layer-id="<%=@layer.id%>" data-session-id="<%=@session_id%>" >
+    <div class="data">
         <div>
           <%= text_field :user_name, nil, data: {map_target: "userName"}, placeholder: "your name" %>
         </div>
         <%= render "row_contents/table" %>
     </div>
-    <div id="map" data-map-target="map">
+    <div class="map" data-map-target="map">
         <%= render "row_contents/new", layer: @layer %>
     </div>
 </div>
