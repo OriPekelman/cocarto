@@ -14,15 +14,15 @@ function marker (point) {
 
 export default class extends Controller {
   static targets = ['longitudeField', 'latitudeField', 'newPointForm', 'map', 'point', 'userName']
+  static values = {
+    editable: Boolean,
+    layerId: String,
+    sessionId: String
+  }
 
   initialize () {
     this.markers = new Map()
-    this.editable = this.element.getAttribute('data-editable') === "true"
-    this.layerId = this.element.getAttribute('data-layer-id')
-    if (this.editable){
-      this.sessionId = this.element.getAttribute('data-session-id')
-      this.lastMoveSent = Date.now()
-    }
+    this.lastMoveSent = Date.now()
   }
 
   connect () {
@@ -31,14 +31,13 @@ export default class extends Controller {
     this.trackers = new Trackers(this.map)
     this.markers.forEach(marker => marker.addTo(this.map))
 
-
-    if (this.editable){
+    if (this.editableValue){
       this.map.on('click', e => {
         this.longitudeFieldTarget.value = e.lngLat.lng
         this.latitudeFieldTarget.value = e.lngLat.lat
         this.newPointFormTarget.requestSubmit()
       })
-  
+
       this.map.on('mousemove', e => {
         if ( Date.now() - this.lastMoveSent > 20) {
           this.channel.mouse_moved(e.lngLat)
@@ -46,10 +45,9 @@ export default class extends Controller {
         }
       })
     }
-  
 
     const _this = this
-    this.channel = consumer.subscriptions.create({channel: 'SharePositionChannel', layer: this.layerId}, {
+    this.channel = consumer.subscriptions.create({channel: 'SharePositionChannel', layer: this.layerIdValue}, {
       connected() {
         console.log('connected')
       },
@@ -57,7 +55,7 @@ export default class extends Controller {
         console.log('disconnected')
       },
       received(data) {
-        if(data.sessionId !== _this.sessionId) {
+        if(data.sessionId !== _this.sessionIdValue) {
           _this.trackers.upsert(data)
         }
       },
@@ -65,8 +63,8 @@ export default class extends Controller {
         return this.perform('mouse_moved', {
           lngLat,
           name: _this.userNameTarget.value,
-          sessionId: _this.sessionId,
-          layerId: _this.layerId
+          sessionId: _this.sessionIdValue,
+          layerId: _this.layerIdValue
         });
       },
     });
