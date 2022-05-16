@@ -33,11 +33,16 @@ module GeojsonImporter
           raise "Invalide geometry type #{geometry.type} for feature with name: #{name} and code: #{code}"
         end
 
+        puts "  Processing geometry #{name} (#{code})}" unless silent
         parent_id = if parent
-          parent_category.territories.find_by(code: feature[parent_key]).id
+          parent_territory = parent_category.territories.find_by(code: feature[parent_key])
+          if parent_territory.nil?
+            puts "  ⚠ warning: Could not find parent (#{feature[parent_key]}) for #{name} (#{code})"
+          else
+            parent_territory.id
+          end
         end
 
-        puts "  Processing geometry #{name} (#{code})" unless silent
         {
           name: name,
           geometry: geometry.as_text,
