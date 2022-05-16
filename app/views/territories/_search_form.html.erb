@@ -1,0 +1,5 @@
+<%= form_with url: search_territories_path, method: :post do |form| %>
+  <%= form.search_field :q, value: params[:q], oninput: "this.form.requestSubmit()" %>
+<% end %>
+
+<div id="search_results"></div>
