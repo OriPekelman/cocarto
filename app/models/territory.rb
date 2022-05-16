@@ -7,7 +7,7 @@ class Territory < ApplicationRecord
   # We also compute the bounding box
   scope :with_geojson, -> do
     select(<<-SQL
-      name, id, parent_id, code, created_at, updated_at,
+      name, id, parent_id, code, created_at, updated_at, territory_category_id,
       st_asgeojson(geometry) as geojson,
       st_Xmin(geometry) as lng_min,
       st_Ymin(geometry) as lat_min,
