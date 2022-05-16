@@ -1,6 +1,6 @@
 class TerritoryCategoriesController < ApplicationController
   def index
-    @categories = TerritoryCategory.all
+    @categories = TerritoryCategory.all.limit
   end
 
   def show
