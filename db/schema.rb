@@ -10,8 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_05_145814) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_16_134350) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_trgm"
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -62,6 +63,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_05_145814) do
     t.string "code"
     t.uuid "parent_id"
     t.index ["code", "territory_category_id"], name: "index_territories_on_code_and_territory_category_id", unique: true
+    t.index ["name"], name: "index_territories_on_name", opclass: :gin_trgm_ops, using: :gin
     t.index ["parent_id"], name: "index_territories_on_parent_id"
     t.index ["territory_category_id"], name: "index_territories_on_territory_category_id"
   end
