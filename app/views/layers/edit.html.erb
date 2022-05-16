@@ -9,7 +9,13 @@
       <% end %>
     </div>
 </nav>
-<div class="data-with-map" data-controller="map" data-editable="true" data-layer-id="<%=@layer.id%>" data-session-id="<%=@session_id%>" >
+<div
+  class="data-with-map"
+  data-controller="map"
+  data-map-editable-value="true"
+  data-map-layer-id-value="<%=@layer.id%>"
+  data-map-session-id-value="<%=@session_id%>"
+>
     <div class="data">
         <div>
           <%= text_field :user_name, nil, data: {map_target: "userName"}, placeholder: "your name" %>
