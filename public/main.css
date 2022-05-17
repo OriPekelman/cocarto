@@ -117,11 +117,40 @@
 }
 
 .header-trad-logo {
+  margin: 4px 4px;
   display: flex;
-  justify-content: space-between;
-  margin: 6px 6px 6px;
+  justify-content: center;
 }
+
+/* MAIN LANDING PAGE */
 
 body {
   background-color: var(--color-bg-ambient-10);
+}
+
+.main-text-landing {
+  padding: 64px 120px;
+  font-size: 20px;
+  font-family: var(--font-serif);
+  font-weight: 100;
+  letter-spacing: 1.2px;
+  color: var(--color-grey-90);
+}
+
+.main-text-landing-ul {
+  margin-left: 1em;
+}
+
+.main-text-landing-p {
+  margin-top: 1em;
+}
+
+/* FOOTER LANDING PAGE */
+
+.footer-text-landing {
+  padding: 0px 120px;
+  color: var(--color-grey-60);
+  font-size: 14px;
+  font-family: var(--font-serif);
+  letter-spacing: 1.143px;
 }

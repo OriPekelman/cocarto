@@ -19,7 +19,7 @@
             <h1 class="header-title">Gxis</h1>
           </div>
           <div class="header-right">
-              <a href="link_to ('layers#index'),layers_path"class="header-login">connexion</a>
+              <%=link_to "connexion", layers_path, class: "header-login" %>
               <a href="#subs" class="header-subs">inscription</a>
               <button class="button-trad">
               <?xml version="1.0" encoding="UTF-8"?>
@@ -32,6 +32,26 @@
           </div>
         </div>
     </header>
+
+    <main> 
+        <div>
+          <div class="main-text-landing">
+              <p>Gxis sera un outil de collaboration cartographique.<br/> Il permettra d’associer des informations à un territoire.<br/><br/></p>
+              <p>Comme par exemple :<br></p>
+              <ul class="main-text-landing-ul">
+                <li>préparer le parcours et les étapes d’une randonnée,</li>
+                <li>répertorier des défauts d’infrastructure. <br/></li>
+              </ul>
+              <p class="main-text-landing-p">Nous sommes à l’écoute des besoins pour un tel outil dans des<br/> structures existantes.<a href="#" style="color:#4d7a5d;"> Contactez-nous </a>si vous souhaitez faire part des <br/>votres.</p>
+          </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-text-landing">
+          <p>Développé par <a href="https://www.codeursenliberté.fr" target="_blank" style="color:#4d7a5d;">codeurs en liberté</a>, une coopérative d’indépendant·e·s dans le domaine <br/> de l’informatique.</p>
+        </div>
+    </footer>
     <%= yield %>
   </body>
 </html>
