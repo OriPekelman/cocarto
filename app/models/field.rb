@@ -17,10 +17,6 @@ class Field < ApplicationRecord
     Turbo::StreamsChannel.broadcast_remove_to layer, targets: ".field-#{id}"
   end
 
-  def geometry_type
-    layer.geometry_type
-  end
-
   def numerical?
     ["float", "integer"].include?(field_type)
   end
