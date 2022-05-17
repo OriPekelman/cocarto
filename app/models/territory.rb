@@ -16,4 +16,10 @@ class Territory < ApplicationRecord
     SQL
           )
   end
+
+  scope :name_autocomplete, ->(name) {
+    quoted_name = ActiveRecord::Base.connection.quote_string(name)
+    where("name % :name", name: name)
+      .order(Arel.sql("similarity(name, '#{quoted_name}') DESC"))
+  }
 end

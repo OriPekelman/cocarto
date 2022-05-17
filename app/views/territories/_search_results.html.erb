@@ -1,0 +1,9 @@
+<%= search_results.count %>
+<% search_results.each do |territory| %>
+  <br>
+  <%= link_to territory do %>
+    <%= highlight(territory.name, params.dig(:q)) %>
+    (<%= territory.code%>)
+    <%= territory.parent.name if territory.parent %>
+  <% end %>
+<% end %>

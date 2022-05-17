@@ -5,5 +5,10 @@ class TerritoryCategoriesController < ApplicationController
 
   def show
     @category = TerritoryCategory.find(params[:id])
+    @territories = if params[:q]
+      @category.territories.name_autocomplete(params[:q])
+    else
+      @category.territories
+    end
   end
 end
