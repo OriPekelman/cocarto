@@ -1,6 +1,8 @@
 <td class="field field-<%= field.id %> <%= "numerical" if field.numerical? %>">
-  <% field.numerical? then %>
+  <% if field.numerical? %>
     <%= number_field_tag "row_content[#{field.id}]", nil, id: field.id, class: "input", value: value, data: {action: "row#setModified focusin->row#focusIn"}, form: form %>
+  <% elsif field.field_type == "territory" %>
+    <span>Can’t</span>
   <% else %>
     <%= text_field_tag "row_content[#{field.id}]", nil, id: field.id, class: "input", value: value, data: {action: "row#setModified focusin->row#focusIn"}, form: form %>
   <% end %>
