@@ -1,6 +1,6 @@
 /* MVP.css v1.8 - https://github.com/andybrewer/mvp */
 
-:root {
+/* :root {
   --active-brightness: 0.85;
   --border-radius: 0px;
   --box-shadow: 2px 2px 10px;
@@ -27,7 +27,7 @@
   --width-card-wide: 800px;
   --width-content: 1080px;
   --nav-height: 3rem;
-}
+} */
 
 /*@media (prefers-color-scheme: dark) {
     :root {
@@ -46,13 +46,13 @@
 }*/
 
 /* Layout */
-article aside {
+/* article aside {
   background: var(--color-secondary-accent);
   border-left: 4px solid var(--color-secondary);
   padding: 0.01rem 0.8rem;
-}
+} */
 
-body {
+/* body {
   background: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-family);
@@ -62,112 +62,112 @@ body {
   overflow-y: hidden;
   padding: 0;
   height: 100vh;
-}
+} */
 
-footer,
+/* footer,
 header,
 main {
   margin: 0 auto;
   max-width: var(--width-content);
   padding: 3rem 1rem;
-}
-
+} */
+/* 
 hr {
   background-color: var(--color-bg-secondary);
   border: none;
   height: 1px;
   margin: 4rem 0;
   width: 100%;
-}
+} */
 
-section {
+/* section {
   display: flex;
   flex-wrap: wrap;
   justify-content: var(--justify-important);
-}
+} */
 
-section img,
+/* section img,
 article img {
   max-width: 100%;
-}
-
+} */
+/* 
 section pre {
   overflow: auto;
-}
+} */
 
-section aside {
+/* section aside {
   border: 1px solid var(--color-bg-secondary);
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow) var(--color-shadow);
   margin: 1rem;
   padding: 1.25rem;
   width: var(--width-card);
-}
+} */
 
-section aside:hover {
+/* section aside:hover {
   box-shadow: var(--box-shadow) var(--color-bg-secondary);
-}
+} */
 
-[hidden] {
+/* [hidden] {
   display: none;
-}
+} */
 
-/* Headers */
+/* Headers
 article header,
 div header,
 main header {
   padding-top: 0;
-}
+} */
 
-header {
+/* header {
   text-align: var(--justify-important);
-}
-
+} */
+/* 
 header a b,
 header a em,
 header a i,
 header a strong {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
-}
+} */
 
-header nav img {
+/* header nav img {
   margin: 1rem 0;
-}
+} */
 
-section header {
+/* section header {
   padding-top: 0;
   width: 100%;
-}
+} */
 
 /* Nav */
-nav {
+/* nav {
   align-items: center;
   display: flex;
   font-weight: bold;
   justify-content: space-between;
   margin: 0;
   height: var(--nav-height);
-}
+} */
 
-nav ul {
+/* nav ul {
   list-style: none;
   padding: 0;
-}
+} */
 
-nav ul li {
+/* nav ul li {
   display: inline-block;
   margin: 0 0.5rem;
   position: relative;
   text-align: left;
-}
+} */
 
 /* Nav Dropdown */
-nav ul li:hover ul {
+/* nav ul li:hover ul {
   display: block;
-}
+} */
 
-nav ul li ul {
+/* nav ul li ul {
   background: var(--color-bg);
   border: 1px solid var(--color-bg-secondary);
   border-radius: var(--border-radius);
@@ -181,25 +181,25 @@ nav ul li ul {
   white-space: nowrap;
   width: auto;
   z-index: 1;
-}
+} */
 
-nav ul li ul::before {
-  /* fill gap above to make mousing over them easier */
-  content: "";
+/* nav ul li ul::before { */
+/* fill gap above to make mousing over them easier */
+/* content: "";
   position: absolute;
   left: 0;
   right: 0;
   top: -0.5rem;
   height: 0.5rem;
-}
-
+} */
+/* 
 nav ul li ul li,
 nav ul li ul li a {
   display: block;
-}
+} */
 
 /* Typography */
-code,
+/* code,
 samp {
   background-color: var(--color-accent);
   border-radius: var(--border-radius);
@@ -207,60 +207,60 @@ samp {
   display: inline-block;
   margin: 0 0.1rem;
   padding: 0 0.5rem;
-}
+} */
 
-details {
+/* details {
   margin: 1.3rem 0;
-}
-
+} */
+/* 
 details summary {
   font-weight: bold;
   cursor: pointer;
-}
+} */
 
-h1,
+/* h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
   line-height: var(--line-height);
-}
+} */
 
-mark {
+/* mark {
   padding: 0.1rem;
-}
+} */
 
-ol li,
+/* ol li,
 ul li {
   padding: 0.2rem 0;
-}
+} */
 
-p {
+/* p {
   margin: 0.75rem 0;
   padding: 0;
   width: 100%;
-}
+} */
 
-pre {
+/* pre {
   margin: 1rem 0;
   max-width: var(--width-card-wide);
   padding: 1rem 0;
-}
-
+} */
+/* 
 pre code,
 pre samp {
   display: block;
   max-width: var(--width-card-wide);
   padding: 0.5rem 2rem;
   white-space: pre-wrap;
-}
+} */
 
-small {
+/* small {
   color: var(--color-text-secondary);
-}
+} */
 
-sup {
+/* sup {
   background-color: var(--color-secondary);
   border-radius: var(--border-radius);
   color: var(--color-bg);
@@ -270,27 +270,27 @@ sup {
   padding: 0.2rem 0.3rem;
   position: relative;
   top: -2px;
-}
+} */
 
 /* Links */
-a {
+/* a {
   color: var(--color-link);
   display: inline-block;
   font-weight: bold;
   text-decoration: none;
-}
+} */
 
-a:active {
+/* a:active {
   filter: brightness(var(--active-brightness));
   text-decoration: underline;
-}
-
+} */
+/* 
 a:hover {
   filter: brightness(var(--hover-brightness));
   text-decoration: underline;
-}
+} */
 
-a b,
+/* a b,
 a em,
 a i,
 a strong,
@@ -302,127 +302,127 @@ button {
   line-height: var(--line-height);
   margin: 0.5rem 0;
   padding: 0.1rem 0.2rem;
-}
+} */
 
-button {
+/* button {
   font-family: var(--font-family);
-}
+} */
 
-button:active {
+/* button:active {
   filter: brightness(var(--active-brightness));
-}
+} */
 
-button:hover {
+/* button:hover {
   cursor: pointer;
   filter: brightness(var(--hover-brightness));
-}
+} */
 
-a b,
+/* a b,
 a strong,
 button {
   background-color: var(--color-link);
   border: 2px solid var(--color-link);
   color: var(--color-bg);
-}
+} */
 
-a em,
+/* a em,
 a i {
   border: 2px solid var(--color-link);
   border-radius: var(--border-radius);
   color: var(--color-link);
   display: inline-block;
   padding: 1rem 2rem;
-}
+} */
 
-article aside a {
+/* article aside a {
   color: var(--color-secondary);
-}
+} */
 
 /* Images */
-figure {
+/* figure {
   margin: 0;
   padding: 0;
-}
+} */
 
-figure img {
+/* figure img {
   max-width: 100%;
-}
+} */
 
-figure figcaption {
+/* figure figcaption {
   color: var(--color-text-secondary);
-}
+} */
 
 /* Forms */
-
+/* 
 button:disabled,
 input:disabled {
   background: var(--color-bg-secondary);
   border-color: var(--color-bg-secondary);
   color: var(--color-text-secondary);
   cursor: not-allowed;
-}
+} */
 
-button[disabled]:hover {
+/* button[disabled]:hover {
   filter: none;
-}
+} */
 
-form {
+/* form {
   display: block;
   max-width: var(--width-card-wide);
   text-align: var(--justify-normal);
-}
-
+} */
+/* 
 form header {
   margin: 0.5rem 0;
   padding: 0.5rem 0;
-}
+} */
 
-input,
+/* input,
 label,
 select,
 textarea {
   display: block;
   font-size: inherit;
   max-width: var(--width-card-wide);
-}
+} */
 
-input[type="checkbox"],
+/* input[type="checkbox"],
 input[type="radio"] {
   display: inline-block;
-}
+} */
 
-input[type="checkbox"] + label,
+/* input[type="checkbox"] + label,
 input[type="radio"] + label {
   display: inline-block;
   font-weight: normal;
   position: relative;
   top: 1px;
-}
+} */
 
-input,
+/* input,
 select,
 textarea {
   border: 0;
   border-radius: var(--border-radius);
-}
+} */
 
-td input {
+/* td input {
   height: 100%;
   padding: 0;
-}
+} */
 
-input[readonly],
+/* input[readonly],
 textarea[readonly] {
   background-color: var(--color-bg-secondary);
-}
-
+} */
+/* 
 label {
   font-weight: bold;
   margin-bottom: 0.2rem;
-}
+} */
 
 /* Tables */
-table {
+/* table {
   border: 1px solid var(--color-bg-secondary);
   border-radius: var(--border-radius);
   border-spacing: 0;
@@ -433,15 +433,15 @@ table {
   padding: 0;
   white-space: nowrap;
   position: relative;
-}
+} */
 
-table td,
+/* table td,
 table th,
 table tr {
   padding: 0rem;
   text-align: var(--justify-important);
-}
-
+} */
+/* 
 table thead {
   background-color: var(--color-table);
   border-collapse: collapse;
@@ -449,22 +449,22 @@ table thead {
   color: var(--color-bg);
   margin: 0;
   padding: 0;
-}
+} */
 
-th {
+/* th {
   position: sticky;
   top: 0;
   background-color: var(--color);
   z-index: 10;
-}
-
+} */
+/* 
 td {
   border: 0.5px solid var(--color-border);
   height: 2rem;
-}
+} */
 
 /* Quotes */
-blockquote {
+/* blockquote {
   display: block;
   font-size: x-large;
   line-height: var(--line-height);
@@ -472,25 +472,25 @@ blockquote {
   max-width: var(--width-card-medium);
   padding: 1.5rem 1rem;
   text-align: var(--justify-important);
-}
+} */
 
-blockquote footer {
+/* blockquote footer {
   color: var(--color-text-secondary);
   display: block;
   font-size: small;
   line-height: var(--line-height);
   padding: 1.5rem 0;
-}
-
+} */
+/* 
 nav > div {
   height: 2rem;
-}
+} */
 
-.dropdown {
+/* .dropdown {
   position: relative;
   display: inline-block;
-}
-
+} */
+/* 
 .dropdown-content {
   border-radius: var(--border-radius);
   display: none;
@@ -502,40 +502,40 @@ nav > div {
   color: var(--color-text);
   padding: 0.2rem;
   font-size: 80%;
-}
+} */
 
-.dropdown.is-active > .dropdown-content {
+/* .dropdown.is-active > .dropdown-content {
   display: block;
-}
+} */
 
-.actions {
+/* .actions {
   display: flex;
-}
+} */
 
-.is-hidden {
+/* .is-hidden {
   visibility: hidden;
-}
+} */
 
-.row-actions {
+/* .row-actions {
   position: sticky;
   right: 0;
-}
+} */
 
-.data-with-map {
+/* .data-with-map {
   height: calc(100vh - var(--nav-height));
   display: flex;
   height: 100%;
-}
+} */
 
-.data-with-map > .data {
+/* .data-with-map > .data {
   width: 50%;
-}
+} */
 
-.data-with-map > .data > table {
+/* .data-with-map > .data > table {
   height: 100%;
-}
-
+} */
+/* 
 .data-with-map > .map {
   width: 50%;
   height: 100%;
-}
+} */
