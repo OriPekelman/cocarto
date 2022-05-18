@@ -1,9 +1,14 @@
-<%= search_results.count %>
+<ul>
 <% search_results.each do |territory| %>
-  <br>
-  <%= link_to territory do %>
+  <li
+    data-autocomplete-target="suggestion"
+    data-autocomplete-value-param="<%=territory.name%> (<%=territory.code%>)"
+    data-autocomplete-id-param="<%=territory.id%>"
+    data-action="click->autocomplete#selected"
+  >
     <%= highlight(territory.name, params.dig(:q)) %>
     (<%= territory.code%>)
     <%= territory.parent.name if territory.parent %>
-  <% end %>
+  </li>
 <% end %>
+</ul>
