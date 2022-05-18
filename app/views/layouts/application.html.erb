@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Ĝis</title>
+    <title>Ĝxis</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <link href='https://unpkg.com/maplibre-gl@2.1.7/dist/maplibre-gl.css' rel='stylesheet' />
     <%= javascript_importmap_tags %>
-    <%= stylesheet_link_tag "/mvp.css", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "/main.css", "data-turbo-track": "reload" %>
   </head>
 
@@ -34,17 +33,7 @@
     </header>
 
     <main> 
-        <div>
-          <div class="main-text-landing">
-              <p>Gxis sera un outil de collaboration cartographique.<br/> Il permettra d’associer des informations à un territoire.<br/><br/></p>
-              <p>Comme par exemple :<br></p>
-              <ul class="main-text-landing-ul">
-                <li>préparer le parcours et les étapes d’une randonnée,</li>
-                <li>répertorier des défauts d’infrastructure. <br/></li>
-              </ul>
-              <p class="main-text-landing-p">Nous sommes à l’écoute des besoins pour un tel outil dans des<br/> structures existantes.<a href="#" style="color:#4d7a5d;"> Contactez-nous </a>si vous souhaitez faire part des <br/>votres.</p>
-          </div>
-        </div>
+    <%= yield %>
     </main>
 
     <footer>
@@ -52,6 +41,5 @@
           <p>Développé par <a href="https://www.codeursenliberté.fr" target="_blank" style="color:#4d7a5d;">codeurs en liberté</a>, une coopérative d’indépendant·e·s dans le domaine <br/> de l’informatique.</p>
         </div>
     </footer>
-    <%= yield %>
   </body>
 </html>
