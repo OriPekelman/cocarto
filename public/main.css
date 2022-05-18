@@ -67,15 +67,19 @@
   justify-content: space-between;
 }
 
+.header-title-move {
+  margin-top: 2em;
+}
+
 .header-title {
   color: var(--color-green-50);
   font-size: 54px;
   font-family: var(--font-serif);
   font-variant: normal;
   font-weight: lighter;
-  padding-top: 32px;
   margin-left: 1em;
   letter-spacing: -1.3px;
+  text-decoration: none;
 }
 
 .header-right {
