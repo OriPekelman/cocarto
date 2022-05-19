@@ -21,4 +21,9 @@ class TerritoryTest < ActiveSupport::TestCase
     assert_in_epsilon guadeloupe.lng_max, -61.29
     assert_in_epsilon guadeloupe.lat_max, 16.465
   end
+
+  test "search for autocomplete" do
+    results = Territory.name_autocomplete("Breta")
+    assert_equal "Bretagne", results[0].name
+  end
 end
