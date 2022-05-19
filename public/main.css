@@ -68,7 +68,7 @@
 
 /* HEADER */
 
-.main-nav {
+.header-nav {
   height: 140px;
   background-color: var(--color-bg-ambient-20);
   display: flex;
@@ -143,14 +143,19 @@ body {
 a {
   color: var(--color-green-70);
 }
-
+p {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
 .main-text-landing {
   padding: 64px 120px;
-  font-size: 20px;
+  font-size: 18px;
   font-family: var(--font-serif);
   font-weight: 100;
-  letter-spacing: 1.2px;
+  letter-spacing: 1.111px;
   color: var(--color-grey-90);
+  max-width: 950px;
+  line-height: 20px;
 }
 
 .main-text-landing-ul {
@@ -388,4 +393,11 @@ textarea[readonly] {
 label {
   font-weight: bold;
   margin-bottom: 0.2rem;
+}
+
+/* SHOW PART */
+.nav-show {
+  display: flex;
+  align-self: center;
+  display: inline-block;
 }

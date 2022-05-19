@@ -12,11 +12,14 @@
   </head>
 
   <body>
-    <nav class="main-nav"> 
+    <nav class="header-nav"> 
         <div class="header-title-move">
           <h1><%=link_to "Ĝis", root_path, class: "header-title" %></h1>
         </div>
-        <div class="header-right">
+          <div class="nav-show">
+            <%= yield :nav %> 
+          </div>
+        <div class="header-right">   
             <%=link_to "connexion", layers_path, class: "header-login" %>
             <a href="#subs" class="header-subs">inscription</a>
             <button class="button-trad">
@@ -35,7 +38,7 @@
     </main>
 
     <footer>
-          <p>Développé par <a href="https://www.codeursenliberté.fr" target="_blank">codeurs en liberté</a>, une coopérative d’indépendant·e·s dans le domaine <br/> de l’informatique.</p>
+      <p>Développé par <a href="https://www.codeursenliberté.fr" target="_blank">codeurs en liberté</a>, une coopérative d’indépendant·e·s dans le domaine de l’informatique.</p>
     </footer>
   </body>
 </html>
