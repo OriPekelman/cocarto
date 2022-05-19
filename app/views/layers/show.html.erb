@@ -1,15 +1,11 @@
 <%= turbo_stream_from @layer %>
 <p id="notice"><%= notice %></p>
-<nav role="navigation" aria-label="main navigation">
-    <div class="nav-show">
-        <% content_for :nav do %>
-            <h2><%= t :layer%><%= @layer.name %></h2>
-            <%= link_to t('edit'), edit_layer_path(@layer) %> |
-            <%= link_to t('back'), layers_path %>
-        <% end %>
-    </div>   
-</nav>
 
+<% content_for :nav do %>
+    <h2><%= t :layer%><%= @layer.name %></h2>
+    <%= link_to t('edit'), edit_layer_path(@layer) %> |
+    <%= link_to t('back'), layers_path %>
+<% end %>
 <div>
     <%= t :type%><%= @layer.geometry_type %>
 </div>
