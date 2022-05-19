@@ -1,9 +1,6 @@
 <%= turbo_stream_from @layer %>
 <nav role="navigation" aria-label="main navigation">
     <div>
-      <%= link_to "Ĝis", "/layers", class: "navbar-item" %>
-    </div>
-    <div>
       <%= form_with(model: @layer) do |form| %>
         <%= form.text_field :name %>
       <% end %>
