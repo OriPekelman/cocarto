@@ -401,3 +401,13 @@ label {
   align-self: center;
   display: inline-block;
 }
+
+.search-result {
+  position:absolute;
+  border-radius: 5px;
+  border: black;
+  border-width: 1px;
+  background-color: white;
+  text-align: left;
+  padding: 0.5rem 1rem;
+}
