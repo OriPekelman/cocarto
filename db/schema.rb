@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_16_134350) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_17_094135) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -21,6 +21,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_16_134350) do
     "text",
     "float",
     "integer",
+    "territory",
   ], force: :cascade
 
   create_enum :geometry_type_enum, [

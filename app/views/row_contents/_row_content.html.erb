@@ -5,8 +5,8 @@
     data-controller="row"
     data-action="focusout->row#focusOut"
 >
-    <% row_content.layer.fields.each do |field| %>
-        <%= render partial: "fields/field_in_form", locals: {field: field, value: row_content.values[field.id], form: row_content.id} %>
+    <% row_content.data do |field, value| %>
+        <%= render partial: "fields/field_in_form", locals: {field: field, value: value, row_id: row_content.id} %>
     <% end %>
     <td id="<%= row_content.id %>-action">
         <div class="actions">

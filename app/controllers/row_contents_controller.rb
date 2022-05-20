@@ -54,12 +54,18 @@ class RowContentsController < ApplicationController
 
   def set_row_content
     @row_content = RowContent.find(params[:id])
-    puts @row_content
   end
 
   def fields(layer)
-    field_keys = layer.fields.map { |field| field.id }
-    params.require(:row_content).permit(field_keys)
+    layer.fields.map do |field|
+      # Some inputs match a territory
+      # If the value is empty, it means that we didn’t select a territory, so we don’t want to store it
+      if field.field_type == "territory" && params[:row_content][field.id].empty?
+        nil
+      else
+        [field.id, params[:row_content][field.id]]
+      end
+    end.reject(&:nil?).to_h
   end
 
   def set_layer
