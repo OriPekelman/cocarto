@@ -225,7 +225,7 @@ footer {
 .layers-table {
   display: flex;
   justify-content: center;
-  font-family: var(--font-sans);
+  font-family: var(--font-serif);
   color: var(--color-grey-90);
   border-collapse: collapse;
   border: none;
