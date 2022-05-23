@@ -15,3 +15,4 @@ fr:
   error_message_field_update: "Le champ a été mise à jour avec succès."
   error_message_row_contents_destroy: "La géométrie a été détruite avec succès."
   error_message_row_contents_update: "Les propriétés géométriques ont été mises à jour avec succès."
+  current layer: Couche courante
