@@ -220,6 +220,8 @@ footer {
   text-align: center;
   font-family: var(--font-serif);
   color: var(--color-grey-90);
+  display: flex;
+  justify-content: center;
 }
 
 .layers-table {
@@ -228,7 +230,6 @@ footer {
   font-family: var(--font-sans);
   color: var(--color-grey-90);
   border-collapse: collapse;
-  border: none;
 }
 
 /* TABLES */
