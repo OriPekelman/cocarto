@@ -65,14 +65,14 @@
   --color-bg-secondary: #e9e9e9;
   --color-text: #000;
   /* MAP SIZE */
-  --nav-height: 90vh;
-  --footer-height: 8rem;
+  --nav-height: 140px;
+  --footer-height: 50px;
 }
 
 /* HEADER */
 
 .header-nav {
-  height: 140px;
+  height: var(--nav-height);
   background-color: var(--color-bg-ambient-20);
   display: flex;
   justify-content: space-between;
@@ -129,12 +129,45 @@
   border-radius: 4px;
   border-style: double;
   border-width: 2px;
+  transition: 0.35s ease-out;
 }
 
 .header-trad-logo {
   display: flex;
   justify-content: space-between;
   margin: 6px 6px 6px;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
 }
 
 /* MAIN LANDING PAGE */
@@ -178,6 +211,7 @@ footer {
   font-size: 14px;
   font-family: var(--font-serif);
   letter-spacing: 1.143px;
+  height: var(--footer-height);
 }
 
 /* LAYER PART */
@@ -238,7 +272,7 @@ td {
 }
 /* MAP */
 .data-with-map {
-  height: calc(var(--nav-height) - var(--footer-height));
+  height: calc(90vh - 8rem);
   display: flex;
   width: 100%;
 }
