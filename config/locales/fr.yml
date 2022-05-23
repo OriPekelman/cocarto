@@ -1,18 +1,23 @@
+---
 fr:
-  layers: "Couches"
-  layer: "Couche "
-  show: "Voir"
-  edit: "Éditer"
-  destroy: "Détruire"
-  new_layer: "Nouvelle couche"
-  layer_name: "Nom de couche "
-  back: "Retour"
-  t_geometry_type: "Type de géometrie"
-  type: "Type : "
-  error_message_layer_destroy: "La couche a été détruite avec succès"
-  error_message_layer_update: "La couche a été mise à jour avec succès."
-  error_message_field_destroy: "Le champ a été détruite avec succès."
-  error_message_field_update: "Le champ a été mise à jour avec succès."
-  error_message_row_contents_destroy: "La géométrie a été détruite avec succès."
-  error_message_row_contents_update: "Les propriétés géométriques ont été mises à jour avec succès."
+  back: Retour
   current layer: Couche courante
+  destroy: Détruire
+  edit: Éditer
+  error_message_field_destroy: Le champ a été détruite avec succès.
+  error_message_field_update: Le champ a été mise à jour avec succès.
+  error_message_layer_destroy: La couche a été détruite avec succès
+  error_message_layer_update: La couche a été mise à jour avec succès.
+  error_message_row_contents_destroy: La géométrie a été détruite avec succès.
+  error_message_row_contents_update: Les propriétés géométriques ont été mises à jour avec succès.
+  layer: 'Couche '
+  layer_name: 'Nom de couche '
+  layers: Couches
+  new_layer: Nouvelle couche
+  part of territory: Part of territory
+  show: Voir
+  t_geometry_type: Type de géometrie
+  territory category: Territory category
+  territory code: Territory identifier
+  territory revision: Territory category revision
+  type: 'Type : '
