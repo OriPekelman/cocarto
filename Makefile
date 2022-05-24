@@ -13,6 +13,7 @@ dev: install ## Start the app server for development purpose
 
 lint: lint-ruby ## Run all the linters
 	bundle exec standardrb
+	bundle exec erblint --lint-all
 
 test: ## Run tests
 	bin/rails db:prepare test

@@ -35,6 +35,7 @@ group :development, :test do
   gem "standard"
   # Verifies that we have all translations
   gem "i18n-tasks", "~> 1.0.10"
+  gem "erb_lint", require: false
 end
 
 group :development do
