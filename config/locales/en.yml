@@ -1,48 +1,23 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   'true': 'foo'
-#
-# To learn more, please read the Rails Internationalization guide
-# available at https://guides.rubyonrails.org/i18n.html.
-
+---
 en:
-  layers: "Layers"
-  layer: "Layer "
-  show: "Show"
-  edit: "Edit"
-  destroy: "Destroy"
-  new_layer: "New Layer"
-  layer_name: "Layer Name"
-  back: "Back"
-  t_geometry_type: "Geometry Type"
-  type: "Type : "
-  error_message_layer_destroy: "Layer was successfully destroyed."
-  error_message_layer_update: "Layer was successfully updated."
-  error_message_field_destroy: "Field was successfully destroyed."
-  error_message_field_update: "Field was successfully updated."
-  error_message_row_contents_destroy: "Geometry was successfully destroyed."
-  error_message_row_contents_update: "Geometry properties were successfully updated."
+  back: Back
+  current layer: Current layer
+  destroy: Destroy
+  edit: Edit
+  error_message_field_destroy: Field was successfully destroyed.
+  error_message_field_update: Field was successfully updated.
+  error_message_layer_destroy: Layer was successfully destroyed.
+  error_message_layer_update: Layer was successfully updated.
+  error_message_row_contents_destroy: Geometry was successfully destroyed.
+  error_message_row_contents_update: Geometry properties were successfully updated.
+  layer: 'Layer '
+  layer_name: Layer Name
+  layers: Layers
+  new_layer: New Layer
+  part of territory: Part of territory
+  show: Show
+  t_geometry_type: Geometry Type
+  territory category: Territory category
+  territory code: Territory identifier
+  territory revision: Territory category revision
+  type: 'Type : '
