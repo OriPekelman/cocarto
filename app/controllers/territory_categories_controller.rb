@@ -4,7 +4,7 @@ class TerritoryCategoriesController < ApplicationController
   end
 
   def show
-    @category = TerritoryCategory.find(params[:id])
+    @category = TerritoryCategory.includes(:territories).find(params[:id])
     @territories = if params[:q]
       @category.territories.name_autocomplete(params[:q])
     else

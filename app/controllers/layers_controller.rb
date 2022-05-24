@@ -56,7 +56,7 @@ class LayersController < ApplicationController
   private
 
   def set_layer
-    @layer = Layer.find(params[:id])
+    @layer = Layer.includes(:fields, :row_contents).find(params[:id])
   end
 
   def layer_params

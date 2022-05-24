@@ -32,7 +32,7 @@ class TerritoryTest < ActiveSupport::TestCase
   end
 
   test "import from geojson" do
-    regions = TerritoryCategory.find_by(name: "Régions")
+    regions = TerritoryCategory.includes(:territories).find_by(name: "Régions")
     assert_equal 18, regions.territories.length
 
     # Test that it calls the with_geojson scope
