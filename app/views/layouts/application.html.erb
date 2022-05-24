@@ -29,13 +29,12 @@
               </svg>
             </button>
             <div class="dropdown-content">
-              <a href="#"> English </a>
-              <a href="#"> French</a>
+              <%=link_to "English", url_for(:locale => :en)%>
+              <%=link_to "Français", url_for(:locale => :fr)%>
             </div>
         </div>
     </nav>
-
-    <main>
+    <main> 
     <%= yield %>
     </main>
     <footer>
