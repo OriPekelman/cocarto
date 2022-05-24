@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: row_contents
+#
+#  id         :uuid             not null, primary key
+#  point      :geometry         point, 0
+#  values     :jsonb
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  layer_id   :uuid
+#
+# Indexes
+#
+#  index_row_contents_on_layer_id  (layer_id)
+#
 class RowContent < ApplicationRecord
   belongs_to :layer
   after_update_commit -> { broadcast_replace_to layer }
