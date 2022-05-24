@@ -53,7 +53,7 @@ class RowContentsController < ApplicationController
   private
 
   def set_row_content
-    @row_content = RowContent.find(params[:id])
+    @row_content = RowContent.includes(layer: [:fields]).find(params[:id])
   end
 
   def fields(layer)
