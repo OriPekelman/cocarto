@@ -1,6 +1,6 @@
 <%= turbo_stream_from @layer %>
 <% content_for :nav do %>
-  <h2><%= t('current layer')%></h2>
+  <h2><%= t('current layer') %></h2>
   <%= form_with(model: @layer) do |form| %>
     <%= form.text_field :name %>
   <% end %>
@@ -10,9 +10,8 @@
   class="data-with-map"
   data-controller="map"
   data-map-editable-value="true"
-  data-map-layer-id-value="<%=@layer.id%>"
-  data-map-session-id-value="<%=@session_id%>"
->
+  data-map-layer-id-value="<%= @layer.id %>"
+  data-map-session-id-value="<%= @session_id %>">
     <div class="data">
         <div>
           <%= text_field :user_name, nil, data: {map_target: "userName"}, placeholder: "your name" %>

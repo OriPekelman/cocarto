@@ -3,8 +3,7 @@
     data-lng="<%= row_content.point.x %>"
     data-lat="<%= row_content.point.y %>"
     data-controller="row"
-    data-action="focusout->row#focusOut"
->
+    data-action="focusout->row#focusOut">
     <% row_content.data do |field, value| %>
         <%= render partial: "fields/field_in_form", locals: {field: field, value: value, row_id: row_content.id} %>
     <% end %>

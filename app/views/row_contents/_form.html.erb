@@ -3,7 +3,7 @@
     <%= form.hidden_field :anonymous, value: "true" if @anonymous %>
     <% @layer.fields.each do |field| %>
         <div>
-            <%= form.label field.id, field.label  %>
+            <%= form.label field.id, field.label %>
             <div>
                 <%= form.text_field field.id, value: @values[field.id] %>
             </div>
