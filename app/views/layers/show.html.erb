@@ -2,12 +2,12 @@
 <p id="notice"><%= notice %></p>
 
 <% content_for :nav do %>
-    <h2><%= t :layer%><%= @layer.name %></h2>
+    <h2><%= t :layer %><%= @layer.name %></h2>
     <%= link_to t('edit'), edit_layer_path(@layer) %> |
     <%= link_to t('back'), layers_path %>
 <% end %>
 <div>
-    <%= t :type%><%= @layer.geometry_type %>
+    <%= t :type %><%= @layer.geometry_type %>
 </div>
 
 <div class="data-with-map" data-controller="map">
@@ -17,4 +17,3 @@
     <div class="map" data-map-target="map">
     </div>
 </div>
-

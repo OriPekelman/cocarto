@@ -1,11 +1,10 @@
 <tr id="<%= dom_id(row_content) %>"
     data-map-target="point"
     data-lng="<%= row_content.point.x %>"
-    data-lat="<%= row_content.point.y %>"
->
+    data-lat="<%= row_content.point.y %>">
     <% row_content.layer.fields.each do |field| %>
     <td>
-        <%= row_content.values[field.id]%>
+        <%= row_content.values[field.id] %>
     </td>
     <% end %>
 </tr>

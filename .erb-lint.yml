@@ -1,0 +1,4 @@
+---
+EnableDefaultLinters: true
+exclude:
+  - '**/vendor/**/*'
