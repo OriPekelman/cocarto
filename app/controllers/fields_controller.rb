@@ -17,7 +17,7 @@ class FieldsController < ApplicationController
   end
 
   def create
-    @layer = Layer.find(field_params[:layer_id])
+    @layer = Layer.includes(:row_contents).find(field_params[:layer_id])
     @field = @layer.fields.create(field_params)
     respond_to do |format|
       format.turbo_stream
@@ -36,7 +36,7 @@ class FieldsController < ApplicationController
   private
 
   def set_field
-    @field = Field.find(params[:id])
+    @field = Field.includes(:layer).find(params[:id])
   end
 
   def field_params

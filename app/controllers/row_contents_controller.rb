@@ -1,6 +1,6 @@
 class RowContentsController < ApplicationController
   before_action :set_layer, only: %i[create new]
-  before_action :set_row_content, only: %i[destroy update]
+  before_action :set_row_content, only: %i[edit destroy update]
 
   def new
     @row_content = @layer.row_contents.new
@@ -10,7 +10,6 @@ class RowContentsController < ApplicationController
   end
 
   def edit
-    @row_content = RowContents.find(params[:id])
     @layer = @row_content.layer
     @values = @row_content.values
   end
@@ -70,6 +69,6 @@ class RowContentsController < ApplicationController
 
   def set_layer
     layer_id = params[:layer_id] || params[:row_content][:layer_id]
-    @layer = Layer.find(layer_id)
+    @layer = Layer.includes(:fields).find(layer_id)
   end
 end
