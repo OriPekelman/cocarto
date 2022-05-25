@@ -79,7 +79,6 @@ nav {
   justify-content: space-between;
   font-family: var(--font-serif);
   vertical-align: middle;
-  font-size: 18px;
 }
 
 nav > h1 {
@@ -144,6 +143,7 @@ hr.solid {
 body {
   background-color: var(--color-bg-ambient-10);
   overflow-y: hidden;
+  font-size: 18px;
 }
 
 a {
@@ -155,7 +155,6 @@ p {
 }
 .main-text-landing {
   padding: 64px 120px;
-  font-size: 18px;
   font-family: var(--font-serif);
   font-weight: 100;
   letter-spacing: 1.111px;
@@ -311,7 +310,6 @@ a strong,
 button {
   border-radius: var(--border-radius);
   display: inline-block;
-  font-size: 14px;
   line-height: 1.5;
   margin: 0.5rem 0;
   padding: 0.1rem 0.2rem;

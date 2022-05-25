@@ -10,12 +10,16 @@ fr:
   error_message_layer_update: La couche a été mise à jour avec succès.
   error_message_row_contents_destroy: La géométrie a été détruite avec succès.
   error_message_row_contents_update: Les propriétés géométriques ont été mises à jour avec succès.
+  hello: Bonjour
   layer: 'Couche '
   layer_name: 'Nom de couche '
   layers: Couches
   new_layer: Nouvelle couche
   part of territory: Part of territory
   show: Voir
+  sign_in: connexion
+  sign_out: déconnexion
+  sign_up: inscription
   t_geometry_type: Type de géometrie
   territory category: Territory category
   territory code: Territory identifier

@@ -10,12 +10,16 @@ en:
   error_message_layer_update: Layer was successfully updated.
   error_message_row_contents_destroy: Geometry was successfully destroyed.
   error_message_row_contents_update: Geometry properties were successfully updated.
+  hello: Hello
   layer: 'Layer '
   layer_name: Layer Name
   layers: Layers
   new_layer: New Layer
   part of territory: Part of territory
   show: Show
+  sign_in: Log in
+  sign_out: Sign out
+  sign_up: Sign up
   t_geometry_type: Geometry Type
   territory category: Territory category
   territory code: Territory identifier

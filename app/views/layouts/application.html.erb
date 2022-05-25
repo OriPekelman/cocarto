@@ -15,11 +15,18 @@
     <nav>
         <h1><%= link_to "Ĝis", root_path %></h1>
         <div class="nav-show">
+          <p class="notice"><%= notice %></p>
+          <p class="alert"><%= alert %></p>
           <%= yield :nav %>
         </div>
         <div class="header-right">
-          <%= link_to "connexion", layers_path, class: "header-login" %>
-          <a href="#subs" class="header-subs">inscription</a>
+          <% if user_signed_in? %>
+            <span><%= t(:hello) %>, <%= current_user.email %></span>
+            <%= button_to t(:sign_out), destroy_user_session_path, method: :delete, class: "header-subs" %>
+          <% else %>
+            <%= link_to t(:sign_in), new_user_session_path, class: "header-login" %>
+            <%= link_to t(:sign_up), new_user_registration_path, class: "header-subs" %>
+          <% end %>
           <div class="dropdown" data-controller="dropdown">
           <button class="button-trad" aria-controls="dropdown-menu" data-action="click->dropdown#toggle">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="0 0 20 20">
