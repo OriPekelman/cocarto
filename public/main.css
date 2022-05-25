@@ -221,7 +221,7 @@ table tr {
 }
 
 table thead {
-  background-color: var(--color-table);
+  background-color: var(--color-green-20);
   border-collapse: collapse;
   border-radius: var(--border-radius);
   color: var(--color-bg);
@@ -232,7 +232,7 @@ table thead {
 th {
   position: sticky;
   top: 0;
-  background-color: var(--color);
+  background-color: var(--color-green-20);
   z-index: 1;
 }
 
@@ -311,15 +311,14 @@ a strong,
 button {
   border-radius: var(--border-radius);
   display: inline-block;
-  font-size: medium;
-  font-weight: bold;
+  font-size: 14px;
   line-height: 1.5;
   margin: 0.5rem 0;
   padding: 0.1rem 0.2rem;
 }
 
 button {
-  font-family: var(--font-sans);
+  font-family: var(--font-serif);
 }
 
 button:active {
@@ -333,8 +332,8 @@ button:hover {
 a b,
 a strong,
 button {
-  background-color: var(--color);
-  border: 2px solid var(--color);
+  background-color: var(--color-green-70);
+  border: none;
   color: var(--color-bg);
 }
 
