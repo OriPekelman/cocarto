@@ -59,8 +59,8 @@ class RowContentsController < ApplicationController
     layer.fields.map do |field|
       # Some inputs match a territory
       # If the value is empty, it means that we didn’t select a territory, so we don’t want to store it
-      if field.field_type == "territory" && params[:row_content][field.id].empty?
-        nil
+      if field.field_type == "territory"
+        params[:row_content][field.id].presence
       else
         [field.id, params[:row_content][field.id]]
       end
