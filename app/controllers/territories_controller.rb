@@ -1,10 +1,10 @@
 class TerritoriesController < ApplicationController
   def show
-    @territory = Territory.includes(:territory_category)..with_geojson.find(params[:id])
+    @territory = Territory.includes(:territory_category).with_geojson.find(params[:id])
   end
 
   def search
-    territories = Territory.includes(:territory_category).call(params[:q]).preload(:parent)
+    territories = Territory.includes(:territory_category).name_autocomplete(params[:q]).preload(:parent)
     respond_to do |format|
       format.turbo_stream do
         render turbo_stream: [
