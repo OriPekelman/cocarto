@@ -236,7 +236,6 @@ th {
 td {
   border: 0.5px solid var(--color-border);
   height: 2rem;
-  font-family: var(--font-mono);
 }
 
 /* MAP */
