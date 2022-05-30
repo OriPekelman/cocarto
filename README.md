@@ -54,6 +54,11 @@ On a new installation, run
 
 That command will install the gem `bundler`, the dependencies and will initialize the database.
 
+The database will contain two users:
+
+* elisee.reclus@commune.paris, password: refleurir
+* cassini@carto.gouv.fr, password: générations12345
+
 ## Run the app
 
 ### Start the server
