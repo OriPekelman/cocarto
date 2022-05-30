@@ -238,6 +238,10 @@ td {
   height: 2rem;
 }
 
+.numerical {
+  font-family: var(--font-mono);
+}
+
 /* MAP */
 .data-with-map {
   height: calc(100vh - var(--nav-height) - var(--footer-height));
