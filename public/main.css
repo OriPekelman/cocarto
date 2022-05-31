@@ -240,6 +240,7 @@ td {
 
 .numerical {
   font-family: var(--font-mono);
+  text-align: right;
 }
 
 /* MAP */
