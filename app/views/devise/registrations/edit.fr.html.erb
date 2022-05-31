@@ -1,0 +1,43 @@
+<h2>Modifier <%= resource_name.to_s.humanize %></h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <div class="field">
+    <%= f.label :email %><br>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>En attente de confirmation pour : <%= resource.unconfirmed_email %></div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :"Mot de passe" %> <i>(laisser vide si vous ne souhaitez pas le changer)</i><br>
+    <%= f.password_field :password, autocomplete: "new-password" %>
+    <% if @minimum_password_length %>
+      <br>
+      <em><%= @minimum_password_length %> caractères au moins</em>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :"Confirmation du mot de passe"n %><br>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :"Mot de passe actuel" %> <i>(saississez votre mot de passe actuel pour confirmer les changements)</i><br>
+    <%= f.password_field :current_password, autocomplete: "current-password" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Mettre à jour" %>
+  </div>
+<% end %>
+
+<h3>Supprimer mon compte</h3>
+
+<p>Mécontent·e ? <%= button_to "Supprimer mon compte", registration_path(resource_name), data: { confirm: "Êtes-vous sûr·e ?" }, method: :delete %></p>
+
+<%= link_to "Back", :back %>

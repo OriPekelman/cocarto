@@ -2,6 +2,7 @@ require "securerandom"
 
 class LayersController < ApplicationController
   before_action :set_layer, only: %i[show edit update destroy schema]
+  before_action :authenticate_user!
 
   def index
     @layers = Layer.all

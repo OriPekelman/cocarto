@@ -54,6 +54,11 @@ On a new installation, run
 
 That command will install the gem `bundler`, the dependencies and will initialize the database.
 
+The database will contain two users:
+
+* elisee.reclus@commune.paris, password: refleurir
+* cassini@carto.gouv.fr, password: générations12345
+
 ## Run the app
 
 ### Start the server
@@ -96,3 +101,10 @@ If you want to set the parent of a territories, you need to pass as an extra-par
 * the code of that parent in the dataset feature properties (`region`)
 
 `rake import:geojson[http://etalab-datasets.geo.data.gouv.fr/contours-administratifs/2022/geojson/departements-100m.geojson,Départements de France,2022,Régions de France,region]`
+
+## Hosting
+
+If you want to host the app by yourself, you will need to set the following environment variables:
+
+* PUBLIC_URL: where is your instance running. This is used by the mailer (password recovery…)
+* EMAIL_FROM: adress that is used as `From:` in the emails sent
