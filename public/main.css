@@ -55,7 +55,7 @@
   /* MAIN FONT */
   --font-serif: Georgia, "Times New Roman", Times, serif, Regular;
   --font-sans: Verdana, Geneva, Tahoma, sans-serif;
-  --font-mono: Menlo, "DejaVu Sans Mono" monospace;
+  --font-mono: Menlo, "DejaVu Sans Mono", monospace;
   /* COLOR TABLE */
   --color-table: #118bee;
   --justify-important: center;
@@ -125,7 +125,6 @@ nav > h1 > a {
   border-radius: var(--border-radius);
   border-style: double;
   border-width: 2px;
-  transition: 0.35s ease-out;
 }
 
 .button-trad > svg {
@@ -227,7 +226,6 @@ table thead {
   margin: 0;
   padding: 0;
 }
-
 th {
   position: sticky;
   top: 0;
@@ -239,6 +237,12 @@ td {
   border: 0.5px solid var(--color-border);
   height: 2rem;
 }
+
+.numerical {
+  font-family: var(--font-mono);
+  text-align: right;
+}
+
 /* MAP */
 .data-with-map {
   height: calc(100vh - var(--nav-height) - var(--footer-height));
