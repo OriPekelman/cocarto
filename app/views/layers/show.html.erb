@@ -1,6 +1,4 @@
 <%= turbo_stream_from @layer %>
-<p id="notice"><%= notice %></p>
-
 <% content_for :nav do %>
     <h2><%= t :layer %><%= @layer.name %></h2>
     <%= link_to t('edit'), edit_layer_path(@layer) %> |
