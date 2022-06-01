@@ -17,7 +17,7 @@ class FieldsController < ApplicationController
   end
 
   def create
-    @layer = Layer.includes(:row_contents).find(field_params[:layer_id])
+    @layer = current_user.layers.includes(:row_contents).find(field_params[:layer_id])
     @field = @layer.fields.create(field_params)
     respond_to do |format|
       format.turbo_stream

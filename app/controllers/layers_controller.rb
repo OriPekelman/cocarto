@@ -5,14 +5,14 @@ class LayersController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @layers = Layer.all
+    @layers = current_user.layers.all
   end
 
   def show
   end
 
   def new
-    @layer = Layer.new
+    @layer = current_user.layers.new
   end
 
   def edit
@@ -30,7 +30,7 @@ class LayersController < ApplicationController
   end
 
   def create
-    @layer = Layer.new(layer_params)
+    @layer = current_user.layers.new(layer_params)
     if @layer.save
       redirect_to @layer
     else
@@ -57,7 +57,7 @@ class LayersController < ApplicationController
   private
 
   def set_layer
-    @layer = Layer.includes(:fields, :row_contents).find(params[:id])
+    @layer = current_user.layers.includes(:fields, :row_contents).find(params[:id])
   end
 
   def layer_params
