@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_25_101518) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_01_092236) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -44,6 +44,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_25_101518) do
     t.enum "geometry_type", enum_type: "geometry_type_enum"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "user_id", null: false
+    t.index ["user_id"], name: "index_layers_on_user_id"
   end
 
   create_table "row_contents", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -90,6 +92,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_25_101518) do
   end
 
   add_foreign_key "fields", "layers"
+  add_foreign_key "layers", "users"
   add_foreign_key "territories", "territories", column: "parent_id"
   add_foreign_key "territories", "territory_categories"
 end

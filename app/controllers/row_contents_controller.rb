@@ -60,7 +60,7 @@ class RowContentsController < ApplicationController
       # Some inputs match a territory
       # If the value is empty, it means that we didn’t select a territory, so we don’t want to store it
       if field.field_type == "territory"
-        params[:row_content][field.id].presence
+        [field.id, params[:row_content][field.id].presence]
       else
         [field.id, params[:row_content][field.id]]
       end
@@ -69,6 +69,6 @@ class RowContentsController < ApplicationController
 
   def set_layer
     layer_id = params[:layer_id] || params[:row_content][:layer_id]
-    @layer = Layer.includes(:fields).find(layer_id)
+    @layer = current_user.layers.includes(:fields).find(layer_id)
   end
 end
