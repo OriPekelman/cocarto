@@ -28,6 +28,7 @@ class Field < ApplicationRecord
     layer.row_contents.each do |row_content|
       target = [row_content.id, "action"].join("-")
       broadcast_before_to layer, target: target, partial: "fields/field_in_form", locals: {field: self, row_id: row_content.id, value: nil}
+      broadcast_replace_to layer, target: "tutorial", partial: "layers/tooltip", locals: {layer: layer}
     end
   end
 

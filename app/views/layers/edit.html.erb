@@ -17,6 +17,7 @@
   data-map-username-value="<%= @user_name %>">
     <div class="data">
       <%= render "row_contents/table" %>
+      <%= render partial: "tooltip", locals: {layer: @layer} %>
     </div>
     <div class="map" data-map-target="map">
         <%= render "row_contents/new", layer: @layer %>

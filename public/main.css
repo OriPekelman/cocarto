@@ -251,6 +251,18 @@ td {
 
 .data-with-map > .data {
   width: 50%;
+  position: relative;
+}
+
+.data .tooltip {
+  position: absolute;
+  padding: 16px;
+  width: 320px;
+  top: 24px;
+  right: 40px;
+  background-color: var(--color-info-10);
+  color: var(--color-info-40);
+  border-radius: var(--border-radius);
 }
 
 .data-with-map > .data > table {

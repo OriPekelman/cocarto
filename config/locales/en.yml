@@ -1,6 +1,8 @@
 ---
 en:
   back: Back
+  call to add a field: Click on the + to add a data column to your data
+  click on map for more content: Click on the map to add a new data point
   current layer: Current layer
   destroy: Destroy
   edit: Edit
