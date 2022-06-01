@@ -10,6 +10,8 @@ fr:
   error_message_layer_update: La couche a été mise à jour avec succès.
   error_message_row_contents_destroy: La géométrie a été détruite avec succès.
   error_message_row_contents_update: Les propriétés géométriques ont été mises à jour avec succès.
+  field label: Nom du champ
+  field type: Type du champ
   hello: Bonjour
   layer: 'Couche '
   layer_name: 'Nom de couche '

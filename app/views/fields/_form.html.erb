@@ -1,13 +1,13 @@
 <%= form_with model: Field.new, data: {action: "dropdown#toggle"} do |form| %>
   <%= form.hidden_field :layer_id, value: @layer.id %>
   <div>
-    <%= form.label "Field label", class: "label" %>
-    <%= form.text_field :label, class: "slim_input" %>
+    <%= form.label :label, t("field label") %>
+    <%= form.text_field :label, class: "slim" %>
   </div>
 
   <div>
-    <%= form.label "Field name"%>
-    <div>
+    <%= form.label :field_name, t("field type") %>
+    <div class="slim">
       <%= form.collection_radio_buttons(:field_type, Field.enum_field_types.keys, :to_s, :titlecase) do |b| %>
         <%= b.label(class: "radio") do %>
           <%= b.text %>
