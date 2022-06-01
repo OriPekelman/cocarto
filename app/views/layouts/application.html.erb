@@ -13,7 +13,7 @@
 
   <body>
     <nav>
-        <h1><%= link_to "Ĝis", root_path %></h1>
+        <h1><%= link_to "Ĝis", user_signed_in? ? layers_path : root_path %></h1>
         <div class="nav-show">
           <p class="notice"><%= notice %></p>
           <p class="alert"><%= alert %></p>
