@@ -13,11 +13,12 @@ function marker (point) {
 }
 
 export default class extends Controller {
-  static targets = ['longitudeField', 'latitudeField', 'newPointForm', 'map', 'point', 'userName']
+  static targets = ['longitudeField', 'latitudeField', 'newPointForm', 'map', 'point']
   static values = {
     editable: Boolean,
     layerId: String,
-    sessionId: String
+    sessionId: String,
+    username: String,
   }
 
   initialize () {
@@ -62,7 +63,7 @@ export default class extends Controller {
       mouse_moved(lngLat) {
         return this.perform('mouse_moved', {
           lngLat,
-          name: _this.userNameTarget.value,
+          name: _this.usernameValue,
           sessionId: _this.sessionIdValue,
           layerId: _this.layerIdValue
         });

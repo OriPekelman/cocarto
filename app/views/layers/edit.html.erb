@@ -11,12 +11,10 @@
   data-controller="map"
   data-map-editable-value="true"
   data-map-layer-id-value="<%= @layer.id %>"
-  data-map-session-id-value="<%= @session_id %>">
+  data-map-session-id-value="<%= @session_id %>"
+  data-map-username-value="<%= @user_name %>">
     <div class="data">
-        <div>
-          <%= text_field :user_name, nil, data: {map_target: "userName"}, placeholder: "your name" %>
-        </div>
-        <%= render "row_contents/table" %>
+      <%= render "row_contents/table" %>
     </div>
     <div class="map" data-map-target="map">
         <%= render "row_contents/new", layer: @layer %>
