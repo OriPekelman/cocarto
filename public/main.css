@@ -479,7 +479,8 @@ main {
 h2 {
   text-align: center;
   color: var(--color-green-90);
-  margin-bottom: 16px;
+  margin: 16px;
+  margin-top: 0;
 }
 
 input.slim {
@@ -497,4 +498,8 @@ radio.slim {
 
 .submit_form.slim {
   padding: 0.1rem 0.2rem;
+}
+
+.inline > * {
+  display: inline-block;
 }

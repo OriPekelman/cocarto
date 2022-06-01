@@ -1,9 +1,11 @@
 <%= turbo_stream_from @layer %>
 <% content_for :nav do %>
-  <h2><%= t('current layer') %></h2>
-  <%= form_with(model: @layer) do |form| %>
-    <%= form.text_field :name %>
-  <% end %>
+  <div class="inline">
+    <h2><%= t('current layer') %></h2>
+    <%= form_with(model: @layer) do |form| %>
+      <%= form.text_field :name %>
+    <% end %>
+  </div>
 <% end %>
 
 <div
