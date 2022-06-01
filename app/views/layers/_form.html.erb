@@ -18,7 +18,9 @@
 
   <div class="field radio">
     <h3><%= t :t_geometry_type %></h3>
-    <%= form.collection_radio_buttons :geometry_type, Layer.enum_geometry_types.keys, :to_s, :titlecase, disabled: [:linestring, :polygon, :territory] %>
+    <%= form.collection_radio_buttons :geometry_type, Layer.enum_geometry_types.keys, :to_s, :titlecase, disabled: [:linestring, :polygon, :territory]  do |b| %>
+      <%= b.label { b.radio_button + b.text} %>
+    <% end %>
   </div>
 
   <div class="actions">
