@@ -18,10 +18,10 @@
 
   <div class="field radio">
     <h3><%= t :t_geometry_type %></h3>
-    <%= form.collection_radio_buttons :geometry_type, Layer.enum_geometry_types.keys, :to_s, :titlecase %>
+    <%= form.collection_radio_buttons :geometry_type, Layer.enum_geometry_types.keys, :to_s, :titlecase, disabled: [:linestring, :polygon, :territory] %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class: "submit_form" %>
   </div>
 <% end %>
