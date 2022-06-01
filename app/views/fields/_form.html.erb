@@ -10,14 +10,14 @@
     <div class="slim">
       <%= form.collection_radio_buttons(:field_type, Field.enum_field_types.keys, :to_s, :titlecase) do |b| %>
         <%= b.label(class: "radio") do %>
+          <%= b.radio_button class: "slim" %>
           <%= b.text %>
-          <%= b.radio_button %>
         <% end %>
       <% end %>
     </div>
   </div>
 
   <div>
-    <%= form.submit class: "submit_form" %>
+    <%= form.submit class: "submit_form slim" %>
   </div>
 <% end %>
