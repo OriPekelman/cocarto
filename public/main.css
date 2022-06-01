@@ -57,7 +57,6 @@
   --font-sans: Verdana, Geneva, Tahoma, sans-serif;
   --font-mono: Menlo, "DejaVu Sans Mono", monospace;
   /* COLOR TABLE */
-  --color-table: #118bee;
   --justify-important: center;
   --color-bg: #fff;
   --color: #118bee;
@@ -202,7 +201,7 @@ footer {
 /* TABLES */
 table {
   border-spacing: 0;
-  display: inline-block;
+  display: block;
   max-width: 100%;
   overflow-x: auto;
   overflow-y: scroll;
@@ -341,8 +340,8 @@ button {
 
 button:disabled,
 input:disabled {
-  background: var(--color-bg-secondary);
-  border-color: var(--color-bg-secondary);
+  background: var(--color-bg-ambient-20);
+  border-color: var(--color-bg-ambient-20);
   color: var(--color-text-secondary);
   cursor: not-allowed;
 }
@@ -382,12 +381,14 @@ textarea {
 input[type="checkbox"],
 input[type="radio"] {
   display: inline-block;
+  color: var(--color-green-60);
 }
 
 input[type="checkbox"] + label,
 input[type="radio"] + label {
   display: inline-block;
-  font-weight: normal;
+  align-items: center;
+  font-weight: lighter;
   position: relative;
   top: 1px;
 }
@@ -406,12 +407,12 @@ td input {
 
 input[readonly],
 textarea[readonly] {
-  background-color: var(--color-bg-secondary);
+  background-color: var(--color-bg-ambient-20);
 }
 
 label {
-  font-weight: bold;
   margin-bottom: 0.2rem;
+  font-family: var(--font-serif);
 }
 
 /* SHOW PART */
