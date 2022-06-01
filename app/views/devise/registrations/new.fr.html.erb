@@ -1,3 +1,4 @@
+<div class="centered-main">
 <h2>Inscription</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
@@ -22,8 +23,9 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "Inscription" %>
+    <%= f.submit "Inscription", class: "submit_form" %>
   </div>
 <% end %>
 
 <%= render "devise/shared/links" %>
+</div>

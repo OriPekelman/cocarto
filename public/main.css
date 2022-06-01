@@ -390,8 +390,9 @@ input[type="radio"] {
   color: var(--color-bg);
   line-height: 1.5;
   margin: 0.5rem 0;
-  padding: 0.1rem 0.2rem;
+  padding: 0.2rem 0.4rem;
   cursor: pointer;
+  border-radius: var(--border-radius);
 }
 
 input[type="checkbox"] + label,
@@ -406,13 +407,23 @@ input[type="radio"] + label {
 input,
 select,
 textarea {
-  border: 0;
-  border-radius: var(--border-radius);
+  border-color: var(--color-grey-50);
+  border-width: 1px;
+  border-radius: 2px;
+  box-shadow: 0px 1px 4px var(--color-grey-40);
+  height: 40px;
+  vertical-align: middle;
+}
+
+input:focus {
+  border-color: var(--color-info-30);
+  outline: 2px solid var(--color-info-20);
 }
 
 td input {
   height: 100%;
   padding: 0;
+  border: 0;
 }
 
 input[readonly],
@@ -439,4 +450,31 @@ label {
   background-color: white;
   text-align: left;
   padding: 0.5rem 1rem;
+}
+
+main {
+  display: flex;
+}
+
+.centered-main {
+  margin: auto;
+  padding: 24px;
+}
+
+.field {
+  padding-top: 16px;
+}
+
+.field > br {
+  display: block;
+}
+
+.field > label {
+  vertical-align: middle;
+}
+
+h2 {
+  text-align: center;
+  color: var(--color-green-90);
+  margin-bottom: 16px;
 }
