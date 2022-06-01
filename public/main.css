@@ -140,7 +140,6 @@ hr.solid {
 /* MAIN LANDING PAGE */
 body {
   background-color: var(--color-bg-ambient-10);
-  overflow-y: hidden;
   font-size: 18px;
 }
 
@@ -244,6 +243,7 @@ td {
 
 /* MAP */
 .data-with-map {
+  overflow-y: hidden;
   height: calc(100vh - var(--nav-height) - var(--footer-height));
   display: flex;
   width: 100%;
