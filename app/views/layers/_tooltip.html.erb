@@ -1,0 +1,9 @@
+<% if layer.row_contents.empty? %>
+  <div class="tooltip" id="tutorial">
+    <%= t("click on map for more content") %>
+  </div>
+<% elsif layer.fields.empty? %>
+  <div class="tooltip" id="tutorial">
+    <%= t("call to add a field") %>
+  </div>
+<% end %>

@@ -1,3 +1,4 @@
+<div class="centered-main">
 <h2>Connexion</h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -19,8 +20,9 @@
   <% end %>
 
   <div class="actions">
-    <%= f.submit "Connexion" %>
+    <%= f.submit "Connexion", class: "submit_form" %>
   </div>
 <% end %>
 
 <%= render "devise/shared/links" %>
+</div>

@@ -2,6 +2,7 @@ require "securerandom"
 
 class LayersController < ApplicationController
   before_action :set_layer, only: %i[show edit update destroy schema]
+  before_action :set_user_name
   before_action :authenticate_user!
 
   def index
@@ -58,6 +59,14 @@ class LayersController < ApplicationController
 
   def set_layer
     @layer = current_user.layers.includes(:fields, :row_contents).find(params[:id])
+  end
+
+  def set_user_name
+    @user_name = if user_signed_in?
+      current_user.email.split("@")[0]
+    else
+      "annonymous"
+    end
   end
 
   def layer_params

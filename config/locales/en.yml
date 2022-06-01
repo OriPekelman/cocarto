@@ -1,6 +1,8 @@
 ---
 en:
   back: Back
+  call to add a field: Click on the + to add a data column to your data
+  click on map for more content: Click on the map to add a new data point
   current layer: Current layer
   destroy: Destroy
   edit: Edit
@@ -10,6 +12,8 @@ en:
   error_message_layer_update: Layer was successfully updated.
   error_message_row_contents_destroy: Geometry was successfully destroyed.
   error_message_row_contents_update: Geometry properties were successfully updated.
+  field label: Field name
+  field type: Field type
   hello: Hello
   layer: 'Layer '
   layer_name: Layer Name
