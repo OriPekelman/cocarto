@@ -381,7 +381,6 @@ textarea {
 input[type="checkbox"],
 input[type="radio"] {
   display: inline-block;
-  color: var(--color-green-60);
 }
 
 .submit_form {
@@ -420,8 +419,12 @@ input:focus {
   outline: 2px solid var(--color-info-20);
 }
 
+td {
+  padding: 0;
+}
+
 td input {
-  height: 100%;
+
   padding: 0;
   border: 0;
 }

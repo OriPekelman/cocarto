@@ -1,4 +1,4 @@
-<td class="field field-<%= field.id %> <%= "numerical" if field.numerical? %>">
+<td class="field-<%= field.id %> <%= "numerical" if field.numerical? %>">
   <% if field.numerical? %>
     <%= number_field_tag "row_content[#{field.id}]", nil, id: field.id, class: "numerical", value: value, data: {action: "row#setModified focusin->row#focusIn"}, form: row_id, autocomplete: :off %>
   <% elsif field.field_type == "territory" %>
