@@ -15,8 +15,9 @@
     <nav>
         <h1><%= link_to "Ĝis", user_signed_in? ? layers_path : root_path %></h1>
         <div class="nav-show">
-          <p class="notice"><%= notice %></p>
-          <p class="alert"><%= alert %></p>
+          <div id="flash">
+            <%= render "layouts/flash" %>
+          </div>
           <%= yield :nav %>
         </div>
         <div class="header-right">

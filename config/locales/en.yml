@@ -18,6 +18,7 @@ en:
   layer: 'Layer '
   layer_name: Layer Name
   layers: Layers
+  new field created: New field %{name} created
   new_layer: New Layer
   part of territory: Part of territory
   show: Show
@@ -28,4 +29,4 @@ en:
   territory category: Territory category
   territory code: Territory identifier
   territory revision: Territory category revision
-  type: 'Type : '
+  type: 'Type: '

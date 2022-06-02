@@ -37,7 +37,7 @@ class LayersController < ApplicationController
     else
       # This line overrides the default rendering behavior, which
       # would have been to render the "create" view.
-      render "new"
+      render "new", status: :unprocessable_entity
     end
   end
 
