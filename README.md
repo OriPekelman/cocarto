@@ -108,3 +108,4 @@ If you want to host the app by yourself, you will need to set the following envi
 
 * PUBLIC_URL: where is your instance running. This is used by the mailer (password recovery…)
 * EMAIL_FROM: adress that is used as `From:` in the emails sent
+* SMTP_HOST, SMTP_USERNAME, SMTP_PASSWORD, SMTP_PORT: being able to send emails
