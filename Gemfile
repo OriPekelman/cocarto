@@ -29,6 +29,7 @@ gem "rubyzip"
 gem "devise"
 gem "http_accept_language"
 gem "rails-i18n", "~> 7.0"
+gem "skylight"
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", ">= 1.4.4", require: false
