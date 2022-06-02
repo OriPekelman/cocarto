@@ -8,7 +8,7 @@
   <div>
     <%= form.label :field_name, t("field type") %>
     <div class="slim">
-      <%= form.collection_radio_buttons(:field_type, Field.enum_field_types.keys, :to_s, :titlecase) do |b| %>
+      <%= form.collection_radio_buttons(:field_type, Field.enum_field_types.keys, :to_s, :titlecase, checked: Field.enum_field_types.keys.first) do |b| %>
         <%= b.label(class: "radio") do %>
           <%= b.radio_button class: "slim" %>
           <%= b.text %>
