@@ -121,4 +121,11 @@ Rails.application.configure do
   config.active_record.action_on_strict_loading_violation = :log
 
   config.action_mailer.default_url_options = {host: ENV["PUBLIC_URL"]}
+  config.action_mailer.default_options = {from: ENV["EMAIL_FROM"]}
+  config.action_mailer.smtp_settings = {
+    address: ENV["SMTP_HOST"],
+    user_name: ENV["SMTP_USERNAME"],
+    password: ENV["SMTP_PASSWORD"],
+    port: ENV["SMTP_PORT"]
+  }
 end
