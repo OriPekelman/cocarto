@@ -393,6 +393,8 @@ textarea {
 input[type="checkbox"],
 input[type="radio"] {
   display: inline-block;
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
 }
 
 .submit_form {
@@ -513,5 +515,22 @@ radio.slim {
 }
 
 .inline > * {
+  display: inline-block;
+}
+
+#error_explanation {
+  background-color: var(--color-attention-20);
+  font-size: 12px;
+  border-radius: var(--border-radius);
+  padding: 1rem 2rem;
+}
+
+#error_explanation h2 {
+  font-size: 16px;
+  color: var(--color-green-100);
+}
+
+.field_with_errors {
+  background-color: var(--color-attention-30);
   display: inline-block;
 }
