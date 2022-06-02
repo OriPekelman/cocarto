@@ -18,6 +18,7 @@ en:
   layer: 'Layer '
   layer_name: Layer Name
   layers: Layers
+  new field created: New field %{name} created
   new_layer: New Layer
   part of territory: Part of territory
   show: Show
