@@ -12,6 +12,7 @@ variables:
   GITLAB_CI_POSTGRES_DB: gxis_test
   POSTGRES_USER: postgres
   POSTGRES_PASSWORD: postgres
+  SAST_EXCLUDED_PATHS: vendor
 
 # Cache gems in between builds
 cache:
