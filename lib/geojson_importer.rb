@@ -52,7 +52,7 @@ module GeojsonImporter
         }
       end
 
-      Territory.insert_all(features)
+      Territory.insert_all(features) # rubocop:disable Rails/SkipsModelValidations
     end
   end
 end

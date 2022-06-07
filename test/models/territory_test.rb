@@ -39,7 +39,7 @@ class TerritoryTest < ActiveSupport::TestCase
     assert_not_nil regions.territories.first.geojson
   end
 
-  test "we have geojson and geojson bounding" do
+  test "we have geojson and geojson bounding" do # rubocop:disable Minitest/MultipleAssertions
     guadeloupe = Territory.with_geojson.find_by(name: "Guadeloupe")
     assert_in_epsilon guadeloupe.lng_min, -61.801
     assert_in_epsilon guadeloupe.lat_min, 15.947
