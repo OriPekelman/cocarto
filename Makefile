@@ -14,6 +14,7 @@ dev: ## Start the app server for development purpose
 lint: ## Run all the linters
 	bundle exec standardrb
 	bundle exec erblint --lint-all
+	bundle exec i18n-tasks health
 
 test: ## Run tests
 	bin/rails test
