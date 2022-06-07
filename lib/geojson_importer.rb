@@ -12,7 +12,7 @@ module GeojsonImporter
       File.read(uri)
     end
     geojson = RGeo::GeoJSON.decode(file)
-    puts "Reading #{uri} with #{geojson.size} features" unless silent
+    Rails.logger.debug { "Reading #{uri} with #{geojson.size} features" } unless silent
 
     parent_category = find_parent_category!(parent, revision)
 
@@ -33,11 +33,11 @@ module GeojsonImporter
           raise "Invalide geometry type #{geometry.type} for feature with name: #{name} and code: #{code}"
         end
 
-        puts "  Processing geometry #{name} (#{code})}" unless silent
+        Rails.logger.debug { "  Processing geometry #{name} (#{code})}" } unless silent
         parent_id = if parent
           parent_territory = parent_category.territories.find_by(code: feature[parent_key])
           if parent_territory.nil?
-            puts "  ⚠ warning: Could not find parent (#{feature[parent_key]}) for #{name} (#{code})"
+            Rails.logger.debug { "  ⚠ warning: Could not find parent (#{feature[parent_key]}) for #{name} (#{code})" }
           else
             parent_territory.id
           end

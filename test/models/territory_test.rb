@@ -36,7 +36,7 @@ class TerritoryTest < ActiveSupport::TestCase
     assert_equal 18, regions.territories.length
 
     # Test that it calls the with_geojson scope
-    assert !regions.territories.first.geojson.nil?
+    assert_not_nil regions.territories.first.geojson
   end
 
   test "we have geojson and geojson bounding" do

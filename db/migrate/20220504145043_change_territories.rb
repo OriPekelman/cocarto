@@ -6,7 +6,7 @@ class ChangeTerritories < ActiveRecord::Migration[7.0]
       # We switch from geography to geometry. Geography handles implicitly that the earth is round
       # …but this yields more problems as only few functions are aware that the earth is round
       # This is not revertable, but we haven’t any actual user yet. Yolo.
-      execute <<-SQL
+      execute <<-SQL.squish
         ALTER TABLE territories
         ALTER COLUMN geography SET DATA TYPE geometry(MultiPolygon, 4326)
         USING geography::geometry(MultiPolygon, 4326);
