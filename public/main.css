@@ -534,3 +534,11 @@ radio.slim {
   background-color: var(--color-attention-30);
   display: inline-block;
 }
+
+.dragbar {
+  background-color: black;
+  height: 100%;
+  float: right;
+  width: 2px;
+  cursor: col-resize;
+}
