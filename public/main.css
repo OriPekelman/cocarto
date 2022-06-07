@@ -77,7 +77,6 @@ nav {
   display: flex;
   justify-content: space-between;
   font-family: var(--font-serif);
-  vertical-align: middle;
 }
 
 nav > h1 {
@@ -95,7 +94,6 @@ nav > h1 > a {
 
 .header-right {
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: space-around;
   padding: 55px;
@@ -312,7 +310,7 @@ td {
 }
 
 .is-hidden {
-  visibility: hidden;
+  visibility: collapse;
 }
 
 .row-actions {
@@ -465,7 +463,6 @@ label {
 /* SHOW PART */
 .nav-show {
   align-self: center;
-  display: inline-block;
 }
 
 .search-result {
@@ -549,16 +546,19 @@ radio.slim {
 }
 
 #layer-header {
-  text-align: center;
+  display: flex;
+  gap: 1rem;
 }
 
 #layer-header > * {
-  display: inline-block;
+  margin: 0;
 }
 
 .editable {
   cursor: pointer;
+  font-family: var(--font-sans);
 }
+
 .editable:after {
   content: "🖉";
 }
