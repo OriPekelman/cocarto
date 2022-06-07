@@ -24,5 +24,5 @@ class Layer < ApplicationRecord
   enum enum_geometry_type: {point: :point, linestring: :linestring, polygon: :polygon, territory: :territory}
   validates :geometry_type, inclusion: {in: enum_geometry_types.keys}
 
-  after_update_commit -> { broadcast_replace_to self, target: "layer-header", partial: "layers/name"}
+  after_update_commit -> { broadcast_replace_to self, target: "layer-header", partial: "layers/name" }
 end
