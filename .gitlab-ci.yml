@@ -18,22 +18,22 @@ cache:
   paths:
     - vendor/ruby
 
-before_script:
-  - bundle config set --local path 'vendor/ruby'
-
 install:
   stage: build
   script:
+    - bundle config set --local path 'vendor/ruby'
     - make install
 
 lint:
   stage: test
   script:
+    - bundle config set --local path 'vendor/ruby'
     - make lint
 
 test:
   stage: test
   script:
+    - bundle config set --local path 'vendor/ruby'
     - bundle exec rails db:setup
     - make test
   variables:
