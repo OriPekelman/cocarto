@@ -45,3 +45,9 @@ test:
     - /builds/CodeursEnLiberte/gxis/tmp/screenshots
     when: always
     expire_in: 1 week
+
+# Security testing (see https://gitlab.com/CodeursEnLiberte/gxis/-/security/dashboard)
+include:
+  - template: Security/Dependency-Scanning.gitlab-ci.yml
+  - template: Security/Secret-Detection.gitlab-ci.yml
+  - template: Security/SAST.gitlab-ci.yml
