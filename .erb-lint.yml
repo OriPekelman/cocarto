@@ -3,6 +3,8 @@ EnableDefaultLinters: true
 exclude:
   - '**/vendor/**/*'
 linters:
+  PartialInstanceVariable:
+    enabled: true
   DeprecatedClasses:
     enabled: true
   ErbSafety:
