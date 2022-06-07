@@ -34,6 +34,7 @@ lint:
 test:
   stage: test
   script:
+    - bundle exec rails db:setup
     - make test
   variables:
     # This is needed so that chrome can access to rails server

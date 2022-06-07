@@ -8,7 +8,7 @@ setup: install
 setup-pg-users: ## Creates the required postgresql users
 	bin/setup_pg_users
 
-dev: install ## Start the app server for development purpose
+dev: ## Start the app server for development purpose
 	bin/dev
 
 lint: ## Run all the linters
@@ -16,7 +16,7 @@ lint: ## Run all the linters
 	bundle exec erblint --lint-all
 
 test: ## Run tests
-	bin/rails db:prepare test
+	bin/rails test
 	bin/rails test:system
 
 help: ## Display this help
