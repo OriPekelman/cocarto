@@ -4,32 +4,25 @@
 
 ***Collaborative and historized edition of geographical data***
 
-Ĝis is a web application to input and modify geographical data, their attributes
-by multiple users at the same time.
+Ĝis is a tool for managing geographical-related data that doesn’t require a geomatic engineer experience.  It is a web application that lets you create, edit data sets that include geographical data; multiple users can collaborate in realtime on the same data.
 
-Nice rendering, import/export, managing *big data* or annotating the background map are not at the heart of the project.
+It’s just tabular data with an extra column for the geometry; a spreadsheet of geographical data.
 
-One could say that it is the “google spreadsheet of geographical data”:
-a tool that is neither very fancy nor powerful, but that covers the essential needs.
-
-You don’t need to be a computer scientist or a geomatic engineer, just
-a bit resourceful. In the end, it is just tabular data with an extra column for the geometry.
+It is *not*:
+* a rendering tool to make nice printable maps
+* a tool for managing very large datasets.
 
 ### How to contribute
 
 This software is distributed under the AGPLv3.
 
-If you want to report a bug, ask for an improvement or submit a fix,
-open an issue, a merge request or send us an email at
-bonjour@codeursenliberte.fr
+If you want to report a bug, ask for an improvement or submit a fix, open an issue, a merge request or email us at bonjour@codeursenliberte.fr
 
 ## Installation for development
 
 ### Technical dependencies
 
-Ĝis is a [Ruby on rails](https://rubyonrails.org/) application. A well known monolith.
-
-We use [turbo](https://turbo.hotwired.dev/) for interactivity and [stimulus](https://stimulus.hotwired.dev/) for the small bits that need javascript.
+Ĝis is a [Ruby on rails](https://rubyonrails.org/) monolith application. We use [turbo](https://turbo.hotwired.dev/) for interactivity and [stimulus](https://stimulus.hotwired.dev/) for the small bits that need javascript.
 
 In order to work on it, you will need:
 - postgresql with postgis
@@ -37,8 +30,7 @@ In order to work on it, you will need:
 
 ### Create the database roles
 
-By default, the app will try to connect to the database with the user `gxis`
-and the password `gxis`.
+By default, the app will try to connect to the database with the user `gxis` and the password `gxis`.
 
 To create that user, run:
 
@@ -52,12 +44,10 @@ On a new installation, run
 
     make setup
 
-That command will install the gem `bundler`, the dependencies and will initialize the database.
+That command will install the gem `bundler`, the dependencies and will initialize the database. The database will contain two users:
 
-The database will contain two users:
-
-* elisee.reclus@commune.paris, password: refleurir
-* cassini@carto.gouv.fr, password: générations12345
+* `elisee.reclus@commune.paris`, password: `refleurir`
+* `cassini@carto.gouv.fr`, password: `générations12345`
 
 ## Run the app
 
@@ -67,9 +57,7 @@ To run the server, run:
 
     make dev
 
-That command will automatically run `make install` to install new dependencies and run database migrations.
-
-The app then runs at `http://localhost:5000`.
+That command will automatically run `make install` to install new dependencies and run database migrations. The app then runs at `http://localhost:5000`.
 
 ### Run the tests
 
@@ -84,15 +72,13 @@ We follow the conventions from [StandardRB](https://github.com/testdouble/standa
 ## Importing Territories
 
 Territories are reference geometries (like countries of the world) that are available to all users.
-
 The territories are grouped into TerritoryCategories that have each a revision to handle evolution over time.
 
 A `rake` task allows to import them, either from an url, either from a local file:
 
-`rake import:geojson[regions.json,Régions de France,2022]`
+    rake import:geojson[regions.json,Régions de France,2022]
 
-`rake import:geojson[http://etalab-datasets.geo.data.gouv.fr/contours-administratifs/2022/geojson/departements-100m.geojson,Départements de France,2022]`
-
+    rake import:geojson[http://etalab-datasets.geo.data.gouv.fr/contours-administratifs/2022/geojson/departements-100m.geojson,Départements de France,2022]
 
 Expect a processing time of about 1s per Mb of geojson.
 
@@ -100,7 +86,8 @@ If you want to set the parent of a territories, you need to pass as an extra-par
 * the name of the parent category (`Régions de France`)
 * the code of that parent in the dataset feature properties (`region`)
 
-`rake import:geojson[http://etalab-datasets.geo.data.gouv.fr/contours-administratifs/2022/geojson/departements-100m.geojson,Départements de France,2022,Régions de France,region]`
+
+    rake import:geojson[http://etalab-datasets.geo.data.gouv.fr/contours-administratifs/2022/geojson/departements-100m.geojson,Départements de France,2022,Régions de France,region]
 
 ## Hosting
 
