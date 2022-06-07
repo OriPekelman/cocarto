@@ -12,7 +12,7 @@ dev: ## Start the app server for development purpose
 	bin/dev
 
 lint: ## Run all the linters
-	bundle exec standardrb
+	bundle exec rubocop
 	bundle exec erblint --lint-all
 	bundle exec i18n-tasks health
 

@@ -1,0 +1,19 @@
+# We’re using rubocop with standardrb rules, with the rubocop-rails extensions (that are not part of standardrb)
+#
+# See https://evilmartians.com/chronicles/rubocoping-with-legacy-bring-your-ruby-code-up-to-standard
+
+inherit_mode:
+  merge:
+    - Exclude
+
+require:
+  - standard
+  - rubocop-performance
+  - rubocop-minitest
+  - rubocop-rails
+
+inherit_gem:
+  standard: config/base.yml
+
+AllCops:
+  NewCops: enable

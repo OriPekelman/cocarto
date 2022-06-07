@@ -38,6 +38,8 @@ group :development, :test do
   # Call "byebug" anywhere in the code to stop execution and get a debugger console
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
   gem "standard"
+  gem "rubocop-rails", require: false
+  gem "rubocop-minitest", require: false
   # Verifies that we have all translations
   gem "i18n-tasks", "~> 1.0.10"
   gem "erb_lint", require: false
