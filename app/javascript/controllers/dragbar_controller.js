@@ -17,8 +17,8 @@ export default class extends Controller {
 
         if (this.dragging){    
             console.log("mousemove-left");
-            this.leftTarget.style.width = `${e.clientX}px`;
-            this.rightTarget.style.width = `calc(100vw - ${e.clientX}px)`;
+            this.leftTarget.style.width = `max(7em, ${e.clientX}px)`;
+            this.rightTarget.style.width = `max(7em, calc(100vw - ${e.clientX}px))`;
         }
     }
     mouseup (){
