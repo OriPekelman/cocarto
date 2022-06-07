@@ -523,10 +523,6 @@ radio.slim {
   padding: 0.1rem 0.2rem;
 }
 
-.inline > * {
-  display: inline-block;
-}
-
 #error_explanation {
   background-color: var(--color-attention-20);
   font-size: 12px;
@@ -550,4 +546,19 @@ radio.slim {
   float: right;
   width: 6px;
   cursor: col-resize;
+}
+
+#layer-header {
+  text-align: center;
+}
+
+#layer-header > * {
+  display: inline-block;
+}
+
+.editable {
+  cursor: pointer;
+}
+.editable:after {
+  content: "🖉";
 }
