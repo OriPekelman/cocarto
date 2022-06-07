@@ -1,20 +1,6 @@
 <%= turbo_stream_from @layer %>
 <% content_for :nav do %>
-  <div id="layer-header" data-controller="edit-toggle">
-    <h2><%= t('current layer') %></h2>
-    <h2
-      class="editable"
-      data-edit-toggle-target="text"
-      data-action="click->edit-toggle#edit">
-        <%= @layer.name %>
-    </h2>
-    <%= form_with model: @layer, class: "is-hidden", html: {
-      "data-edit-toggle-target": "form",
-      "data-action": "focusout->edit-toggle#submit"
-      } do |form| %>
-      <%= form.text_field :name %>
-    <% end %>
-  </div>
+  <%= render "name", layer: @layer %>
 <% end %>
 
 <div
