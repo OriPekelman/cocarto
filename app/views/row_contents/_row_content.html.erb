@@ -1,18 +1,15 @@
 <tr id="<%= dom_id(row_content) %>"
     data-map-target="point"
-    data-controller="row"
-    data-action="focusout->row#focusOut">
+    data-controller="row">
     <% row_content.data do |field, value| %>
         <%= render partial: "fields/field_in_form", locals: {field: field, value: value, row_id: row_content.id} %>
     <% end %>
     <td id="<%= row_content.id %>-action">
         <div class="actions">
-            <%= form_with method: :patch, model: row_content, id: row_content.id, data: {"row-target": "form"} do |form| %>
+            <%= form_with method: :patch, model: row_content, id: row_content.id, data: {"row-target": "form", action: "row#save"} do |form| %>
                 <%= form.hidden_field "longitude", value: row_content.point.x, data: {"row-target": "longitude"} %>
                 <%= form.hidden_field "latitude", value: row_content.point.y, data: {"row-target": "latitude"} %>
-                <%= form.button method: :update, disabled: true, data: {"row-target": "save", action: "row#setLoading"} do %>
-                    Save
-                <% end %>
+                <%= form.button "save", class: "is-hidden" %>
             <% end %>
             <%= button_to row_content, method: :delete do %>
                 Delete
