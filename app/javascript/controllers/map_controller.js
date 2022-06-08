@@ -5,11 +5,10 @@ import consumer from "channels/consumer"
 import { new_map } from "lib/map_helpers"
 import Trackers from 'lib/trackers'
 
-function marker (point) {
-  const lng = +point.getAttribute('data-lng')
-  const lat = +point.getAttribute('data-lat')
-
-  return new maplibre.Marker().setLngLat({ lng, lat })
+function makeMarker (lngLat) {
+  const marker = new maplibre.Marker({draggable: true})
+  marker.setLngLat(lngLat)
+  return marker
 }
 
 export default class extends Controller {
@@ -32,16 +31,16 @@ export default class extends Controller {
   }
 
   pointTargetConnected (point) {
-    const id = point.getAttribute('id')
-    const m = marker(point)
-    this.markers.set(id, m)
+    const marker = makeMarker(point.rowController.getLngLat())
+    this.markers.set(point.id, marker)
+    marker.on('dragend', () => point.rowController.dragged(marker.getLngLat()))
     if (this.map) {
-      m.addTo(this.map)
+      marker.addTo(this.map)
     }
   }
 
   pointTargetDisconnected (point) {
-    const id = point.getAttribute('id')
+    const id = point.id
     const m = this.markers.get(id)
     m.remove()
     this.markers.delete(id)
@@ -49,10 +48,11 @@ export default class extends Controller {
 
   #initMap () {
     this.map = new_map(this.mapTarget)
+    this.markers.forEach(marker => marker.addTo(this.map))
+
     const resizeObserver = new ResizeObserver (( ) => this.map.resize())
     resizeObserver.observe(this.mapTarget)
     this.trackers = new Trackers(this.map)
-    this.markers.forEach(marker => marker.addTo(this.map))
 
     if (this.editableValue){
       this.map.on('click', e => {

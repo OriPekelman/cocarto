@@ -1,6 +1,7 @@
 class RowContentsController < ApplicationController
   before_action :set_layer, only: %i[create new]
   before_action :set_row_content, only: %i[edit destroy update]
+  before_action :set_point, only: %i[create update]
 
   def new
     @row_content = @layer.row_contents.new
@@ -15,15 +16,15 @@ class RowContentsController < ApplicationController
   end
 
   def create
-    point = params.require(:row_content).permit(:longitude, :latitude, :layer_id, :anonymous)
+    anonymous = params.require(:row_content)[:annonymous] == "true"
 
     @row_content = @layer.row_contents.create({
       layer: @layer,
-      point: RGEO_FACTORY.point(point[:longitude], point[:latitude]),
+      point: @point,
       values: fields(@layer)
     })
 
-    if point[:anonymous] == "true"
+    if anonymous
       redirect_to action: :edit, id: @row_content
     else
       respond_to do |format|
@@ -42,7 +43,7 @@ class RowContentsController < ApplicationController
   end
 
   def update
-    @row_content.update(values: fields(@row_content.layer))
+    @row_content.update(values: fields(@row_content.layer), point: @point)
     respond_to do |format|
       format.turbo_stream
       format.html { redirect_to @row_content.layer, notice: t("error_message_row_contents_update") }
@@ -70,5 +71,10 @@ class RowContentsController < ApplicationController
   def set_layer
     layer_id = params[:layer_id] || params[:row_content][:layer_id]
     @layer = current_user.layers.includes(:fields).find(layer_id)
+  end
+
+  def set_point
+    point = params.require(:row_content).permit(:longitude, :latitude, :layer_id, :anonymous)
+    @point = RGEO_FACTORY.point(point[:longitude], point[:latitude])
   end
 end
