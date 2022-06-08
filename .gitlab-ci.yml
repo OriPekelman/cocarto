@@ -14,27 +14,27 @@ variables:
   POSTGRES_PASSWORD: postgres
   SAST_EXCLUDED_PATHS: vendor
 
-# Cache gems in between builds
-cache:
-  paths:
-    - vendor/ruby
-
-install:
-  stage: build
-  script:
+.ruby:
+  cache:
+    key:
+      files:
+        - Gemfile.lock
+    paths:
+      - vendor/ruby
+  before_script:
     - bundle config set --local path 'vendor/ruby'
-    - make install
+    - bundle install
 
 lint:
+  extends: .ruby
   stage: test
   script:
-    - bundle config set --local path 'vendor/ruby'
     - make lint
 
 test:
+  extends: .ruby
   stage: test
   script:
-    - bundle config set --local path 'vendor/ruby'
     - bundle exec rails db:setup
     - make test
   variables:
