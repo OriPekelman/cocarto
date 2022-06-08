@@ -10,16 +10,18 @@
 
 <div
   class="data-with-map"
-  data-controller="map"
+  data-action="mousemove@window->dragbar#mousemove mouseup@document->dragbar#mouseup"
+  data-controller="map dragbar"
   data-map-editable-value="true"
   data-map-layer-id-value="<%= @layer.id %>"
   data-map-session-id-value="<%= @session_id %>"
   data-map-username-value="<%= @user_name %>">
-    <div class="data">
+    <div class="data" data-dragbar-target="left">
       <%= render "row_contents/table" %>
       <%= render partial: "tooltip", locals: {layer: @layer} %>
     </div>
-    <div class="map" data-map-target="map">
+    <div class="dragbar" data-dragbar-target="dragbar" data-action="mousedown->dragbar#mousedown"></div>
+    <div class="map" data-map-target="map" data-dragbar-target="right">
         <%= render "row_contents/new", layer: @layer %>
     </div>
 </div>

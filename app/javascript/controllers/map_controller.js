@@ -27,8 +27,10 @@ export default class extends Controller {
   }
 
   connect () {
-    this.map = new_map(this.mapTarget)
 
+    this.map = new_map(this.mapTarget)
+    const resizeObserver = new ResizeObserver (( ) => this.map.resize())
+    resizeObserver.observe(this.mapTarget)
     this.trackers = new Trackers(this.map)
     this.markers.forEach(marker => marker.addTo(this.map))
 

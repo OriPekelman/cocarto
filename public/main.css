@@ -435,10 +435,13 @@ input:focus {
 
 td {
   padding: 0;
+  resize: horizontal;
+  overflow: auto;
+  background-color: white;
+  display: table-cell;
 }
 
 td input {
-
   padding: 0;
   border: 0;
 }
@@ -533,4 +536,12 @@ radio.slim {
 .field_with_errors {
   background-color: var(--color-attention-30);
   display: inline-block;
+}
+
+.dragbar {
+  background-color: black;
+  height: 100%;
+  float: right;
+  width: 8px;
+  cursor: col-resize;
 }
