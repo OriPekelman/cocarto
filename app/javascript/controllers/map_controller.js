@@ -1,4 +1,3 @@
-import maplibre from 'maplibre-gl'
 import { Controller } from '@hotwired/stimulus'
 
 import consumer from "channels/consumer"
