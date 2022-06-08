@@ -435,10 +435,13 @@ input:focus {
 
 td {
   padding: 0;
+  resize: horizontal;
+  overflow: auto;
+  background-color: white;
+  display: table-cell;
 }
 
 td input {
-
   padding: 0;
   border: 0;
 }
@@ -539,6 +542,6 @@ radio.slim {
   background-color: black;
   height: 100%;
   float: right;
-  width: 2px;
+  width: 8px;
   cursor: col-resize;
 }
