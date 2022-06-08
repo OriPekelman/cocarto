@@ -225,6 +225,7 @@ table thead {
   padding: 0;
 }
 th {
+  position: sticky;
   top: 0;
   background-color: var(--color-green-20);
   z-index: 1;
@@ -320,7 +321,6 @@ td {
 }
 
 .edit th {
-  position: sticky;
   resize: horizontal;
   overflow-x: scroll;
   overflow-y: visible;
@@ -449,6 +449,7 @@ td {
 td input {
   padding: 0;
   border: 0;
+  width: 100%;
 }
 
 input[readonly],
