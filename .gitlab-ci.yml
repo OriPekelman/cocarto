@@ -12,28 +12,29 @@ variables:
   GITLAB_CI_POSTGRES_DB: gxis_test
   POSTGRES_USER: postgres
   POSTGRES_PASSWORD: postgres
+  SAST_EXCLUDED_PATHS: vendor
 
 # Cache gems in between builds
 cache:
   paths:
     - vendor/ruby
 
-before_script:
-  - bundle config set --local path 'vendor/ruby'
-
 install:
   stage: build
   script:
+    - bundle config set --local path 'vendor/ruby'
     - make install
 
 lint:
   stage: test
   script:
+    - bundle config set --local path 'vendor/ruby'
     - make lint
 
 test:
   stage: test
   script:
+    - bundle config set --local path 'vendor/ruby'
     - bundle exec rails db:setup
     - make test
   variables:
@@ -45,3 +46,9 @@ test:
     - /builds/CodeursEnLiberte/gxis/tmp/screenshots
     when: always
     expire_in: 1 week
+
+# Security testing (see https://gitlab.com/CodeursEnLiberte/gxis/-/security/dashboard)
+include:
+  - template: Security/Dependency-Scanning.gitlab-ci.yml
+  - template: Security/Secret-Detection.gitlab-ci.yml
+  - template: Security/SAST.gitlab-ci.yml
