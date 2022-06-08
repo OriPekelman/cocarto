@@ -61,7 +61,7 @@ class LayersController < ApplicationController
   private
 
   def set_layer
-    @layer = current_user.layers.includes(:fields, :row_contents).find(params[:id])
+    @layer = authorize Layer.includes(:fields, :row_contents).find(params[:id])
   end
 
   def set_user_name
