@@ -3,10 +3,6 @@ default:
   tags:
     - xuan # We use our own runner: faster and the shared seem to have a network issue
 
-services:
-  - postgis/postgis:latest
-  - browserless/chrome:latest
-
 variables:
   GITLAB_CI_POSTGRES_HOST: postgis-postgis
   GITLAB_CI_POSTGRES_DB: gxis_test
@@ -34,6 +30,9 @@ lint:
 test:
   extends: .ruby
   stage: test
+  services:
+    - postgis/postgis:latest
+    - browserless/chrome:latest
   script:
     - bundle exec rails db:setup
     - make test
