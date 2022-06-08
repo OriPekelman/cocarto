@@ -234,6 +234,7 @@ th {
 td {
   border: 0.5px solid var(--color-border);
   height: 2rem;
+  background-color: white;
 }
 
 .numerical {
@@ -291,7 +292,7 @@ td {
 .dropdown-content {
   border-radius: var(--border-radius);
   display: none;
-  position: absolute;
+  position: fixed;
   background-color: var(--color-bg);
   border: 1px solid var(--color-bg-secondary);
   border-radius: var(--border-radius);
@@ -299,6 +300,7 @@ td {
   color: var(--color-text);
   padding: 0.2rem;
   font-size: 80%;
+  overflow: visible !important;
 }
 
 .dropdown.is-active > .dropdown-content {
@@ -316,6 +318,12 @@ td {
 .row-actions {
   position: sticky;
   right: 0;
+}
+
+.edit th {
+  resize: horizontal;
+  overflow-x: scroll;
+  overflow-y: visible;
 }
 
 a b,
@@ -435,15 +443,13 @@ input:focus {
 
 td {
   padding: 0;
-  resize: horizontal;
-  overflow: auto;
   background-color: white;
-  display: table-cell;
 }
 
 td input {
   padding: 0;
   border: 0;
+  width: 100%;
 }
 
 input[readonly],
@@ -542,6 +548,6 @@ radio.slim {
   background-color: black;
   height: 100%;
   float: right;
-  width: 8px;
+  width: 6px;
   cursor: col-resize;
 }
