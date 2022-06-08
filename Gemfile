@@ -56,7 +56,7 @@ group :development do
 end
 
 group :test do
-  # Cuprite is used for system tests (to pilote chrome driver)
+  # Cuprite is used for system tests (to pilot chrome driver)
   gem "cuprite"
 end
 
