@@ -104,8 +104,6 @@ nav > h1 > a {
 .header-login {
   color: var(--color-green-70);
   text-decoration: none;
-  text-transform: none;
-  font-size: 14px;
 }
 
 .header-subs {
@@ -115,8 +113,6 @@ nav > h1 > a {
   font-weight: lighter;
   border-radius: var(--border-radius);
   text-decoration: none;
-  text-transform: none;
-  font-size: 14px;
 }
 
 .button-trad {
@@ -342,14 +338,20 @@ button {
   border: 0;
 }
 
-button {
+.table-head {
   font-family: var(--font-serif);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0.8px;
   text-transform: uppercase;
   text-decoration: underline;
   text-underline-offset: 0.5em;
   text-decoration-color: var(--color-grey-50);
+  font-weight: 400;
+  cursor: pointer;
+}
+
+button {
+  font-family: var(--font-serif);
 }
 
 button:active {
