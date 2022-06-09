@@ -104,6 +104,8 @@ nav > h1 > a {
 .header-login {
   color: var(--color-green-70);
   text-decoration: none;
+  text-transform: none;
+  font-size: 14px;
 }
 
 .header-subs {
@@ -113,6 +115,8 @@ nav > h1 > a {
   font-weight: lighter;
   border-radius: var(--border-radius);
   text-decoration: none;
+  text-transform: none;
+  font-size: 14px;
 }
 
 .button-trad {
@@ -212,25 +216,27 @@ table th,
 table tr {
   padding: 0rem;
   text-align: var(--justify-important);
+  border-color: var(--color-grey-40);
 }
 
 table thead {
-  background-color: var(--color-green-20);
+  background-color: var(--color-grey-20);
   border-collapse: collapse;
   border-radius: var(--border-radius);
-  color: var(--color-bg);
+  color: var(--color-grey-80);
   margin: 0;
   padding: 0;
 }
+
 th {
   position: sticky;
   top: 0;
-  background-color: var(--color-green-20);
+  background-color: var(--color-grey-20);
   z-index: 1;
 }
 
 td {
-  border: 0.5px solid var(--color-border);
+  border: 0.5px solid var(--color-grey-50);
   height: 2rem;
   background-color: white;
 }
@@ -329,15 +335,21 @@ a em,
 a i,
 a strong,
 button {
-  border-radius: var(--border-radius);
   display: inline-block;
   line-height: 1.5;
   margin: 0.5rem 0;
   padding: 0.1rem 0.2rem;
+  border: 0;
 }
 
 button {
   font-family: var(--font-serif);
+  font-size: 10px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-underline-offset: 0.5em;
+  text-decoration-color: var(--color-grey-50);
 }
 
 button:active {
@@ -351,16 +363,16 @@ button:hover {
 a b,
 a strong,
 button {
-  background-color: var(--color-green-70);
   border: none;
-  color: var(--color-bg);
+  color: var(--color-grey-80);
+  outline: none;
 }
 
 button:disabled,
 input:disabled {
   background: var(--color-bg-ambient-20);
   border-color: var(--color-bg-ambient-20);
-  color: var(--color-text-secondary);
+  color: var(--color-grey-80);
   cursor: not-allowed;
 }
 
@@ -432,6 +444,11 @@ textarea {
   box-shadow: 0px 1px 4px var(--color-grey-40);
   height: 40px;
   vertical-align: middle;
+}
+
+td input:focus {
+  background-color: RGBA(215, 233, 221, 0.5);
+  outline: 2px solid var(--color-grey-40);
 }
 
 input:focus {
