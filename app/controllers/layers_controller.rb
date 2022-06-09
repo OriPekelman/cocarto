@@ -24,7 +24,10 @@ class LayersController < ApplicationController
 
   def update
     if @layer.update(layer_params)
-      redirect_to @layer, notice: t("error_message_layer_update")
+      respond_to do |format|
+        format.turbo_stream
+        format.html { redirect_to edit_layer_path(@layer) }
+      end
     else
       render :edit, status: :unprocessable_entity
     end
