@@ -12,9 +12,13 @@ dev: ## Start the app server for development purpose
 	bin/dev
 
 lint: ## Run all the linters
-	bundle exec standardrb
+	bundle exec rubocop
 	bundle exec erblint --lint-all
 	bundle exec i18n-tasks health
+
+lint_autocorrect: ## Run linters in autocorrect mode
+	bundle exec rubocop --auto-correct-all
+	bundle exec erblint --lint-all --autocorrect
 
 test: ## Run tests
 	bin/rails test
@@ -23,4 +27,4 @@ test: ## Run tests
 help: ## Display this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-.PHONY: install setup setup-pg-users dev lint test help
+.PHONY: install setup setup-pg-users dev lint lint_autocorrect test help

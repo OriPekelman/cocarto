@@ -1,5 +1,5 @@
 class FieldsController < ApplicationController
-  before_action :set_field, only: %i[show edit update destroy]
+  before_action :set_field, only: %i[edit update destroy]
 
   def new
     @field = Field.new

@@ -2,14 +2,14 @@
   <div class="data">
     <h2><%= @territory.name %></h2>
     <dl>
-      <dt><%= t('territory code') %></dt>
+      <dt><%= t("territory code") %></dt>
       <dd><%= @territory.code %></dd>
-      <dt><%= t('territory category') %></dt>
+      <dt><%= t("territory category") %></dt>
       <dd><%= link_to @territory.territory_category.name, @territory.territory_category %></dd>
-      <dt><%= t('territory revision') %></dt>
+      <dt><%= t("territory revision") %></dt>
       <dd><%= @territory.territory_category.revision %></dd>
       <% if @territory.parent %>
-        <dt><%= t('part of territory') %></dt>
+        <dt><%= t("part of territory") %></dt>
         <dd><%= link_to @territory.parent.name, @territory.parent %></dd>
       <% end %>
     </dl>

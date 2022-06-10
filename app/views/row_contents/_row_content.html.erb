@@ -10,7 +10,7 @@
     <td id="<%= row_content.id %>-action">
         <div class="actions">
             <%= form_with method: :patch, model: row_content, id: row_content.id, data: {"row-target": "form"} do |form| %>
-                <%= form.button method: :update, disabled: true, data: {"row-target": "save", "action": "row#setLoading"} do %>
+                <%= form.button method: :update, disabled: true, data: {"row-target": "save", action: "row#setLoading"} do %>
                     Save
                 <% end %>
             <% end %>

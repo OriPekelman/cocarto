@@ -13,5 +13,5 @@
 #  index_territory_categories_on_name_and_revision  (name,revision) UNIQUE
 #
 class TerritoryCategory < ApplicationRecord
-  has_many :territories, -> { with_geojson.limit(1000) }
+  has_many :territories, -> { with_geojson.limit(1000) }, dependent: :destroy, inverse_of: :territory_category
 end
