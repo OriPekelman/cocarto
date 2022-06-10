@@ -5,6 +5,6 @@
         Vous n’avez pas besoin de finir la saisie. En cliquant sur « Sauvegarder »,
         vous obtiendrez un lien pour poursuivre l’édition plus tard.
     </p>
-    <%= render "form" %>
+    <%= render "form", row: @row, layer: @layer, anonymous: @anonymous, values: @values %>
 </div>
 </section>

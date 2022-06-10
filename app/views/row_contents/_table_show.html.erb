@@ -1,12 +1,12 @@
 <table>
     <thead>
         <tr>
-        <% @layer.fields.each do |field| %>
+        <% layer.fields.each do |field| %>
             <th> <%= field.label %> </th>
         <% end %>
         </tr>
     </thead>
     <tbody id="rows-tbody">
-      <%= render partial: "row_contents/show", collection: @layer.row_contents.order(:created_at), as: :row_content %>
+      <%= render partial: "row_contents/show", collection: layer.row_contents.order(:created_at), as: :row_content %>
     </tbody>
 </table>
