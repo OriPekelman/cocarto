@@ -1,5 +1,5 @@
 <%= form_with model: Field.new, data: {action: "dropdown#toggle"} do |form| %>
-  <%= form.hidden_field :layer_id, value: @layer.id %>
+  <%= form.hidden_field :layer_id, value: layer.id %>
   <div>
     <%= form.label :label, t("field label") %>
     <%= form.text_field :label, class: "slim" %>

@@ -2,6 +2,6 @@
 <div class="container">
     <h1>Modifier un formulaire</h1>
     <p>Cette restera accessible et partageable par <%= link_to "ce lien", edit_point_url(@point) %>
-    <%= render "form" %>
+    <%= render "form", row: @row, layer: @layer, anonymous: @anonymous, values: @values %>
 </div>
 </section>

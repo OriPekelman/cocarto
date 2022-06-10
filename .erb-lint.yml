@@ -10,6 +10,8 @@ linters:
       - '**/app/views/devise/mailer/*.html.erb'
       - '**/app/views/territory_categories/index.html.erb'
       - '**/app/views/territory_categories/show.html.erb'
+      - '**/app/views/row_contents/edit.html.erb'
+      - '**/app/views/row_contents/new.html.erb'
   DeprecatedClasses:
     enabled: true
   ErbSafety:
