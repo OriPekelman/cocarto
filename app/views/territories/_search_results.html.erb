@@ -7,7 +7,7 @@
     data-action="click->autocomplete#selected">
     <%= highlight(territory.name, params.dig(:q)) %>
     (<%= territory.code %>)
-    <%= territory.parent.name if territory.parent %>
+    <%= territory.parent&.name %>
   </li>
 <% end %>
 </ul>

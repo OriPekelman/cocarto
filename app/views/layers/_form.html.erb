@@ -2,9 +2,9 @@
   <% if layer.errors.any? %>
     <div id="error_explanation">
       <h2>
-        <%= t('errors.template.header', model: "couche", count: layer.errors.count) %>
+        <%= t("errors.template.header", model: "couche", count: layer.errors.count) %>
       </h2>
-      <p><%= t 'errors.template.body' %></p>
+      <p><%= t "errors.template.body" %></p>
       <ul>
         <% layer.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -21,7 +21,7 @@
   <div class="field radio">
     <h3><%= t :t_geometry_type %></h3>
     <%= form.collection_radio_buttons :geometry_type, Layer.enum_geometry_types.keys, :to_s, :titlecase, disabled: [:linestring, :polygon, :territory], checked: Layer.enum_geometry_types.first  do |b| %>
-      <%= b.label { b.radio_button + b.text} %>
+      <%= b.label { b.radio_button + b.text } %>
     <% end %>
   </div>
 

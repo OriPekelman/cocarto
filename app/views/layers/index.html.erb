@@ -12,9 +12,9 @@
     <% @layers.each do |layer| %>
       <tr>
         <td><%= layer.name %></td>
-        <td><%= link_to t('show'), layer %></td>
-        <td><%= link_to t('edit'), edit_layer_path(layer) %></td>
-        <td><%= button_to t('destroy'), layer, method: :delete %></td>
+        <td><%= link_to t("show"), layer %></td>
+        <td><%= link_to t("edit"), edit_layer_path(layer) %></td>
+        <td><%= button_to t("destroy"), layer, method: :delete %></td>
       </tr>
     <% end %>
   </tbody>
@@ -22,5 +22,5 @@
 
 <br>
 
-<%= link_to t('new_layer'), new_layer_path, class: "layers-title" %>
+<%= link_to t("new_layer"), new_layer_path, class: "layers-title" %>
 </div>
