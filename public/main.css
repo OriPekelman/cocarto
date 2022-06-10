@@ -581,3 +581,8 @@ radio.slim {
 .editable:after {
   content: "🖉";
 }
+
+.map button {
+  margin: 0;
+  border-radius: 0;
+}
