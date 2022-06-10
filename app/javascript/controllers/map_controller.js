@@ -17,6 +17,7 @@ export default class extends Controller {
   initialize () {
     this.markers = new Map()
     this.lastMoveSent = Date.now()
+    this.clickTimer = null
   }
 
   connect () {
@@ -57,11 +58,7 @@ export default class extends Controller {
     this.trackers = new Trackers(this.map)
 
     if (this.editableValue) {
-      this.map.on('click', e => {
-        this.longitudeFieldTarget.value = e.lngLat.lng
-        this.latitudeFieldTarget.value = e.lngLat.lat
-        this.newPointFormTarget.requestSubmit()
-      })
+      this.map.on('click', e => this.#handleClick(e))
 
       this.map.on('mousemove', e => {
         if (Date.now() - this.lastMoveSent > 20) {
@@ -95,5 +92,22 @@ export default class extends Controller {
         })
       }
     })
+  }
+
+  #handleClick (event) {
+    // It is the first click, a second might happen if the user double-clicks
+    if (event.originalEvent.detail === 1) {
+      // We put the submit in a timeout so it can be canceled if it was a doubleclick
+      this.clickTimer = setTimeout(() => {
+        this.longitudeFieldTarget.value = event.lngLat.lng
+        this.latitudeFieldTarget.value = event.lngLat.lat
+        this.newPointFormTarget.requestSubmit()
+      }, 500) // Is there a way to accually know what the double-click delay is?
+    } else if (this.clickTimer !== null) {
+      // Oh! it was a double click. ABORT!
+      // We didn’t want to create a new point
+      clearTimeout(this.clickTimer)
+      this.clickTimer = null
+    }
   }
 }
