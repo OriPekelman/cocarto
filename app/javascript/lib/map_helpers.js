@@ -13,7 +13,7 @@ function new_map(node) {
     compact: false
   })).addControl(new maplibre.NavigationControl({
     showCompass: false,
-  }));
+  })).addControl(new maplibre.ScaleControl());
 }
 
 export { new_map }
