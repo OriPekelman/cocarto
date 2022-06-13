@@ -2,14 +2,8 @@ import maplibre from 'maplibre-gl'
 import { Controller } from '@hotwired/stimulus'
 
 import consumer from "channels/consumer"
-import { new_map } from "lib/map_helpers"
+import { new_map, newMarker } from "lib/map_helpers"
 import Trackers from 'lib/trackers'
-
-function makeMarker (lngLat) {
-  const marker = new maplibre.Marker({draggable: true})
-  marker.setLngLat(lngLat)
-  return marker
-}
 
 export default class extends Controller {
   static targets = ['longitudeField', 'latitudeField', 'newPointForm', 'map', 'point']
@@ -31,7 +25,7 @@ export default class extends Controller {
   }
 
   pointTargetConnected (point) {
-    const marker = makeMarker(point.rowController.getLngLat())
+    const marker = newMarker(point.rowController.getLngLat())
     this.markers.set(point.id, marker)
     marker.on('dragend', () => point.rowController.dragged(marker.getLngLat()))
     if (this.map) {
