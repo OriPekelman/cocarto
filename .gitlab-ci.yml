@@ -21,11 +21,28 @@ variables:
     - bundle config set --local path 'vendor/ruby'
     - bundle install
 
-lint:
+.js:
+  image: node:18
+  cache:
+    key:
+      files:
+        - package-lock.json
+    paths:
+      - node_modules
+  before_script:
+    - npm install
+
+lint-rb:
   extends: .ruby
   stage: test
   script:
-    - make lint
+    - make lint-rb
+
+lint-js:
+  extends: .js
+  stage: test
+  script:
+    - make lint-js
 
 test:
   extends: .ruby
