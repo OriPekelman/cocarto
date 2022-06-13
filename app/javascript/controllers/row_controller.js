@@ -13,13 +13,13 @@ export default class extends Controller {
   }
 
   getLngLat () {
-    return  {
+    return {
       lng: Number(this.longitudeTarget.value),
-      lat: Number(this.latitudeTarget.value),
+      lat: Number(this.latitudeTarget.value)
     }
   }
 
-  dragged ({lng, lat}) {
+  dragged ({ lng, lat }) {
     this.longitudeTarget.value = lng
     this.latitudeTarget.value = lat
     this.formTarget.requestSubmit()
