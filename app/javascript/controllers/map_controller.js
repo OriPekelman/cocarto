@@ -2,15 +2,8 @@ import maplibre from 'maplibre-gl'
 import { Controller } from '@hotwired/stimulus'
 
 import consumer from "channels/consumer"
-import { new_map } from "lib/map_helpers"
+import { new_map, newMarker } from "lib/map_helpers"
 import Trackers from 'lib/trackers'
-
-function marker (point) {
-  const lng = +point.getAttribute('data-lng')
-  const lat = +point.getAttribute('data-lat')
-
-  return new maplibre.Marker().setLngLat({ lng, lat })
-}
 
 export default class extends Controller {
   static targets = ['longitudeField', 'latitudeField', 'newPointForm', 'map', 'point']
@@ -27,12 +20,33 @@ export default class extends Controller {
   }
 
   connect () {
+    this.#initMap()
+    this.#initActionCable()
+  }
 
+  pointTargetConnected (point) {
+    const marker = newMarker(point.rowController.getLngLat())
+    this.markers.set(point.id, marker)
+    marker.on('dragend', () => point.rowController.dragged(marker.getLngLat()))
+    if (this.map) {
+      marker.addTo(this.map)
+    }
+  }
+
+  pointTargetDisconnected (point) {
+    const id = point.id
+    const m = this.markers.get(id)
+    m.remove()
+    this.markers.delete(id)
+  }
+
+  #initMap () {
     this.map = new_map(this.mapTarget)
+    this.markers.forEach(marker => marker.addTo(this.map))
+
     const resizeObserver = new ResizeObserver (( ) => this.map.resize())
     resizeObserver.observe(this.mapTarget)
     this.trackers = new Trackers(this.map)
-    this.markers.forEach(marker => marker.addTo(this.map))
 
     if (this.editableValue){
       this.map.on('click', e => {
@@ -42,20 +56,22 @@ export default class extends Controller {
       })
 
       this.map.on('mousemove', e => {
-        if ( Date.now() - this.lastMoveSent > 20) {
+        if (Date.now() - this.lastMoveSent > 20) {
           this.channel.mouse_moved(e.lngLat)
           this.lastMoveSent = Date.now()
         }
       })
     }
+  }
 
+  #initActionCable() {
     const _this = this
     this.channel = consumer.subscriptions.create({channel: 'SharePositionChannel', layer: this.layerIdValue}, {
       connected() {
-        console.log('connected')
+        console.log('SharePositionChannel connected')
       },
       disconnected() {
-        console.log('disconnected')
+        console.log('SharePositionChannel disconnected')
       },
       received(data) {
         if(data.sessionId !== _this.sessionIdValue) {
@@ -73,19 +89,4 @@ export default class extends Controller {
     });
   }
 
-  pointTargetConnected (point) {
-    const id = point.getAttribute('id')
-    const m = marker(point)
-    this.markers.set(id, m)
-    if (this.map) {
-      m.addTo(this.map)
-    }
-  }
-
-  pointTargetDisconnected (point) {
-    const id = point.getAttribute('id')
-    const m = this.markers.get(id)
-    m.remove()
-    this.markers.delete(id)
-  }
 }
