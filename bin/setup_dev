@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+function linux() {
+  sudo apt install graphviz
+  sudo apt install npm nodejs
+}
+
+function macos() {
+  brew install graphviz
+  brew install npm node
+}
+
+case $(uname -s) in
+    Linux*)     linux;;
+    Darwin*)    macos;;
+    *)          echo "Unknow system '$(uname -s)'"; exit 1
+esac

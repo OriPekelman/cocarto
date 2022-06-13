@@ -5,6 +5,9 @@ install: ## Install or update dependencies
 
 setup: install
 
+setup-dev: ## Install development dependencies
+	bin/setup_dev
+
 setup-pg-users: ## Creates the required postgresql users
 	bin/setup_pg_users
 
@@ -33,4 +36,4 @@ test: ## Run tests
 help: ## Display this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-.PHONY: install setup setup-pg-users dev lint lint-rb lint-js lint_autocorrect test help
+.PHONY: install setup setup-dev setup-pg-users dev lint lint-rb lint-js lint_autocorrect test help
