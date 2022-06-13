@@ -74,10 +74,10 @@ export default class extends Controller {
     const _this = this
     this.channel = consumer.subscriptions.create({channel: 'SharePositionChannel', layer: this.layerIdValue}, {
       connected() {
-        console.log('Cable SharePoisitonChannel connected')
+        console.log('SharePositionChannel connected')
       },
       disconnected() {
-        console.log('Cable SharePoisitonChannel disconnected')
+        console.log('SharePositionChannel disconnected')
       },
       received(data) {
         if(data.sessionId !== _this.sessionIdValue) {
