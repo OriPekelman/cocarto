@@ -1,4 +1,4 @@
-import { new_map } from 'lib/map_helpers'
+import { newMap } from 'lib/map_helpers'
 import { Controller } from '@hotwired/stimulus'
 import maplibre from 'maplibre-gl'
 
@@ -6,7 +6,7 @@ export default class extends Controller {
   static targets = ['map', 'geometry']
 
   connect () {
-    this.map = new_map(this.mapTarget)
+    this.map = newMap(this.mapTarget)
 
     this.bounds = null
 

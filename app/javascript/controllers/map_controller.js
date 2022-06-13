@@ -1,7 +1,8 @@
+/* global ResizeObserver */
 import { Controller } from '@hotwired/stimulus'
 
 import consumer from 'channels/consumer'
-import { new_map, newMarker } from 'lib/map_helpers'
+import { newMap, newMarker } from 'lib/map_helpers'
 import Trackers from 'lib/trackers'
 
 export default class extends Controller {
@@ -40,7 +41,7 @@ export default class extends Controller {
   }
 
   #initMap () {
-    this.map = new_map(this.mapTarget)
+    this.map = newMap(this.mapTarget)
     this.markers.forEach(marker => marker.addTo(this.map))
 
     const resizeObserver = new ResizeObserver(() => this.map.resize())

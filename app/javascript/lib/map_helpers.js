@@ -1,6 +1,6 @@
 import maplibre from 'maplibre-gl'
 
-function new_map (node) {
+function newMap (node) {
   return new maplibre.Map({
     container: node,
     style:
@@ -22,4 +22,4 @@ function newMarker (lngLat) {
   return marker
 }
 
-export { new_map, newMarker }
+export { newMap, newMarker }
