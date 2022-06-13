@@ -12,6 +12,7 @@ gem "activerecord-postgis-adapter"
 gem "rgeo-geojson"
 # Use Puma as the app server
 gem "puma", "~> 5.0"
+gem "pundit"
 gem "propshaft"
 gem "turbo-rails"
 gem "hotwire-rails"

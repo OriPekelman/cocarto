@@ -1,4 +1,7 @@
 class ApplicationController < ActionController::Base
+  # Pundit handles the authorization policies
+  include Pundit::Authorization
+
   around_action :switch_locale
 
   def switch_locale(&action)
