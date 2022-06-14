@@ -25,12 +25,20 @@ export default class extends Controller {
   }
 
   pointTargetConnected (point) {
-    const marker = newMarker(point.rowController.getLngLat())
-    this.markers.set(point.id, marker)
-    marker.on('dragend', () => point.rowController.dragged(marker.getLngLat()))
-    if (this.map) {
-      marker.addTo(this.map)
-    }
+    // We are accessing to the controller of the target
+    // This is not very stimmulus-ish
+    // So we have a bit of a timing problem, that is solved with this promise
+    // https://github.com/hotwired/stimulus/issues/201#issuecomment-435285227
+    Promise.resolve().then(() => {
+      const marker = newMarker(point.rowController.getLngLat())
+      this.markers.set(point.id, marker)
+      marker.on('dragend', () =>
+        point.rowController.dragged(marker.getLngLat())
+      )
+      if (this.map) {
+        marker.addTo(this.map)
+      }
+    })
   }
 
   pointTargetDisconnected (point) {
