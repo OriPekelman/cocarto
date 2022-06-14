@@ -1,15 +1,15 @@
 <%= form_with model: row do |form| %>
-    <%= form.hidden_field :layer_id, value: layer.id %>
-    <%= form.hidden_field :anonymous, value: "true" if anonymous %>
-    <% layer.fields.each do |field| %>
-        <div>
-            <%= form.label field.id, field.label %>
-            <div>
-                <%= form.text_field field.id, value: values[field.id] %>
-            </div>
-        </div>
-    <% end %>
+  <%= form.hidden_field :layer_id, value: layer.id %>
+  <%= form.hidden_field :anonymous, value: "true" if anonymous %>
+  <% layer.fields.each do |field| %>
     <div>
-        <%= form.submit "Sauvegarder" %>
+      <%= form.label field.id, field.label %>
+      <div>
+        <%= form.text_field field.id, value: values[field.id] %>
+      </div>
     </div>
+  <% end %>
+  <div>
+    <%= form.submit "Sauvegarder" %>
+  </div>
 <% end %>

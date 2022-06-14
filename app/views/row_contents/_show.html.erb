@@ -2,11 +2,11 @@
     data-map-target="point"
     data-lng="<%= row_content.point.x %>"
     data-lat="<%= row_content.point.y %>">
-    <% row_content.layer.fields.each do |field| %>
-        <% if field.numerical? %>
-            <td class="numerical"><%= row_content.values[field.id] %></td>
-        <% else %>
-            <td><%= row_content.values[field.id] %></td>
-        <% end %>
+  <% row_content.layer.fields.each do |field| %>
+    <% if field.numerical? %>
+      <td class="numerical"><%= row_content.values[field.id] %></td>
+    <% else %>
+      <td><%= row_content.values[field.id] %></td>
     <% end %>
+  <% end %>
 </tr>
