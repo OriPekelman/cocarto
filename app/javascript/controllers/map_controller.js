@@ -1,7 +1,8 @@
+/* global ResizeObserver */
 import { Controller } from '@hotwired/stimulus'
 
-import consumer from "channels/consumer"
-import { new_map, newMarker } from "lib/map_helpers"
+import consumer from 'channels/consumer'
+import { newMap, newMarker } from 'lib/map_helpers'
 import Trackers from 'lib/trackers'
 
 export default class extends Controller {
@@ -10,7 +11,7 @@ export default class extends Controller {
     editable: Boolean,
     layerId: String,
     sessionId: String,
-    username: String,
+    username: String
   }
 
   initialize () {
@@ -40,14 +41,14 @@ export default class extends Controller {
   }
 
   #initMap () {
-    this.map = new_map(this.mapTarget)
+    this.map = newMap(this.mapTarget)
     this.markers.forEach(marker => marker.addTo(this.map))
 
-    const resizeObserver = new ResizeObserver (( ) => this.map.resize())
+    const resizeObserver = new ResizeObserver(() => this.map.resize())
     resizeObserver.observe(this.mapTarget)
     this.trackers = new Trackers(this.map)
 
-    if (this.editableValue){
+    if (this.editableValue) {
       this.map.on('click', e => {
         this.longitudeFieldTarget.value = e.lngLat.lng
         this.latitudeFieldTarget.value = e.lngLat.lat
@@ -63,29 +64,28 @@ export default class extends Controller {
     }
   }
 
-  #initActionCable() {
+  #initActionCable () {
     const _this = this
-    this.channel = consumer.subscriptions.create({channel: 'SharePositionChannel', layer: this.layerIdValue}, {
-      connected() {
+    this.channel = consumer.subscriptions.create({ channel: 'SharePositionChannel', layer: this.layerIdValue }, {
+      connected () {
         console.log('SharePositionChannel connected')
       },
-      disconnected() {
+      disconnected () {
         console.log('SharePositionChannel disconnected')
       },
-      received(data) {
-        if(data.sessionId !== _this.sessionIdValue) {
+      received (data) {
+        if (data.sessionId !== _this.sessionIdValue) {
           _this.trackers.upsert(data)
         }
       },
-      mouse_moved(lngLat) {
+      mouse_moved (lngLat) {
         return this.perform('mouse_moved', {
           lngLat,
           name: _this.usernameValue,
           sessionId: _this.sessionIdValue,
           layerId: _this.layerIdValue
-        });
-      },
-    });
+        })
+      }
+    })
   }
-
 }
