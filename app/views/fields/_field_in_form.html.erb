@@ -1,3 +1,5 @@
+<%# params: field %>
+
 <td class="field-<%= field.id %> <%= "numerical" if field.numerical? %>">
   <% if field.numerical? %>
     <%= number_field_tag "row_content[#{field.id}]", nil, id: field.id, class: "numerical", value: value, data: {action: "focusout->row#save"}, form: row_id, autocomplete: :off %>
