@@ -1,9 +1,10 @@
 <%# params: @layer, @session_id, @user_name %>
 
 <%= turbo_stream_from @layer %>
+<div class="nav-edit">
 <% content_for :nav do %>
-  <%= render "name", layer: @layer %>
 <% end %>
+</div>
 
 <div
   class="data-with-map"
@@ -15,7 +16,12 @@
   data-map-username-value="<%= @user_name %>">
   <div class="data edit" data-dragbar-target="left">
     <span><%= link_to t("delete_layer"), @layer, data: {turbo_method: :delete, turbo_confirm: t("delete_confirm")}, class: "delete-edit" %></span>
+<<<<<<< HEAD
     <%= render "rows/table", layer: @layer %>
+=======
+    <%= render "name", layer: @layer %>
+    <%= render "row_contents/table", layer: @layer %>
+>>>>>>> style: nav and title of table
     <%= render partial: "tooltip", locals: {layer: @layer} %>
   </div>
   <div class="dragbar" data-dragbar-target="dragbar" data-action="mousedown->dragbar#mousedown"></div>
