@@ -20,7 +20,7 @@
 class Layer < ApplicationRecord
   belongs_to :user
   has_many :fields, dependent: :delete_all
-  has_many :row_contents, dependent: :delete_all
+  has_many :rows, dependent: :delete_all
   enum enum_geometry_type: {point: :point, linestring: :linestring, polygon: :polygon, territory: :territory}
   validates :geometry_type, inclusion: {in: enum_geometry_types.keys}
 

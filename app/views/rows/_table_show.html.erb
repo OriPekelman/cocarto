@@ -9,6 +9,6 @@
   </tr>
   </thead>
   <tbody id="rows-tbody">
-  <%= render partial: "row_contents/show", collection: layer.row_contents.order(:created_at), as: :row_content %>
+  <%= render partial: "rows/show", collection: layer.rows.order(:created_at), as: :row %>
   </tbody>
 </table>

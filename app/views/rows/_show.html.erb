@@ -1,0 +1,14 @@
+<%# params: row %>
+
+<tr id="<%= dom_id(row) %>"
+    data-map-target="point"
+    data-lng="<%= row.point.x %>"
+    data-lat="<%= row.point.y %>">
+  <% row.layer.fields.each do |field| %>
+    <% if field.numerical? %>
+      <td class="numerical"><%= row.values[field.id] %></td>
+    <% else %>
+      <td><%= row.values[field.id] %></td>
+    <% end %>
+  <% end %>
+</tr>

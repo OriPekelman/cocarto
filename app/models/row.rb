@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: row_contents
+# Table name: rows
 #
 #  id         :uuid             not null, primary key
 #  point      :geometry         point, 0
@@ -11,14 +11,14 @@
 #
 # Indexes
 #
-#  index_row_contents_on_layer_id  (layer_id)
+#  index_rows_on_layer_id  (layer_id)
 #
-class RowContent < ApplicationRecord
+class Row < ApplicationRecord
   belongs_to :layer
   after_update_commit -> { broadcast_replace_to layer }
   after_destroy_commit -> { broadcast_remove_to layer }
   after_create_commit -> do
-    broadcast_append_to layer, target: "rows-tbody", partial: "row_contents/row_content", locals: {row_content: self}
+    broadcast_append_to layer, target: "rows-tbody", partial: "rows/row", locals: {row: self}
     broadcast_replace_to layer, target: "tutorial", partial: "layers/tooltip", locals: {layer: layer}
   end
   # Iterates of each field with its data

@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: row_contents
+# Table name: rows
 #
 #  id         :uuid             not null, primary key
 #  point      :geometry         point, 0
@@ -11,7 +11,7 @@
 #
 # Indexes
 #
-#  index_row_contents_on_layer_id  (layer_id)
+#  index_rows_on_layer_id  (layer_id)
 #
 
 one:

@@ -10,8 +10,8 @@ en:
   error_message_field_destroy: Field was successfully destroyed.
   error_message_field_update: Field was successfully updated.
   error_message_layer_destroy: Layer was successfully destroyed.
-  error_message_row_contents_destroy: Geometry was successfully destroyed.
-  error_message_row_contents_update: Geometry properties were successfully updated.
+  error_message_row_destroy: Geometry was successfully destroyed.
+  error_message_row_update: Geometry properties were successfully updated.
   field label: Field name
   field type: Field type
   hello: Hello
