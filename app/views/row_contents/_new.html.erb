@@ -1,3 +1,5 @@
+<%# params: layer %>
+
 <%= form_with model: RowContent.new, data: {"map-target" => "newPointForm"}, class: "is-hidden" do |form| %>
   <%= form.hidden_field :layer_id, value: layer.id %>
   <%= form.hidden_field :longitude, data: {"map-target" => "longitudeField"} %>

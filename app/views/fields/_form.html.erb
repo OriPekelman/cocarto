@@ -1,7 +1,4 @@
-<!--
-params:
-  field
--->
+<%# params: field %>
 
 <%= form_with model: field, data: {action: "dropdown#toggle"} do |form| %>
   <%= form.hidden_field :layer_id %>

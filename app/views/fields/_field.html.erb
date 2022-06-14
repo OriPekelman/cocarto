@@ -1,7 +1,10 @@
+<%# params: field %>
+
 <li id="<%= dom_id(field) %>">
-    <div>
-        <span><%= field.label %> (<%= field.field_type %>)</span>
+  <div>
+    <span><%= field.label %> (<%= field.field_type %>)</span>
     <%= button_to field, method: :delete, form_class: "level-item" do %>
-        <span>delete</span>
+      <span>delete</span>
     <% end %>
+  </div>
 </li>

@@ -1,0 +1,20 @@
+<table>
+  <thead>
+  <tr>
+    <%= render partial: "fields/th", collection: layer.fields, as: :field %>
+    <th id="delete-column" class="row-actions">
+      <div class="dropdown" data-controller="dropdown">
+        <button aria-haspopup="true" aria-controls="dropdown-menu" data-action="click->dropdown#toggle">
+          <span>+</span>
+        </button>
+        <div class="dropdown-content" role="menu">
+          <%= render "fields/form", field: Field.new(layer: layer) %>
+        </div>
+      </div>
+    </th>
+  </tr>
+  </thead>
+  <tbody id="rows-tbody">
+  <%= render layer.row_contents.order(:created_at) %>
+  </tbody>
+</table>

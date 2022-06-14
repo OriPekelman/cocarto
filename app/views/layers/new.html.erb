@@ -1,7 +1,9 @@
+<%# params: @layer %>
+
 <div class="centered-main">
-<h2><%= t :new_layer %></h2>
+  <h2><%= t :new_layer %></h2>
 
-<%= render "form", layer: @layer %>
+  <%= render "form", layer: @layer %>
 
-<%= link_to t("back"), layers_path %>
+  <%= link_to t("back"), layers_path %>
 </div>

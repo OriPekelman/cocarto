@@ -39,6 +39,8 @@ linters:
         Enabled: false
       Style/FrozenStringLiteralComment:
         Enabled: false
+      Style/Semicolon:
+        Enabled: false
       Lint/UselessAssignment:
         Enabled: false
       Rails/OutputSafety:

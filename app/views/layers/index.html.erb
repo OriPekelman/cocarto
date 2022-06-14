@@ -1,14 +1,16 @@
-<div class="centered-main">
-<h2><%= t :layers %></h2>
+<%# params: @layers %>
 
-<table class="layers-table">
-  <thead>
+<div class="centered-main">
+  <h2><%= t :layers %></h2>
+
+  <table class="layers-table">
+    <thead>
     <tr>
       <th colspan="3"></th>
     </tr>
-  </thead>
+    </thead>
 
-  <tbody>
+    <tbody>
     <% @layers.each do |layer| %>
       <tr>
         <td><%= layer.name %></td>
@@ -16,10 +18,10 @@
         <td><%= link_to t("edit"), edit_layer_path(layer) %></td>
       </tr>
     <% end %>
-  </tbody>
-</table>
+    </tbody>
+  </table>
 
-<br>
+  <br>
 
-<%= link_to t("new_layer"), new_layer_path, class: "layers-title" %>
+  <%= link_to t("new_layer"), new_layer_path, class: "layers-title" %>
 </div>
