@@ -312,7 +312,7 @@ td {
 }
 
 .is-hidden {
-  visibility: collapse;
+  display: none;
 }
 
 .row-actions {
