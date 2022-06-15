@@ -32,4 +32,9 @@ class Row < ApplicationRecord
       yield [field, value]
     end
   end
+
+  def polygon_geojson
+    geojson = RGeo::GeoJSON.encode(polygon)
+    JSON.dump(geojson)
+  end
 end

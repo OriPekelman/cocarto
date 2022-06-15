@@ -51,6 +51,14 @@ export default class extends Controller {
     this.markers.delete(id)
   }
 
+  polygonTargetConnected (polygon) {
+    // Same hack as with pointTargetConnected
+    Promise.resolve().then(() => {
+      const geojson = polygon.rowController.geojson()
+      this.draw.add(geojson)
+    })
+  }
+
   #initMap () {
     this.map = newMap(this.mapTarget)
     this.markers.forEach(marker => marker.addTo(this.map))
@@ -119,8 +127,8 @@ export default class extends Controller {
     }
   }
 
-  #initPolygonDraw() {
-    const draw = new MapboxDraw({
+  #initPolygonDraw () {
+    this.draw = new MapboxDraw({
       displayControlsDefault: false,
       // Select which mapbox-gl-draw control buttons to add to the map.
       controls: {
@@ -130,9 +138,9 @@ export default class extends Controller {
       // The user does not have to click the polygon control button first.
       defaultMode: 'draw_polygon'
       });
-    this.map.addControl(draw)
-    this.map.on('draw.create', (e) => {
-      this.polygonFieldTarget.value = JSON.stringify(e.features[0].geometry)
+    this.map.addControl(this.draw)
+    this.map.on('draw.create', ({ features }) => {
+      this.polygonFieldTarget.value = JSON.stringify(features[0].geometry)
       this.newPolygonFormTarget.requestSubmit()
     });
   }
