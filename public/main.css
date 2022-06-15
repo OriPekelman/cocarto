@@ -79,8 +79,8 @@ nav {
   font-family: var(--font-serif);
 }
 
-.nav_edit {
-  height: 20px;
+.second-nav {
+  height: 10px;
   background-color: var(--color-bg-ambient-20);
   display: flex;
   justify-content: space-between;

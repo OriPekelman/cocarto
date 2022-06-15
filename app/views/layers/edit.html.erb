@@ -1,10 +1,8 @@
 <%# params: @layer, @session_id, @user_name %>
 
 <%= turbo_stream_from @layer %>
-<div class="nav-edit">
 <% content_for :nav do %>
 <% end %>
-</div>
 
 <div
   class="data-with-map"
