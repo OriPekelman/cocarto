@@ -1,0 +1,7 @@
+<%# params: layer %>
+
+<%= form_with model: Row.new, data: {"map-target" => "newPolygonForm"}, class: "is-hidden" do |form| %>
+  <%= form.hidden_field :layer_id, value: layer.id %>
+  <%= form.hidden_field :polygon, data: {"map-target" => "polygonField"} %>
+  <%= form.submit %>
+<% end %>

@@ -21,6 +21,6 @@
   </div>
   <div class="dragbar" data-dragbar-target="dragbar" data-action="mousedown->dragbar#mousedown"></div>
   <div class="map" data-map-target="map" data-dragbar-target="right">
-    <%= render "rows/point/new", layer: @layer %>
+    <%= render "rows/#{@layer.geometry_type}/new", layer: @layer %>
   </div>
 </div>

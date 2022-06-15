@@ -15,6 +15,6 @@
   </tr>
   </thead>
   <tbody id="rows-tbody">
-  <%= render partial: "rows/point/edit", collection: layer.rows.order(:created_at), as: :row %>
+  <%= render partial: "rows/#{layer.geometry_type}/edit", collection: layer.rows.order(:created_at), as: :row %>
   </tbody>
 </table>
