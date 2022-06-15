@@ -1,0 +1,6 @@
+filename: doc/domain_model
+indirect: false
+filetype: png
+exclude:
+    - ActiveRecord::SchemaMigration
+    - ActiveRecord::InternalMetadata
