@@ -1,7 +1,7 @@
 class RowsController < ApplicationController
-  before_action :set_layer, only: %i[create new]
   before_action :set_row, only: %i[edit destroy update]
-  before_action :set_point, only: %i[create update]
+  before_action :set_layer, only: %i[create new update]
+  before_action :set_geometry, only: %i[create update]
 
   def new
     @row = @layer.rows.new
@@ -18,11 +18,13 @@ class RowsController < ApplicationController
   def create
     anonymous = params.require(:row)[:annonymous] == "true"
 
-    @row = @layer.rows.create({
+    params = {
       layer: @layer,
-      point: @point,
       values: fields(@layer)
-    })
+    }
+    params[@layer.geometry_type] = @geometry
+
+    @row = @layer.rows.create(params)
 
     if anonymous
       redirect_to action: :edit, id: @row
@@ -43,7 +45,7 @@ class RowsController < ApplicationController
   end
 
   def update
-    @row.update(values: fields(@row.layer), point: @point)
+    @row.update(values: fields(@row.layer), point: @geometry)
     respond_to do |format|
       format.turbo_stream
       format.html { redirect_to @row.layer, notice: t("error_message_row_update") }
@@ -69,12 +71,16 @@ class RowsController < ApplicationController
   end
 
   def set_layer
-    layer_id = params[:layer_id] || params[:row][:layer_id]
+    layer_id = @row&.layer_id || params[:layer_id] || params[:row][:layer_id]
     @layer = current_user.layers.includes(:fields).find(layer_id)
   end
 
-  def set_point
-    point = params.require(:row).permit(:longitude, :latitude, :layer_id, :anonymous)
-    @point = RGEO_FACTORY.point(point[:longitude], point[:latitude])
+  def set_geometry
+    if @layer.geometry_type == "point"
+      point = params.require(:row).permit(:longitude, :latitude)
+      @geometry = RGEO_FACTORY.point(point[:longitude], point[:latitude])
+    else
+      logger.error("Unsupported geometry type #{@layer.geometry_type}")
+    end
   end
 end
