@@ -25,9 +25,9 @@ class Field < ApplicationRecord
   after_create_commit -> do
     broadcast_append_to layer, target: "fields"
     broadcast_before_to layer, target: "delete-column", partial: "fields/th"
-    layer.row_contents.each do |row_content|
-      target = [row_content.id, "action"].join("-")
-      broadcast_before_to layer, target: target, partial: "fields/field_in_form", locals: {field: self, row_id: row_content.id, value: nil}
+    layer.rows.each do |row|
+      target = [row.id, "action"].join("-")
+      broadcast_before_to layer, target: target, partial: "fields/field_in_form", locals: {field: self, row_id: row.id, value: nil}
       broadcast_replace_to layer, target: "tutorial", partial: "layers/tooltip", locals: {layer: layer}
     end
   end

@@ -17,7 +17,7 @@ class FieldsController < ApplicationController
   end
 
   def create
-    @layer = current_user.layers.includes(:row_contents).find(field_params[:layer_id])
+    @layer = current_user.layers.includes(:rows).find(field_params[:layer_id])
     @field = @layer.fields.new(field_params)
 
     if @field.save

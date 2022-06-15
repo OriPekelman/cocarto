@@ -15,11 +15,11 @@
   data-map-username-value="<%= @user_name %>">
   <div class="data edit" data-dragbar-target="left">
     <span><%= link_to t("delete_layer"), @layer, data: {turbo_method: :delete, turbo_confirm: t("delete_confirm")}, class: "delete-edit" %></span>
-    <%= render "row_contents/table", layer: @layer %>
+    <%= render "rows/table", layer: @layer %>
     <%= render partial: "tooltip", locals: {layer: @layer} %>
   </div>
   <div class="dragbar" data-dragbar-target="dragbar" data-action="mousedown->dragbar#mousedown"></div>
   <div class="map" data-map-target="map" data-dragbar-target="right">
-    <%= render "row_contents/new", layer: @layer %>
+    <%= render "rows/new", layer: @layer %>
   </div>
 </div>

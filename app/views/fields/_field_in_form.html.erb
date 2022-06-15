@@ -2,10 +2,10 @@
 
 <td class="field-<%= field.id %> <%= "numerical" if field.numerical? %>">
   <% if field.numerical? %>
-    <%= number_field_tag "row_content[#{field.id}]", nil, id: field.id, class: "numerical", value: value, data: {action: "focusout->row#save"}, form: row_id, autocomplete: :off %>
+    <%= number_field_tag "row[#{field.id}]", nil, id: field.id, class: "numerical", value: value, data: {action: "focusout->row#save"}, form: row_id, autocomplete: :off %>
   <% elsif field.field_type == "territory" %>
     <%= render partial: "territories/search_form", locals: {field_id: field.id, value: value, row_id: row_id} %>
   <% else %>
-    <%= text_field_tag "row_content[#{field.id}]", nil, id: field.id, class: "input", value: value, data: {action: "focusout->row#save"}, form: row_id, autocomplete: :off %>
+    <%= text_field_tag "row[#{field.id}]", nil, id: field.id, class: "input", value: value, data: {action: "focusout->row#save"}, form: row_id, autocomplete: :off %>
   <% end %>
 </td>

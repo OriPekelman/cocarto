@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   scope "(:locale)", locale: /en|fr/ do
     resources :layers
     resources :fields
-    resources :row_contents
+    resources :rows
     resources :territory_categories
     resources :territories do
       collection do
