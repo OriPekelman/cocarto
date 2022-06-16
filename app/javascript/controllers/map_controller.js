@@ -151,6 +151,9 @@ export default class extends Controller {
     this.map.on('draw.create', ({ features }) => {
       this.polygonFieldTarget.value = JSON.stringify(features[0].geometry)
       this.newPolygonFormTarget.requestSubmit()
+      // When we submit the drawn polygon, we get one back from the server through turbo
+      // So we remove the one we’ve just drawn
+      this.draw.delete(features[0].id)
     })
     this.map.on('draw.update', ({ features }) => {
       const id = features[0].id
