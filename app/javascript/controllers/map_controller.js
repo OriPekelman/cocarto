@@ -55,8 +55,18 @@ export default class extends Controller {
     // Same hack as with pointTargetConnected
     Promise.resolve().then(() => {
       const geojson = polygon.rowController.geojson()
-      this.draw.add(geojson)
+      const feature = {
+        id: polygon.id,
+        type: 'Feature',
+        properties: {},
+        geometry: geojson,
+      };
+      this.draw.add(feature)
     })
+  }
+
+  polygonTargetDisconnected (polygon) {
+    this.draw.delete(polygon.id)
   }
 
   #initMap () {
