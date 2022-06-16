@@ -58,9 +58,8 @@ export default class extends Controller {
       const feature = {
         id: polygon.id,
         type: 'Feature',
-        properties: {},
-        geometry: geojson,
-      };
+        geometry: geojson
+      }
       this.draw.add(feature)
     })
   }
@@ -142,16 +141,21 @@ export default class extends Controller {
       displayControlsDefault: false,
       // Select which mapbox-gl-draw control buttons to add to the map.
       controls: {
-      polygon: true,
+        polygon: true
       },
       // Set mapbox-gl-draw to draw by default.
       // The user does not have to click the polygon control button first.
       defaultMode: 'draw_polygon'
-      });
+    })
     this.map.addControl(this.draw)
     this.map.on('draw.create', ({ features }) => {
       this.polygonFieldTarget.value = JSON.stringify(features[0].geometry)
       this.newPolygonFormTarget.requestSubmit()
-    });
+    })
+    this.map.on('draw.update', ({ features }) => {
+      const id = features[0].id
+      const polygon = document.getElementById(id)
+      polygon.rowController.updatePolygon(features[0].geometry)
+    })
   }
 }

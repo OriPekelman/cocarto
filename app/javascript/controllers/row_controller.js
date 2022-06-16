@@ -28,4 +28,9 @@ export default class extends Controller {
     this.latitudeTarget.value = lat
     this.formTarget.requestSubmit()
   }
+
+  updatePolygon (geojson) {
+    this.polygonTarget.value = JSON.stringify(geojson)
+    this.formTarget.requestSubmit()
+  }
 }

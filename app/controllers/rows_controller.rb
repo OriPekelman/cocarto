@@ -45,7 +45,12 @@ class RowsController < ApplicationController
   end
 
   def update
-    @row.update(values: fields(@row.layer), point: @geometry)
+    params = {
+      values: fields(@row.layer)
+    }
+    params[@row.layer.geometry_type] = @geometry
+
+    @row.update(params)
     respond_to do |format|
       format.turbo_stream
       format.html { redirect_to @row.layer, notice: t("error_message_row_update") }
