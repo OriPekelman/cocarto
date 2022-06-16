@@ -154,6 +154,14 @@ span:active {
   margin-top: 1em;
 }
 
+.dropdown.is-active::after {
+  content: "^";
+}
+
+.dropdown:not(.is-active)::after{
+  content: "v";
+}
+
 .header-subs-app {
   background-color: var(--color-green-20);
   color: var(--color-green-80);
