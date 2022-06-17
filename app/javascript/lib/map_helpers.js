@@ -4,7 +4,7 @@ function newMap (node) {
   return new maplibre.Map({
     container: node,
     style:
-      'https://api.maptiler.com/maps/basic/style.json?key=rF1iMNeNc3Eh3ES7Ke8H',
+      'https://api.maptiler.com/maps/74282552-6648-4800-9768-d62dac64839e/style.json?key=rF1iMNeNc3Eh3ES7Ke8H',
     center: [0, 0],
     zoom: 1,
     attributionControl: false
