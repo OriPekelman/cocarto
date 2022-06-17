@@ -25,4 +25,20 @@ class Layer < ApplicationRecord
   validates :geometry_type, inclusion: {in: enum_geometry_types.keys}
 
   after_update_commit -> { broadcast_replace_to self, target: "layer-header", partial: "layers/name" }
+
+  def geojson
+    {
+      type: "FeatureCollection",
+      properties: {
+        layer_name: name
+      },
+      features: rows.map { |row|
+        {
+          type: "Feature",
+          properties: row.human_readable_fields,
+          geometry: row.geojson
+        }
+      }
+    }
+  end
 end

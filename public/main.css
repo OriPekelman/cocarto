@@ -603,25 +603,19 @@ h2 .editable{
   border-color: var(--color-grey-30);
 }
 
-.maplibregl-ctrl-group {
+.layer-toolbar {
+  font-size: 12px;
   display: flex;
-  flex-direction: row-reverse;
-  border-style: double;
-  border-color: var(--color-grey-50);
-  border-width: 2px;
-}
-.maplibregl-ctrl-zoom-out.mapboxgl-ctrl-zoom-out {
-  border: none;
-}
-
-.mapboxgl-ctrl-group:not(:empty),
-.maplibregl-ctrl-group:not(:empty) {
-  box-shadow: none;
+  justify-content: flex-end;
+  gap: 1em;
+  margin-right: 3em;
+  margin-top: 2em;
+  margin-bottom: 3em;
 }
 
  .delete-edit {
   margin-right: 2em;
-} 
+}
 
 .layer-edit {
   margin-left: 3em;

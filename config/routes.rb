@@ -13,7 +13,6 @@ Rails.application.routes.draw do
         post "search"
       end
     end
-    get "/layers/:id/schema" => "layers#schema"
     get "/:locale" => "dashboard#index"
   end
 end

@@ -12,4 +12,6 @@ class LayerPolicy < ApplicationPolicy
   def destroy? = user_owns_record
 
   def schema? = user_owns_record
+
+  def geojson? = user_owns_record
 end

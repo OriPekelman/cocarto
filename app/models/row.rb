@@ -22,6 +22,7 @@ class Row < ApplicationRecord
     broadcast_append_to layer, target: "rows-tbody", partial: "rows/#{layer.geometry_type}/edit", locals: {row: self}
     broadcast_replace_to layer, target: "tutorial", partial: "layers/tooltip", locals: {layer: layer}
   end
+
   # Iterates of each field with its data
   def data
     layer.fields.each do |field|
@@ -33,8 +34,19 @@ class Row < ApplicationRecord
     end
   end
 
-  def polygon_geojson
-    geojson = RGeo::GeoJSON.encode(polygon)
-    JSON.dump(geojson)
+  def geojson
+    if layer.geometry_type == "point"
+      RGeo::GeoJSON.encode(point)
+    elsif layer.geometry_type == "line"
+      RGeo::GeoJSON.encode(line)
+    elsif layer.geometry_type == "polygon"
+      RGeo::GeoJSON.encode(polygon)
+    else
+      logger.error("Can not convert to geojson row of type #{layer.geometry_type}")
+    end
+  end
+
+  def human_readable_fields
+    layer.fields.map { |field| [field.label, values[field.id]] }.to_h
   end
 end

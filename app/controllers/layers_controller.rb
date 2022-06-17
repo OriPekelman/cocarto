@@ -1,7 +1,7 @@
 require "securerandom"
 
 class LayersController < ApplicationController
-  before_action :set_layer, only: %i[show edit update destroy schema]
+  before_action :set_layer, only: %i[show edit update destroy schema geojson]
   before_action :set_user_name
   before_action :authenticate_user!
 
@@ -56,6 +56,10 @@ class LayersController < ApplicationController
       type: :object,
       properties: properties
     }.to_json
+  end
+
+  def geojson
+    send_data @layer.geojson.to_json, filename: "#{@layer.name}.geojson", type: "application/geo+json"
   end
 
   private
