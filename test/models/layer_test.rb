@@ -25,7 +25,7 @@ class LayerTest < ActiveSupport::TestCase
       Layer.create! geometry_type: :point, user: users(:reclus)
     end
 
-    assert_equal -1, users(:cassini).layers.count
+    assert_equal 1, users(:cassini).layers.count
   end
 
   test "a layer needs a geometry type" do
