@@ -37,4 +37,13 @@ class LayerTest < ActiveSupport::TestCase
     a = Layer.new geometry_type: :hypercube
     assert_raises(ActiveRecord::RecordInvalid) { a.save! }
   end
+
+  test "we can do a geojson export of a layer" do
+    restaurants = layers(:restaurants)
+    geojson = restaurants.geojson
+    assert_equal "Restaurants", geojson[:properties][:layer_name]
+    point = geojson[:features][0][:geometry]
+    assert_equal "Point", point["type"]
+    assert_in_delta 2.375, point["coordinates"][0]
+  end
 end
