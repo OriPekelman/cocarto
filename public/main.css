@@ -607,3 +607,12 @@ radio.slim {
 .maplibregl-ctrl-group:not(:empty) {
   box-shadow: none;
 }
+
+.delete-edit {
+  font-size: 12px;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 3em;
+  margin-top: 2em;
+  margin-bottom: 3em;
+}
