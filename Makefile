@@ -14,7 +14,7 @@ setup-pg-users: ## Creates the required postgresql users
 dev: ## Start the app server for development purpose
 	bin/dev
 
-lint-rb: ## Run all the linters
+lint-rb: ## Run ruby linters
 	bundle exec rubocop
 	bundle exec erblint --lint-all
 	bundle exec i18n-tasks health
@@ -22,7 +22,7 @@ lint-rb: ## Run all the linters
 lint-js: ## Run javascript linters
 	npx standard
 
-lint: lint-rb lint-js
+lint: lint-rb lint-js ## Run all linters
 
 lint_autocorrect: ## Run linters in autocorrect mode
 	bundle exec rubocop --auto-correct-all
