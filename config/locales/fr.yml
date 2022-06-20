@@ -22,6 +22,7 @@ fr:
   layers: Couches
   new field created: Nouvel attribut %{name} créé
   new_layer: Nouvelle couche
+  not_authorized: Vous n’avez pas les droits pour effectuer cette action.
   part of territory: Part of territory
   show: Voir
   sign_in: connexion

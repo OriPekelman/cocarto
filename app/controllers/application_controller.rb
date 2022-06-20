@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
   # Pundit handles the authorization policies
   include Pundit::Authorization
 
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
   around_action :switch_locale
 
   def switch_locale(&action)
@@ -15,5 +17,10 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource_or_scope)
     layers_path
+  end
+
+  def user_not_authorized
+    flash[:alert] = t :not_authorized
+    redirect_back(fallback_location: root_path)
   end
 end

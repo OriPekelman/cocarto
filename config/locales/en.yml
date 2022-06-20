@@ -22,6 +22,7 @@ en:
   layers: Layers
   new field created: New field %{name} created
   new_layer: New Layer
+  not_authorized: You are not authorized to perform this action.
   part of territory: Part of territory
   show: Show
   sign_in: Log in
