@@ -592,7 +592,7 @@ radio.slim {
   border-color: var(--color-grey-30);
 }
 
-.zoom-in-out-group {
+.maplibregl-ctrl-group {
   display: flex;
   flex-direction: row-reverse;
   border-style: double;
