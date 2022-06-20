@@ -28,11 +28,12 @@
       <div class="dropdown-content-app">
         <%= link_to "Préférences", edit_user_registration_url %>
       <%= button_to t(:sign_out), destroy_user_session_path, method: :delete, class: "header-subs-app" %>
+      </div>
+    </div>
     <% else %>
       <%= link_to t(:sign_in), new_user_session_path, class: "header-login" %>
       <%= link_to t(:sign_up), new_user_registration_path, class: "header-subs" %>
     <% end %>
-    </div>
   </div>
 </nav>
 <main>
