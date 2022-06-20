@@ -37,6 +37,15 @@ lint-rb:
   stage: test
   script:
     - make lint-rb
+  variables:
+    RUBOCOP_OPTS: "--format junit --out /builds/CodeursEnLiberte/gxis/tmp/rubocop.xml"
+  artifacts:
+    paths:
+      - /builds/CodeursEnLiberte/gxis/tmp/rubocop.xml
+    when: always
+    reports:
+      junit:
+        - /builds/CodeursEnLiberte/gxis/tmp/rubocop.xml
 
 lint-js:
   extends: .js
