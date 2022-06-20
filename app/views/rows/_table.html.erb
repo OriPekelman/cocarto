@@ -15,6 +15,6 @@
   </tr>
   </thead>
   <tbody id="rows-tbody">
-  <%= render layer.rows.order(:created_at) %>
+  <%= render partial: "rows/point/edit", collection: layer.rows.order(:created_at), as: :row %>
   </tbody>
 </table>

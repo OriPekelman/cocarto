@@ -2,8 +2,9 @@
 
 <tr id="<%= dom_id(row) %>"
     data-map-target="point"
-    data-lng="<%= row.point.x %>"
-    data-lat="<%= row.point.y %>">
+    data-controller="row">
+  <%= hidden_field_tag "longitude", row.point.x, data: {"row-target": "longitude"} %>
+  <%= hidden_field_tag "latitude", row.point.y, data: {"row-target": "latitude"} %>
   <% row.layer.fields.each do |field| %>
     <% if field.numerical? %>
       <td class="numerical"><%= row.values[field.id] %></td>
