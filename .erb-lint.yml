@@ -5,11 +5,6 @@ exclude:
 linters:
   PartialInstanceVariable:
     enabled: true
-    exclude:
-      # needed until https://github.com/Shopify/erb-lint/pull/235 is merged and released
-      - '**/app/views/devise/mailer/*.html.erb'
-      - '**/app/views/territory_categories/index.html.erb'
-      - '**/app/views/territory_categories/show.html.erb'
   DeprecatedClasses:
     enabled: true
   ErbSafety:
