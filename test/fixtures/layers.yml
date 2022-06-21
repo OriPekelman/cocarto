@@ -18,10 +18,11 @@
 #  fk_rails_...  (user_id => users.id)
 #
 
-one:
-  name: MyString
+restaurants:
+  name: Restaurants
   user: reclus
+  geometry_type: 'point'
 
-two:
-  name: MyString
+hiking:
+  name: hiking path
   user: cassini

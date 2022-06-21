@@ -25,4 +25,8 @@ class Layer < ApplicationRecord
   validates :geometry_type, inclusion: {in: enum_geometry_types.keys}
 
   after_update_commit -> { broadcast_replace_to self, target: "layer-header", partial: "layers/name" }
+
+  def geo_feature_collection
+    RGeo::GeoJSON::FeatureCollection.new(rows.map(&:geo_feature))
+  end
 end

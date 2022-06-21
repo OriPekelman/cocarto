@@ -7,6 +7,7 @@ en:
   current layer: Current layer
   delete_confirm: Are you sure?
   delete_layer: Delete this layer
+  download_as_geojson: Download as GeoJSON
   edit: Edit
   error_message_field_destroy: Field was successfully destroyed.
   error_message_field_update: Field was successfully updated.
@@ -21,6 +22,7 @@ en:
   layers: Layers
   new field created: New field %{name} created
   new_layer: New Layer
+  not_authorized: You are not authorized to perform this action.
   part of territory: Part of territory
   show: Show
   sign_in: Log in

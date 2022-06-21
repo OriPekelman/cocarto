@@ -4,7 +4,13 @@ Rails.application.routes.draw do
   root "main#index"
 
   scope "(:locale)", locale: /en|fr/ do
-    resources :layers
+    resources :layers do
+      member do
+        get :schema
+        get :geojson
+      end
+    end
+
     resources :fields
     resources :rows
     resources :territory_categories
@@ -13,7 +19,6 @@ Rails.application.routes.draw do
         post "search"
       end
     end
-    get "/layers/:id/schema" => "layers#schema"
     get "/:locale" => "dashboard#index"
   end
 end

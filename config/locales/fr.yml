@@ -7,6 +7,7 @@ fr:
   current layer: Couche courante
   delete_confirm: Êtes-vous sûr ?
   delete_layer: Supprimer cette couche
+  download_as_geojson: Télécharger en GeoJSON
   edit: Éditer
   error_message_field_destroy: Le champ a été détruit avec succès.
   error_message_field_update: Le champ a été mis à jour avec succès.
@@ -21,6 +22,7 @@ fr:
   layers: Couches
   new field created: Nouvel attribut %{name} créé
   new_layer: Nouvelle couche
+  not_authorized: Vous n’avez pas les droits pour effectuer cette action.
   part of territory: Part of territory
   show: Voir
   sign_in: connexion

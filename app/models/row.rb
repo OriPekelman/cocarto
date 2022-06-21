@@ -22,6 +22,7 @@ class Row < ApplicationRecord
     broadcast_append_to layer, target: "rows-tbody", partial: "rows/#{layer.geometry_type}/edit", locals: {row: self}
     broadcast_replace_to layer, target: "tutorial", partial: "layers/tooltip", locals: {layer: layer}
   end
+
   # Iterates of each field with its data
   def data
     layer.fields.each do |field|
@@ -33,8 +34,24 @@ class Row < ApplicationRecord
     end
   end
 
-  def polygon_geojson
-    geojson = RGeo::GeoJSON.encode(polygon)
-    JSON.dump(geojson)
+  def geo_feature
+    RGeo::GeoJSON::Feature.new(geometry, nil, geo_properties)
+  end
+
+  def geometry
+    case layer.geometry_type
+    when "point"
+      point
+    when "line"
+      line
+    when "polygon"
+      polygon
+    else
+      logger.error("Unknown geometry type #{layer.geometry_type}")
+    end
+  end
+
+  def geo_properties
+    layer.fields.map { |field| [field.label, values[field.id]] }.to_h
   end
 end

@@ -16,9 +16,9 @@
 #
 
 one:
-  layer: one
-  values:
+  layer: restaurants
+  point: POINT(2.37516 48.88661)
 
 two:
-  layer: two
+  layer: hiking
   values:

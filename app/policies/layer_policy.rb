@@ -1,6 +1,6 @@
 class LayerPolicy < ApplicationPolicy
   def user_owns_record
-    record.user_id == user.id
+    record.user_id == user&.id
   end
 
   def show? = user_owns_record
@@ -12,4 +12,6 @@ class LayerPolicy < ApplicationPolicy
   def destroy? = user_owns_record
 
   def schema? = user_owns_record
+
+  def geojson? = user_owns_record
 end
