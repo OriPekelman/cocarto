@@ -4,7 +4,6 @@ en:
   back: Back
   call to add a field: Click on the + to add a data column to your data
   click on map for more content: Click on the map to add a new data point
-  current layer: Current layer
   delete_confirm: Are you sure?
   delete_layer: Delete this layer
   download_as_geojson: Download as GeoJSON
