@@ -628,8 +628,6 @@ h2 .editable{
   font-size: 12px;
   color: var(--color-green-70);
 }
-<<<<<<< HEAD
-=======
 
 .layer-name-edit{
   margin-left: 5em;
@@ -638,4 +636,3 @@ h2 .editable{
   color: var(--color-grey-90);
   margin-top: 3em;
 }
->>>>>>> add some css to layer_name and others ...
