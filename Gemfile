@@ -62,6 +62,7 @@ end
 group :test do
   # Cuprite is used for system tests (to pilot chrome driver)
   gem "cuprite"
+  gem "minitest-reporters"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

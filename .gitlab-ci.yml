@@ -44,7 +44,26 @@ lint-js:
   script:
     - make lint-js
 
-test:
+test-unit:
+  extends: .ruby
+  stage: test
+  services:
+    - postgis/postgis:latest
+  script:
+    - bundle exec rails db:setup
+    - make test-unit
+  variables:
+    MINITEST_REPORTER: JUnitReporter
+    MINITEST_REPORTERS_REPORTS_DIR: test-unit
+  artifacts:
+    paths:
+    - test-unit/*.xml
+    when: always
+    reports:
+      junit:
+      - test-unit/*.xml
+
+test-system:
   extends: .ruby
   stage: test
   services:
@@ -52,16 +71,21 @@ test:
     - browserless/chrome:latest
   script:
     - bundle exec rails db:setup
-    - make test
+    - make test-system
   variables:
     # This is needed so that chrome can access to rails server
     FF_NETWORK_PER_BUILD: 1
-  # We always save the screenshots to help the debugs
+    MINITEST_REPORTER: JUnitReporter
+    MINITEST_REPORTERS_REPORTS_DIR: test-system
   artifacts:
     paths:
-    - /builds/CodeursEnLiberte/gxis/tmp/screenshots
+      - test-system/*.xml
+      # We always save the screenshots to help the debugs
+      - tmp/screenshots/*
     when: always
-    expire_in: 1 week
+    reports:
+      junit:
+        - test-system/*.xml
 
 # Security testing (see https://gitlab.com/CodeursEnLiberte/gxis/-/security/dashboard)
 include:

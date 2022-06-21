@@ -29,8 +29,12 @@ lint_autocorrect: ## Run linters in autocorrect mode
 	bundle exec erblint --lint-all --autocorrect
 	npx standard --fix
 
-test: ## Run tests
+test: test-unit test-system ## Run all tests
+
+test-unit: ## Run unit tests
 	bin/rails test
+
+test-system: ## Run system tests
 	bin/rails test:system
 
 help: ## Display this help
