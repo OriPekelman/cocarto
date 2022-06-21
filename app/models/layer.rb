@@ -26,19 +26,7 @@ class Layer < ApplicationRecord
 
   after_update_commit -> { broadcast_replace_to self, target: "layer-header", partial: "layers/name" }
 
-  def geojson
-    {
-      type: "FeatureCollection",
-      properties: {
-        layer_name: name
-      },
-      features: rows.map { |row|
-        {
-          type: "Feature",
-          properties: row.human_readable_fields,
-          geometry: row.geojson
-        }
-      }
-    }
+  def geo_feature_collection
+    RGeo::GeoJSON::FeatureCollection.new(rows.map(&:geo_feature))
   end
 end

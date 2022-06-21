@@ -34,19 +34,24 @@ class Row < ApplicationRecord
     end
   end
 
-  def geojson
-    if layer.geometry_type == "point"
-      RGeo::GeoJSON.encode(point)
-    elsif layer.geometry_type == "line"
-      RGeo::GeoJSON.encode(line)
-    elsif layer.geometry_type == "polygon"
-      RGeo::GeoJSON.encode(polygon)
+  def geo_feature
+    RGeo::GeoJSON::Feature.new(geometry, nil, geo_properties)
+  end
+
+  def geometry
+    case layer.geometry_type
+    when "point"
+      point
+    when "line"
+      line
+    when "polygon"
+      polygon
     else
-      logger.error("Can not convert to geojson row of type #{layer.geometry_type}")
+      logger.error("Unknown geometry type #{layer.geometry_type}")
     end
   end
 
-  def human_readable_fields
+  def geo_properties
     layer.fields.map { |field| [field.label, values[field.id]] }.to_h
   end
 end

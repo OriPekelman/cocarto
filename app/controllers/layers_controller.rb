@@ -59,7 +59,7 @@ class LayersController < ApplicationController
   end
 
   def geojson
-    send_data @layer.geojson.to_json, filename: "#{@layer.name}.geojson", type: "application/geo+json"
+    send_data RGeo::GeoJSON.encode(@layer.geo_feature_collection).to_json, filename: "#{@layer.name}.geojson", type: "application/geo+json"
   end
 
   private
