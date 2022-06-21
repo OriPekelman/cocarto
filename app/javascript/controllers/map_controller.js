@@ -4,14 +4,16 @@ import { Controller } from '@hotwired/stimulus'
 import consumer from 'channels/consumer'
 import { newMap, newMarker } from 'lib/map_helpers'
 import Trackers from 'lib/trackers'
+import MapboxDraw from '@mapbox/mapbox-gl-draw'
 
 export default class extends Controller {
-  static targets = ['longitudeField', 'latitudeField', 'newPointForm', 'map', 'point']
+  static targets = ['longitudeField', 'latitudeField', 'polygonField', 'newPolygonForm', 'newPointForm', 'map', 'point']
   static values = {
     editable: Boolean,
     layerId: String,
     sessionId: String,
-    username: String
+    username: String,
+    geometryType: String
   }
 
   initialize () {
@@ -49,6 +51,23 @@ export default class extends Controller {
     this.markers.delete(id)
   }
 
+  polygonTargetConnected (polygon) {
+    // Same hack as with pointTargetConnected
+    Promise.resolve().then(() => {
+      const geojson = polygon.rowController.geojson()
+      const feature = {
+        id: polygon.id,
+        type: 'Feature',
+        geometry: geojson
+      }
+      this.draw.add(feature)
+    })
+  }
+
+  polygonTargetDisconnected (polygon) {
+    this.draw.delete(polygon.id)
+  }
+
   #initMap () {
     this.map = newMap(this.mapTarget)
     this.markers.forEach(marker => marker.addTo(this.map))
@@ -58,7 +77,13 @@ export default class extends Controller {
     this.trackers = new Trackers(this.map)
 
     if (this.editableValue) {
-      this.map.on('click', e => this.#handleClick(e))
+      if (this.geometryTypeValue === 'point') {
+        this.map.on('click', e => this.#handleClick(e))
+      } else if (this.geometryTypeValue === 'polygon') {
+        this.#initPolygonDraw()
+      } else {
+        console.error('Unknown geometry type', this.geometryTypeValue)
+      }
 
       this.map.on('mousemove', e => {
         if (Date.now() - this.lastMoveSent > 20) {
@@ -109,5 +134,31 @@ export default class extends Controller {
       clearTimeout(this.clickTimer)
       this.clickTimer = null
     }
+  }
+
+  #initPolygonDraw () {
+    this.draw = new MapboxDraw({
+      displayControlsDefault: false,
+      // Select which mapbox-gl-draw control buttons to add to the map.
+      controls: {
+        polygon: true
+      },
+      // Set mapbox-gl-draw to draw by default.
+      // The user does not have to click the polygon control button first.
+      defaultMode: 'draw_polygon'
+    })
+    this.map.addControl(this.draw)
+    this.map.on('draw.create', ({ features }) => {
+      this.polygonFieldTarget.value = JSON.stringify(features[0].geometry)
+      this.newPolygonFormTarget.requestSubmit()
+      // When we submit the drawn polygon, we get one back from the server through turbo
+      // So we remove the one we’ve just drawn
+      this.draw.delete(features[0].id)
+    })
+    this.map.on('draw.update', ({ features }) => {
+      const id = features[0].id
+      const polygon = document.getElementById(id)
+      polygon.rowController.updatePolygon(features[0].geometry)
+    })
   }
 }

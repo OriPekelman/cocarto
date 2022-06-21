@@ -4,6 +4,7 @@
 #
 #  id         :uuid             not null, primary key
 #  point      :geometry         point, 0
+#  polygon    :geometry         polygon, 4326
 #  values     :jsonb
 #  created_at :datetime         not null
 #  updated_at :datetime         not null

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_16_144101) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_16_163156) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -55,6 +55,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_16_144101) do
     t.geometry "point", limit: {:srid=>0, :type=>"st_point"}
     t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.geometry "polygon", limit: {:srid=>4326, :type=>"st_polygon"}
     t.index ["layer_id"], name: "index_rows_on_layer_id"
   end
 

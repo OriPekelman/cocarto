@@ -1,0 +1,20 @@
+<%# params: row %>
+
+<tr id="<%= dom_id(row) %>"
+    data-map-target="polygon"
+    data-controller="row">
+  <% row.data do |field, value| %>
+    <%= render partial: "fields/field_in_form", locals: {field: field, value: value, row_id: row.id} %>
+  <% end %>
+  <td id="<%= row.id %>-action">
+    <div class="actions">
+      <%= form_with method: :patch, model: row, id: row.id, data: {"row-target": "form", action: "row#save"} do |form| %>
+        <%= form.hidden_field "polygon", value: row.polygon_geojson, data: {"row-target": "polygon"} %>
+        <%= form.button "save", class: "is-hidden" %>
+      <% end %>
+      <%= button_to row, method: :delete do %>
+        Delete
+      <% end %>
+    </div>
+  </td>
+</tr>

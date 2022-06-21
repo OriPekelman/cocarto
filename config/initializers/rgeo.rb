@@ -1,1 +1,1 @@
-RGEO_FACTORY = RGeo::Geographic.spherical_factory
+RGEO_FACTORY = RGeo::Geographic.spherical_factory(srid: 4326)

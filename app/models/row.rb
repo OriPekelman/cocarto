@@ -4,6 +4,7 @@
 #
 #  id         :uuid             not null, primary key
 #  point      :geometry         point, 0
+#  polygon    :geometry         polygon, 4326
 #  values     :jsonb
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -15,10 +16,10 @@
 #
 class Row < ApplicationRecord
   belongs_to :layer
-  after_update_commit -> { broadcast_replace_to layer, partial: "rows/point/edit", locals: {row: self} }
+  after_update_commit -> { broadcast_replace_to layer, partial: "rows/#{layer.geometry_type}/edit", locals: {row: self} }
   after_destroy_commit -> { broadcast_remove_to layer }
   after_create_commit -> do
-    broadcast_append_to layer, target: "rows-tbody", partial: "rows/point/edit", locals: {row: self}
+    broadcast_append_to layer, target: "rows-tbody", partial: "rows/#{layer.geometry_type}/edit", locals: {row: self}
     broadcast_replace_to layer, target: "tutorial", partial: "layers/tooltip", locals: {layer: layer}
   end
   # Iterates of each field with its data
@@ -30,5 +31,10 @@ class Row < ApplicationRecord
       end
       yield [field, value]
     end
+  end
+
+  def polygon_geojson
+    geojson = RGeo::GeoJSON.encode(polygon)
+    JSON.dump(geojson)
   end
 end
