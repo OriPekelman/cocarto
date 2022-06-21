@@ -608,11 +608,17 @@ radio.slim {
   box-shadow: none;
 }
 
-.delete-edit {
+ .delete-edit {
   font-size: 12px;
-  display: flex;
-  justify-content: flex-end;
-  margin-right: 3em;
+  margin-right: 2em;
+} 
+
+.show_layer {
+  font-size: 12px;
+}
+.layer-edit {
+  margin-left: 3em;
   margin-top: 2em;
-  margin-bottom: 3em;
+  display: flex;
+  justify-content: space-between;
 }
