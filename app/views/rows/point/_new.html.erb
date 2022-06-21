@@ -1,4 +1,5 @@
 <%# params: layer %>
+<%# renders a hidden form for a new Row with connectors to stimulus controllers. Used in layers/edit %>
 
 <%= form_with model: Row.new, data: {"map-target" => "newPointForm"}, class: "is-hidden" do |form| %>
   <%= form.hidden_field :layer_id, value: layer.id %>
