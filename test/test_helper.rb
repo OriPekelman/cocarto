@@ -3,7 +3,7 @@ require_relative "../config/environment"
 require "rails/test_help"
 
 require "minitest/reporters"
-Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
+Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new if ENV["RM_INFO"].blank? # IntelliJ Minitest support conflicts with Minitest::Reporters
 
 class ActiveSupport::TestCase
   # Run tests in parallel with specified workers
