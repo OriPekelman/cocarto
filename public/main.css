@@ -629,10 +629,9 @@ h2 .editable{
   color: var(--color-green-70);
 }
 
-.layer-name-edit{
+#layer-header{
   margin-left: 5em;
   font-family: var(--font-serif);
   letter-spacing: -0.2px;
-  color: var(--color-grey-90);
   margin-top: 3em;
 }
