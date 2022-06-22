@@ -1,7 +1,7 @@
 import maplibre from 'maplibre-gl'
 import consumer from 'channels/consumer'
 
-class Tracker {
+class PresenceTracker {
   constructor ({ name, lngLat, sessionId }) {
     this.name = name || 'Anonymous'
     this.sessionId = sessionId
@@ -48,7 +48,7 @@ class Tracker {
   }
 }
 
-class Trackers {
+class PresenceTrackers {
   constructor (mapController) {
     this.trackers = new Map()
     this.lastMoveSent = Date.now()
@@ -56,7 +56,7 @@ class Trackers {
     this.#initActionCable(mapController)
   }
 
-  mousemouve ({ lngLat }) {
+  mousemove ({ lngLat }) {
     if (Date.now() - this.lastMoveSent > 20) {
       this.channel.mouse_moved(lngLat)
       this.lastMoveSent = Date.now()
@@ -67,7 +67,7 @@ class Trackers {
     if (this.trackers.has(data.sessionId)) {
       this.trackers.get(data.sessionId).update(data)
     } else {
-      const tracker = new Tracker(data)
+      const tracker = new PresenceTracker(data)
       tracker.marker.addTo(this.map)
       tracker.resetTimeout(this.trackers)
       this.trackers.set(data.sessionId, tracker)
@@ -76,12 +76,12 @@ class Trackers {
 
   #initActionCable (mapController) {
     const _this = this
-    this.channel = consumer.subscriptions.create({ channel: 'SharePositionChannel', layer: mapController.layerIdValue }, {
+    this.channel = consumer.subscriptions.create({ channel: 'PresenceTrackerChannel', layer: mapController.layerIdValue }, {
       connected () {
-        console.log('SharePositionChannel connected')
+        console.log('PresenceTrackerChannel connected')
       },
       disconnected () {
-        console.log('SharePositionChannel disconnected')
+        console.log('PresenceTrackerChannel disconnected')
       },
       received (data) {
         if (data.sessionId !== mapController.sessionIdValue) {
@@ -100,4 +100,4 @@ class Trackers {
   }
 }
 
-export default Trackers
+export default PresenceTrackers

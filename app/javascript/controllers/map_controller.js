@@ -2,7 +2,7 @@
 import { Controller } from '@hotwired/stimulus'
 
 import { newMap, newMarker } from 'lib/map_helpers'
-import Trackers from 'lib/trackers'
+import PresenceTrackers from 'lib/presence_trackers'
 import MapboxDraw from '@mapbox/mapbox-gl-draw'
 
 export default class extends Controller {
@@ -22,7 +22,7 @@ export default class extends Controller {
 
   connect () {
     this.#initMap()
-    this.trackers = new Trackers(this)
+    this.trackers = new PresenceTrackers(this)
   }
 
   pointTargetConnected (point) {
