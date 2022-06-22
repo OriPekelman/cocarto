@@ -1,7 +1,8 @@
-<%# params: layer %>
+<%# params: row %>
+<%# renders a hidden form for a new Row with connectors to stimulus controllers. Used in layers/edit %>
 
-<%= form_with model: Row.new, data: {"map-target" => "newPolygonForm"}, class: "is-hidden" do |form| %>
-  <%= form.hidden_field :layer_id, value: layer.id %>
+<%= form_with model: row, data: {"map-target" => "newPolygonForm"}, class: "is-hidden" do |form| %>
+  <%= form.hidden_field :layer_id %>
   <%= form.hidden_field :polygon, data: {"map-target" => "polygonField"} %>
   <%= form.submit %>
 <% end %>

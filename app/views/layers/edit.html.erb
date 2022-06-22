@@ -16,8 +16,8 @@
       <span><%= link_to t("download_as_geojson"), geojson_layer_path(@layer), download: "#{@layer.name}.geojson" %></span>
       <span><%= link_to t("delete_layer"), @layer, data: {turbo_method: :delete, turbo_confirm: t("delete_confirm")}, class: "delete-edit" %></span>
     </div>
-      <%= render "name", layer: @layer %>
-    <%= render "rows/table", layer: @layer %>
+    <%= render "name", layer: @layer %>
+    <%= render "rows_rw", layer: @layer %>
     <%= render "tooltip", layer: @layer %>
   </div>
   <div class="dragbar" data-dragbar-target="dragbar" data-action="mousedown->dragbar#mousedown"></div>
