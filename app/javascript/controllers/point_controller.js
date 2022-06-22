@@ -1,11 +1,12 @@
 import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
-  static targets = ['form', 'longitude', 'latitude', 'polygon']
+  static targets = ['form', 'longitude', 'latitude']
 
   connect () {
     // Small hack inspired by https://dev.to/leastbad/the-best-one-line-stimulus-power-move-2o90
     this.element.rowController = this
+    this.element.dataset.mapTarget = 'point'
   }
 
   save () {
@@ -19,18 +20,9 @@ export default class extends Controller {
     }
   }
 
-  geojson () {
-    return JSON.parse(this.polygonTarget.value)
-  }
-
   dragged ({ lng, lat }) {
     this.longitudeTarget.value = lng
     this.latitudeTarget.value = lat
-    this.formTarget.requestSubmit()
-  }
-
-  updatePolygon (geojson) {
-    this.polygonTarget.value = JSON.stringify(geojson)
     this.formTarget.requestSubmit()
   }
 }

@@ -2,8 +2,7 @@
 <%# renders a non-editable row in a table. used in layers/rows_ro %>
 
 <tr id="<%= dom_id(row) %>"
-    data-map-target="point"
-    data-controller="row">
+    data-controller="point">
   <%= hidden_field_tag "longitude", row.point.x, data: {"row-target": "longitude"} %>
   <%= hidden_field_tag "latitude", row.point.y, data: {"row-target": "latitude"} %>
   <% row.layer.fields.each do |field| %>
