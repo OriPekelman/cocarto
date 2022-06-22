@@ -1,0 +1,20 @@
+---
+en:
+  activerecord:
+    attributes:
+      field:
+        field_type: Type
+        label: Name
+      layer:
+        geometry_type: Geometry type
+        name: Name
+    models:
+      layer:
+        one: Layer
+        other: Layers
+  helpers:
+    submit:
+      field:
+        create: Add a field
+      layer:
+        create: Create a layer

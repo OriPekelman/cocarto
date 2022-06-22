@@ -1,0 +1,20 @@
+---
+fr:
+  activerecord:
+    attributes:
+      field:
+        field_type: Type
+        label: Nom
+      layer:
+        geometry_type: Type de géometrie
+        name: Nom
+    models:
+      layer:
+        one: Couche
+        other: Couches
+  helpers:
+    submit:
+      field:
+        create: Ajouter un champ
+      layer:
+        create: Créer une couche

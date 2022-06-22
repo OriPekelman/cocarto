@@ -13,12 +13,7 @@ fr:
   error_message_layer_destroy: La couche a été détruite avec succès
   error_message_row_destroy: La géométrie a été détruite avec succès.
   error_message_row_update: Les propriétés géométriques ont été mises à jour avec succès.
-  field label: Nom du champ
-  field type: Type du champ
   hello: Bonjour
-  layer: 'Couche '
-  layer_name: 'Nom de couche '
-  layers: Couches
   new field created: Nouvel attribut %{name} créé
   new_layer: Nouvelle couche
   not_authorized: Vous n’avez pas les droits pour effectuer cette action.
@@ -27,8 +22,6 @@ fr:
   sign_in: connexion
   sign_out: déconnexion
   sign_up: inscription
-  t_geometry_type: Type de géometrie
   territory category: Territory category
   territory code: Territory identifier
   territory revision: Territory category revision
-  type: 'Type : '
