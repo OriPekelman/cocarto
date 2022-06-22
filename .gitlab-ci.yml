@@ -51,17 +51,18 @@ test-unit:
     - postgis/postgis:latest
   script:
     - bundle exec rails db:setup
+    - bundle exec rails dartsass:build
     - make test-unit
   variables:
     MINITEST_REPORTER: JUnitReporter
     MINITEST_REPORTERS_REPORTS_DIR: test-unit
   artifacts:
     paths:
-    - test-unit/*.xml
+      - test-unit/*.xml
     when: always
     reports:
       junit:
-      - test-unit/*.xml
+        - test-unit/*.xml
 
 test-system:
   extends: .ruby
@@ -71,6 +72,7 @@ test-system:
     - browserless/chrome:latest
   script:
     - bundle exec rails db:setup
+    - bundle exec rails dartsass:build
     - make test-system
   variables:
     # This is needed so that chrome can access to rails server
