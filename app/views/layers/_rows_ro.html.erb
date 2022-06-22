@@ -1,4 +1,5 @@
 <%# params: layer %>
+<%# renders a full table of non-editable rows for a layer %>
 
 <table>
   <thead>
@@ -9,6 +10,6 @@
   </tr>
   </thead>
   <tbody id="rows-tbody">
-  <%= render partial: "rows/point/show", collection: layer.rows.order(:created_at), as: :row %>
+  <%= render partial: "rows/#{layer.geometry_type}/row_ro", collection: layer.rows.order(:created_at), as: :row %>
   </tbody>
 </table>

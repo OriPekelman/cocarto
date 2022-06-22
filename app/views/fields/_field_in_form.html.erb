@@ -1,4 +1,5 @@
-<%# params: field %>
+<%# params: field, value, row_id %>
+<%# renders one form field tag for a value of a row for a specific field %>
 
 <td class="field-<%= field.id %> <%= "numerical" if field.numerical? %>">
   <% if field.numerical? %>

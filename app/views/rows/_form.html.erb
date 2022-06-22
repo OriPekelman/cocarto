@@ -1,4 +1,5 @@
 <%# params: row, layer, anonymous, values %>
+<%# renders a form for an existing or new row, used in rows/edit and rows/new %>
 
 <%= form_with model: row do |form| %>
   <%= form.hidden_field :layer_id, value: layer.id %>

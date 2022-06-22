@@ -23,7 +23,6 @@ class Field < ApplicationRecord
   validates :field_type, inclusion: {in: enum_field_types.keys}
 
   after_create_commit -> do
-    broadcast_append_to layer, target: "fields"
     broadcast_before_to layer, target: "delete-column", partial: "fields/th"
     layer.rows.each do |row|
       target = [row.id, "action"].join("-")

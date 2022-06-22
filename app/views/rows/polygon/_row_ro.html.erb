@@ -1,0 +1,15 @@
+<%# params: row %>
+<%# renders a non-editable row in a table. used in layers/rows_ro %>
+
+<tr id="<%= dom_id(row) %>"
+    data-map-target="point"
+    data-controller="row">
+  <%= hidden_field_tag "polygon", value: RGeo::GeoJSON.encode(row.geometry).to_json, data: {"row-target": "polygon"} %>
+  <% row.layer.fields.each do |field| %>
+    <% if field.numerical? %>
+      <td class="numerical"><%= row.values[field.id] %></td>
+    <% else %>
+      <td><%= row.values[field.id] %></td>
+    <% end %>
+  <% end %>
+</tr>

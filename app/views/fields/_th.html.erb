@@ -1,12 +1,13 @@
 <%# params: field %>
+<%# renders an destroyable table header for a given field. Used in layers/rows_rw %>
 
 <th class="field-<%= field.id %>">
-    <div class="dropdown" data-controller="dropdown">
-            <span class="table-head" aria-haspopup="true" aria-controls="dropdown-menu" data-action="click->dropdown#toggle"><%= field.label %></span>
-        <div class="dropdown-content" role="menu">
-            <%= button_to field, method: :delete, form_class: "level-item" do %>
-                <span>Delete column</span>
-            <% end %>
-        </div>
+  <div class="dropdown" data-controller="dropdown">
+    <span class="table-head" aria-haspopup="true" aria-controls="dropdown-menu" data-action="click->dropdown#toggle"><%= field.label %></span>
+    <div class="dropdown-content" role="menu">
+      <%= button_to field, method: :delete, form_class: "level-item" do %>
+        <span>Delete column</span>
+      <% end %>
     </div>
+  </div>
 </th>
