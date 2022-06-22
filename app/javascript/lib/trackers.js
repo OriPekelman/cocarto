@@ -1,4 +1,5 @@
 import maplibre from 'maplibre-gl'
+import consumer from 'channels/consumer'
 
 class Tracker {
   constructor ({ name, lngLat, sessionId }) {
@@ -48,12 +49,21 @@ class Tracker {
 }
 
 class Trackers {
-  constructor (map) {
+  constructor (mapController) {
     this.trackers = new Map()
-    this.map = map
+    this.lastMoveSent = Date.now()
+    this.map = mapController.map
+    this.#initActionCable(mapController)
   }
 
-  upsert (data) {
+  mousemouve ({ lngLat }) {
+    if (Date.now() - this.lastMoveSent > 20) {
+      this.channel.mouse_moved(lngLat)
+      this.lastMoveSent = Date.now()
+    }
+  }
+
+  #upsert (data) {
     if (this.trackers.has(data.sessionId)) {
       this.trackers.get(data.sessionId).update(data)
     } else {
@@ -62,6 +72,31 @@ class Trackers {
       tracker.resetTimeout(this.trackers)
       this.trackers.set(data.sessionId, tracker)
     }
+  }
+
+  #initActionCable (mapController) {
+    const _this = this
+    this.channel = consumer.subscriptions.create({ channel: 'SharePositionChannel', layer: mapController.layerIdValue }, {
+      connected () {
+        console.log('SharePositionChannel connected')
+      },
+      disconnected () {
+        console.log('SharePositionChannel disconnected')
+      },
+      received (data) {
+        if (data.sessionId !== mapController.sessionIdValue) {
+          _this.#upsert(data)
+        }
+      },
+      mouse_moved (lngLat) {
+        return this.perform('mouse_moved', {
+          lngLat,
+          name: mapController.usernameValue,
+          sessionId: mapController.sessionIdValue,
+          layerId: mapController.layerIdValue
+        })
+      }
+    })
   }
 }
 
