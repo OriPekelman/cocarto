@@ -510,7 +510,6 @@ main {
 .centered-main {
   margin: auto;
   padding: 24px;
-  height: 44.2rem;
 }
 
 .field {
@@ -580,10 +579,9 @@ radio.slim {
   cursor: pointer;
   font-family: var(--font-serif);
   color: var(--color-grey-90);
+  font-size: 24px;
 }
-h2 .editable{
-  color: var(--color-grey-60);
-}
+
 .editable:after {
   content: "🖋";
 }

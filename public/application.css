@@ -178,4 +178,7 @@ span:active {
 footer {
   background-color: var(--color-bg-ambient-30);
   padding-top: 0.5em;
+  position: fixed;
+  width: 100%;
+  bottom: 0rem;
 }
