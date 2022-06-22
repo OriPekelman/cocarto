@@ -1,7 +1,6 @@
 <%# params: @layer, @session_id, @user_name %>
 
 <%= turbo_stream_from @layer %>
-
 <div
   class="data-with-map"
   data-action="mousemove@window->dragbar#mousemove mouseup@document->dragbar#mouseup"
@@ -12,16 +11,18 @@
   data-map-username-value="<%= @user_name %>"
   data-map-geometry-type-value="<%= @layer.geometry_type %>">
   <div class="data edit" data-dragbar-target="left">
-  <div class="layer-edit">
-    <span>&lt; <%= link_to t("all_layer"), layers_path, class: "show_layer" %></span>
-    <span><%= link_to t("download_as_geojson"), geojson_layer_path(@layer), download: "#{@layer.name}.geojson" %></span>
-    <span><%= link_to t("delete_layer"), @layer, data: {turbo_method: :delete, turbo_confirm: t("delete_confirm")}, class: "delete-edit" %></span>
-  </div>
+    <div class="layer-edit">
+      <span>&lt; <%= link_to t("all_layer"), layers_path %></span>
+      <span><%= link_to t("download_as_geojson"), geojson_layer_path(@layer), download: "#{@layer.name}.geojson" %></span>
+      <span><%= link_to t("delete_layer"), @layer, data: {turbo_method: :delete, turbo_confirm: t("delete_confirm")}, class: "delete-edit" %></span>
+    </div>
+      <%= render "name", layer: @layer %>
     <%= render "rows/table", layer: @layer %>
     <%= render partial: "tooltip", locals: {layer: @layer} %>
   </div>
   <div class="dragbar" data-dragbar-target="dragbar" data-action="mousedown->dragbar#mousedown"></div>
   <div class="map" data-map-target="map" data-dragbar-target="right">
+    <%= render "rows/point/new", layer: @layer %>
     <%= render "rows/#{@layer.geometry_type}/new", layer: @layer %>
   </div>
 </div>

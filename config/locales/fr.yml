@@ -4,7 +4,6 @@ fr:
   back: Retour
   call to add a field: Cliquez sur le + pour ajouter une colonne à vos données
   click on map for more content: Cliquez sur la carte pour ajouter un nouveau point de données
-  current layer: Couche courante
   delete_confirm: Êtes-vous sûr ?
   delete_layer: Supprimer cette couche
   download_as_geojson: Télécharger en GeoJSON
