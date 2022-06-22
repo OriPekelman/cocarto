@@ -2,7 +2,7 @@
 <%# renders a row in a table, editable, used in layers/_rows_rw %>
 
 <tr id="<%= dom_id(row) %>"
-    data-controller="row">
+    data-controller="point">
   <% row.data do |field, value| %>
     <%= render partial: "fields/field_in_form", locals: {field: field, value: value, row_id: row.id} %>
   <% end %>

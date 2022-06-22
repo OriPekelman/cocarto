@@ -7,7 +7,7 @@ import Trackers from 'lib/trackers'
 import MapboxDraw from '@mapbox/mapbox-gl-draw'
 
 export default class extends Controller {
-  static targets = ['longitudeField', 'latitudeField', 'polygonField', 'newPolygonForm', 'newPointForm', 'map', 'point']
+  static targets = ['longitudeField', 'latitudeField', 'polygonField', 'newPolygonForm', 'newPointForm', 'map', 'point', 'polygon']
   static values = {
     editable: Boolean,
     layerId: String,
@@ -46,13 +46,10 @@ export default class extends Controller {
   }
 
   polygonTargetConnected (polygon) {
-    const geojson = polygon.rowController.geojson()
-    const feature = {
-      id: polygon.id,
-      type: 'Feature',
-      geometry: geojson
+    // a polygon can be connected when this.draw isn’t initialized yet
+    if (this.draw) {
+      this.#addPolygon(polygon)
     }
-    this.draw.add(feature)
   }
 
   polygonTargetDisconnected (polygon) {
@@ -72,6 +69,7 @@ export default class extends Controller {
         this.map.on('click', e => this.#handleClick(e))
       } else if (this.geometryTypeValue === 'polygon') {
         this.#initPolygonDraw()
+        this.polygonTargets.forEach(polygon => this.#addPolygon(polygon))
       } else {
         console.error('Unknown geometry type', this.geometryTypeValue)
       }
@@ -149,7 +147,17 @@ export default class extends Controller {
     this.map.on('draw.update', ({ features }) => {
       const id = features[0].id
       const polygon = document.getElementById(id)
-      polygon.rowController.updatePolygon(features[0].geometry)
+      polygon.polygonController.update(features[0].geometry)
     })
+  }
+
+  #addPolygon (polygon) {
+    const geometry = polygon.polygonController.geojson()
+    const feature = {
+      id: polygon.id,
+      type: 'Feature',
+      geometry
+    }
+    this.draw.add(feature)
   }
 }
