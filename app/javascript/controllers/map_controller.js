@@ -58,7 +58,12 @@ export default class extends Controller {
 
   #initMap () {
     this.map = newMap(this.mapTarget)
-    this.markers.forEach(marker => marker.addTo(this.map))
+    if (this.geometryTypeValue === 'point') {
+      this.markers.forEach(marker => marker.addTo(this.map))
+    } else if (this.geometryTypeValue === 'polygon') {
+      this.#initPolygonDraw()
+      this.polygonTargets.forEach(polygon => this.#addPolygon(polygon))
+    }
 
     const resizeObserver = new ResizeObserver(() => this.map.resize())
     resizeObserver.observe(this.mapTarget)
@@ -67,11 +72,6 @@ export default class extends Controller {
     if (this.editableValue) {
       if (this.geometryTypeValue === 'point') {
         this.map.on('click', e => this.#handleClick(e))
-      } else if (this.geometryTypeValue === 'polygon') {
-        this.#initPolygonDraw()
-        this.polygonTargets.forEach(polygon => this.#addPolygon(polygon))
-      } else {
-        console.error('Unknown geometry type', this.geometryTypeValue)
       }
 
       this.map.on('mousemove', e => {
@@ -126,7 +126,7 @@ export default class extends Controller {
   }
 
   #initPolygonDraw () {
-    this.draw = new MapboxDraw({
+    const rwOptions = {
       displayControlsDefault: false,
       // Select which mapbox-gl-draw control buttons to add to the map.
       controls: {
@@ -135,20 +135,29 @@ export default class extends Controller {
       // Set mapbox-gl-draw to draw by default.
       // The user does not have to click the polygon control button first.
       defaultMode: 'draw_polygon'
-    })
+    }
+
+    const roOptions = {
+      displayControlsDefault: false
+    }
+
+    this.draw = new MapboxDraw(this.editableValue ? rwOptions : roOptions)
     this.map.addControl(this.draw)
-    this.map.on('draw.create', ({ features }) => {
-      this.polygonFieldTarget.value = JSON.stringify(features[0].geometry)
-      this.newPolygonFormTarget.requestSubmit()
-      // When we submit the drawn polygon, we get one back from the server through turbo
-      // So we remove the one we’ve just drawn
-      this.draw.delete(features[0].id)
-    })
-    this.map.on('draw.update', ({ features }) => {
-      const id = features[0].id
-      const polygon = document.getElementById(id)
-      polygon.polygonController.update(features[0].geometry)
-    })
+
+    if (this.editableValue) {
+      this.map.on('draw.create', ({ features }) => {
+        this.polygonFieldTarget.value = JSON.stringify(features[0].geometry)
+        this.newPolygonFormTarget.requestSubmit()
+        // When we submit the drawn polygon, we get one back from the server through turbo
+        // So we remove the one we’ve just drawn
+        this.draw.delete(features[0].id)
+      })
+      this.map.on('draw.update', ({ features }) => {
+        const id = features[0].id
+        const polygon = document.getElementById(id)
+        polygon.polygonController.update(features[0].geometry)
+      })
+    }
   }
 
   #addPolygon (polygon) {

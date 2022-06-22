@@ -8,7 +8,9 @@
   <%= t :type %><%= @layer.geometry_type %>
 </div>
 
-<div class="data-with-map" data-controller="map">
+<div class="data-with-map"
+    data-controller="map"
+    data-map-geometry-type-value="<%= @layer.geometry_type %>">
   <div class="data">
     <%= render "rows_ro", layer: @layer %>
   </div>
