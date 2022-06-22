@@ -1,0 +1,262 @@
+* {
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+}
+
+:root {
+/* AMBIENT COLOR */
+--color-bg-ambient-10: #fffefa;
+--color-bg-ambient-20: #fcfaf3;
+--color-bg-ambient-30: #f7f4eb;
+/* GREY COLOR */
+--color-grey-10: #f7f7f5;
+--color-grey-20: #f0efed;
+--color-grey-30: #e8e7e6;
+--color-grey-40: #d4d3d2;
+--color-grey-50: #afaeaa;
+--color-grey-60: #8e8e8c;
+--color-grey-70: #6b6a68;
+--color-grey-80: #545452;
+--color-grey-90: #3d3d3c;
+--color-grey-100: #212120;
+/* GREEN COLOR */
+--color-green-10: #d7e9dd;
+--color-green-20: #c3dbcb;
+--color-green-30: #a8c9b4;
+--color-green-40: #96baa3;
+--color-green-50: #80a68d;
+--color-green-60: #638e72;
+--color-green-70: #4d7a5d;
+--color-green-80: #376647;
+--color-green-90: #1d4c2e;
+--color-green-100: #0d2e18;
+/* ATTENTION COLOR */
+--color-attention-10: #ffeece;
+--color-attention-20: #fdda94;
+--color-attention-30: #fabc1e;
+--color-attention-40: #915e04;
+/* ERROR COLOR */
+--color-error-10: #ffedee;
+--color-error-20: #fbc5c9;
+--color-error-30: #e62c41;
+--color-error-40: #b01a2b;
+/* INFO COLOR */
+--color-info-10: #d8f0f9;
+--color-info-20: #70caf1;
+--color-info-30: #299ae5;
+--color-info-40: #026ebb;
+/* SUCCES COLOR */
+--color-succes-10: #ecfadc;
+--color-succes-20: #c4ed98;
+--color-succes-30: #8bbd54;
+--color-succes-40: #46790f;
+/* MAIN FONT */
+--font-serif: Georgia, "Times New Roman", Times, serif, Regular;
+--font-sans: Verdana, Geneva, Tahoma, sans-serif;
+--font-mono: Menlo, "DejaVu Sans Mono", monospace;
+/* COLOR TABLE */
+--justify-important: center;
+--color-bg: #fff;
+--color: #118bee;
+--color-border: #999;
+--color-bg-secondary: #e9e9e9;
+--color-text: #000;
+/* MAP SIZE */
+--nav-height: 4.3rem;
+--footer-height: 2.4rem;
+--border-radius: 4px;
+}
+
+th {
+position: sticky;
+top: 0;
+background-color: var(--color-grey-20);
+z-index: 1;
+}
+
+td {
+border: 0.5px solid var(--color-grey-50);
+height: 2rem;
+background-color: white;
+}
+
+button {
+font-family: var(--font-serif);
+}
+
+button:active {
+filter: brightness(0.85);
+}
+
+button:hover {
+cursor: pointer;
+}
+
+.dropdown {
+position: relative;
+display: inline-block;
+}
+
+.dropdown-content a {
+text-decoration: none;
+padding: 8px 12px;
+}
+
+.dropdown-content a:hover {
+color: var(--color-grey-50);
+}
+
+.dropdown-content {
+border-radius: var(--border-radius);
+display: none;
+position: fixed;
+background-color: var(--color-bg);
+border: 1px solid var(--color-bg-secondary);
+border-radius: var(--border-radius);
+box-shadow: var(--box-shadow) var(--color-shadow);
+color: var(--color-text);
+padding: 0.2rem;
+font-size: 80%;
+overflow: visible !important;
+}
+
+.dropdown.is-active > .dropdown-content {
+display: block;
+}
+
+a {
+color: var(--color-green-70);
+}
+p {
+padding-top: 8px;
+padding-bottom: 8px;
+}
+a b,
+a strong,
+button {
+border: none;
+color: var(--color-grey-80);
+outline: none;
+}
+
+button:disabled,
+input:disabled {
+background: var(--color-bg-ambient-20);
+border-color: var(--color-bg-ambient-20);
+color: var(--color-grey-80);
+cursor: not-allowed;
+}
+
+a em,
+a i {
+border: 2px solid var(--color);
+color: var(--color);
+display: inline-block;
+padding: 1rem 2rem;
+}
+
+button[disabled]:hover {
+filter: none;
+}
+
+form {
+display: block;
+max-width: 460px;
+text-align: left;
+}
+
+td {
+padding: 0;
+background-color: white;
+}
+
+label {
+margin-bottom: 0.2rem;
+font-family: var(--font-serif);
+}
+main {
+display: flex;
+}
+
+h2 {
+text-align: center;
+color: var(--color-green-90);
+margin: 16px;
+margin-top: 0;
+}
+
+form header {
+margin: 0.5rem 0;
+padding: 0.5rem 0;
+}
+
+input,
+label,
+select,
+textarea {
+display: block;
+font-size: inherit;
+max-width: 460px;
+}
+
+
+input:focus {
+border-color: var(--color-info-30);
+outline: 2px solid var(--color-info-20);
+}
+
+input,
+select,
+textarea {
+border-color: var(--color-grey-50);
+border-width: 1px;
+border-radius: 2px;
+box-shadow: 0px 1px 4px var(--color-grey-40);
+height: 40px;
+vertical-align: middle;
+}
+
+a b,
+a em,
+a i,
+a strong,
+button {
+display: inline-block;
+line-height: 1.5;
+margin: 0.5rem 0;
+padding: 0.1rem 0.2rem;
+border: 0;
+}
+
+.submit_form {
+background-color: var(--color-green-70);
+border: none;
+color: var(--color-bg);
+line-height: 1.5;
+margin: 0.5rem 0;
+padding: 0.2rem 0.4rem;
+cursor: pointer;
+border-radius: var(--border-radius);
+}
+  
+.centered-main {
+margin: auto;
+padding: 24px;
+}
+
+input[type="checkbox"] + label,
+input[type="radio"] + label {
+display: inline-block;
+align-items: center;
+font-weight: lighter;
+position: relative;
+top: 1px;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+display: inline-block;
+margin-right: 0.5rem;
+margin-left: 0.5rem;
+}
