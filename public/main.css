@@ -624,3 +624,13 @@ radio.slim {
   letter-spacing: -0.2px;
   padding-top: 1em;
 }
+
+.maplibregl-ctrl-group {
+  display: flex;
+  flex-direction: row-reverse;
+  border-style: double;
+}
+
+.maplibregl-ctrl-group:not(:empty){
+  box-shadow: none;
+}

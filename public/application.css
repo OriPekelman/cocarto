@@ -133,7 +133,7 @@ span:active {
 
 .dropdown-content-app {
   position: fixed;
-  z-index: 1;
+  z-index: 3;
   display: none;
   background-color: var(--color-bg);
   border-style: double;
