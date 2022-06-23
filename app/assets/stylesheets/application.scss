@@ -225,13 +225,6 @@ table {
   right: 0;
 }
 
-.edit th {
-  resize: horizontal;
-  overflow-x: scroll;
-  overflow-y: visible;
-}
-
-
 input[readonly],
 textarea[readonly] {
   background-color: var(--color-bg-ambient-20);
