@@ -115,10 +115,13 @@ footer {
 /* TABLES */
 table {
   * {
-    padding: 0;
+    padding: 0 0.1rem;
   }
 
+  margin: 0 1rem;
   border-collapse: collapse;
+  border-radius: 10px;
+  border: solid 1px var(--color-grey-40);
   display: block;
   max-width: 100%;
   overflow-x: auto;
@@ -126,14 +129,20 @@ table {
   white-space: nowrap;
   position: relative;
 
-  td, th, tr {
+  td, th {
     text-align: center;
     border: solid 1px var(--color-grey-40);
+    border-bottom-width: 0px;
+    border-left-width: 0px;
 
     input:focus {
       background-color: RGBA(215, 233, 221, 0.5);
       outline: 2px solid var(--color-grey-40);
     }
+  }
+
+  th:last-child, td:last-child {
+    border-right-width: 0px;
   }
 
   td input {
@@ -145,6 +154,9 @@ table {
   thead {
     background-color: var(--color-grey-20);
     color: var(--color-grey-80);
+    th {
+      border-top-width: 0px;
+    }
   }
 
   .table-head {
