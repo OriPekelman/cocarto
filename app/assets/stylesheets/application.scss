@@ -125,32 +125,53 @@ footer {
 
 /* TABLES */
 table {
+  * {
+    padding: 0;
+  }
+
   border-spacing: 0;
   display: block;
   max-width: 100%;
   overflow-x: auto;
   overflow-y: scroll;
-  padding: 0;
   white-space: nowrap;
   position: relative;
-}
 
-table td,
-table th,
-table tr {
-  padding: 0rem;
-  text-align: var(--justify-important);
-  border-color: var(--color-grey-40);
-}
+  td, th, tr {
+    text-align: center;
+    border-color: var(--color-grey-40);
 
-table thead {
-  background-color: var(--color-grey-20);
-  border-collapse: collapse;
-  border-radius: var(--border-radius);
-  color: var(--color-grey-80);
-  margin: 0;
-  padding: 0;
-  border-radius: 3px 3px 0px 0px;
+    input:focus {
+      background-color: RGBA(215, 233, 221, 0.5);
+      outline: 2px solid var(--color-grey-40);
+    }
+  }
+
+  td input {
+    border: 0;
+    width: 100%;
+  }
+
+  thead {
+    background-color: var(--color-grey-20);
+    border-collapse: collapse;
+    border-radius: var(--border-radius);
+    color: var(--color-grey-80);
+    margin: 0;
+    border-radius: 3px 3px 0px 0px;
+  }
+
+  .table-head {
+    font-family: var(--font-serif);
+    font-size: 12px;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    text-decoration: underline;
+    text-underline-offset: 0.5em;
+    text-decoration-color: var(--color-grey-50);
+    font-weight: 400;
+    cursor: move;
+  }
 }
 
 .numerical {
@@ -204,39 +225,9 @@ table thead {
   right: 0;
 }
 
-.edit th {
-  resize: horizontal;
-  overflow-x: scroll;
-  overflow-y: visible;
-}
-
-
-.table-head {
-  font-family: var(--font-serif);
-  font-size: 12px;
-  letter-spacing: 0.8px;
-  text-transform: uppercase;
-  text-decoration: underline;
-  text-underline-offset: 0.5em;
-  text-decoration-color: var(--color-grey-50);
-  font-weight: 400;
-  cursor: pointer;
-}
-
-td input:focus {
-  background-color: RGBA(215, 233, 221, 0.5);
-  outline: 2px solid var(--color-grey-40);
-}
-
 input[readonly],
 textarea[readonly] {
   background-color: var(--color-bg-ambient-20);
-}
-
-td input {
-  padding: 0;
-  border: 0;
-  width: 100%;
 }
 
 .nav-show {
@@ -368,4 +359,3 @@ cursor: pointer;
 .maplibregl-ctrl-group:not(:empty){
   box-shadow: none;
 }
-
