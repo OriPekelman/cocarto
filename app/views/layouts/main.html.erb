@@ -20,10 +20,10 @@
   <div class="header-right">
     <% if user_signed_in? %>
       <span><%= t(:hello) %>, <%= current_user.email %></span>
-      <%= button_to t(:sign_out), destroy_user_session_path, method: :delete, class: "header-subs" %>
+      <%= button_to t(:sign_out), destroy_user_session_path, method: :delete, class: "primary-action" %>
     <% else %>
       <%= link_to t(:sign_in), new_user_session_path, class: "header-login" %>
-      <%= link_to t(:sign_up), new_user_registration_path, class: "header-subs" %>
+      <%= link_to t(:sign_up), new_user_registration_path, class: "primary-action" %>
     <% end %>
     <div class="dropdown" data-controller="dropdown">
       <button class="button-trad" aria-controls="dropdown-menu" data-action="click->dropdown#toggle">

@@ -2,6 +2,7 @@
 en:
   all_layer: All layers
   back: Back
+  by: by
   call to add a field: Click on the + to add a data column to your data
   click on map for more content: Click on the map to add a new data point
   delete_confirm: Are you sure?
@@ -15,7 +16,7 @@ en:
   error_message_row_update: Geometry properties were successfully updated.
   hello: Hello
   new field created: New field %{name} created
-  new_layer: New Layer
+  new_layer: Add a new layer
   not_authorized: You are not authorized to perform this action.
   part of territory: Part of territory
   show: Show
@@ -25,3 +26,4 @@ en:
   territory category: Territory category
   territory code: Territory identifier
   territory revision: Territory category revision
+  updated_the: updated the

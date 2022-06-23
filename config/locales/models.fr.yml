@@ -7,7 +7,16 @@ fr:
         label: Nom
       layer:
         geometry_type: Type de géometrie
+        linestring:
+          one: tracé
+          other: tracés
         name: Nom
+        point:
+          one: point
+          other: points
+        polygon:
+          one: polygone
+          other: polygones
     models:
       layer:
         one: Couche
