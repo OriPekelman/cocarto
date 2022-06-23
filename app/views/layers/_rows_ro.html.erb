@@ -1,11 +1,11 @@
 <%# params: layer %>
 <%# renders a full table of non-editable rows for a layer %>
 
-<table>
+<table class="table-show">
   <thead>
   <tr>
     <% layer.fields.each do |field| %>
-      <th> <%= field.label %> </th>
+      <th class="table-head"> <%= field.label %> </th>
     <% end %>
   </tr>
   </thead>

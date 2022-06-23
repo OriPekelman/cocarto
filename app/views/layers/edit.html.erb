@@ -11,10 +11,10 @@
   data-map-username-value="<%= @user_name %>"
   data-map-geometry-type-value="<%= @layer.geometry_type %>">
   <div class="data" data-dragbar-target="left">
-    <div class="layer-edit">
+    <div class="layer-actions">
       <span>&lt; <%= link_to t("all_layer"), layers_path %></span>
       <span><%= link_to t("download_as_geojson"), geojson_layer_path(@layer), download: "#{@layer.name}.geojson" %></span>
-      <span><%= link_to t("delete_layer"), @layer, data: {turbo_method: :delete, turbo_confirm: t("delete_confirm")}, class: "delete-edit" %></span>
+      <span><%= link_to t("delete_layer"), @layer, data: {turbo_method: :delete, turbo_confirm: t("delete_confirm")} %></span>
     </div>
     <%= render "name", layer: @layer %>
     <%= render "rows_rw", layer: @layer %>

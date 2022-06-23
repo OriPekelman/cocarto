@@ -1,18 +1,16 @@
 <%# params: @layer %>
 
 <%= turbo_stream_from @layer %>
-  <h2><%= "#{Layer.model_name.human} #{@layer.name}" %></h2>
-  <%= link_to t("edit"), edit_layer_path(@layer) %> |
-  <%= link_to t("back"), layers_path %>
-<div>
-  <%= "#{Layer.human_attribute_name(:geometry_type)} #{@layer.geometry_type}" %>
-</div>
-
 <div class="data-with-map"
     data-controller="map"
     data-map-geometry-type-value="<%= @layer.geometry_type %>">
   <div class="data">
-    <%= render "rows_ro", layer: @layer %>
+    <div class="layer-actions">
+      <%= link_to t("edit"), edit_layer_path(@layer) %>
+      <%= link_to t("back"), layers_path %>
+    </div>
+      <h2><%= "#{Layer.model_name.human} #{@layer.name}" %></h2>
+      <%= render "rows_ro", layer: @layer %>
   </div>
   <div class="map" data-map-target="map">
   </div>
