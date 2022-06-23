@@ -1,7 +1,7 @@
 <%# params: @layers %>
 
 <div class="centered-main">
-  <h2><%= t :layers %></h2>
+  <h2><%= Layer.model_name.human(count: 2) %></h2>
 
   <table class="layers-table">
     <thead>

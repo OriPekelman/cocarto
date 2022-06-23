@@ -1,11 +1,11 @@
 <%# params: @layer %>
 
 <%= turbo_stream_from @layer %>
-  <h2><%= t :layer %><%= @layer.name %></h2>
+  <h2><%= "#{Layer.model_name.human} #{@layer.name}" %></h2>
   <%= link_to t("edit"), edit_layer_path(@layer) %> |
   <%= link_to t("back"), layers_path %>
 <div>
-  <%= t :type %><%= @layer.geometry_type %>
+  <%= "#{Layer.human_attribute_name(:geometry_type)} #{@layer.geometry_type}" %>
 </div>
 
 <div class="data-with-map"
