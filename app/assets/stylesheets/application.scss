@@ -122,12 +122,11 @@ table {
   border-collapse: collapse;
   border-radius: 6px;
   border: solid 1px var(--color-grey-50);
-  display: block;
+  display: inline-block;
   max-width: 100%;
   overflow-x: auto;
   overflow-y: scroll;
   white-space: nowrap;
-  position: relative;
 
   td, th {
     text-align: center;
@@ -168,11 +167,10 @@ table {
 
   .table-head {
     font-family: var(--font-serif);
-    font-size: 12px;
     letter-spacing: 0.8px;
     text-transform: uppercase;
     text-decoration: underline;
-    text-underline-offset: 0.5em;
+    text-underline-offset: 0.2em;
     text-decoration-color: var(--color-grey-50);
     font-weight: 400;
     cursor: pointer;
@@ -209,7 +207,7 @@ table {
 }
 
 .data-with-map > .data > table {
-  height: 100%;
+  max-height: 100%;
 }
 
 .data-with-map > .map {
@@ -361,14 +359,10 @@ cursor: pointer;
   box-shadow: none;
 }
 
-
-.layer-show {
- display: flex;   
-}
-
 .layer-show a {
   font-size: 18px;
   color: var(--color-green-70);
+  margin-top: 2em;
 }
 
 .layers-title-show{
@@ -376,10 +370,27 @@ cursor: pointer;
   font-family: var(--font-serif);
   color: var(--color-grey-90);
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   padding-top: 3em;
 }
 .type_geometry{
-  display: flex;
-  justify-content: flex-start;
+  text-align: center;
+  font-family: var(--font-serif);
+  font-size: 14px;
+}
+
+.table-head-show {
+  font-family: var(--font-serif);
+      font-size: 12px;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      text-decoration: underline;
+      text-underline-offset: 0.5em;
+      text-decoration-color: var(--color-grey-50);
+      font-weight: 400;
+      cursor: pointer;
+}
+
+.table-show{
+  margin-top: 2em;
 }

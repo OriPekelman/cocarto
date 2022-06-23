@@ -13,9 +13,8 @@
     <div class="type_geometry">
       <%= "#{Layer.human_attribute_name(:geometry_type)} #{@layer.geometry_type}" %>
     </div>
-        <%= render "rows_ro", layer: @layer %>
+      <%= render "rows_ro", layer: @layer %>
   </div>
   <div class="map" data-map-target="map">
   </div>
 </div>
-
