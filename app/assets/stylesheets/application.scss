@@ -8,25 +8,15 @@ nav {
   border-left: none;
   border-right: none;
   h1 {
-    font-size: 28px;
+    font-size: 200%;
     letter-spacing: -0.58px;
   }
-}
-
-.header-right {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  padding: 40px;
-  gap: 1.8rem;
-  letter-spacing: 0.44px;
 }
 
 span {
   font-family: var(--font-serif);
   color: var(--color-grey-90);
   line-height: 1.143px;
-  font-size: 16px;
   cursor: pointer;
 }
 
@@ -61,7 +51,6 @@ span:active {
   box-shadow: var(--box-shadow) var(--color-shadow);
   color: var(--color-text);
   padding: 0.8rem;
-  font-size: 16px;
   line-height: 1.25px;
   overflow: visible !important;
 }
@@ -228,10 +217,6 @@ table {
 input[readonly],
 textarea[readonly] {
   background-color: var(--color-bg-ambient-20);
-}
-
-.nav-show {
-  align-self: center;
 }
 
 .search-result {

@@ -4,6 +4,10 @@
     padding: 0;
 }
 
+body {
+    font-size: 16px;
+}
+
 :root {
 /* AMBIENT COLOR */
 --color-bg-ambient-10: #fffefa;
@@ -72,11 +76,11 @@ nav {
     display: flex;
     justify-content: space-between;
     font-family: var(--font-serif);
+    align-items: center;
+    padding: 0 3rem;
 
     h1 {
-        margin-top: 0.8em;
         font-weight: lighter;
-        margin-left: 1em;
         a {
             color: var(--color-green-50);
             text-decoration: none;
