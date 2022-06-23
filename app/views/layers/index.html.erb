@@ -1,27 +1,20 @@
 <%# params: @layers %>
 
-<div class="centered-main">
-  <h2><%= Layer.model_name.human(count: 2) %></h2>
+<div class="layers-list">
+<h2><%= Layer.model_name.human(count: 2) %></h2>
+<% @layers.each do |layer| %>
+  <div class="layer">
+    <h3><%= layer.name %></h3>
+    <p>
+      <%= layer.rows.count %> <%= Layer.human_attribute_name(layer.geometry_type, count: layer.rows.count) %>
+      — <%= t :updated_the %> <%= l(layer.updated_at.to_date, format: :long) %> <%= t :by %> <%= current_user.email %>
+    </p>
+    <p>
+      <%= link_to t("edit"), edit_layer_path(layer) %>
+      —
+      <%= link_to t("show"), layer %>
+    </p>
+  </div>
+<% end %>
 
-  <table class="layers-table">
-    <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-    </thead>
-
-    <tbody>
-    <% @layers.each do |layer| %>
-      <tr>
-        <td><%= layer.name %></td>
-        <td><%= link_to t("show"), layer %></td>
-        <td><%= link_to t("edit"), edit_layer_path(layer) %></td>
-      </tr>
-    <% end %>
-    </tbody>
-  </table>
-
-  <br>
-
-  <%= link_to t("new_layer"), new_layer_path, class: "layers-title" %>
-</div>
+<%= link_to t("new_layer"), new_layer_path, class: "primary-action" %>

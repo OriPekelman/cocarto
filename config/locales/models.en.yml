@@ -7,7 +7,16 @@ en:
         label: Name
       layer:
         geometry_type: Geometry type
+        linestring:
+          one: line string
+          other: line strings
         name: Name
+        point:
+          one: point
+          other: points
+        polygon:
+          one: polygon
+          other: polygons
     models:
       layer:
         one: Layer

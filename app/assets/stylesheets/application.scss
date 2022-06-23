@@ -96,14 +96,6 @@ footer {
   color: var(--color-grey-60);
 }
 
-.layers-title {
-  text-align: center;
-  font-family: var(--font-serif);
-  color: var(--color-grey-90);
-  display: flex;
-  justify-content: center;
-}
-
 .layers-table {
   display: flex;
   justify-content: center;
@@ -345,4 +337,27 @@ cursor: pointer;
 
 .table-show{
   margin-top: 2em;
+}
+
+.layers-list {
+  padding: 2em 4em;
+
+  h2 {
+    margin: 0;
+    margin-bottom: 1em;
+    text-align: left;
+  }
+
+  p {
+    color: var(--color-grey-60);
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+
+  .layer {
+    margin-bottom: 2em;
+    width: 720px;
+    border-bottom: 1px solid var(--color-grey-40);
+    padding-bottom: 2em;
+  }
 }
