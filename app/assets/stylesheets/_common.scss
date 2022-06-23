@@ -56,7 +56,6 @@
 --font-sans: Verdana, Geneva, Tahoma, sans-serif;
 --font-mono: Menlo, "DejaVu Sans Mono", monospace;
 /* COLOR TABLE */
---justify-important: center;
 --color-bg: #fff;
 --color: #118bee;
 --color-border: #999;
@@ -83,19 +82,6 @@ nav {
             text-decoration: none;
         }
     }
-}
-
-th {
-    position: sticky;
-    top: 0;
-    background-color: var(--color-grey-20);
-    z-index: 1;
-}
-
-td {
-    border: 0.5px solid var(--color-grey-50);
-    height: 2rem;
-    background-color: white;
 }
 
 button {
@@ -183,11 +169,6 @@ form {
     text-align: left;
 }
 
-td {
-    padding: 0;
-    background-color: white;
-}
-
 label {
     margin-bottom: 0.2rem;
     font-family: var(--font-serif);
@@ -216,7 +197,6 @@ textarea {
     font-size: inherit;
     max-width: 460px;
 }
-
 
 input:focus {
     border-color: var(--color-info-30);
