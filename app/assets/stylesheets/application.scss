@@ -120,8 +120,8 @@ table {
 
   margin: 0 1rem;
   border-collapse: collapse;
-  border-radius: 10px;
-  border: solid 1px var(--color-grey-40);
+  border-radius: 6px;
+  border: solid 1px var(--color-grey-50);
   display: block;
   max-width: 100%;
   overflow-x: auto;
@@ -131,7 +131,8 @@ table {
 
   td, th {
     text-align: center;
-    border: solid 1px var(--color-grey-40);
+    font-size: 12px;
+    border: solid 1px var(--color-grey-50);
     border-bottom-width: 0px;
     border-left-width: 0px;
 
@@ -149,14 +150,20 @@ table {
     border: 0;
     width: 100%;
     box-shadow: none;
+    height: 24px;
   }
 
   thead {
     background-color: var(--color-grey-20);
     color: var(--color-grey-80);
+    height: 32px;
     th {
       border-top-width: 0px;
     }
+  }
+
+  button {
+    margin: 0;
   }
 
   .table-head {
