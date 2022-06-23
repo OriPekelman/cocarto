@@ -1,6 +1,7 @@
 import maplibre from 'maplibre-gl'
+import consumer from 'channels/consumer'
 
-class Tracker {
+class PresenceTracker {
   constructor ({ name, lngLat, sessionId }) {
     this.name = name || 'Anonymous'
     this.sessionId = sessionId
@@ -47,22 +48,56 @@ class Tracker {
   }
 }
 
-class Trackers {
-  constructor (map) {
+class PresenceTrackers {
+  constructor (mapController) {
     this.trackers = new Map()
-    this.map = map
+    this.lastMoveSent = Date.now()
+    this.map = mapController.map
+    this.#initActionCable(mapController)
   }
 
-  upsert (data) {
+  mousemove ({ lngLat }) {
+    if (Date.now() - this.lastMoveSent > 20) {
+      this.channel.mouse_moved(lngLat)
+      this.lastMoveSent = Date.now()
+    }
+  }
+
+  #upsert (data) {
     if (this.trackers.has(data.sessionId)) {
       this.trackers.get(data.sessionId).update(data)
     } else {
-      const tracker = new Tracker(data)
+      const tracker = new PresenceTracker(data)
       tracker.marker.addTo(this.map)
       tracker.resetTimeout(this.trackers)
       this.trackers.set(data.sessionId, tracker)
     }
   }
+
+  #initActionCable (mapController) {
+    const _this = this
+    this.channel = consumer.subscriptions.create({ channel: 'PresenceTrackerChannel', layer: mapController.layerIdValue }, {
+      connected () {
+        console.log('PresenceTrackerChannel connected')
+      },
+      disconnected () {
+        console.log('PresenceTrackerChannel disconnected')
+      },
+      received (data) {
+        if (data.sessionId !== mapController.sessionIdValue) {
+          _this.#upsert(data)
+        }
+      },
+      mouse_moved (lngLat) {
+        return this.perform('mouse_moved', {
+          lngLat,
+          name: mapController.usernameValue,
+          sessionId: mapController.sessionIdValue,
+          layerId: mapController.layerIdValue
+        })
+      }
+    })
+  }
 }
 
-export default Trackers
+export default PresenceTrackers

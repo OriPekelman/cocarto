@@ -1,4 +1,4 @@
-class SharePositionChannel < ApplicationCable::Channel
+class PresenceTrackerChannel < ApplicationCable::Channel
   def subscribed
     stream_from "layer_#{params[:layerId]}"
   end

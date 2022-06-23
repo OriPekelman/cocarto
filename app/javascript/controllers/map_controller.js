@@ -1,9 +1,8 @@
 /* global ResizeObserver */
 import { Controller } from '@hotwired/stimulus'
 
-import consumer from 'channels/consumer'
 import { newMap, newMarker } from 'lib/map_helpers'
-import Trackers from 'lib/trackers'
+import PresenceTrackers from 'lib/presence_trackers'
 import MapboxDraw from '@mapbox/mapbox-gl-draw'
 
 export default class extends Controller {
@@ -18,13 +17,12 @@ export default class extends Controller {
 
   initialize () {
     this.markers = new Map()
-    this.lastMoveSent = Date.now()
     this.clickTimer = null
   }
 
   connect () {
     this.#initMap()
-    this.#initActionCable()
+    this.trackers = new PresenceTrackers(this)
   }
 
   pointTargetConnected (point) {
@@ -67,45 +65,14 @@ export default class extends Controller {
 
     const resizeObserver = new ResizeObserver(() => this.map.resize())
     resizeObserver.observe(this.mapTarget)
-    this.trackers = new Trackers(this.map)
 
     if (this.editableValue) {
       if (this.geometryTypeValue === 'point') {
         this.map.on('click', e => this.#handleClick(e))
       }
 
-      this.map.on('mousemove', e => {
-        if (Date.now() - this.lastMoveSent > 20) {
-          this.channel.mouse_moved(e.lngLat)
-          this.lastMoveSent = Date.now()
-        }
-      })
+      this.map.on('mousemove', e => this.trackers.mousemove(e))
     }
-  }
-
-  #initActionCable () {
-    const _this = this
-    this.channel = consumer.subscriptions.create({ channel: 'SharePositionChannel', layer: this.layerIdValue }, {
-      connected () {
-        console.log('SharePositionChannel connected')
-      },
-      disconnected () {
-        console.log('SharePositionChannel disconnected')
-      },
-      received (data) {
-        if (data.sessionId !== _this.sessionIdValue) {
-          _this.trackers.upsert(data)
-        }
-      },
-      mouse_moved (lngLat) {
-        return this.perform('mouse_moved', {
-          lngLat,
-          name: _this.usernameValue,
-          sessionId: _this.sessionIdValue,
-          layerId: _this.layerIdValue
-        })
-      }
-    })
   }
 
   #handleClick (event) {
