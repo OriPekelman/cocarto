@@ -5,14 +5,11 @@
     data-controller="map"
     data-map-geometry-type-value="<%= @layer.geometry_type %>">
   <div class="data">
-    <div class="layer-show">
-      <%= link_to t("edit"), edit_layer_path(@layer) %> |
+    <div class="layer-actions">
+      <%= link_to t("edit"), edit_layer_path(@layer) %>
       <%= link_to t("back"), layers_path %>
-      <h2 class="layers-title-show"><%= "#{Layer.model_name.human} #{@layer.name}" %></h2>
     </div>
-    <div class="type_geometry">
-      <%= "#{Layer.human_attribute_name(:geometry_type)} #{@layer.geometry_type}" %>
-    </div>
+      <h2><%= "#{Layer.model_name.human} #{@layer.name}" %></h2>
       <%= render "rows_ro", layer: @layer %>
   </div>
   <div class="map" data-map-target="map">
