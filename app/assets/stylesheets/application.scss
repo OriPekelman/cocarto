@@ -360,3 +360,26 @@ cursor: pointer;
 .maplibregl-ctrl-group:not(:empty){
   box-shadow: none;
 }
+
+
+.layer-show {
+ display: flex;   
+}
+
+.layer-show a {
+  font-size: 18px;
+  color: var(--color-green-70);
+}
+
+.layers-title-show{
+  text-align: center;
+  font-family: var(--font-serif);
+  color: var(--color-grey-90);
+  display: flex;
+  justify-content: flex-start;
+  padding-top: 3em;
+}
+.type_geometry{
+  display: flex;
+  justify-content: flex-start;
+}
