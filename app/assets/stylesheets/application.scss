@@ -302,7 +302,12 @@ cursor: pointer;
 .editable:after {
   content: "🖋";
 }
-
+.edit th {
+  resize: horizontal;
+  overflow-x: scroll;
+  overflow-y: visible;
+ 
+}
 .map button {
   margin: 0;
   border-radius: 0;
