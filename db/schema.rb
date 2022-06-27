@@ -47,6 +47,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_29_102323) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "user_id", null: false
+    t.uuid "map_id", null: false
+    t.index ["map_id"], name: "index_layers_on_map_id"
     t.index ["user_id"], name: "index_layers_on_user_id"
   end
 
@@ -103,6 +105,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_29_102323) do
   end
 
   add_foreign_key "fields", "layers"
+  add_foreign_key "layers", "maps"
   add_foreign_key "layers", "users"
   add_foreign_key "maps", "users"
   add_foreign_key "territories", "territories", column: "parent_id"
