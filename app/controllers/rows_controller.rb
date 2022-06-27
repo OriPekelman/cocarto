@@ -77,7 +77,7 @@ class RowsController < ApplicationController
 
   def set_layer
     layer_id = @row&.layer_id || params[:layer_id] || params[:row][:layer_id]
-    @layer = current_user.layers.includes(:fields).find(layer_id)
+    @layer = Layer.includes(:fields, :map).find(layer_id)
   end
 
   def set_geometry

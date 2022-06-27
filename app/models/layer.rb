@@ -8,20 +8,17 @@
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  map_id        :uuid             not null
-#  user_id       :uuid             not null
 #
 # Indexes
 #
-#  index_layers_on_map_id   (map_id)
-#  index_layers_on_user_id  (user_id)
+#  index_layers_on_map_id  (map_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (map_id => maps.id)
-#  fk_rails_...  (user_id => users.id)
 #
 class Layer < ApplicationRecord
-  belongs_to :user
+  belongs_to :map
   has_many :fields, dependent: :delete_all
   has_many :rows, dependent: :delete_all
   enum enum_geometry_type: {point: :point, linestring: :linestring, polygon: :polygon, territory: :territory}
