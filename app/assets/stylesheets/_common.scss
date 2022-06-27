@@ -170,6 +170,7 @@ label {
     margin-bottom: 0.2rem;
     font-family: var(--font-serif);
 }
+
 main {
     display: flex;
 }
@@ -290,7 +291,8 @@ input[type="radio"] {
     background-color: $background;
     cursor: pointer;
     font-family: var(--font-serif);
-    //height: 40px;
+    height: 40px;
+    line-height: 1.5;
 }
 
 .primary-action {
