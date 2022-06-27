@@ -23,4 +23,5 @@ class User < ApplicationRecord
     :recoverable, :rememberable, :validatable
 
   has_many :layers, dependent: :restrict_with_error
+  has_many :maps, dependent: :restrict_with_error
 end
