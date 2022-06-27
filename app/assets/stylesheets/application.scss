@@ -127,6 +127,8 @@ table {
     border-bottom-width: 0px;
     border-left-width: 0px;
     height: 24px;
+    resize: horizontal;
+    overflow-x: auto;
 
     input:focus {
       background-color: RGBA(215, 233, 221, 0.5);
@@ -302,12 +304,7 @@ cursor: pointer;
 .editable:after {
   content: "🖋";
 }
-.edit th {
-  resize: horizontal;
-  overflow-x: scroll;
-  overflow-y: visible;
- 
-}
+
 .map button {
   margin: 0;
   border-radius: 0;
