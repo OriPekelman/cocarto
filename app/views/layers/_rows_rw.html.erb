@@ -2,7 +2,7 @@
 <%# renders a full table of editable rows for a layer %>
 
 <table>
-  <thead>
+  <thead class="resizable">
   <tr>
     <%= render partial: "fields/th", collection: layer.fields, as: :field %>
     <th id="delete-column" class="row-actions">

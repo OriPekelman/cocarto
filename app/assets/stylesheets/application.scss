@@ -133,7 +133,12 @@ table {
       outline: 2px solid var(--color-grey-40);
     }
   }
-
+  
+  .resizable th {
+    resize: horizontal;
+    overflow-x: auto;
+  }
+  
   th:last-child, td:last-child {
     border-right-width: 0px;
   }
