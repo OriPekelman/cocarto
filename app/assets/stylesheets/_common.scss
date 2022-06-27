@@ -210,6 +210,19 @@ textarea {
     vertical-align: middle;
 }
 
+input {
+    height: 40px;
+}
+
+input:focus {
+    border-radius: 2px;
+    border: 2px solid rgba(153,204,255, 1);
+    border: 1px solid rgba(40,140,255, 1);
+    box-shadow: 0px 0px 5px rgba(20,136,243, 0.198171) inset, 0px 0px 5px rgba(77,162,255, 0.4);
+    opacity: 1;
+    background-color: rgba(255,255,255, 1);
+}
+
 a b,
 a em,
 a i,
@@ -286,4 +299,25 @@ input[type="radio"] {
 
 .secondary-action {
     @include button(var(--color-green-80), var(--color-green-20));
+}
+
+@mixin border() {
+    background-color: var(--color-bg);
+    border-style: double;
+    border-color: var(--color-grey-100);
+    border-width: 3px;
+}
+
+.field {
+    font-family: var(--font-serif);
+    margin-top: 16px;
+    margin-bottom: 16px;
+
+    br {
+      display: block;
+    }
+
+    label {
+      vertical-align: middle;
+    }
 }

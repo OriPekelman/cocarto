@@ -41,13 +41,10 @@ span:active {
 }
 
 .dropdown-content-app {
+  @include common.border;
   position: fixed;
   z-index: 3;
   display: none;
-  background-color: var(--color-bg);
-  border-style: double;
-  border-color: var(--color-grey-100);
-  border-width: 3px;
   box-shadow: var(--box-shadow) var(--color-shadow);
   color: var(--color-text);
   padding: 0.8rem;
@@ -239,18 +236,6 @@ textarea[readonly] {
   background-color: white;
   text-align: left;
   padding: 0.5rem 1rem;
-}
-
-.field {
-  padding-top: 16px;
-}
-
-.field > br {
-  display: block;
-}
-
-.field > label {
-  vertical-align: middle;
 }
 
 input.slim {
