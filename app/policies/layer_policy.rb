@@ -1,6 +1,6 @@
 class LayerPolicy < ApplicationPolicy
   def user_owns_record
-    record.user_id == user&.id
+    record.map.user_id == user&.id
   end
 
   def show? = user_owns_record

@@ -21,11 +21,11 @@ require "test_helper"
 
 class LayerTest < ActiveSupport::TestCase
   test "create a new layer" do
-    assert_changes -> { users(:reclus).layers.count }, from: 1, to: 2 do
-      Layer.create! geometry_type: :point, user: users(:reclus)
+    assert_changes -> { maps(:one).layers.count }, from: 1, to: 2 do
+      Layer.create! geometry_type: :point, map: maps(:one)
     end
 
-    assert_equal 1, users(:cassini).layers.count
+    assert_equal 1, maps(:two).layers.count
   end
 
   test "a layer needs a geometry type" do
