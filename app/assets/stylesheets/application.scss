@@ -113,11 +113,12 @@ table {
   border-radius: 6px;
   border: solid 1px var(--color-grey-50);
   display: inline-block;
-  max-width: 100%;
+  max-width: fit-content;
   overflow-x: auto;
   overflow-y: scroll;
   white-space: nowrap;
-
+  margin-bottom: 0.1em;
+    
   td, th {
     text-align: center;
     font-size: 12px;
@@ -125,13 +126,13 @@ table {
     border-bottom-width: 0px;
     border-left-width: 0px;
     height: 24px;
-
+    
     input:focus {
       background-color: RGBA(215, 233, 221, 0.5);
       outline: 2px solid var(--color-grey-40);
     }
   }
-
+  
   .resizable th {
     resize: horizontal;
     overflow-x: auto;
@@ -139,7 +140,7 @@ table {
   th:last-child, td:last-child {
     border-right-width: 0px;
   }
-
+  
   td input {
     border: 0;
     width: 100%;
@@ -188,6 +189,8 @@ table {
 .data-with-map > .data {
   width: 50%;
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .data .tooltip {
