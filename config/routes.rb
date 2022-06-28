@@ -10,7 +10,9 @@ Rails.application.routes.draw do
         get :geojson
       end
     end
-    resources :maps
+    resources :maps do
+      resources :layers, only: [:new]
+    end
     resources :fields
     resources :rows
     resources :territory_categories

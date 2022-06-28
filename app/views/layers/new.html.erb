@@ -3,6 +3,7 @@
 <div class="centered-main new-layer">
   <h2><%= t :new_layer %></h2>
   <%= form_with(model: @layer) do |form| %>
+    <%= form.hidden_field :map_id %>
 
     <div class="field">
       <%= form.label :name %>

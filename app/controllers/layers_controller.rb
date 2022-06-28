@@ -9,7 +9,8 @@ class LayersController < ApplicationController
   end
 
   def new
-    @layer = current_user.layers.new
+    map = current_user.maps.find(params["map_id"])
+    @layer = map.layers.new
   end
 
   def edit
@@ -30,9 +31,12 @@ class LayersController < ApplicationController
   end
 
   def create
-    @layer = current_user.layers.new(layer_params)
-    if @layer.save
-      redirect_to edit_layer_path(@layer)
+    puts(layer_params)
+    map = current_user.maps.find(layer_params["map_id"])
+
+    layer = map.layers.new(layer_params)
+    if layer.save
+      redirect_to map_path(map)
     else
       # This line overrides the default rendering behavior, which
       # would have been to render the "create" view.
@@ -73,7 +77,7 @@ class LayersController < ApplicationController
   end
 
   def layer_params
-    params.require(:layer).permit(:name, :geometry_type)
+    params.require(:layer).permit(:name, :geometry_type, :map_id)
   end
 
   def field_schema(field)
