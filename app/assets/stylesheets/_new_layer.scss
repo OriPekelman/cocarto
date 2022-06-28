@@ -1,0 +1,86 @@
+@use "common";
+
+.new-layer {
+  $action-bar-height: 80px;
+  @include common.border;
+  position: relative;
+  padding-bottom: $action-bar-height + 32px;
+  margin-top: 32px;
+
+  h2 {
+    text-align: left;
+    margin: 0;
+  }
+
+  .field input {
+    width: 100%;
+  }
+
+  .geometry-type-selector {
+    width: 400px;
+    display: flex;
+    justify-content: space-between;
+
+    [type=radio] {
+      display: none;
+    }
+
+    [type=radio] + div {
+      cursor: pointer;
+      img {
+        outline: 1px solid var(--color-grey-50);
+        background-color: var(--color-bg-ambient-20);
+      }
+    }
+
+    [type=radio]:hover + div {
+      cursor: pointer;
+      img {
+        outline: 1px solid var(--color-grey-100);
+        background-color: white;
+      }
+      background-color: var(--color-bg-ambient-20);
+    }
+
+    [type=radio]:checked + div {
+      background-color: var(--color-green-10);
+      img {
+        outline: 2px solid var(--color-green-70);
+        background-color: var(--color-bg-ambient-20);
+      }
+    }
+
+    [type=radio]:disabled + div {
+      cursor: default;
+      background-color: var(--color-grey-20);
+      img {
+        outline: 1px solid var(--color-grey-50);
+        background-color: var(--color-bg-ambient-20);
+      }
+    }
+
+    div {
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+      padding-bottom: 8px;
+
+      img {
+        width: 48px;
+        margin: 8px;
+      }
+    }
+  }
+
+  .actions {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: $action-bar-height;
+    background-color: var(--color-bg-ambient-30);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+  }
+}

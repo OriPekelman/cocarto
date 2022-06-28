@@ -1,9 +1,31 @@
 <%# params: @layer %>
 
-<div class="centered-main">
+<div class="centered-main new-layer">
   <h2><%= t :new_layer %></h2>
+  <%= form_with(model: @layer) do |form| %>
 
-  <%= render "form", layer: @layer %>
+    <div class="field">
+      <%= form.label :name %>
+      <%= form.text_field :name %>
+    </div>
 
-  <%= link_to t("back"), layers_path %>
+    <h3><%= form.label :geometry_type %></h3>
+    <div class="geometry-type-selector">
+        <% Layer.enum_geometry_types.keys.each do |type| %>
+          <%= form.label "geometry_type_#{type}" do %>
+            <%= form.radio_button :geometry_type, type, disabled: ["linestring", "territory"].include?(type), checked: type == "point" %>
+            <div>
+              <%= image_tag asset_path("#{type}.svg") %>
+              <%= Layer.human_attribute_name(type).capitalize %>
+            </div>
+          <% end %>
+        <% end %>
+    </div>
+
+    <div class="actions">
+      <%= link_to t("back"), layers_path, class: "secondary-action" %>
+      <%= form.submit class: "primary-action" %>
+    </div>
+  <% end %>
+
 </div>
