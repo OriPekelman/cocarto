@@ -18,5 +18,5 @@
 #
 class Map < ApplicationRecord
   belongs_to :user
-  has_many :layers, dependent: :delete_all
+  has_many :layers, dependent: :destroy
 end

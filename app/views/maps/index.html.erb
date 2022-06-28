@@ -1,0 +1,8 @@
+<div>
+  <h2><%= Map.model_name.human(count: 2) %></h2>
+  <ul>
+  <% @maps.each do |map| %>
+    <li><%= link_to map.name, map %></li>
+  <% end %>
+  </ul>
+</div>
