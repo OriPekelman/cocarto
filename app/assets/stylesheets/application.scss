@@ -82,6 +82,7 @@ span:active {
 }
 
 footer {
+  text-align: center;
   background-color: var(--color-bg-ambient-30);
   font-size: 14px;
   padding-top: 0.5em;
@@ -90,7 +91,6 @@ footer {
   position: fixed;
   width: 100%;
   bottom: 0rem;
-  padding-left: 120px;
   color: var(--color-grey-60);
 }
 
