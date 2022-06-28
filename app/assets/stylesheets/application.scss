@@ -62,7 +62,7 @@ span:active {
 }
 
 .dropdown.is-active::after {
-  content : url("data:image/svg+xml;utf-8,<svg width='12' height='12' xmlns='http://www.w3.org/2000/svg'><path d='M7.723 5.584a.5.5 0 0 1 .467-.047l.087.047 3 2a.5.5 0 0 1-.475.875l-.08-.043L8 6.601 5.277 8.416a.5.5 0 0 1-.636-.068l-.057-.07a.5.5 0 0 1 .068-.637l.07-.057 3-2Z' fill='%23000' fill-rule='evenodd'/></svg>");
+  content : url("data:image/svg+xml;utf-8,<svg width='12' height='12' xmlns='http://www.w3.org/2000/svg'><path d='M7.723 5.584a.5.5 0 0 1 .467-.047l.087.047 3 2a.5.5 0 0 1-.475.875l-.08-.043L8 6.601 5.277 8.416a.5.5 0 0 1-.636-.068l-.057-.07a.5.5 0 0 1 .068-.637l.07-.057 3-2Z' fill='currentcolor' fill-rule='evenodd'/></svg>");
 }
 
 .dropdown:not(.is-active)::after{
