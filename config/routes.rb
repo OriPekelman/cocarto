@@ -21,6 +21,6 @@ Rails.application.routes.draw do
         post "search"
       end
     end
-    get "/:locale" => "dashboard#index"
+    get "/:locale" => "main#index"
   end
 end

@@ -46,7 +46,7 @@ class LayersController < ApplicationController
 
   def destroy
     @layer.destroy
-    redirect_to layers_url, notice: t("error_message_layer_destroy"), status: :see_other
+    redirect_to maps_url, notice: t("error_message_layer_destroy"), status: :see_other
   end
 
   def schema
