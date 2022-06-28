@@ -5,10 +5,6 @@ class LayersController < ApplicationController
   before_action :set_user_name
   before_action :authenticate_user!
 
-  def index
-    @layers = current_user.maps.includes(:layers).all.flat_map { |map| map.layers }
-  end
-
   def show
   end
 

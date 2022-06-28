@@ -1,8 +1,8 @@
-<%# params: @layers %>
+<%# params: @map %>
 
 <div class="layers-list">
 <h2><%= Layer.model_name.human(count: 2) %></h2>
-<% @layers.each do |layer| %>
+<% @map.layers.each do |layer| %>
   <div class="layer">
     <h3><%= layer.name %></h3>
     <p>
