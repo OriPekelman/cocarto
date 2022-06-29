@@ -16,10 +16,17 @@
 #
 class Row < ApplicationRecord
   belongs_to :layer
-  after_update_commit -> { broadcast_replace_to layer, partial: "rows/#{layer.geometry_type}/row_rw", locals: {row: self} }
-  after_destroy_commit -> { broadcast_remove_to layer }
+  after_update_commit -> do
+     broadcast_replace_to layer, partial: "rows/#{layer.geometry_type}/row_rw", locals: {row: self} 
+     broadcast_replace_to "#{layer.id}_ro", partial: "rows/#{layer.geometry_type}/row_ro", locals: {row: self} 
+  end
+  after_destroy_commit -> do 
+    broadcast_remove_to layer 
+    broadcast_remove_to "#{layer.id}_ro"
+  end
   after_create_commit -> do
     broadcast_append_to layer, target: "rows-tbody", partial: "rows/#{layer.geometry_type}/row_rw", locals: {row: self}
+    broadcast_append_to "#{layer.id}_ro", target: "rows-tbody", partial: "rows/#{layer.geometry_type}/row_ro", locals: {row: self} 
     broadcast_replace_to layer, target: "tutorial", partial: "layers/tooltip", locals: {layer: layer}
   end
 
