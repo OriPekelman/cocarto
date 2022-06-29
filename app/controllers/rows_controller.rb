@@ -31,7 +31,7 @@ class RowsController < ApplicationController
     else
       respond_to do |format|
         format.turbo_stream
-        format.html { redirect_to @row.layer }
+        format.html { redirect_to layer_path(@row.layer) }
       end
     end
   end
@@ -53,7 +53,7 @@ class RowsController < ApplicationController
     @row.update(params)
     respond_to do |format|
       format.turbo_stream
-      format.html { redirect_to @row.layer, notice: t("error_message_row_update") }
+      format.html { redirect_to layer_path(@row.layer), notice: t("error_message_row_update") }
     end
   end
 

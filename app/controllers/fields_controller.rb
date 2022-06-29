@@ -28,7 +28,7 @@ class FieldsController < ApplicationController
 
     respond_to do |format|
       format.turbo_stream
-      format.html { redirect_to @field.layer }
+      format.html { redirect_to layer_path(@field.layer) }
     end
   end
 
