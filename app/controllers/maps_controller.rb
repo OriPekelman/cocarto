@@ -9,9 +9,28 @@ class MapsController < ApplicationController
     @map
   end
 
+  def new
+    @map = current_user.maps.new
+  end
+
+  def create
+    map = current_user.maps.new(map_params)
+    if map.save
+      redirect_to map
+    else
+      # This line overrides the default rendering behavior, which
+      # would have been to render the "create" view.
+      render "new", status: :unprocessable_entity
+    end
+  end
+
   private
 
   def set_map
     @map = authorize Map.includes(:layers).find(params[:id])
+  end
+
+  def map_params
+    params.require(:map).permit(:name)
   end
 end

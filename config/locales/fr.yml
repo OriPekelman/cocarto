@@ -17,6 +17,7 @@ fr:
   hello: Bonjour
   new field created: Nouvel attribut %{name} créé
   new_layer: Ajouter une nouvelle couche
+  new_map: Créer une nouvelle carte
   not_authorized: Vous n’avez pas les droits pour effectuer cette action.
   part of territory: Part of territory
   show: Consulter

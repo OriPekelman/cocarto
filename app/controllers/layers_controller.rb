@@ -31,7 +31,6 @@ class LayersController < ApplicationController
   end
 
   def create
-    puts(layer_params)
     map = current_user.maps.find(layer_params["map_id"])
 
     layer = map.layers.new(layer_params)
