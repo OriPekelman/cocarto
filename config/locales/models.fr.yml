@@ -21,6 +21,9 @@ fr:
       layer:
         one: Couche
         other: Couches
+      map:
+        one: Carte
+        other: Cartes
   helpers:
     submit:
       field:

@@ -21,6 +21,9 @@ en:
       layer:
         one: Layer
         other: Layers
+      map:
+        one: Map
+        other: Maps
   helpers:
     submit:
       field:

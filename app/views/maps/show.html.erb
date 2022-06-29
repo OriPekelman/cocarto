@@ -1,9 +1,9 @@
 <%# params: @map %>
 
-<div class="layers-list">
-<h2><%= Layer.model_name.human(count: 2) %></h2>
+<div class="main-list">
+<h2><%= @map.name %></h2>
 <% @map.layers.each do |layer| %>
-  <div class="layer">
+  <div class="main-element">
     <h3><%= layer.name %></h3>
     <p>
       <%= layer.rows.count %> <%= Layer.human_attribute_name(layer.geometry_type, count: layer.rows.count) %>

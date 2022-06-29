@@ -20,7 +20,7 @@ span {
   line-height: 1.143px;
   cursor: pointer;
 }
- 
+
 .dropdown {
   position: relative;
   display: inline-block;
@@ -332,7 +332,7 @@ cursor: pointer;
   margin-top: 2em;
 }
 
-.layers-list {
+.main-list {
   padding: 2em 4em;
 
   h2 {
@@ -347,10 +347,11 @@ cursor: pointer;
     padding-bottom: 4px;
   }
 
-  .layer {
+  .main-element {
     margin-bottom: 2em;
     width: 720px;
     border-bottom: 1px solid var(--color-grey-40);
     padding-bottom: 2em;
+    position: relative;
   }
 }
