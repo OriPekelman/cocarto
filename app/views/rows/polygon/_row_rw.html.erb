@@ -4,7 +4,7 @@
 <tr id="<%= dom_id(row) %>"
     data-controller="polygon">
   <% row.data do |field, value| %>
-    <%= render partial: "fields/field_in_form", locals: {field: field, value: value, row_id: row.id} %>
+    <%= render partial: "fields/field_in_form", locals: {field: field, value: value, row_id: row.id, controller: "polygon"} %>
   <% end %>
   <td id="<%= row.id %>-action">
     <div class="actions">
