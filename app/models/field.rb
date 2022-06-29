@@ -19,7 +19,7 @@
 #
 class Field < ApplicationRecord
   belongs_to :layer
-  enum enum_field_type: {text: :text, float: :float, integer: :integer, territory: :territory, date: :date}
+  enum enum_field_type: {text: :text, float: :float, integer: :integer, territory: :territory, date: :date, boolean: :boolean}
   validates :field_type, inclusion: {in: enum_field_types.keys}
 
   after_create_commit -> do
