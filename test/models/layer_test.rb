@@ -5,6 +5,7 @@
 #  id            :uuid             not null, primary key
 #  geometry_type :enum             geometry, 0
 #  name          :string
+#  style         :jsonb            not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  map_id        :uuid             not null
