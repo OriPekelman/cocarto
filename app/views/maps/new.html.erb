@@ -1,0 +1,16 @@
+<%# params: @layer %>
+
+<div class="centered-main new-layer">
+  <h2><%= t :new_map %></h2>
+  <%= form_with(model: @map) do |form| %>
+    <div class="field">
+      <%= form.label :name %>
+      <%= form.text_field :name %>
+    </div>
+
+    <div class="actions">
+      <%= link_to t("back"), layers_path, class: "secondary-action" %>
+      <%= form.submit class: "primary-action" %>
+    </div>
+  <% end %>
+</div>

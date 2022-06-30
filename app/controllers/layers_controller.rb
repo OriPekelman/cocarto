@@ -5,15 +5,12 @@ class LayersController < ApplicationController
   before_action :set_user_name
   before_action :authenticate_user!
 
-  def index
-    @layers = current_user.layers.all
-  end
-
   def show
   end
 
   def new
-    @layer = current_user.layers.new
+    map = current_user.maps.find(params["map_id"])
+    @layer = map.layers.new
   end
 
   def edit
@@ -34,9 +31,11 @@ class LayersController < ApplicationController
   end
 
   def create
-    @layer = current_user.layers.new(layer_params)
-    if @layer.save
-      redirect_to edit_layer_path(@layer)
+    map = current_user.maps.find(layer_params["map_id"])
+
+    layer = map.layers.new(layer_params)
+    if layer.save
+      redirect_to map_path(map)
     else
       # This line overrides the default rendering behavior, which
       # would have been to render the "create" view.
@@ -46,7 +45,7 @@ class LayersController < ApplicationController
 
   def destroy
     @layer.destroy
-    redirect_to layers_url, notice: t("error_message_layer_destroy"), status: :see_other
+    redirect_to maps_url, notice: t("error_message_layer_destroy"), status: :see_other
   end
 
   def schema
@@ -65,7 +64,7 @@ class LayersController < ApplicationController
   private
 
   def set_layer
-    @layer = authorize Layer.includes(:fields, :rows).find(params[:id])
+    @layer = authorize Layer.includes(:fields, :rows, :map).find(params[:id])
   end
 
   def set_user_name
@@ -77,7 +76,7 @@ class LayersController < ApplicationController
   end
 
   def layer_params
-    params.require(:layer).permit(:name, :geometry_type)
+    params.require(:layer).permit(:name, :geometry_type, :map_id)
   end
 
   def field_schema(field)

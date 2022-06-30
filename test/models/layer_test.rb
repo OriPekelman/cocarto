@@ -7,25 +7,25 @@
 #  name          :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  user_id       :uuid             not null
+#  map_id        :uuid             not null
 #
 # Indexes
 #
-#  index_layers_on_user_id  (user_id)
+#  index_layers_on_map_id  (map_id)
 #
 # Foreign Keys
 #
-#  fk_rails_...  (user_id => users.id)
+#  fk_rails_...  (map_id => maps.id)
 #
 require "test_helper"
 
 class LayerTest < ActiveSupport::TestCase
   test "create a new layer" do
-    assert_changes -> { users(:reclus).layers.count }, from: 1, to: 2 do
-      Layer.create! geometry_type: :point, user: users(:reclus)
+    assert_changes -> { maps(:one).layers.count }, from: 1, to: 2 do
+      Layer.create! geometry_type: :point, map: maps(:one)
     end
 
-    assert_equal 1, users(:cassini).layers.count
+    assert_equal 1, maps(:two).layers.count
   end
 
   test "a layer needs a geometry type" do

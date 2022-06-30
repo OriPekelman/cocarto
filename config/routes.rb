@@ -10,6 +10,9 @@ Rails.application.routes.draw do
         get :geojson
       end
     end
+    resources :maps do
+      resources :layers, only: [:new]
+    end
     resources :fields
     resources :rows
     resources :territory_categories
@@ -18,6 +21,6 @@ Rails.application.routes.draw do
         post "search"
       end
     end
-    get "/:locale" => "dashboard#index"
+    get "/:locale" => "main#index"
   end
 end

@@ -1,0 +1,16 @@
+<div class="main-list">
+  <h2><%= Map.model_name.human(count: 2) %></h2>
+  <% @maps.each do |map| %>
+    <%= link_to map, class: "no-decoration" do %>
+    <div class="main-element">
+      <h3><%= map.name %></h3>
+      <p>
+        <%= map.layers.count %> <%= Layer.model_name.human(count: map.layers.count) %>
+        — <%= t :updated_the %> <%= l(map.updated_at.to_date, format: :long) %> <%= t :by %> <%= current_user.email %>
+      </p>
+      <div class="next"><%= embedded_svg "chevron_droite.svg" %></div>
+    </div>
+    <% end %>
+  <% end %>
+  <%= link_to t("new_map"), new_map_path(@map), class: "primary-action" %>
+</div>

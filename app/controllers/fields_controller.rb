@@ -17,8 +17,8 @@ class FieldsController < ApplicationController
   end
 
   def create
-    @layer = current_user.layers.includes(:rows).find(field_params[:layer_id])
-    @field = @layer.fields.new(field_params)
+    layer = Layer.includes(:rows).find(field_params[:layer_id])
+    @field = layer.fields.new(field_params)
 
     if @field.save
       flash.now[:notice] = t("new field created", name: @field.label)
@@ -28,7 +28,7 @@ class FieldsController < ApplicationController
 
     respond_to do |format|
       format.turbo_stream
-      format.html { redirect_to @field.layer }
+      format.html { redirect_to layer_path(@field.layer) }
     end
   end
 

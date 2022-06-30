@@ -12,7 +12,7 @@
   data-map-geometry-type-value="<%= @layer.geometry_type %>">
   <div class="data" data-dragbar-target="left">
     <div class="layer-actions">
-      <%= link_to t("all_layer"), layers_path, class: "go-back" %>
+      <%= link_to t("all_layer"), @layer.map, class: "go-back" %>
       <%= link_to t("download_as_geojson"), geojson_layer_path(@layer), download: "#{@layer.name}.geojson" %>
       <%= link_to t("delete_layer"), @layer, data: {turbo_method: :delete, turbo_confirm: t("delete_confirm")} %>
     </div>

@@ -46,8 +46,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_29_102323) do
     t.enum "geometry_type", enum_type: "geometry_type_enum"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "map_id", null: false
+    t.index ["map_id"], name: "index_layers_on_map_id"
+  end
+
+  create_table "maps", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
     t.uuid "user_id", null: false
-    t.index ["user_id"], name: "index_layers_on_user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_maps_on_user_id"
   end
 
   create_table "rows", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -95,7 +103,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_29_102323) do
   end
 
   add_foreign_key "fields", "layers"
-  add_foreign_key "layers", "users"
+  add_foreign_key "layers", "maps"
+  add_foreign_key "maps", "users"
   add_foreign_key "territories", "territories", column: "parent_id"
   add_foreign_key "territories", "territory_categories"
 end

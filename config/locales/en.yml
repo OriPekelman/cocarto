@@ -17,6 +17,7 @@ en:
   hello: Hello
   new field created: New field %{name} created
   new_layer: Add a new layer
+  new_map: Build a new map
   not_authorized: You are not authorized to perform this action.
   part of territory: Part of territory
   show: Show

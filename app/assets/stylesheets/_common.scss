@@ -275,7 +275,7 @@ input[type="radio"] {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    
+
     a {
         font-size: 14px;
         text-decoration: none;
@@ -328,5 +328,31 @@ input[type="radio"] {
 
     label {
       vertical-align: middle;
+    }
+}
+
+.no-decoration {
+    text-decoration: none;
+}
+
+.next {
+    width: 40px;
+    height: 48px;
+    border-radius: 4px;
+    border: 1px solid var(--color-grey-50);
+    outline: 1px solid  var(--color-grey-30);
+    outline-offset: 1.5px;
+    background-color: white;
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: auto 0;
+    box-sizing: content-box;
+
+    svg {
+        width: 24px;
+        height: 24px;
+        margin: 12px 8px;
+        fill: var(--color-green-50)
     }
 }

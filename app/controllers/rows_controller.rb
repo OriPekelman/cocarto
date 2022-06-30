@@ -31,7 +31,7 @@ class RowsController < ApplicationController
     else
       respond_to do |format|
         format.turbo_stream
-        format.html { redirect_to @row.layer }
+        format.html { redirect_to layer_path(@row.layer) }
       end
     end
   end
@@ -53,7 +53,7 @@ class RowsController < ApplicationController
     @row.update(params)
     respond_to do |format|
       format.turbo_stream
-      format.html { redirect_to @row.layer, notice: t("error_message_row_update") }
+      format.html { redirect_to layer_path(@row.layer), notice: t("error_message_row_update") }
     end
   end
 
@@ -77,7 +77,7 @@ class RowsController < ApplicationController
 
   def set_layer
     layer_id = @row&.layer_id || params[:layer_id] || params[:row][:layer_id]
-    @layer = current_user.layers.includes(:fields).find(layer_id)
+    @layer = Layer.includes(:fields, :map).find(layer_id)
   end
 
   def set_geometry
