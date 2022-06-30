@@ -1,14 +1,16 @@
-<%# params: field, value, row_id %>
+<%# params: field, value, row_id, controller %>
 <%# renders one form field tag for a value of a row for a specific field %>
 
 <td class="field-<%= field.id %> <%= "numerical" if field.numerical? %>">
   <% if field.numerical? %>
-    <%= number_field_tag "row[#{field.id}]", nil, id: field.id, class: "numerical", value: value, data: {action: "focusout->row#save"}, form: row_id, autocomplete: :off %>
+    <%= number_field_tag "row[#{field.id}]", value, id: field.id, class: "numerical", data: {action: "focusout->#{controller}#save"}, form: row_id, autocomplete: :off %>
   <% elsif field.field_type == "territory" %>
     <%= render partial: "territories/search_form", locals: {field_id: field.id, value: value, row_id: row_id} %>
   <% elsif field.field_type == "date" %>
-    <%= date_field_tag "row[#{field.id}]", nil, id: field.id, value: value, data: {action: "change->row#save"}, form: row_id, autocomplete: "off" %>
+    <%= date_field_tag "row[#{field.id}]", value, id: field.id, data: {action: "change->#{controller}#save"}, form: row_id, autocomplete: "off" %>
+  <% elsif field.field_type == "boolean" %>
+    <%= check_box_tag "row[#{field.id}]", "1", value == "1", id: field.id, data: {action: "change->#{controller}#save"}, form: row_id %>
   <% else %>
-    <%= text_field_tag "row[#{field.id}]", nil, id: field.id, class: "input", value: value, data: {action: "focusout->row#save"}, form: row_id, autocomplete: :off %>
+    <%= text_field_tag "row[#{field.id}]", value, id: field.id, class: "input", data: {action: "focusout->#{controller}#save"}, form: row_id, autocomplete: :off %>
   <% end %>
 </td>
