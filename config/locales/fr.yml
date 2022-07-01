@@ -17,6 +17,7 @@ fr:
   error_message_row_destroy: La géométrie a été détruite avec succès.
   error_message_row_update: Les propriétés géométriques ont été mises à jour avec succès.
   hello: Bonjour
+  layer_feature_colors: Couleur des objets
   new field created: Nouvel attribut %{name} créé
   new_layer: Ajouter une nouvelle couche
   new_map: Créer une nouvelle carte

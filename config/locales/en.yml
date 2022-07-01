@@ -17,6 +17,7 @@ en:
   error_message_row_destroy: Geometry was successfully destroyed.
   error_message_row_update: Geometry properties were successfully updated.
   hello: Hello
+  layer_feature_colors: Color of the features
   new field created: New field %{name} created
   new_layer: Add a new layer
   new_map: Build a new map
