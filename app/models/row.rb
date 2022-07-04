@@ -46,20 +46,15 @@ class Row < ApplicationRecord
     RGeo::GeoJSON::Feature.new(geometry, nil, geo_properties)
   end
 
-  def geometry
-    case layer.geometry_type
-    when "point"
-      point
-    when "line_string"
-      line_string
-    when "polygon"
-      polygon
-    else
-      logger.error("Unknown geometry type #{layer.geometry_type}")
-    end
-  end
-
   def geo_properties
     layer.fields.map { |field| [field.label, values[field.id]] }.to_h
+  end
+
+  def geometry=(new_geometry)
+    self[layer.geometry_type] = new_geometry
+  end
+
+  def geometry
+    self[layer.geometry_type]
   end
 end

@@ -20,9 +20,9 @@ class RowsController < ApplicationController
 
     params = {
       layer: @layer,
-      values: fields(@layer)
+      values: fields(@layer),
+      geometry: @geometry
     }
-    params[@layer.geometry_type] = @geometry
 
     @row = @layer.rows.create(params)
 
@@ -46,9 +46,9 @@ class RowsController < ApplicationController
 
   def update
     params = {
-      values: fields(@row.layer)
+      values: fields(@row.layer),
+      geometry: @geometry
     }
-    params[@row.layer.geometry_type] = @geometry
 
     @row.update(params)
     respond_to do |format|
