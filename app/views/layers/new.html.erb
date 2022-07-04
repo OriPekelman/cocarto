@@ -24,7 +24,7 @@
     </div>
 
     <div class="actions">
-      <%= link_to t("back"), layers_path, class: "secondary-action" %>
+      <%= link_to t("back"), map_path(@layer.map), class: "secondary-action" %>
       <%= form.submit class: "primary-action" %>
     </div>
   <% end %>
