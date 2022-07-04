@@ -6,7 +6,7 @@ import PresenceTrackers from 'lib/presence_trackers'
 import MapboxDraw from '@mapbox/mapbox-gl-draw'
 
 export default class extends Controller {
-  static targets = ['longitudeField', 'latitudeField', 'polygonField', 'newPolygonForm', 'newPointForm', 'map', 'point', 'polygon']
+  static targets = ['longitudeField', 'latitudeField', 'lineStringField', 'polygonField', 'newPolygonForm', 'newLineStringForm', 'newPointForm', 'map', 'point', 'lineString', 'polygon']
   static values = {
     editable: Boolean,
     layerId: String,
@@ -54,10 +54,24 @@ export default class extends Controller {
     this.draw.delete(polygon.id)
   }
 
+  lineStringTargetConnected (lineString) {
+    // a lineString can be connected when this.draw isn’t initialized yet
+    if (this.draw) {
+      this.#addLineString(lineString)
+    }
+  }
+
+  lineStringTargetDisconnected (lineString) {
+    this.draw.delete(lineString.id)
+  }
+
   #initMap () {
     this.map = newMap(this.mapTarget)
     if (this.geometryTypeValue === 'point') {
       this.markers.forEach(marker => marker.addTo(this.map))
+    } else if (this.geometryTypeValue === 'line_string') {
+      this.#initLineStringDraw()
+      this.lineStringTargets.forEach(lineString => this.#addLineString(lineString))
     } else if (this.geometryTypeValue === 'polygon') {
       this.#initPolygonDraw()
       this.polygonTargets.forEach(polygon => this.#addPolygon(polygon))
@@ -90,6 +104,51 @@ export default class extends Controller {
       clearTimeout(this.clickTimer)
       this.clickTimer = null
     }
+  }
+
+  #initLineStringDraw () {
+    const rwOptions = {
+      displayControlsDefault: false,
+      // Select which mapbox-gl-draw control buttons to add to the map.
+      controls: {
+        line_string: true
+      },
+      // Set mapbox-gl-draw to draw by default.
+      // The user does not have to click the polygon control button first.
+      defaultMode: 'draw_line_string'
+    }
+
+    const roOptions = {
+      displayControlsDefault: false
+    }
+
+    this.draw = new MapboxDraw(this.editableValue ? rwOptions : roOptions)
+    this.map.addControl(this.draw)
+
+    if (this.editableValue) {
+      this.map.on('draw.create', ({ features }) => {
+        this.lineStringFieldTarget.value = JSON.stringify(features[0].geometry)
+        this.newLineStringFormTarget.requestSubmit()
+        // When we submit the drawn line_string, we get one back from the server through turbo
+        // So we remove the one we’ve just drawn
+        this.draw.delete(features[0].id)
+      })
+      this.map.on('draw.update', ({ features }) => {
+        const id = features[0].id
+        const lineString = document.getElementById(id)
+        lineString.lineStringController.update(features[0].geometry)
+      })
+    }
+  }
+
+  #addLineString (lineString) {
+    const geometry = lineString.lineStringController.geojson()
+    const feature = {
+      id: lineString.id,
+      type: 'Feature',
+      geometry
+    }
+    this.draw.add(feature)
   }
 
   #initPolygonDraw () {

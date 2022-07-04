@@ -2,13 +2,14 @@
 #
 # Table name: rows
 #
-#  id         :uuid             not null, primary key
-#  point      :geometry         point, 0
-#  polygon    :geometry         polygon, 4326
-#  values     :jsonb
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  layer_id   :uuid
+#  id          :uuid             not null, primary key
+#  line_string :geometry         linestring, 4326
+#  point       :geometry         point, 0
+#  polygon     :geometry         polygon, 4326
+#  values      :jsonb
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  layer_id    :uuid
 #
 # Indexes
 #
@@ -49,8 +50,8 @@ class Row < ApplicationRecord
     case layer.geometry_type
     when "point"
       point
-    when "line"
-      line
+    when "line_string"
+      line_string
     when "polygon"
       polygon
     else
