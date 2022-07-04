@@ -1,7 +1,6 @@
 class RowsController < ApplicationController
   before_action :set_row, only: %i[edit destroy update]
   before_action :set_layer, only: %i[create new update]
-  before_action :set_geometry, only: %i[create update]
 
   def new
     @row = @layer.rows.new
@@ -18,13 +17,13 @@ class RowsController < ApplicationController
   def create
     anonymous = params.require(:row)[:annonymous] == "true"
 
-    params = {
+    create_params = {
       layer: @layer,
       values: fields(@layer),
-      geometry: @geometry
+      geojson: params.require(:row).permit(:geojson)[:geojson]
     }
 
-    @row = @layer.rows.create(params)
+    @row = @layer.rows.create(create_params)
 
     if anonymous
       redirect_to action: :edit, id: @row
@@ -45,12 +44,12 @@ class RowsController < ApplicationController
   end
 
   def update
-    params = {
+    update_params = {
       values: fields(@row.layer),
-      geometry: @geometry
+      geojson: params.require(:row).permit(:geojson)[:geojson]
     }
 
-    @row.update(params)
+    @row.update(update_params)
     respond_to do |format|
       format.turbo_stream
       format.html { redirect_to layer_path(@row.layer), notice: t("error_message_row_update") }
@@ -78,10 +77,5 @@ class RowsController < ApplicationController
   def set_layer
     layer_id = @row&.layer_id || params[:layer_id] || params[:row][:layer_id]
     @layer = Layer.includes(:fields, :map).find(layer_id)
-  end
-
-  def set_geometry
-    geometry = params.require(:row).permit(:geometry)[:geometry]
-    @geometry = RGeo::GeoJSON.decode(geometry, geo_factory: RGEO_FACTORY)
   end
 end

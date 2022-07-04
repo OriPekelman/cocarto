@@ -6,7 +6,7 @@ import PresenceTrackers from 'lib/presence_trackers'
 import MapboxDraw from '@mapbox/mapbox-gl-draw'
 
 export default class extends Controller {
-  static targets = ['geometryField', 'newRowForm', 'row', 'map']
+  static targets = ['geojsonField', 'newRowForm', 'row', 'map']
   static values = {
     editable: Boolean,
     layerId: String,
@@ -70,7 +70,7 @@ export default class extends Controller {
 
     if (this.editableValue) {
       this.map.on('draw.create', ({ features }) => {
-        this.geometryFieldTarget.value = JSON.stringify(features[0].geometry)
+        this.geojsonFieldTarget.value = JSON.stringify(features[0].geometry)
         this.newRowFormTarget.requestSubmit()
         // When we submit the drawn row, we get one back from the server through turbo
         // So we remove the one we’ve just drawn

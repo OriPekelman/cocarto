@@ -57,4 +57,12 @@ class Row < ApplicationRecord
   def geometry
     self[layer.geometry_type]
   end
+
+  def geojson
+    RGeo::GeoJSON.encode(geometry).to_json
+  end
+
+  def geojson=(new_geojson)
+    self.geometry = RGeo::GeoJSON.decode(new_geojson, geo_factory: RGEO_FACTORY)
+  end
 end
