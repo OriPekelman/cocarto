@@ -18,5 +18,5 @@
   </div>
 <% end %>
 
-<%= link_to t("delete_map"), @map, data: {turbo_method: :delete, turbo_confirm: t("delete_confirm")}, class: "primary-action" %>
+<%= link_to t("delete_map"), @map, data: {turbo_method: :delete, turbo_confirm: t("delete_confirm")}, class: "delete-action" %>
 <%= link_to t("new_layer"), new_map_layer_path(@map), class: "primary-action" %>
