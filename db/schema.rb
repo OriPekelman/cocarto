@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_04_125905) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_04_132417) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
   enable_extension "postgis"
 
-  create_enum :fields_type_enum, [
+  create_enum :field_type, [
     "text",
     "float",
     "integer",
@@ -26,7 +26,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_04_125905) do
     "boolean",
   ], force: :cascade
 
-  create_enum :geometry_type_enum, [
+  create_enum :layer_geometry_type, [
     "point",
     "line_string",
     "polygon",
@@ -37,13 +37,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_04_125905) do
     t.uuid "layer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.enum "field_type", enum_type: "fields_type_enum"
+    t.enum "field_type", enum_type: "field_type"
     t.index ["layer_id"], name: "index_fields_on_layer_id"
   end
 
   create_table "layers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
-    t.enum "geometry_type", enum_type: "geometry_type_enum"
+    t.enum "geometry_type", enum_type: "layer_geometry_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "map_id", null: false
