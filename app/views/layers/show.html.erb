@@ -6,7 +6,7 @@
     data-map-geometry-type-value="<%= @layer.geometry_type %>">
   <div class="data">
     <div class="layer-actions">
-      <%= link_to t("back"), layers_path, class: "go-back" %>
+      <%= link_to t("back"), map_path(@layer.map), class: "go-back" %>
       <%= link_to t("edit"), edit_layer_path(@layer) %>
     </div>
       <h2><%= "#{Layer.model_name.human} #{@layer.name}" %></h2>
