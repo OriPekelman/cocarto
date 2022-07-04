@@ -7,11 +7,13 @@ en:
   click on map for more content: Click on the map to add a new data point
   delete_confirm: Are you sure?
   delete_layer: Delete this layer
+  delete_map: Delete map
   download_as_geojson: Download as GeoJSON
   edit: Edit
   error_message_field_destroy: Field was successfully destroyed.
   error_message_field_update: Field was successfully updated.
   error_message_layer_destroy: Layer was successfully destroyed.
+  error_message_map_destroy: The map was successfully destroyed
   error_message_row_destroy: Geometry was successfully destroyed.
   error_message_row_update: Geometry properties were successfully updated.
   hello: Hello

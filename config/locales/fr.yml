@@ -7,11 +7,13 @@ fr:
   click on map for more content: Cliquez sur la carte pour ajouter un nouveau point de données
   delete_confirm: Êtes-vous sûr ?
   delete_layer: Supprimer cette couche
+  delete_map: Supprimer la carte
   download_as_geojson: Télécharger en GeoJSON
   edit: Modifier
   error_message_field_destroy: Le champ a été détruit avec succès.
   error_message_field_update: Le champ a été mis à jour avec succès.
   error_message_layer_destroy: La couche a été détruite avec succès
+  error_message_map_destroy: La carte a été détruite avec succès
   error_message_row_destroy: La géométrie a été détruite avec succès.
   error_message_row_update: Les propriétés géométriques ont été mises à jour avec succès.
   hello: Bonjour
