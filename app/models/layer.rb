@@ -41,4 +41,12 @@ class Layer < ApplicationRecord
   def geo_feature_collection
     RGeo::GeoJSON::FeatureCollection.new(rows.map(&:geo_feature))
   end
+
+  def color
+    style["color"] || COLORS[:blue]
+  end
+
+  def color=(new_color)
+    style["color"] = new_color
+  end
 end

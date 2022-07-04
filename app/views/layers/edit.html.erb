@@ -9,7 +9,8 @@
   data-map-layer-id-value="<%= @layer.id %>"
   data-map-session-id-value="<%= @session_id %>"
   data-map-username-value="<%= @user_name %>"
-  data-map-geometry-type-value="<%= @layer.geometry_type %>">
+  data-map-geometry-type-value="<%= @layer.geometry_type %>"
+  data-map-color-value="<%= @layer.color %>">
   <div class="data" data-dragbar-target="left">
     <div class="layer-actions">
       <%= link_to t("all_layer"), @layer.map, class: "go-back" %>
