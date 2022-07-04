@@ -306,6 +306,10 @@ input[type="radio"] {
     @include button(white, var(--color-green-70));
 }
 
+.delete-action {
+    @include button(white, var(--color-error-40));
+}
+
 .secondary-action {
     @include button(var(--color-green-80), var(--color-green-20));
 }
