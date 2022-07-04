@@ -9,6 +9,7 @@
       <%= layer.rows.count %> <%= Layer.human_attribute_name(layer.geometry_type, count: layer.rows.count) %>
       — <%= t :updated_the %> <%= l(layer.updated_at.to_date, format: :long) %> <%= t :by %> <%= current_user.email %>
     </p>
+
     <p>
       <%= link_to t("edit"), edit_layer_path(layer) %>
       —
@@ -17,4 +18,5 @@
   </div>
 <% end %>
 
+<%= link_to t("delete_map"), @map, data: {turbo_method: :delete, turbo_confirm: t("delete_confirm")}, class: "primary-action" %>
 <%= link_to t("new_layer"), new_map_layer_path(@map), class: "primary-action" %>

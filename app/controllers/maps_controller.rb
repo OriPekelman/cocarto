@@ -1,5 +1,5 @@
 class MapsController < ApplicationController
-  before_action :set_map, only: %i[show]
+  before_action :set_map, only: %i[show destroy]
 
   def index
     @maps = current_user.maps.all
@@ -11,6 +11,11 @@ class MapsController < ApplicationController
 
   def new
     @map = current_user.maps.new
+  end
+
+  def destroy
+    @map.destroy
+    redirect_to maps_url, notice: t("error_message_map_destroy"), status: :see_other
   end
 
   def create
