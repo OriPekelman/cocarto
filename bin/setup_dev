@@ -6,6 +6,7 @@ function linux() {
 }
 
 function macos() {
+  brew install postgis
   brew install graphviz
   brew install npm node
 }
