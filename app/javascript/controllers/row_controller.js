@@ -5,8 +5,8 @@ export default class extends Controller {
 
   connect () {
     // Small hack inspired by https://dev.to/leastbad/the-best-one-line-stimulus-power-move-2o90
-    this.element.polygonController = this
-    this.element.dataset.mapTarget = 'polygon'
+    this.element.rowController = this
+    this.element.dataset.mapTarget = 'row'
   }
 
   save () {

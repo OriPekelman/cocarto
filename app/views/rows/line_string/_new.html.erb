@@ -1,8 +1,0 @@
-<%# params: row %>
-<%# renders a hidden form for a new Row with connectors to stimulus controllers. Used in layers/edit %>
-
-<%= form_with model: row, data: {"map-target" => "newLineStringForm"}, class: "is-hidden" do |form| %>
-  <%= form.hidden_field :layer_id %>
-  <%= form.hidden_field :line_string, data: {"map-target" => "lineStringField"} %>
-  <%= form.submit %>
-<% end %>
