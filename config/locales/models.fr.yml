@@ -7,7 +7,7 @@ fr:
         label: Nom
       layer:
         geometry_type: Type de géometrie
-        linestring:
+        line_string:
           one: tracé
           other: tracés
         name: Nom

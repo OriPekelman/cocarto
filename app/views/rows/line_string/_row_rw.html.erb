@@ -1,0 +1,20 @@
+<%# params: row %>
+<%# renders a row in a table, editable, used in layers/_rows_rw %>
+
+<tr id="<%= dom_id(row) %>"
+    data-controller="line-string">
+  <% row.data do |field, value| %>
+    <%= render partial: "fields/field_in_form", locals: {field: field, value: value, row_id: row.id, controller: "line-string"} %>
+  <% end %>
+  <td id="<%= row.id %>-action">
+    <div class="actions">
+      <%= form_with method: :patch, model: row, id: row.id, data: {"line-string-target": "form", action: "row#save"} do |form| %>
+        <%= form.hidden_field "line_string", value: RGeo::GeoJSON.encode(row.geometry).to_json, data: {"line-string-target": "geojson"} %>
+        <%= form.button "save", class: "is-hidden" %>
+      <% end %>
+      <%= button_to row, method: :delete do %>
+        Delete
+      <% end %>
+    </div>
+  </td>
+</tr>

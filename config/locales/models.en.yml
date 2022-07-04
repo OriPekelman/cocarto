@@ -7,7 +7,7 @@ en:
         label: Name
       layer:
         geometry_type: Geometry type
-        linestring:
+        line_string:
           one: line string
           other: line strings
         name: Name

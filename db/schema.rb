@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_29_102323) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_04_102157) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -28,7 +28,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_29_102323) do
 
   create_enum :geometry_type_enum, [
     "point",
-    "linestring",
+    "line_string",
     "polygon",
   ], force: :cascade
 
@@ -65,6 +65,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_29_102323) do
     t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.geometry "polygon", limit: {:srid=>4326, :type=>"st_polygon"}
+    t.geometry "line_string", limit: {:srid=>4326, :type=>"line_string"}
     t.index ["layer_id"], name: "index_rows_on_layer_id"
   end
 

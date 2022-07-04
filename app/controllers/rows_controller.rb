@@ -87,6 +87,9 @@ class RowsController < ApplicationController
     elsif @layer.geometry_type == "polygon"
       polygon = params.require(:row).permit(:polygon)[:polygon]
       @geometry = RGeo::GeoJSON.decode(polygon, geo_factory: RGEO_FACTORY)
+    elsif @layer.geometry_type == "line_string"
+      line_string = params.require(:row).permit(:line_string)[:line_string]
+      @geometry = RGeo::GeoJSON.decode(line_string, geo_factory: RGEO_FACTORY)
     else
       logger.error("Unsupported geometry type #{@layer.geometry_type}")
     end
