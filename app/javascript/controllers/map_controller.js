@@ -1,7 +1,7 @@
 /* global ResizeObserver */
 import { Controller } from '@hotwired/stimulus'
 
-import { newMap, newMarker } from 'lib/map_helpers'
+import { newMap } from 'lib/map_helpers'
 import PresenceTrackers from 'lib/presence_trackers'
 import MapboxDraw from '@mapbox/mapbox-gl-draw'
 
