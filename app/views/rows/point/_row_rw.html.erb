@@ -9,8 +9,7 @@
   <td id="<%= row.id %>-action">
     <div class="actions">
       <%= form_with method: :patch, model: row, id: row.id, data: {"point-target": "form", action: "row#save"} do |form| %>
-        <%= form.hidden_field "longitude", value: row.point.x, data: {"point-target": "longitude"} %>
-        <%= form.hidden_field "latitude", value: row.point.y, data: {"point-target": "latitude"} %>
+        <%= form.hidden_field "point", value: RGeo::GeoJSON.encode(row.geometry).to_json, data: {"point-target": "geojson"} %>
         <%= form.button "save", class: "is-hidden" %>
       <% end %>
       <%= button_to row, method: :delete do %>

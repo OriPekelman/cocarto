@@ -3,7 +3,6 @@
 
 <%= form_with model: row, data: {"map-target" => "newPointForm"}, class: "is-hidden" do |form| %>
   <%= form.hidden_field :layer_id %>
-  <%= form.hidden_field :longitude, data: {"map-target" => "longitudeField"} %>
-  <%= form.hidden_field :latitude, data: {"map-target" => "latitudeField"} %>
+  <%= form.hidden_field :point, data: {"map-target" => "pointField"} %>
   <%= form.submit %>
 <% end %>

@@ -1,11 +1,11 @@
 import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
-  static targets = ['form', 'longitude', 'latitude']
+  static targets = ['form', 'geojson']
 
   connect () {
     // Small hack inspired by https://dev.to/leastbad/the-best-one-line-stimulus-power-move-2o90
-    this.element.rowController = this
+    this.element.pointController = this
     this.element.dataset.mapTarget = 'point'
   }
 
@@ -13,16 +13,12 @@ export default class extends Controller {
     this.formTarget.requestSubmit()
   }
 
-  getLngLat () {
-    return {
-      lng: Number(this.longitudeTarget.value),
-      lat: Number(this.latitudeTarget.value)
-    }
+  geojson () {
+    return JSON.parse(this.geojsonTarget.value)
   }
 
-  dragged ({ lng, lat }) {
-    this.longitudeTarget.value = lng
-    this.latitudeTarget.value = lat
+  update (geojson) {
+    this.geojsonTarget.value = JSON.stringify(geojson)
     this.formTarget.requestSubmit()
   }
 }
