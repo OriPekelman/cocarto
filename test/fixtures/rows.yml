@@ -4,7 +4,7 @@
 #
 #  id          :uuid             not null, primary key
 #  line_string :geometry         linestring, 4326
-#  point       :geometry         point, 0
+#  point       :geometry         point, 4326
 #  polygon     :geometry         polygon, 4326
 #  values      :jsonb
 #  created_at  :datetime         not null
