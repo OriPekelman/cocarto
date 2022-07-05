@@ -21,6 +21,7 @@ lint-rb: ## Run ruby linters
 
 lint-js: ## Run javascript linters
 	npx standard
+	npx prettier --check app/assets/stylesheets
 
 lint: lint-rb lint-js ## Run all linters
 
@@ -28,6 +29,7 @@ lint_autocorrect: ## Run linters in autocorrect mode
 	bundle exec rubocop --auto-correct-all
 	bundle exec erblint --lint-all --autocorrect
 	npx standard --fix
+	npx prettier --write app/assets/stylesheets
 
 test: test-unit test-system ## Run all tests
 

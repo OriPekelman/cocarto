@@ -1,0 +1,39 @@
+# Ignore artifacts:
+build
+coverage
+
+# Ignore all HTML files:
+*.html
+
+# Ignore all JS files:
+*.js
+
+# Ignore all YML files:
+*.yml
+
+# Ignore all RB files:
+*.rb
+
+# Ignore all HTML.ERB files:
+*.html.erb
+
+# Ignore all RAKE files:
+*.rake
+
+# Ignore all JSON files:
+*.json
+
+# Ignore all GEOJSON files:
+*.geojson
+
+# Ignore all RU files:
+*.ru
+
+# Ignore all MD files:
+*.md
+
+# Ignore all RAKEFILE files:
+*Rakefile
+
+# Ignore all GEMFILE files:
+*Gemfile
