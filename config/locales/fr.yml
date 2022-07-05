@@ -5,6 +5,15 @@ fr:
   by: par
   call to add a field: Cliquez sur le + pour ajouter une colonne à vos données
   click on map for more content: Cliquez sur la carte pour ajouter un nouveau point de données
+  colors:
+    blue: Bleu
+    brown: Marron
+    cyan: Cyan
+    green: Vert
+    indigo: Indigo
+    orange: Orange
+    pink: Rose
+    purple: Violet
   delete_confirm: Êtes-vous sûr ?
   delete_layer: Supprimer cette couche
   delete_map: Supprimer la carte
@@ -17,6 +26,7 @@ fr:
   error_message_row_destroy: La géométrie a été détruite avec succès.
   error_message_row_update: Les propriétés géométriques ont été mises à jour avec succès.
   hello: Bonjour
+  layer_feature_colors: Couleur des objets
   new field created: Nouvel attribut %{name} créé
   new_layer: Ajouter une nouvelle couche
   new_map: Créer une nouvelle carte

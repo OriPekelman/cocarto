@@ -6,6 +6,7 @@
   <div class="main-element">
     <h3><%= layer.name %></h3>
     <p>
+      <span class="color-marker" style="background-color: <%= layer.color %>"></span>
       <%= layer.rows.count %> <%= Layer.human_attribute_name(layer.geometry_type, count: layer.rows.count) %>
       — <%= t :updated_the %> <%= l(layer.updated_at.to_date, format: :long) %> <%= t :by %> <%= current_user.email %>
     </p>

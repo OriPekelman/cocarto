@@ -5,6 +5,15 @@ en:
   by: by
   call to add a field: Click on the + to add a data column to your data
   click on map for more content: Click on the map to add a new data point
+  colors:
+    blue: Blue
+    brown: Brown
+    cyan: Cyan
+    green: Green
+    indigo: Indigo
+    orange: Orange
+    pink: Pink
+    purple: Purple
   delete_confirm: Are you sure?
   delete_layer: Delete this layer
   delete_map: Delete map
@@ -17,6 +26,7 @@ en:
   error_message_row_destroy: Geometry was successfully destroyed.
   error_message_row_update: Geometry properties were successfully updated.
   hello: Hello
+  layer_feature_colors: Color of the features
   new field created: New field %{name} created
   new_layer: Add a new layer
   new_map: Build a new map

@@ -3,7 +3,8 @@
 <%= turbo_stream_from "#{@layer.id}_ro" %>
 <div class="data-with-map"
     data-controller="map"
-    data-map-geometry-type-value="<%= @layer.geometry_type %>">
+    data-map-geometry-type-value="<%= @layer.geometry_type %>"
+    data-map-color-value="<%= @layer.color %>">
   <div class="data">
     <div class="layer-actions">
       <%= link_to t("back"), map_path(@layer.map), class: "go-back" %>

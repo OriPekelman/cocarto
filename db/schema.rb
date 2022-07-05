@@ -47,6 +47,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_04_132417) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "map_id", null: false
+    t.jsonb "style", default: {}, null: false
     t.index ["map_id"], name: "index_layers_on_map_id"
   end
 

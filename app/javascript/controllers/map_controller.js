@@ -1,7 +1,7 @@
 /* global ResizeObserver */
 import { Controller } from '@hotwired/stimulus'
 
-import { newMap } from 'lib/map_helpers'
+import { newMap, maplibreGLFeaturesStyle } from 'lib/map_helpers'
 import PresenceTrackers from 'lib/presence_trackers'
 import MapboxDraw from '@mapbox/mapbox-gl-draw'
 
@@ -12,7 +12,8 @@ export default class extends Controller {
     layerId: String,
     sessionId: String,
     username: String,
-    geometryType: String
+    geometryType: String,
+    color: String
   }
 
   initialize () {
@@ -58,11 +59,13 @@ export default class extends Controller {
       },
       // Set mapbox-gl-draw to draw by default.
       // The user does not have to click the polygon control button first.
-      defaultMode: `draw_${this.geometryTypeValue}`
+      defaultMode: `draw_${this.geometryTypeValue}`,
+      styles: maplibreGLFeaturesStyle(this.colorValue)
     }
 
     const roOptions = {
-      displayControlsDefault: false
+      displayControlsDefault: false,
+      styles: maplibreGLFeaturesStyle(this.colorValue)
     }
 
     this.draw = new MapboxDraw(this.editableValue ? rwOptions : roOptions)

@@ -30,6 +30,7 @@ lint_autocorrect: ## Run linters in autocorrect mode
 	bundle exec erblint --lint-all --autocorrect
 	npx standard --fix
 	npx prettier --write app/assets/stylesheets
+	bundle exec i18n-tasks normalize
 
 test: test-unit test-system ## Run all tests
 

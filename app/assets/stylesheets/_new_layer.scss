@@ -12,8 +12,17 @@
     margin: 0;
   }
 
+  h3 {
+    margin-top: 2rem;
+  }
+
   .field input {
     width: 100%;
+  }
+
+  .color-selection {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
   }
 
   .geometry-type-selector {
@@ -27,7 +36,7 @@
 
     [type="radio"] + div {
       cursor: pointer;
-      img {
+      svg {
         outline: 1px solid var(--color-grey-50);
         background-color: var(--color-bg-ambient-20);
       }
@@ -35,7 +44,7 @@
 
     [type="radio"]:hover + div {
       cursor: pointer;
-      img {
+      svg {
         outline: 1px solid var(--color-grey-100);
         background-color: white;
       }
@@ -44,7 +53,7 @@
 
     [type="radio"]:checked + div {
       background-color: var(--color-green-10);
-      img {
+      svg {
         outline: 2px solid var(--color-green-70);
         background-color: var(--color-bg-ambient-20);
       }
@@ -53,7 +62,7 @@
     [type="radio"]:disabled + div {
       cursor: default;
       background-color: var(--color-grey-20);
-      img {
+      svg {
         outline: 1px solid var(--color-grey-50);
         background-color: var(--color-bg-ambient-20);
       }
@@ -65,8 +74,9 @@
       align-items: center;
       padding-bottom: 8px;
 
-      img {
+      svg {
         width: 48px;
+        height: 48px;
         margin: 8px;
       }
     }
