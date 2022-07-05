@@ -16,10 +16,4 @@ function newMap (node) {
   })).addControl(new maplibre.ScaleControl())
 }
 
-function newMarker (lngLat) {
-  const marker = new maplibre.Marker({ draggable: true })
-  marker.setLngLat(lngLat)
-  return marker
-}
-
-export { newMap, newMarker }
+export { newMap }

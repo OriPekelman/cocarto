@@ -1,12 +1,12 @@
 /* global ResizeObserver */
 import { Controller } from '@hotwired/stimulus'
 
-import { newMap, newMarker } from 'lib/map_helpers'
+import { newMap } from 'lib/map_helpers'
 import PresenceTrackers from 'lib/presence_trackers'
 import MapboxDraw from '@mapbox/mapbox-gl-draw'
 
 export default class extends Controller {
-  static targets = ['longitudeField', 'latitudeField', 'lineStringField', 'polygonField', 'newPolygonForm', 'newLineStringForm', 'newPointForm', 'map', 'point', 'lineString', 'polygon']
+  static targets = ['pointField', 'lineStringField', 'polygonField', 'newPolygonForm', 'newLineStringForm', 'newPointForm', 'map', 'point', 'lineString', 'polygon']
   static values = {
     editable: Boolean,
     layerId: String,
@@ -26,21 +26,14 @@ export default class extends Controller {
   }
 
   pointTargetConnected (point) {
-    const marker = newMarker(point.rowController.getLngLat())
-    this.markers.set(point.id, marker)
-    marker.on('dragend', () =>
-      point.rowController.dragged(marker.getLngLat())
-    )
-    if (this.map) {
-      marker.addTo(this.map)
+    // a point can be connected when this.draw isn’t initialized yet
+    if (this.draw) {
+      this.#addPoint(point)
     }
   }
 
   pointTargetDisconnected (point) {
-    const id = point.id
-    const m = this.markers.get(id)
-    m.remove()
-    this.markers.delete(id)
+    this.draw.delete(point.id)
   }
 
   polygonTargetConnected (polygon) {
@@ -68,7 +61,8 @@ export default class extends Controller {
   #initMap () {
     this.map = newMap(this.mapTarget)
     if (this.geometryTypeValue === 'point') {
-      this.markers.forEach(marker => marker.addTo(this.map))
+      this.#initPointDraw()
+      this.pointTargets.forEach(point => this.#addPoint(point))
     } else if (this.geometryTypeValue === 'line_string') {
       this.#initLineStringDraw()
       this.lineStringTargets.forEach(lineString => this.#addLineString(lineString))
@@ -81,29 +75,53 @@ export default class extends Controller {
     resizeObserver.observe(this.mapTarget)
 
     if (this.editableValue) {
-      if (this.geometryTypeValue === 'point') {
-        this.map.on('click', e => this.#handleClick(e))
-      }
-
       this.map.on('mousemove', e => this.trackers.mousemove(e))
     }
   }
 
-  #handleClick (event) {
-    // It is the first click, a second might happen if the user double-clicks
-    if (event.originalEvent.detail === 1) {
-      // We put the submit in a timeout so it can be canceled if it was a doubleclick
-      this.clickTimer = setTimeout(() => {
-        this.longitudeFieldTarget.value = event.lngLat.lng
-        this.latitudeFieldTarget.value = event.lngLat.lat
-        this.newPointFormTarget.requestSubmit()
-      }, 500) // Is there a way to accually know what the double-click delay is?
-    } else if (this.clickTimer !== null) {
-      // Oh! it was a double click. ABORT!
-      // We didn’t want to create a new point
-      clearTimeout(this.clickTimer)
-      this.clickTimer = null
+  #initPointDraw () {
+    const rwOptions = {
+      displayControlsDefault: false,
+      // Select which mapbox-gl-draw control buttons to add to the map.
+      controls: {
+        point: true
+      },
+      // Set mapbox-gl-draw to draw by default.
+      // The user does not have to click the point control button first.
+      defaultMode: 'draw_point'
     }
+
+    const roOptions = {
+      displayControlsDefault: false
+    }
+
+    this.draw = new MapboxDraw(this.editableValue ? rwOptions : roOptions)
+    this.map.addControl(this.draw)
+
+    if (this.editableValue) {
+      this.map.on('draw.create', ({ features }) => {
+        this.pointFieldTarget.value = JSON.stringify(features[0].geometry)
+        this.newPointFormTarget.requestSubmit()
+        // When we submit the drawn line_string, we get one back from the server through turbo
+        // So we remove the one we’ve just drawn
+        this.draw.delete(features[0].id)
+      })
+      this.map.on('draw.update', ({ features }) => {
+        const id = features[0].id
+        const point = document.getElementById(id)
+        point.pointController.update(features[0].geometry)
+      })
+    }
+  }
+
+  #addPoint (point) {
+    const geometry = point.pointController.geojson()
+    const feature = {
+      id: point.id,
+      type: 'Feature',
+      geometry
+    }
+    this.draw.add(feature)
   }
 
   #initLineStringDraw () {

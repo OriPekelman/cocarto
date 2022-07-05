@@ -82,8 +82,8 @@ class RowsController < ApplicationController
 
   def set_geometry
     if @layer.geometry_type == "point"
-      point = params.require(:row).permit(:longitude, :latitude)
-      @geometry = RGEO_FACTORY.point(point[:longitude], point[:latitude])
+      point = params.require(:row).permit(:point)[:point]
+      @geometry = RGeo::GeoJSON.decode(point, geo_factory: RGEO_FACTORY)
     elsif @layer.geometry_type == "polygon"
       polygon = params.require(:row).permit(:polygon)[:polygon]
       @geometry = RGeo::GeoJSON.decode(polygon, geo_factory: RGEO_FACTORY)
