@@ -16,3 +16,5 @@ case $(uname -s) in
     Darwin*)    macos;;
     *)          echo "Unknow system '$(uname -s)'"; exit 1
 esac
+
+npm install
