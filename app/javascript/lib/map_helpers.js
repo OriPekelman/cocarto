@@ -22,6 +22,40 @@ function newMap (node) {
 function maplibreGLFeaturesStyle (color) {
   return [
     {
+      id: 'highlight-active-points',
+      type: 'circle',
+      filter: ['all',
+        ['==', '$type', 'Point'],
+        ['==', 'meta', 'feature'],
+        ['==', 'active', 'true']],
+      paint: {
+        'circle-radius': 10,
+        'circle-color': '#fff'
+      }
+    },
+    {
+      id: 'points-base',
+      type: 'circle',
+      filter: ['all',
+        ['==', '$type', 'Point'],
+        ['==', 'meta', 'feature']],
+      paint: {
+        'circle-radius': 6,
+        'circle-color': color
+      }
+    },
+    {
+      id: 'points-outline',
+      type: 'circle',
+      filter: ['all', ['==', '$type', 'Point'], ['==', 'meta', 'feature']],
+      paint: {
+        'circle-radius': 4,
+        'circle-stroke-color': '#fff',
+        'circle-stroke-width': 1,
+        'circle-opacity': 0
+      }
+    },
+    {
       id: 'gl-draw-polygon-fill',
       type: 'fill',
       filter: ['all', ['==', '$type', 'Polygon'], ['!=', 'mode', 'static']],
