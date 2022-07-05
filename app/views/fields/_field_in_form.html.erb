@@ -9,7 +9,7 @@
   <% elsif field.field_type == "date" %>
     <%= date_field_tag "row[#{field.id}]", value, id: field.id, data: {action: "change->#{controller}#save"}, form: row_id, autocomplete: "off" %>
   <% elsif field.field_type == "boolean" %>
-    <%= check_box_tag "row[#{field.id}]", "1", value == "1", id: field.id, data: {action: "change->#{controller}#save"}, form: row_id %>
+    <%= check_box_tag "row[#{field.id}]", "1", value == "1", id: field.id, data: {action: "change->#{controller}#save"}, form: row_id, class: "field_checkbox" %>
   <% else %>
     <%= text_field_tag "row[#{field.id}]", value, id: field.id, class: "input", data: {action: "focusout->#{controller}#save"}, form: row_id, autocomplete: :off %>
   <% end %>
