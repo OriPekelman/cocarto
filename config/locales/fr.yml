@@ -5,6 +5,15 @@ fr:
   by: par
   call to add a field: Cliquez sur le + pour ajouter une colonne à vos données
   click on map for more content: Cliquez sur la carte pour ajouter un nouveau point de données
+  colors:
+    blue: Bleu
+    brown: Marron
+    cyan: Cyan
+    green: Vert
+    indigo: Indigo
+    orange: Orange
+    pink: Rose
+    purple: Violet
   delete_confirm: Êtes-vous sûr ?
   delete_layer: Supprimer cette couche
   delete_map: Supprimer la carte
