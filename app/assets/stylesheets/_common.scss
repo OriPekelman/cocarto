@@ -365,3 +365,11 @@ input[type="radio"] {
     fill: var(--color-green-50);
   }
 }
+
+select {
+  width: 26em;
+  height: 30px;
+  border-radius: var(--border-radius);
+  margin-bottom: 14px;
+  border-color: var(--color-grey-60);
+}
