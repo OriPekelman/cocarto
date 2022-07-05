@@ -18,16 +18,16 @@
 class Row < ApplicationRecord
   belongs_to :layer
   after_update_commit -> do
-    broadcast_replace_to layer, partial: "rows/#{layer.geometry_type}/row_rw", locals: {row: self}
-    broadcast_replace_to "#{layer.id}_ro", partial: "rows/#{layer.geometry_type}/row_ro", locals: {row: self}
+    broadcast_replace_to layer, partial: "rows/row_rw", locals: {row: self}
+    broadcast_replace_to "#{layer.id}_ro", partial: "rows/row_ro", locals: {row: self}
   end
   after_destroy_commit -> do
     broadcast_remove_to layer
     broadcast_remove_to "#{layer.id}_ro"
   end
   after_create_commit -> do
-    broadcast_append_to layer, target: "rows-tbody", partial: "rows/#{layer.geometry_type}/row_rw", locals: {row: self}
-    broadcast_append_to "#{layer.id}_ro", target: "rows-tbody", partial: "rows/#{layer.geometry_type}/row_ro", locals: {row: self}
+    broadcast_append_to layer, target: "rows-tbody", partial: "rows/row_rw", locals: {row: self}
+    broadcast_append_to "#{layer.id}_ro", target: "rows-tbody", partial: "rows/row_ro", locals: {row: self}
     broadcast_replace_to layer, target: "tutorial", partial: "layers/tooltip", locals: {layer: layer}
   end
 
@@ -46,20 +46,23 @@ class Row < ApplicationRecord
     RGeo::GeoJSON::Feature.new(geometry, nil, geo_properties)
   end
 
-  def geometry
-    case layer.geometry_type
-    when "point"
-      point
-    when "line_string"
-      line_string
-    when "polygon"
-      polygon
-    else
-      logger.error("Unknown geometry type #{layer.geometry_type}")
-    end
-  end
-
   def geo_properties
     layer.fields.map { |field| [field.label, values[field.id]] }.to_h
+  end
+
+  def geometry=(new_geometry)
+    self[layer.geometry_type] = new_geometry
+  end
+
+  def geometry
+    self[layer.geometry_type]
+  end
+
+  def geojson
+    RGeo::GeoJSON.encode(geometry).to_json
+  end
+
+  def geojson=(new_geojson)
+    self.geometry = RGeo::GeoJSON.decode(new_geojson, geo_factory: RGEO_FACTORY)
   end
 end

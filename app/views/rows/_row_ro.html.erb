@@ -2,8 +2,8 @@
 <%# renders a non-editable row in a table. used in layers/rows_ro %>
 
 <tr id="<%= dom_id(row) %>"
-    data-controller="line_string">
-  <%= hidden_field_tag "line_string", RGeo::GeoJSON.encode(row.geometry).to_json, data: {"line-string-target": "geojson"} %>
+    data-controller="row">
+  <%= hidden_field_tag "geojson", row.geojson, data: {"row-target": "geojson"} %>
   <% row.layer.fields.each do |field| %>
     <% if field.numerical? %>
       <td class="numerical"><%= row.values[field.id] %></td>

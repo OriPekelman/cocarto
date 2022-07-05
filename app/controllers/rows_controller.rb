@@ -1,7 +1,6 @@
 class RowsController < ApplicationController
   before_action :set_row, only: %i[edit destroy update]
   before_action :set_layer, only: %i[create new update]
-  before_action :set_geometry, only: %i[create update]
 
   def new
     @row = @layer.rows.new
@@ -18,13 +17,13 @@ class RowsController < ApplicationController
   def create
     anonymous = params.require(:row)[:annonymous] == "true"
 
-    params = {
+    create_params = {
       layer: @layer,
-      values: fields(@layer)
+      values: fields(@layer),
+      geojson: params.require(:row).permit(:geojson)[:geojson]
     }
-    params[@layer.geometry_type] = @geometry
 
-    @row = @layer.rows.create(params)
+    @row = @layer.rows.create(create_params)
 
     if anonymous
       redirect_to action: :edit, id: @row
@@ -45,12 +44,12 @@ class RowsController < ApplicationController
   end
 
   def update
-    params = {
-      values: fields(@row.layer)
+    update_params = {
+      values: fields(@row.layer),
+      geojson: params.require(:row).permit(:geojson)[:geojson]
     }
-    params[@row.layer.geometry_type] = @geometry
 
-    @row.update(params)
+    @row.update(update_params)
     respond_to do |format|
       format.turbo_stream
       format.html { redirect_to layer_path(@row.layer), notice: t("error_message_row_update") }
@@ -78,20 +77,5 @@ class RowsController < ApplicationController
   def set_layer
     layer_id = @row&.layer_id || params[:layer_id] || params[:row][:layer_id]
     @layer = Layer.includes(:fields, :map).find(layer_id)
-  end
-
-  def set_geometry
-    if @layer.geometry_type == "point"
-      point = params.require(:row).permit(:point)[:point]
-      @geometry = RGeo::GeoJSON.decode(point, geo_factory: RGEO_FACTORY)
-    elsif @layer.geometry_type == "polygon"
-      polygon = params.require(:row).permit(:polygon)[:polygon]
-      @geometry = RGeo::GeoJSON.decode(polygon, geo_factory: RGEO_FACTORY)
-    elsif @layer.geometry_type == "line_string"
-      line_string = params.require(:row).permit(:line_string)[:line_string]
-      @geometry = RGeo::GeoJSON.decode(line_string, geo_factory: RGEO_FACTORY)
-    else
-      logger.error("Unsupported geometry type #{@layer.geometry_type}")
-    end
   end
 end
