@@ -62,10 +62,10 @@ span:active {
 }
 
 .dropdown.is-active::after {
-  content : url("data:image/svg+xml;utf-8,<svg width='12' height='12' xmlns='http://www.w3.org/2000/svg'><path d='M7.723 5.584a.5.5 0 0 1 .467-.047l.087.047 3 2a.5.5 0 0 1-.475.875l-.08-.043L8 6.601 5.277 8.416a.5.5 0 0 1-.636-.068l-.057-.07a.5.5 0 0 1 .068-.637l.07-.057 3-2Z' fill='currentcolor' fill-rule='evenodd'/></svg>");
+  content: url("data:image/svg+xml;utf-8,<svg width='12' height='12' xmlns='http://www.w3.org/2000/svg'><path d='M7.723 5.584a.5.5 0 0 1 .467-.047l.087.047 3 2a.5.5 0 0 1-.475.875l-.08-.043L8 6.601 5.277 8.416a.5.5 0 0 1-.636-.068l-.057-.07a.5.5 0 0 1 .068-.637l.07-.057 3-2Z' fill='currentcolor' fill-rule='evenodd'/></svg>");
 }
 
-.dropdown:not(.is-active)::after{
+.dropdown:not(.is-active)::after {
   content: url("data:image/svg+xml;utf-8,<svg width='12' height='12' xmlns='http://www.w3.org/2000/svg'><g fill='none' fill-rule='evenodd'><path d='M0 0h16v16H0z'/><path d='M10.723 6.584a.5.5 0 0 1 .625.775l-.07.057-3 2a.5.5 0 0 1-.468.047l-.087-.047-3-2a.5.5 0 0 1 .475-.875l.08.043L8 8.398l2.723-1.814Z' fill='currentcolor'/></g></svg>");
 }
 
@@ -118,29 +118,31 @@ table {
   overflow-y: scroll;
   white-space: nowrap;
   margin-bottom: 0.1em;
-    
-  td, th {
+
+  td,
+  th {
     text-align: center;
     font-size: 12px;
     border: solid 1px var(--color-grey-50);
     border-bottom-width: 0px;
     border-left-width: 0px;
     height: 24px;
-    
+
     input:focus {
       background-color: RGBA(215, 233, 221, 0.5);
       outline: 2px solid var(--color-grey-40);
     }
   }
-  
+
   .resizable th {
     resize: horizontal;
     overflow-x: auto;
   }
-  th:last-child, td:last-child {
+  th:last-child,
+  td:last-child {
     border-right-width: 0px;
   }
-  
+
   td input {
     border: 0;
     width: 100%;
@@ -286,7 +288,7 @@ radio.slim {
 }
 
 .editable {
-cursor: pointer;
+  cursor: pointer;
   font-family: var(--font-serif);
   color: var(--color-grey-90);
   font-size: 24px;
@@ -312,7 +314,7 @@ cursor: pointer;
   margin-bottom: 3em;
 }
 
-#layer-header{
+#layer-header {
   font-family: var(--font-serif);
   letter-spacing: -0.2px;
   padding-top: 1em;
@@ -324,11 +326,11 @@ cursor: pointer;
   border-style: double;
 }
 
-.maplibregl-ctrl-group:not(:empty){
+.maplibregl-ctrl-group:not(:empty) {
   box-shadow: none;
 }
 
-.table-show{
+.table-show {
   margin-top: 2em;
 }
 
