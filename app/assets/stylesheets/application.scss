@@ -275,7 +275,8 @@ radio.slim {
 .dragbar {
   background-color: white;
   color: var(--color-grey-70);
-  border-style: double;
+  border-style: none solid none solid;
+  border-width: 1px;
   height: 100%;
   float: right;
   width: 6px;
