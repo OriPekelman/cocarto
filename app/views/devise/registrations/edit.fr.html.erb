@@ -1,5 +1,5 @@
 <div class="centered-main">
-<h2>Modifier <%= resource_name.to_s.humanize %></h2>
+<h2>Préferences <%= resource_name.to_s.humanize %></h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {method: :put}) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
@@ -33,13 +33,10 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "Mettre à jour" %>
+    <%= f.submit "Mettre à jour", class: "primary-action" %>
   </div>
 <% end %>
+<p>Mécontent·e ? <%= button_to "Supprimer mon compte", registration_path(resource_name), data: {confirm: "Êtes-vous sûr·e ?"}, method: :delete, class: "delete-action" %></p>
 
-<h3>Supprimer mon compte</h3>
-
-<p>Mécontent·e ? <%= button_to "Supprimer mon compte", registration_path(resource_name), data: {confirm: "Êtes-vous sûr·e ?"}, method: :delete %></p>
-
-<%= link_to "Back", :back %>
+<%= link_to t("back"), :back %>
 </div>

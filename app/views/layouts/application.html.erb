@@ -23,6 +23,8 @@
     <div class="dropdown" data-controller="dropdown">
       <span aria-controls="dropdown-menu" data-action="click->dropdown#toggle"><%= current_user.email %></span>
       <div class="dropdown-content-app">
+        <%= link_to "Français", url_for(locale: :fr) %>
+        <%= link_to "English", url_for(locale: :en) %>
         <%= link_to "Préférences", edit_user_registration_url %>
         <%= button_to t(:sign_out), destroy_user_session_path, method: :delete, class: "header-subs-app" %>
       </div>

@@ -30,34 +30,30 @@ span:active {
   color: var(--color-grey-60);
 }
 
-.dropdown-content-app a {
-  text-decoration: underline;
-  color: var(--color-green-70);
-  margin-left: 5rem;
-  margin-top: auto;
-}
-
-.dropdown-content-app a:hover {
-  color: var(--color-grey-60);
-}
-
 .dropdown-content-app {
   @include common.border;
   position: fixed;
   z-index: 3;
   display: none;
   box-shadow: var(--box-shadow) var(--color-shadow);
-  color: var(--color-text);
-  padding: 0.8rem;
   line-height: 1.25px;
   overflow: visible !important;
+  a:hover {
+    color: var(--color-grey-60);
+  }
+  a {
+    text-decoration: underline;
+    padding-bottom: 1.2em;
+    font-size: 14px;
+    padding-top: 0.4em;
+  }
 }
 
 .dropdown.is-active > .dropdown-content-app {
-  display: block;
-  max-width: 320px;
-  max-height: 104px;
-  padding: 40px 20px 60px 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 20px 20px 0px 20px;
   margin-top: 1em;
 }
 
@@ -78,7 +74,6 @@ span:active {
   border-radius: var(--border-radius);
   text-decoration: none;
   margin-left: 5rem;
-  margin-top: 1.3rem;
 }
 
 footer {
