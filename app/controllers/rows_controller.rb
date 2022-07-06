@@ -17,13 +17,7 @@ class RowsController < ApplicationController
   def create
     anonymous = params.require(:row)[:annonymous] == "true"
 
-    create_params = {
-      layer: @layer,
-      values: fields(@layer),
-      geojson: params.require(:row).permit(:geojson)[:geojson]
-    }
-
-    @row = @layer.rows.create(create_params)
+    @row = Row.create(layer: @layer, **row_params)
 
     if anonymous
       redirect_to action: :edit, id: @row
@@ -44,12 +38,7 @@ class RowsController < ApplicationController
   end
 
   def update
-    update_params = {
-      values: fields(@row.layer),
-      geojson: params.require(:row).permit(:geojson)[:geojson]
-    }
-
-    @row.update(update_params)
+    @row.update(row_params)
     respond_to do |format|
       format.turbo_stream
       format.html { redirect_to layer_path(@row.layer), notice: t("error_message_row_update") }
@@ -59,22 +48,14 @@ class RowsController < ApplicationController
   private
 
   def set_row
-    @row = Row.includes(layer: [:fields]).find(params[:id])
-  end
-
-  def fields(layer)
-    layer.fields.map do |field|
-      # Some inputs match a territory
-      # If the value is empty, it means that we didn’t select a territory, so we don’t want to store it
-      if field.field_type == "territory"
-        [field.id, params[:row][field.id].presence]
-      else
-        [field.id, params[:row][field.id]]
-      end
-    end.reject(&:nil?).to_h
+    @row = Row.includes(layer: :fields).find(params[:id])
   end
 
   def set_layer
     @layer = Layer.includes(:fields, :map).find(params[:layer_id])
+  end
+
+  def row_params
+    @row_params ||= params.require(:row).permit(:geojson, fields_values: @layer.fields.ids)
   end
 end
