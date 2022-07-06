@@ -22,8 +22,7 @@ class Layer < ApplicationRecord
   belongs_to :map
   has_many :fields, dependent: :delete_all
   has_many :rows, dependent: :delete_all
-  enum enum_geometry_type: {point: :point, line_string: :line_string, polygon: :polygon, territory: :territory}
-  validates :geometry_type, inclusion: {in: enum_geometry_types.keys}
+  enum :geometry_type, {point: "point", line_string: "line_string", polygon: "polygon", territory: "territory"}, prefix: "geometry"
 
   COLORS = {
     blue: "#007AFF",

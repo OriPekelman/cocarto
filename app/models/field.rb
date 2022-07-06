@@ -19,8 +19,7 @@
 #
 class Field < ApplicationRecord
   belongs_to :layer
-  enum enum_field_type: {text: :text, float: :float, integer: :integer, territory: :territory, date: :date, boolean: :boolean}
-  validates :field_type, inclusion: {in: enum_field_types.keys}
+  enum :field_type, {text: "text", float: "float", integer: "integer", territory: "territory", date: "date", boolean: "boolean"}
 
   after_create_commit -> do
     broadcast_before_to layer, target: "delete-column", partial: "fields/th"
@@ -36,7 +35,5 @@ class Field < ApplicationRecord
     Turbo::StreamsChannel.broadcast_remove_to layer, targets: ".field-#{id}"
   end
 
-  def numerical?
-    ["float", "integer"].include?(field_type)
-  end
+  def numerical? = float? || integer?
 end

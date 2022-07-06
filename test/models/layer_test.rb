@@ -35,7 +35,7 @@ class LayerTest < ActiveSupport::TestCase
   end
 
   test "a layer needs a valid geometry type" do
-    a = Layer.new geometry_type: :hypercube
-    assert_raises(ActiveRecord::RecordInvalid) { a.save! }
+    a = Layer.new
+    assert_raises(ArgumentError) { a.geometry_type = :hypercube }
   end
 end
