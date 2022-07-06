@@ -2,18 +2,24 @@
 #
 # Table name: rows
 #
-#  id          :uuid             not null, primary key
-#  line_string :geometry         linestring, 4326
-#  point       :geometry         point, 4326
-#  polygon     :geometry         polygon, 4326
-#  values      :jsonb            not null
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  layer_id    :uuid
+#  id           :uuid             not null, primary key
+#  line_string  :geometry         linestring, 4326
+#  point        :geometry         point, 4326
+#  polygon      :geometry         polygon, 4326
+#  values       :jsonb            not null
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  layer_id     :uuid
+#  territory_id :uuid
 #
 # Indexes
 #
-#  index_rows_on_layer_id  (layer_id)
+#  index_rows_on_layer_id      (layer_id)
+#  index_rows_on_territory_id  (territory_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (territory_id => territories.id)
 #
 require "test_helper"
 
