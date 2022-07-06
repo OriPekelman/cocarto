@@ -33,8 +33,10 @@ span:active {
 .dropdown-content-app a {
   text-decoration: underline;
   color: var(--color-green-70);
-  margin-left: 5rem;
-  margin-top: auto;
+  margin-bottom: 1em;
+  display: flex;
+  justify-content: flex-end;
+  font-size: 14px;
 }
 
 .dropdown-content-app a:hover {
@@ -57,7 +59,7 @@ span:active {
   display: block;
   max-width: 320px;
   max-height: 104px;
-  padding: 40px 20px 60px 50px;
+  padding: 20px 10px 90px 30px;
   margin-top: 1em;
 }
 
@@ -78,7 +80,18 @@ span:active {
   border-radius: var(--border-radius);
   text-decoration: none;
   margin-left: 5rem;
-  margin-top: 1.3rem;
+}
+
+.flag_trad {
+  height: 18px;
+  width: 18px;
+  margin-left: 1em;
+}
+
+.container-flag {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
 }
 
 footer {
