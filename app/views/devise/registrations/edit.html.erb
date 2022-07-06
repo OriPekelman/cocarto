@@ -32,14 +32,6 @@
     <%= f.password_field :current_password, autocomplete: "current-password" %>
   </div>
 
-<div class="select">
-  <select>
-    <option value=""> --- Langues --- </option>
-    <option value=""> <%= link_to "English", url_for(locale: :en) %></option>
-    <option value=""><%= link_to "Français", url_for(locale: :fr) %></option>
-  </select>
-</div>
-
   <div class="actions">
     <%= f.submit "Mettre à jour", class: "primary-action" %>
   </div>
