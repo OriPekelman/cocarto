@@ -35,6 +35,9 @@ class Row < ApplicationRecord
   # fields_values and fields_values= have two roles
   # - make sure the values in the DB and from user input are for existing fields of the layer
   # - cast values to correct field types (currently only for Territory)
+  # NOTE: fields_values and fields_values= are not symmetrical
+  # - the getter returns Fields as keys, the setter wants Field ids
+  # - the getter returns Territory objects, the setter wants Territory ids
   def fields_values
     db_values = values
     layer.fields.map do |field|
@@ -44,6 +47,18 @@ class Row < ApplicationRecord
       end
       [field, value]
     end.to_h
+  end
+
+  def fields_values=(new_fields_values)
+    cleaned_values = layer.fields.map do |field|
+      value = new_fields_values[field.id]
+      if field.territory?
+        value = Territory.exists?(id: value) ? value : nil
+      end
+      [field.id, value]
+    end.to_h
+
+    self.values = cleaned_values
   end
 
   # Accessor to the correct geometry attribute (row.point, row.line_string or row.polygon)

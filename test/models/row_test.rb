@@ -47,5 +47,30 @@ class RowTest < ActiveSupport::TestCase
     test "invalid territory identifier is ignored" do
       assert_nil restaurant_with_value(field("Ville"), "invalid_identifier").fields_values[field("Ville")]
     end
+
+    # Set values from user input
+    test "value is saved" do
+      row = Row.new(layer: layer)
+      row.assign_attributes(fields_values: {field("Name").id => "Le Bastringue"})
+      assert_equal "Le Bastringue", row.values[field("Name").id]
+    end
+
+    test "invalid field identifier is not saved" do
+      row = Row.new(layer: layer)
+      row.assign_attributes(fields_values: {invalid_field_identifier: "whatever"})
+      assert_nil row.values[:invalid_field_identifier]
+    end
+
+    test "valid territory id is saved" do
+      row = Row.new(layer: layer)
+      row.assign_attributes(fields_values: {field("Ville").id => territories("paris").id})
+      assert_equal territories("paris").id, row.values[field("Ville").id]
+    end
+
+    test "invalid territory id is ignored" do
+      row = Row.new(layer: layer)
+      row.assign_attributes(fields_values: {field("Ville").id => "invalid_identifier"})
+      assert_nil row.values[field("Ville").id]
+    end
   end
 end
