@@ -28,7 +28,7 @@ require_relative "../../lib/geojson_importer"
 
 class TerritoryTest < ActiveSupport::TestCase
   def setup
-    GeojsonImporter.import("lib/assets/data_fixtures/regions.geojson", "Régions", "2022", true)
+    GeojsonImporter.import(file_fixture("regions.geojson").to_path, "Régions", "2022", true)
   end
 
   test "import from geojson" do
