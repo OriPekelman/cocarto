@@ -23,6 +23,8 @@
 #
 reclus:
   email: elisee.reclus@commune.paris
+  encrypted_password: <%= User.new.send(:password_digest, "refleurir") %>
 
 cassini:
   email: cassini@carto.gouv.fr
+  encrypted_password: <%= User.new.send(:password_digest, "générations12345") %>
