@@ -3,7 +3,7 @@
 
 <tr id="<%= dom_id(row) %>"
     data-controller="row">
-  <% row.data do |field, value| %>
+  <% row.fields_values.each do |field, value| %>
     <%= render partial: "fields/field_in_form", locals: {field: field, value: value, row_id: row.id, controller: "row"} %>
   <% end %>
   <td id="<%= row.id %>-action">

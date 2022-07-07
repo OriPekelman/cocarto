@@ -31,15 +31,19 @@ class Row < ApplicationRecord
     broadcast_replace_to layer, target: "tutorial", partial: "layers/tooltip", locals: {layer: layer}
   end
 
-  # Iterates of each field with its data
-  def data
-    layer.fields.each do |field|
-      value = values[field.id]
-      if field.field_type == "territory" && !value.nil?
-        value = Territory.find(value)
+  # Values accessors:
+  # fields_values and fields_values= have two roles
+  # - make sure the values in the DB and from user input are for existing fields of the layer
+  # - cast values to correct field types (currently only for Territory)
+  def fields_values
+    db_values = values
+    layer.fields.map do |field|
+      value = db_values[field.id]
+      if field.territory?
+        value = Territory.find_by(id: value)
       end
-      yield [field, value]
-    end
+      [field, value]
+    end.to_h
   end
 
   # Accessor to the correct geometry attribute (row.point, row.line_string or row.polygon)
