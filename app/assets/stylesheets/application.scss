@@ -278,23 +278,24 @@ radio.slim {
   border-style: none solid none solid;
   border-width: 1px;
   height: 100%;
-  float: right;
   width: 6px;
-  cursor: move;
   z-index: 2;
   position: relative;
+  cursor: move;
 }
 
 .svg-dragbar {
-  height: 24px;
-  width: 24px;
+  height: 26px;
+  width: 26px;
   position: absolute;
-  bottom: 5rem;
+  bottom: 12rem;
   left: 50%;
   transform: translate(-50%, 0px);
 }
+
 .svg-dragbar:active {
-  background-color: var(--color-grey-60);
+  pointer-events: none;
+  background-color: var(--color-green-60);
 }
 
 .editable {
