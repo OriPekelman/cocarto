@@ -18,8 +18,32 @@
 #  fk_rails_...  (layer_id => layers.id)
 #
 
-one:
-  label: MyString
+restaurant_name:
+  layer: restaurants
+  label: "Name"
+  field_type: "text"
 
-two:
-  label: MyString
+restaurant_rating:
+  layer: restaurants
+  label: "Rating"
+  field_type: "float"
+
+restaurant_table_size:
+  layer: restaurants
+  label: "Table Size"
+  field_type: "integer"
+
+restaurant_ville:
+  layer: restaurants
+  label: "Ville"
+  field_type: "territory"
+
+restaurant_date:
+  layer: restaurants
+  label: "Date"
+  field_type: "date"
+
+restaurant_decision:
+  layer: restaurants
+  label: "Decision"
+  field_type: "boolean"

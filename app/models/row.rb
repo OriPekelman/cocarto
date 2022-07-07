@@ -6,7 +6,7 @@
 #  line_string :geometry         linestring, 4326
 #  point       :geometry         point, 4326
 #  polygon     :geometry         polygon, 4326
-#  values      :jsonb
+#  values      :jsonb            not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  layer_id    :uuid
@@ -31,25 +31,37 @@ class Row < ApplicationRecord
     broadcast_replace_to layer, target: "tutorial", partial: "layers/tooltip", locals: {layer: layer}
   end
 
-  # Iterates of each field with its data
-  def data
-    layer.fields.each do |field|
-      value = values[field.id]
-      if field.field_type == "territory" && !value.nil?
-        value = Territory.find(value)
+  # Values accessors:
+  # fields_values and fields_values= have two roles
+  # - make sure the values in the DB and from user input are for existing fields of the layer
+  # - cast values to correct field types (currently only for Territory)
+  # NOTE: fields_values and fields_values= are not symmetrical
+  # - the getter returns Fields as keys, the setter wants Field ids
+  # - the getter returns Territory objects, the setter wants Territory ids
+  def fields_values
+    db_values = values
+    layer.fields.to_h do |field|
+      value = db_values[field.id]
+      if field.territory?
+        value = Territory.find_by(id: value)
       end
-      yield [field, value]
+      [field, value]
     end
   end
 
-  def geo_feature
-    RGeo::GeoJSON::Feature.new(geometry, nil, geo_properties)
+  def fields_values=(new_fields_values)
+    cleaned_values = layer.fields.to_h do |field|
+      value = new_fields_values[field.id]
+      if field.territory?
+        value = Territory.exists?(id: value) ? value : nil
+      end
+      [field.id, value]
+    end
+
+    self.values = cleaned_values
   end
 
-  def geo_properties
-    layer.fields.map { |field| [field.label, values[field.id]] }.to_h
-  end
-
+  # Accessor to the correct geometry attribute (row.point, row.line_string or row.polygon)
   def geometry=(new_geometry)
     self[layer.geometry_type] = new_geometry
   end
@@ -58,11 +70,21 @@ class Row < ApplicationRecord
     self[layer.geometry_type]
   end
 
+  # Geometry accessor, as geojson (used in the row form)
   def geojson
     RGeo::GeoJSON.encode(geometry).to_json
   end
 
   def geojson=(new_geojson)
     self.geometry = RGeo::GeoJSON.decode(new_geojson, geo_factory: RGEO_FACTORY)
+  end
+
+  # Geojson export (used when exporting a layer as json)
+  def geo_feature
+    RGeo::GeoJSON::Feature.new(geometry, nil, geo_properties)
+  end
+
+  def geo_properties
+    layer.fields.to_h { |field| [field.label, values[field.id]] }
   end
 end

@@ -4,13 +4,13 @@
 <tr id="<%= dom_id(row) %>"
     data-controller="row">
   <%= hidden_field_tag "geojson", row.geojson, data: {"row-target": "geojson"} %>
-  <% row.layer.fields.each do |field| %>
+  <% row.fields_values.each do |field, value| %>
     <% if field.numerical? %>
-      <td class="numerical"><%= row.values[field.id] %></td>
-    <% elsif field.field_type == "boolean" %>
-      <td><%= check_box_tag "row[#{field.id}]", "boolean", row.values[field.id], disabled: true %></td>
+      <td class="numerical"><%= value %></td>
+    <% elsif field.boolean? %>
+      <td><%= check_box_tag "row[#{field.id}]", "boolean", value, disabled: true %></td>
     <% else %>
-      <td><%= row.values[field.id] %></td>
+      <td><%= value %></td>
     <% end %>
   <% end %>
 </tr>

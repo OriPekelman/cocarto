@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_04_132417) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_05_135004) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -60,7 +60,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_04_132417) do
   end
 
   create_table "rows", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.jsonb "values"
+    t.jsonb "values", default: {}, null: false
     t.uuid "layer_id"
     t.geometry "point", limit: {:srid=>4326, :type=>"st_point"}
     t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false

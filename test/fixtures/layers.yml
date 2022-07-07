@@ -20,8 +20,8 @@
 #
 
 restaurants:
-  name: Restaurants
   map: one
+  name: "Restaurants"
   geometry_type: 'point'
 
 hiking:
