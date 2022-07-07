@@ -23,6 +23,8 @@
 #
 reclus:
   email: elisee.reclus@commune.paris
+  encrypted_password: <%= Devise::Encryptor.digest(User, "refleurir") %>
 
 cassini:
   email: cassini@carto.gouv.fr
+  encrypted_password: <%= Devise::Encryptor.digest(User, "générations12345") %>
