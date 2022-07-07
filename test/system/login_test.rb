@@ -1,6 +1,6 @@
 require "application_system_test_case"
 
-class TranslationsTest < ApplicationSystemTestCase
+class LoginTest < ApplicationSystemTestCase
   test "create an accout" do
     visit("/?locale=en")
     click_link "Sign up"
