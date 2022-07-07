@@ -40,23 +40,23 @@ class Row < ApplicationRecord
   # - the getter returns Territory objects, the setter wants Territory ids
   def fields_values
     db_values = values
-    layer.fields.map do |field|
+    layer.fields.to_h do |field|
       value = db_values[field.id]
       if field.territory?
         value = Territory.find_by(id: value)
       end
       [field, value]
-    end.to_h
+    end
   end
 
   def fields_values=(new_fields_values)
-    cleaned_values = layer.fields.map do |field|
+    cleaned_values = layer.fields.to_h do |field|
       value = new_fields_values[field.id]
       if field.territory?
         value = Territory.exists?(id: value) ? value : nil
       end
       [field.id, value]
-    end.to_h
+    end
 
     self.values = cleaned_values
   end
@@ -85,6 +85,6 @@ class Row < ApplicationRecord
   end
 
   def geo_properties
-    layer.fields.map { |field| [field.label, values[field.id]] }.to_h
+    layer.fields.to_h { |field| [field.label, values[field.id]] }
   end
 end
