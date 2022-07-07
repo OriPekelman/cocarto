@@ -56,6 +56,6 @@ class RowsController < ApplicationController
   end
 
   def row_params
-    @row_params ||= params.require(:row).permit(:geojson, fields_values: @layer.fields.ids)
+    @row_params = params.require(:row).permit(:geojson, :territory_id, fields_values: @layer.fields.ids)
   end
 end

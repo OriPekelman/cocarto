@@ -4,6 +4,9 @@
 <table>
   <thead class="resizable">
   <tr>
+    <% if layer.geometry_territory? %>
+      <th></th>
+    <% end %>
     <%= render partial: "fields/th", collection: layer.fields, as: :field %>
     <th id="delete-column" class="row-actions">
       <div class="dropdown" data-controller="dropdown">
@@ -21,3 +24,5 @@
   <%= render partial: "rows/row_rw", collection: layer.rows.order(:created_at), as: :row %>
   </tbody>
 </table>
+
+<%= render "rows/new", row: Row.new(layer: layer) %>
