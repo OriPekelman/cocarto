@@ -42,14 +42,7 @@ class Row < ApplicationRecord
     end
   end
 
-  def geo_feature
-    RGeo::GeoJSON::Feature.new(geometry, nil, geo_properties)
-  end
-
-  def geo_properties
-    layer.fields.map { |field| [field.label, values[field.id]] }.to_h
-  end
-
+  # Accessor to the correct geometry attribute (row.point, row.line_string or row.polygon)
   def geometry=(new_geometry)
     self[layer.geometry_type] = new_geometry
   end
@@ -58,11 +51,21 @@ class Row < ApplicationRecord
     self[layer.geometry_type]
   end
 
+  # Geometry accessor, as geojson (used in the row form)
   def geojson
     RGeo::GeoJSON.encode(geometry).to_json
   end
 
   def geojson=(new_geojson)
     self.geometry = RGeo::GeoJSON.decode(new_geojson, geo_factory: RGEO_FACTORY)
+  end
+
+  # Geojson export (used when exporting a layer as json)
+  def geo_feature
+    RGeo::GeoJSON::Feature.new(geometry, nil, geo_properties)
+  end
+
+  def geo_properties
+    layer.fields.map { |field| [field.label, values[field.id]] }.to_h
   end
 end
