@@ -3,12 +3,13 @@
 
 <tr id="<%= dom_id(row) %>"
     data-controller="row">
+  <% form_id = dom_id(row, :form) %>
   <% row.fields_values.each do |field, value| %>
-    <%= render partial: "fields/field_in_form", locals: {field: field, value: value, row_id: row.id, controller: "row"} %>
+    <%= render "fields/field_in_form", field: field, value: value, form_id: form_id %>
   <% end %>
-  <td id="<%= row.id %>-action">
+  <td>
     <div class="actions">
-      <%= form_with method: :patch, model: [row.layer, row], id: row.id, data: {"row-target": "form", action: "row#save"} do |form| %>
+      <%= form_with method: :patch, model: [row.layer, row], id: form_id, data: {"row-target": "form", action: "row#save"} do |form| %>
         <%= form.hidden_field "geojson", data: {"row-target": "geojson"} %>
         <%= form.button "save", class: "is-hidden" %>
       <% end %>
