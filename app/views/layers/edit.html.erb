@@ -3,7 +3,7 @@
 <%= turbo_stream_from @layer %>
 <div
   class="data-with-map"
-  data-action="mousemove@window->dragbar#mousemove mouseup@document->dragbar#mouseup"
+  data-action="mousemove@window->dragbar#mousemove mouseup@document->dragbar#mouseup svg-dragbar"
   data-controller="map dragbar"
   data-map-editable-value="true"
   data-map-layer-id-value="<%= @layer.id %>"
@@ -21,8 +21,11 @@
     <%= render "rows_rw", layer: @layer %>
     <%= render "tooltip", layer: @layer %>
   </div>
-  <div class="dragbar" data-dragbar-target="dragbar" data-action="mousedown->dragbar#mousedown"></div>
-  <div class="map" data-map-target="map" data-dragbar-target="right">
-    <%= render "rows/new", row: Row.new(layer: @layer) %>
+  <div class="dragbar" data-dragbar-target="dragbar" data-action="mousedown->dragbar#mousedown">
+    <%= image_tag "dragbar_cursor.svg", class: "svg-dragbar" %>
   </div>
+    <div class="map" data-map-target="map" data-dragbar-target="right">
+        <%= render "rows/new", row: Row.new(layer: @layer) %>
+      </div>
+    </div>
 </div>
