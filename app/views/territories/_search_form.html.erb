@@ -1,10 +1,10 @@
-<%# params: field_id, value, row_id %>
+<%# params: field_id, value, form_id %>
 
 <div class="territory-search" data-controller="autocomplete" data-action="autocomplete:selected->row#setModified">
-  <%= hidden_field_tag "row[fields_values][#{field_id}]", value&.id, id: field_id, data: {"autocomplete-target": "selected"}, form: row_id %>
+  <%= hidden_field_tag "row[fields_values][#{field_id}]", value&.id, id: field_id, data: {"autocomplete-target": "selected"}, form: form_id %>
   <%= form_with url: search_territories_path, method: :post do |form| %>
     <%= form.search_field :q, value: value && "#{value.name} (#{value.code})", data: {"autocomplete-target": "searchInput", action: "autocomplete#input"} %>
-    <%= form.hidden_field :result_id, value: "#{field_id}-#{row_id}" %>
+    <%= form.hidden_field :result_id, value: "#{field_id}-#{form_id}" %>
   <% end %>
-  <div id="<%= "#{field_id}-#{row_id}" %>" class="search-result is-hidden" data-autocomplete-target="suggestionList"></div>
+  <div id="<%= "#{field_id}-#{form_id}" %>" class="search-result is-hidden" data-autocomplete-target="suggestionList"></div>
 </div>

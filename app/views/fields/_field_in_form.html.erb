@@ -1,16 +1,16 @@
-<%# params: field, value, row_id, controller %>
+<%# params: field, value, form_id %>
 <%# renders one form field tag for a value of a row for a specific field %>
 
 <td class="field-<%= field.id %> <%= "numerical" if field.numerical? %>">
   <% if field.numerical? %>
-    <%= number_field_tag "row[fields_values][#{field.id}]", value, id: field.id, class: "numerical", data: {action: "focusout->#{controller}#save"}, form: row_id, autocomplete: :off %>
+    <%= number_field_tag "row[fields_values][#{field.id}]", value, id: field.id, class: "numerical", data: {action: "focusout->row#save"}, form: form_id, autocomplete: :off %>
   <% elsif field.field_type == "territory" %>
-    <%= render partial: "territories/search_form", locals: {field_id: field.id, value: value, row_id: row_id} %>
+    <%= render "territories/search_form", field_id: field.id, value: value, form_id: form_id %>
   <% elsif field.field_type == "date" %>
-    <%= date_field_tag "row[fields_values][#{field.id}]", value, id: field.id, data: {action: "change->#{controller}#save"}, form: row_id, autocomplete: "off" %>
+    <%= date_field_tag "row[fields_values][#{field.id}]", value, id: field.id, data: {action: "change->row#save"}, form: form_id, autocomplete: "off" %>
   <% elsif field.field_type == "boolean" %>
-    <%= check_box_tag "row[fields_values][#{field.id}]", "1", value == "1", id: field.id, data: {action: "change->#{controller}#save"}, form: row_id %>
+    <%= check_box_tag "row[fields_values][#{field.id}]", "1", value == "1", id: field.id, data: {action: "change->row#save"}, form: form_id %>
   <% else %>
-    <%= text_field_tag "row[fields_values][#{field.id}]", value, id: field.id, class: "input", data: {action: "focusout->#{controller}#save"}, form: row_id, autocomplete: :off %>
+    <%= text_field_tag "row[fields_values][#{field.id}]", value, id: field.id, class: "input", data: {action: "focusout->row#save"}, form: form_id, autocomplete: :off %>
   <% end %>
 </td>
