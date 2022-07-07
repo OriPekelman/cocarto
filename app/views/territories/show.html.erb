@@ -4,14 +4,14 @@
   <div class="data">
     <h2><%= @territory.name %></h2>
     <dl>
-      <dt><%= t("territory code") %></dt>
+      <dt><%= Territory.human_attribute_name(:code) %></dt>
       <dd><%= @territory.code %></dd>
-      <dt><%= t("territory category") %></dt>
+      <dt><%= TerritoryCategory.model_name.human %></dt>
       <dd><%= link_to @territory.territory_category.name, @territory.territory_category %></dd>
-      <dt><%= t("territory revision") %></dt>
+      <dt><%= TerritoryCategory.human_attribute_name(:revision) %></dt>
       <dd><%= @territory.territory_category.revision %></dd>
       <% if @territory.parent %>
-        <dt><%= t("part of territory") %></dt>
+        <dt><%= Territory.human_attribute_name(:parent) %></dt>
         <dd><%= link_to @territory.parent.name, @territory.parent %></dd>
       <% end %>
     </dl>

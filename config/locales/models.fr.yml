@@ -6,6 +6,7 @@ fr:
         field_type: Type
         label: Nom
       layer:
+        color: Couleur des objets
         geometry_type: Type de géometrie
         line_string:
           one: tracé
@@ -17,6 +18,11 @@ fr:
         polygon:
           one: polygone
           other: polygones
+      territory:
+        code: identifiant
+        parent: partie de
+      territory_category:
+        revision: version
     models:
       layer:
         one: Couche
@@ -24,8 +30,35 @@ fr:
       map:
         one: Carte
         other: Cartes
+      territory:
+        one: Territoire
+        other: Territoires
+      territory_category:
+        one: Catégorie de territoires
+        other: Catégories de territoires
   helpers:
+    _comment: The "helpers" scope is for model-specific keys. For general purpose labels, use the "common" scope.
+    link:
+      layer:
+        delete: Créer une nouvelle carte
+        new: Ajouter une nouvelle couche
+      map:
+        delete: Supprimer la carte
+        new: Build a new map
+    message:
+      field:
+        created: Nouvel attribut %{name} créé
+        destroyed: Le champ a été détruit avec succès.
+        updated: Le champ a été mis à jour avec succès.
+      layer:
+        destroyed: La couche a été détruite avec succès
+      map:
+        destroyed: La carte a été détruite avec succès
+      row:
+        destroyed: La géométrie a été détruite avec succès.
+        updated: Les propriétés géométriques ont été mises à jour avec succès.
     submit:
+      _comment: The helpers.submit.create and helpers.submit.update keys are standard in Rails.
       field:
         create: Ajouter un champ
       layer:

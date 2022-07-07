@@ -117,6 +117,7 @@ ignore_missing:
 
 ## Consider these keys used:
 ignore_unused:
+  - '*._comment'
   - 'devise.*'
   - 'errors.messages.*'
   - 'activerecord.attributes.*'

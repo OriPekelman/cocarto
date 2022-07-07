@@ -1,10 +1,5 @@
 ---
 fr:
-  all_layer: Toutes les couches
-  back: Retour
-  by: par
-  call to add a field: Cliquez sur le + pour ajouter une colonne à vos données
-  click on map for more content: Cliquez sur la carte pour ajouter un nouveau point de données
   colors:
     blue: Bleu
     brown: Marron
@@ -14,29 +9,23 @@ fr:
     orange: Orange
     pink: Rose
     purple: Violet
-  delete_confirm: Êtes-vous sûr ?
-  delete_layer: Supprimer cette couche
-  delete_map: Supprimer la carte
-  download_as_geojson: Télécharger en GeoJSON
-  edit: Modifier
-  error_message_field_destroy: Le champ a été détruit avec succès.
-  error_message_field_update: Le champ a été mis à jour avec succès.
-  error_message_layer_destroy: La couche a été détruite avec succès
-  error_message_map_destroy: La carte a été détruite avec succès
-  error_message_row_destroy: La géométrie a été détruite avec succès.
-  error_message_row_update: Les propriétés géométriques ont été mises à jour avec succès.
-  hello: Bonjour
-  layer_feature_colors: Couleur des objets
-  new field created: Nouvel attribut %{name} créé
-  new_layer: Ajouter une nouvelle couche
-  new_map: Créer une nouvelle carte
-  not_authorized: Vous n’avez pas les droits pour effectuer cette action.
-  part of territory: Part of territory
-  show: Consulter
-  sign_in: connexion
-  sign_out: déconnexion
-  sign_up: inscription
-  territory category: Territory category
-  territory code: Territory identifier
-  territory revision: Territory category revision
-  updated_the: mis à jour le
+  common:
+    back: Retour
+    confirm: Êtes-vous sûr ?
+    edit: Modifier
+    hello: Bonjour
+    show: Consulter
+    updated_at_by: Mis à jour le %{date} par %{user}
+    user_not_authorized: Vous n’avez pas la permission d’effectuer cette action.
+  layers:
+    edit:
+      all_layers: Toutes les couches
+      download_as_geojson: Télécharger en GeoJSON
+    tooltip:
+      new_field_description: Cliquez sur le + pour ajouter une colonne à vos données
+      new_row_description: Cliquez sur la carte pour ajouter un nouveau point de données
+  layouts:
+    application:
+      sign_in: connexion
+      sign_out: déconnexion
+      sign_up: inscription

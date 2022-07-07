@@ -26,12 +26,12 @@
         <%= link_to "Français", url_for(locale: :fr) %>
         <%= link_to "English", url_for(locale: :en) %>
         <%= link_to "Préférences", edit_user_registration_url %>
-        <%= button_to t(:sign_out), destroy_user_session_path, method: :delete, class: "header-subs-app" %>
+        <%= button_to t(".sign_out"), destroy_user_session_path, method: :delete, class: "header-subs-app" %>
       </div>
     </div>
     <% else %>
-      <%= link_to t(:sign_in), new_user_session_path, class: "secondary-action" %>
-      <%= link_to t(:sign_up), new_user_registration_path, class: "primary-action" %>
+      <%= link_to t(".sign_in"), new_user_session_path, class: "secondary-action" %>
+      <%= link_to t(".sign_up"), new_user_registration_path, class: "primary-action" %>
     <% end %>
   </div>
 </nav>

@@ -3,9 +3,9 @@
 <h2><%= @category.name %></h2>
 <div class="data-with-map" data-controller="territory">
   <div class="data">
-    <h1><%= t("territory category") %></h1>
+    <h1><%= TerritoryCategory.model_name.human %></h1>
     <dl>
-      <dt><%= t("territory revision") %></dt>
+      <dt><%= TerritoryCategory.human_attribute_name(:revision) %></dt>
       <dd><%= @category.revision %></dd>
     </dl>
     <ul>
