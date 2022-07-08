@@ -5,6 +5,13 @@ en:
       field:
         field_type: Type
         label: Name
+      field/field_types:
+        boolean: Boolean
+        date: Date
+        float: Decimal
+        integer: Integer
+        territory: Territory
+        text: Text
       layer:
         color: Color of the features
         geometry_type: Geometry type

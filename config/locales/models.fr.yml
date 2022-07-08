@@ -5,6 +5,13 @@ fr:
       field:
         field_type: Type
         label: Nom
+      field/field_types:
+        boolean: Booléen
+        date: Date
+        float: Nombre décimal
+        integer: Nombre entier
+        territory: Territoire
+        text: Texte
       layer:
         color: Couleur des objets
         geometry_type: Type de géometrie
