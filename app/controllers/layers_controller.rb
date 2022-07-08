@@ -71,7 +71,7 @@ class LayersController < ApplicationController
     @user_name = if user_signed_in?
       current_user.email.split("@")[0]
     else
-      "annonymous"
+      "anonymous"
     end
   end
 

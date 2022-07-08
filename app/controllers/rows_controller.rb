@@ -15,7 +15,7 @@ class RowsController < ApplicationController
   end
 
   def create
-    anonymous = params.require(:row)[:annonymous] == "true"
+    anonymous = params.require(:row)[:anonymous] == "true"
 
     @row = Row.create(layer: @layer, **row_params)
 
