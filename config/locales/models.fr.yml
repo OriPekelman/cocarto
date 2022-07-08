@@ -39,12 +39,16 @@ fr:
   helpers:
     _comment: The "helpers" scope is for model-specific keys. For general purpose labels, use the "common" scope.
     link:
+      field:
+        delete: Supprimer cette colonne
       layer:
         delete: Créer une nouvelle carte
         new: Ajouter une nouvelle couche
       map:
         delete: Supprimer la carte
         new: Build a new map
+      row:
+        delete: Supprimer
     message:
       field:
         created: Nouvel attribut %{name} créé
@@ -63,3 +67,5 @@ fr:
         create: Ajouter un champ
       layer:
         create: Créer une couche
+      row:
+        create: Enregistrer la ligne

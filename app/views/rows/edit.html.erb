@@ -2,8 +2,8 @@
 
 <section class="section">
   <div class="container">
-    <h1>Modifier un formulaire</h1>
-    <p>Cette restera accessible et partageable par <%= link_to "ce lien", edit_row_url(@row) %>
-      <%= render "form", row: @row, layer: @layer, anonymous: @anonymous, values: @values %>
+    <h1><%= t(".edit_row_title") %></h1>
+    <p><%= t(".page_access_description_html", url: edit_layer_row_url(@layer, @row)) %></p>
+    <%= render "form", row: @row, layer: @layer, anonymous: @anonymous, values: @values %>
   </div>
 </section>

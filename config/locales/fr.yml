@@ -10,6 +10,7 @@ fr:
     pink: Rose
     purple: Violet
   common:
+    app_title: Ĝis
     back: Retour
     confirm: Êtes-vous sûr ?
     edit: Modifier
@@ -26,6 +27,27 @@ fr:
       new_row_description: Cliquez sur la carte pour ajouter un nouveau point de données
   layouts:
     application:
+      footer_html: Développé par <a href="https://www.codeursenliberté.fr" target="_blank">codeurs en liberté</a>, une coopérative d’indépendant·e·s dans le domaine de l’informatique.
       sign_in: connexion
       sign_out: déconnexion
       sign_up: inscription
+  main:
+    index:
+      landing_1_header_html: |
+        <p>Ĝis est un outil de collaboration cartographique.<br>
+        Il permettra d’associer des informations à un territoire.</p><p>Comme par exemple :</p>
+      landing_2_examples_html: "<li>préparer le parcours et les étapes d’une randonnée,</li><li>répertorier des défauts d’infrastructure.</li>\n"
+      landing_3_footer_html: |
+        Nous sommes à l’écoute des besoins pour un tel outil dans des structures existantes.
+        <a href=" https://gitlab.com/CodeursEnLiberte/gxis/-/blob/main/README.md#user-content-how-to-contribute" target="_blank">Contactez-nous</a>
+        si vous souhaitez faire part des votres.</p>
+  rows:
+    edit:
+      edit_row_title: Modifier une ligne
+      page_access_description_html: Cette restera accessible et partageable par <a href="%{url}">ce lien</a>.
+    new:
+      new_row_description: Saisir une nouvelle ligne
+      new_row_explanation: Vous n’avez pas besoin de finir la saisie. En cliquant sur « Sauvegarder », vous obtiendrez un lien pour poursuivre l’édition plus tard.
+  territories:
+    index:
+      search_title: Chercher un territoire

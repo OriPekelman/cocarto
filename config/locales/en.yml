@@ -10,6 +10,7 @@ en:
     pink: Pink
     purple: Purple
   common:
+    app_title: Ĝis
     back: Back
     confirm: Are you sure?
     edit: Edit
@@ -26,6 +27,27 @@ en:
       new_row_description: Click on the map to add a new data point
   layouts:
     application:
+      footer_html: Made by <a href="https://www.codeursenliberté.fr" target="_blank">codeurs en liberté</a>, an indie software cooperative.
       sign_in: Log in
       sign_out: Sign out
       sign_up: Sign up
+  main:
+    index:
+      landing_1_header_html: |
+        <p>Ĝis is a collaborative cartography tool.<br>
+        Il can link data to a territory.</p><p>For example :</p>
+      landing_2_examples_html: "<li>prepare the journey and every step for a hike,</li><li>list infrastructure issues.</li>\n"
+      landing_3_footer_html: |
+        We’re looking for stories for such needs in existing companies.
+        <a href=" https://gitlab.com/CodeursEnLiberte/gxis/-/blob/main/README.md#user-content-how-to-contribute" target="_blank">Contact us</a>
+        if you want to talk about yours.</p>
+  rows:
+    edit:
+      edit_row_title: Update a row
+      page_access_description_html: This page can be accessed and shared through <a href="%{url}">this link</a>.
+    new:
+      new_row_description: Enter a new row
+      new_row_explanation: You don’t need to enter the whole data now. By clicking “Save”, you’ll receive a link to continue editing later.
+  territories:
+    index:
+      search_title: Search a territory

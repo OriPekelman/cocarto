@@ -14,8 +14,8 @@
         <%= form.button "save", class: "is-hidden" %>
       <% end %>
       <%= button_to [row.layer, row], method: :delete do %>
-        Delete
-      <% end %>
+        <%= t("helpers.link.row.delete") %>
+    <% end %>
     </div>
   </td>
 </tr>
