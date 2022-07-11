@@ -21,7 +21,7 @@
   </tr>
   </thead>
   <tbody id="rows-tbody">
-  <%= render partial: "rows/row_rw", collection: layer.rows.order(:created_at), as: :row %>
+  <%= render partial: "rows/row_rw", collection: layer.rows, as: :row %>
   </tbody>
 </table>
 
