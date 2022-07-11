@@ -275,16 +275,30 @@ input[type="radio"] {
 }
 
 .layer-actions {
-  padding: 1em 3em 0 3em;
+  background-color: var(--color-bg-ambient-30);
+  border-bottom: solid var(--color-grey-40);
+  padding: 0em 1em 0em 1em;
+  margin-bottom: 2em;
   color: var(--color-green-70);
   display: flex;
   align-items: center;
   justify-content: space-between;
 
   a {
-    font-size: 14px;
+    font-size: 12px;
     text-decoration: none;
-    height: 14px;
+    background-color: var(--color-bg-ambient-10);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+  .layer-actions-right {
+    display: flex;
+    flex-direction: row;
+  }
+  .delete {
+    margin-left: 0.5em;
   }
 }
 
@@ -305,6 +319,13 @@ input[type="radio"] {
 
 .go-back::before {
   content: url("data:image/svg+xml;utf-8,<svg width='12' height='12' xmlns='http://www.w3.org/2000/svg'><path d='M7.584 4.723a.5.5 0 0 1 .875.475l-.043.08L6.601 8l1.815 2.723a.5.5 0 0 1-.068.636l-.07.057a.5.5 0 0 1-.637-.068l-.057-.07-2-3a.5.5 0 0 1-.047-.468l.047-.087 2-3Z' fill='%234d7a5d' fill-rule='evenodd'/></svg>");
+}
+.export::before {
+  content: url("data:image/svg+xml;utf-8,<svg width='16' height='16' xmlns='http://www.w3.org/2000/svg'><g fill='none' fill-rule='evenodd'><path d='M0 0h16v16H0z'/><path d='m10 2 3 3v9H4v-4h1v3h7V5.415L9.585 3H5v3H4V2h6ZM7 5l4 3-4 3V9H2V7h5V5Z' fill='%234d7a5d'/></g></svg>");
+}
+
+.delete::before {
+  content: url("data:image/svg+xml;utf-8,<svg width='16' height='16' xmlns='http://www.w3.org/2000/svg'><path d='m13 6-.901 8.11a1 1 0 0 1-.994.89h-6.21a1 1 0 0 1-.994-.89L3 6h10ZM8 8a.5.5 0 0 0-.492.41L7.5 8.5v4a.5.5 0 0 0 .992.09l.008-.09v-4A.5.5 0 0 0 8 8Zm2.685.018a.5.5 0 0 0-.444.355l-.018.089-.441 3.972-.002.09a.5.5 0 0 0 .978.109l.018-.088.441-3.973.002-.09a.5.5 0 0 0-.355-.444l-.088-.018-.09-.002Zm-5.371 0-.09.002-.089.018a.5.5 0 0 0-.341.357l-.014.087.002.09.441 3.973.018.088a.5.5 0 0 0 .964-.022l.014-.087-.002-.09-.441-3.972-.018-.089a.5.5 0 0 0-.444-.355ZM9 1a2 2 0 0 1 2 2h1a2 2 0 0 1 2 2v.5H2V5a2 2 0 0 1 2-2h1a2 2 0 0 1 2-2h2Zm0 1H7a1 1 0 0 0-.993.883L6 3h4a1 1 0 0 0-.883-.993L9 2Z' fill='%23fbc5c9' fill-rule='evenodd'/></svg>");
 }
 
 .primary-action {

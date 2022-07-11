@@ -13,11 +13,13 @@
   data-map-color-value="<%= @layer.color %>">
   <div class="data" data-dragbar-target="left">
     <div class="layer-actions">
-      <%= link_to t(".all_layers"), @layer.map, class: "go-back" %>
-      <%= link_to t(".download_as_geojson"), geojson_layer_path(@layer), download: "#{@layer.name}.geojson" %>
-      <%= link_to t("helpers.link.layer.delete"), @layer, data: {turbo_method: :delete, turbo_confirm: t("common.confirm")} %>
+      <%= link_to t(".map"), @layer.map, class: "go-back" %>
+      <%= render "name", layer: @layer %>
+      <div class="layer-actions-right">
+        <%= link_to t(".export"), geojson_layer_path(@layer), download: "#{@layer.name}.geojson", class: "export" %>
+        <%= link_to t("helpers.link.layer.delete"), @layer, data: {turbo_method: :delete, turbo_confirm: t("common.confirm")}, class: "delete" %>
+      </div>
     </div>
-    <%= render "name", layer: @layer %>
     <%= render "rows_rw", layer: @layer %>
     <%= render "tooltip", layer: @layer %>
   </div>
