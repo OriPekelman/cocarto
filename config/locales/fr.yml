@@ -20,8 +20,8 @@ fr:
     user_not_authorized: Vous n’avez pas la permission d’effectuer cette action.
   layers:
     edit:
-      all_layers: Toutes les couches
-      download_as_geojson: Télécharger en GeoJSON
+      export: export
+      map: carte
     tooltip:
       new_field_description: Cliquez sur le + pour ajouter une colonne à vos données
       new_row_description: Cliquez sur la carte pour ajouter un nouveau point de données
