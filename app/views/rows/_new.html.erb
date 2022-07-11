@@ -1,7 +1,7 @@
 <%# params: row %>
 <%# renders a hidden form for a new Row with connectors to stimulus controllers. Used in layers/edit %>
 <% if row.layer.geometry_territory? %>
-  <%= render partial: "territories/search_form", locals: {form_id: "new_territory_form", field_id: "territory_id", value: nil} %>
+  <%= render partial: "territories/search_form", locals: {form_id: "new_territory_form", field: "row[territory_id]", territory: nil} %>
   <%= form_with model: [row.layer, row], id: 'new_territory_form' do |form| %>
     <%= form.hidden_field :layer_id %>
     <%= form.submit %>

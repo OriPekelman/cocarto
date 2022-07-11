@@ -5,7 +5,7 @@
   <% if field.numerical? %>
     <%= number_field_tag "row[fields_values][#{field.id}]", value, id: field.id, class: "numerical", data: {action: "focusout->row#save"}, form: form_id, autocomplete: :off %>
   <% elsif field.field_type == "territory" %>
-    <%= render "territories/search_form", field_id: field.id, value: value, form_id: form_id %>
+    <%= render "territories/search_form", field: "row[fields_values][#{field.id}]", territory: value, form_id: form_id %>
   <% elsif field.field_type == "date" %>
     <%= date_field_tag "row[fields_values][#{field.id}]", value, id: field.id, data: {action: "change->row#save"}, form: form_id, autocomplete: "off" %>
   <% elsif field.field_type == "boolean" %>

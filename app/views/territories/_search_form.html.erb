@@ -1,10 +1,15 @@
-<%# params: field_id, value, form_id %>
+<%# params: field, territory, form_id %>
+<%# We have two interleaved forms:
+- one for the autocomplete
+- one defined outside of the partial, where we want to use the id of the selected territory
+That is why this partial needs the field name and the form_id %>
 
+<% result_div_id = SecureRandom.alphanumeric %>
 <div class="territory-search" data-controller="autocomplete" data-action="autocomplete:selected->row#setModified">
-  <%= hidden_field_tag "row[fields_values][#{field_id}]", value&.id, id: field_id, data: {"autocomplete-target": "selected"}, form: form_id %>
+  <%= hidden_field_tag field, territory&.id, data: {"autocomplete-target": "selected"}, form: form_id %>
   <%= form_with url: search_territories_path, method: :post do |form| %>
-    <%= form.search_field :q, value: value && "#{value.name} (#{value.code})", data: {"autocomplete-target": "searchInput", action: "autocomplete#input"} %>
-    <%= form.hidden_field :result_id, value: "#{field_id}-#{form_id}" %>
+    <%= form.search_field :q, value: territory && "#{territory.name} (#{territory.code})", data: {"autocomplete-target": "searchInput", action: "autocomplete#input"} %>
+    <%= form.hidden_field :result_id, value: result_div_id %>
   <% end %>
-  <div id="<%= "#{field_id}-#{form_id}" %>" class="search-result is-hidden" data-autocomplete-target="suggestionList"></div>
+  <div id="<%= search_result_div_id %>" class="search-result is-hidden" data-autocomplete-target="suggestionList"></div>
 </div>
