@@ -13,7 +13,6 @@ export default class extends Controller {
   }
 
   selected ({ params }) {
-    console.log('selected')
     this.selectedTarget.value = params.id
     this.searchInputTarget.value = params.value
     this.dispatch('selected')
