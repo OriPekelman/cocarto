@@ -21,7 +21,9 @@
     <%= render "rows_rw", layer: @layer %>
     <%= render "tooltip", layer: @layer %>
   </div>
-  <div class="dragbar" data-dragbar-target="dragbar" data-action="mousedown->dragbar#mousedown"></div>
+  <div class="dragbar" data-dragbar-target="dragbar" data-action="mousedown->dragbar#mousedown">
+    <%= image_tag "dragbar_cursor.svg", class: "svg-dragbar" %>
+  </div>
   <div class="map" data-map-target="map" data-dragbar-target="right">
     <%= render "rows/new", row: Row.new(layer: @layer) %>
   </div>
