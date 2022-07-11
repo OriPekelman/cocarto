@@ -5,7 +5,7 @@
     <%= render partial: "territories/search_form", locals: {form_id: "new_territory_form", field: "row[territory_id]", territory: nil} %>
     <%= form_with model: [row.layer, row], id: "new_territory_form" do |form| %>
       <%= form.hidden_field :layer_id %>
-      <%= form.submit class: "new-territory primary-action" %>
+      <%= form.submit t("helpers.link.territory.new"), class: "new-territory primary-action" %>
     <% end %>
   </div>
 <% else %>

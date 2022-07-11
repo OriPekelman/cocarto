@@ -56,6 +56,8 @@ en:
         new: Build a new map
       row:
         delete: Delete
+      territory:
+        new: Add the territory
     message:
       field:
         created: New field %{name} created
