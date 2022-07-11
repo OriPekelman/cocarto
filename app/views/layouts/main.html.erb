@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Ĝis</title>
+  <title><%= t("common.app_title") %></title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
@@ -13,17 +13,17 @@
 
 <body>
 <nav>
-  <h1><%= link_to "Ĝis", user_signed_in? ? maps_path : root_path %></h1>
+  <h1><%= link_to t("common.app_title"), user_signed_in? ? maps_path : root_path %></h1>
   <div id="flash">
     <%= render "layouts/flash" %>
   </div>
   <div class="header-right">
     <% if user_signed_in? %>
-      <span><%= t(:hello) %>, <%= current_user.email %></span>
-      <%= button_to t(:sign_out), destroy_user_session_path, method: :delete, class: "primary-action" %>
+      <span><%= t("common.hello") %>, <%= current_user.email %></span>
+      <%= button_to t("layouts.application.sign_out"), destroy_user_session_path, method: :delete, class: "primary-action" %>
     <% else %>
-      <%= link_to t(:sign_in), new_user_session_path, class: "header-login" %>
-      <%= link_to t(:sign_up), new_user_registration_path, class: "primary-action" %>
+      <%= link_to t("layouts.application.sign_in"), new_user_session_path, class: "header-login" %>
+      <%= link_to t("layouts.application.sign_up"), new_user_registration_path, class: "primary-action" %>
     <% end %>
     <div class="dropdown" data-controller="dropdown">
       <button class="button-trad" aria-controls="dropdown-menu" data-action="click->dropdown#toggle">
@@ -45,7 +45,7 @@
   <%= yield %>
 </main>
 <footer>
-  <p>Développé par <a href="https://www.codeursenliberté.fr" target="_blank">codeurs en liberté</a>, une coopérative d’indépendant·e·s dans le domaine de l’informatique.</p>
+  <p><%= t("layouts.application.footer_html") %>></p>
 </footer>
 </body>
 </html>

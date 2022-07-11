@@ -45,7 +45,7 @@ class LayersController < ApplicationController
 
   def destroy
     @layer.destroy
-    redirect_to maps_url, notice: t("error_message_layer_destroy"), status: :see_other
+    redirect_to maps_url, notice: t("helpers.message.layer.destroyed"), status: :see_other
   end
 
   def schema
@@ -71,7 +71,7 @@ class LayersController < ApplicationController
     @user_name = if user_signed_in?
       current_user.email.split("@")[0]
     else
-      "annonymous"
+      "anonymous"
     end
   end
 

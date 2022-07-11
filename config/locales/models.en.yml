@@ -5,7 +5,15 @@ en:
       field:
         field_type: Type
         label: Name
+      field/field_types:
+        boolean: Boolean
+        date: Date
+        float: Decimal
+        integer: Integer
+        territory: Territory
+        text: Text
       layer:
+        color: Color of the features
         geometry_type: Geometry type
         line_string:
           one: line string
@@ -17,6 +25,11 @@ en:
         polygon:
           one: polygon
           other: polygons
+      territory:
+        code: identifier
+        parent: part of
+      territory_category:
+        revision: revision
     models:
       layer:
         one: Layer
@@ -24,9 +37,42 @@ en:
       map:
         one: Map
         other: Maps
+      territory:
+        one: Territory
+        other: Territories
+      territory_category:
+        one: Territory category
+        other: Territory categories
   helpers:
+    _comment: The "helpers" scope is for model-specific keys. For general purpose labels, use the "common" scope.
+    link:
+      field:
+        delete: Delete this column
+      layer:
+        delete: Delete this layer
+        new: Add a new layer
+      map:
+        delete: Delete map
+        new: Build a new map
+      row:
+        delete: Delete
+    message:
+      field:
+        created: New field %{name} created
+        destroyed: Field was successfully destroyed.
+        updated: Field was successfully updated.
+      layer:
+        destroyed: Layer was successfully destroyed.
+      map:
+        destroyed: The map was successfully destroyed
+      row:
+        destroyed: Geometry was successfully destroyed.
+        updated: Geometry properties were successfully updated.
     submit:
+      _comment: The helpers.submit.create and helpers.submit.update keys are standard in Rails.
       field:
         create: Add a field
       layer:
         create: Create a layer
+      row:
+        create: Create a new row

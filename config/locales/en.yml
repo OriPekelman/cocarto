@@ -1,10 +1,5 @@
 ---
 en:
-  all_layer: All layers
-  back: Back
-  by: by
-  call to add a field: Click on the + to add a data column to your data
-  click on map for more content: Click on the map to add a new data point
   colors:
     blue: Blue
     brown: Brown
@@ -14,29 +9,45 @@ en:
     orange: Orange
     pink: Pink
     purple: Purple
-  delete_confirm: Are you sure?
-  delete_layer: Delete this layer
-  delete_map: Delete map
-  download_as_geojson: Download as GeoJSON
-  edit: Edit
-  error_message_field_destroy: Field was successfully destroyed.
-  error_message_field_update: Field was successfully updated.
-  error_message_layer_destroy: Layer was successfully destroyed.
-  error_message_map_destroy: The map was successfully destroyed
-  error_message_row_destroy: Geometry was successfully destroyed.
-  error_message_row_update: Geometry properties were successfully updated.
-  hello: Hello
-  layer_feature_colors: Color of the features
-  new field created: New field %{name} created
-  new_layer: Add a new layer
-  new_map: Build a new map
-  not_authorized: You are not authorized to perform this action.
-  part of territory: Part of territory
-  show: Show
-  sign_in: Log in
-  sign_out: Sign out
-  sign_up: Sign up
-  territory category: Territory category
-  territory code: Territory identifier
-  territory revision: Territory category revision
-  updated_the: updated the
+  common:
+    app_title: Ĝis
+    back: Back
+    confirm: Are you sure?
+    edit: Edit
+    hello: Hello
+    show: Show
+    updated_at_by: Last update on %{date} by %{user}
+    user_not_authorized: You are not authorized to perform this action.
+  layers:
+    edit:
+      all_layers: All layers
+      download_as_geojson: Download as GeoJSON
+    tooltip:
+      new_field_description: Click on the + to add a data column to your data
+      new_row_description: Click on the map to add a new data point
+  layouts:
+    application:
+      footer_html: Made by <a href="https://www.codeursenliberté.fr" target="_blank">codeurs en liberté</a>, an indie software cooperative.
+      sign_in: Log in
+      sign_out: Sign out
+      sign_up: Sign up
+  main:
+    index:
+      landing_1_header_html: |
+        <p>Ĝis is a collaborative cartography tool.<br>
+        Il can link data to a territory.</p><p>For example :</p>
+      landing_2_examples_html: "<li>prepare the journey and every step for a hike,</li><li>list infrastructure issues.</li>\n"
+      landing_3_footer_html: |
+        We’re looking for stories for such needs in existing companies.
+        <a href=" https://gitlab.com/CodeursEnLiberte/gxis/-/blob/main/README.md#user-content-how-to-contribute" target="_blank">Contact us</a>
+        if you want to talk about yours.</p>
+  rows:
+    edit:
+      edit_row_title: Update a row
+      page_access_description_html: This page can be accessed and shared through <a href="%{url}">this link</a>.
+    new:
+      new_row_description: Enter a new row
+      new_row_explanation: You don’t need to enter the whole data now. By clicking “Save”, you’ll receive a link to continue editing later.
+  territories:
+    index:
+      search_title: Search a territory

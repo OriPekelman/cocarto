@@ -15,7 +15,7 @@ class RowsController < ApplicationController
   end
 
   def create
-    anonymous = params.require(:row)[:annonymous] == "true"
+    anonymous = params.require(:row)[:anonymous] == "true"
 
     @row = Row.create(layer: @layer, **row_params)
 
@@ -33,7 +33,7 @@ class RowsController < ApplicationController
     @row.destroy
     respond_to do |format|
       format.turbo_stream
-      format.html { redirect_to @row.layer, notice: t("error_message_row_destroy") }
+      format.html { redirect_to @row.layer, notice: t("helpers.message.row.destroyed") }
     end
   end
 
@@ -41,7 +41,7 @@ class RowsController < ApplicationController
     @row.update(row_params)
     respond_to do |format|
       format.turbo_stream
-      format.html { redirect_to layer_path(@row.layer), notice: t("error_message_row_update") }
+      format.html { redirect_to layer_path(@row.layer), notice: t("helpers.message.row.updated") }
     end
   end
 

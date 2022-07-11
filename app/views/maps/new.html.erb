@@ -1,7 +1,7 @@
-<%# params: @layer %>
+<%# params: @map %>
 
 <div class="centered-main new-layer">
-  <h2><%= t :new_map %></h2>
+  <h2><%= t("helpers.link.map.new") %></h2>
   <%= form_with(model: @map) do |form| %>
     <div class="field">
       <%= form.label :name %>
@@ -9,7 +9,7 @@
     </div>
 
     <div class="actions">
-      <%= link_to t("back"), maps_path, class: "secondary-action" %>
+      <%= link_to t("common.back"), maps_path, class: "secondary-action" %>
       <%= form.submit class: "primary-action" %>
     </div>
   <% end %>

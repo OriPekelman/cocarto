@@ -15,7 +15,7 @@ class MapsController < ApplicationController
 
   def destroy
     @map.destroy
-    redirect_to maps_url, notice: t("error_message_map_destroy"), status: :see_other
+    redirect_to maps_url, notice: t("helpers.message.map.destroyed"), status: :see_other
   end
 
   def create

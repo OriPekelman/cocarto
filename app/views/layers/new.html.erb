@@ -4,7 +4,7 @@
   class="centered-main new-layer"
   data-controller="color-selector"
   data-color-selector-default-value="<%= Layer::COLORS[:blue] %>">
-  <h2><%= t :new_layer %></h2>
+  <h2><%= t("helpers.link.layer.new") %></h2>
   <%= form_with(model: @layer) do |form| %>
     <%= form.hidden_field :map_id %>
 
@@ -13,7 +13,7 @@
       <%= form.text_field :name %>
     </div>
 
-    <h3><%= t(:layer_feature_colors) %></h3>
+    <h3><%= Layer.human_attribute_name(:color) %></h3>
     <div class="color-selection">
       <% Layer::COLORS.each do |key, rgb| %>
         <div>
@@ -37,7 +37,7 @@
     </div>
 
     <div class="actions">
-      <%= link_to t("back"), map_path(@layer.map), class: "secondary-action" %>
+      <%= link_to t("common.back"), map_path(@layer.map), class: "secondary-action" %>
       <%= form.submit class: "primary-action" %>
     </div>
   <% end %>
