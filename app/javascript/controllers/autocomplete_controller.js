@@ -8,7 +8,6 @@ export default class extends Controller {
       this.suggestionListTarget.classList.remove('is-hidden')
 
       target.form.requestSubmit()
-      console.log('input')
     }
   }
 

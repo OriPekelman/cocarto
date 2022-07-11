@@ -39,9 +39,11 @@ export default class extends Controller {
 
   #initMap () {
     this.map = newMap(this.mapTarget)
-    this.#initRowDraw()
 
-    this.rowTargets.forEach(row => this.#addRow(row))
+    if (this.geometryTypeValue !== 'territory') {
+      this.#initRowDraw()
+      this.rowTargets.forEach(row => this.#addRow(row))
+    }
 
     const resizeObserver = new ResizeObserver(() => this.map.resize())
     resizeObserver.observe(this.mapTarget)
