@@ -26,6 +26,7 @@
 class Territory < ApplicationRecord
   belongs_to :territory_category
   belongs_to :parent, class_name: "Territory"
+  has_many :rows, dependent: :restrict_with_error
 
   # We use postgis functions to convert to geojson
   # This makes the load be on postgres’ side, not rails (C implementation)

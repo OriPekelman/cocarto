@@ -40,10 +40,8 @@ export default class extends Controller {
   #initMap () {
     this.map = newMap(this.mapTarget)
 
-    if (this.geometryTypeValue !== 'territory') {
-      this.#initRowDraw()
-      this.rowTargets.forEach(row => this.#addRow(row))
-    }
+    this.#initRowDraw()
+    this.rowTargets.forEach(row => this.#addRow(row))
 
     const resizeObserver = new ResizeObserver(() => this.map.resize())
     resizeObserver.observe(this.mapTarget)
@@ -70,7 +68,8 @@ export default class extends Controller {
       styles: maplibreGLFeaturesStyle(this.colorValue)
     }
 
-    this.draw = new MapboxDraw(this.editableValue ? rwOptions : roOptions)
+    const editable = this.editableValue && this.geometryTypeValue !== 'territory'
+    this.draw = new MapboxDraw(editable ? rwOptions : roOptions)
     this.map.addControl(this.draw)
 
     if (this.editableValue) {

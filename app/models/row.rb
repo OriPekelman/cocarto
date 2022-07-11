@@ -23,7 +23,7 @@
 #
 class Row < ApplicationRecord
   belongs_to :layer
-  belongs_to :territory, optional: true
+  belongs_to :territory, -> { with_geojson }, inverse_of: :rows, optional: true
 
   after_update_commit -> do
     strict_loading!(false)
