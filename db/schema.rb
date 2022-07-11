@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_06_135320) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_11_160711) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -71,6 +71,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_06_135320) do
     t.uuid "territory_id"
     t.index ["layer_id"], name: "index_rows_on_layer_id"
     t.index ["territory_id"], name: "index_rows_on_territory_id"
+    t.check_constraint "num_nonnulls(point, line_string, polygon, territory_id) = 1"
   end
 
   create_table "territories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

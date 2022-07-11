@@ -27,3 +27,4 @@ restaurants:
 hiking:
   name: hiking path
   map: two
+  geometry_type: 'territory'
