@@ -10,17 +10,20 @@ en:
     pink: Pink
     purple: Purple
   common:
+    add: add
     app_title: Ĝis
     back: Back
+    colors: colors
     confirm: Are you sure?
     edit: Edit
+    frame: frame
     hello: Hello
     show: Show
     updated_at_by: Last update on %{date} by %{user}
     user_not_authorized: You are not authorized to perform this action.
   layers:
     edit:
-      export: export
+      export: geojson
       map: map
     tooltip:
       new_field_description: Click on the + to add a data column to your data
