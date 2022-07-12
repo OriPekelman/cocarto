@@ -48,4 +48,12 @@ class Territory < ApplicationRecord
     where("name % :name", name: name)
       .order(Arel.sql("similarity(name, '#{quoted_name}') DESC"))
   }
+
+  def to_s
+    if id
+      "#{name} (#{code})"
+    else
+      name
+    end
+  end
 end
