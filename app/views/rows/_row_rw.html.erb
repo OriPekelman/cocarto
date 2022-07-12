@@ -7,7 +7,7 @@
   <% row.fields_values.each do |field, value| %>
     <%= render "fields/field_in_form", field: field, value: value, form_id: form_id %>
   <% end %>
-  <td>
+  <td id="<%= dom_id(row, :last) %>">
     <div class="actions">
       <%= form_with method: :patch, model: [row.layer, row], id: form_id, data: {"row-target": "form", action: "row#save"} do |form| %>
         <%= form.hidden_field "geojson", data: {"row-target": "geojson"} %>

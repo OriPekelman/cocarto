@@ -18,14 +18,14 @@
 #  fk_rails_...  (layer_id => layers.id)
 #
 class Field < ApplicationRecord
+  include ActionView::RecordIdentifier # to access `dom_id`
   belongs_to :layer
   enum :field_type, {text: "text", float: "float", integer: "integer", territory: "territory", date: "date", boolean: "boolean"}
 
   after_create_commit -> do
     broadcast_before_to layer, target: "delete-column", partial: "fields/th"
     layer.rows.each do |row|
-      target = [row.id, "action"].join("-")
-      broadcast_before_to layer, target: target, partial: "fields/field_in_form", locals: {field: self, row_id: row.id, value: nil}
+      broadcast_before_to layer, target: dom_id(row, :last), partial: "fields/field_in_form", locals: {field: self, form_id: dom_id(row, :form), value: nil}
       broadcast_replace_to layer, target: "tutorial", partial: "layers/tooltip", locals: {layer: layer}
     end
   end
