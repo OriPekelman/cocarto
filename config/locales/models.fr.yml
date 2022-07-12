@@ -55,11 +55,7 @@ fr:
         new: Ajouter une nouvelle couche
       map:
         delete: Supprimer la carte
-<<<<<<< HEAD
         new: Créer une nouvelle carte
-=======
-        new: Crée une nouvelle carte
->>>>>>> 8067aef (feat: add new traduction and delete old traduction)
       row:
         delete: Supprimer
       territory:
