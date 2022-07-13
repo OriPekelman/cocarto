@@ -17,7 +17,7 @@
         <% if !row.layer.geometry_territory? %>
           <%= form.hidden_field "geojson", data: {"row-target": "geojson"} %>
         <% else %>
-          <%= form.hidden_field "geojson", value: row.territory.geojson, data: {"row-target": "geojson"} %>
+          <%= hidden_field_tag "geojson", row.territory.geojson, data: {"row-target": "geojson"} %>
         <% end %>
         <%= form.button "save", class: "is-hidden" %>
       <% end %>
