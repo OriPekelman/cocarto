@@ -82,10 +82,15 @@ class Row < ApplicationRecord
 
   # Geometry accessor, as geojson (used in the row form)
   def geojson
-    RGeo::GeoJSON.encode(geometry).to_json
+    if layer.geometry_territory?
+      row.territory.geojson
+    else
+      RGeo::GeoJSON.encode(geometry).to_json
+    end
   end
 
   def geojson=(new_geojson)
+    raise "Can not set the geojson of a territory" if layer.geometry_territory?
     self.geometry = RGeo::GeoJSON.decode(new_geojson, geo_factory: RGEO_FACTORY)
   end
 
