@@ -1,0 +1,30 @@
+.dropdown {
+  .dropdown-content {
+    border-radius: var(--border-radius);
+    visibility: hidden;
+    position: absolute;
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-bg-secondary);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow) var(--color-shadow);
+    color: var(--color-text);
+    padding: 0.2rem;
+    font-size: 80%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+
+    a {
+      text-decoration: none;
+      padding: 3px 6px;
+
+      &:hover {
+        color: var(--color-grey-50);
+      }
+    }
+  }
+
+  &.is-active > .dropdown-content {
+    visibility: visible;
+  }
+}

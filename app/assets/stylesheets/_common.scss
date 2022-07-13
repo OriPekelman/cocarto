@@ -1,3 +1,5 @@
+@use "dropdown";
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -97,38 +99,6 @@ button:active {
 
 button:hover {
   cursor: pointer;
-}
-
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-content a {
-  text-decoration: none;
-  padding: 3px 6px;
-}
-
-.dropdown-content a:hover {
-  color: var(--color-grey-50);
-}
-
-.dropdown-content {
-  border-radius: var(--border-radius);
-  display: none;
-  position: fixed;
-  background-color: var(--color-bg);
-  border: 1px solid var(--color-bg-secondary);
-  border-radius: var(--border-radius);
-  box-shadow: var(--box-shadow) var(--color-shadow);
-  color: var(--color-text);
-  padding: 0.2rem;
-  font-size: 80%;
-  overflow: visible !important;
-}
-
-.dropdown.is-active > .dropdown-content {
-  display: block;
 }
 
 a {
@@ -271,7 +241,6 @@ input[type="radio"] {
   height: 16px;
   width: 16px;
   accent-color: var(--color-green-70);
-  transition: all 0.3s ease-in-out;
 }
 
 .layer-actions {

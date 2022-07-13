@@ -21,11 +21,6 @@ span {
   cursor: pointer;
 }
 
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
 span:active {
   color: var(--color-grey-60);
 }
@@ -225,11 +220,6 @@ table {
 
 .is-hidden {
   display: none;
-}
-
-.row-actions {
-  position: sticky;
-  right: 0;
 }
 
 input[readonly],
