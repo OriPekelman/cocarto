@@ -4,7 +4,7 @@ class TerritoriesController < ApplicationController
   end
 
   def search
-    territories = Territory.includes(:territory_category).name_autocomplete(params[:q]).preload(:parent)
+    territories = Territory.includes(:territory_category).name_autocomplete(params[:q]).preload(:parent).limit(20)
     render turbo_stream: [
       turbo_stream.update(params[:result_id],
         partial: "territories/search_results",
