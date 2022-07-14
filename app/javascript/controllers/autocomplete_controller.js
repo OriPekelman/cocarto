@@ -1,11 +1,11 @@
 import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
-  static targets = ['searchInput', 'suggestion', 'suggestionList', 'selected']
+  static targets = ['searchInput', 'selected']
 
   input ({ target }) {
     if (this.searchInputTarget.value.length >= 2) {
-      this.suggestionListTarget.classList.remove('is-hidden')
+      this.dispatch('input')
 
       target.form.requestSubmit()
     }
@@ -17,9 +17,5 @@ export default class extends Controller {
     this.dispatch('selected')
     this.searchInputTarget.focus()
     this.hide()
-  }
-
-  hide () {
-    this.suggestionListTarget.classList.add('is-hidden')
   }
 }

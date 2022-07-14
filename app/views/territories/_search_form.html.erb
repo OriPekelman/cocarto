@@ -5,11 +5,18 @@
 That is why this partial needs the field name and the form_id %>
 
 <% search_result_div_id = SecureRandom.alphanumeric %>
-<div class="territory-search" data-controller="autocomplete" data-action="autocomplete:selected->row#save autocomplete:selected->enable#enable">
+<div
+  class="territory-search dropdown"
+  data-controller="autocomplete dropdown"
+  data-action="autocomplete:selected->row#save autocomplete:selected->enable#enable autocomplete:selected->dropdown#unactive autocomplete:input->dropdown#active">
   <%= hidden_field_tag field, territory&.id, data: {"autocomplete-target": "selected"}, form: form_id %>
   <%= form_with url: search_territories_path, method: :post do |form| %>
-    <%= form.search_field :q, value: territory, autocomplete: "off", data: {"autocomplete-target": "searchInput", action: "autocomplete#input"} %>
+    <%= form.search_field :q, value: territory, autocomplete: "off", data: {"autocomplete-target": "searchInput","dropdown-target": "trigger", action: "autocomplete#input"} %>
     <%= form.hidden_field :result_id, value: search_result_div_id %>
   <% end %>
-  <div id="<%= search_result_div_id %>" class="search-result is-hidden" data-autocomplete-target="suggestionList"></div>
+  <div
+    id="<%= search_result_div_id %>"
+    class="search-result dropdown-content"
+    data-dropdown-target="content">
+  </div>
 </div>

@@ -1,5 +1,5 @@
 import { Controller } from '@hotwired/stimulus'
-import { computePosition, offset, autoUpdate } from '@floating-ui/dom'
+import { computePosition, offset, autoUpdate, flip } from '@floating-ui/dom'
 
 export default class extends Controller {
   static targets = ['trigger', 'content']
@@ -15,7 +15,7 @@ export default class extends Controller {
     autoUpdate(trigger, content, () => {
       computePosition(trigger, content, {
         placement: this.placementValue,
-        middleware: [offset(this.offsetNumber)]
+        middleware: [offset(this.offsetNumber), flip()]
       }).then(({ x, y }) => {
         Object.assign(content.style, {
           left: `${x}px`,
@@ -27,5 +27,13 @@ export default class extends Controller {
 
   toggle () {
     this.element.classList.toggle('is-active')
+  }
+
+  activate () {
+    this.element.classList.add('is-active')
+  }
+
+  desactivate () {
+    this.element.classList.remove('is-active')
   }
 }
