@@ -16,6 +16,5 @@ export default class extends Controller {
     this.searchInputTarget.value = params.value
     this.dispatch('selected')
     this.searchInputTarget.focus()
-    this.hide()
   }
 }
