@@ -51,7 +51,7 @@ fr:
       field:
         delete: Supprimer cette colonne
       layer:
-        delete: Créer une nouvelle carte
+        delete: supprimer
         new: Ajouter une nouvelle couche
       map:
         delete: Supprimer la carte

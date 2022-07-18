@@ -177,15 +177,18 @@ table {
 
 /* MAP */
 .data-with-map {
-  overflow-y: hidden;
   height: calc(100vh - var(--nav-height) - var(--footer-height));
+  bottom: 0;
   display: flex;
   width: 100%;
+  position: relative;
 }
 
+.right-pane {
+  width: 50%;
+}
 .data-with-map > .data {
   width: 50%;
-  position: relative;
   display: flex;
   flex-direction: column;
 }
@@ -194,8 +197,8 @@ table {
   position: absolute;
   padding: 16px;
   width: 320px;
-  top: 24px;
-  right: 40px;
+  bottom: 300px;
+  left: 200px;
   background-color: var(--color-info-10);
   color: var(--color-info-40);
   border-radius: var(--border-radius);
@@ -206,10 +209,16 @@ table {
 }
 
 .data-with-map > .map {
-  width: 50%;
-  height: 100%;
+  width: 100%;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  height: calc(100% - 66px);
 }
-
+.maplibregl-control-container.mapboxgl-control-container {
+  right: 0;
+  height: 668px;
+}
 .actions {
   display: flex;
 }
@@ -281,7 +290,7 @@ radio.slim {
   width: 6px;
   z-index: 2;
   position: relative;
-  cursor: move;
+  cursor: ew-resize;
 }
 
 .svg-dragbar {
@@ -291,10 +300,10 @@ radio.slim {
   bottom: 12rem;
   left: 50%;
   transform: translate(-50%, 0px);
+  pointer-events: none;
 }
 
 .svg-dragbar:active {
-  pointer-events: none;
   background-color: var(--color-green-60);
 }
 
