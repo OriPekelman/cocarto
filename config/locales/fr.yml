@@ -46,7 +46,6 @@ fr:
       edit_row_title: Modifier une ligne
       page_access_description_html: Cette restera accessible et partageable par <a href="%{url}">ce lien</a>.
     new:
-      add_territory: Ajouter le territoire
       new_row_description: Saisir une nouvelle ligne
       new_row_explanation: Vous n’avez pas besoin de finir la saisie. En cliquant sur « Sauvegarder », vous obtiendrez un lien pour poursuivre l’édition plus tard.
   territories:
