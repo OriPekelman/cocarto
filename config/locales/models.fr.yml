@@ -25,6 +25,8 @@ fr:
         polygon:
           one: polygone
           other: polygones
+      map:
+        name: Nom
       territory:
         code: identifiant
         parent: partie de
@@ -53,7 +55,7 @@ fr:
         new: Ajouter une nouvelle couche
       map:
         delete: Supprimer la carte
-        new: Build a new map
+        new: Créer une nouvelle carte
       row:
         delete: Supprimer
       territory:
@@ -76,5 +78,7 @@ fr:
         create: Ajouter un champ
       layer:
         create: Créer une couche
+      map:
+        create: Créer une carte
       row:
         create: Enregistrer la ligne
