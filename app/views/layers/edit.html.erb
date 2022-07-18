@@ -26,6 +26,14 @@
   <div class="dragbar" data-dragbar-target="dragbar" data-action="mousedown->dragbar#mousedown">
     <%= image_tag "dragbar_cursor.svg", class: "svg-dragbar" %>
   </div>
-  <div class="map" data-map-target="map" data-dragbar-target="right">
+  <div data-dragbar-target="right" class="div-size">
+    <div class="layer-actions-map">
+      <%= link_to t("common.frame"), @layer, class: "frame-map" %>
+      <%= link_to t("common.colors"), @layer.map, class: "color" %>
+      <%= link_to t("common.add"), @layer.map, class: "add-geometry" %>
+    </div>
+    <div class="map" data-map-target="map">
+      <%= render "rows/new", row: Row.new(layer: @layer) %>
+    </div>
   </div>
 </div>
