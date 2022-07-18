@@ -3,7 +3,14 @@
 
 <tr id="<%= dom_id(row) %>"
     data-controller="row">
-  <%= hidden_field_tag "geojson", row.geojson, data: {"row-target": "geojson"} %>
+  <% if row.layer.geometry_territory? %>
+    <td>
+      <%= row.territory %>
+      <%= hidden_field_tag "geojson", row.territory.geojson, data: {"row-target": "geojson"} %>
+    </td>
+  <% else %>
+    <%= hidden_field_tag "geojson", row.geojson, data: {"row-target": "geojson"} %>
+  <% end %>
   <% row.fields_values.each do |field, value| %>
     <% if field.numerical? %>
       <td class="numerical"><%= value %></td>
