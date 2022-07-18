@@ -225,13 +225,24 @@ textarea[readonly] {
 }
 
 .search-result {
-  position: absolute;
   border-radius: 5px;
   border: black;
-  border-width: 1px;
-  background-color: white;
-  text-align: left;
-  padding: 0.5rem 1rem;
+  ul {
+    list-style-type: none;
+    text-align: start;
+    li {
+      cursor: pointer;
+      font-family: var(--font-sans);
+      &.active,
+      &:hover {
+        color: var(--color-green-60);
+        text-decoration: underline;
+      }
+      mark {
+        background-color: var(--color-attention-20);
+      }
+    }
+  }
 }
 
 input.slim {
