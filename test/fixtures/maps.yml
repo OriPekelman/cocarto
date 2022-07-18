@@ -8,10 +8,8 @@
 #  updated_at :datetime         not null
 #
 
-one:
-  name: MyString
-  user: reclus
+restaurants:
+  name: Restaurants
 
-two:
-  name: MyString
-  user: cassini
+hiking:
+  name: Hiking
