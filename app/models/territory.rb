@@ -50,7 +50,7 @@ class Territory < ApplicationRecord
   }
 
   def to_s
-    if id
+    if code.present?
       "#{name} (#{code})"
     else
       name
