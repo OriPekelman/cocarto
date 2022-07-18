@@ -5,7 +5,7 @@
   <% form_id = dom_id(row, :form) %>
   <% if row.layer.geometry_territory? %>
     <td>
-      <%= render partial: "territories/search_form", locals: {form_id: form_id, field: "row[territory_id]", territory: row.territory} %>
+      <%= render "territories/search_form", form_id: form_id, field: "row[territory_id]", territory: row.territory %>
     </td>
   <% end %>
   <% row.fields_values.each do |field, value| %>
