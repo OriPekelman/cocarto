@@ -21,7 +21,7 @@
 class Layer < ApplicationRecord
   belongs_to :map
   has_many :fields, dependent: :delete_all
-  has_many :rows, dependent: :delete_all
+  has_many :rows, -> { order :created_at }, dependent: :delete_all, inverse_of: :layer
   enum :geometry_type, {point: "point", line_string: "line_string", polygon: "polygon", territory: "territory"}, prefix: "geometry"
 
   COLORS = {

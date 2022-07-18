@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_05_135004) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_11_160711) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -30,6 +30,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_05_135004) do
     "point",
     "line_string",
     "polygon",
+    "territory",
   ], force: :cascade
 
   create_table "fields", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -67,7 +68,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_05_135004) do
     t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.geometry "polygon", limit: {:srid=>4326, :type=>"st_polygon"}
     t.geometry "line_string", limit: {:srid=>4326, :type=>"line_string"}
+    t.uuid "territory_id"
     t.index ["layer_id"], name: "index_rows_on_layer_id"
+    t.index ["territory_id"], name: "index_rows_on_territory_id"
+    t.check_constraint "num_nonnulls(point, line_string, polygon, territory_id) = 1"
   end
 
   create_table "territories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -107,6 +111,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_05_135004) do
   add_foreign_key "fields", "layers"
   add_foreign_key "layers", "maps"
   add_foreign_key "maps", "users"
+  add_foreign_key "rows", "territories"
   add_foreign_key "territories", "territories", column: "parent_id"
   add_foreign_key "territories", "territory_categories"
 end

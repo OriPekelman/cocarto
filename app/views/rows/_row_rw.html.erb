@@ -1,16 +1,24 @@
 <%# params: row %>
 <%# renders a row in a table, editable, used in layers/_rows_rw %>
-
 <tr id="<%= dom_id(row) %>"
     data-controller="row">
   <% form_id = dom_id(row, :form) %>
+  <% if row.layer.geometry_territory? %>
+    <td>
+      <%= render "territories/search_form", form_id: form_id, field: "row[territory_id]", territory: row.territory %>
+    </td>
+  <% end %>
   <% row.fields_values.each do |field, value| %>
     <%= render "fields/field_in_form", field: field, value: value, form_id: form_id %>
   <% end %>
   <td id="<%= dom_id(row, :last) %>">
     <div class="actions">
       <%= form_with method: :patch, model: [row.layer, row], id: form_id, data: {"row-target": "form", action: "row#save"} do |form| %>
-        <%= form.hidden_field "geojson", data: {"row-target": "geojson"} %>
+        <% if !row.layer.geometry_territory? %>
+          <%= form.hidden_field "geojson", data: {"row-target": "geojson"} %>
+        <% else %>
+          <%= form.hidden_field "geojson", value: row.territory.geojson, data: {"row-target": "geojson"} %>
+        <% end %>
         <%= form.button "save", class: "is-hidden" %>
       <% end %>
       <%= button_to [row.layer, row], method: :delete do %>

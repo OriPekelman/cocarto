@@ -27,7 +27,7 @@
     <div class="geometry-type-selector">
         <% Layer.geometry_types.keys.each do |type| %>
           <%= form.label "geometry_type_#{type}" do %>
-            <%= form.radio_button :geometry_type, type, disabled: ["territory"].include?(type), checked: type == "point" %>
+            <%= form.radio_button :geometry_type, type, checked: type == "point" %>
             <div>
               <div data-color-selector-target="icon"><%= embedded_svg "#{type}.svg" %></div>
               <%= Layer.human_attribute_name(type).capitalize %>

@@ -375,3 +375,10 @@ radio.slim {
   display: inline-block;
   border-radius: 4px;
 }
+
+.new-territory {
+  display: flex;
+  margin: 1rem;
+  gap: 2rem;
+  align-items: center;
+}

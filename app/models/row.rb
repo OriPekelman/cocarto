@@ -2,22 +2,31 @@
 #
 # Table name: rows
 #
-#  id          :uuid             not null, primary key
-#  line_string :geometry         linestring, 4326
-#  point       :geometry         point, 4326
-#  polygon     :geometry         polygon, 4326
-#  values      :jsonb            not null
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  layer_id    :uuid
+#  id           :uuid             not null, primary key
+#  line_string  :geometry         linestring, 4326
+#  point        :geometry         point, 4326
+#  polygon      :geometry         polygon, 4326
+#  values       :jsonb            not null
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  layer_id     :uuid
+#  territory_id :uuid
 #
 # Indexes
 #
-#  index_rows_on_layer_id  (layer_id)
+#  index_rows_on_layer_id      (layer_id)
+#  index_rows_on_territory_id  (territory_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (territory_id => territories.id)
 #
 class Row < ApplicationRecord
   belongs_to :layer
+  belongs_to :territory, -> { with_geojson }, inverse_of: :rows, optional: true
+
   after_update_commit -> do
+    strict_loading!(false)
     broadcast_replace_to layer, partial: "rows/row_rw", locals: {row: self}
     broadcast_replace_to "#{layer.id}_ro", partial: "rows/row_ro", locals: {row: self}
   end
@@ -26,6 +35,7 @@ class Row < ApplicationRecord
     broadcast_remove_to "#{layer.id}_ro"
   end
   after_create_commit -> do
+    strict_loading!(false)
     broadcast_append_to layer, target: "rows-tbody", partial: "rows/row_rw", locals: {row: self}
     broadcast_append_to "#{layer.id}_ro", target: "rows-tbody", partial: "rows/row_ro", locals: {row: self}
     broadcast_replace_to layer, target: "tutorial", partial: "layers/tooltip", locals: {layer: layer}

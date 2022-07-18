@@ -8,12 +8,10 @@ export default class extends Controller {
       this.suggestionListTarget.classList.remove('is-hidden')
 
       target.form.requestSubmit()
-      console.log('input')
     }
   }
 
   selected ({ params }) {
-    console.log('selected')
     this.selectedTarget.value = params.id
     this.searchInputTarget.value = params.value
     this.dispatch('selected')
