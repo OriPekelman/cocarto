@@ -1,6 +1,8 @@
 class LayerPolicy < ApplicationPolicy
   def user_owns_record
-    record.map.user_id == user&.id
+    return false if user.nil?
+
+    record.map.roles.owner.merge(user.roles).exists?
   end
 
   def show? = user_owns_record
