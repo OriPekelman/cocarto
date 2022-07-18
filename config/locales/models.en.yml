@@ -25,6 +25,8 @@ en:
         polygon:
           one: polygon
           other: polygons
+      map:
+        name: Name
       territory:
         code: identifier
         parent: part of
@@ -76,5 +78,7 @@ en:
         create: Add a field
       layer:
         create: Create a layer
+      map:
+        create: Create a map
       row:
         create: Create a new row
