@@ -13,7 +13,6 @@ class TranslationsTest < ApplicationSystemTestCase
     visit("/?locale=en")
     find(".button-trad").click
     click_link("Français")
-    sleep(0.1)
-    assert_selector "a", text: "connexion"
+    assert_link "connexion"
   end
 end
