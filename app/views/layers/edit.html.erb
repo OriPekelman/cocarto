@@ -16,7 +16,7 @@
       <%= icon t(".map"), @layer.map, "chevron_gauche.svg" %>
       <%= render "name", layer: @layer %>
       <div class="layer-actions-right">
-        <%= icon t(".export"), geojson_layer_path(@layer), "exporter.svg", download: "#{@layer.name}.geojson"%>
+        <%= icon t(".export"), geojson_layer_path(@layer), "exporter.svg", download: "#{@layer.name}.geojson" %>
         <%= icon t("helpers.link.layer.delete"), @layer, "supprimer.svg", data: {turbo_method: :delete, turbo_confirm: t("common.confirm")} %>
       </div>
     </div>
@@ -28,7 +28,7 @@
   </div>
   <div data-dragbar-target="right" class="right-pane">
     <div class="layer-actions-map">
-      <%= icon t("common.frame"),@layer.map,"cadrer.svg" %>
+      <%= icon t("common.frame"), @layer.map, "cadrer.svg" %>
       <%= icon t("common.colors"), @layer.map, "color.svg" %>
       <%= icon t("common.add"), @layer.map, "ajouter_cercle.svg" %>
     </div>
