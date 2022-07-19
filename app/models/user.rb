@@ -23,8 +23,12 @@ class User < ApplicationRecord
     :recoverable, :rememberable, :validatable
 
   # Relationships
-  has_many :roles, dependent: :restrict_with_error
+  has_many :roles, dependent: :restrict_with_error, inverse_of: :user
 
   # Through relationships
-  has_many :maps, through: :roles
+  has_many :maps, through: :roles, inverse_of: :users do
+    def new_owned(...)
+      joins(:roles).where(roles: {role_type: :owner}).new(...)
+    end
+  end
 end

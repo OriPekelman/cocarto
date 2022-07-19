@@ -24,6 +24,6 @@ class Role < ApplicationRecord
   enum :role_type, {owner: "owner", editor: "editor", contributor: "contributor", viewer: "viewer"}
 
   # Relationships
-  belongs_to :user
-  belongs_to :map
+  belongs_to :user, inverse_of: :roles
+  belongs_to :map, inverse_of: :roles
 end
