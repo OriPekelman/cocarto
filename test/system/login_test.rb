@@ -1,7 +1,7 @@
 require "application_system_test_case"
 
 class LoginTest < ApplicationSystemTestCase
-  test "create an accout" do
+  test "create an account" do
     visit("/?locale=en")
     click_link "Sign up"
     fill_in "user_email", with: "cabiai@amazonas.br"
