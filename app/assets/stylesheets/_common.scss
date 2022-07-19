@@ -219,7 +219,7 @@ input {
 input:focus {
   border-radius: 2px;
   border: 2px solid rgba(153, 204, 255, 1);
-  border: 1px solid rgba(40, 140, 255, 1);
+  border: 1px solid var(--color-green-90);
   box-shadow: 0px 0px 5px rgba(20, 136, 243, 0.198171) inset,
     0px 0px 5px rgba(77, 162, 255, 0.4);
   opacity: 1;
@@ -309,7 +309,7 @@ input[type="radio"] {
   background-color: var(--color-bg-ambient-30);
   border-bottom: solid var(--color-grey-40);
   color: var(--color-green-70);
-  display: flex;
+  display: none;
   justify-content: flex-end;
   position: relative;
   align-items: center;
