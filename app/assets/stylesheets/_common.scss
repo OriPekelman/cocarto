@@ -314,10 +314,17 @@ input[type="radio"] {
   font-family: var(--font-serif);
   height: 40px;
   line-height: 1.5;
+
+  &:focus {
+    background-color: $background;
+  }
 }
 
 .primary-action {
   @include button(white, var(--color-green-70));
+  &:hover:not([disabled]) {
+    background-color: var(--color-green-90);
+  }
 }
 
 .delete-action {
