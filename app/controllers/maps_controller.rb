@@ -32,7 +32,7 @@ class MapsController < ApplicationController
   private
 
   def set_map
-    @map = authorize Map.includes(:layers).find(params[:id])
+    @map = authorize Map.find(params[:id])
   end
 
   def map_params
