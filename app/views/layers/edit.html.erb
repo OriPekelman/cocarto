@@ -13,11 +13,11 @@
   data-map-color-value="<%= @layer.color %>">
   <div class="data" data-dragbar-target="left">
     <div class="layer-actions">
-      <%= link_to t(".map"), @layer.map, class: "go-back" %>
+      <%= icon t(".map"), @layer.map, "chevron_gauche.svg" %>
       <%= render "name", layer: @layer %>
       <div class="layer-actions-right">
-        <%= link_to t(".export"), geojson_layer_path(@layer), download: "#{@layer.name}.geojson", class: "export" %>
-        <%= link_to t("helpers.link.layer.delete"), @layer, data: {turbo_method: :delete, turbo_confirm: t("common.confirm")}, class: "delete" %>
+        <%= icon t(".export"), geojson_layer_path(@layer), "exporter.svg", download: "#{@layer.name}.geojson"%>
+        <%= icon t("helpers.link.layer.delete"), @layer, "supprimer.svg", data: {turbo_method: :delete, turbo_confirm: t("common.confirm")} %>
       </div>
     </div>
     <%= render "rows_rw", layer: @layer %>
@@ -28,9 +28,9 @@
   </div>
   <div data-dragbar-target="right" class="right-pane">
     <div class="layer-actions-map">
-      <%= link_to t("common.frame"), @layer, class: "frame-map" %>
-      <%= link_to t("common.colors"), @layer.map, class: "color" %>
-      <%= link_to t("common.add"), @layer.map, class: "add-geometry" %>
+      <%= icon t("common.frame"),@layer.map,"cadrer.svg" %>
+      <%= icon t("common.colors"), @layer.map, "color.svg" %>
+      <%= icon t("common.add"), @layer.map, "ajouter_cercle.svg" %>
     </div>
     <div class="map" data-map-target="map">
     </div>

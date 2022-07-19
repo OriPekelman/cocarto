@@ -8,4 +8,9 @@ module ApplicationHelper
     end
     doc.to_html.html_safe # rubocop:disable Rails/OutputSafety
   end
+  def icon text,path,filename, **options
+  link_to path, options do 
+      embedded_svg(filename).safe_concat(text)
+    end
+  end
 end
