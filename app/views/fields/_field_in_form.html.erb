@@ -4,11 +4,11 @@
 <td class="field-<%= field.id %> <%= "numerical" if field.numerical? %>">
   <% if field.numerical? %>
     <%= number_field_tag "row[fields_values][#{field.id}]", value, id: field.id, class: "numerical", data: {action: "focusout->row#save"}, form: form_id, autocomplete: :off %>
-  <% elsif field.field_type == "territory" %>
+  <% elsif field.territory? %>
     <%= render "territories/search_form", field: "row[fields_values][#{field.id}]", territory: value, form_id: form_id %>
-  <% elsif field.field_type == "date" %>
+  <% elsif field.date? %>
     <%= date_field_tag "row[fields_values][#{field.id}]", value, id: field.id, data: {action: "change->row#save"}, form: form_id, autocomplete: "off" %>
-  <% elsif field.field_type == "boolean" %>
+  <% elsif field.boolean? %>
     <%= check_box_tag "row[fields_values][#{field.id}]", "1", value == "1", id: field.id, data: {action: "change->row#save"}, form: form_id %>
   <% else %>
     <%= text_field_tag "row[fields_values][#{field.id}]", value, id: field.id, class: "input", data: {action: "focusout->row#save"}, form: form_id, autocomplete: :off %>
