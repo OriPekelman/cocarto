@@ -1,27 +1,20 @@
 class MapsController < ApplicationController
+  before_action :new_map, only: %i[new create]
   before_action :set_map, only: %i[show destroy]
 
-  def index
-    @maps = current_user.maps.all
-  end
+  after_action :verify_authorized, except: :index
+  after_action :verify_policy_scoped, only: :index
 
-  def show
-    @map
+  def index
+    @maps = policy_scope(Map)
   end
 
   def new
-    @map = current_user.maps.new
-  end
-
-  def destroy
-    @map.destroy
-    redirect_to maps_url, notice: t("helpers.message.map.destroyed"), status: :see_other
   end
 
   def create
-    map = current_user.maps.new(map_params)
-    if map.save
-      redirect_to map
+    if @map.update(map_params)
+      redirect_to @map
     else
       # This line overrides the default rendering behavior, which
       # would have been to render the "create" view.
@@ -29,10 +22,25 @@ class MapsController < ApplicationController
     end
   end
 
+  def show
+    @map
+  end
+
+  def destroy
+    @map.destroy
+    redirect_to maps_url, notice: t("helpers.message.map.destroyed"), status: :see_other
+  end
+
   private
 
   def set_map
-    @map = authorize Map.find(params[:id])
+    @map = Map.find(params[:id])
+    authorize @map
+  end
+
+  def new_map
+    @map = current_user.maps.new_owned
+    authorize @map
   end
 
   def map_params
