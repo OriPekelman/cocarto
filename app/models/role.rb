@@ -26,4 +26,6 @@ class Role < ApplicationRecord
   # Relationships
   belongs_to :user, inverse_of: :roles
   belongs_to :map, inverse_of: :roles
+
+  accepts_nested_attributes_for :user
 end

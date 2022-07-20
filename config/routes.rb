@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     end
     resources :maps do
       resources :layers, only: [:new]
+      resources :roles, only: [:index, :create, :update], shallow: true
     end
     resources :fields
     resources :territory_categories

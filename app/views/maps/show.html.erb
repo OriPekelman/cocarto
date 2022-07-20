@@ -2,6 +2,7 @@
 
 <div class="main-list">
   <h2><%= @map.name %></h2>
+  <%= link_to "roles", map_roles_path(@map) %>
   <% @map.layers.each do |layer| %>
     <div class="main-element">
       <h3><%= layer.name %></h3>

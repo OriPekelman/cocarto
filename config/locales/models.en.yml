@@ -69,6 +69,10 @@ en:
         destroyed: Layer was successfully destroyed.
       map:
         destroyed: The map was successfully destroyed
+      role:
+        created: Role was successfully created.
+        destroyed: Role was successfully destroyed.
+        updated: Role was successfully updated.
       row:
         destroyed: Geometry was successfully destroyed.
         updated: Geometry properties were successfully updated.
