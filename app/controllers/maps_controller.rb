@@ -39,7 +39,7 @@ class MapsController < ApplicationController
   end
 
   def new_map
-    @map = current_user.maps.new_owned
+    @map = current_user.maps.merge(Role.owner).new
     authorize @map
   end
 
