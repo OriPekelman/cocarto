@@ -22,6 +22,9 @@ class User < ApplicationRecord
   devise :invitable, :database_authenticatable, :registerable,
     :recoverable, :rememberable, :validatable
 
+  # The belongs_to :invited_by relation is added automatically by invitable
+  has_many :invitations, class_name: "User", foreign_key: :invited_by, inverse_of: :invited_by, dependent: :nullify
+
   # Relationships
   has_many :roles, dependent: :restrict_with_error, inverse_of: :user
 
