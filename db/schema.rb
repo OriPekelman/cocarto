@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_18_151027) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_20_143402) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -119,7 +119,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_18_151027) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "invitation_token"
+    t.datetime "invitation_created_at"
+    t.datetime "invitation_sent_at"
+    t.datetime "invitation_accepted_at"
+    t.integer "invitation_limit"
+    t.uuid "invited_by_id"
+    t.integer "invitations_count", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
+    t.index ["invited_by_id"], name: "index_users_on_invited_by_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
@@ -130,4 +139,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_18_151027) do
   add_foreign_key "rows", "territories"
   add_foreign_key "territories", "territories", column: "parent_id"
   add_foreign_key "territories", "territory_categories"
+  add_foreign_key "users", "users", column: "invited_by_id"
 end
