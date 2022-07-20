@@ -29,6 +29,7 @@ gem "importmap-rails"
 gem "rubyzip"
 # Used for authentification
 gem "devise"
+gem 'devise_invitable'
 gem "http_accept_language"
 gem "rails-i18n", "~> 7.0"
 gem "skylight"
