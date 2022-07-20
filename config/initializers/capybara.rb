@@ -2,6 +2,8 @@ if Rails.env.test?
   require "capybara"
 
   Capybara.configure do |config|
+    config.enable_aria_label = true
+
     if ENV["CI"] == "true"
       # When using the browser in docker, we must pass the server’s url
       config.app_host = "http://#{`hostname`.strip&.downcase || "0.0.0.0"}".freeze
