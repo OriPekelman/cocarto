@@ -5,7 +5,8 @@ export default class extends Controller {
   static targets = ['trigger', 'content']
   static values = {
     placement: { type: String, default: 'bottom-start' },
-    offset: Number
+    offset: Number,
+    loaded: Boolean
   }
 
   connect () {
@@ -23,6 +24,7 @@ export default class extends Controller {
         })
       })
     })
+    this.loadedValue = true
   }
 
   toggle () {
