@@ -14,7 +14,7 @@ class MapsController < ApplicationController
 
   def create
     if @map.update(map_params)
-      redirect_to @map
+      redirect_to new_map_layer_url(@map)
     else
       # This line overrides the default rendering behavior, which
       # would have been to render the "create" view.
