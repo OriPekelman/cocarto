@@ -54,3 +54,5 @@ fr:
   territories:
     index:
       search_title: Chercher un territoire
+    search_results:
+      no_result: Pas de résultat
