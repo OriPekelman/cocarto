@@ -51,7 +51,7 @@ en:
       field:
         delete: Delete this column
       layer:
-        delete: Delete
+        delete: delete
         new: Add a new layer
       map:
         delete: Delete map
