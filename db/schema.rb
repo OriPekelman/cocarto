@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_11_160711) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_18_151027) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -31,6 +31,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_11_160711) do
     "line_string",
     "polygon",
     "territory",
+  ], force: :cascade
+
+  create_enum :role_type, [
+    "owner",
+    "editor",
+    "contributor",
+    "viewer",
   ], force: :cascade
 
   create_table "fields", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -54,10 +61,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_11_160711) do
 
   create_table "maps", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
-    t.uuid "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_maps_on_user_id"
+  end
+
+  create_table "roles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.enum "role_type", null: false, enum_type: "role_type"
+    t.uuid "user_id", null: false
+    t.uuid "map_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["map_id"], name: "index_roles_on_map_id"
+    t.index ["user_id"], name: "index_roles_on_user_id"
   end
 
   create_table "rows", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -110,7 +125,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_11_160711) do
 
   add_foreign_key "fields", "layers"
   add_foreign_key "layers", "maps"
-  add_foreign_key "maps", "users"
+  add_foreign_key "roles", "maps"
+  add_foreign_key "roles", "users"
   add_foreign_key "rows", "territories"
   add_foreign_key "territories", "territories", column: "parent_id"
   add_foreign_key "territories", "territory_categories"

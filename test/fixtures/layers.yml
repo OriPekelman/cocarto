@@ -20,11 +20,11 @@
 #
 
 restaurants:
-  map: one
+  map: restaurants
   name: "Restaurants"
   geometry_type: 'point'
 
 hiking:
+  map: hiking
   name: hiking path
-  map: two
   geometry_type: 'territory'

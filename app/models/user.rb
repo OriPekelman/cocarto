@@ -22,5 +22,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :validatable
 
-  has_many :maps, dependent: :restrict_with_error
+  # Relationships
+  has_many :roles, dependent: :restrict_with_error, inverse_of: :user
+
+  # Through relationships
+  has_many :maps, through: :roles, inverse_of: :users
 end
