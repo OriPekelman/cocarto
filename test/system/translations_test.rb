@@ -11,8 +11,11 @@ class TranslationsTest < ApplicationSystemTestCase
 
   test "selecting an other language" do
     visit("/?locale=en")
+    # We want to make sure that the dropdown controller is loaded
+    # Otherwise capybara will click on the button, and nothing happens
+    assert page.has_css?('[data-dropdown-loaded-value="true"]')
     find(".button-trad").click
-    click_link("Français")
+    find_link("Français").click
     assert_link "connexion"
   end
 end

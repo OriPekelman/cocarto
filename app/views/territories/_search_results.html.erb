@@ -1,6 +1,8 @@
 <%# params: search_results %>
-
-<ul>
+<% if search_results.empty? %>
+  <em><%= t ".no_result" %> </em>
+<% end %>
+<ul data-autocomplete-target="suggestionList">
   <% search_results.each do |territory| %>
     <li
       data-autocomplete-target="suggestion"
