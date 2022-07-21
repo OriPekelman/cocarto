@@ -1,7 +1,0 @@
-<p>Bonjour <%= @resource.email %>!</p>
-
-<p>Votre compte a été vérouillé après un nombre excessif de tentatives de connexion.</p>
-
-<p>Cliquez sur le lien ci-dessous pour dévérouiller votre compte :</p>
-
-<p><%= link_to "Dévérouiller mon compte", unlock_url(@resource, unlock_token: @token) %></p>
