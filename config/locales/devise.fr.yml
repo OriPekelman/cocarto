@@ -8,10 +8,10 @@ fr:
     failure:
       already_authenticated: Vous êtes déjà connecté.
       inactive: Votre compte n'est pas encore activé.
-      invalid: Email et/ou mot de passe incorrect(s).
+      invalid: "%{authentication_keys} et/ou mot de passe incorrect(s)."
       last_attempt: Vous avez droit à une tentative avant que votre compte ne soit verrouillé.
       locked: Votre compte est verrouillé.
-      not_found_in_database: Email et/ou mot de passe incorrect(s).
+      not_found_in_database: "%{authentication_keys} et/ou mot de passe incorrect(s)."
       timeout: Votre session est expirée. Veuillez vous reconnecter pour continuer.
       unauthenticated: Vous devez vous connecter ou vous inscrire pour continuer.
       unconfirmed: Vous devez valider votre compte pour continuer.
@@ -23,6 +23,11 @@ fr:
       password_change:
         subject: Votre mot de passe a été modifié avec succès
       reset_password_instructions:
+        change_password: Changer mon mot de passe
+        hello: Bonjour %{email}
+        ignore: Si vous n’êtes pas à l’origine de cette demande, ignorez cet email.
+        password_wont_change_if_ignored: Votre mot de passe ne changera pas tant que vous ne suivez pas le lien et en creez un nouveau.
+        someone_requested_password_change: Quelqu’un a demandé un lien pour réinitialiser votre mot de passe. Vous pouvez le faire en suivant le lien ci-dessous.
         subject: Instructions pour changer le mot de passe
       unlock_instructions:
         subject: Instructions pour déverrouiller le compte

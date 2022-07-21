@@ -23,6 +23,11 @@ en:
       password_change:
         subject: Password Changed
       reset_password_instructions:
+        change_password: Change my password
+        hello: Hello %{email}
+        ignore: If you didn't request this, please ignore this email.
+        password_wont_change_if_ignored: Your password won't change until you access the link above and create a new one.
+        someone_requested_password_change: Someone has requested a link to change your password. You can do this through the link below.
         subject: Reset password instructions
       unlock_instructions:
         subject: Unlock instructions

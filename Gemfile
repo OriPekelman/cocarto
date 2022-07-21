@@ -31,6 +31,7 @@ gem "devise"
 gem "http_accept_language"
 gem "rails-i18n", "~> 7.0"
 gem "skylight"
+gem "premailer-rails", github: "Intrepidd/premailer-rails", branch: "support-propshaft" # Waiting for https://github.com/fphilipe/premailer-rails/pull/266
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", ">= 1.4.4", require: false
