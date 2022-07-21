@@ -1,14 +1,14 @@
 class DeviseInvitableAddToUsers < ActiveRecord::Migration[7.0]
   def up
     change_table :users do |t|
-      t.string     :invitation_token
-      t.datetime   :invitation_created_at
-      t.datetime   :invitation_sent_at
-      t.datetime   :invitation_accepted_at
-      t.integer    :invitation_limit
-      t.references :invited_by, foreign_key: { to_table: :users }, type: :uuid
-      t.integer    :invitations_count, default: 0
-      t.index      :invitation_token, unique: true # for invitable
+      t.string :invitation_token
+      t.datetime :invitation_created_at
+      t.datetime :invitation_sent_at
+      t.datetime :invitation_accepted_at
+      t.integer :invitation_limit
+      t.references :invited_by, foreign_key: {to_table: :users}, type: :uuid
+      t.integer :invitations_count, default: 0
+      t.index :invitation_token, unique: true # for invitable
     end
   end
 
