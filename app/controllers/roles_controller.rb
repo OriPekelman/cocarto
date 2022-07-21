@@ -20,25 +20,28 @@ class RolesController < ApplicationController
       if @role.user.invitation_sent_at.blank?
         @role.user.invite!
       end
-      redirect_to action: :index, notice: t("helpers.message.role.created")
+      redirect_to map_roles_path(@map), notice: t("helpers.message.role.created")
     else
-      redirect_to action: :index, error: "failed: #{@role.errors}"
+      redirect_to map_roles_path(@map), alert: "failed: #{@role.errors.full_messages.to_sentence}"
     end
   end
 
   def update
     @map = @role.map
     if @role.update(update_role_params)
-      redirect_to action: :index, notice: t("helpers.message.role.updated")
+      redirect_to map_roles_path(@map), notice: t("helpers.message.role.updated")
     else
-      redirect_to action: :index, error: "failed"
+      redirect_to map_roles_path(@map), alert: "failed: #{@role.errors.full_messages.to_sentence}"
     end
   end
 
   def destroy
-    @role.destroy
-
-    redirect_to action: :index, notice: t("helpers.message.role.destroyed")
+    @map = @role.map
+    if @role.destroy
+      redirect_to map_roles_path(@map), alert: t("helpers.message.role.destroyed")
+    else
+      redirect_to map_roles_path(@map), alert: "failed: #{@role.errors.full_messages.to_sentence}"
+    end
   end
 
   private
