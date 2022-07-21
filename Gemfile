@@ -14,6 +14,7 @@ gem "rgeo-geojson"
 gem "puma", "~> 5.0"
 gem "pundit"
 gem "propshaft"
+gem "dartsass-rails", "~> 0.4.0"
 gem "turbo-rails"
 gem "hotwire-rails"
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -32,6 +33,9 @@ gem "http_accept_language"
 gem "rails-i18n", "~> 7.0"
 gem "skylight"
 gem "premailer-rails", github: "Intrepidd/premailer-rails", branch: "support-propshaft" # Waiting for https://github.com/fphilipe/premailer-rails/pull/266
+
+
+gem "foreman", "~> 0.87.2"
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", ">= 1.4.4", require: false
@@ -68,7 +72,3 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-
-gem "foreman", "~> 0.87.2"
-
-gem "dartsass-rails", "~> 0.4.0"
