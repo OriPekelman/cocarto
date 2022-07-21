@@ -10,6 +10,7 @@ class LoginTest < ApplicationSystemTestCase
     click_button "Sign up"
     assert_selector "span", text: "cabiai@amazonas.br"
 
+    assert page.has_css?('[data-dropdown-loaded-value="true"]')
     find("span", text: "cabiai@amazonas.br").click
     click_button "Sign out"
     click_link "Log in"

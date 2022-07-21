@@ -246,7 +246,7 @@ input[type="radio"] {
 .layer-actions {
   background-color: var(--color-bg-ambient-30);
   border-bottom: solid var(--color-grey-40);
-  padding: 0.5em 1em 0.5em 1em;
+  padding: 1.28em 1em 0.5em 1em;
   margin-bottom: 2em;
   color: var(--color-green-70);
   display: flex;
@@ -278,18 +278,19 @@ input[type="radio"] {
   background-color: var(--color-bg-ambient-30);
   border-bottom: solid var(--color-grey-40);
   color: var(--color-green-70);
-  display: none;
+  display: flex;
   justify-content: flex-end;
   position: relative;
   align-items: center;
   gap: 0.2em;
-  padding: 0.6em 0em 0.5em 1em;
+  padding: 0em 1em 0em 0em;
   overflow: hidden;
 
-  a {
-    font-size: 10px;
+  button {
     text-decoration: none;
     background-color: var(--color-bg-ambient-10);
+    color: var(--color-green-70);
+    font-size: 10px;
     padding: 6px;
     display: flex;
     flex-direction: column;
@@ -297,7 +298,6 @@ input[type="radio"] {
     font-family: var(--font-sans);
     max-width: 60px;
     max-height: 44px;
-    gap: 0.3em;
   }
 }
 
