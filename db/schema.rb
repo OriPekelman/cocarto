@@ -59,6 +59,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_20_143402) do
     t.index ["map_id"], name: "index_layers_on_map_id"
   end
 
+  create_table "layers_territory_categories", id: false, force: :cascade do |t|
+    t.uuid "layer_id"
+    t.uuid "territory_category_id"
+    t.index ["layer_id"], name: "index_layers_territory_categories_on_layer_id"
+    t.index ["territory_category_id"], name: "index_layers_territory_categories_on_territory_category_id"
+  end
+
   create_table "maps", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -134,6 +141,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_20_143402) do
 
   add_foreign_key "fields", "layers"
   add_foreign_key "layers", "maps"
+  add_foreign_key "layers_territory_categories", "layers"
+  add_foreign_key "layers_territory_categories", "territory_categories"
   add_foreign_key "roles", "maps"
   add_foreign_key "roles", "users"
   add_foreign_key "rows", "territories"
