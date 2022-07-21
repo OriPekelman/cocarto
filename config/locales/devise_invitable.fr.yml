@@ -6,14 +6,11 @@ fr:
     invitations:
       edit:
         header: Confirmation
-        new_password: Mot de passe
-        new_password_confirmation: Confirmation du mot de passe
         submit_button: Confirmer
       invitation_removed: Votre invitation a été supprimée.
       invitation_token_invalid: Le jeton d'invitation fourni n'est pas valide!
       new:
         header: Nouvel utilisateur
-        legend: Envoyer l’invitation
         submit_button: Envoyer
       no_invitations_remaining: Il n'y a plus d'invitations restantes
       send_instructions: Un e-mail d'invitation a été envoyé à %{email}.
