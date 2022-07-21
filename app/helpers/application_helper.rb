@@ -14,4 +14,10 @@ module ApplicationHelper
       embedded_svg(filename).concat(text)
     end
   end
+
+  def button_with_icon text, filename, **options
+    button_tag options do
+      embedded_svg(filename).concat(text)
+    end
+  end
 end

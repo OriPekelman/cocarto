@@ -2,6 +2,7 @@
 @use "common";
 @use "new_layer";
 
+// NAVIGATION
 nav {
   height: var(--nav-height);
   border-bottom: 0.5px solid var(--color-grey-40);
@@ -74,14 +75,6 @@ footer {
   width: 100%;
   bottom: 0rem;
   color: var(--color-grey-60);
-}
-
-.layers-table {
-  display: flex;
-  justify-content: center;
-  font-family: var(--font-sans);
-  color: var(--color-grey-90);
-  border-collapse: collapse;
 }
 
 /* TABLES */
@@ -179,6 +172,7 @@ table {
 .right-pane {
   width: 50%;
 }
+
 .data-with-map > .data {
   width: 50%;
   display: flex;
@@ -207,10 +201,12 @@ table {
   bottom: 0;
   height: calc(100% - 66px);
 }
+
 .maplibregl-control-container.mapboxgl-control-container {
   right: 0;
   height: 651px;
 }
+
 .actions {
   display: flex;
 }
