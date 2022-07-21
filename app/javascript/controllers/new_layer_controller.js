@@ -6,8 +6,12 @@ export default class extends Controller {
     defaultColor: String
   }
 
-  colorSelected (e) {
-    this.setColor(e.target.dataset.color)
+  connect () {
+    this.setColor(this.defaultColorValue)
+  }
+
+  colorSelected ({ params }) {
+    this.setColor(params.color)
   }
 
   setColor (color) {
