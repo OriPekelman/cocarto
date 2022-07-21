@@ -76,7 +76,7 @@ class LayersController < ApplicationController
   end
 
   def layer_params
-    params.require(:layer).permit(:name, :geometry_type, :map_id, :color)
+    params.require(:layer).permit(:name, :geometry_type, :map_id, :color, territory_category_ids: [])
   end
 
   def field_schema(field)
