@@ -25,7 +25,7 @@
       <div class="dropdown-content-app" data-dropdown-target="content">
         <%= link_to "Français", url_for(locale: :fr) %>
         <%= link_to "English", url_for(locale: :en) %>
-        <%= link_to "Préférences", edit_user_registration_url %>
+        <%= link_to t(".preferences"), edit_user_registration_url %>
         <%= button_to t(".sign_out"), destroy_user_session_path, method: :delete, class: "header-subs-app" %>
       </div>
     </div>

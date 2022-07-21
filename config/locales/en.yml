@@ -30,7 +30,9 @@ en:
       new_row_description: Click on the map to add a new data point
   layouts:
     application:
+      change_language: Change language
       footer_html: Made by <a href="https://www.codeursenliberté.fr" target="_blank">codeurs en liberté</a>, an indie software cooperative.
+      preferences: Preferences
       sign_in: Log in
       sign_out: Sign out
       sign_up: Sign up

@@ -30,7 +30,9 @@ fr:
       new_row_description: Cliquez sur la carte pour ajouter un nouveau point de données
   layouts:
     application:
+      change_language: Changer la langue
       footer_html: Développé par <a href="https://www.codeursenliberté.fr" target="_blank">codeurs en liberté</a>, une coopérative d’indépendant·e·s dans le domaine de l’informatique.
+      preferences: Préférences
       sign_in: connexion
       sign_out: déconnexion
       sign_up: inscription
