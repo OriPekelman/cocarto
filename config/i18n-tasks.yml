@@ -137,8 +137,7 @@ ignore_unused:
 #     - common.brand
 
 ## Exclude these keys from the `i18n-tasks check-consistent-interpolations` report:
-ignore_inconsistent_interpolations:
- - 'devise.*'
+# ignore_inconsistent_interpolations:
 
 ## Ignore these keys completely:
 # ignore:
