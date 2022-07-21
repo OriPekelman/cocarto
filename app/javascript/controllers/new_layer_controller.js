@@ -3,10 +3,10 @@ import { Controller } from '@hotwired/stimulus'
 export default class extends Controller {
   static targets = ['icon']
   static values = {
-    default: String
+    defaultColor: String
   }
 
-  selected (e) {
+  colorSelected (e) {
     this.setColor(e.target.dataset.color)
   }
 
@@ -15,6 +15,6 @@ export default class extends Controller {
   }
 
   connect () {
-    this.setColor(this.defaultValue)
+    this.setColor(this.defaultColorValue)
   }
 }

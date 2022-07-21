@@ -2,8 +2,8 @@
 
 <div
   class="centered-main new-layer"
-  data-controller="color-selector"
-  data-color-selector-default-value="<%= Layer::COLORS[:blue] %>">
+  data-controller="new-layer"
+  data-new-layer-default-color-value="<%= Layer::COLORS[:blue] %>">
   <h2><%= t("helpers.link.layer.new") %></h2>
   <%= form_with(model: @layer) do |form| %>
     <%= form.hidden_field :map_id %>
@@ -17,7 +17,7 @@
     <div class="color-selection">
       <% Layer::COLORS.each do |key, rgb| %>
         <div>
-          <%= form.radio_button :color, rgb, checked: key == :blue, data: {color: rgb, action: "color-selector#selected"} %>
+          <%= form.radio_button :color, rgb, checked: key == :blue, data: {color: rgb, action: "new-layer#colorSelected"} %>
           <%= form.label :color, t(key, scope: "colors"), value: rgb %>
         </div>
       <% end %>
