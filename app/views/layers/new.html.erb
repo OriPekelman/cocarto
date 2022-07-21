@@ -18,7 +18,7 @@
       <% Layer::COLORS.each do |key, rgb| %>
         <div>
           <%= form.radio_button :color, rgb, checked: key == :blue, data: {color: rgb, action: "color-selector#selected"} %>
-          <%= form.label :"color_#{key}", t(key, scope: "colors") %>
+          <%= form.label :color, t(key, scope: "colors"), value: rgb %>
         </div>
       <% end %>
     </div>
