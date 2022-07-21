@@ -24,4 +24,8 @@ Rails.application.routes.draw do
     end
     get "/:locale" => "main#index"
   end
+
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: "/letter_opener"
+  end
 end
