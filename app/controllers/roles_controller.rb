@@ -8,28 +8,37 @@ class RolesController < ApplicationController
 
   def create
     @map = current_user.maps.find(params["map_id"])
-    @role = @map.roles.new(role_params)
+    create_params = create_role_params
+    if (existing_user = User.find_by(email: create_params.dig(:user_attributes, :email)))
+      create_params.delete(:user_attributes)
+      create_params[:user] = existing_user
+    end
+
+    @role = @map.roles.new(create_params)
 
     if @role.save
-      redirect_to role_url(@role), notice: t("helpers.message.role.created")
+      if @role.user.invitation_sent_at.blank?
+        @role.user.invite!
+      end
+      redirect_to action: :index, notice: t("helpers.message.role.created")
     else
-      redirect_to :index, error: "failed"
+      redirect_to action: :index, error: "failed: #{@role.errors}"
     end
   end
 
   def update
     @map = @role.map
-    if @role.update(role_params)
-      redirect_to role_url(@role), notice: t("helpers.message.role.updated")
+    if @role.update(update_role_params)
+      redirect_to action: :index, notice: t("helpers.message.role.updated")
     else
-      redirect_to :index, error: "failed"
+      redirect_to action: :index, error: "failed"
     end
   end
 
   def destroy
     @role.destroy
 
-    redirect_to roles_url, notice: t("helpers.message.role.destroyed")
+    redirect_to action: :index, notice: t("helpers.message.role.destroyed")
   end
 
   private
@@ -38,7 +47,11 @@ class RolesController < ApplicationController
     @role = Role.find(params[:id])
   end
 
-  def role_params
+  def create_role_params
     params.require(:role).permit(:role_type, user_attributes: [:email])
+  end
+
+  def update_role_params
+    params.require(:role).permit(:role_type)
   end
 end

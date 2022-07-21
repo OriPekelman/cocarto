@@ -56,6 +56,8 @@ fr:
       map:
         delete: Supprimer la carte
         new: Créer une nouvelle carte
+      role:
+        delete: Supprimer
       row:
         delete: Supprimer
       territory:

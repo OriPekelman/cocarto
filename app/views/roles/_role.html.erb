@@ -1,3 +1,4 @@
 <div id="<%= dom_id role %>">
   <%= render "form", role: role %>
+  <%= link_to t("helpers.link.role.delete"), role, data: {turbo_method: :delete, turbo_confirm: t("common.confirm")}, class: "delete-action" %>
 </div>
