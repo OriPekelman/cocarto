@@ -54,7 +54,7 @@ fr:
         delete: supprimer
         new: Ajouter une nouvelle couche
       map:
-        delete: Supprimer la carte
+        delete: Supprimer cette carte
         new: Créer une nouvelle carte
       role:
         delete: Supprimer

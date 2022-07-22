@@ -1,25 +1,32 @@
 <%# params: @map %>
 
-<div class="main-list">
-  <h2><%= @map.name %></h2>
-  <%= link_to "roles", map_roles_path(@map) %>
-  <% @map.layers.each do |layer| %>
-    <div class="main-element">
-      <h3><%= layer.name %></h3>
-      <p>
-        <span class="color-marker" style="background-color: <%= layer.color %>"></span>
-        <%= layer.rows.count %> <%= Layer.human_attribute_name(layer.geometry_type, count: layer.rows.count) %>
-        — <%= t("common.updated_at_by", date: l(layer.updated_at.to_date, format: :long), user: current_user.email) %>
-      </p>
-
-      <p>
-        <%= link_to t("common.edit"), edit_layer_path(layer) %>
-        —
-        <%= link_to t("common.show"), layer %>
-      </p>
+<div>
+  <div class="main-actions">
+    <%= link_to t(".all_maps"), maps_path %>
+    <div class="main-actions-right">
+      <%= link_to t("common.share"), map_roles_path(@map) %>
+      <%= link_to t("helpers.link.map.delete"), @map, data: {turbo_method: :delete, turbo_confirm: t("common.confirm")} %>
     </div>
-  <% end %>
+  </div>
+  <div class="main-list">
+    <h2><%= @map.name %></h2>
+    <% @map.layers.each do |layer| %>
+      <div class="main-element">
+        <h3><%= layer.name %></h3>
+        <p>
+          <span class="color-marker" style="background-color: <%= layer.color %>"></span>
+          <%= layer.rows.count %> <%= Layer.human_attribute_name(layer.geometry_type, count: layer.rows.count) %>
+          — <%= t("common.updated_at_by", date: l(layer.updated_at.to_date, format: :long), user: current_user.email) %>
+        </p>
 
-  <%= link_to t("helpers.link.map.delete"), @map, data: {turbo_method: :delete, turbo_confirm: t("common.confirm")}, class: "delete-action" %>
-  <%= link_to t("helpers.link.layer.new"), new_map_layer_path(@map), class: "primary-action" %>
+        <p>
+          <%= link_to t("common.edit"), edit_layer_path(layer) %>
+          —
+          <%= link_to t("common.show"), layer %>
+        </p>
+      </div>
+    <% end %>
+
+    <%= link_to t("helpers.link.layer.new"), new_map_layer_path(@map), class: "primary-action" %>
+  </div>
 </div>

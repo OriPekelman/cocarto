@@ -18,6 +18,7 @@ en:
     edit: Edit
     frame: frame
     hello: Hello
+    share: Share…
     show: Show
     updated_at_by: Last update on %{date} by %{user}
     user_not_authorized: You are not authorized to perform this action.
@@ -58,3 +59,6 @@ en:
       search_title: Search a territory
     search_results:
       no_result: No result
+  maps:
+    show:
+      all_maps: "Toutes les cartes"
