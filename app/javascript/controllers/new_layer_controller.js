@@ -10,10 +10,6 @@ export default class extends Controller {
     this.setColor(this.defaultColorValue)
   }
 
-  connect () {
-    this.setColor(this.defaultColorValue)
-  }
-
   colorSelected ({ params }) {
     this.setColor(params.color)
   }
