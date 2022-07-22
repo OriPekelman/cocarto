@@ -11,7 +11,7 @@ class MapPolicy < ApplicationPolicy
 
   def create? = user_owns_record
 
-  def show? = user_owns_record
+  def show? = Role.exists?(map: record, user: user)
 
   def update? = user_owns_record
 
