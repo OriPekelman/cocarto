@@ -37,27 +37,26 @@ export default class extends Controller {
     }
   }
 
-  
   rowTargetDisconnected (row) {
     this.draw.delete(row.id)
   }
-  
+
   #initMap () {
     this.map = newMap(this.mapTarget)
-    
+
     this.#initRowDraw()
     this.rowTargets.forEach(row => this.#addRow(row))
-    
+
     const resizeObserver = new ResizeObserver(() => this.map.resize())
     resizeObserver.observe(this.mapTarget)
-    
+
     if (this.editableValue) {
       this.map.on('mousemove', e => this.trackers.mousemove(e))
     }
   }
-  
+
   reconizePoint () {
-    this.map.fitBounds([this.xminValue, this.yminValue, this.xmaxValue, this.ymaxValue], {padding:20});
+    this.map.fitBounds([this.xminValue, this.yminValue, this.xmaxValue, this.ymaxValue], { padding: 20 })
   }
 
   changeMode () {
