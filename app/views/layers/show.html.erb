@@ -10,8 +10,8 @@
       <%= link_to t("common.back"), map_path(@layer.map), class: "go-back" %>
       <%= link_to t("common.edit"), edit_layer_path(@layer) %>
     </div>
-      <h2><%= "#{Layer.model_name.human} #{@layer.name}" %></h2>
-      <%= render "rows_ro", layer: @layer %>
+    <h2><%= "#{Layer.model_name.human} #{@layer.name}" %></h2>
+    <%= render "rows_ro", layer: @layer %>
   </div>
   <div class="map" data-map-target="map">
   </div>

@@ -1,4 +1,19 @@
-<div id="<%= dom_id role %>">
-  <%= render "form", role: role %>
-  <%= link_to t("helpers.link.role.delete"), role, data: {turbo_method: :delete, turbo_confirm: t("common.confirm")}, class: "delete-action" %>
+<div class="main-element" id="<%= dom_id role %>" style="display: flex">
+  <%= form_with(model: role.new_record? ? [role.map, role] : role) do |form| %>
+
+    <%= form.fields_for :user do |f| %>
+      <%= f.label :email %><br>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <% end %>
+
+    <%= form.label :role_type %>
+    <%= form.select :role_type, options_for_select(Role.role_types, role.role_type) %>
+
+    <%= form.submit %>
+
+    <% if role.persisted? %>
+      <%= link_to t("helpers.link.role.delete"), role, data: {turbo_method: :delete, turbo_confirm: t("common.confirm")}, class: "delete-action" %>
+    <% end %>
+
+  <% end %>
 </div>
