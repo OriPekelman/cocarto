@@ -102,8 +102,8 @@ class Row < ApplicationRecord
   end
 
   def self.bbox
-    reorder(nil).select("st_xmin(st_union(point)) as xmin, 
-    st_xmax(st_union(point)) as xmax, 
+    reorder(nil).select("st_xmin(st_union(point)) as xmin,
+    st_xmax(st_union(point)) as xmax,
     st_ymin(st_union(point)) as ymin,
     st_ymax(st_union(point)) as ymax")[0]
   end
