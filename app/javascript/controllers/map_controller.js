@@ -55,7 +55,7 @@ export default class extends Controller {
     }
   }
 
-  reconizePoint () {
+  centerToContent () {
     this.map.fitBounds([this.xminValue, this.yminValue, this.xmaxValue, this.ymaxValue], { padding: 20 })
   }
 
