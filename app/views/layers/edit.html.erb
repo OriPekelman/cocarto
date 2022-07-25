@@ -10,7 +10,11 @@
   data-map-session-id-value="<%= @session_id %>"
   data-map-username-value="<%= @user_name %>"
   data-map-geometry-type-value="<%= @layer.geometry_type %>"
-  data-map-color-value="<%= @layer.color %>">
+  data-map-color-value="<%= @layer.color %>"
+  data-map-xmin-value="<%= @layer.rows.bbox.xmin %>"
+  data-map-xmax-value="<%= @layer.rows.bbox.xmax %>"
+  data-map-ymin-value="<%= @layer.rows.bbox.ymin %>"
+  data-map-ymax-value="<%= @layer.rows.bbox.ymax %>">
   <div class="data" data-dragbar-target="left">
     <div class="layer-actions">
       <%= link_with_icon t(".map"), @layer.map, "chevron_left.svg" %>
@@ -28,7 +32,7 @@
   </div>
   <div data-dragbar-target="right" class="right-pane">
     <div class="layer-actions-map">
-      <%= button_with_icon t("common.frame"), "frame.svg", style: "display: none;" %>
+      <%= button_with_icon t("common.frame"), "frame.svg", data: {action: "click->map#reconizePoint"} %>
       <%= button_with_icon t("common.colors"), "color.svg", style: "display: none;" %>
       <%= button_with_icon t("common.add"), "add_circle.svg", data: {action: "click->map#changeMode"} %>
     </div>
