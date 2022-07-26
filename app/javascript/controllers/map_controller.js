@@ -56,7 +56,11 @@ export default class extends Controller {
   }
 
   centerToContent () {
-    this.map.fitBounds([this.xminValue, this.yminValue, this.xmaxValue, this.ymaxValue], { padding: 20 })
+    if (this.rowTargets.length === 1) {
+      this.map.setCenter([this.xmaxValue, this.yminValue])
+    } else if (this.rowTargets.length >= 2) {
+      this.map.fitBounds([this.xminValue, this.yminValue, this.xmaxValue, this.ymaxValue], { padding: 20 })
+    }
   }
 
   changeMode () {
