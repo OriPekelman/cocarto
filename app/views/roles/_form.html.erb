@@ -20,6 +20,6 @@
   <%= form.select :role_type, options_for_select(Role.role_types, role.role_type) %>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit t("helpers.link.role.create") %>
   </div>
 <% end %>

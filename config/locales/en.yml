@@ -47,6 +47,14 @@ en:
         We’re looking for stories for such needs in existing companies.
         <a href=" https://gitlab.com/CodeursEnLiberte/gxis/-/blob/main/README.md#user-content-how-to-contribute" target="_blank">Contact us</a>
         if you want to talk about yours.</p>
+  maps:
+    show:
+      all_maps: All les maps
+  roles:
+    index:
+      new: Create a new role
+    role:
+      type: Role type
   rows:
     edit:
       edit_row_title: Update a row
@@ -59,6 +67,3 @@ en:
       search_title: Search a territory
     search_results:
       no_result: No result
-  maps:
-    show:
-      all_maps: "Toutes les cartes"

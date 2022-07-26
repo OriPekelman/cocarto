@@ -27,6 +27,11 @@ fr:
           other: polygones
       map:
         name: Nom
+      role:
+        contributor: Contributeur
+        editor: Éditeur
+        owner: Propriétaire
+        viewer: Observateur
       territory:
         code: identifiant
         parent: partie de
@@ -39,6 +44,9 @@ fr:
       map:
         one: Carte
         other: Cartes
+      role:
+        one: Rôle
+        other: Rôles
       territory:
         one: Territoire
         other: Territoires
@@ -57,7 +65,9 @@ fr:
         delete: Supprimer cette carte
         new: Créer une nouvelle carte
       role:
+        create: Créer
         delete: Supprimer
+        modify: Modifier
       row:
         delete: Supprimer
       territory:

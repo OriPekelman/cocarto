@@ -5,10 +5,11 @@
     <%= link_to t("common.back"), @map %>
   </div>
   <div class="main-list">
-    <h2>Roles</h2>
+    <h2><%= Role.model_name.human(count: 2) %></h2>
 
     <div id="roles">
       <%= render @roles %>
+      <h3><%= t(".new") %></h3>
       <%= render Role.new(map: @map, user: User.new) %>
     </div>
   </div>
