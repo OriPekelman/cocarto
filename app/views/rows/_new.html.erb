@@ -4,7 +4,7 @@
   <div
     class="new-territory"
     data-controller="new-territory">
-   <%= render "territories/search_form", form_id: "new_territory_form", field: "row[territory_id]", territory: nil %>
+   <%= render "territories/search_form", form_id: "new_territory_form", field: "row[territory_id]", territory: nil, layer_id: row.layer.id %>
     <%= form_with model: [row.layer, row], id: "new_territory_form", data: {"new-territory-target": "form"} do |form| %>
       <%= form.hidden_field :layer_id %>
       <%= form.submit t("helpers.link.territory.new"), class: "new-territory primary-action", disabled: true, data: {"new-territory-target": "submit", action: "new-territory#save"} %>

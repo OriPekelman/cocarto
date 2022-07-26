@@ -14,4 +14,13 @@
 #
 class TerritoryCategory < ApplicationRecord
   has_many :territories, -> { with_geojson.limit(1000) }, dependent: :destroy, inverse_of: :territory_category
+  has_and_belongs_to_many :layers
+
+  def to_s
+    if revision.present?
+      "#{name} (#{revision})"
+    else
+      name
+    end
+  end
 end
