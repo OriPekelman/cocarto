@@ -100,4 +100,11 @@ class Row < ApplicationRecord
   def geo_properties
     layer.fields.to_h { |field| [field.label, values[field.id]] }
   end
+
+  def self.bbox
+    reorder(nil).select("st_xmin(st_union(point)) as xmin,
+    st_xmax(st_union(point)) as xmax,
+    st_ymin(st_union(point)) as ymin,
+    st_ymax(st_union(point)) as ymax")[0]
+  end
 end

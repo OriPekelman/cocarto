@@ -13,7 +13,11 @@ export default class extends Controller {
     sessionId: String,
     username: String,
     geometryType: String,
-    color: String
+    color: String,
+    xmin: Number,
+    ymin: Number,
+    xmax: Number,
+    ymax: Number
   }
 
   initialize () {
@@ -49,6 +53,10 @@ export default class extends Controller {
     if (this.editableValue) {
       this.map.on('mousemove', e => this.trackers.mousemove(e))
     }
+  }
+
+  centerToContent () {
+    this.map.fitBounds([this.xminValue, this.yminValue, this.xmaxValue, this.ymaxValue], { padding: 20 })
   }
 
   changeMode () {
