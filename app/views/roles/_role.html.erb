@@ -1,13 +1,17 @@
-<div class="main-element" id="<%= dom_id role %>" style="display: flex">
+<div class="main-element" id="<%= dom_id role %>">
   <%= form_with(model: role.new_record? ? [role.map, role] : role) do |form| %>
 
     <%= form.fields_for :user do |f| %>
-      <%= f.label :email %><br>
-      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      <div class="label-with-input">
+        <%= f.label :email %><br>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      </div>
     <% end %>
 
-    <%= form.label :role_type %>
-    <%= form.select :role_type, options_for_select(Role.role_types, role.role_type) %>
+    <div class="label-with-input">
+      <%= form.label :role_type %>
+      <%= form.select :role_type, options_for_select(Role.role_types, role.role_type) %>
+    </div>
 
     <%= form.submit %>
 

@@ -165,6 +165,7 @@ textarea {
   display: block;
   font-size: inherit;
   max-width: 460px;
+  margin: 8px;
 }
 
 input:focus {
@@ -182,7 +183,8 @@ textarea {
   vertical-align: middle;
 }
 
-input {
+input,
+select {
   height: 40px;
 }
 
@@ -379,5 +381,15 @@ input[type="radio"] {
     height: 24px;
     margin: 12px 8px;
     fill: var(--color-green-50);
+  }
+}
+
+div.label-with-input {
+  display: flex;
+  flex-direction: column;
+
+  input,
+  select {
+    margin-top: 0;
   }
 }
