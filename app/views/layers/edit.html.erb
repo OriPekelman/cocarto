@@ -11,10 +11,10 @@
   data-map-username-value="<%= @user_name %>"
   data-map-geometry-type-value="<%= @layer.geometry_type %>"
   data-map-color-value="<%= @layer.color %>"
-  data-map-xmin-value="<%= @layer.rows.bbox.xmin %>"
-  data-map-xmax-value="<%= @layer.rows.bbox.xmax %>"
-  data-map-ymin-value="<%= @layer.rows.bbox.ymin %>"
-  data-map-ymax-value="<%= @layer.rows.bbox.ymax %>">
+  data-map-xmin-value="<%= @layer.rows.bbox(@layer.geometry_type).xmin %>"
+  data-map-xmax-value="<%= @layer.rows.bbox(@layer.geometry_type).xmax %>"
+  data-map-ymin-value="<%= @layer.rows.bbox(@layer.geometry_type).ymin %>"
+  data-map-ymax-value="<%= @layer.rows.bbox(@layer.geometry_type).ymax %>">
   <div class="data" data-dragbar-target="left">
     <div class="layer-actions">
       <%= link_with_icon t(".map"), @layer.map, "chevron_left.svg" %>
