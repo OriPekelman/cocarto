@@ -1,3 +1,4 @@
+<% delete_message = role.user.email == current_user.email ? t(".delete_self") : t("common.confirm") %>
 <div class="main-element" id="<%= dom_id role %>">
   <%= form_with(model: role.new_record? ? [role.map, role] : role) do |form| %>
 
@@ -15,7 +16,7 @@
 
     <% if role.persisted? %>
       <%= form.submit t("helpers.link.role.modify"), class: "submit_form" %>
-      <%= link_to t("helpers.link.role.delete"), role, data: {turbo_method: :delete, turbo_confirm: t("common.confirm")}, class: "delete-action" %>
+      <%= link_to t("helpers.link.role.delete"), role, data: {turbo_method: :delete, turbo_confirm: delete_message}, class: "delete-action" %>
     <% else %>
       <%= form.submit t("helpers.link.role.create"), class: "submit_form" %>
     <% end %>
