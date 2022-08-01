@@ -1,4 +1,4 @@
-<% delete_message = role.user.email == current_user.email ? t(".delete_self") : t("common.confirm") %>
+<% delete_message = role.user == current_user ? t(".delete_self") : t("common.confirm") %>
 <div class="main-element" id="<%= dom_id role %>">
   <%= form_with(model: role.new_record? ? [role.map, role] : role) do |form| %>
 

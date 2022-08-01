@@ -54,7 +54,7 @@ fr:
     index:
       new: Créer un nouveau rôle
     role:
-      delete_self: Êtes-vous sûr ? Vous ne pourrez plus accéder à la carte
+      delete_self: Êtes-vous sûr ? Vous ne pourrez plus accéder à la carte.
       type: Type de rôle
   rows:
     edit:
