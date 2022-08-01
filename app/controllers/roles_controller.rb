@@ -3,7 +3,7 @@ class RolesController < ApplicationController
 
   def index
     @map = current_user.maps.find(params["map_id"])
-    @roles = @map.roles.includes(:user)
+    @roles = authorize @map.roles.includes(:user)
   end
 
   def create
@@ -14,7 +14,7 @@ class RolesController < ApplicationController
       create_params[:user] = existing_user
     end
 
-    @role = @map.roles.new(create_params)
+    @role = authorize @map.roles.new(create_params)
 
     if @role.save
       if @role.user.invitation_sent_at.blank?
@@ -47,7 +47,7 @@ class RolesController < ApplicationController
   private
 
   def set_role
-    @role = Role.find(params[:id])
+    @role = authorize Role.find(params[:id])
   end
 
   def create_role_params
