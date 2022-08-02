@@ -27,6 +27,11 @@ fr:
           other: polygones
       map:
         name: Nom
+      role:
+        contributor: Contributeur
+        editor: Éditeur
+        owner: Propriétaire
+        viewer: Observateur
       territory:
         code: identifiant
         parent: partie de
@@ -39,6 +44,9 @@ fr:
       map:
         one: Carte
         other: Cartes
+      role:
+        one: Rôle
+        other: Rôles
       territory:
         one: Territoire
         other: Territoires
@@ -54,8 +62,12 @@ fr:
         delete: supprimer
         new: Ajouter une nouvelle couche
       map:
-        delete: Supprimer la carte
+        delete: Supprimer cette carte
         new: Créer une nouvelle carte
+      role:
+        create: Créer
+        delete: Supprimer
+        modify: Modifier
       row:
         delete: Supprimer
       territory:
@@ -66,9 +78,13 @@ fr:
         destroyed: Le champ a été détruit avec succès.
         updated: Le champ a été mis à jour avec succès.
       layer:
-        destroyed: La couche a été détruite avec succès
+        destroyed: La couche a été détruite avec succès.
       map:
-        destroyed: La carte a été détruite avec succès
+        destroyed: La carte a été détruite avec succès.
+      role:
+        created: Rôle créé avec succès.
+        destroyed: Le rôle a été détruit avec succès.
+        updated: Le rôle a été mis à jour avec succès.
       row:
         destroyed: La géométrie a été détruite avec succès.
         updated: Les propriétés géométriques ont été mises à jour avec succès.

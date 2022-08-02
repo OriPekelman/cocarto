@@ -11,7 +11,7 @@ class MapsTest < ApplicationSystemTestCase
     click_button "Create a layer"
     click_link "map"
     accept_confirm do
-      click_link "Delete map"
+      click_link "Delete this map"
     end
     assert_text "The map was successfully destroyed"
   end

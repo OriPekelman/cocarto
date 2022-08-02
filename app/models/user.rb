@@ -43,4 +43,9 @@ class User < ApplicationRecord
 
   # Through relationships
   has_many :maps, through: :roles, inverse_of: :users
+
+  # Devise overrides
+  def password_required?
+    false
+  end
 end

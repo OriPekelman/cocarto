@@ -1,0 +1,24 @@
+<div class="main-element" id="<%= dom_id role %>">
+  <%= form_with(model: role.new_record? ? [role.map, role] : role) do |form| %>
+
+    <%= form.fields_for :user do |f| %>
+      <div class="label-with-input">
+        <%= f.label :email %><br>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      </div>
+    <% end %>
+
+    <div class="label-with-input">
+      <%= form.label :role_type, t(".type") %>
+      <%= form.select :role_type, options_for_select(Role.role_types.map { |role| [Role.human_attribute_name(role[0]), role[1]] }, role.role_type) %>
+    </div>
+
+    <% if role.persisted? %>
+      <%= form.submit t("helpers.link.role.modify"), class: "submit_form" %>
+      <%= link_to t("helpers.link.role.delete"), role, data: {turbo_method: :delete, turbo_confirm: t("common.confirm")}, class: "delete-action" %>
+    <% else %>
+      <%= form.submit t("helpers.link.role.create"), class: "submit_form" %>
+    <% end %>
+
+  <% end %>
+</div>

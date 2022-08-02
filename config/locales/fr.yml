@@ -18,6 +18,7 @@ fr:
     edit: Modifier
     frame: cadrer
     hello: Bonjour
+    share: Partager…
     show: Consulter
     updated_at_by: Mis à jour le %{date} par %{user}
     user_not_authorized: Vous n’avez pas la permission d’effectuer cette action.
@@ -46,6 +47,14 @@ fr:
         Nous sommes à l’écoute des besoins pour un tel outil dans des structures existantes.
         <a href=" https://gitlab.com/CodeursEnLiberte/gxis/-/blob/main/README.md#user-content-how-to-contribute" target="_blank">Contactez-nous</a>
         si vous souhaitez faire part des votres.</p>
+  maps:
+    show:
+      all_maps: Toutes les cartes
+  roles:
+    index:
+      new: Créer un nouveau rôle
+    role:
+      type: Type de rôle
   rows:
     edit:
       edit_row_title: Modifier une ligne

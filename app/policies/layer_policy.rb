@@ -5,15 +5,15 @@ class LayerPolicy < ApplicationPolicy
     record.map.roles.owner.merge(user.roles).exists?
   end
 
-  def show? = user_owns_record
+  def show? = Role.exists?(map: record.map, user: user)
+
+  def schema? = show?
+
+  def geojson? = show?
 
   def edit? = user_owns_record
 
   def update? = user_owns_record
 
   def destroy? = user_owns_record
-
-  def schema? = user_owns_record
-
-  def geojson? = user_owns_record
 end

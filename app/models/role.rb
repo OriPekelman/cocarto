@@ -11,8 +11,9 @@
 #
 # Indexes
 #
-#  index_roles_on_map_id   (map_id)
-#  index_roles_on_user_id  (user_id)
+#  index_roles_on_map_id              (map_id)
+#  index_roles_on_map_id_and_user_id  (map_id,user_id) UNIQUE
+#  index_roles_on_user_id             (user_id)
 #
 # Foreign Keys
 #
@@ -26,4 +27,17 @@ class Role < ApplicationRecord
   # Relationships
   belongs_to :user, inverse_of: :roles
   belongs_to :map, inverse_of: :roles
+
+  accepts_nested_attributes_for :user
+
+  validates :user, uniqueness: {scope: :map}
+
+  before_destroy :map_must_have_an_owner
+
+  def map_must_have_an_owner
+    return if map.roles.owner.where.not(id: self).exists?
+
+    errors.add(:map, :must_have_an_owner)
+    throw(:abort)
+  end
 end

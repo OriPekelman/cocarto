@@ -27,6 +27,11 @@ en:
           other: polygons
       map:
         name: Name
+      role:
+        contributor: Contributor
+        editor: Editor
+        owner: Owner
+        viewer: Viewer
       territory:
         code: identifier
         parent: part of
@@ -39,6 +44,9 @@ en:
       map:
         one: Map
         other: Maps
+      role:
+        one: Role
+        other: Roles
       territory:
         one: Territory
         other: Territories
@@ -54,8 +62,12 @@ en:
         delete: delete
         new: Add a new layer
       map:
-        delete: Delete map
+        delete: Delete this map
         new: Build a new map
+      role:
+        create: Create
+        delete: Supprimer
+        modify: Modify
       row:
         delete: Delete
       territory:
@@ -69,6 +81,10 @@ en:
         destroyed: Layer was successfully destroyed.
       map:
         destroyed: The map was successfully destroyed
+      role:
+        created: Role was successfully created.
+        destroyed: Role was successfully destroyed.
+        updated: Role was successfully updated.
       row:
         destroyed: Geometry was successfully destroyed.
         updated: Geometry properties were successfully updated.

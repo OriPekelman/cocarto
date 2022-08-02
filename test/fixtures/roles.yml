@@ -11,8 +11,9 @@
 #
 # Indexes
 #
-#  index_roles_on_map_id   (map_id)
-#  index_roles_on_user_id  (user_id)
+#  index_roles_on_map_id              (map_id)
+#  index_roles_on_map_id_and_user_id  (map_id,user_id) UNIQUE
+#  index_roles_on_user_id             (user_id)
 #
 # Foreign Keys
 #

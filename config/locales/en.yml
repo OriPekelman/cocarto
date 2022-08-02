@@ -18,6 +18,7 @@ en:
     edit: Edit
     frame: frame
     hello: Hello
+    share: Share…
     show: Show
     updated_at_by: Last update on %{date} by %{user}
     user_not_authorized: You are not authorized to perform this action.
@@ -46,6 +47,14 @@ en:
         We’re looking for stories for such needs in existing companies.
         <a href=" https://gitlab.com/CodeursEnLiberte/gxis/-/blob/main/README.md#user-content-how-to-contribute" target="_blank">Contact us</a>
         if you want to talk about yours.</p>
+  maps:
+    show:
+      all_maps: All les maps
+  roles:
+    index:
+      new: Create a new role
+    role:
+      type: Role type
   rows:
     edit:
       edit_row_title: Update a row
