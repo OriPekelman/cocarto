@@ -49,7 +49,7 @@ en:
         if you want to talk about yours.</p>
   maps:
     show:
-      all_maps: All les maps
+      all_maps: All maps
   roles:
     index:
       new: Create a new role
