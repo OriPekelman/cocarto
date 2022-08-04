@@ -2,10 +2,11 @@
 
 <%= turbo_stream_from "#{@layer.id}_ro" %>
 <div class="data-with-map"
-    data-controller="map"
-    data-map-geometry-type-value="<%= @layer.geometry_type %>"
-    data-map-color-value="<%= @layer.color %>">
-  <div class="data">
+  data-action="mousemove@window->dragbar#mousemove mouseup@document->dragbar#mouseup"
+  data-controller="map dragbar"
+  data-map-geometry-type-value="<%= @layer.geometry_type %>"
+  data-map-color-value="<%= @layer.color %>">
+  <div class="data" data-dragbar-target="left">
     <div class="layer-actions">
       <%= link_to t("common.back"), map_path(@layer.map), class: "go-back" %>
       <%= link_to t("common.edit"), edit_layer_path(@layer) %>
@@ -13,6 +14,14 @@
     <h2><%= "#{Layer.model_name.human} #{@layer.name}" %></h2>
     <%= render "rows_ro", layer: @layer %>
   </div>
-  <div class="map" data-map-target="map">
+  <div class="dragbar" data-dragbar-target="dragbar" data-action="mousedown->dragbar#mousedown">
+    <%= image_tag "dragbar_cursor.svg", class: "svg-dragbar" %>
+  </div>
+  <div data-dragbar-target="right" class="right-pane">
+    <div class="layer-actions-map">
+      <%= button_with_icon t("common.frame"), "frame.svg", data: {action: "click->map#centerToContent"} %>
+    </div>
+    <div class="map" data-map-target="map">
+    </div>
   </div>
 </div>
