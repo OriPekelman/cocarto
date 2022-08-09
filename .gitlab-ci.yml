@@ -64,6 +64,7 @@ test-unit:
 
 test-system:
   extends: .ruby
+  allow_failure: true
   stage: test
   services:
     - postgis/postgis:latest
