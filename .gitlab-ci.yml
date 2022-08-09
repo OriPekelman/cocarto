@@ -1,7 +1,5 @@
 default:
   image: ruby:3.1.2
-  tags:
-    - xuan # We use our own runner: faster and the shared seem to have a network issue
 
 variables:
   GITLAB_CI_POSTGRES_HOST: postgis-postgis
