@@ -39,6 +39,25 @@ class Row < ApplicationRecord
     broadcast_replace_to layer, target: "tutorial", partial: "layers/tooltip", locals: {layer: layer}
   end
 
+  # We use postgis functions to convert to geojson
+  # This makes the load be on postgres’ side, not rails (C implementation)
+  # We also compute the bounding box
+  # The coalesce function takes the first non null value, allowing the same behaviour for each geometry type
+  # We are guaranteed that this works, as we have the constraint "num_nonnulls(point, line_string, polygon, territory_id) = 1"
+  scope :with_geom, -> do
+    left_outer_joins(:territory)
+      .select(<<-SQL.squish
+      rows.*,
+      COALESCE(point, line_string, polygon, territories.geometry) as geometry,
+      st_asgeojson(COALESCE(point, line_string, polygon, territories.geometry)) as geojson,
+      st_Xmin(COALESCE(point, line_string, polygon, territories.geometry)) as lng_min,
+      st_Ymin(COALESCE(point, line_string, polygon, territories.geometry)) as lat_min,
+      st_Xmax(COALESCE(point, line_string, polygon, territories.geometry)) as lng_max,
+      st_Ymax(COALESCE(point, line_string, polygon, territories.geometry)) as lat_max
+    SQL
+             )
+  end
+
   # Values accessors:
   # fields_values and fields_values= have two roles
   # - make sure the values in the DB and from user input are for existing fields of the layer
@@ -74,19 +93,6 @@ class Row < ApplicationRecord
     self[layer.geometry_type] = new_geometry
   end
 
-  def geometry
-    self[layer.geometry_type]
-  end
-
-  # Geometry accessor, as geojson (used in the row form)
-  def geojson
-    if layer.geometry_territory?
-      row.territory.geojson
-    else
-      RGeo::GeoJSON.encode(geometry).to_json
-    end
-  end
-
   def geojson=(new_geojson)
     raise "Can not set the geojson of a territory" if layer.geometry_territory?
     self.geometry = RGeo::GeoJSON.decode(new_geojson, geo_factory: RGEO_FACTORY)
@@ -102,7 +108,7 @@ class Row < ApplicationRecord
   end
 
   def self.bbox(geometry_type)
-    reorder(nil).select("st_xmin(st_union(#{geometry_type})) as xmin,
+    unscoped.reorder(nil).select("st_xmin(st_union(#{geometry_type})) as xmin,
     st_xmax(st_union(#{geometry_type})) as xmax,
     st_ymin(st_union(#{geometry_type})) as ymin,
     st_ymax(st_union(#{geometry_type})) as ymax")[0]
