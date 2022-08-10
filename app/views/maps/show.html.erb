@@ -15,7 +15,7 @@
         <h3><%= layer.name %></h3>
         <p>
           <span class="color-marker" style="background-color: <%= layer.color %>"></span>
-          <%= layer.rows.count %> <%= Layer.human_attribute_name(layer.geometry_type, count: layer.rows.count) %>
+          <%= layer.rows.size %> <%= Layer.human_attribute_name(layer.geometry_type, count: layer.rows.size) %>
           — <%= t("common.updated_at_by", date: l(layer.updated_at.to_date, format: :long), user: current_user.email) %>
         </p>
 
