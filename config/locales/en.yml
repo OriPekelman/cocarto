@@ -54,6 +54,7 @@ en:
     index:
       new: Create a new role
     role:
+      delete_self: Are you sure? You won’t be able to access the map anymore.
       type: Role type
   rows:
     edit:
