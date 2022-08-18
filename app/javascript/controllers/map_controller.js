@@ -4,6 +4,7 @@ import { Controller } from '@hotwired/stimulus'
 import { newMap, maplibreGLFeaturesStyle } from 'lib/map_helpers'
 import PresenceTrackers from 'lib/presence_trackers'
 import MapboxDraw from '@mapbox/mapbox-gl-draw'
+import maplibre from 'maplibre-gl'
 
 export default class extends Controller {
   static targets = ['geojsonField', 'newRowForm', 'row', 'map']
@@ -23,6 +24,7 @@ export default class extends Controller {
   initialize () {
     this.markers = new Map()
     this.clickTimer = null
+    this.boundingBox = null
   }
 
   connect () {
@@ -34,6 +36,15 @@ export default class extends Controller {
     // a row can be connected when this.draw isn’t initialized yet
     if (this.draw) {
       this.#addRow(row)
+    }
+    const sw = new maplibre.LngLat(row.dataset.lngMin, row.dataset.latMin)
+    const ne = new maplibre.LngLat(row.dataset.lngMax, row.dataset.latMax)
+    const llb = new maplibre.LngLatBounds(sw, ne)
+
+    if (this.boundingBox === null) {
+      this.boundingBox = llb
+    } else {
+      this.boundingBox = this.boundingBox.extend(llb)
     }
   }
 
@@ -57,9 +68,9 @@ export default class extends Controller {
 
   centerToContent () {
     if (this.rowTargets.length === 1) {
-      this.map.setCenter([this.xmaxValue, this.yminValue])
+      this.map.setCenter(this.boundingBox.getCenter())
     } else if (this.rowTargets.length >= 2) {
-      this.map.fitBounds([this.xminValue, this.yminValue, this.xmaxValue, this.ymaxValue], { padding: 20 })
+      this.map.fitBounds(this.boundingBox, { padding: 20 })
     }
   }
 
