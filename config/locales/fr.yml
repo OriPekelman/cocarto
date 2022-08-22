@@ -46,7 +46,7 @@ fr:
       landing_3_footer_html: |
         Nous sommes à l’écoute des besoins pour un tel outil dans des structures existantes.
         <a href=" https://gitlab.com/CodeursEnLiberte/gxis/-/blob/main/README.md#user-content-how-to-contribute" target="_blank">Contactez-nous</a>
-        si vous souhaitez faire part des votres.</p>
+        si vous souhaitez faire part des vôtres.</p>
   maps:
     show:
       all_maps: Toutes les cartes
