@@ -42,7 +42,7 @@ Those values can also be modified in `config/database.yml`.
 
 On a new installation, run
 
-    make setup
+    make setup-dev
 
 That command will install the gem `bundler`, the dependencies and will initialize the database. The database will contain two users:
 
