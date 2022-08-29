@@ -13,3 +13,6 @@ restaurants:
 
 hiking:
   name: Hiking
+
+boat:
+  name: Boating trip
