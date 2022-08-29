@@ -4,8 +4,6 @@ class RowsController < ApplicationController
 
   def new
     @row = @layer.rows.new
-    # The form is filled by someone that shouldn’t be redirected to the main page
-    @anonymous = true
     @values = {}
   end
 
@@ -15,17 +13,11 @@ class RowsController < ApplicationController
   end
 
   def create
-    anonymous = params.require(:row)[:anonymous] == "true"
-
     @row = Row.create(layer: @layer, **row_params)
 
-    if anonymous
-      redirect_to action: :edit, id: @row
-    else
-      respond_to do |format|
-        format.turbo_stream
-        format.html { redirect_to layer_path(@row.layer) }
-      end
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to layer_path(@row.layer) }
     end
   end
 
