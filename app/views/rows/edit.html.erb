@@ -1,9 +1,0 @@
-<%# params: @row, @layer, @anonymous, @values %>
-
-<section class="section">
-  <div class="container">
-    <h1><%= t(".edit_row_title") %></h1>
-    <p><%= t(".page_access_description_html", url: edit_layer_row_url(@layer, @row)) %></p>
-    <%= render "form", row: @row, layer: @layer, anonymous: @anonymous, values: @values %>
-  </div>
-</section>

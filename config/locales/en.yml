@@ -56,13 +56,6 @@ en:
     role:
       delete_self: Are you sure? You won’t be able to access the map anymore.
       type: Role type
-  rows:
-    edit:
-      edit_row_title: Update a row
-      page_access_description_html: This page can be accessed and shared through <a href="%{url}">this link</a>.
-    new:
-      new_row_description: Enter a new row
-      new_row_explanation: You don’t need to enter the whole data now. By clicking “Save”, you’ll receive a link to continue editing later.
   territories:
     index:
       search_title: Search a territory
