@@ -3,7 +3,7 @@ class RowsController < ApplicationController
   before_action :set_layer, only: %i[create new update]
 
   def new
-    @row = @layer.rows.new
+    @row = authorize @layer.rows.new
     @values = {}
   end
 
@@ -13,7 +13,7 @@ class RowsController < ApplicationController
   end
 
   def create
-    @row = Row.create(layer: @layer, **row_params)
+    @row = authorize Row.create(layer: @layer, **row_params)
 
     respond_to do |format|
       format.turbo_stream
@@ -40,7 +40,7 @@ class RowsController < ApplicationController
   private
 
   def set_row
-    @row = Row.includes(layer: :fields).find(params[:id])
+    @row = authorize Row.includes(layer: :fields).find(params[:id])
   end
 
   def set_layer
