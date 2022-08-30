@@ -1,7 +1,11 @@
 <%# params: row %>
 <%# renders a row in a table, editable, used in layers/_rows_rw %>
 <tr id="<%= dom_id(row) %>"
-    data-controller="row">
+    data-controller="row"
+    data-lng-min="<%= row.lng_min %>"
+    data-lat-min="<%= row.lat_min %>"
+    data-lng-max="<%= row.lng_max %>"
+    data-lat-max="<%= row.lat_max %>">
   <% form_id = dom_id(row, :form) %>
   <% if row.layer.geometry_territory? %>
     <td>
