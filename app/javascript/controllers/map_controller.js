@@ -14,11 +14,7 @@ export default class extends Controller {
     sessionId: String,
     username: String,
     geometryType: String,
-    color: String,
-    xmin: Number,
-    ymin: Number,
-    xmax: Number,
-    ymax: Number
+    color: String
   }
 
   initialize () {
