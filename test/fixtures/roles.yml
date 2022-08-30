@@ -34,3 +34,13 @@ hiking_cassini:
   map: hiking
   user: cassini
   role_type: owner
+
+boat_reclus:
+  map: boat
+  user: reclus
+  role_type: owner
+
+boat_cassini:
+  map: boat
+  user: cassini
+  role_type: viewer

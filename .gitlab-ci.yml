@@ -66,6 +66,8 @@ test-system:
   extends: .ruby
   allow_failure: true
   stage: test
+  tags:
+    - xuan
   services:
     - postgis/postgis:latest
     - browserless/chrome:latest
