@@ -2,7 +2,7 @@ class FieldsController < ApplicationController
   before_action :set_field, only: %i[edit update destroy]
 
   def new
-    @field = Field.new
+    @field = authorize Field.new
   end
 
   def edit
@@ -18,7 +18,7 @@ class FieldsController < ApplicationController
 
   def create
     layer = Layer.includes(:rows).find(field_params[:layer_id])
-    @field = layer.fields.new(field_params)
+    @field = authorize layer.fields.new(field_params)
 
     if @field.save
       flash.now[:notice] = t("helpers.message.field.created", name: @field.label)
@@ -43,7 +43,7 @@ class FieldsController < ApplicationController
   private
 
   def set_field
-    @field = Field.includes(:layer).find(params[:id])
+    @field = authorize Field.includes(:layer).find(params[:id])
   end
 
   def field_params
