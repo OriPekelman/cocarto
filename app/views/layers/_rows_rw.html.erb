@@ -16,12 +16,14 @@
       data-dropdown-target="trigger"
       aria-haspopup="true"
       aria-controls="dropdown-menu">
-      <span data-action="click->dropdown#toggle" class="chevron">
-        <button><span>+</span></button>
-      </span>
-      <div class="dropdown-content" data-dropdown-target="content" role="menu">
-        <%= render "fields/form", field: Field.new(layer: layer) %>
-      </div>
+      <% if policy(layer).update? %>
+        <span data-action="click->dropdown#toggle" class="chevron">
+          <button><span>+</span></button>
+        </span>
+        <div class="dropdown-content" data-dropdown-target="content" role="menu">
+          <%= render "fields/form", field: Field.new(layer: layer) %>
+        </div>
+      <% end %>
     </th>
   </tr>
   </thead>
