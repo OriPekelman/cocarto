@@ -1,10 +1,10 @@
 class TerritoryCategoriesController < ApplicationController
   def index
-    @categories = TerritoryCategory.all
+    @categories = scope_policy(TerritoryCategory)
   end
 
   def show
-    @category = TerritoryCategory.includes(:territories).find(params[:id])
+    @category = authorize TerritoryCategory.includes(:territories).find(params[:id])
     @territories = if params[:q]
       @category.territories.name_autocomplete(params[:q])
     else
