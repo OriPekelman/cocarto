@@ -16,4 +16,8 @@ class RolePolicy < ApplicationPolicy
   def user_is_owner?
     record.map.roles.owner.merge(user.roles).exists?
   end
+
+  class Scope < Scope
+    def resolve = scope.all
+  end
 end
