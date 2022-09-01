@@ -28,11 +28,7 @@ export default class extends Controller {
     this.trackers = new PresenceTrackers(this)
   }
 
-  rowTargetConnected (row) {
-    // a row can be connected when this.draw isn’t initialized yet
-    if (this.draw) {
-      this.#addRow(row)
-    }
+  #extendBounds (row) {
     const sw = new maplibre.LngLat(row.dataset.lngMin, row.dataset.latMin)
     const ne = new maplibre.LngLat(row.dataset.lngMax, row.dataset.latMax)
     const llb = new maplibre.LngLatBounds(sw, ne)
@@ -44,8 +40,19 @@ export default class extends Controller {
     }
   }
 
+  rowTargetConnected (row) {
+    // a row can be connected when this.draw isn’t initialized yet
+    if (this.draw) {
+      this.#addRow(row)
+    }
+    this.#extendBounds(row)
+  }
+
   rowTargetDisconnected (row) {
     this.draw.delete(row.id)
+    this.boundingBox = null
+
+    this.rowTargets.forEach(otherRow => this.#extendBounds(otherRow))
   }
 
   #initMap () {
