@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   # Pundit handles the authorization policies
   include Pundit::Authorization
+  after_action :verify_authorized, except: :index # rubocop:disable Rails/LexicallyScopedActionFilter
+  after_action :verify_policy_scoped, only: :index # rubocop:disable Rails/LexicallyScopedActionFilter
 
   around_action :rescue_unauthorized,
     :switch_locale # make sure locale is around all the rest
