@@ -26,7 +26,7 @@ lint-js: ## Run javascript linters
 lint: lint-rb lint-js ## Run all linters
 
 lint_autocorrect: ## Run linters in autocorrect mode
-	bundle exec rubocop --auto-correct-all
+	bundle exec rubocop --autocorrect-all
 	bundle exec erblint --lint-all --autocorrect
 	npx standard --fix
 	npx prettier --write app/assets/stylesheets

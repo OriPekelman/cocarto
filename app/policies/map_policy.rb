@@ -3,7 +3,7 @@ class MapPolicy < ApplicationPolicy
     return false if user.nil?
 
     if record.new_record?
-      record.roles.find{ _1.owner? && _1.user == user }.present?
+      record.roles.find { _1.owner? && _1.user == user }.present?
     else
       record.roles.owner.merge(user.roles).exists?
     end
