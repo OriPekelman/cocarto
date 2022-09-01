@@ -1,4 +1,8 @@
 class LayerPolicy < ApplicationPolicy
+  def new? = update?
+
+  def create? = update?
+
   def show? = role.present?
 
   def schema? = show?
