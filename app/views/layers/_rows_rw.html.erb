@@ -6,7 +6,16 @@
   <tr>
     <% if layer.geometry_territory? %>
       <th></th>
+      <th><%= t("common.territory_code") %></th>
+    <% elsif layer.geometry_point? %>
+      <th><%= t("common.longitude") %></th>
+      <th><%= t("common.latitude") %></th>
+    <% elsif layer.geometry_line_string? %>
+      <th><%= t("common.length") %></th>
+    <% elsif layer.geometry_polygon? %>
+      <th><%= t("common.area") %></th>
     <% end %>
+
     <%= render partial: "fields/th", collection: layer.fields, as: :field %>
     <th
       id="delete-column"

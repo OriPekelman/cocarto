@@ -1,5 +1,8 @@
 ---
 fr:
+  area:
+    million: km²
+    unit: m²
   colors:
     blue: Bleu
     brown: Marron
@@ -12,16 +15,24 @@ fr:
   common:
     add: ajouter
     app_title: Ĝis
+    area: Surface
     back: Retour
     colors: couleur
     confirm: Êtes-vous sûr ?
     edit: Modifier
     frame: cadrer
     hello: Bonjour
+    latitude: Latitude
+    length: Longueur
+    longitude: Longitude
     share: Partager…
     show: Consulter
+    territory_code: Code
     updated_at_by: Mis à jour le %{date} par %{user}
     user_not_authorized: Vous n’avez pas la permission d’effectuer cette action.
+  distance:
+    thousand: km
+    unit: m
   layers:
     edit:
       export: geojson
