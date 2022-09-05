@@ -125,6 +125,8 @@ ignore_unused:
   - 'helpers.submit.*'
   - 'colors.*'
   - 'time.formats.*'
+  - 'area.*'
+  - 'distance.*'
 # - '{devise,kaminari,will_paginate}.*'
 # - 'simple_form.{yes,no}'
 # - 'simple_form.{placeholders,hints,labels}.*'

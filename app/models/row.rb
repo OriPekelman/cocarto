@@ -53,7 +53,9 @@ class Row < ApplicationRecord
       st_Xmin(COALESCE(point, line_string, polygon, territories.geometry)) as lng_min,
       st_Ymin(COALESCE(point, line_string, polygon, territories.geometry)) as lat_min,
       st_Xmax(COALESCE(point, line_string, polygon, territories.geometry)) as lng_max,
-      st_Ymax(COALESCE(point, line_string, polygon, territories.geometry)) as lat_max
+      st_Ymax(COALESCE(point, line_string, polygon, territories.geometry)) as lat_max,
+      st_length(line_string::geography) as length,
+      st_area(polygon::geography) as area
     SQL
              )
   end
