@@ -27,6 +27,6 @@
       </div>
     <% end %>
 
-    <%= link_to t("helpers.link.layer.new"), new_map_layer_path(@map), class: "primary-action" %>
+    <%= link_to t("helpers.link.layer.new"), new_map_layer_path(@map), class: "primary-action" if policy(@map).update? %>
   </div>
 </div>

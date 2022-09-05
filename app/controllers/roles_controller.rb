@@ -3,7 +3,7 @@ class RolesController < ApplicationController
 
   def index
     @map = current_user.maps.find(params["map_id"])
-    @roles = authorize @map.roles.includes(:user)
+    @roles = authorize policy_scope(@map.roles).includes(:user)
   end
 
   def create

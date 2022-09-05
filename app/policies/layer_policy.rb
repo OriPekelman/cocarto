@@ -1,19 +1,23 @@
 class LayerPolicy < ApplicationPolicy
-  def user_owns_record
-    return false if user.nil?
+  def new? = update?
 
-    record.map.roles.owner.merge(user.roles).exists?
-  end
+  def create? = update?
 
-  def show? = Role.exists?(map: record.map, user: user)
+  def show? = role.present?
 
   def schema? = show?
 
   def geojson? = show?
 
-  def edit? = user_owns_record
+  def edit? = update? || role&.contributor?
 
-  def update? = user_owns_record
+  def update? = role&.owner? || role&.editor?
 
-  def destroy? = user_owns_record
+  def destroy? = role&.owner?
+
+  private
+
+  def role
+    Role.find_by(map: record.map, user: user)
+  end
 end

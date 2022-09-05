@@ -1,10 +1,10 @@
 class TerritoriesController < ApplicationController
   def show
-    @territory = Territory.includes(:territory_category).with_geojson.find(search_params[:id])
+    @territory = authorize Territory.includes(:territory_category).with_geojson.find(search_params[:id])
   end
 
   def search
-    territories = Territory.includes(:territory_category).name_autocomplete(search_params[:q]).preload(:parent).limit(20)
+    territories = authorize Territory.includes(:territory_category).name_autocomplete(search_params[:q]).preload(:parent).limit(20)
 
     if search_params[:layer_id]
       cat = Layer.find(search_params[:layer_id]).territory_categories

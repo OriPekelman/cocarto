@@ -10,7 +10,7 @@ class LayersController < ApplicationController
 
   def new
     map = current_user.maps.find(params["map_id"])
-    @layer = map.layers.new
+    @layer = authorize map.layers.new
   end
 
   def edit
@@ -33,7 +33,7 @@ class LayersController < ApplicationController
   def create
     map = current_user.maps.find(layer_params["map_id"])
 
-    layer = map.layers.new(layer_params)
+    layer = authorize map.layers.new(layer_params)
     if layer.save
       redirect_to edit_layer_path(layer)
     else
