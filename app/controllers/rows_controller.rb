@@ -13,7 +13,7 @@ class RowsController < ApplicationController
   end
 
   def create
-    @row = authorize Row.create(layer: @layer, **row_params)
+    @row = authorize Row.create(layer: @layer, **row_params, author: current_user)
 
     respond_to do |format|
       format.turbo_stream
