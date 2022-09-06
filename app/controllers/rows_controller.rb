@@ -1,5 +1,5 @@
 class RowsController < ApplicationController
-  before_action :set_row, only: %i[edit destroy update]
+  before_action :set_row, only: %i[destroy update]
   before_action :set_layer, only: %i[create new update]
 
   def new
