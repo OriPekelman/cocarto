@@ -7,11 +7,6 @@ class RowsController < ApplicationController
     @values = {}
   end
 
-  def edit
-    @layer = @row.layer
-    @values = @row.values
-  end
-
   def create
     @row = authorize Row.create(layer: @layer, **row_params, author: current_user)
 
