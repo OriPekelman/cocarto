@@ -257,17 +257,18 @@ input[type="radio"] {
   overflow: hidden;
 
   a {
-    font-size: 10px;
+    font-size: 7px;
     text-decoration: none;
     background-color: var(--color-bg-ambient-10);
-    padding: 6px;
+    padding: 9px;
     display: flex;
     flex-direction: column;
     align-items: center;
     font-family: var(--font-sans);
     max-width: 60px;
-    max-height: 44px;
-    gap: 0.3em;
+    max-height: 45px;
+    height: 45px;
+    width: 45px;
   }
   .layer-actions-right {
     display: flex;
