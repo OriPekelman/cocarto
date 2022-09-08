@@ -30,7 +30,7 @@
     <div class="layer-actions-map action-bar">
       <%= button_with_icon t("common.frame"), "frame.svg", data: {action: "click->map#centerToContent"} %>
       <%= button_with_icon t("common.colors"), "color.svg", style: "display: none;" %>
-      <%= button_with_icon t("common.add"), "add_circle.svg", data: {action: "click->map#changeMode"} %>
+      <%= button_with_icon t("common.add"), "add_circle.svg", data: {action: "click->map#changeMode"} unless @layer.geometry_territory? %>
     </div>
     <div class="map" data-map-target="map">
     </div>
