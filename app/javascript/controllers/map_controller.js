@@ -16,7 +16,7 @@ export default class extends Controller {
     geometryType: String,
     color: String,
     userId: String,
-    userRole: String,
+    userRole: String
   }
 
   initialize () {

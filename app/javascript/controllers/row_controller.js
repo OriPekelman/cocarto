@@ -3,7 +3,7 @@ import { Controller } from '@hotwired/stimulus'
 export default class extends Controller {
   static targets = ['form', 'geojson']
   static values = {
-    'author': String
+    author: String
   }
 
   connect () {
@@ -25,15 +25,13 @@ export default class extends Controller {
     this.formTarget.requestSubmit()
   }
 
-  disableInput(currentUser, role) {
+  updateEditable (currentUser, role) {
     const canEdit = role === 'owner' || role === 'editor' || (role === 'contributor' && currentUser === this.authorValue)
-    if(!canEdit) {
-      for(const input of  this.element.getElementsByTagName('input')) {
-        input.setAttribute("disabled", true)
-      }
-      for(const input of  this.element.getElementsByTagName('button')) {
-        input.setAttribute("disabled", true)
-      }
+    for (const input of this.element.getElementsByTagName('input')) {
+      input.setAttribute('disabled', !canEdit)
+    }
+    for (const button of this.element.getElementsByTagName('button')) {
+      button.setAttribute('disabled', !canEdit)
     }
   }
 }

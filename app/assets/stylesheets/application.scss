@@ -113,6 +113,11 @@ table {
       background-color: RGBA(215, 233, 221, 0.5);
       outline: 2px solid var(--color-grey-40);
     }
+
+    input:disabled {
+      cursor: default;
+    }
+
     span {
       width: 100%;
       padding: 0;
