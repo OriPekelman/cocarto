@@ -168,44 +168,38 @@ table {
   display: flex;
   width: 100%;
   position: relative;
-}
-
-.right-pane {
-  width: 50%;
-}
-
-.data-with-map > .data {
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-}
-
-.data .tooltip {
-  position: absolute;
-  padding: 16px;
-  width: 320px;
-  bottom: 300px;
-  left: 200px;
-  background-color: var(--color-info-10);
-  color: var(--color-info-40);
-  border-radius: var(--border-radius);
-}
-
-.data-with-map > .data > table {
-  max-height: 100%;
-}
-
-.data-with-map > .map {
-  width: 50%;
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  height: calc(100% - 66px);
-}
-
-.maplibregl-control-container.mapboxgl-control-container {
-  right: 0;
-  height: 651px;
+  > .map {
+    width: 50%;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    height: calc(100% - 66px);
+  }
+  > .data {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    > table {
+      max-height: 100%;
+    }
+    .tooltip {
+      position: absolute;
+      padding: 16px;
+      width: 320px;
+      bottom: 300px;
+      left: 200px;
+      background-color: var(--color-info-10);
+      color: var(--color-info-40);
+      border-radius: var(--border-radius);
+    }
+  }
+  .right-pane {
+    width: 50%;
+  }
+  .maplibregl-control-container.mapboxgl-control-container {
+    right: 0;
+    height: 620px;
+  }
 }
 
 .actions {
