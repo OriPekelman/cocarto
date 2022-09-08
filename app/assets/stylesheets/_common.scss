@@ -256,18 +256,6 @@ input[type="radio"] {
   justify-content: space-between;
   overflow: hidden;
 
-  a {
-    font-size: 8px;
-    text-decoration: none;
-    background-color: var(--color-bg-ambient-10);
-    padding: 5px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-family: var(--font-sans);
-    height: 45px;
-    width: 45px;
-  }
   .layer-actions-right {
     display: flex;
     flex-direction: row;
@@ -286,12 +274,14 @@ input[type="radio"] {
   gap: 0.2em;
   padding: 1em 1em 1em 0em;
   overflow: hidden;
+}
 
+.action-bar {
+  a,
   button {
+    font-size: 8px;
     text-decoration: none;
     background-color: var(--color-bg-ambient-10);
-    color: var(--color-green-70);
-    font-size: 8px;
     padding: 5px;
     display: flex;
     flex-direction: column;
