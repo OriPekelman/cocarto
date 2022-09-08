@@ -2,6 +2,7 @@
 <%# renders a row in a table, editable, used in layers/_rows_rw %>
 <tr id="<%= dom_id(row) %>"
     data-controller="row"
+    data-row-author-value="<%= row.author.id %>"
     data-lng-min="<%= row.lng_min %>"
     data-lat-min="<%= row.lat_min %>"
     data-lng-max="<%= row.lng_max %>"
