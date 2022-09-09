@@ -1,16 +1,22 @@
 <%# params: field, value, form_id %>
 <%# renders one form field tag for a value of a row for a specific field %>
-<% data = { action: "input->row#setChanged focusout->row#save" } %>
+<% opts = {
+     id: field.id,
+     data: {action: "input->row#setChanged focusout->row#save"},
+     form: form_id,
+     autocomplete: :off
+   }
+   field_value = "row[fields_values][#{field.id}]" %>
 <td class="field-<%= field.id %> <%= "numerical" if field.numerical? %>">
   <% if field.numerical? %>
-    <%= number_field_tag "row[fields_values][#{field.id}]", value, id: field.id, class: "numerical", data: data, form: form_id, autocomplete: :off %>
+    <%= number_field_tag field_value, value, opts.merge(class: "numerical") %>
   <% elsif field.territory? %>
-    <%= render "territories/search_form", field: "row[fields_values][#{field.id}]", territory: value, form_id: form_id %>
+    <%= render "territories/search_form", opts.merge(territory: value, field: field_value) %>
   <% elsif field.date? %>
-    <%= date_field_tag "row[fields_values][#{field.id}]", value, id: field.id, data: data, form: form_id, autocomplete: "off" %>
+    <%= date_field_tag field_value, value, opts %>
   <% elsif field.boolean? %>
-    <%= check_box_tag "row[fields_values][#{field.id}]", "1", value == "1", id: field.id, data: data, form: form_id %>
+    <%= check_box_tag field_value, "1", value == "1", opts %>
   <% else %>
-    <%= text_field_tag "row[fields_values][#{field.id}]", value, id: field.id, class: "input", data: data, form: form_id, autocomplete: :off %>
+    <%= text_field_tag field_value, value, opts.merge(class: "input") %>
   <% end %>
 </td>

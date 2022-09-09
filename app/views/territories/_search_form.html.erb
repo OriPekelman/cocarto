@@ -1,15 +1,15 @@
-<%# params: field, territory, form_id, layer_id %>
+<%# params: field, territory, form, layer_id %>
 <%# We have two interleaved forms:
 - one for the autocomplete
 - one defined outside of the partial, where we want to use the id of the selected territory
-That is why this partial needs the field name and the form_id %>
+That is why this partial needs the field name and the form %>
 
 <% search_result_div_id = SecureRandom.alphanumeric %>
 <div
   class="territory-search dropdown"
   data-controller="autocomplete dropdown"
   data-action="autocomplete:selected->row#save autocomplete:selected->new-territory#selected autocomplete:selected->dropdown#desactivate autocomplete:input->dropdown#activate">
-  <%= hidden_field_tag field, territory&.id, data: {"autocomplete-target": "selected"}, form: form_id %>
+  <%= hidden_field_tag field, territory&.id, data: {"autocomplete-target": "selected"}, form: form %>
   <%= form_with url: search_territories_path, method: :post do |form| %>
     <%= form.hidden_field :layer_id, value: layer_id if local_assigns[:layer_id] %>
     <%= form.search_field :q, value: territory&.name, autocomplete: "off", data: {"autocomplete-target": "searchInput", "dropdown-target": "trigger", "new-territory-target": "input", action: "autocomplete#input"} %>
