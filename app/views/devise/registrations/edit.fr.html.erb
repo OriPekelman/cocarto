@@ -36,7 +36,11 @@
     <%= f.submit "Mettre à jour", class: "primary-action" %>
   </div>
 <% end %>
+<<<<<<< HEAD
 <p>Mécontent·e ? <%= button_to "Supprimer mon compte", registration_path(resource_name), data: {confirm: "Êtes-vous sûr·e ?"}, method: :delete, class: "delete-action" %></p>
+=======
+<p>Mécontent·e ? <%= button_to "Supprimer mon compte", registration_path(resource_name), data: {confirm: "Êtes-vous sûr·e ?"}, method: :delete, type: "button", "aria-haspopup": true, class: "delete-action" %></p>
+>>>>>>> 1a63ed5 (feat: now all button are good for accessibility)
 
 <%= link_to t("common.back"), :back %>
 </div>
