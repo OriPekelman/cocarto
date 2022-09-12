@@ -28,7 +28,9 @@
 one:
   layer: restaurants
   point: POINT(2.37516 48.88661)
+  user: reclus
 
 two:
   layer: hiking
   territory: idf
+  user: cassini

@@ -20,9 +20,7 @@
         </p>
 
         <p>
-          <%= link_to t("common.edit"), edit_layer_path(layer) %>
-          —
-          <%= link_to t("common.show"), layer %>
+          <%= link_to t("common.display"), layer_path(layer) %>
         </p>
       </div>
     <% end %>

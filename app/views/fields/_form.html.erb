@@ -1,5 +1,5 @@
 <%# params: field %>
-<%# renders a form to create or edit a field in a layer. . Used in layers/rows_rw. %>
+<%# renders a form to create or edit a field in a layer. . Used in layers/rows. %>
 
 <%= form_with model: field, data: {action: "dropdown#toggle"} do |form| %>
   <%= form.hidden_field :layer_id %>

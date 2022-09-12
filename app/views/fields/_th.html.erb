@@ -1,5 +1,5 @@
 <%# params: field %>
-<%# renders an destroyable table header for a given field. Used in layers/rows_rw %>
+<%# renders an destroyable table header for a given field. Used in layers/rows %>
 
 <th
   class="field-<%= field.id %> <%= "dropdown" if policy(field).destroy? %> table-head"

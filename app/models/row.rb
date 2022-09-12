@@ -30,16 +30,13 @@ class Row < ApplicationRecord
   belongs_to :territory, -> { with_geojson }, inverse_of: :rows, optional: true
 
   after_update_commit -> do
-    broadcast_replace_to layer, partial: "rows/row_rw", locals: {row: Row.with_geom.find(id)}
-    broadcast_replace_to "#{layer.id}_ro", partial: "rows/row_ro", locals: {row: Row.with_geom.find(id)}
+    broadcast_replace_to layer, partial: "rows/row", locals: {row: Row.with_geom.find(id)}
   end
   after_destroy_commit -> do
     broadcast_remove_to layer
-    broadcast_remove_to "#{layer.id}_ro"
   end
   after_create_commit -> do
-    broadcast_append_to layer, target: "rows-tbody", partial: "rows/row_rw", locals: {row: Row.with_geom.find(id)}
-    broadcast_append_to "#{layer.id}_ro", target: "rows-tbody", partial: "rows/row_ro", locals: {row: Row.with_geom.find(id)}
+    broadcast_append_to layer, target: "rows-tbody", partial: "rows/row", locals: {row: Row.with_geom.find(id)}
     broadcast_replace_to layer, target: "tutorial", partial: "layers/tooltip", locals: {layer: layer}
   end
 
