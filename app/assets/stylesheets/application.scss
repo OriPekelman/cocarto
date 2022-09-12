@@ -101,8 +101,12 @@ table {
     height: 24px;
 
     input {
+      height: 24px;
+      width: 100%;
+      box-shadow: none;
       padding: 0 0.1rem;
       margin: 0;
+      border: 1px solid transparent;
     }
 
     input:focus {
@@ -128,13 +132,6 @@ table {
   th:last-child,
   td:last-child {
     border-right-width: 0px;
-  }
-
-  td input {
-    border: 0;
-    width: 100%;
-    box-shadow: none;
-    height: 24px;
   }
 
   thead {
