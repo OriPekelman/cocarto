@@ -19,14 +19,13 @@ en:
     back: Back
     colors: colors
     confirm: Are you sure?
-    edit: Edit
+    display: Display
     frame: frame
     hello: Hello
     latitude: Latitude
     length: Length
     longitude: Longitude
     share: Share…
-    show: Show
     territory_code: Code
     updated_at_by: Last update on %{date} by %{user}
     user_not_authorized: You are not authorized to perform this action.
@@ -34,7 +33,7 @@ en:
     thousand: km
     unit: m
   layers:
-    edit:
+    show:
       export: geojson
       map: map
     tooltip:

@@ -6,6 +6,10 @@ class LayersController < ApplicationController
   before_action :authenticate_user!
 
   def show
+    # Every time we open a new tab, we create this session id
+    # It allows to keep track of who is currently on the page
+    # It differs from current_user as a user can be connected many times on the same page
+    @session_id = SecureRandom.alphanumeric
   end
 
   def new
@@ -24,10 +28,10 @@ class LayersController < ApplicationController
     if @layer.update(layer_params)
       respond_to do |format|
         format.turbo_stream
-        format.html { redirect_to edit_layer_path(@layer) }
+        format.html { redirect_to layer_path(@layer) }
       end
     else
-      render :edit, status: :unprocessable_entity
+      render :show, status: :unprocessable_entity
     end
   end
 
@@ -36,7 +40,7 @@ class LayersController < ApplicationController
 
     layer = authorize map.layers.new(layer_params)
     if layer.save
-      redirect_to edit_layer_path(layer)
+      redirect_to layer_path(layer)
     else
       # This line overrides the default rendering behavior, which
       # would have been to render the "create" view.

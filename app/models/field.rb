@@ -26,7 +26,7 @@ class Field < ApplicationRecord
     broadcast_before_to layer, target: "delete-column", partial: "fields/th"
     layer.rows.each do |row|
       broadcast_before_to layer, target: dom_id(row, :last), partial: "fields/field_in_form", locals: {field: self, form_id: dom_id(row, :form), value: nil}
-      broadcast_replace_to layer, target: "tutorial", partial: "layers/tooltip", locals: {layer: layer}
+      broadcast_replace_to layer, target: "tutorial", partial: "layers/tooltip", object: layer
     end
   end
 

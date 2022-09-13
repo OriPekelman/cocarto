@@ -19,14 +19,13 @@ fr:
     back: Retour
     colors: couleur
     confirm: Êtes-vous sûr ?
-    edit: Modifier
+    display: Afficher
     frame: cadrer
     hello: Bonjour
     latitude: Latitude
     length: Longueur
     longitude: Longitude
     share: Partager…
-    show: Consulter
     territory_code: Code
     updated_at_by: Mis à jour le %{date} par %{user}
     user_not_authorized: Vous n’avez pas la permission d’effectuer cette action.
@@ -34,7 +33,7 @@ fr:
     thousand: km
     unit: m
   layers:
-    edit:
+    show:
       export: geojson
       map: carte
     tooltip:
