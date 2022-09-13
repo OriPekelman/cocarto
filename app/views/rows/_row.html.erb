@@ -10,7 +10,7 @@
   <% form_id = dom_id(row, :form) %>
   <% if row.layer.geometry_territory? %>
     <td>
-      <%= render "territories/search_form", form_id: form_id, field: "row[territory_id]", territory: row.territory %>
+      <%= render "territories/search_form", form: form_id, field: "row[territory_id]", territory: row.territory %>
     </td>
     <td><%= row.territory.code %></td>
   <% elsif row.layer.geometry_point? %>
