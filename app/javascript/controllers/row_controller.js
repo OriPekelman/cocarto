@@ -35,10 +35,18 @@ export default class extends Controller {
   updateEditable (currentUser, role) {
     const canEdit = role === 'owner' || role === 'editor' || (role === 'contributor' && currentUser === this.authorValue)
     for (const input of this.element.getElementsByTagName('input')) {
-      input.setAttribute('disabled', !canEdit)
+      if (canEdit) {
+        input.removeAttribute('disabled')
+      } else {
+        input.setAttribute('disabled', true)
+      }
     }
     for (const button of this.element.getElementsByTagName('button')) {
-      button.setAttribute('disabled', !canEdit)
+      if (canEdit) {
+        button.removeAttribute('disabled')
+      } else {
+        button.setAttribute('disabled', true)
+      }
     }
   }
 }
