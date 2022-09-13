@@ -14,7 +14,7 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :"Mot de passe" %> <i>(laisser vide si vous ne souhaitez pas le changer)</i><br>
+    <%= f.label :password, :"Mot de passe" %> <i>(laisser vide si vous ne souhaitez pas le changer)</i><br>
     <%= f.password_field :password, autocomplete: "new-password" %>
     <% if @minimum_password_length %>
       <br>
@@ -23,12 +23,12 @@
   </div>
 
   <div class="field">
-    <%= f.label :"Confirmation du mot de passe" %><br>
+    <%= f.label :password_confirmation, :"Confirmation du mot de passe" %><br>
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
   <div class="field">
-    <%= f.label :"Mot de passe actuel" %> <i>(saississez votre mot de passe actuel pour confirmer les changements)</i><br>
+    <%= f.label :current_password, :"Mot de passe actuel" %> <i>(saississez votre mot de passe actuel pour confirmer les changements)</i><br>
     <%= f.password_field :current_password, autocomplete: "current-password" %>
   </div>
 
