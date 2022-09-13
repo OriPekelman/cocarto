@@ -80,10 +80,6 @@ footer {
 
 /* TABLES */
 table {
-  * {
-    padding: 0 0.1rem;
-  }
-
   margin: 0 1rem;
   border-collapse: collapse;
   border-radius: 6px;
@@ -105,8 +101,12 @@ table {
     height: 24px;
 
     input {
-      padding: 0;
+      height: 24px;
+      width: 100%;
+      box-shadow: none;
+      padding: 0 0.1rem;
       margin: 0;
+      border: 1px solid transparent;
     }
 
     input:focus {
@@ -132,13 +132,6 @@ table {
   th:last-child,
   td:last-child {
     border-right-width: 0px;
-  }
-
-  td input {
-    border: 0;
-    width: 100%;
-    box-shadow: none;
-    height: 24px;
   }
 
   thead {
@@ -169,6 +162,7 @@ table {
 .numerical {
   font-family: var(--font-mono);
   text-align: right;
+  padding: 0 0.1rem;
 }
 
 /* MAP */
