@@ -17,6 +17,7 @@
     <% end %>
 
     <%= render partial: "fields/th", collection: layer.fields, as: :field %>
+<<<<<<< HEAD
     <% if policy(layer).update? %>
       <th
         id="delete-column"
@@ -28,6 +29,18 @@
         aria-controls="dropdown-menu">
         <span data-action="click->dropdown#toggle" class="chevron">
           <button><span>+</span></button>
+=======
+    <th
+      id="dropdown-menu"
+      class="row-actions dropdown"
+      data-controller="dropdown"
+      data-dropdown-placement-value="bottom-end"
+      data-dropdown-target="trigger"
+      aria-haspopup="true">
+      <% if policy(layer).update? %>
+        <span data-action="click->dropdown#toggle" class="chevron" aria-controls="dropdown-menu">
+          <button type="button"><span>+</span></button>
+>>>>>>> f5ee946 (feat: delete all aria-hidden and make better properties to accessibility (my bad))
         </span>
         <div class="dropdown-content" data-dropdown-target="content" role="menu">
           <%= render "fields/form", field: Field.new(layer: layer) %>
