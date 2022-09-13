@@ -1,9 +1,6 @@
 class RolePolicy < ApplicationPolicy
-  # For now we say that only the owner can see and modify the roles
-  # We will probably change that at some point (like all editors can see all roles)
-  def index?
-    record.owner.merge(user.roles).exists?
-  end
+  # Only owners can see or modify the roles of a map;
+  def index? = user_is_owner?
 
   def create? = user_is_owner?
 
@@ -18,6 +15,8 @@ class RolePolicy < ApplicationPolicy
   end
 
   class Scope < Scope
-    def resolve = scope.all
+    def resolve
+      scope.where(map: @user.maps.merge(Role.owner))
+    end
   end
 end
