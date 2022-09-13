@@ -7,7 +7,8 @@ class LayersController < ApplicationController
 
   def show
     # Every time we open a new tab, we create this session id
-    # It allows to keep track what
+    # It allows to keep track of who is currently on the page
+    # It differs from current_user as a user can be connected many times on the same page
     @session_id = SecureRandom.alphanumeric
   end
 
