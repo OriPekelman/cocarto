@@ -1,3 +1,46 @@
 <%# params: row %>
 <%# renders a row in a table, editable, used in layers/_rows %>
+<<<<<<< HEAD
 <%= row_tag(row) %>
+=======
+<tr id="<%= dom_id(row) %>"
+    data-controller="row"
+    data-row-author-value="<%= row.author.id %>"
+    data-lng-min="<%= row.lng_min %>"
+    data-lat-min="<%= row.lat_min %>"
+    data-lng-max="<%= row.lng_max %>"
+    data-lat-max="<%= row.lat_max %>">
+  <% form_id = dom_id(row, :form) %>
+  <% if row.layer.geometry_territory? %>
+    <td>
+      <%= render "territories/search_form", form: form_id, field: "row[territory_id]", territory: row.territory %>
+    </td>
+    <td><%= row.territory.code %></td>
+  <% elsif row.layer.geometry_point? %>
+    <td class="numerical" type="number"><%= number_with_precision row.geometry.x, precision: 6 %></td>
+    <td class="numerical" type="number"><%= number_with_precision row.geometry.y, precision: 6 %></td>
+  <% elsif row.layer.geometry_line_string? %>
+    <td class="numerical"><%= number_to_human row.length, units: :length %></td>
+  <% elsif row.layer.geometry_polygon? %>
+    <td class="numerical" type="number"><%= number_to_human row.area, units: :area %></td>
+  <% end %>
+  <% row.fields_values.each do |field, value| %>
+    <%= render "fields/field_in_form", field: field, value: value, form_id: form_id %>
+  <% end %>
+  <td id="<%= dom_id(row, :last) %>">
+    <div class="actions">
+      <%= form_with method: :patch, model: [row.layer, row], id: form_id, data: {"row-target": "form", action: "row#save"} do |form| %>
+        <% if !row.layer.geometry_territory? %>
+          <%= form.hidden_field "geojson", data: {"row-target": "geojson"} %>
+        <% else %>
+          <%= hidden_field_tag "geojson", row.territory.geojson, data: {"row-target": "geojson"} %>
+        <% end %>
+        <%= form.button "save", class: "is-hidden" %>
+      <% end %>
+      <%= button_to [row.layer, row], type: "button", "aria-haspopup": true, method: :delete do %>
+        <%= t("helpers.link.row.delete") %>
+    <% end %>
+    </div>
+  </td>
+</tr>
+>>>>>>> 2bbb415 (feat: little part of code who make a better accessibility in google score)
