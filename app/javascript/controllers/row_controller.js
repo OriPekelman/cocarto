@@ -2,6 +2,9 @@ import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
   static targets = ['form', 'geojson']
+  static values = {
+    author: String
+  }
 
   connect () {
     // Small hack inspired by https://dev.to/leastbad/the-best-one-line-stimulus-power-move-2o90
@@ -20,5 +23,15 @@ export default class extends Controller {
   update (geojson) {
     this.geojsonTarget.value = JSON.stringify(geojson)
     this.formTarget.requestSubmit()
+  }
+
+  updateEditable (currentUser, role) {
+    const canEdit = role === 'owner' || role === 'editor' || (role === 'contributor' && currentUser === this.authorValue)
+    for (const input of this.element.getElementsByTagName('input')) {
+      input.setAttribute('disabled', !canEdit)
+    }
+    for (const button of this.element.getElementsByTagName('button')) {
+      button.setAttribute('disabled', !canEdit)
+    }
   }
 }

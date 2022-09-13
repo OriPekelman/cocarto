@@ -9,20 +9,24 @@
 #  values       :jsonb            not null
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  author_id    :uuid
 #  layer_id     :uuid
 #  territory_id :uuid
 #
 # Indexes
 #
+#  index_rows_on_author_id     (author_id)
 #  index_rows_on_layer_id      (layer_id)
 #  index_rows_on_territory_id  (territory_id)
 #
 # Foreign Keys
 #
+#  fk_rails_...  (author_id => users.id)
 #  fk_rails_...  (territory_id => territories.id)
 #
 class Row < ApplicationRecord
   belongs_to :layer
+  belongs_to :author, class_name: "User"
   belongs_to :territory, -> { with_geojson }, inverse_of: :rows, optional: true
 
   after_update_commit -> do

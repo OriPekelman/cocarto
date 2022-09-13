@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_21_154126) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_06_083454) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -92,6 +92,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_21_154126) do
     t.geometry "polygon", limit: {:srid=>4326, :type=>"st_polygon"}
     t.geometry "line_string", limit: {:srid=>4326, :type=>"line_string"}
     t.uuid "territory_id"
+    t.uuid "author_id"
+    t.index ["author_id"], name: "index_rows_on_author_id"
     t.index ["layer_id"], name: "index_rows_on_layer_id"
     t.index ["territory_id"], name: "index_rows_on_territory_id"
     t.check_constraint "num_nonnulls(point, line_string, polygon, territory_id) = 1"
@@ -147,6 +149,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_21_154126) do
   add_foreign_key "roles", "maps"
   add_foreign_key "roles", "users"
   add_foreign_key "rows", "territories"
+  add_foreign_key "rows", "users", column: "author_id"
   add_foreign_key "territories", "territories", column: "parent_id"
   add_foreign_key "territories", "territory_categories"
   add_foreign_key "users", "users", column: "invited_by_id"

@@ -1,5 +1,5 @@
 class RowsController < ApplicationController
-  before_action :set_row, only: %i[edit destroy update]
+  before_action :set_row, only: %i[destroy update]
   before_action :set_layer, only: %i[create new update]
 
   def new
@@ -7,13 +7,8 @@ class RowsController < ApplicationController
     @values = {}
   end
 
-  def edit
-    @layer = @row.layer
-    @values = @row.values
-  end
-
   def create
-    @row = authorize Row.create(layer: @layer, **row_params)
+    @row = authorize Row.create(layer: @layer, **row_params, author: current_user)
 
     respond_to do |format|
       format.turbo_stream

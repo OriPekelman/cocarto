@@ -1,17 +1,15 @@
 class RowPolicy < ApplicationPolicy
-  def new? = edit?
-
-  def create? = edit?
-
-  def show?
-    edit? || role&.viewer?
+  def new?
+    role&.owner? || role&.editor? || role&.contributor?
   end
 
-  def edit?
-    destroy? || role&.contributor?
-  end
+  def create? = new?
 
-  def update? = edit?
+  # A contributor can only update its own fields
+  # Owner and editor can always update
+  def update?
+    role&.owner? || role&.editor? || (role&.contributor? && user == record.author)
+  end
 
   def destroy?
     role&.owner? || role&.editor?

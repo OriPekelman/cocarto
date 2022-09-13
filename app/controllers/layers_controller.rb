@@ -17,6 +17,7 @@ class LayersController < ApplicationController
     # Every time we open a new tab, we create this session id
     # It allows to keep track what
     @session_id = SecureRandom.alphanumeric
+    @role_type = Role.find_by(map: @layer.map, user: current_user)&.role_type
   end
 
   def update
