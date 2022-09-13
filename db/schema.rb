@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_06_083454) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_13_165427) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -148,6 +148,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_06_083454) do
   add_foreign_key "layers_territory_categories", "territory_categories"
   add_foreign_key "roles", "maps"
   add_foreign_key "roles", "users"
+  add_foreign_key "rows", "layers"
   add_foreign_key "rows", "territories"
   add_foreign_key "rows", "users", column: "author_id"
   add_foreign_key "territories", "territories", column: "parent_id"
