@@ -22,6 +22,7 @@
 # Foreign Keys
 #
 #  fk_rails_...  (author_id => users.id)
+#  fk_rails_...  (layer_id => layers.id)
 #  fk_rails_...  (territory_id => territories.id)
 #
 class Row < ApplicationRecord
