@@ -2,7 +2,7 @@
 <%# renders one form field tag for a value of a row for a specific field %>
 <% opts = {
      id: field.id,
-     data: {action: "input->row#setChanged focusout->row#save"},
+     data: {action: "input->row#setDirty focusout->row#save"},
      form: form_id,
      autocomplete: :off
    }
