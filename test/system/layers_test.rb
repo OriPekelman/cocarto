@@ -5,6 +5,6 @@ class LayersTest < ApplicationSystemTestCase
     sign_in_as(users("reclus"), "refleurir")
 
     visit layer_path(id: layers("restaurants"))
-    assert_text "Restaurants"
+    assert_field "layer[name]", with: "Restaurants"
   end
 end
