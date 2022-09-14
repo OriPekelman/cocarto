@@ -20,10 +20,10 @@ fr:
     colors: couleur
     confirm: Êtes-vous sûr ?
     display: Afficher
+    distance: Distance
     frame: cadrer
     hello: Bonjour
     latitude: Latitude
-    length: Longueur
     longitude: Longitude
     share: Partager…
     territory_code: Code
