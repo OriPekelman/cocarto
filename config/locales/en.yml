@@ -71,3 +71,36 @@ en:
       search_title: Search a territory
     search_results:
       no_result: No result
+  devise:
+    confirmation:
+      email : Email
+      resend_instruction: Resend confirmation instructions
+      didnt_receive_confirmation_instructions: Didn't receive confirmation instructions?
+    password:
+      password: Password
+      new_password: New password
+      current_password: Current password
+      password_confirmation: Confirm new password
+      submit_change_password: Change my password
+      send_reset_password: Send me reset password instructions
+      forgot_your_password: Forgot your password?
+    registrations:
+      currently_waiting_confirmation_for: Currently waiting confirmation for
+      characters_minimum: Characters minimum
+      unhappy: Unhappy?
+      cancel_my_account: Cancel my account 
+      sign_up: Sign up
+    sessions:
+      log_in: Log in 
+      remember_me: Remember me 
+    shared:
+      sign_in_with: Sign in with 
+      resend_unlock_instructions: Resend unlock instructions
+    unlock:
+      didnt_receive_unlock_instructions: Didn't receive unlock instructions?
+
+
+
+
+
+
