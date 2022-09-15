@@ -6,7 +6,8 @@ export default class extends Controller {
   static values = {
     placement: { type: String, default: 'bottom-start' },
     offset: Number,
-    loaded: Boolean
+    loaded: Boolean,
+    exclusive: { type: Boolean, default: true }
   }
 
   connect () {
@@ -28,14 +29,27 @@ export default class extends Controller {
   }
 
   toggle () {
-    this.element.classList.toggle('is-active')
+    if (this.element.classList.contains('is-active')) {
+      this.deactivate()
+    } else {
+      this.activate()
+    }
   }
 
   activate () {
+    if (this.exclusiveValue) {
+      this.#deactivateAllDropdowns()
+    }
     this.element.classList.add('is-active')
   }
 
-  desactivate () {
+  deactivate () {
     this.element.classList.remove('is-active')
+  }
+
+  #deactivateAllDropdowns () {
+    for (const dropdown of document.querySelectorAll('.dropdown.is-active')) {
+      dropdown.classList.remove('is-active')
+    }
   }
 }
