@@ -313,6 +313,14 @@ radio.slim {
   padding-top: 0;
   margin-bottom: 0;
   text-align: center;
+
+  input:not([disabled]):not(:focus):hover {
+    // Custom border on hover
+    border-color: var(--color-grey-30);
+    border-style: solid;
+    background-color: var(--color-bg-ambient-20);
+    box-shadow: none;
+  }
 }
 
 .maplibregl-ctrl-group {

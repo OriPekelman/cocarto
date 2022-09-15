@@ -11,7 +11,7 @@
     letter-spacing: inherit;
   }
 
-  input:not(:focus) {
+  input:not(:focus):not(:hover) {
     // Remove all decoration, except on focus
     border-color: transparent;
     background: none;
@@ -21,12 +21,5 @@
   input[disabled] {
     // If the input is disabled, nothing should even hint that this is an input
     cursor: default;
-  }
-
-  input:not([disabled]):not(:focus):hover {
-    // Custom border on hover
-    border-color: var(--color-grey-30);
-    border-style: solid;
-    background-color: var(--color-bg-ambient-20);
   }
 }
