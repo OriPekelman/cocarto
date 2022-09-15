@@ -263,25 +263,13 @@ input[type="radio"] {
   }
 }
 
-.layer-actions-map {
-  background-color: var(--color-bg-ambient-30);
-  border-bottom: solid var(--color-grey-40);
-  color: var(--color-green-70);
-  display: flex;
-  justify-content: flex-end;
-  position: relative;
-  align-items: center;
-  gap: 0.2em;
-  padding: 1em 1em 1em 0em;
-  overflow: hidden;
-}
-
 .action-bar {
   a,
   button {
     font-size: 8px;
     text-decoration: none;
     background-color: var(--color-bg-ambient-10);
+    margin: 0.5rem 0;
     padding: 5px;
     display: flex;
     flex-direction: column;
