@@ -2,7 +2,8 @@ module RowHelper
   def row_tag(row)
     data_attributes = {
       controller: "row",
-      row_author_value: row.author_id,
+      restricted_target: "restricted",
+      restricted_authorizations: %W[owner editor contributor-#{row.author_id}].to_json, # cf RowPolicy#update?
       lng_min: row.lng_min,
       lat_min: row.lat_min,
       lng_max: row.lng_max,
