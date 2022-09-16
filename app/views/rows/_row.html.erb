@@ -17,7 +17,7 @@
     <td class="numerical"><%= number_with_precision row.geometry.x, precision: 6 %></td>
     <td class="numerical"><%= number_with_precision row.geometry.y, precision: 6 %></td>
   <% elsif row.layer.geometry_line_string? %>
-    <td class="numerical"><%= number_to_human row.length, units: :distance %></td>
+    <td class="numerical"><%= number_to_human row.length, units: :length %></td>
   <% elsif row.layer.geometry_polygon? %>
     <td class="numerical"><%= number_to_human row.area, units: :area %></td>
   <% end %>

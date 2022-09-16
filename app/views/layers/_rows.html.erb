@@ -11,7 +11,7 @@
       <th><%= t("common.longitude") %></th>
       <th><%= t("common.latitude") %></th>
     <% elsif layer.geometry_line_string? %>
-      <th><%= t("common.distance") %></th>
+      <th><%= t("common.length") %></th>
     <% elsif layer.geometry_polygon? %>
       <th><%= t("common.area") %></th>
     <% end %>

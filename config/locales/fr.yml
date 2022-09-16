@@ -20,18 +20,15 @@ fr:
     colors: couleur
     confirm: Êtes-vous sûr ?
     display: Afficher
-    distance: Distance
     frame: cadrer
     hello: Bonjour
     latitude: Latitude
+    length: Longueur
     longitude: Longitude
     share: Partager…
     territory_code: Code
     updated_at_by: Mis à jour le %{date} par %{user}
     user_not_authorized: Vous n’avez pas la permission d’effectuer cette action.
-  distance:
-    thousand: km
-    unit: m
   layers:
     show:
       export: geojson
@@ -47,6 +44,9 @@ fr:
       sign_in: connexion
       sign_out: déconnexion
       sign_up: inscription
+  length:
+    thousand: km
+    unit: m
   main:
     index:
       landing_1_header_html: |
