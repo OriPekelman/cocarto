@@ -22,7 +22,7 @@
     <td class="numerical"><%= number_to_human row.area, units: :area %></td>
   <% end %>
   <% row.fields_values.each do |field, value| %>
-    <%= render "fields/field_in_form", field: field, value: value, form_id: form_id %>
+    <%= field_value field, value, form_id %>
   <% end %>
   <td id="<%= dom_id(row, :last) %>">
     <div class="actions">
