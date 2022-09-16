@@ -330,7 +330,9 @@ radio.slim {
 #layer-header {
   font-family: var(--font-serif);
   letter-spacing: -0.2px;
-  padding-top: 1em;
+  padding-top: 0;
+  margin-bottom: 0;
+  text-align: center;
 }
 
 .maplibregl-ctrl-group {
