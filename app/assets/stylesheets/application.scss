@@ -80,7 +80,6 @@ footer {
 
 /* TABLES */
 table {
-  margin: 0 1rem;
   border-collapse: collapse;
   border-radius: 6px;
   border: solid 1px var(--color-grey-50);
@@ -89,15 +88,15 @@ table {
   overflow-x: auto;
   overflow-y: scroll;
   white-space: nowrap;
-  margin-bottom: 0.1em;
+  margin: 0 1rem 0.1em;
 
   td,
   th {
     text-align: center;
     font-size: 12px;
     border: solid 1px var(--color-grey-50);
-    border-bottom-width: 0px;
-    border-left-width: 0px;
+    border-bottom-width: 0;
+    border-left-width: 0;
     height: 24px;
 
     input {
@@ -131,7 +130,7 @@ table {
   }
   th:last-child,
   td:last-child {
-    border-right-width: 0px;
+    border-right-width: 0;
   }
 
   thead {
@@ -139,7 +138,7 @@ table {
     color: var(--color-grey-80);
     height: 32px;
     th {
-      border-top-width: 0px;
+      border-top-width: 0;
     }
   }
 
