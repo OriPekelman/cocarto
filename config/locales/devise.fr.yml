@@ -70,6 +70,7 @@ fr:
     sessions:
       already_signed_out: Déconnecté.
       log_in: Connexion
+      preferences: Préferences utilisateur
       remember_me: Se souvenir de moi
       signed_in: Connecté.
       signed_out: Déconnecté.
