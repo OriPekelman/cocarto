@@ -20,6 +20,7 @@ fr:
     colors: couleur
     confirm: Êtes-vous sûr ?
     display: Afficher
+    dragbar_cursor: Curseur de la barre de défilement
     frame: cadrer
     hello: Bonjour
     latitude: Latitude

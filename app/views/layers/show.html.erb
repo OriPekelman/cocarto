@@ -26,7 +26,7 @@
     <%= render "tooltip", layer: @layer %>
   </div>
   <div class="dragbar" data-dragbar-target="dragbar" data-action="mousedown->dragbar#mousedown">
-    <%= image_tag "dragbar_cursor.svg", class: "svg-dragbar" %>
+    <%= image_tag "dragbar_cursor.svg", alt: t("common.dragbar_cursor"), class: "svg-dragbar" %>
   </div>
   <div data-dragbar-target="right" class="right-pane">
     <div class="layer-actions action-bar">
