@@ -3,7 +3,6 @@ table.rows_table {
   border-collapse: collapse;
   border-radius: 6px;
   border: solid 1px var(--color-grey-50);
-  display: none; // For performance issues, we wait until displaying the table
   table-layout: fixed;
   max-width: fit-content;
   overflow-x: auto;
