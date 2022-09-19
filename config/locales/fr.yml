@@ -34,9 +34,6 @@ fr:
     show:
       export: geojson
       map: carte
-    tooltip:
-      new_field_description: Cliquez sur le + pour ajouter une colonne à vos données
-      new_row_description: Cliquez sur la carte pour ajouter un nouveau point de données
   layouts:
     application:
       change_language: Changer la langue

@@ -23,7 +23,6 @@
       </div>
     </div>
     <%= render "rows", layer: @layer %>
-    <%= render "tooltip", layer: @layer %>
   </div>
   <div class="dragbar" data-dragbar-target="dragbar" data-action="mousedown->dragbar#mousedown">
     <%= image_tag "dragbar_cursor.svg", alt: t("common.dragbar_cursor"), class: "svg-dragbar" %>
