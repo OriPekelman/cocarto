@@ -31,7 +31,7 @@ class Field < ApplicationRecord
 
   after_destroy_commit -> do
     broadcast_remove_to layer
-    Turbo::StreamsChannel.broadcast_remove_to layer, targets: ".field-#{id}"
+    Turbo::StreamsChannel.broadcast_remove_to layer, targets: ".field-value-#{id}"
   end
 
   def numerical? = float? || integer?
