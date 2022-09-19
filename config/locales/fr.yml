@@ -71,30 +71,3 @@ fr:
       search_title: Chercher un territoire
     search_results:
       no_result: Pas de résultat
-   devise:
-    confirmation:
-      email : Email
-      resend_instruction: Renvoyer les instructions de confirmation
-      didnt_receive_confirmation_instructions: Instructions de confirmation pas reçues ?
-    password:
-      password: Mot de passe 
-      new_password: Nouveau mot de passe
-      current_password: Mot de passe actuel
-      password_confirmation: Confirmez le nouveau mot de passe
-      submit_change_password: Changer mon mot de passe
-      send_reset_password: Envoyez-moi les instructions pour renouveller mon mot de passe
-      forgot_your_password: Mot de passe oublié ?
-    registrations:
-      currently_waiting_confirmation_for: En attente de confirmation pour
-      characters_minimum: Caractères minimum
-      unhappy: Mécontent ?
-      cancel_my_account: Supprimer mon compte 
-      sign_up: Inscription
-    sessions:
-      log_in: Connexion
-      remember_me: Se souvenir de moi
-    shared:
-      sign_in_with: Connexion avec 
-      resend_unlock_instructions: Renvoyer les instructions de dévérouillage
-    unlock:
-      didnt_receive_unlock_instructions: Instructions de dévérouillage pas reçues ?
