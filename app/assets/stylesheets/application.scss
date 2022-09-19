@@ -83,7 +83,7 @@ table {
   border-collapse: collapse;
   border-radius: 6px;
   border: solid 1px var(--color-grey-50);
-  display: inline-block;
+  display: none; // For performance issues, we wait until displaying the table
   max-width: fit-content;
   overflow-x: auto;
   overflow-y: scroll;
