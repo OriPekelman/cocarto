@@ -10,8 +10,10 @@ module FieldHelper
     field_name = "row[fields_values][#{field.id}]"
 
     field_tag = case field.field_type
-    when "integer", "float"
-      number_field_tag field_name, value, opts.merge(class: "numerical")
+    when "integer"
+      number_field_tag field_name, value, opts.merge(class: "numerical", step: "1")
+    when "float"
+      number_field_tag field_name, value, opts.merge(class: "numerical", step: "any")
     when "territory"
       render "territories/search_form", opts.merge(territory: value, field: field_name)
     when "date"
