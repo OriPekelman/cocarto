@@ -3,39 +3,40 @@
 
 <table class="rows_table display-when-loaded" data-controller="display-when-loaded">
   <thead class="resizable">
-  <tr>
-    <% if layer.geometry_territory? %>
-      <th></th>
-      <th><%= t("common.territory_code") %></th>
-    <% elsif layer.geometry_point? %>
-      <th><%= t("common.longitude") %></th>
-      <th><%= t("common.latitude") %></th>
-    <% elsif layer.geometry_line_string? %>
-      <th><%= t("common.length") %></th>
-    <% elsif layer.geometry_polygon? %>
-      <th><%= t("common.area") %></th>
-    <% end %>
+    <tr>
+      <% if layer.geometry_territory? %>
+        <th></th>
+        <th><%= t("common.territory_code") %></th>
+      <% elsif layer.geometry_point? %>
+        <th><%= t("common.longitude") %></th>
+        <th><%= t("common.latitude") %></th>
+      <% elsif layer.geometry_line_string? %>
+        <th><%= t("common.length") %></th>
+      <% elsif layer.geometry_polygon? %>
+        <th><%= t("common.area") %></th>
+      <% end %>
 
-    <%= render partial: "fields/th", collection: layer.fields, as: :field %>
-    <% if policy(layer).update? %>
-      <th
-        id="delete-column"
-        class="row-actions dropdown"
-        data-controller="dropdown"
-        data-dropdown-placement-value="bottom-end"
-        data-dropdown-target="trigger"
-        aria-haspopup="true">
-        <span data-action="click->dropdown#toggle" class="chevron">
-          <button><span>+</span></button>
-        </span>
-        <div class="dropdown-content" data-dropdown-target="content" role="menu" aria-controls="delete-column">
-          <%= render "fields/form", field: Field.new(layer: layer) %>
-        </div>
-      </th>
-    <% else %>
-      <th></th>
-    <% end %>
-  </tr>
+      <%= render partial: "fields/th", collection: layer.fields, as: :field %>
+
+      <% if policy(layer).update? %>
+        <th
+          id="delete-column"
+          class="row-actions dropdown"
+          data-controller="dropdown"
+          data-dropdown-placement-value="bottom-end"
+          data-dropdown-target="trigger"
+          aria-haspopup="true">
+          <span data-action="click->dropdown#toggle" class="chevron">
+            <button><span>+</span></button>
+          </span>
+          <div class="dropdown-content" data-dropdown-target="content" role="menu" aria-controls="delete-column">
+            <%= render "fields/form", field: Field.new(layer: layer) %>
+          </div>
+        </th>
+      <% else %>
+        <th></th>
+      <% end %>
+    </tr>
   </thead>
   <tbody id="rows-tbody">
   <%= render layer.rows %>
