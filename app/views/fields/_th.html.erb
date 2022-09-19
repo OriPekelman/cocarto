@@ -9,7 +9,11 @@
   data-action="click->dropdown#toggle">
   <span class="chevron"><%= field.label %></span>
   <div class="dropdown-content" role="menu" data-dropdown-target="content">
-    <%= button_to field, method: :delete, form_class: "level-item" do %>
+    <%= button_to field, method: :delete,
+          data: {
+            restricted_target: "restricted",
+            restricted_authorizations: %w[owner editor].to_json # cf LayerPolicy#update?
+          } do %>
       <span><%= t("helpers.link.field.delete") %></span>
     <% end %>
   </div>
