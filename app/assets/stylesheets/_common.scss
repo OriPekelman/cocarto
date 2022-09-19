@@ -245,6 +245,16 @@ input[type="radio"] {
   accent-color: var(--color-green-70);
 }
 
+// Hide browser-specific decoration of number inputs
+input[type="number"] {
+  -moz-appearance: textfield;
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
 .layer-actions {
   background-color: var(--color-bg-ambient-30);
   border-bottom: solid var(--color-grey-40);
