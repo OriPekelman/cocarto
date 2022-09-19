@@ -20,6 +20,7 @@ en:
     colors: colors
     confirm: Are you sure?
     display: Display
+    dragbar_cursor: Dragbar cursor
     frame: frame
     hello: Hello
     latitude: Latitude
