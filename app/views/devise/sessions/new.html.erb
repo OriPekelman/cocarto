@@ -1,5 +1,5 @@
 <div class="centered-main">
-<h2><%= t("devise.registrations.sign_up") %></h2>
+<h2><%= t("devise.sessions.log_in") %></h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
@@ -20,7 +20,7 @@
   <% end %>
 
   <div class="actions">
-    <%= f.submit t("devise.registrations.sign_up"), class: "submit_form" %>
+    <%= f.submit t("devise.sessions.log_in"), class: "submit_form" %>
   </div>
 <% end %>
 
