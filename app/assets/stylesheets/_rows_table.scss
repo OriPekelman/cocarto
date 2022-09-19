@@ -1,0 +1,86 @@
+/* TABLES */
+table.rows_table {
+  border-collapse: collapse;
+  border-radius: 6px;
+  border: solid 1px var(--color-grey-50);
+  display: none; // For performance issues, we wait until displaying the table
+  table-layout: fixed;
+  max-width: fit-content;
+  overflow-x: auto;
+  overflow-y: scroll;
+  white-space: nowrap;
+  margin: 0 1rem 0.1em;
+
+  td,
+  th {
+    text-align: center;
+    font-size: 12px;
+    border: solid 1px var(--color-grey-50);
+    border-bottom-width: 0;
+    border-left-width: 0;
+    height: 24px;
+
+    input {
+      height: 24px;
+      width: 100%;
+      box-shadow: none;
+      padding: 0 0.1rem;
+      margin: 0;
+      border: 1px solid transparent;
+    }
+
+    input:focus {
+      background-color: RGBA(215, 233, 221, 0.5);
+      outline: 2px solid var(--color-grey-40);
+    }
+
+    input:disabled {
+      cursor: default;
+    }
+
+    span {
+      width: 100%;
+      padding: 0;
+      margin: 0;
+    }
+  }
+
+  .resizable th {
+    resize: horizontal;
+    overflow-x: auto;
+  }
+  th:last-child,
+  td:last-child {
+    border-right-width: 0;
+  }
+
+  thead {
+    background-color: var(--color-grey-20);
+    color: var(--color-grey-80);
+    height: 32px;
+    th {
+      border-top-width: 0;
+    }
+  }
+
+  button {
+    margin: 0;
+  }
+
+  .table-head {
+    font-family: var(--font-serif);
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    text-decoration-color: var(--color-grey-50);
+    font-weight: 400;
+    cursor: pointer;
+  }
+}
+
+.numerical {
+  font-family: var(--font-mono);
+  text-align: right;
+  padding: 0 0.1rem;
+}
