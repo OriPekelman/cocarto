@@ -299,17 +299,6 @@ radio.slim {
   background-color: var(--color-green-60);
 }
 
-.editable {
-  cursor: pointer;
-  font-family: var(--font-serif);
-  color: var(--color-grey-90);
-  font-size: 24px;
-}
-
-.editable:after {
-  content: "🖋";
-}
-
 .map button {
   margin: 0;
   border-radius: 0;
@@ -326,8 +315,9 @@ radio.slim {
   margin-bottom: 3em;
 }
 
-#layer-header {
+#layer-name h2 {
   font-family: var(--font-serif);
+  color: var(--color-grey-90);
   letter-spacing: -0.2px;
   padding-top: 0;
   margin-bottom: 0;
