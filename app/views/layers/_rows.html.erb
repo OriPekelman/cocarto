@@ -24,11 +24,11 @@
         data-controller="dropdown"
         data-dropdown-placement-value="bottom-end"
         data-dropdown-target="trigger"
-        aria-haspopup="true" >
+        aria-haspopup="true">
         <span data-action="click->dropdown#toggle" class="chevron">
           <button><span>+</span></button>
         </span>
-        <div class="dropdown-content" data-dropdown-target="content" role="menu" aria-controls="delete-column" >
+        <div class="dropdown-content" data-dropdown-target="content" role="menu" aria-controls="delete-column">
           <%= render "fields/form", field: Field.new(layer: layer) %>
         </div>
       </th>
