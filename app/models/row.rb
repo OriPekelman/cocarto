@@ -37,16 +37,16 @@ class Row < ApplicationRecord
   belongs_to :author, class_name: "User"
   belongs_to :territory, optional: true
 
-  after_update_commit -> { broadcast_replace_to layer, object: Row.with_geom.find(id) }
+  after_update_commit -> { broadcast_replace_to layer, object: Row.with_territory.find(id) }
   after_destroy_commit -> { broadcast_remove_to layer }
-  after_create_commit -> { broadcast_append_to layer, target: "rows-tbody", object: Row.with_geom.find(id) }
+  after_create_commit -> { broadcast_append_to layer, target: "rows-tbody", object: Row.with_territory.find(id) }
 
   # We use postgis functions to convert to geojson
   # This makes the load be on postgres’ side, not rails (C implementation)
   # We also compute the bounding box
   # The coalesce function takes the first non null value, allowing the same behaviour for each geometry type
   # We are guaranteed that this works, as we have the constraint "num_nonnulls(point, line_string, polygon, territory_id) = 1"
-  scope :with_geom, -> do
+  scope :with_territory, -> do
     left_outer_joins(:territory)
       .select(<<-SQL.squish
       rows.id, layer_id, author_id,
