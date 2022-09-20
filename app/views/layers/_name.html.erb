@@ -1,10 +1,15 @@
 <%# params: layer %>
 <%# renders a form for a layer name %>
 
-<div id="layer-name" class="restricted">
-  <h2>
+<div id="layer-name">
+  <h2 class="restricted">
     <%= form_with model: layer do |form| %>
-      <%= form.text_field :name, onfocusout: "this.form.requestSubmit()" %>
+      <%= form.text_field :name,
+            data: {
+              restricted_target: "restricted",
+              restricted_authorizations: %w[owner editor].to_json # cf LayerPolicy#update?
+            },
+            onfocusout: "this.form.requestSubmit()" %>
     <% end %>
   </h2>
 </div>

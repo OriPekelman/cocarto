@@ -14,9 +14,7 @@ export default class extends Controller {
     sessionId: String,
     username: String,
     geometryType: String,
-    color: String,
-    userId: String,
-    userRole: String
+    color: String
   }
 
   initialize () {
@@ -48,7 +46,6 @@ export default class extends Controller {
       this.#addRow(row)
     }
     this.#extendBounds(row)
-    row.rowController.updateEditable(this.userIdValue, this.userRoleValue)
   }
 
   rowTargetDisconnected (row) {
