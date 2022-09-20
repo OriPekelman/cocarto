@@ -4,6 +4,12 @@
 #
 #  id                    :uuid             not null, primary key
 #  code                  :string
+#  geo_area              :decimal(, )
+#  geo_lat_max           :decimal(, )
+#  geo_lat_min           :decimal(, )
+#  geo_lng_max           :decimal(, )
+#  geo_lng_min           :decimal(, )
+#  geojson               :text
 #  geometry              :geometry         multipolygon, 4326
 #  name                  :string
 #  created_at            :datetime         not null
@@ -40,11 +46,11 @@ class TerritoryTest < ActiveSupport::TestCase
   end
 
   test "we have geojson and geojson bounding" do # rubocop:disable Minitest/MultipleAssertions
-    guadeloupe = Territory.with_geojson.find_by(name: "Guadeloupe")
-    assert_in_epsilon guadeloupe.lng_min, -61.801
-    assert_in_epsilon guadeloupe.lat_min, 15.947
-    assert_in_epsilon guadeloupe.lng_max, -61.29
-    assert_in_epsilon guadeloupe.lat_max, 16.465
+    guadeloupe = Territory.find_by(name: "Guadeloupe")
+    assert_in_epsilon guadeloupe.geo_lng_min, -61.801
+    assert_in_epsilon guadeloupe.geo_lat_min, 15.947
+    assert_in_epsilon guadeloupe.geo_lng_max, -61.29
+    assert_in_epsilon guadeloupe.geo_lat_max, 16.465
   end
 
   test "search for autocomplete" do

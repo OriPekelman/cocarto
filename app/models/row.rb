@@ -3,6 +3,13 @@
 # Table name: rows
 #
 #  id           :uuid             not null, primary key
+#  geo_area     :decimal(, )
+#  geo_lat_max  :decimal(, )
+#  geo_lat_min  :decimal(, )
+#  geo_length   :decimal(, )
+#  geo_lng_max  :decimal(, )
+#  geo_lng_min  :decimal(, )
+#  geojson      :text
 #  line_string  :geometry         linestring, 4326
 #  point        :geometry         point, 4326
 #  polygon      :geometry         polygon, 4326
@@ -28,7 +35,7 @@
 class Row < ApplicationRecord
   belongs_to :layer
   belongs_to :author, class_name: "User"
-  belongs_to :territory, -> { with_geojson }, inverse_of: :rows, optional: true
+  belongs_to :territory, optional: true
 
   after_update_commit -> { broadcast_replace_to layer, object: Row.with_geom.find(id) }
   after_destroy_commit -> { broadcast_remove_to layer }
@@ -42,14 +49,17 @@ class Row < ApplicationRecord
   scope :with_geom, -> do
     left_outer_joins(:territory)
       .select(<<-SQL.squish
-      rows.*,
-      st_asgeojson(COALESCE(point, line_string, polygon, territories.geometry)) as geojson,
-      st_Xmin(COALESCE(point, line_string, polygon, territories.geometry)) as lng_min,
-      st_Ymin(COALESCE(point, line_string, polygon, territories.geometry)) as lat_min,
-      st_Xmax(COALESCE(point, line_string, polygon, territories.geometry)) as lng_max,
-      st_Ymax(COALESCE(point, line_string, polygon, territories.geometry)) as lat_max,
-      st_length(line_string::geography) as length,
-      st_area(polygon::geography) as area
+      rows.id, layer_id, author_id,
+      values,
+      rows.created_at, rows.updated_at,
+      territory_id,
+      geo_length,
+      COALESCE(rows.geojson, territories.geojson) as geojson,
+      COALESCE(rows.geo_area, territories.geo_area) as geo_area,
+      COALESCE(rows.geo_lng_min, territories.geo_lng_min) as geo_lng_min,
+      COALESCE(rows.geo_lat_min, territories.geo_lat_min) as geo_lat_min,
+      COALESCE(rows.geo_lng_max, territories.geo_lng_max) as geo_lng_max,
+      COALESCE(rows.geo_lat_max, territories.geo_lat_max) as geo_lat_max
     SQL
              )
   end

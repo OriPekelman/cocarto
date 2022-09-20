@@ -3,6 +3,13 @@
 # Table name: rows
 #
 #  id           :uuid             not null, primary key
+#  geo_area     :decimal(, )
+#  geo_lat_max  :decimal(, )
+#  geo_lat_min  :decimal(, )
+#  geo_length   :decimal(, )
+#  geo_lng_max  :decimal(, )
+#  geo_lng_min  :decimal(, )
+#  geojson      :text
 #  line_string  :geometry         linestring, 4326
 #  point        :geometry         point, 4326
 #  polygon      :geometry         polygon, 4326

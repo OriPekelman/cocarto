@@ -4,6 +4,12 @@
 #
 #  id                    :uuid             not null, primary key
 #  code                  :string
+#  geo_area              :decimal(, )
+#  geo_lat_max           :decimal(, )
+#  geo_lat_min           :decimal(, )
+#  geo_lng_max           :decimal(, )
+#  geo_lng_min           :decimal(, )
+#  geojson               :text
 #  geometry              :geometry         multipolygon, 4326
 #  name                  :string
 #  created_at            :datetime         not null
