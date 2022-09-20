@@ -25,12 +25,12 @@ module RowHelper
       tag.td(render("territories/search_form", form: dom_id(row, :form), field: "row[territory_id]", territory: row.territory)) +
         tag.td(row.territory.code)
     when "point"
-      tag.td(number_with_precision(row.geo_lng_min, precision: 6, class: "numerical")) +
-        tag.td(number_with_precision(row.geo_lat_min, precision: 6, class: "numerical"))
+      tag.td(number_with_precision(row.geo_lng_min, precision: 6), class: "numerical") +
+        tag.td(number_with_precision(row.geo_lat_min, precision: 6), class: "numerical")
     when "line_string"
-      tag.td(number_to_human(row.geo_length, units: :length, class: "numerical"))
+      tag.td(number_to_human(row.geo_length, units: :length), class: "numerical")
     when "polygon"
-      tag.td(number_to_human(row.geo_area, units: :area, class: "numerical"))
+      tag.td(number_to_human(row.geo_area, units: :area), class: "numerical")
     end
   end
 
