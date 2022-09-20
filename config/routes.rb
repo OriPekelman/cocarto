@@ -3,7 +3,13 @@ Rails.application.routes.draw do
   scope "(:locale)", locale: Regexp.union(I18n.available_locales.map(&:to_s)) do
     devise_for :users
 
-    root "main#index"
+    unauthenticated do
+      root "main#index"
+    end
+
+    authenticated :user do
+      root "maps#index", as: :authenticated_root
+    end
 
     resources :layers do
       member do
