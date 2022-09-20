@@ -1,7 +1,7 @@
 <%# params: layer %>
 <%# renders a full table of editable rows for a layer %>
 
-<table class="rows_table display-when-loaded" data-controller="display-when-loaded">
+<table class="layer__data display-when-loaded" data-controller="display-when-loaded">
   <thead class="resizable">
     <tr>
       <% if layer.geometry_territory? %>
@@ -38,7 +38,7 @@
       <% end %>
     </tr>
   </thead>
-  <tbody id="rows-tbody">
+  <tbody id="<%= dom_id(layer, "rows") %>">
   <%= render layer.rows %>
   </tbody>
 </table>

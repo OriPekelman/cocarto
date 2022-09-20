@@ -1,5 +1,5 @@
 module RowHelper
-  def row_tag(row)
+  def row_tr(row)
     data_attributes = {
       controller: "row",
       restricted_target: "restricted",
@@ -10,7 +10,7 @@ module RowHelper
       lat_max: row.geo_lat_max
     }
 
-    tag.tr id: dom_id(row), data: data_attributes do
+    tag.tr id: dom_id(row), data: data_attributes, class: "row" do
       row_tag_calculated_data(row) +
         row_tag_data_cols(row) +
         row_tag_actions(row)
@@ -35,7 +35,7 @@ module RowHelper
   end
 
   def row_tag_data_cols(row)
-    safe_join(row.fields_values.map { |field, value| field_value field, value, dom_id(row, :form) })
+    safe_join(row.fields_values.map { |field, value| field_td field, value, dom_id(row, :form) })
   end
 
   def row_tag_actions(row)

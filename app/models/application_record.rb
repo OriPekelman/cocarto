@@ -1,4 +1,5 @@
 class ApplicationRecord < ActiveRecord::Base
+  include ActionView::RecordIdentifier # to access `dom_id`
   self.abstract_class = true
 
   after_initialize do
