@@ -24,6 +24,7 @@ table.layer__data {
     background-color: var(--color-grey-20);
     color: var(--color-grey-80);
     height: 32px;
+    th.calculated,
     th.field {
       border-top-width: 0;
       font-family: var(--font-serif);
