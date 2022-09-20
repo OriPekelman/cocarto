@@ -25,7 +25,7 @@ class Field < ApplicationRecord
   after_create_commit -> do
     broadcast_before_to layer, target: "delete-column", partial: "fields/th"
     layer.rows.each do |row|
-      broadcast_before_to layer, target: dom_id(row, :last), html: ApplicationController.helpers.field_td(self, "", dom_id(row, :form))
+      broadcast_before_to layer, target: dom_id(row, :last), partial: "fields/td", locals: {field: self, value: nil, form_id: dom_id(row, :form)}
     end
   end
 
