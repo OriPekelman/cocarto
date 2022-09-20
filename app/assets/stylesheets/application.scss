@@ -186,16 +186,6 @@ footer {
     > table {
       max-height: 100%;
     }
-    .tooltip {
-      position: absolute;
-      padding: 16px;
-      width: 320px;
-      bottom: 300px;
-      left: 200px;
-      background-color: var(--color-info-10);
-      color: var(--color-info-40);
-      border-radius: var(--border-radius);
-    }
   }
   .right-pane {
     width: 50%;
