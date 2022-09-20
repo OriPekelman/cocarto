@@ -43,7 +43,6 @@ class Row < ApplicationRecord
     left_outer_joins(:territory)
       .select(<<-SQL.squish
       rows.*,
-      COALESCE(point, line_string, polygon, territories.geometry) as geometry,
       st_asgeojson(COALESCE(point, line_string, polygon, territories.geometry)) as geojson,
       st_Xmin(COALESCE(point, line_string, polygon, territories.geometry)) as lng_min,
       st_Ymin(COALESCE(point, line_string, polygon, territories.geometry)) as lat_min,
@@ -97,7 +96,8 @@ class Row < ApplicationRecord
 
   # Geojson export (used when exporting a layer as json)
   def geo_feature
-    RGeo::GeoJSON::Feature.new(geometry, nil, geo_properties)
+    feature = RGeo::GeoJSON.decode(geojson)
+    RGeo::GeoJSON::Feature.new(feature, id, geo_properties)
   end
 
   def geo_properties
