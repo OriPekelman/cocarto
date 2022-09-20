@@ -1,9 +1,14 @@
 <%# params: field %>
 <%# renders a form to create or edit a field in a layer. . Used in layers/rows. %>
 
-<%= form_with model: field, id: dom_id(field), class: "field", data: {action: "dropdown#toggle"} do |form| %>
+<%= form_with model: field, id: dom_id(field), class: "field",
+      data: {
+        clearing_form_target: "form",
+        action: "dropdown#toggle"
+      } do |form| %>
+  <h3><%= t("helpers.link.field.new") %></h3>
   <%= form.hidden_field :layer_id %>
-  <%= form.text_field :label, placeholder: "Nouvelle colonne" %>
+  <%= form.text_field :label %>
 
   <%= form.collection_radio_buttons(:field_type, Field.field_types.keys, :to_s, -> { Field.human_attribute_name("field_types.#{_1}") }) do |b| %>
     <%= b.label(class: "radio") do %>

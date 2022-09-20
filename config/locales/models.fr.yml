@@ -58,6 +58,7 @@ fr:
     link:
       field:
         delete: Supprimer cette colonne
+        new: Nouvelle colonne
       layer:
         delete: supprimer
         new: Ajouter une nouvelle couche
