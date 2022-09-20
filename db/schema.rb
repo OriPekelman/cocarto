@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_13_165427) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_20_101923) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -93,6 +93,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_13_165427) do
     t.geometry "line_string", limit: {:srid=>4326, :type=>"line_string"}
     t.uuid "territory_id"
     t.uuid "author_id"
+    t.virtual "geojson", type: :text, as: "st_asgeojson(COALESCE(point, line_string, polygon))", stored: true
+    t.virtual "geo_lng_min", type: :decimal, as: "st_xmin((COALESCE(point, line_string, polygon))::box3d)", stored: true
+    t.virtual "geo_lat_min", type: :decimal, as: "st_ymin((COALESCE(point, line_string, polygon))::box3d)", stored: true
+    t.virtual "geo_lng_max", type: :decimal, as: "st_xmax((COALESCE(point, line_string, polygon))::box3d)", stored: true
+    t.virtual "geo_lat_max", type: :decimal, as: "st_ymax((COALESCE(point, line_string, polygon))::box3d)", stored: true
+    t.virtual "geo_length", type: :decimal, as: "st_length((line_string)::geography)", stored: true
+    t.virtual "geo_area", type: :decimal, as: "st_area((polygon)::geography)", stored: true
     t.index ["author_id"], name: "index_rows_on_author_id"
     t.index ["layer_id"], name: "index_rows_on_layer_id"
     t.index ["territory_id"], name: "index_rows_on_territory_id"
@@ -107,6 +114,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_13_165427) do
     t.datetime "updated_at", null: false
     t.string "code"
     t.uuid "parent_id"
+    t.virtual "geojson", type: :text, as: "st_asgeojson(geometry)", stored: true
+    t.virtual "geo_lng_min", type: :decimal, as: "st_xmin((geometry)::box3d)", stored: true
+    t.virtual "geo_lat_min", type: :decimal, as: "st_ymin((geometry)::box3d)", stored: true
+    t.virtual "geo_lng_max", type: :decimal, as: "st_xmax((geometry)::box3d)", stored: true
+    t.virtual "geo_lat_max", type: :decimal, as: "st_ymax((geometry)::box3d)", stored: true
+    t.virtual "geo_area", type: :decimal, as: "st_area((geometry)::geography)", stored: true
     t.index ["code", "territory_category_id"], name: "index_territories_on_code_and_territory_category_id", unique: true
     t.index ["name"], name: "index_territories_on_name", opclass: :gin_trgm_ops, using: :gin
     t.index ["parent_id"], name: "index_territories_on_parent_id"

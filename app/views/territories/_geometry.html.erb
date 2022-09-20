@@ -3,9 +3,9 @@
 <script
   id="<%= geometry.id %>"
   data-territory-target="geometry"
-  data-lng-min="<%= geometry.lng_min %>"
-  data-lat-min="<%= geometry.lat_min %>"
-  data-lng-max="<%= geometry.lng_max %>"
-  data-lat-max="<%= geometry.lat_max %>">
+  data-lng-min="<%= geometry.geo_lng_min %>"
+  data-lat-min="<%= geometry.geo_lat_min %>"
+  data-lng-max="<%= geometry.geo_lng_max %>"
+  data-lat-max="<%= geometry.geo_lat_max %>">
   <%= geometry.geojson.html_safe %>
 </script>
