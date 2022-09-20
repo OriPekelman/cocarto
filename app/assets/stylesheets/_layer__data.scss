@@ -28,6 +28,12 @@ table.layer__data {
     border-bottom-width: 0;
     border-left-width: 0;
     height: 24px;
+
+
+    button {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
   }
 
   td.field {
@@ -35,7 +41,7 @@ table.layer__data {
       height: 24px;
       width: 100%;
       box-shadow: none;
-      padding: 0 0.1rem;
+      padding: 0 1px;
       margin: 0;
       border: 1px solid transparent;
     }
@@ -45,8 +51,9 @@ table.layer__data {
       outline: 2px solid var(--color-grey-40);
     }
 
-    input:disabled {
-      cursor: default;
+    input[type="number"] {
+      font-family: var(--font-mono);
+      text-align: right;
     }
 
     span {
@@ -69,18 +76,21 @@ table.layer__data {
       text-underline-offset: 0.2em;
       text-decoration-color: var(--color-grey-50);
       font-weight: 400;
-      cursor: pointer;
     }
   }
 
-  button {
-    margin: 0;
+}
+
+form.field {
+  input[type="radio"] {
+    margin-top: 0;
+    margin-bottom: 0;
   }
 
+  font-size: 14px;
 }
 
 .numerical {
   font-family: var(--font-mono);
   text-align: right;
-  padding: 0 0.1rem;
 }

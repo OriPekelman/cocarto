@@ -1,26 +1,16 @@
 <%# params: field %>
 <%# renders a form to create or edit a field in a layer. . Used in layers/rows. %>
 
-<%= form_with model: field, data: {action: "dropdown#toggle"} do |form| %>
+<%= form_with model: field, id: dom_id(field), class: "field", data: {action: "dropdown#toggle"} do |form| %>
   <%= form.hidden_field :layer_id %>
-  <div>
-    <%= form.label :label %>
-    <%= form.text_field :label, class: "slim" %>
-  </div>
+  <%= form.text_field :label, placeholder: "Nouvelle colonne" %>
 
-  <div>
-    <%= form.label :field_type %>
-    <div class="slim">
-      <%= form.collection_radio_buttons(:field_type, Field.field_types.keys, :to_s, -> { Field.human_attribute_name("field_types.#{_1}") }, checked: Field.field_types.keys.first) do |b| %>
-        <%= b.label(class: "radio") do %>
-          <%= b.radio_button class: "slim" %>
-          <%= b.text %>
-        <% end %>
-      <% end %>
-    </div>
-  </div>
+  <%= form.collection_radio_buttons(:field_type, Field.field_types.keys, :to_s, -> { Field.human_attribute_name("field_types.#{_1}") }, checked: Field.field_types.keys.first) do |b| %>
+    <%= b.label(class: "radio") do %>
+      <%= b.radio_button %>
+      <%= b.text %>
+    <% end %>
+  <% end %>
 
-  <div>
-    <%= form.submit class: "submit_form slim" %>
-  </div>
+  <%= form.submit class: "primary-action" %>
 <% end %>

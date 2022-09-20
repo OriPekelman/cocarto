@@ -145,23 +145,6 @@ textarea[readonly] {
   }
 }
 
-input.slim {
-  height: 20px;
-}
-
-.slim {
-  font-size: 12px;
-}
-
-radio.slim {
-  font-size: 12px;
-  max-height: 10px;
-}
-
-.submit_form.slim {
-  padding: 0.1rem 0.2rem;
-}
-
 #error_explanation {
   background-color: var(--color-attention-20);
   font-size: 12px;

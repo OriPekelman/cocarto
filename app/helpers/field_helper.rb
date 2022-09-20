@@ -23,6 +23,6 @@ module FieldHelper
       text_field_tag field_name, value, opts.merge(class: "input")
     end
 
-    content_tag :td, field_tag, class: class_names("field", dom_id(field), numerical: field.numerical?)
+    content_tag :td, field_tag, class: class_names("field", dom_id(field))
   end
 end
