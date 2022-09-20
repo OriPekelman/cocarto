@@ -22,15 +22,15 @@ module RowHelper
   def row_tag_calculated_data(row)
     case row.layer.geometry_type
     when "territory"
-      tag.td(render("territories/search_form", form: dom_id(row, :form), field: "row[territory_id]", territory: row.territory)) +
-        tag.td(row.territory.code)
+      tag.td(render("territories/search_form", form: dom_id(row, :form), field: "row[territory_id]", territory: row.territory), class: "calculated") +
+        tag.td(row.territory.code, class: "calculated")
     when "point"
-      tag.td(number_with_precision(row.geo_lng_min, precision: 6), class: "numerical") +
-        tag.td(number_with_precision(row.geo_lat_min, precision: 6), class: "numerical")
+      tag.td(number_with_precision(row.geo_lng_min, precision: 6), class: "numerical calculated") +
+        tag.td(number_with_precision(row.geo_lat_min, precision: 6), class: "numerical calculated")
     when "line_string"
-      tag.td(number_to_human(row.geo_length, units: :length), class: "numerical")
+      tag.td(number_to_human(row.geo_length, units: :length), class: "numerical calculated")
     when "polygon"
-      tag.td(number_to_human(row.geo_area, units: :area), class: "numerical")
+      tag.td(number_to_human(row.geo_area, units: :area), class: "numerical calculated")
     end
   end
 
