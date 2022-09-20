@@ -5,9 +5,9 @@
   <%= form.hidden_field :layer_id %>
   <%= form.text_field :label, placeholder: "Nouvelle colonne" %>
 
-  <%= form.collection_radio_buttons(:field_type, Field.field_types.keys, :to_s, -> { Field.human_attribute_name("field_types.#{_1}") }, checked: Field.field_types.keys.first) do |b| %>
+  <%= form.collection_radio_buttons(:field_type, Field.field_types.keys, :to_s, -> { Field.human_attribute_name("field_types.#{_1}") }) do |b| %>
     <%= b.label(class: "radio") do %>
-      <%= b.radio_button %>
+      <%= b.radio_button required: true %>
       <%= b.text %>
     <% end %>
   <% end %>

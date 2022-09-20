@@ -3,7 +3,7 @@
 # Table name: fields
 #
 #  id         :uuid             not null, primary key
-#  field_type :enum
+#  field_type :enum             not null
 #  label      :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -20,6 +20,7 @@
 class Field < ApplicationRecord
   belongs_to :layer
   enum :field_type, {text: "text", float: "float", integer: "integer", territory: "territory", date: "date", boolean: "boolean"}
+  validates :field_type, presence: true
 
   after_create_commit -> do
     broadcast_before_to layer, target: "delete-column", partial: "fields/th"
