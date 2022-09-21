@@ -39,7 +39,7 @@ class Row < ApplicationRecord
 
   after_update_commit -> { broadcast_replace_to layer, object: Row.with_territory.find(id) }
   after_destroy_commit -> { broadcast_remove_to layer }
-  after_create_commit -> { broadcast_append_to layer, target: "rows-tbody", object: Row.with_territory.find(id) }
+  after_create_commit -> { broadcast_append_to layer, target: dom_id(layer, "rows"), object: Row.with_territory.find(id) }
 
   # We use postgis functions to convert to geojson
   # This makes the load be on postgres’ side, not rails (C implementation)

@@ -2,7 +2,8 @@
 <%# renders an destroyable table header for a given field. Used in layers/rows %>
 
 <th
-  class="field-<%= field.id %> dropdown table-head"
+  id="<%= dom_id(field) %>"
+  class="field dropdown"
   data-controller="dropdown"
   aria-haspopup="true"
   data-dropdown-target="trigger"

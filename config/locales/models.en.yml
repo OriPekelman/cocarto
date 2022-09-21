@@ -58,6 +58,7 @@ en:
     link:
       field:
         delete: Delete this column
+        new: New column
       layer:
         delete: delete
         new: Add a new layer
