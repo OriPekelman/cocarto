@@ -42,7 +42,8 @@ module RowHelper
     tag.td(id: dom_id(row, :last)) do
       tag.div(class: "actions") do
         row_tag_form(row) +
-          button_to(t("helpers.link.row.delete"), [row.layer, row], method: :delete)
+          button_to(t("helpers.link.row.delete"), [row.layer, row], method: :delete) +
+          button_with_icon(t("common.frame"), "frame.svg", data: {action: "click->map#centerInRow"})
       end
     end
   end
