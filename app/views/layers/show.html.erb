@@ -1,6 +1,7 @@
 <%# params: @layer, @session_id, @user_name, @role_type %>
 
 <%= turbo_stream_from @layer %>
+<%= turbo_stream_i18n_from @layer %>
 <div
   class="data-with-map"
   data-action="mousemove@window->dragbar#mousemove mouseup@document->dragbar#mouseup"

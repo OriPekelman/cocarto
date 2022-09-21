@@ -36,7 +36,7 @@ class Layer < ApplicationRecord
     orange: "#FF9500"
   }
 
-  after_update_commit -> { broadcast_replace_to self, target: "layer-name", partial: "layers/name" }
+  after_update_commit -> { broadcast_i18n_replace_to self, target: "layer-name", partial: "layers/name" }
 
   def geo_feature_collection
     RGeo::GeoJSON::FeatureCollection.new(rows.map(&:geo_feature))
