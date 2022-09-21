@@ -9,7 +9,6 @@ import maplibre from 'maplibre-gl'
 export default class extends Controller {
   static targets = ['geojsonField', 'newRowForm', 'row', 'map']
   static values = {
-    editable: Boolean,
     layerId: String,
     sessionId: String,
     username: String,
@@ -64,9 +63,7 @@ export default class extends Controller {
     const resizeObserver = new ResizeObserver(() => this.map.resize())
     resizeObserver.observe(this.mapTarget)
 
-    if (this.editableValue) {
-      this.map.on('mousemove', e => this.trackers.mousemove(e))
-    }
+    this.map.on('mousemove', e => this.trackers.mousemove(e))
   }
 
   centerToContent () {
@@ -95,24 +92,22 @@ export default class extends Controller {
       styles: maplibreGLFeaturesStyle(this.colorValue)
     }
 
-    const editable = this.editableValue && this.geometryTypeValue !== 'territory'
+    const editable = this.geometryTypeValue !== 'territory'
     this.draw = new MapboxDraw(editable ? rwOptions : roOptions)
     this.map.addControl(this.draw)
 
-    if (this.editableValue) {
-      this.map.on('draw.create', ({ features }) => {
-        this.geojsonFieldTarget.value = JSON.stringify(features[0].geometry)
-        this.newRowFormTarget.requestSubmit()
-        // When we submit the drawn row, we get one back from the server through turbo
-        // So we remove the one we’ve just drawn
-        this.draw.delete(features[0].id)
-      })
-      this.map.on('draw.update', ({ features }) => {
-        const id = features[0].id
-        const row = document.getElementById(id)
-        row.rowController.update(features[0].geometry)
-      })
-    }
+    this.map.on('draw.create', ({ features }) => {
+      this.geojsonFieldTarget.value = JSON.stringify(features[0].geometry)
+      this.newRowFormTarget.requestSubmit()
+      // When we submit the drawn row, we get one back from the server through turbo
+      // So we remove the one we’ve just drawn
+      this.draw.delete(features[0].id)
+    })
+    this.map.on('draw.update', ({ features }) => {
+      const id = features[0].id
+      const row = document.getElementById(id)
+      row.rowController.update(features[0].geometry)
+    })
   }
 
   #addRow (row) {
