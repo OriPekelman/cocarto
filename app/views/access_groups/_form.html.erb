@@ -1,0 +1,25 @@
+<%= form_with(model: access_group.new_record? ? [access_group.map, access_group] : access_group) do |form| %>
+  <% if access_group.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(access_group.errors.count, "error") %> prohibited this access_group from being saved:</h2>
+
+      <ul>
+        <% access_group.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.fields_for :user do |f| %>
+    <%= f.label :email %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  <% end %>
+
+  <%= form.label :role_type %>
+  <%= form.select :role_type, options_for_select(AccessGroup.role_types, access_group.access_group_type) %>
+
+  <div>
+    <%= form.submit t("helpers.link.access_group.create") %>
+  </div>
+<% end %>

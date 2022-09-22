@@ -1,0 +1,23 @@
+<% delete_message = access_group.users.include?(current_user) ? t(".delete_self") : t("common.confirm") %>
+<div class="main-element" id="<%= dom_id access_group %>">
+  <%= form_with(model: access_group.new_record? ? [access_group.map, access_group] : access_group) do |form| %>
+    <%= form.fields_for :users do |f| %>
+      <div class="label-with-input">
+        <%= f.label :email %><br>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      </div>
+    <% end %>
+
+    <div class="label-with-input">
+      <%= form.label :role_type, t(".type") %>
+      <%= form.select :role_type, options_for_select(AccessGroup.role_types.map { |access_group| [AccessGroup.human_attribute_name(access_group[0]), access_group[1]] }, access_group.role_type) %>
+    </div>
+
+    <% if access_group.persisted? %>
+      <%= form.submit t("helpers.link.access_group.modify"), class: "submit_form" %>
+      <%= link_to t("helpers.link.access_group.delete"), access_group, data: {turbo_method: :delete, turbo_confirm: delete_message}, class: "delete-action" %>
+    <% else %>
+      <%= form.submit t("helpers.link.access_group.create"), class: "submit_form" %>
+    <% end %>
+    <% end %>
+</div>

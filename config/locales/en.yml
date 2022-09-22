@@ -1,5 +1,11 @@
 ---
 en:
+  access_groups:
+    access_group:
+      delete_self: Are you sure? You won’t be able to access the map anymore.
+      type: Role type
+    index:
+      new: Create a new access
   area:
     million: km²
     unit: m²
@@ -58,12 +64,6 @@ en:
   maps:
     show:
       all_maps: All maps
-  roles:
-    index:
-      new: Create a new role
-    role:
-      delete_self: Are you sure? You won’t be able to access the map anymore.
-      type: Role type
   territories:
     index:
       search_title: Search a territory

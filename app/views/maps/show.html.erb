@@ -4,7 +4,7 @@
   <div class="main-actions">
     <%= link_to t(".all_maps"), maps_path %>
     <div class="main-actions-right">
-      <%= link_to t("common.share"), map_roles_path(@map) if policy(@map.roles.new).index? %>
+      <%= link_to t("common.share"), map_access_groups_path(@map) if policy(@map.access_groups.new).index? %>
       <%= link_to t("helpers.link.map.delete"), @map, data: {turbo_method: :delete, turbo_confirm: t("common.confirm")} if policy(@map).destroy? %>
     </div>
   </div>

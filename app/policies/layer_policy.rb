@@ -3,21 +3,21 @@ class LayerPolicy < ApplicationPolicy
 
   def create? = update?
 
-  def show? = role.present?
+  def show? = access_group.present?
 
   def schema? = show?
 
   def geojson? = show?
 
-  def edit? = update? || role&.contributor?
+  def edit? = update? || access_group&.contributor?
 
-  def update? = role&.owner? || role&.editor?
+  def update? = access_group&.owner? || access_group&.editor?
 
-  def destroy? = role&.owner?
+  def destroy? = access_group&.owner?
 
   private
 
-  def role
-    Role.find_by(map: record.map, user: user)
+  def access_group
+    user&.access_groups&.find_by(map: record.map)
   end
 end

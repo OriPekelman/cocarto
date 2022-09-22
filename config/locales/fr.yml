@@ -1,5 +1,11 @@
 ---
 fr:
+  access_groups:
+    access_group:
+      delete_self: Êtes-vous sûr ? Vous ne pourrez plus accéder à la carte.
+      type: Type de rôle
+    index:
+      new: Créer un nouveau rôle
   area:
     million: km²
     unit: m²
@@ -58,12 +64,6 @@ fr:
   maps:
     show:
       all_maps: Toutes les cartes
-  roles:
-    index:
-      new: Créer un nouveau rôle
-    role:
-      delete_self: Êtes-vous sûr ? Vous ne pourrez plus accéder à la carte.
-      type: Type de rôle
   territories:
     index:
       search_title: Chercher un territoire

@@ -1,6 +1,6 @@
 class RowPolicy < ApplicationPolicy
   def new?
-    role&.owner? || role&.editor? || role&.contributor?
+    access_group&.owner? || access_group&.editor? || access_group&.contributor?
   end
 
   def create? = new?
@@ -8,16 +8,16 @@ class RowPolicy < ApplicationPolicy
   # A contributor can only update its own fields
   # Owner and editor can always update
   def update?
-    role&.owner? || role&.editor? || (role&.contributor? && user == record.author)
+    access_group&.owner? || access_group&.editor? || (access_group&.contributor? && user == record.author)
   end
 
   def destroy?
-    role&.owner? || role&.editor?
+    access_group&.owner? || access_group&.editor?
   end
 
   private
 
-  def role
-    Role.find_by(map: record.layer.map, user: user)
+  def access_group
+    user.access_groups.find_by(map: record.layer.map)
   end
 end
