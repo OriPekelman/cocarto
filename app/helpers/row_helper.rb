@@ -4,10 +4,10 @@ module RowHelper
       controller: "row",
       restricted_target: "restricted",
       restricted_authorizations: %W[owner editor contributor-#{row.author_id}].to_json, # cf RowPolicy#update?
-      lng_min: row.geo_lng_min,
-      lat_min: row.geo_lat_min,
-      lng_max: row.geo_lng_max,
-      lat_max: row.geo_lat_max
+      row_lng_min_value: row.geo_lng_min,
+      row_lat_min_value: row.geo_lat_min,
+      row_lng_max_value: row.geo_lng_max,
+      row_lat_max_value: row.geo_lat_max
     }
 
     tag.tr id: dom_id(row), data: data_attributes, class: "row" do
@@ -43,7 +43,7 @@ module RowHelper
       tag.div(class: "actions") do
         row_tag_form(row) +
           button_to(t("helpers.link.row.delete"), [row.layer, row], method: :delete) +
-          button_with_icon(t("common.frame"), "frame.svg", data: {action: "click->map#centerInRow"})
+          button_with_icon(t("common.frame"), "frame.svg", data: {action: "click->map#centerToRow"})
       end
     end
   end
