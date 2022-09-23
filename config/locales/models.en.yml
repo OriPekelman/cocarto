@@ -25,6 +25,9 @@ en:
         polygon:
           one: polygon
           other: polygons
+        territory:
+          one: territory
+          other: territories
       map:
         name: Name
       role:
