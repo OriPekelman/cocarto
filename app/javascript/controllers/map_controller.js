@@ -4,7 +4,6 @@ import { Controller } from '@hotwired/stimulus'
 import { newMap, maplibreGLFeaturesStyle } from 'lib/map_helpers'
 import PresenceTrackers from 'lib/presence_trackers'
 import MapboxDraw from '@mapbox/mapbox-gl-draw'
-import maplibre from 'maplibre-gl'
 
 export default class extends Controller {
   static targets = ['geojsonField', 'newRowForm', 'row', 'map']
@@ -28,9 +27,7 @@ export default class extends Controller {
   }
 
   #extendBounds (row) {
-    const sw = new maplibre.LngLat(row.dataset.lngMin, row.dataset.latMin)
-    const ne = new maplibre.LngLat(row.dataset.lngMax, row.dataset.latMax)
-    const llb = new maplibre.LngLatBounds(sw, ne)
+    const llb = row.rowController.bounds()
 
     if (this.boundingBox === null) {
       this.boundingBox = llb
@@ -71,6 +68,18 @@ export default class extends Controller {
       this.map.setCenter(this.boundingBox.getCenter())
     } else if (this.rowTargets.length >= 2) {
       this.map.fitBounds(this.boundingBox, { padding: 20 })
+    }
+  }
+
+  centerToRow (event) {
+    const row = event.target.closest('tr')
+
+    const llb = row.rowController.bounds()
+
+    if (this.geometryTypeValue === 'point') {
+      this.map.setCenter(llb.getCenter())
+    } else {
+      this.map.fitBounds(llb, { padding: 20 })
     }
   }
 
