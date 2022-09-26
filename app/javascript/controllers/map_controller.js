@@ -64,9 +64,9 @@ export default class extends Controller {
   }
 
   centerToContent () {
-    if (this.rowTargets.length === 1) {
+    if (this.geometryTypeValue === 'point' && this.rowTargets.length === 1) {
       this.map.setCenter(this.boundingBox.getCenter())
-    } else if (this.rowTargets.length >= 2) {
+    } else {
       this.map.fitBounds(this.boundingBox, { padding: 20 })
     }
   }
