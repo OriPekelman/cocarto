@@ -3,21 +3,28 @@
 table.layer__data {
   border-collapse: collapse;
   border-radius: 6px;
-  border: solid 1px var(--color-grey-50);
   table-layout: fixed;
   max-width: fit-content;
   overflow-x: auto;
   overflow-y: scroll;
   white-space: nowrap;
   margin: 2em 1rem 0.1em;
+<<<<<<< HEAD
+=======
+  display: block;
+  border: solid 1px var(--color-grey-50);
+  border-right-width: 0;
+>>>>>>> 99792a9 (fix: arrangement to delete border table)
 
   thead.resizable th {
     resize: horizontal;
     overflow-x: auto;
+    border-right: solid 1px var(--color-grey-50);
   }
   th:last-child,
   td:last-child {
     border-right-width: 0;
+    border-top-width: 0;
   }
 
   thead {
@@ -40,8 +47,8 @@ table.layer__data {
   th,
   tr.row td {
     text-align: center;
-    font-size: 12px;
     border: solid 1px var(--color-grey-50);
+    font-size: 12px;
     border-bottom-width: 0;
     border-left-width: 0;
     height: 24px;
