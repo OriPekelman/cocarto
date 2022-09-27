@@ -68,7 +68,7 @@ body {
   --color-bg-secondary: #e9e9e9;
   --color-text: #000;
   /* MAP SIZE */
-  --nav-height: 4.3rem;
+  --nav-height: 3rem;
   --footer-height: 2.4rem;
   --border-radius: 4px;
 }
@@ -259,12 +259,11 @@ input[type="number"] {
 .layer-actions {
   background-color: var(--color-bg-ambient-30);
   border-bottom: solid var(--color-grey-40);
-  padding: 1.28em 1em 0.5em 1em;
+  padding: 0em 1em 0em 1em;
   color: var(--color-green-70);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  overflow: hidden;
 
   .layer-actions-right {
     display: flex;
