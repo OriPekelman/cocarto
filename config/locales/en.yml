@@ -4,8 +4,11 @@ en:
     access_group:
       delete_self: Are you sure? You won’t be able to access the map anymore.
       type: Role type
+      url_name: Link description
+      url_to_share: Link to share
     index:
       new: Create a new access
+      new_link: Create a sharing link
   area:
     million: km²
     unit: m²

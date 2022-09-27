@@ -24,6 +24,21 @@ class AccessGroupsController < ApplicationController
     end
   end
 
+  # Someone access the page through a link
+  # If the user is signed in we add them to the users list of that access group
+  # Other wise, we create a user without email
+  def enter_by_link
+    skip_authorization
+    access_group = AccessGroup.find_by(token: params[:token])
+    if user_signed_in?
+      access_group.users << current_user unless access_group.users.exists?(current_user.id)
+    else
+      user = access_group.users.create(email: nil)
+      sign_in user
+    end
+    redirect_to access_group.map
+  end
+
   def update
     @map = @access_group.map
     if @access_group.update(update_access_group_params)
@@ -49,7 +64,13 @@ class AccessGroupsController < ApplicationController
   end
 
   def create_access_group_params
-    params.require(:access_group).permit(:role_type, users_attributes: [:email])
+    create_params = params.require(:access_group).permit(:role_type, :token, :name, users_attributes: [:email])
+    if (existing_user = User.find_by(email: create_params.dig(:users_attributes, "0", :email)))
+      create_params.delete(:users_attributes)
+      create_params[:users] = [existing_user]
+    end
+
+    create_params
   end
 
   def update_access_group_params

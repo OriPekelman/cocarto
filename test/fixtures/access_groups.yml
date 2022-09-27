@@ -3,7 +3,9 @@
 # Table name: access_groups
 #
 #  id         :uuid             not null, primary key
+#  name       :text
 #  role_type  :enum             not null
+#  token      :text
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  map_id     :uuid             not null

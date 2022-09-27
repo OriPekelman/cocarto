@@ -1,11 +1,27 @@
 <% delete_message = access_group.users.include?(current_user) ? t(".delete_self") : t("common.confirm") %>
 <div class="main-element" id="<%= dom_id access_group %>">
   <%= form_with(model: access_group.new_record? ? [access_group.map, access_group] : access_group) do |form| %>
-    <%= form.fields_for :users do |f| %>
+    <% if access_group.token.present? %>
+      <% if access_group.persisted? %>
+        <div class="label-with-input" data-controller="clipboard">
+          <%= form.label :url_to_share, t(".url_to_share") %><br>
+          <div class="input-with-button">
+            <%= text_field_tag :url_to_share, share_link_url(access_group.token), data: {clipboard_target: "source"}, autocomplete: :off %>
+            <button data-action="clipboard#copy"><%= embedded_svg "copy.svg" %></button>
+          </div>
+        </div>
+      <% end %>
       <div class="label-with-input">
-        <%= f.label :email %><br>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        <%= form.label :name, t(".url_name") %><br>
+        <%= form.text_field :name %>
       </div>
+    <% else %>
+      <%= form.fields_for :users do |f| %>
+        <div class="label-with-input">
+          <%= f.label :email %><br>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        </div>
+      <% end %>
     <% end %>
 
     <div class="label-with-input">
@@ -19,5 +35,5 @@
     <% else %>
       <%= form.submit t("helpers.link.access_group.create"), class: "submit_form" %>
     <% end %>
-    <% end %>
+  <% end %>
 </div>

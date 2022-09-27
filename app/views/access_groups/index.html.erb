@@ -9,6 +9,9 @@
       <%= render @access_groups %>
       <h3><%= t(".new") %></h3>
       <%= render AccessGroup.new(map: @map, users: [User.new]) %>
+
+      <h3><%= t(".new_link") %></h3>
+      <%= render AccessGroup.new(map: @map, token: Devise.friendly_token.first(16)) %>
     </div>
   </div>
 </div>

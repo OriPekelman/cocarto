@@ -30,6 +30,7 @@ Rails.application.routes.draw do
       end
     end
     get "/:locale" => "main#index"
+    get "share/:token", to: "access_groups#enter_by_link", as: "share_link"
   end
 
   if Rails.env.development?

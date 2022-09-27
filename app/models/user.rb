@@ -3,7 +3,7 @@
 # Table name: users
 #
 #  id                     :uuid             not null, primary key
-#  email                  :string           default(""), not null
+#  email                  :string           default("")
 #  encrypted_password     :string           default(""), not null
 #  invitation_accepted_at :datetime
 #  invitation_created_at  :datetime
@@ -47,5 +47,15 @@ class User < ApplicationRecord
   # Devise overrides
   def password_required?
     false
+  end
+
+  def email_required? = false
+
+  def display_name
+    if email
+      email.split("@")[0]
+    else
+      I18n.t("users.anonymous")
+    end
   end
 end

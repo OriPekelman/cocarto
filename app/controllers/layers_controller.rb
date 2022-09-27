@@ -67,11 +67,7 @@ class LayersController < ApplicationController
   end
 
   def set_user_name
-    @user_name = if user_signed_in?
-      current_user.email.split("@")[0]
-    else
-      "anonymous"
-    end
+    @user_name = current_user.display_name
   end
 
   def layer_params
