@@ -9,12 +9,9 @@ table.layer__data {
   overflow-y: scroll;
   white-space: nowrap;
   margin: 2em 1rem 0.1em;
-<<<<<<< HEAD
-=======
   display: block;
   border: solid 1px var(--color-grey-50);
   border-right-width: 0;
->>>>>>> 99792a9 (fix: arrangement to delete border table)
 
   thead.resizable th {
     resize: horizontal;
@@ -23,7 +20,6 @@ table.layer__data {
   }
   th:last-child,
   td:last-child {
-    border-right-width: 0;
     border-top-width: 0;
   }
 

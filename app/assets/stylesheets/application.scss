@@ -87,12 +87,12 @@ footer {
   display: flex;
   width: 100%;
   position: relative;
-  > .map {
+  .map {
     width: 50%;
     position: absolute;
     right: 0;
     bottom: 0;
-    height: calc(100% - 66px);
+    height: calc(100% - var(--toolbar-height));
   }
   > .data {
     width: 50%;
@@ -104,10 +104,6 @@ footer {
   }
   .right-pane {
     width: 50%;
-  }
-  .maplibregl-control-container.mapboxgl-control-container {
-    right: 0;
-    height: 620px;
   }
 }
 
