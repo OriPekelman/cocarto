@@ -10,14 +10,17 @@ table.layer__data {
   overflow-y: scroll;
   white-space: nowrap;
   margin: 2em 1rem 0.1em;
+  display: block;
 
   thead.resizable th {
     resize: horizontal;
     overflow-x: auto;
+    border-right: solid 1px var(--color-grey-50);
   }
   th:last-child,
   td:last-child {
     border-right-width: 0;
+    border-top-width: 0;
   }
 
   thead {
