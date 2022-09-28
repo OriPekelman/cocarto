@@ -3,6 +3,7 @@
 table.layer__data {
   border-collapse: collapse;
   border-radius: 6px;
+  border: solid 1px var(--color-grey-50);
   table-layout: fixed;
   max-width: fit-content;
   overflow-x: auto;
@@ -10,8 +11,6 @@ table.layer__data {
   white-space: nowrap;
   margin: 2em 1rem 0.1em;
   display: block;
-  border: solid 1px var(--color-grey-50);
-  border-right-width: 0;
 
   thead.resizable th {
     resize: horizontal;
@@ -20,6 +19,7 @@ table.layer__data {
   }
   th:last-child,
   td:last-child {
+    border-right-width: 0;
     border-top-width: 0;
   }
 
@@ -43,8 +43,8 @@ table.layer__data {
   th,
   tr.row td {
     text-align: center;
-    border: solid 1px var(--color-grey-50);
     font-size: 12px;
+    border: solid 1px var(--color-grey-50);
     border-bottom-width: 0;
     border-left-width: 0;
     height: 24px;
