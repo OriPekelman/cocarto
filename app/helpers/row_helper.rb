@@ -39,10 +39,13 @@ module RowHelper
   end
 
   def row_tag_actions(row)
+    remove = button_to([row.layer, row], method: :delete) do
+      embedded_svg("remove_item.svg")
+    end
     tag.td(id: dom_id(row, :last)) do
       tag.div(class: "actions") do
         row_tag_form(row) +
-          button_to(t("helpers.link.row.delete"), [row.layer, row], method: :delete) +
+          remove +
           button_with_icon("", "centrer.svg", data: {action: "click->map#centerToRow"})
       end
     end

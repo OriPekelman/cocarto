@@ -72,8 +72,6 @@ fr:
         create: Créer
         delete: Supprimer
         modify: Modifier
-      row:
-        delete: Supprimer
       territory:
         new: Ajouter le territoire
     message:
