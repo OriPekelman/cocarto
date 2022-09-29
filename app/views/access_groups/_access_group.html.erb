@@ -1,7 +1,8 @@
 <% delete_message = access_group.users.include?(current_user) ? t(".delete_self") : t("common.confirm") %>
-<div class="main-element" id="<%= dom_id access_group %>">
+<div class="main-element" id="<%= access_group.build_dom_id %>">
   <%= form_with(model: access_group.new_record? ? [access_group.map, access_group] : access_group) do |form| %>
     <% if access_group.token.present? %>
+      <%= form.hidden_field :token unless access_group.persisted? %>
       <% if access_group.persisted? %>
         <div class="label-with-input" data-controller="clipboard">
           <%= form.label :url_to_share, t(".url_to_share") %><br>
