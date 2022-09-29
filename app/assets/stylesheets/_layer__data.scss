@@ -15,12 +15,6 @@ table.layer__data {
   thead.resizable th {
     resize: horizontal;
     overflow-x: auto;
-    border-right: solid 1px var(--color-grey-50);
-  }
-  th:last-child,
-  td:last-child {
-    border-right-width: 0;
-    border-top-width: 0;
   }
 
   thead {
@@ -29,7 +23,6 @@ table.layer__data {
     height: 32px;
     th.calculated,
     th.field {
-      border-top-width: 0;
       font-family: var(--font-serif);
       letter-spacing: 0.8px;
       text-transform: uppercase;
@@ -37,6 +30,9 @@ table.layer__data {
       text-underline-offset: 0.2em;
       text-decoration-color: var(--color-grey-50);
       font-weight: 400;
+    }
+    th {
+      border-top-width: 0;
     }
   }
 
@@ -57,6 +53,10 @@ table.layer__data {
     &.numerical {
       font-family: var(--font-mono);
       text-align: right;
+    }
+
+    &:last-child {
+      border-right-width: 0;
     }
   }
 
