@@ -30,6 +30,7 @@ en:
     confirm: Are you sure?
     display: Display
     dragbar_cursor: Dragbar cursor
+    failed: 'Failed: %{msg}'
     frame: frame
     hello: Hello
     latitude: Latitude

@@ -30,6 +30,7 @@ fr:
     confirm: Êtes-vous sûr ?
     display: Afficher
     dragbar_cursor: Curseur de la barre de défilement
+    failed: 'Échec : %{msg}'
     frame: cadrer
     hello: Bonjour
     latitude: Latitude

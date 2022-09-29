@@ -20,7 +20,7 @@ class AccessGroupsController < ApplicationController
       end
       redirect_to map_access_groups_path(@map), notice: t("helpers.message.access_group.created")
     else
-      redirect_to map_access_groups_path(@map), alert: "failed: #{@access_group.errors.full_messages.to_sentence}"
+      redirect_to map_access_groups_path(@map), alert: t("common.failed", msg: @access_group.errors.full_messages.to_sentence)
     end
   end
 
@@ -44,7 +44,7 @@ class AccessGroupsController < ApplicationController
     if @access_group.update(update_access_group_params)
       redirect_to map_access_groups_path(@map), notice: t("helpers.message.access_group.updated")
     else
-      redirect_to map_access_groups_path(@map), alert: "failed: #{@access_group.errors.full_messages.to_sentence}"
+      redirect_to map_access_groups_path(@map), alert: t("common.failed", msg: @access_group.errors.full_messages.to_sentence)
     end
   end
 
@@ -53,7 +53,7 @@ class AccessGroupsController < ApplicationController
     if @access_group.destroy
       redirect_to map_access_groups_path(@map), alert: t("helpers.message.access_group.destroyed")
     else
-      redirect_to map_access_groups_path(@map), alert: "failed: #{@access_group.errors.full_messages.to_sentence}"
+      redirect_to map_access_groups_path(@map), alert: t("common.failed", msg: @access_group.errors.full_messages.to_sentence)
     end
   end
 
