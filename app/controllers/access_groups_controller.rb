@@ -74,6 +74,6 @@ class AccessGroupsController < ApplicationController
   end
 
   def update_access_group_params
-    params.require(:access_group).permit(:role_type)
+    params.require(:access_group).permit(:role_type, :name)
   end
 end

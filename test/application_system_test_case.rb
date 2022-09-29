@@ -24,5 +24,6 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   def sign_out
     find(".header-right span").click
     click_button "Sign out"
+    visit("/")
   end
 end
