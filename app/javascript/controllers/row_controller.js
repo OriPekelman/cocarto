@@ -7,7 +7,8 @@ export default class extends Controller {
     lngMin: Number,
     lngMax: Number,
     latMin: Number,
-    latMax: Number
+    latMax: Number,
+    properties: Object
   }
 
   connect () {

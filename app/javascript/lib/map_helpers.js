@@ -41,7 +41,7 @@ function maplibreGLFeaturesStyle (color) {
         ['==', 'meta', 'feature']],
       paint: {
         'circle-radius': 6,
-        'circle-color': color
+        'circle-color': ['coalesce', ['get', 'user_color'], color]
       }
     },
     {
@@ -60,8 +60,8 @@ function maplibreGLFeaturesStyle (color) {
       type: 'fill',
       filter: ['all', ['==', '$type', 'Polygon'], ['!=', 'mode', 'static']],
       paint: {
-        'fill-color': color,
-        'fill-outline-color': color,
+        'fill-color': ['coalesce', ['get', 'user_fill'], color],
+        'fill-outline-color': ['coalesce', ['get', 'user_outline-color'], color],
         'fill-opacity': 0.1
       }
     },
@@ -74,7 +74,7 @@ function maplibreGLFeaturesStyle (color) {
         ['==', 'meta', 'midpoint']],
       paint: {
         'circle-radius': 3,
-        'circle-color': color
+        'circle-color': ['coalesce', ['get', 'user_color'], color]
       }
     },
     // polygon outline stroke
@@ -88,8 +88,8 @@ function maplibreGLFeaturesStyle (color) {
         'line-join': 'round'
       },
       paint: {
-        'line-color': color,
-        'line-width': 2
+        'line-color': ['coalesce', ['get', 'user_stroke'], color],
+        'line-width': ['coalesce', ['get', 'user_stroke-width'], 2]
       }
     },
     // vertex point halos
@@ -109,7 +109,7 @@ function maplibreGLFeaturesStyle (color) {
       filter: ['all', ['==', 'meta', 'vertex'], ['==', '$type', 'Point'], ['!=', 'mode', 'static']],
       paint: {
         'circle-radius': 3,
-        'circle-color': color
+        'circle-color': ['coalesce', ['get', 'user_color'], color]
       }
     },
     // line stroke
@@ -122,8 +122,8 @@ function maplibreGLFeaturesStyle (color) {
         'line-join': 'round'
       },
       paint: {
-        'line-color': color,
-        'line-width': 2
+        'line-color': ['coalesce', ['get', 'user_stroke'], color],
+        'line-width': ['coalesce', ['get', 'user_stroke-width'], 2]
       }
     }
   ]
