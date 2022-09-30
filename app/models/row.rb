@@ -87,6 +87,8 @@ class Row < ApplicationRecord
       value = new_fields_values[field.id]
       if field.territory?
         value = Territory.exists?(id: value) ? value : nil
+      elsif field.css_property? && field.label == "stroke-width"
+        value = value.to_i
       end
       [field.id, value]
     end
@@ -112,5 +114,14 @@ class Row < ApplicationRecord
 
   def geo_properties
     layer.fields.to_h { |field| [field.label, values[field.id]] }
+  end
+
+  def css_properties
+    layer
+      .fields
+      .filter { |field| field.css_property? }
+      .map { |field| [field.label, values[field.id]] }
+      .compact_blank
+      .to_h
   end
 end
