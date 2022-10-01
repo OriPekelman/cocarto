@@ -19,4 +19,14 @@ class LoginTest < ApplicationSystemTestCase
     click_button "Log in"
     assert_selector "span", text: "cabiai@amazonas.br"
   end
+
+  test "login and logout" do
+    sign_in_as(users("reclus"), "refleurir")
+    visit map_path(id: maps("boat"))
+    assert_text "Boating trip"
+
+    sign_out
+    visit map_path(id: maps("boat"))
+    assert_no_text "Boating trip"
+  end
 end

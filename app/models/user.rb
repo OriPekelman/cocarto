@@ -3,7 +3,7 @@
 # Table name: users
 #
 #  id                     :uuid             not null, primary key
-#  email                  :string           default(""), not null
+#  email                  :string           default("")
 #  encrypted_password     :string           default(""), not null
 #  invitation_accepted_at :datetime
 #  invitation_created_at  :datetime
@@ -39,13 +39,23 @@ class User < ApplicationRecord
   has_many :invitations, class_name: "User", foreign_key: :invited_by, inverse_of: :invited_by, dependent: :nullify
 
   # Relationships
-  has_many :roles, dependent: :restrict_with_error, inverse_of: :user
+  has_and_belongs_to_many :access_groups, dependent: :restrict_with_error, inverse_of: :users
 
   # Through relationships
-  has_many :maps, through: :roles, inverse_of: :users
+  has_many :maps, through: :access_groups
 
   # Devise overrides
   def password_required?
     false
+  end
+
+  def email_required? = false
+
+  def display_name
+    if email
+      email.split("@")[0]
+    else
+      I18n.t("users.anonymous")
+    end
   end
 end

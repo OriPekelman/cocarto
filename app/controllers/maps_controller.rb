@@ -39,7 +39,8 @@ class MapsController < ApplicationController
   end
 
   def new_map
-    @map = current_user.maps.merge(Role.owner).new
+    @map = Map.new
+    @map.access_groups.new(users: [current_user], role_type: :owner)
     authorize @map
   end
 

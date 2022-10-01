@@ -1,5 +1,14 @@
 ---
 fr:
+  access_groups:
+    access_group:
+      delete_self: Êtes-vous sûr ? Vous ne pourrez plus accéder à la carte.
+      type: Type de rôle
+      url_name: Description du lien
+      url_to_share: Lien à partager
+    index:
+      new: Créer un nouveau rôle
+      new_link: Créer un nouveau lien de partage
   area:
     million: km²
     unit: m²
@@ -21,6 +30,7 @@ fr:
     confirm: Êtes-vous sûr ?
     display: Afficher
     dragbar_cursor: Curseur de la barre de défilement
+    failed: 'Échec : %{msg}'
     frame: cadrer
     hello: Bonjour
     latitude: Latitude
@@ -58,14 +68,10 @@ fr:
   maps:
     show:
       all_maps: Toutes les cartes
-  roles:
-    index:
-      new: Créer un nouveau rôle
-    role:
-      delete_self: Êtes-vous sûr ? Vous ne pourrez plus accéder à la carte.
-      type: Type de rôle
   territories:
     index:
       search_title: Chercher un territoire
     search_results:
       no_result: Pas de résultat
+  users:
+    anonymous: anonyme

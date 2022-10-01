@@ -3,15 +3,15 @@ class MapPolicy < ApplicationPolicy
     return false if user.nil?
 
     if record.new_record?
-      record.roles.find { _1.owner? && _1.user == user }.present?
+      record.access_groups.find { _1.owner? && _1.users.include?(user) }.present?
     else
-      record.roles.owner.merge(user.roles).exists?
+      record.access_groups.owner.merge(user.access_groups).exists?
     end
   end
 
   def create? = user_owns_record
 
-  def show? = Role.exists?(map: record, user: user)
+  def show? = user&.access_groups&.find_by(map: record).present?
 
   def update? = user_owns_record
 

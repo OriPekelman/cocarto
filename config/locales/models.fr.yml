@@ -2,6 +2,11 @@
 fr:
   activerecord:
     attributes:
+      access_group:
+        contributor: Contributeur
+        editor: Éditeur
+        owner: Propriétaire
+        viewer: Observateur
       field:
         field_type: Type
         label: Nom
@@ -30,26 +35,19 @@ fr:
           other: territoires
       map:
         name: Nom
-      role:
-        contributor: Contributeur
-        editor: Éditeur
-        owner: Propriétaire
-        viewer: Observateur
       territory:
         code: identifiant
         parent: partie de
       territory_category:
         revision: version
     models:
+      access_group: Accès
       layer:
         one: Couche
         other: Couches
       map:
         one: Carte
         other: Cartes
-      role:
-        one: Rôle
-        other: Rôles
       territory:
         one: Territoire
         other: Territoires
@@ -59,6 +57,10 @@ fr:
   helpers:
     _comment: The "helpers" scope is for model-specific keys. For general purpose labels, use the "common" scope.
     link:
+      access_group:
+        create: Créer
+        delete: Supprimer
+        modify: Modifier
       field:
         delete: Supprimer cette colonne
         new: Nouvelle colonne
@@ -68,13 +70,13 @@ fr:
       map:
         delete: Supprimer cette carte
         new: Créer une nouvelle carte
-      role:
-        create: Créer
-        delete: Supprimer
-        modify: Modifier
       territory:
         new: Ajouter le territoire
     message:
+      access_group:
+        created: Accès créé avec succès.
+        destroyed: L’accès a été détruit avec succès.
+        updated: L’accès a été mis à jour avec succès.
       field:
         created: Nouvel attribut %{name} créé
         destroyed: Le champ a été détruit avec succès.
@@ -83,10 +85,6 @@ fr:
         destroyed: La couche a été détruite avec succès.
       map:
         destroyed: La carte a été détruite avec succès.
-      role:
-        created: Rôle créé avec succès.
-        destroyed: Le rôle a été détruit avec succès.
-        updated: Le rôle a été mis à jour avec succès.
       row:
         destroyed: La géométrie a été détruite avec succès.
         updated: Les propriétés géométriques ont été mises à jour avec succès.

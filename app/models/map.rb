@@ -9,9 +9,9 @@
 #
 class Map < ApplicationRecord
   # Relationships
-  has_many :roles, dependent: :destroy, inverse_of: :map
+  has_many :access_groups, dependent: :destroy, inverse_of: :map
   has_many :layers, dependent: :destroy
 
   # Through relationships
-  has_many :users, through: :roles, inverse_of: :maps
+  has_many :users, through: :access_groups, inverse_of: :maps
 end

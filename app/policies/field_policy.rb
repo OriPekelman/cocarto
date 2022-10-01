@@ -1,9 +1,9 @@
 class FieldPolicy < ApplicationPolicy
   def new? = create?
 
-  def create? = role&.owner? || role&.editor?
+  def create? = access_group&.owner? || access_group&.editor?
 
-  def show? = role.present?
+  def show? = access_group.present?
 
   def edit? = create?
 
@@ -13,7 +13,7 @@ class FieldPolicy < ApplicationPolicy
 
   private
 
-  def role
-    Role.find_by(map: record.layer.map, user: user)
+  def access_group
+    user.access_groups.find_by(map: record.layer.map)
   end
 end

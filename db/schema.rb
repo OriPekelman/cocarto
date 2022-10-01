@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_20_131842) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_26_102001) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -39,6 +39,26 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_20_131842) do
     "contributor",
     "viewer",
   ], force: :cascade
+
+  create_table "access_groups", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.enum "role_type", null: false, enum_type: "role_type"
+    t.uuid "map_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "token"
+    t.text "name"
+    t.index ["map_id"], name: "index_access_groups_on_map_id"
+  end
+
+  create_table "access_groups_users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "access_group_id"
+    t.uuid "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["access_group_id", "user_id"], name: "index_access_groups_users_on_access_group_id_and_user_id", unique: true
+    t.index ["access_group_id"], name: "index_access_groups_users_on_access_group_id"
+    t.index ["user_id"], name: "index_access_groups_users_on_user_id"
+  end
 
   create_table "fields", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "label"
@@ -70,17 +90,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_20_131842) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "roles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.enum "role_type", null: false, enum_type: "role_type"
-    t.uuid "user_id", null: false
-    t.uuid "map_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["map_id", "user_id"], name: "index_roles_on_map_id_and_user_id", unique: true
-    t.index ["map_id"], name: "index_roles_on_map_id"
-    t.index ["user_id"], name: "index_roles_on_user_id"
   end
 
   create_table "rows", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -135,7 +144,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_20_131842) do
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "email", default: "", null: false
+    t.string "email", default: ""
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -155,12 +164,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_20_131842) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "access_groups", "maps"
+  add_foreign_key "access_groups_users", "access_groups"
+  add_foreign_key "access_groups_users", "users"
   add_foreign_key "fields", "layers"
   add_foreign_key "layers", "maps"
   add_foreign_key "layers_territory_categories", "layers"
   add_foreign_key "layers_territory_categories", "territory_categories"
-  add_foreign_key "roles", "maps"
-  add_foreign_key "roles", "users"
   add_foreign_key "rows", "layers"
   add_foreign_key "rows", "territories"
   add_foreign_key "rows", "users", column: "author_id"

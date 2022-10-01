@@ -20,4 +20,10 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     click_button "Log in"
     assert_text "Maps"
   end
+
+  def sign_out
+    find(".header-right span").click
+    click_button "Sign out"
+    visit("/")
+  end
 end

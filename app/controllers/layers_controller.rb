@@ -10,7 +10,7 @@ class LayersController < ApplicationController
     # It allows to keep track of who is currently on the page
     # It differs from current_user as a user can be connected many times on the same page
     @session_id = SecureRandom.alphanumeric
-    @role_type = Role.find_by(map: @layer.map, user: current_user)&.role_type
+    @role_type = current_user.access_groups.find_by(map: @layer.map)&.role_type
   end
 
   def new
@@ -67,11 +67,7 @@ class LayersController < ApplicationController
   end
 
   def set_user_name
-    @user_name = if user_signed_in?
-      current_user.email.split("@")[0]
-    else
-      "anonymous"
-    end
+    @user_name = current_user.display_name
   end
 
   def layer_params
