@@ -22,6 +22,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   end
 
   def sign_out
+    assert page.has_css?('[data-dropdown-loaded-value="true"]')
     find(".header-right span").click
     click_button "Sign out"
     visit("/")
