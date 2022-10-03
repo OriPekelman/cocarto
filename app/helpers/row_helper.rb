@@ -2,8 +2,6 @@ module RowHelper
   def row_tr(row)
     data_attributes = {
       controller: "row",
-      restricted_target: "restricted",
-      restricted_authorizations: %W[owner editor contributor-#{row.author_id}].to_json, # cf RowPolicy#update?
       row_lng_min_value: row.geo_lng_min,
       row_lat_min_value: row.geo_lat_min,
       row_lng_max_value: row.geo_lng_max,
@@ -35,7 +33,7 @@ module RowHelper
   end
 
   def row_tag_data_cols(row)
-    safe_join(row.fields_values.map { |field, value| field_td field, value, dom_id(row, :form) })
+    safe_join(row.fields_values.map { |field, value| field_td(field, value, dom_id(row, :form), row.author_id) })
   end
 
   def row_tag_actions(row)

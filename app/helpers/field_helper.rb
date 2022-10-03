@@ -1,5 +1,5 @@
 module FieldHelper
-  def field_td(field, value, form_id)
+  def field_td(field, value, form_id, author_id)
     # renders one form field tag for a value of a row for a specific field
     opts = {
       data: {action: "input->row#setDirty focusout->row#save"},
@@ -23,6 +23,11 @@ module FieldHelper
       text_field_tag field_name, value, opts.merge(class: "input")
     end
 
-    content_tag :td, field_tag, class: class_names("field", dom_id(field))
+    tag.td(field_tag,
+      class: class_names("field", dom_id(field)),
+      data: {
+        restricted_target: "restricted",
+        restricted_authorizations: %W[owner editor contributor-#{author_id}].to_json # cf RowPolicy#update?
+      })
   end
 end
