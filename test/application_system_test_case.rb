@@ -22,8 +22,15 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   end
 
   def sign_out
+    wait_until_dropdown_controller_ready
     find(".header-right span").click
     click_button "Sign out"
     visit("/")
+  end
+
+  # We want to make sure that the dropdown controller is loaded
+  # Otherwise capybara will click on the button, and nothing happens
+  def wait_until_dropdown_controller_ready
+    assert page.has_css?('[data-dropdown-loaded-value="true"]')
   end
 end
