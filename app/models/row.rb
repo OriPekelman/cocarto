@@ -109,7 +109,7 @@ class Row < ApplicationRecord
   # Geojson export (used when exporting a layer as json)
   def geo_feature
     feature = RGeo::GeoJSON.decode(geojson)
-    RGeo::GeoJSON::Feature.new(feature, id, geo_properties.merge(css_properties))
+    RGeo::GeoJSON::Feature.new(feature, id, geo_properties.merge(css_properties).merge(calculated_properties))
   end
 
   def geo_properties
@@ -126,5 +126,16 @@ class Row < ApplicationRecord
       .map { |field| [field.label, values[field.id]] }
       .compact_blank
       .to_h
+  end
+
+  def calculated_properties
+    case layer.geometry_type
+    when "line_string"
+      {calculated_length: geo_length}
+    when "polygon", "territory"
+      {calculated_area: geo_area}
+    else
+      {}
+    end
   end
 end
