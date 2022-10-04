@@ -93,12 +93,14 @@ export default class extends Controller {
       // Set mapbox-gl-draw to draw by default.
       // The user does not have to click the polygon control button first.
       defaultMode: `draw_${this.geometryTypeValue}`,
-      styles: maplibreGLFeaturesStyle(this.colorValue)
+      styles: maplibreGLFeaturesStyle(this.colorValue),
+      userProperties: true
     }
 
     const roOptions = {
       displayControlsDefault: false,
-      styles: maplibreGLFeaturesStyle(this.colorValue)
+      styles: maplibreGLFeaturesStyle(this.colorValue),
+      userProperties: true
     }
 
     const editable = this.geometryTypeValue !== 'territory'
@@ -124,6 +126,7 @@ export default class extends Controller {
     const feature = {
       id: row.id,
       type: 'Feature',
+      properties: row.rowController.propertiesValue,
       geometry
     }
     this.draw.add(feature)

@@ -12,6 +12,7 @@ fr:
         label: Nom
       field/field_types:
         boolean: Booléen
+        css_property: Propriété CSS
         date: Date
         float: Nombre décimal
         integer: Nombre entier

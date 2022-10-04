@@ -5,7 +5,8 @@ module RowHelper
       row_lng_min_value: row.geo_lng_min,
       row_lat_min_value: row.geo_lat_min,
       row_lng_max_value: row.geo_lng_max,
-      row_lat_max_value: row.geo_lat_max
+      row_lat_max_value: row.geo_lat_max,
+      row_properties_value: row.css_properties
     }
 
     tag.tr id: dom_id(row), data: data_attributes, class: "row" do
