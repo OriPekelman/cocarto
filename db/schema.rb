@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_29_153656) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_05_092041) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -25,6 +25,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_29_153656) do
     "date",
     "boolean",
     "css_property",
+    "enum",
   ], force: :cascade
 
   create_enum :layer_geometry_type, [
@@ -67,6 +68,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_29_153656) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.enum "field_type", null: false, enum_type: "field_type"
+    t.string "enum_values", array: true
     t.index ["layer_id"], name: "index_fields_on_layer_id"
   end
 

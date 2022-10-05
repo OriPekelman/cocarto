@@ -8,12 +8,14 @@ fr:
         owner: Propriétaire
         viewer: Observateur
       field:
+        enum_values: Valeurs
         field_type: Type
         label: Nom
       field/field_types:
         boolean: Booléen
         css_property: Propriété CSS
         date: Date
+        enum: Menu local
         float: Nombre décimal
         integer: Nombre entier
         territory: Territoire

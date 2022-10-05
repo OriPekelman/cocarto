@@ -2,12 +2,13 @@
 #
 # Table name: fields
 #
-#  id         :uuid             not null, primary key
-#  field_type :enum             not null
-#  label      :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  layer_id   :uuid
+#  id          :uuid             not null, primary key
+#  enum_values :string           is an Array
+#  field_type  :enum             not null
+#  label       :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  layer_id    :uuid
 #
 # Indexes
 #
@@ -19,8 +20,10 @@
 #
 class Field < ApplicationRecord
   belongs_to :layer
-  enum :field_type, {text: "text", float: "float", integer: "integer", territory: "territory", date: "date", boolean: "boolean", css_property: "css_property"}, prefix: :type
+  enum :field_type, {text: "text", float: "float", integer: "integer", territory: "territory", date: "date", boolean: "boolean", css_property: "css_property", enum: "enum"}, prefix: :type
   validates :field_type, presence: true
+
+  validates :enum_values, presence: true, if: -> { type_enum? }
 
   after_create_commit -> do
     broadcast_i18n_before_to layer, target: "delete-column", partial: "fields/th"
