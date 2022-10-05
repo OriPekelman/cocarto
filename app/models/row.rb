@@ -75,7 +75,7 @@ class Row < ApplicationRecord
     db_values = values
     layer.fields.to_h do |field|
       value = db_values[field.id]
-      if field.territory?
+      if field.type_territory?
         value = Territory.find_by(id: value)
       end
       [field, value]
@@ -85,9 +85,9 @@ class Row < ApplicationRecord
   def fields_values=(new_fields_values)
     cleaned_values = layer.fields.to_h do |field|
       value = new_fields_values[field.id]
-      if field.territory?
+      if field.type_territory?
         value = Territory.exists?(id: value) ? value : nil
-      elsif field.css_property? && field.label == "stroke-width"
+      elsif field.type_css_property? && field.label == "stroke-width"
         value = value.to_i
       end
       [field.id, value]
@@ -115,14 +115,14 @@ class Row < ApplicationRecord
   def geo_properties
     layer
       .fields
-      .reject { |field| field.css_property? }
+      .reject { |field| field.type_css_property? }
       .to_h { |field| [field.label, values[field.id]] }
   end
 
   def css_properties
     layer
       .fields
-      .filter { |field| field.css_property? }
+      .filter { |field| field.type_css_property? }
       .map { |field| [field.label, values[field.id]] }
       .compact_blank
       .to_h
