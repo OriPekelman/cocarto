@@ -14,6 +14,7 @@ class MapsTest < ApplicationSystemTestCase
       click_link "Delete this map"
     end
     assert_text "The map was successfully destroyed"
+    assert_no_text "Test de nouvelle carte"
   end
 
   test "visit an existing owned map" do
