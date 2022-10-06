@@ -2,12 +2,13 @@
 #
 # Table name: fields
 #
-#  id         :uuid             not null, primary key
-#  field_type :enum             not null
-#  label      :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  layer_id   :uuid
+#  id          :uuid             not null, primary key
+#  enum_values :string           is an Array
+#  field_type  :enum             not null
+#  label       :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  layer_id    :uuid
 #
 # Indexes
 #
@@ -19,9 +20,13 @@
 #
 class Field < ApplicationRecord
   belongs_to :layer
-  enum :field_type, {text: "text", float: "float", integer: "integer", territory: "territory", date: "date", boolean: "boolean", css_property: "css_property"}
+  enum :field_type, {text: "text", float: "float", integer: "integer", territory: "territory", date: "date", boolean: "boolean", css_property: "css_property", enum: "enum"}, prefix: :type
   validates :field_type, presence: true
 
+  # Type-specific validations
+  validates :enum_values, presence: true, if: -> { type_enum? }
+
+  # Hooks broadcast
   after_create_commit -> do
     broadcast_i18n_before_to layer, target: "delete-column", partial: "fields/th"
     layer.rows.each do |row|
@@ -34,5 +39,8 @@ class Field < ApplicationRecord
     Turbo::StreamsChannel.broadcast_remove_to layer, targets: ".#{dom_id(self)}"
   end
 
-  def numerical? = float? || integer?
+  # Type-specific coercion
+  def enum_values=(new_values)
+    super(new_values&.compact_blank&.uniq)
+  end
 end
