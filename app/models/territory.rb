@@ -31,7 +31,7 @@
 #
 class Territory < ApplicationRecord
   belongs_to :territory_category
-  belongs_to :parent, class_name: "Territory"
+  belongs_to :parent, class_name: "Territory", optional: true
   has_many :rows, dependent: :restrict_with_error
 
   scope :name_autocomplete, ->(name) {
