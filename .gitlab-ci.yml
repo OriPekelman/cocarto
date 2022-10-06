@@ -42,6 +42,15 @@ lint-js:
   script:
     - make lint-js
 
+lint-active-record:
+  extends: .ruby
+  stage: test
+  services:
+    - postgis/postgis:latest
+  script:
+    - bundle exec rails db:setup
+    - make lint-active-record
+
 test-unit:
   extends: .ruby
   stage: test
