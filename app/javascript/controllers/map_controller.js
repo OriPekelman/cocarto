@@ -1,9 +1,11 @@
 /* global ResizeObserver */
 import { Controller } from '@hotwired/stimulus'
 
-import { newMap, maplibreGLFeaturesStyle } from 'lib/map_helpers'
+import { newMap, maplibreGLFeaturesStyle, geocoderApi } from 'lib/map_helpers'
 import PresenceTrackers from 'lib/presence_trackers'
 import MapboxDraw from '@mapbox/mapbox-gl-draw'
+import MaplibreGeocoder from '@maplibre/maplibre-gl-geocoder'
+import maplibregl from 'maplibre-gl'
 
 export default class extends Controller {
   static targets = ['geojsonField', 'newRowForm', 'row', 'map']
@@ -61,6 +63,12 @@ export default class extends Controller {
     resizeObserver.observe(this.mapTarget)
 
     this.map.on('mousemove', e => this.trackers.mousemove(e))
+
+    this.map.addControl(
+      new MaplibreGeocoder(geocoderApi, {
+        maplibregl
+      })
+    )
   }
 
   centerToContent () {
