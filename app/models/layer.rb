@@ -19,12 +19,7 @@
 #  fk_rails_...  (map_id => maps.id)
 #
 class Layer < ApplicationRecord
-  belongs_to :map
-  has_many :fields, dependent: :delete_all
-  has_many :rows, -> { with_territory.order(:created_at) }, dependent: :delete_all, inverse_of: :layer
-  has_and_belongs_to_many :territory_categories
-  enum :geometry_type, {point: "point", line_string: "line_string", polygon: "polygon", territory: "territory"}, prefix: "geometry"
-
+  # Constants
   COLORS = {
     blue: "#007AFF",
     cyan: "#32ADE6",
@@ -36,6 +31,16 @@ class Layer < ApplicationRecord
     orange: "#FF9500"
   }
 
+  # Attributes
+  enum :geometry_type, {point: "point", line_string: "line_string", polygon: "polygon", territory: "territory"}, prefix: "geometry"
+
+  # Relations
+  belongs_to :map
+  has_many :fields, dependent: :delete_all
+  has_many :rows, -> { with_territory.order(:created_at) }, dependent: :delete_all, inverse_of: :layer
+  has_and_belongs_to_many :territory_categories
+
+  # Hooks
   after_update_commit -> { broadcast_i18n_replace_to self, target: "layer-name", partial: "layers/name" }
 
   def geo_feature_collection

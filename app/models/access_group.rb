@@ -28,6 +28,10 @@ class AccessGroup < ApplicationRecord
 
   accepts_nested_attributes_for :users
 
+  # Validations
+  validates :role_type, presence: true
+
+  # Hooks
   before_destroy :map_must_have_an_owner
 
   def map_must_have_an_owner

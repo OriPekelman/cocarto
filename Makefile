@@ -23,7 +23,10 @@ lint-js: ## Run javascript linters
 	npx standard
 	npx prettier --check app/assets/stylesheets
 
-lint: lint-rb lint-js ## Run all linters
+lint-active-record: ## Run Active Record Doctor
+	bundle exec rake active_record_doctor
+
+lint: lint-rb lint-js lint-active-record ## Run all linters
 
 lint_autocorrect: ## Run linters in autocorrect mode
 	bundle exec rubocop --autocorrect-all
@@ -43,4 +46,4 @@ test-system: ## Run system tests
 help: ## Display this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-.PHONY: install setup setup-dev setup-pg-users dev lint lint-rb lint-js lint_autocorrect test help
+.PHONY: install setup setup-dev setup-pg-users dev lint lint-rb lint-js lint-active-record lint_autocorrect test help

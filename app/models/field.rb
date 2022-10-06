@@ -8,7 +8,7 @@
 #  label       :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  layer_id    :uuid
+#  layer_id    :uuid             not null
 #
 # Indexes
 #
@@ -19,14 +19,17 @@
 #  fk_rails_...  (layer_id => layers.id)
 #
 class Field < ApplicationRecord
+  # Relations
   belongs_to :layer
   enum :field_type, {text: "text", float: "float", integer: "integer", territory: "territory", date: "date", boolean: "boolean", css_property: "css_property", enum: "enum"}, prefix: :type
+
+  # Validations
   validates :field_type, presence: true
 
   # Type-specific validations
   validates :enum_values, presence: true, if: -> { type_enum? }
 
-  # Hooks broadcast
+  # Hooks
   after_create_commit -> do
     broadcast_i18n_before_to layer, target: "delete-column", partial: "fields/th"
     layer.rows.each do |row|

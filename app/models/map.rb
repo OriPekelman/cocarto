@@ -8,10 +8,10 @@
 #  updated_at :datetime         not null
 #
 class Map < ApplicationRecord
-  # Relationships
+  # Relations
   has_many :access_groups, dependent: :destroy, inverse_of: :map
   has_many :layers, dependent: :destroy
 
-  # Through relationships
+  # Through relations
   has_many :users, through: :access_groups, inverse_of: :maps
 end

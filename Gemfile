@@ -62,6 +62,7 @@ group :development do
   gem "spring"
   gem "annotate"
   gem "rails-erd"
+  gem "active_record_doctor"
   gem "letter_opener_web"
 end
 
