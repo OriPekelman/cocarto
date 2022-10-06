@@ -18,8 +18,6 @@ export default class extends Controller {
   }
 
   initialize () {
-    this.markers = new Map()
-    this.clickTimer = null
     this.boundingBox = null
   }
 
