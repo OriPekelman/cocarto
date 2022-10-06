@@ -13,6 +13,7 @@
 #  index_territory_categories_on_name_and_revision  (name,revision) UNIQUE
 #
 class TerritoryCategory < ApplicationRecord
+  # Relations
   has_many :territories, -> { limit(1000) }, dependent: :destroy, inverse_of: :territory_category
   has_and_belongs_to_many :layers
 

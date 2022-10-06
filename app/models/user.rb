@@ -38,10 +38,10 @@ class User < ApplicationRecord
   # The belongs_to :invited_by relation is added automatically by invitable
   has_many :invitations, class_name: "User", foreign_key: :invited_by, inverse_of: :invited_by, dependent: :nullify
 
-  # Relationships
+  # Relations
   has_and_belongs_to_many :access_groups, dependent: :restrict_with_error, inverse_of: :users
 
-  # Through relationships
+  # Through relations
   has_many :maps, through: :access_groups
 
   # Devise overrides

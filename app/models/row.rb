@@ -33,10 +33,12 @@
 #  fk_rails_...  (territory_id => territories.id)
 #
 class Row < ApplicationRecord
+  # Relations
   belongs_to :layer
   belongs_to :author, class_name: "User"
   belongs_to :territory, optional: true
 
+  # Hooks
   after_update_commit -> { broadcast_i18n_replace_to layer, object: Row.with_territory.find(id) }
   after_destroy_commit -> { broadcast_remove_to layer }
   after_create_commit -> { broadcast_i18n_append_to layer, target: dom_id(layer, "rows"), object: Row.with_territory.find(id) }
