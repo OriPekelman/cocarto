@@ -15,4 +15,12 @@ ActiveRecordDoctor.configure do
     "User.reset_password_token",
     "User.invitation_token"
   ]
+
+  detector :missing_presence_validation, ignore_attributes: [
+    # Devise-defined attribute (and default value set in schema)
+    "User.encrypted_password",
+    # Default values set in schema
+    "Layer.style",
+    "Row.values",
+  ]
 end
