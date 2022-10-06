@@ -20,8 +20,46 @@
 #
 require "test_helper"
 
-class AttributeTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+class FieldTest < ActiveSupport::TestCase
+  class EnumFieldTest < FieldTest
+    test "some enum value is allowed" do
+      field = Field.type_enum.new(enum_values: ["value"])
+      field.validate
+
+      assert_empty field.errors.details[:enum_values]
+    end
+
+    test "several enum values are allowed" do
+      field = Field.type_enum.new(enum_values: %w[a b c])
+      field.validate
+
+      assert_empty field.errors.details[:enum_values]
+    end
+
+    test "no enum value is invalid" do
+      field = Field.type_enum.new
+      field.validate
+
+      assert_equal [{error: :blank}], field.errors.details[:enum_values]
+    end
+
+    test "only blank value is invalid" do
+      field = Field.type_enum.new(enum_values: [""])
+      field.validate
+
+      assert_equal [{error: :blank}], field.errors.details[:enum_values]
+    end
+
+    test "blank enum values are removed" do
+      field = Field.type_enum.new(enum_values: ["a", "b", "c", ""])
+
+      assert_equal %w[a b c], field.enum_values
+    end
+
+    test "duplicate enum values are removed" do
+      field = Field.type_enum.new(enum_values: %w[a b c c])
+
+      assert_equal %w[a b c], field.enum_values
+    end
+  end
 end
