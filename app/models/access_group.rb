@@ -31,6 +31,7 @@ class AccessGroup < ApplicationRecord
   before_destroy :map_must_have_an_owner
 
   def map_must_have_an_owner
+    return if destroyed_by_association&.inverse_of&.name == :map
     return if map.access_groups.owner.where.not(id: self).exists?
 
     errors.add(:map, :must_have_an_owner)
