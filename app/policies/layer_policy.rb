@@ -18,6 +18,10 @@ class LayerPolicy < ApplicationPolicy
   private
 
   def access_group
-    user&.access_groups&.find_by(map: record.map)
+    if user&.persisted?
+      user.access_groups&.find_by(map: record.map)
+    else
+      user&.access_groups&.find { |access| access.map_id == record.map.id }
+    end
   end
 end

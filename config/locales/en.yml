@@ -9,6 +9,8 @@ en:
     index:
       new: Create a new access
       new_link: Create a sharing link
+  api:
+    bad_key: Bad API key
   area:
     million: km²
     unit: m²
