@@ -1,0 +1,18 @@
+ActiveRecordDoctor.configure do
+  detector :undefined_table_references, ignore_models: [
+    "ApplicationRecord" # Remove after https://github.com/gregnavis/active_record_doctor/pull/91
+  ]
+
+  detector :short_primary_key_type, ignore_tables: [
+    # postgis-defined table
+    "spatial_ref_sys"
+  ]
+
+  detector :incorrect_length_validation, ignore_attributes: [
+    # Devise-defined length validations
+    "User.email",
+    "User.encrypted_password",
+    "User.reset_password_token",
+    "User.invitation_token"
+  ]
+end
