@@ -23,4 +23,10 @@ ActiveRecordDoctor.configure do
     "Layer.style",
     "Row.values",
   ]
+
+  detector :incorrect_dependent_option, ignore_associations: [
+    # See https://gitlab.com/CodeursEnLiberte/gxis/-/issues/192
+    "Layer.fields",
+    "Layer.rows",
+  ]
 end
