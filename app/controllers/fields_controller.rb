@@ -27,7 +27,10 @@ class FieldsController < ApplicationController
     end
 
     respond_to do |format|
-      format.turbo_stream
+      format.turbo_stream do
+        new_field = Field.new(layer: layer)
+        render turbo_stream: turbo_stream.replace(helpers.dom_id(new_field, "form"), partial: "fields/form", locals: {field: new_field})
+      end
       format.html { redirect_to layer_path(@field.layer) }
     end
   end
