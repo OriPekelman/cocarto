@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_05_092041) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_06_135056) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -58,13 +58,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_05_092041) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["access_group_id", "user_id"], name: "index_access_groups_users_on_access_group_id_and_user_id", unique: true
-    t.index ["access_group_id"], name: "index_access_groups_users_on_access_group_id"
     t.index ["user_id"], name: "index_access_groups_users_on_user_id"
   end
 
   create_table "fields", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "label"
-    t.uuid "layer_id"
+    t.uuid "layer_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.enum "field_type", null: false, enum_type: "field_type"
@@ -97,14 +96,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_05_092041) do
 
   create_table "rows", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.jsonb "values", default: {}, null: false
-    t.uuid "layer_id"
+    t.uuid "layer_id", null: false
     t.geometry "point", limit: {:srid=>4326, :type=>"st_point"}
     t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.geometry "polygon", limit: {:srid=>4326, :type=>"st_polygon"}
     t.geometry "line_string", limit: {:srid=>4326, :type=>"line_string"}
     t.uuid "territory_id"
-    t.uuid "author_id"
+    t.uuid "author_id", null: false
     t.virtual "geojson", type: :text, as: "st_asgeojson(COALESCE(point, line_string, polygon))", stored: true
     t.virtual "geo_lng_min", type: :decimal, as: "st_xmin((COALESCE(point, line_string, polygon))::box3d)", stored: true
     t.virtual "geo_lat_min", type: :decimal, as: "st_ymin((COALESCE(point, line_string, polygon))::box3d)", stored: true

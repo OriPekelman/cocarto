@@ -16,8 +16,8 @@
 #  values       :jsonb            not null
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
-#  author_id    :uuid
-#  layer_id     :uuid
+#  author_id    :uuid             not null
+#  layer_id     :uuid             not null
 #  territory_id :uuid
 #
 # Indexes
