@@ -1,20 +1,5 @@
 class FieldsController < ApplicationController
-  before_action :set_field, only: %i[edit update destroy]
-
-  def new
-    @field = authorize Field.new
-  end
-
-  def edit
-  end
-
-  def update
-    if @field.update(field_params)
-      redirect_to @field, notice: t("helpers.message.field.updated")
-    else
-      render :edit, status: :unprocessable_entity
-    end
-  end
+  before_action :set_field, only: %i[update destroy]
 
   def create
     layer = Layer.includes(:rows).find(field_params[:layer_id])
@@ -32,6 +17,14 @@ class FieldsController < ApplicationController
         render turbo_stream: turbo_stream.replace(helpers.dom_id(new_field, "form"), partial: "fields/form", locals: {field: new_field})
       end
       format.html { redirect_to layer_path(@field.layer) }
+    end
+  end
+
+  def update
+    if @field.update(field_params)
+      redirect_to @field, notice: t("helpers.message.field.updated")
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 

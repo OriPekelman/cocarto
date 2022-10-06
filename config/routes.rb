@@ -22,7 +22,7 @@ Rails.application.routes.draw do
       resources :layers, only: [:new]
       resources :access_groups, only: [:index, :create, :update, :destroy], shallow: true
     end
-    resources :fields
+    resources :fields, only: [:create, :update, :destroy]
     resources :territory_categories
     resources :territories do
       collection do
