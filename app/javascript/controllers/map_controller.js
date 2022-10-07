@@ -8,7 +8,7 @@ import MaplibreGeocoder from '@maplibre/maplibre-gl-geocoder'
 import maplibregl from 'maplibre-gl'
 
 export default class extends Controller {
-  static targets = ['geojsonField', 'newRowForm', 'row', 'map']
+  static targets = ['geojsonField', 'newRowForm', 'row', 'map', 'addButton']
   static values = {
     layerId: String,
     sessionId: String,
@@ -63,11 +63,9 @@ export default class extends Controller {
   }
 
   toggleMode () {
-    if (this.draw.getMode() == this.#drawMode()) {
-      this.draw.changeMode('simple_select')
-    } else {
-      this.draw.changeMode(this.#drawMode())
-    }
+    const newMode = this.draw.getMode() === this.drawMode ? 'simple_select' : this.drawMode
+    this.draw.changeMode(newMode)
+    this.#modeChange(newMode)
   }
 
   // Private functions
@@ -118,6 +116,7 @@ export default class extends Controller {
       const row = document.getElementById(id)
       row.rowController.update(features[0].geometry)
     })
+    this.map.on('draw.modechange', ({ mode }) => this.#modeChange(mode))
   }
 
   #addRow (row) {
