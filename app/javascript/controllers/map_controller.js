@@ -24,6 +24,7 @@ export default class extends Controller {
   connect () {
     this.#initMap()
     this.trackers = new PresenceTrackers(this)
+    this.drawMode = `draw_${this.geometryTypeValue}`
   }
 
   rowTargetConnected (row) {
@@ -61,8 +62,12 @@ export default class extends Controller {
     }
   }
 
-  changeMode () {
-    this.draw.changeMode(`draw_${this.geometryTypeValue}`)
+  toggleMode () {
+    if (this.draw.getMode() == this.#drawMode()) {
+      this.draw.changeMode('simple_select')
+    } else {
+      this.draw.changeMode(this.#drawMode())
+    }
   }
 
   // Private functions
@@ -133,6 +138,14 @@ export default class extends Controller {
       this.boundingBox = llb
     } else {
       this.boundingBox = this.boundingBox.extend(llb)
+    }
+  }
+
+  #modeChange (mode) {
+    if (mode === this.drawMode) {
+      this.addButtonTarget.classList.add('active')
+    } else {
+      this.addButtonTarget.classList.remove('active')
     }
   }
 }
