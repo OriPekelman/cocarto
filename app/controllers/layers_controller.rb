@@ -90,6 +90,9 @@ class LayersController < ApplicationController
     if token.present? && !user_signed_in?
       access_group = AccessGroup.find_by(token: token)
       if access_group.present?
+        headers["Access-Control-Allow-Origin"] = "*"
+        headers["Access-Control-Allow-Methods"] = "GET OPTIONS"
+        headers["Access-Control-Allow-Headers"] = "*"
         sign_in User.new(access_groups: [access_group])
       else
         render plain: t("api.bad_key"), status: :unauthorized
