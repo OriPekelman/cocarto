@@ -26,16 +26,6 @@ export default class extends Controller {
     this.trackers = new PresenceTrackers(this)
   }
 
-  #extendBounds (row) {
-    const llb = row.rowController.bounds()
-
-    if (this.boundingBox === null) {
-      this.boundingBox = llb
-    } else {
-      this.boundingBox = this.boundingBox.extend(llb)
-    }
-  }
-
   rowTargetConnected (row) {
     // a row can be connected when this.draw isn’t initialized yet
     if (this.draw) {
@@ -49,24 +39,6 @@ export default class extends Controller {
     this.boundingBox = null
 
     this.rowTargets.forEach(otherRow => this.#extendBounds(otherRow))
-  }
-
-  #initMap () {
-    this.map = newMap(this.mapTarget)
-
-    this.#initRowDraw()
-    this.rowTargets.forEach(row => this.#addRow(row))
-
-    const resizeObserver = new ResizeObserver(() => this.map.resize())
-    resizeObserver.observe(this.mapTarget)
-
-    this.map.on('mousemove', e => this.trackers.mousemove(e))
-
-    this.map.addControl(
-      new MaplibreGeocoder(geocoderApi, {
-        maplibregl
-      })
-    )
   }
 
   centerToContent () {
@@ -91,6 +63,25 @@ export default class extends Controller {
 
   changeMode () {
     this.draw.changeMode(`draw_${this.geometryTypeValue}`)
+  }
+
+  // Private functions
+  #initMap () {
+    this.map = newMap(this.mapTarget)
+
+    this.#initRowDraw()
+    this.rowTargets.forEach(row => this.#addRow(row))
+
+    const resizeObserver = new ResizeObserver(() => this.map.resize())
+    resizeObserver.observe(this.mapTarget)
+
+    this.map.on('mousemove', e => this.trackers.mousemove(e))
+
+    this.map.addControl(
+      new MaplibreGeocoder(geocoderApi, {
+        maplibregl
+      })
+    )
   }
 
   #initRowDraw () {
@@ -133,5 +124,15 @@ export default class extends Controller {
       geometry
     }
     this.draw.add(feature)
+  }
+
+  #extendBounds (row) {
+    const llb = row.rowController.bounds()
+
+    if (this.boundingBox === null) {
+      this.boundingBox = llb
+    } else {
+      this.boundingBox = this.boundingBox.extend(llb)
+    }
   }
 }
