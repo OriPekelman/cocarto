@@ -42,3 +42,8 @@ boat_cassini:
   map: boat
   users: [cassini]
   role_type: viewer
+
+restaurants_token:
+  map: restaurants
+  role_type: viewer
+  token: let me in

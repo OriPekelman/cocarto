@@ -1,6 +1,7 @@
 require "securerandom"
 
 class LayersController < ApplicationController
+  before_action :access_by_apikey, only: %i[geojson]
   before_action :set_layer, only: %i[show update destroy schema geojson]
   before_action :set_user_name
   before_action :authenticate_user!
@@ -82,5 +83,20 @@ class LayersController < ApplicationController
     }
 
     [field.id, type: mapping[field.field_type], title: field.label]
+  end
+
+  def access_by_apikey
+    token = params["authkey"] || request.headers["X-Auth-Key"]
+    if token.present? && !user_signed_in?
+      access_group = AccessGroup.find_by(token: token)
+      if access_group.present?
+        headers["Access-Control-Allow-Origin"] = "*"
+        headers["Access-Control-Allow-Methods"] = "GET OPTIONS"
+        headers["Access-Control-Allow-Headers"] = "*"
+        sign_in User.new(access_groups: [access_group])
+      else
+        render plain: t("api.bad_key"), status: :unauthorized
+      end
+    end
   end
 end

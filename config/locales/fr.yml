@@ -9,6 +9,8 @@ fr:
     index:
       new: Créer un nouveau rôle
       new_link: Créer un nouveau lien de partage
+  api:
+    bad_key: Mauvaise clé d’API
   area:
     million: km²
     unit: m²
