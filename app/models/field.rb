@@ -19,9 +19,12 @@
 #  fk_rails_...  (layer_id => layers.id)
 #
 class Field < ApplicationRecord
+  # Attributes
+  enum :field_type, {text: "text", float: "float", integer: "integer", territory: "territory", date: "date", boolean: "boolean", css_property: "css_property", enum: "enum"}, prefix: :type
+  attr_readonly :field_type
+
   # Relations
   belongs_to :layer
-  enum :field_type, {text: "text", float: "float", integer: "integer", territory: "territory", date: "date", boolean: "boolean", css_property: "css_property", enum: "enum"}, prefix: :type
 
   # Validations
   validates :field_type, presence: true

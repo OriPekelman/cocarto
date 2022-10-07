@@ -21,7 +21,19 @@
 require "test_helper"
 
 class FieldTest < ActiveSupport::TestCase
-  class EnumFieldTest < FieldTest
+  class Base < FieldTest
+    test "type can’t be changed" do
+      field = layers(:restaurants).fields.type_text.create!
+
+      field.type_integer!
+      assert_predicate field, :type_integer?
+
+      field.reload
+      assert_predicate field, :type_text?
+    end
+  end
+
+  class Enum < FieldTest
     test "some enum value is allowed" do
       field = Field.type_enum.new(enum_values: ["value"])
       field.validate
