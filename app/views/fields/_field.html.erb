@@ -1,0 +1,41 @@
+<%# params: field %>
+<%# A new/editable/destroyable table header for a given field.
+Used in layers/rows, broadcast from FieldsController and from Field hooks. %>
+
+<th id="<%= dom_id(field) %>" class="field dropdown" aria-haspopup="true" data-controller="dropdown" data-dropdown-target="trigger">
+
+  <span data-action="click->dropdown#toggle" class="chevron">
+    <%= field.label || "+" %>
+  </span>
+
+  <div class="dropdown-content" role="menu" data-dropdown-target="content">
+    <%# The namespace option makes sure the labels identify the radio buttons in the right forms %>
+    <%= form_with model: field, namespace: dom_id(field), class: "field", data: {action: "dropdown#toggle"} do |form| %>
+      <%# Disable the whole form in unauthorized. cf LayerPolicy#update?> %>
+      <fieldset data-restricted-target="restricted" data-restricted-authorizations="<%= %w[owner editor].to_json %>">
+        <% if field.new_record? %>
+          <h3><%= t("helpers.link.field.new") %></h3>
+        <% end %>
+        <%= form.hidden_field :layer_id %>
+        <%= form.text_field :label %>
+
+        <%= form.collection_radio_buttons(:field_type, Field.field_types.keys, :to_s, -> { Field.human_attribute_name("field_types.#{_1}") }) do |b| %>
+          <%= b.label(class: "radio") do %>
+            <%= b.radio_button required: field.new_record?, disabled: (field.persisted? && (field.field_type != b.value)) %> <%# field type can only be set initially %>
+            <%= b.text %>
+          <% end %>
+        <% end %>
+
+        <%= form.submit class: "primary-action" %>
+      </fieldset>
+    <% end %>
+
+    <%# Don’t display the delete button for persisted fields, and disable it if unauthorized. cf LayerPolicy#update? %>
+    <% if field.persisted? %>
+      <%= button_to field, method: :delete, class: "delete-action",
+            data: {restricted_target: "restricted", restricted_authorizations: %w[owner editor].to_json} do %>
+        <%= t("helpers.link.field.delete") %>
+      <% end %>
+    <% end %>
+  </div>
+</th>

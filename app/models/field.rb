@@ -34,10 +34,14 @@ class Field < ApplicationRecord
 
   # Hooks
   after_create_commit -> do
-    broadcast_i18n_before_to layer, target: "delete-column", partial: "fields/th"
+    broadcast_i18n_before_to layer, target: dom_id(Field.new)
     layer.rows.each do |row|
-      broadcast_i18n_before_to layer, target: dom_id(row, :last), partial: "fields/td", locals: {field: self, value: nil, form_id: dom_id(row, :form), author_id: row.author_id}
+      broadcast_i18n_before_to layer, target: dom_id(row, "actions"), partial: "fields/td", locals: {field: self, value: nil, form_id: dom_id(row, :form), author_id: row.author_id}
     end
+  end
+
+  after_update_commit -> do
+    broadcast_i18n_replace_to layer
   end
 
   after_destroy_commit -> do

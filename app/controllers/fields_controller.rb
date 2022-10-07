@@ -2,8 +2,7 @@ class FieldsController < ApplicationController
   before_action :set_field, only: %i[update destroy]
 
   def create
-    layer = Layer.includes(:rows).find(field_params[:layer_id])
-    @field = authorize layer.fields.new(field_params)
+    @field = authorize Field.new(field_params)
 
     if @field.save
       flash.now[:notice] = t("helpers.message.field.created", name: @field.label)
@@ -13,26 +12,38 @@ class FieldsController < ApplicationController
 
     respond_to do |format|
       format.turbo_stream do
-        new_field = Field.new(layer: layer)
-        render turbo_stream: turbo_stream.replace(helpers.dom_id(new_field, "form"), partial: "fields/form", locals: {field: new_field})
+        render turbo_stream: [
+          turbo_stream.update("flash", partial: "layouts/flash"),
+          turbo_stream.replace(Field.new(layer: @field.layer)) # Clear the “new_field” form
+        ]
       end
-      format.html { redirect_to layer_path(@field.layer) }
+      format.html { redirect_to @field.layer }
     end
   end
 
   def update
     if @field.update(field_params)
-      redirect_to @field, notice: t("helpers.message.field.updated")
+      flash.now[:notice] = t("helpers.message.field.updated")
     else
-      render :edit, status: :unprocessable_entity
+      flash.now[:alert] = @field.errors.first.full_message
+    end
+
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: [turbo_stream.update("flash", partial: "layouts/flash")] }
+      format.html { redirect_to @field.layer }
     end
   end
 
   def destroy
-    @field.destroy
+    if @field.destroy
+      flash.now[:notice] = t("helpers.message.field.destroyed")
+    else
+      flash.now[:alert] = @field.errors.first.full_message
+    end
+
     respond_to do |format|
-      format.turbo_stream
-      format.html { redirect_to @field.layer, notice: t("helpers.message.field.destroyed") } # delete this it’s turbo?
+      format.turbo_stream { render turbo_stream: [turbo_stream.update("flash", partial: "layouts/flash")] }
+      format.html { redirect_to @field.layer }
     end
   end
 
