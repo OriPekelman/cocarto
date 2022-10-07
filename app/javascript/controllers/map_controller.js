@@ -96,9 +96,6 @@ export default class extends Controller {
   #initRowDraw () {
     const rwOptions = {
       displayControlsDefault: false,
-      // Set mapbox-gl-draw to draw by default.
-      // The user does not have to click the polygon control button first.
-      defaultMode: `draw_${this.geometryTypeValue}`,
       styles: maplibreGLFeaturesStyle(this.colorValue),
       userProperties: true
     }
