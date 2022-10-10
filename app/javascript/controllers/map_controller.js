@@ -8,7 +8,7 @@ import MaplibreGeocoder from '@maplibre/maplibre-gl-geocoder'
 import maplibregl from 'maplibre-gl'
 
 export default class extends Controller {
-  static targets = ['geojsonField', 'newRowForm', 'row', 'map']
+  static targets = ['geojsonField', 'newRowForm', 'row', 'map', 'addButton']
   static values = {
     layerId: String,
     sessionId: String,
@@ -24,16 +24,7 @@ export default class extends Controller {
   connect () {
     this.#initMap()
     this.trackers = new PresenceTrackers(this)
-  }
-
-  #extendBounds (row) {
-    const llb = row.rowController.bounds()
-
-    if (this.boundingBox === null) {
-      this.boundingBox = llb
-    } else {
-      this.boundingBox = this.boundingBox.extend(llb)
-    }
+    this.drawMode = `draw_${this.geometryTypeValue}`
   }
 
   rowTargetConnected (row) {
@@ -49,24 +40,6 @@ export default class extends Controller {
     this.boundingBox = null
 
     this.rowTargets.forEach(otherRow => this.#extendBounds(otherRow))
-  }
-
-  #initMap () {
-    this.map = newMap(this.mapTarget)
-
-    this.#initRowDraw()
-    this.rowTargets.forEach(row => this.#addRow(row))
-
-    const resizeObserver = new ResizeObserver(() => this.map.resize())
-    resizeObserver.observe(this.mapTarget)
-
-    this.map.on('mousemove', e => this.trackers.mousemove(e))
-
-    this.map.addControl(
-      new MaplibreGeocoder(geocoderApi, {
-        maplibregl
-      })
-    )
   }
 
   centerToContent () {
@@ -89,16 +62,34 @@ export default class extends Controller {
     }
   }
 
-  changeMode () {
-    this.draw.changeMode(`draw_${this.geometryTypeValue}`)
+  toggleMode () {
+    const newMode = this.draw.getMode() === this.drawMode ? 'simple_select' : this.drawMode
+    this.draw.changeMode(newMode)
+    this.#modeChange(newMode)
+  }
+
+  // Private functions
+  #initMap () {
+    this.map = newMap(this.mapTarget)
+
+    this.#initRowDraw()
+    this.rowTargets.forEach(row => this.#addRow(row))
+
+    const resizeObserver = new ResizeObserver(() => this.map.resize())
+    resizeObserver.observe(this.mapTarget)
+
+    this.map.on('mousemove', e => this.trackers.mousemove(e))
+
+    this.map.addControl(
+      new MaplibreGeocoder(geocoderApi, {
+        maplibregl
+      })
+    )
   }
 
   #initRowDraw () {
     const rwOptions = {
       displayControlsDefault: false,
-      // Set mapbox-gl-draw to draw by default.
-      // The user does not have to click the polygon control button first.
-      defaultMode: `draw_${this.geometryTypeValue}`,
       styles: maplibreGLFeaturesStyle(this.colorValue),
       userProperties: true
     }
@@ -125,6 +116,7 @@ export default class extends Controller {
       const row = document.getElementById(id)
       row.rowController.update(features[0].geometry)
     })
+    this.map.on('draw.modechange', ({ mode }) => this.#modeChange(mode))
   }
 
   #addRow (row) {
@@ -136,5 +128,23 @@ export default class extends Controller {
       geometry
     }
     this.draw.add(feature)
+  }
+
+  #extendBounds (row) {
+    const llb = row.rowController.bounds()
+
+    if (this.boundingBox === null) {
+      this.boundingBox = llb
+    } else {
+      this.boundingBox = this.boundingBox.extend(llb)
+    }
+  }
+
+  #modeChange (mode) {
+    if (mode === this.drawMode) {
+      this.addButtonTarget.classList.add('active')
+    } else {
+      this.addButtonTarget.classList.remove('active')
+    }
   }
 }
