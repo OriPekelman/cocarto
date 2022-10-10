@@ -22,7 +22,7 @@ table.layer__data {
     color: var(--color-grey-80);
     height: 32px;
     th.calculated,
-    th.field {
+    th.field span {
       font-family: var(--font-serif);
       letter-spacing: 0.8px;
       text-transform: uppercase;

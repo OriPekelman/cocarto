@@ -97,6 +97,7 @@ en:
       _comment: The helpers.submit.create and helpers.submit.update keys are standard in Rails.
       field:
         create: Add a field
+        update: Save
       layer:
         create: Create a layer
       map:

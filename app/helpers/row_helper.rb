@@ -41,7 +41,7 @@ module RowHelper
     remove = button_to([row.layer, row], method: :delete, form: {data: {"turbo-confirm": t("common.confirm")}}) do
       embedded_svg("remove_item.svg")
     end
-    tag.td(id: dom_id(row, :last)) do
+    tag.td(id: dom_id(row, "actions")) do
       tag.div(class: "actions") do
         row_tag_form(row) +
           remove +

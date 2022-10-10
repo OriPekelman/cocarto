@@ -18,14 +18,11 @@ export default class extends Controller {
     //   role: viewer -> false
     const enabled = authorizations.some(authorization => this.roleValue.startsWith(authorization))
 
-    // Enable or disable the restricted target itself as well as its compatible descendents
+    // Enable or disable the restricted target
     // https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/disabled
     const supportsDisabling = 'button,fieldset,keygen,optgroup,option,select,textarea,input'
     if (restricted.matches(supportsDisabling)) {
       this.#setEnabled(restricted, enabled)
-    }
-    for (const element of restricted.querySelectorAll(supportsDisabling)) {
-      this.#setEnabled(element, enabled)
     }
   }
 

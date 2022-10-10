@@ -19,9 +19,12 @@
 #  fk_rails_...  (layer_id => layers.id)
 #
 class Field < ApplicationRecord
+  # Attributes
+  enum :field_type, {text: "text", float: "float", integer: "integer", territory: "territory", date: "date", boolean: "boolean", css_property: "css_property", enum: "enum"}, prefix: :type
+  attr_readonly :field_type
+
   # Relations
   belongs_to :layer
-  enum :field_type, {text: "text", float: "float", integer: "integer", territory: "territory", date: "date", boolean: "boolean", css_property: "css_property", enum: "enum"}, prefix: :type
 
   # Validations
   validates :field_type, presence: true
@@ -31,10 +34,14 @@ class Field < ApplicationRecord
 
   # Hooks
   after_create_commit -> do
-    broadcast_i18n_before_to layer, target: "delete-column", partial: "fields/th"
+    broadcast_i18n_before_to layer, target: dom_id(Field.new)
     layer.rows.each do |row|
-      broadcast_i18n_before_to layer, target: dom_id(row, :last), partial: "fields/td", locals: {field: self, value: nil, form_id: dom_id(row, :form), author_id: row.author_id}
+      broadcast_i18n_before_to layer, target: dom_id(row, "actions"), partial: "fields/td", locals: {field: self, value: nil, form_id: dom_id(row, :form), author_id: row.author_id}
     end
+  end
+
+  after_update_commit -> do
+    broadcast_i18n_replace_to layer
   end
 
   after_destroy_commit -> do
