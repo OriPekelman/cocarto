@@ -1,0 +1,31 @@
+<%# params: row %>
+<%# mobile versions %>
+
+<%= turbo_stream_from @layer %>
+<%= turbo_stream_i18n_from @layer %>
+<div
+  class="data-with-map map-rows-size"
+  data-controller="map restricted"
+  data-map-layer-id-value="<%= @layer.id %>"
+  data-map-session-id-value="<%= @session_id %>"
+  data-map-username-value="<%= @user_name %>"
+  data-map-geometry-type-value="<%= @layer.geometry_type %>"
+  data-map-color-value="<%= @layer.color %>"
+  data-restricted-role-value="<%= "#{@role_type}-#{current_user.id}" %>">
+    <div class="map" data-map-target="map">
+    </div>
+</div>
+
+<div>
+  <%= form_with do |form| %>
+  <div class="field field-position">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+    <%= form.label :lieu %>
+    <%= form.text_field :lieu %>
+    <%= form.label :dechets %>
+    <%= form.text_field :dechets %>
+  <button><span>+</span></button>
+  </div>
+<% end %>
+</div>

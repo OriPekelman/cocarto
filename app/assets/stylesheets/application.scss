@@ -105,6 +105,15 @@ footer {
     width: 50%;
   }
 }
+.map-rows-size {
+  .map {
+    width: 100%;
+    right: 0;
+    bottom: 0;
+    height: calc(50% - var(--toolbar-height));
+  }
+}
+
 .actions {
   display: flex;
 }
