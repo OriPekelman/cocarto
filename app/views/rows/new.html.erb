@@ -17,15 +17,15 @@
 </div>
 
 <div>
-  <%= form_with do |form| %>
+  <%= form_with model: [@row.layer, @row] do |form| %>
+  <%= hidden_field_tag :from_rows_new, true %> 
   <div class="field field-position">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-    <%= form.label :lieu %>
-    <%= form.text_field :lieu %>
-    <%= form.label :dechets %>
-    <%= form.text_field :dechets %>
-  <button><span>+</span></button>
+  <% @row.layer.fields.each do |field| %>
+    <%= form.hidden_field :geojson, value:'{"type":"Point","coordinates":[-57.83203125,28.149503212]}' %>
+    <%= form.label "fields_values[#{field.id}]", field.label %>
+    <%= form.text_field "fields_values[#{field.id}]" %>
+  <% end %>
+  <%= form.submit %>
   </div>
 <% end %>
 </div>

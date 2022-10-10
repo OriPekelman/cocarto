@@ -8,11 +8,16 @@ class RowsController < ApplicationController
   end
 
   def create
+    from_rows_new = params[:from_rows_new]
     @row = authorize Row.create(layer: @layer, **row_params, author: current_user)
-
-    respond_to do |format|
-      format.turbo_stream
-      format.html { redirect_to layer_path(@row.layer) }
+    if from_rows_new
+      flash[:notice] = t("helpers.message.row.updated")
+      redirect_to new_layer_row_path
+    else
+      respond_to do |format|
+        format.turbo_stream
+        format.html { redirect_to layer_path(@row.layer) }
+      end
     end
   end
 
@@ -43,6 +48,6 @@ class RowsController < ApplicationController
   end
 
   def row_params
-    @row_params = params.require(:row).permit(:geojson, :territory_id, fields_values: @layer.fields.ids)
+    params.require(:row).permit(:geojson, :territory_id, fields_values: @layer.fields.ids)
   end
 end
