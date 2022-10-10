@@ -112,6 +112,12 @@ footer {
     bottom: 0;
     height: calc(50% - var(--toolbar-height));
   }
+  .crosshair {
+    z-index: 1;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+  }
 }
 
 .actions {

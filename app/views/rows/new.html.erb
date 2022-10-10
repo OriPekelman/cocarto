@@ -1,31 +1,24 @@
 <%# params: row %>
-<%# mobile versions %>
 
-<%= turbo_stream_from @layer %>
-<%= turbo_stream_i18n_from @layer %>
 <div
   class="data-with-map map-rows-size"
-  data-controller="map restricted"
-  data-map-layer-id-value="<%= @layer.id %>"
-  data-map-session-id-value="<%= @session_id %>"
-  data-map-username-value="<%= @user_name %>"
-  data-map-geometry-type-value="<%= @layer.geometry_type %>"
-  data-map-color-value="<%= @layer.color %>"
-  data-restricted-role-value="<%= "#{@role_type}-#{current_user.id}" %>">
-    <div class="map" data-map-target="map">
+  data-controller="map-add-point">
+    <div class="map" data-map-add-point-target="map">
+      <%= embedded_svg "centrer.svg", class: "crosshair" %>
     </div>
-</div>
-
-<div>
-  <%= form_with model: [@row.layer, @row] do |form| %>
-  <%= hidden_field_tag :from_rows_new, true %> 
+      <%= form_with model: [@row.layer, @row] do |form| %>
+  <%= hidden_field_tag :from_rows_new, true %>
   <div class="field field-position">
   <% @row.layer.fields.each do |field| %>
-    <%= form.hidden_field :geojson, value:'{"type":"Point","coordinates":[-57.83203125,28.149503212]}' %>
+    <%= form.hidden_field :geojson, data: {map_add_point_target: "geojson"} %>
     <%= form.label "fields_values[#{field.id}]", field.label %>
     <%= form.text_field "fields_values[#{field.id}]" %>
   <% end %>
   <%= form.submit %>
   </div>
 <% end %>
+</div>
+
+<div>
+
 </div>
