@@ -303,3 +303,11 @@ textarea[readonly] {
     padding: 8px;
   }
 }
+
+input[type="radio"] ~ div.enum-values {
+  display: none;
+}
+
+input[type="radio"]:checked ~ div.enum-values {
+  display: inline;
+}
