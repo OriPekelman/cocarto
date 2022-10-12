@@ -22,6 +22,9 @@
         <p>
           <%= link_to t("common.display"), layer_path(layer) %>
         </p>
+        <p>
+            <%= link_to t("helpers.link.row.add_point"), new_layer_row_path(layer) if policy(layer).edit? && layer.geometry_point? %>
+        </p>
       </div>
     <% end %>
 

@@ -75,6 +75,9 @@ en:
       map:
         delete: Delete this map
         new: Build a new map
+      row:
+        add_point: Add points
+        add_this_point: Add this point
       territory:
         new: Add the territory
     message:
