@@ -384,6 +384,12 @@ input[type="number"] {
     fill: var(--color-green-50);
   }
 }
+.small-icon {
+  svg {
+    height: 16px;
+    width: 16px;
+  }
+}
 
 div.label-with-input {
   display: flex;

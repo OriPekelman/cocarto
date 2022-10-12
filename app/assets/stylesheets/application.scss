@@ -105,7 +105,7 @@ footer {
     width: 50%;
   }
 }
-.map-rows-size {
+.new-row {
   .map {
     width: 100%;
     right: 0;
@@ -113,13 +113,17 @@ footer {
     height: calc(50% - var(--toolbar-height));
   }
   .crosshair {
+    $size: 18px;
+    width: $size;
+    height: $size;
     z-index: 1;
     position: absolute;
     left: 50%;
     top: 50%;
+    margin-left: calc($size / -2);
+    margin-top: calc($size / -2);
   }
 }
-
 .actions {
   display: flex;
 }

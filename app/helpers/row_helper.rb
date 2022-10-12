@@ -45,7 +45,7 @@ module RowHelper
       tag.div(class: "actions") do
         row_tag_form(row) +
           remove +
-          button_with_icon("", "centrer.svg", data: {action: "click->map#centerToRow"})
+          button_with_icon("", "center.svg", class: "small-icon", data: {action: "click->map#centerToRow"})
       end
     end
   end
