@@ -62,7 +62,8 @@ table.layer__data {
 
   td.calculated,
   td.field {
-    input {
+    input,
+    select {
       height: 24px;
       width: 100%;
       box-shadow: none;

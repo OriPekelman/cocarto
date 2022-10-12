@@ -19,6 +19,8 @@ module FieldHelper
       date_field_tag field_name, value, opts
     when "boolean"
       check_box_tag field_name, "1", value == "1", opts
+    when "enum"
+      select_tag field_name, options_for_select(field.enum_values, value), opts.merge(include_blank: true)
     else
       text_field_tag field_name, value, opts.merge(class: "input")
     end
