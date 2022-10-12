@@ -1,7 +1,6 @@
 import { Controller } from '@hotwired/stimulus'
 
-import { newMap, geocoderApi } from 'lib/map_helpers'
-import MaplibreGeocoder from '@maplibre/maplibre-gl-geocoder'
+import { newMap } from 'lib/map_helpers'
 import maplibregl from 'maplibre-gl'
 
 export default class extends Controller {
@@ -23,10 +22,13 @@ export default class extends Controller {
     this.map = newMap(this.mapTarget)
     this.map.on('moveend', () => this.#setGeojson())
 
-    this.map.addControl(
-      new MaplibreGeocoder(geocoderApi, {
-        maplibregl
-      })
-    )
+    const geolocate = new maplibregl.GeolocateControl({
+      positionOptions: {
+        enableHighAccuracy: true
+      },
+      trackUserLocation: true
+    })
+
+    this.map.addControl(geolocate)
   }
 }
