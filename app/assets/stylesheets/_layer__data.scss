@@ -1,4 +1,7 @@
 // Main table of layer data
+.table-container {
+  overflow: auto;
+}
 
 table.layer__data {
   border-collapse: collapse;
@@ -6,15 +9,13 @@ table.layer__data {
   border: solid 1px var(--color-grey-50);
   table-layout: fixed;
   max-width: fit-content;
-  overflow-x: auto;
-  overflow-y: scroll;
+  overflow-x: hidden;
   white-space: nowrap;
   margin: 2em 1rem 0.1em;
   display: block;
 
   thead.resizable th {
     resize: horizontal;
-    overflow-x: auto;
   }
 
   thead {

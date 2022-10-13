@@ -21,7 +21,9 @@
         <%= link_with_icon t("helpers.link.layer.delete"), @layer, "delete.svg", data: {turbo_method: :delete, turbo_confirm: t("common.confirm")} %>
       </div>
     </div>
-    <%= render "rows", layer: @layer %>
+    <div class="table-container">
+      <%= render "rows", layer: @layer %>
+    </div>
   </div>
   <div class="dragbar" data-dragbar-target="dragbar" data-action="mousedown->dragbar#mousedown">
     <%= image_tag "dragbar_cursor.svg", alt: t("common.dragbar_cursor"), class: "svg-dragbar" %>
