@@ -4,36 +4,64 @@
 }
 
 table.layer__data {
-  border-collapse: collapse;
-  border-radius: 6px;
-  border: solid 1px var(--color-grey-50);
+  // -- Fancy rounded borders --
+  // We don’t collapse the borders to allow rounded cells
+  border-spacing: 0;
+  $border-radius: 6px;
+  $border: solid 1px var(--color-grey-50);
+  th {
+    border-top: $border;
+    &:first-child {
+      border-top-left-radius: $border-radius;
+    }
+    &:last-child {
+      border-top-right-radius: $border-radius;
+    }
+  }
+  th,
+  td {
+    border-bottom: $border;
+    border-left: $border;
+    &:last-child {
+      border-right: $border;
+    }
+  }
+  tr:last-child {
+    td:first-child {
+      border-bottom-left-radius: $border-radius;
+    }
+    td:last-child {
+      overflow: hidden;
+      border-bottom-right-radius: $border-radius;
+    }
+  }
+
   table-layout: fixed;
-  max-width: fit-content;
-  overflow-x: hidden;
   white-space: nowrap;
-  margin: 2em 1rem 0.1em;
-  display: block;
+  margin: 1em;
 
   thead.resizable th {
     resize: horizontal;
   }
 
   thead {
-    background-color: var(--color-grey-20);
+    position: sticky;
+    top: 0;
     color: var(--color-grey-80);
+    background-color: var(--color-bg-ambient-10);
     height: 32px;
-    th.calculated,
-    th.field span {
-      font-family: var(--font-serif);
-      letter-spacing: 0.8px;
-      text-transform: uppercase;
-      text-decoration: underline;
-      text-underline-offset: 0.2em;
-      text-decoration-color: var(--color-grey-50);
-      font-weight: 400;
-    }
     th {
-      border-top-width: 0;
+      background-color: var(--color-grey-20);
+      &.calculated,
+      &.field span {
+        font-family: var(--font-serif);
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        text-decoration: underline;
+        text-underline-offset: 0.2em;
+        text-decoration-color: var(--color-grey-50);
+        font-weight: 400;
+      }
     }
   }
 
@@ -41,9 +69,6 @@ table.layer__data {
   tr.row td {
     text-align: center;
     font-size: 12px;
-    border: solid 1px var(--color-grey-50);
-    border-bottom-width: 0;
-    border-left-width: 0;
     height: 24px;
 
     button {
@@ -54,10 +79,6 @@ table.layer__data {
     &.numerical {
       font-family: var(--font-mono);
       text-align: right;
-    }
-
-    &:last-child {
-      border-right-width: 0;
     }
   }
 
