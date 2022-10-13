@@ -73,6 +73,9 @@ fr:
       map:
         delete: Supprimer cette carte
         new: Créer une nouvelle carte
+      row:
+        add_point: Ajouter des points
+        add_this_point: Ajouter ce point
       territory:
         new: Ajouter le territoire
     message:
