@@ -68,6 +68,15 @@ export default class extends Controller {
     this.#modeChange(newMode)
   }
 
+  highlightFeatures (event) {
+    const rowId = event.target.closest('tr').id
+    const opt = {
+      featureIds: [rowId]
+    }
+
+    this.draw.changeMode('simple_select', opt)
+  }
+
   // Private functions
   #initMap () {
     this.map = newMap(this.mapTarget)
@@ -125,7 +134,9 @@ export default class extends Controller {
       const row = document.getElementById(id)
       row.rowController.update(features[0].geometry)
     })
-    this.map.on('draw.modechange', ({ mode }) => this.#modeChange(mode))
+    this.map.on('draw.modechange', ({ mode }) => {
+      this.#modeChange(mode)
+    })
   }
 
   #addRow (row) {
