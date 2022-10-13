@@ -52,6 +52,7 @@ table.layer__data {
     background-color: var(--color-bg-ambient-10);
     height: 32px;
     th {
+      text-align: left;
       background-color: var(--color-grey-20);
       &.calculated,
       &.field span {
