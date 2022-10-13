@@ -45,6 +45,7 @@ table.layer__data {
   }
 
   thead {
+    z-index: 1;
     position: sticky;
     top: 0;
     color: var(--color-grey-80);
@@ -103,6 +104,12 @@ table.layer__data {
       font-family: var(--font-mono);
       text-align: right;
     }
+  }
+
+  th:last-child,
+  td:last-child {
+    position: sticky;
+    right: 0;
   }
 }
 
