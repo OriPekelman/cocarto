@@ -8,13 +8,13 @@
   </div>
   <%= form_with model: [@row.layer, @row] do |form| %>
     <%= hidden_field_tag :from_rows_new, true %>
-  <div class="field field-position">
-    <% @row.layer.fields.each do |field| %>
-      <%= form.hidden_field :geojson, data: {map_add_point_target: "geojson"} %>
-      <%= form.label "fields_values[#{field.id}]", field.label %>
-      <%= form.text_field "fields_values[#{field.id}]" %>
-    <% end %>
-    <%= form.submit t("helpers.link.row.add_this_point") %>
-  </div>
+    <%= form.hidden_field :geojson, data: {map_add_point_target: "geojson"} %>
+   <div class="field field-position">
+      <% @row.layer.fields.each do |field| %>
+        <%= form.label "fields_values[#{field.id}]", field.label %>
+        <%= form.text_field "fields_values[#{field.id}]" %>
+      <% end %>
+      <%= form.submit t("helpers.link.row.add_this_point") %>
+    </div>
   <% end %>
 </div>
