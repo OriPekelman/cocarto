@@ -20,6 +20,7 @@ export default class extends Controller {
   // Private functions
   #initMap () {
     this.map = newMap(this.mapTarget)
+    this.#setGeojson()
     this.map.on('moveend', () => this.#setGeojson())
 
     const geolocate = new maplibregl.GeolocateControl({
@@ -30,5 +31,9 @@ export default class extends Controller {
     })
 
     this.map.addControl(geolocate)
+
+    this.map.on('load', function () {
+      geolocate.trigger()
+    })
   }
 }
