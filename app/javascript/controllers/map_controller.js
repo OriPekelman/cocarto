@@ -80,6 +80,15 @@ export default class extends Controller {
 
     this.map.on('mousemove', e => this.trackers.mousemove(e))
 
+    const geolocate = new maplibregl.GeolocateControl({
+      positionOptions: {
+        enableHighAccuracy: true
+      },
+      trackUserLocation: true
+    })
+
+    this.map.addControl(geolocate)
+
     this.map.addControl(
       new MaplibreGeocoder(geocoderApi, {
         maplibregl
