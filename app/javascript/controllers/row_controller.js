@@ -22,8 +22,8 @@ export default class extends Controller {
     this.dirty = true
   }
 
-  save () {
-    if (this.dirty) {
+  save (event) {
+    if (this.dirty || event.params.autosave) {
       this.formTarget.requestSubmit()
     }
   }
