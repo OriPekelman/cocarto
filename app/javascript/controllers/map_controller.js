@@ -77,6 +77,16 @@ export default class extends Controller {
     this.draw.changeMode('simple_select', opt)
   }
 
+  #selectionChange ({ features }) {
+    const highlightedRows = document.querySelectorAll('tr.highlight')
+    highlightedRows.forEach(row => row.classList.remove('highlight'))
+
+    features.forEach(feature => {
+      const row = document.getElementById(feature.id)
+      row.classList.add('highlight')
+    })
+  }
+
   // Private functions
   #initMap () {
     this.map = newMap(this.mapTarget)
@@ -88,6 +98,7 @@ export default class extends Controller {
     resizeObserver.observe(this.mapTarget)
 
     this.map.on('mousemove', e => this.trackers.mousemove(e))
+    this.map.on('draw.selectionchange', e => this.#selectionChange(e))
 
     const geolocate = new maplibregl.GeolocateControl({
       positionOptions: {
