@@ -8,6 +8,7 @@ That is why this partial needs the field name and the form %>
 <div
   class="territory-search dropdown"
   data-controller="autocomplete dropdown"
+  data-row-autosave-param="true"
   data-action="autocomplete:selected->row#save autocomplete:selected->new-territory#selected autocomplete:selected->dropdown#deactivate autocomplete:input->dropdown#activate">
   <%= hidden_field_tag field, territory&.id, data: {"autocomplete-target": "selected"}, form: form %>
   <%= form_with url: search_territories_path, method: :post do |form| %>
