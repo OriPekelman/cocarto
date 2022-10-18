@@ -21,7 +21,7 @@ class PresenceTrackerChannelTest < ActionCable::Channel::TestCase
     end
 
     test "mouse_moved is broad_cast" do
-      assert_broadcast_on(dom_id(layers(:hiking)), some: :data, action: :mouse_moved) do
+      assert_broadcast_on layers(:hiking), some: :data, action: :mouse_moved do
         perform :mouse_moved, some: :data
       end
     end
