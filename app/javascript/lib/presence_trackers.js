@@ -92,8 +92,7 @@ class PresenceTrackers {
         return this.perform('mouse_moved', {
           lngLat,
           name: mapController.usernameValue,
-          sessionId: mapController.sessionIdValue,
-          layerId: mapController.layerIdValue
+          sessionId: mapController.sessionIdValue
         })
       }
     })
