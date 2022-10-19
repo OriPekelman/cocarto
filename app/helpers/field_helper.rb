@@ -1,14 +1,6 @@
 module FieldHelper
-  def field_td(field, value, form_id, author_id)
-    # renders one form field tag for a value of a row for a specific field
-    opts = {
-      data: {action: "input->row#setDirty focusout->row#save"},
-      form: form_id,
-      autocomplete: :off
-    }
-    field_name = "row[fields_values][#{field.id}]"
-
-    field_tag = case field.field_type
+  def field_tag(field, field_name, value, opts = {})
+    case field.field_type
     when "integer"
       number_field_tag field_name, value, opts.merge(class: "numerical", step: "1")
     when "float"
@@ -24,8 +16,18 @@ module FieldHelper
     else
       text_field_tag field_name, value, opts.merge(class: "input")
     end
+  end
 
-    tag.td(field_tag,
+  def field_td(field, value, form_id, author_id)
+    # renders one form field tag for a value of a row for a specific field
+    opts = {
+      data: {action: "input->row#setDirty focusout->row#save"},
+      form: form_id,
+      autocomplete: :off
+    }
+    field_name = "row[fields_values][#{field.id}]"
+
+    tag.td(field_tag(field, field_name, value, opts),
       class: class_names("field", dom_id(field)),
       data: {
         restricted_target: "restricted",
