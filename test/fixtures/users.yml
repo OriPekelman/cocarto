@@ -34,10 +34,19 @@
 # model remove the "{}" from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
+
+DEFAULTS: &DEFAULTS
+  invitation_created_at: <%= 1.week.ago %>
+  invitation_sent_at: <%= 1.week.ago %>
+  invitation_accepted_at: <%= 1.hour.ago %>
+
 reclus:
   email: elisee.reclus@commune.paris
   encrypted_password: <%= Devise::Encryptor.digest(User, "refleurir") %>
+  <<: *DEFAULTS
 
 cassini:
   email: cassini@carto.gouv.fr
   encrypted_password: <%= Devise::Encryptor.digest(User, "générations12345") %>
+  <<: *DEFAULTS
+
