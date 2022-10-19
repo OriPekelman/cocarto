@@ -3,11 +3,31 @@ import hotkeys from 'hotkeys-js'
 
 export default class extends Controller {
   static targets = ['searchInput', 'selected', 'suggestion', 'suggestionList']
+  static values = {
+    path: String,
+    layerId: String
+  }
+
+  async #processResponse (response) {
+    this.suggestionListTarget.innerHTML = await response.text()
+    this.dispatch('input')
+  }
 
   input ({ target }) {
     if (this.searchInputTarget.value.length >= 2) {
-      this.dispatch('input')
-      target.form.requestSubmit()
+      const params = new URLSearchParams()
+      params.set('q', target.value)
+      if (this.layerIdValue !== '') {
+        params.set('layer_id', this.layerIdValue)
+      }
+
+      fetch(this.pathValue + '?' + params.toString()).then(response => {
+        if (response.ok) {
+          this.#processResponse(response)
+        } else {
+          console.error('Unable to fetch suggestion list', response)
+        }
+      })
     }
   }
 

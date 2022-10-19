@@ -11,11 +11,7 @@ class TerritoriesController < ApplicationController
       territories = territories.joins(:territory_category).merge(cat)
     end
 
-    render turbo_stream: [
-      turbo_stream.update(params[:result_id],
-        partial: "territories/search_results",
-        object: territories)
-    ]
+    render partial: "territories/search_results", object: territories
   end
 
   private
