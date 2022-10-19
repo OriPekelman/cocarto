@@ -92,7 +92,7 @@ class Row < ApplicationRecord
       value = new_fields_values[field.id]
       if field.type_territory?
         value = Territory.exists?(id: value) ? value : nil
-      elsif field.type_css_property? && field.label == "stroke-width"
+      elsif field.type_css_property? && field.label == "stroke-width" && value.present?
         value = value.to_i
       end
       [field.id, value]
