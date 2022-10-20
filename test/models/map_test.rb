@@ -10,7 +10,12 @@
 require "test_helper"
 
 class MapTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  class Queries < MapTest
+    test "#layer_with_last_updated_row, #last_updated_row, #last_updated_row_author" do
+      row = maps(:restaurants).layers.last.rows.create!(author: users(:cassini), point: "POINT(0.0001 0.0001)")
+      assert_equal layers(:restaurants), maps(:restaurants).layer_with_last_updated_row
+      assert_equal row, maps(:restaurants).last_updated_row
+      assert_equal users(:cassini), maps(:restaurants).last_updated_row_author
+    end
+  end
 end
