@@ -37,6 +37,13 @@ table.layer__data {
     }
   }
 
+  .highlight {
+    background-color: var(--color-attention-10);
+    input {
+      background-color: var(--color-attention-10);
+    }
+  }
+
   table-layout: fixed;
   white-space: nowrap;
   margin: 1em;
