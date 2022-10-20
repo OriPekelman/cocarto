@@ -26,7 +26,7 @@ Rails.application.routes.draw do
     resources :territory_categories
     resources :territories do
       collection do
-        post "search"
+        get "search"
       end
     end
     get "/:locale" => "main#index"
