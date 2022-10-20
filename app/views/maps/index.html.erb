@@ -2,7 +2,7 @@
 
 <div class="main-list">
   <h2><%= Map.model_name.human(count: 2) %></h2>
-  <% @maps.each do |map| %>
+  <% @maps.includes(:layers).each do |map| %>
     <%= link_to map, class: "no-decoration" do %>
     <div class="main-element">
       <h3><%= map.name %></h3>
