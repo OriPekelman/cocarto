@@ -24,10 +24,13 @@ module ApplicationHelper
   def updated_at_tag(record, author = nil)
     return if record.nil?
 
-    if author.present?
-      "- " + t("common.updated_at_by", date: l(record.updated_at, format: :long), user: author.display_name)
+    text = if author.present?
+      t("common.updated_at_by", date: time_ago_in_words(record.updated_at), user: author.display_name)
     else
-      "- " + t("common.updated_at", date: l(record.updated_at, format: :long))
+      t("common.updated_at", date: time_ago_in_words(record.updated_at))
+    end
+    tag.span title: l(record.updated_at, format: :long) do
+      "- " + text
     end
   end
 end
