@@ -23,17 +23,21 @@ lint-js: ## Run javascript linters
 	npx standard
 	npx prettier --check app/assets/stylesheets
 
+lint-scss: ## Run sccs linters
+	npx stylelint "**/*.scss"
+
 lint-active-record: ## Run Active Record Doctor
 	bundle exec rake active_record_doctor
 
-lint: lint-rb lint-js lint-active-record ## Run all linters
+lint: lint-rb lint-js lint-scss lint-active-record ## Run all linters
 
 lint_autocorrect: ## Run linters in autocorrect mode
 	bundle exec rubocop --autocorrect-all
 	bundle exec erblint --lint-all --autocorrect
+	bundle exec i18n-tasks normalize
 	npx standard --fix
 	npx prettier --write app/assets/stylesheets
-	bundle exec i18n-tasks normalize
+	npx stylelint --fix "**/*.scss"
 
 test: test-unit test-system ## Run all tests
 
@@ -46,4 +50,4 @@ test-system: ## Run system tests
 help: ## Display this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-.PHONY: install setup setup-dev setup-pg-users dev lint lint-rb lint-js lint-active-record lint_autocorrect test help
+.PHONY: install setup setup-dev setup-pg-users dev lint lint-rb lint-js lint-scss lint-active-record lint_autocorrect test help
