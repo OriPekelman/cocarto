@@ -18,17 +18,6 @@ nav {
   }
 }
 
-span {
-  font-family: var(--font-serif);
-  color: var(--color-grey-90);
-  line-height: 1.143px;
-  cursor: pointer;
-}
-
-span:active {
-  color: var(--color-grey-60);
-}
-
 .dropdown-content-app {
   @include common.border;
   position: fixed;
