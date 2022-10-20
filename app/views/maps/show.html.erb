@@ -10,13 +10,17 @@
   </div>
   <div class="main-list">
     <h2><%= @map.name %></h2>
-    <% @map.layers.includes(:rows).each do |layer| %>
+    <% @map.layers.includes(:rows, :last_updated_row_author).each do |layer| %>
       <div class="main-element">
         <h3><%= layer.name %></h3>
         <p>
           <span class="color-marker" style="background-color: <%= layer.color %>"></span>
           <%= layer.rows.size %> <%= Layer.human_attribute_name(layer.geometry_type, count: layer.rows.size) %>
-          — <%= t("common.updated_at_by", date: l(layer.updated_at.to_date, format: :long), user: current_user.email) %>
+          <% last_row = layer.last_updated_row %>
+          <% last_author = layer.last_updated_row_author %>
+          <% if last_author.present? %>
+            — <%= t("common.updated_at_by", date: l(last_row.updated_at, format: :long), user: last_author.display_name) %>
+          <% end %>
         </p>
 
         <p>

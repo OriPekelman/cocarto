@@ -2,13 +2,17 @@
 
 <div class="main-list">
   <h2><%= Map.model_name.human(count: 2) %></h2>
-  <% @maps.includes(:layers).each do |map| %>
+  <% @maps.includes(:layers, :last_updated_row_author).each do |map| %>
     <%= link_to map, class: "no-decoration" do %>
     <div class="main-element">
       <h3><%= map.name %></h3>
       <p>
         <%= map.layers.size %> <%= Layer.model_name.human(count: map.layers.size) %>
-        — <%= t("common.updated_at_by", date: l(map.updated_at.to_date, format: :long), user: current_user.email) %>
+        <% last_row = map.last_updated_row %>
+        <% last_author = map.last_updated_row_author %>
+        <% if last_author.present? %>
+        — <%= t("common.updated_at_by", date: l(last_row.updated_at, format: :long), user: last_author.display_name) %>
+        <% end %>
       </p>
       <div class="next"><%= embedded_svg "chevron_droite.svg" %></div>
     </div>
