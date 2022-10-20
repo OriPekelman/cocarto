@@ -14,4 +14,5 @@ class Map < ApplicationRecord
 
   # Through relations
   has_many :users, through: :access_groups, inverse_of: :maps
+  has_many :rows, through: :layers, inverse_of: :map
 end
