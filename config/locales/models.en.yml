@@ -94,6 +94,7 @@ en:
       map:
         destroyed: The map was successfully destroyed
       row:
+        added: Geometry was successfully added.
         destroyed: Geometry was successfully destroyed.
         updated: Geometry properties were successfully updated.
     submit:

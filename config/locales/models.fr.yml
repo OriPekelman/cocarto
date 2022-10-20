@@ -92,6 +92,7 @@ fr:
       map:
         destroyed: La carte a été détruite avec succès.
       row:
+        added: La géométrie a été ajoutée avec succès.
         destroyed: La géométrie a été détruite avec succès.
         updated: Les propriétés géométriques ont été mises à jour avec succès.
     submit:
