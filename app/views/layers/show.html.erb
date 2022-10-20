@@ -1,4 +1,4 @@
-<%# params: @layer, @session_id, @user_name, @role_type %>
+<%# params: @layer, @role_type %>
 
 <%= turbo_stream_from @layer %>
 <%= turbo_stream_i18n_from @layer %>
@@ -7,8 +7,6 @@
   data-action="mousemove@window->dragbar#mousemove mouseup@document->dragbar#mouseup"
   data-controller="map dragbar restricted"
   data-map-layer-id-value="<%= @layer.id %>"
-  data-map-session-id-value="<%= @session_id %>"
-  data-map-username-value="<%= @user_name %>"
   data-map-geometry-type-value="<%= @layer.geometry_type %>"
   data-map-color-value="<%= @layer.color %>"
   data-restricted-role-value="<%= "#{@role_type}-#{current_user.id}" %>">

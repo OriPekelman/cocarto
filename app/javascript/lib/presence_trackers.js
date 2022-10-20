@@ -2,9 +2,9 @@ import maplibre from 'maplibre-gl'
 import consumer from 'channels/consumer'
 
 class PresenceTracker {
-  constructor ({ name, lngLat, sessionId }) {
+  constructor ({ name, lngLat, cid }) {
     this.name = name || 'Anonymous'
-    this.sessionId = sessionId
+    this.cid = cid
     this.lost = false
 
     this.el = document.createElement('div')
@@ -25,7 +25,7 @@ class PresenceTracker {
   timeout (trackers) {
     if (this.lost) {
       this.marker.remove()
-      trackers.delete(this.sessionId)
+      trackers.delete(this.cid)
     } else {
       this.lost = true
       this.setName(this.name + ' (lost)')
@@ -53,7 +53,7 @@ class PresenceTrackers {
     this.trackers = new Map()
     this.lastMoveSent = Date.now()
     this.map = mapController.map
-    this.#initActionCable(mapController)
+    this.#initActionCable(mapController.layerIdValue)
   }
 
   mousemove ({ lngLat }) {
@@ -64,19 +64,20 @@ class PresenceTrackers {
   }
 
   #upsert (data) {
-    if (this.trackers.has(data.sessionId)) {
-      this.trackers.get(data.sessionId).update(data)
+    if (this.trackers.has(data.cid)) {
+      this.trackers.get(data.cid).update(data)
     } else {
       const tracker = new PresenceTracker(data)
       tracker.marker.addTo(this.map)
       tracker.resetTimeout(this.trackers)
-      this.trackers.set(data.sessionId, tracker)
+      this.trackers.set(data.cid, tracker)
     }
   }
 
-  #initActionCable (mapController) {
+  #initActionCable (layerId) {
     const _this = this
-    this.channel = consumer.subscriptions.create({ channel: 'PresenceTrackerChannel', layer: mapController.layerIdValue }, {
+    this.cid = window.crypto.randomUUID()
+    this.channel = consumer.subscriptions.create({ channel: 'PresenceTrackerChannel', layer: layerId, cid: this.cid }, {
       connected () {
         console.log('PresenceTrackerChannel connected')
       },
@@ -84,16 +85,12 @@ class PresenceTrackers {
         console.log('PresenceTrackerChannel disconnected')
       },
       received (data) {
-        if (data.sessionId !== mapController.sessionIdValue) {
+        if (data.cid !== _this.cid) {
           _this.#upsert(data)
         }
       },
       mouse_moved (lngLat) {
-        return this.perform('mouse_moved', {
-          lngLat,
-          name: mapController.usernameValue,
-          sessionId: mapController.sessionIdValue
-        })
+        return this.perform('mouse_moved', { lngLat })
       }
     })
   }

@@ -17,12 +17,12 @@ class PresenceTrackerChannelTest < ActionCable::Channel::TestCase
   class ActionTests < PresenceTrackerChannelTest
     setup do
       stub_connection current_user: users(:cassini)
-      subscribe layer: layers(:hiking).id
+      subscribe layer: layers(:hiking).id, cid: "cid"
     end
 
     test "mouse_moved is broad_cast" do
-      assert_broadcast_on layers(:hiking), some: :data, action: :mouse_moved do
-        perform :mouse_moved, some: :data
+      assert_broadcast_on layers(:hiking), lngLat: {lng: 1, lat: 2}, name: "cassini", cid: "cid" do
+        perform :mouse_moved, lngLat: {lng: 1, lat: 2}
       end
     end
   end

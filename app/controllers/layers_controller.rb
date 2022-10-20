@@ -3,14 +3,9 @@ require "securerandom"
 class LayersController < ApplicationController
   before_action :access_by_apikey, only: %i[geojson]
   before_action :set_layer, only: %i[show update destroy schema geojson]
-  before_action :set_user_name
   before_action :authenticate_user!
 
   def show
-    # Every time we open a new tab, we create this session id
-    # It allows to keep track of who is currently on the page
-    # It differs from current_user as a user can be connected many times on the same page
-    @session_id = SecureRandom.alphanumeric
     @role_type = current_user.access_groups.find_by(map: @layer.map)&.role_type
   end
 
@@ -65,10 +60,6 @@ class LayersController < ApplicationController
 
   def set_layer
     @layer = authorize Layer.includes(:fields, :map, rows: :territory).find(params[:id])
-  end
-
-  def set_user_name
-    @user_name = current_user.display_name
   end
 
   def layer_params
