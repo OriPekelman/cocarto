@@ -20,4 +20,14 @@ module ApplicationHelper
       embedded_svg(filename).concat(text)
     end
   end
+
+  def updated_at_tag(record, author = nil)
+    return if record.nil?
+
+    if author.present?
+      "- " + t("common.updated_at_by", date: l(record.updated_at, format: :long), user: author.display_name)
+    else
+      "- " + t("common.updated_at", date: l(record.updated_at, format: :long))
+    end
+  end
 end

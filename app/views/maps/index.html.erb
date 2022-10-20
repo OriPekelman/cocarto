@@ -8,11 +8,7 @@
       <h3><%= map.name %></h3>
       <p>
         <%= map.layers.size %> <%= Layer.model_name.human(count: map.layers.size) %>
-        <% last_row = map.last_updated_row %>
-        <% last_author = map.last_updated_row_author %>
-        <% if last_author.present? %>
-        — <%= t("common.updated_at_by", date: l(last_row.updated_at, format: :long), user: last_author.display_name) %>
-        <% end %>
+        <%= updated_at_tag(map.last_updated_row, map.last_updated_row_author) %>
       </p>
       <div class="next"><%= embedded_svg "chevron_droite.svg" %></div>
     </div>

@@ -16,11 +16,7 @@
         <p>
           <span class="color-marker" style="background-color: <%= layer.color %>"></span>
           <%= layer.rows.size %> <%= Layer.human_attribute_name(layer.geometry_type, count: layer.rows.size) %>
-          <% last_row = layer.last_updated_row %>
-          <% last_author = layer.last_updated_row_author %>
-          <% if last_author.present? %>
-            — <%= t("common.updated_at_by", date: l(last_row.updated_at, format: :long), user: last_author.display_name) %>
-          <% end %>
+          <%= updated_at_tag(layer.last_updated_row, layer.last_updated_row_author) %>
         </p>
 
         <p>

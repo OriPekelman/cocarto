@@ -40,6 +40,7 @@ en:
     longitude: Longitude
     share: Share…
     territory_code: Code
+    updated_at: Last update on %{date}
     updated_at_by: Last update on %{date} by %{user}
     user_not_authorized: You are not authorized to perform this action.
   layers:

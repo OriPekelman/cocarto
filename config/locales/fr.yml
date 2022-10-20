@@ -40,7 +40,8 @@ fr:
     longitude: Longitude
     share: Partager…
     territory_code: Code
-    updated_at_by: Mis à jour le %{date} par %{user}
+    updated_at: Modifié le %{date}
+    updated_at_by: Modifié le %{date} par %{user}
     user_not_authorized: Vous n’avez pas la permission d’effectuer cette action.
   layers:
     show:
