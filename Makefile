@@ -1,3 +1,4 @@
+MAKEFLAGS += --jobs 8 --output-sync --keep-going
 .DEFAULT_GOAL := help
 
 install: ## Install or update dependencies
