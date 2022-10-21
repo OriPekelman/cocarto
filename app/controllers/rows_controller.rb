@@ -11,7 +11,7 @@ class RowsController < ApplicationController
     from_rows_new = params[:from_rows_new]
     @row = authorize Row.create(layer: @layer, **row_params, author: current_user)
     if from_rows_new
-      flash[:notice] = t("helpers.message.row.updated")
+      flash[:notice] = t("helpers.message.row.added")
       redirect_to new_layer_row_path
     else
       respond_to do |format|

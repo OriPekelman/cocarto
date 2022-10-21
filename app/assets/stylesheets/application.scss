@@ -5,7 +5,6 @@
 @use "roles";
 @use "display_when_loaded";
 
-// NAVIGATION
 nav {
   height: var(--nav-height);
   border-bottom: 0.5px solid var(--color-grey-40);
@@ -79,22 +78,32 @@ nav {
 }
 
 .new-row {
+  width: 100%;
   .map {
-    width: 100%;
     right: 0;
     bottom: 0;
-    height: calc(50% - var(--toolbar-height));
+    height: 200px;
+    .crosshair {
+      $size: 18px;
+      width: $size;
+      height: $size;
+      z-index: 1;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      margin-left: calc($size / -2);
+      margin-top: calc($size / -2);
+    }
   }
-  .crosshair {
-    $size: 18px;
-    width: $size;
-    height: $size;
-    z-index: 1;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    margin-left: calc($size / -2);
-    margin-top: calc($size / -2);
+  .form {
+    @media screen and (max-width: 600px) {
+      padding-left: 1rem;
+    }
+    @media screen and (min-width: 600px) {
+      width: 30%;
+      margin-left: auto;
+      margin-right: auto;
+    }
   }
 }
 

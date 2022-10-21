@@ -1,20 +1,22 @@
 <%# params: row %>
 
 <div
-  class="data-with-map new-row"
+  class="new-row"
   data-controller="map-add-point">
   <div class="map" data-map-add-point-target="map">
     <%= embedded_svg "center.svg", class: "crosshair" %>
   </div>
-  <%= form_with model: [@row.layer, @row] do |form| %>
-    <%= hidden_field_tag :from_rows_new, true %>
-    <%= form.hidden_field :geojson, data: {map_add_point_target: "geojson"} %>
-   <div class="field field-position">
-      <% @row.layer.fields.each do |field| %>
-        <%= form.label "fields_values[#{field.id}]", field.label %>
-        <%= form.text_field "fields_values[#{field.id}]" %>
-      <% end %>
+  <div class="form">
+    <%= form_with model: [@row.layer, @row], id: dom_id(@row, :form) do |form| %>
+      <%= hidden_field_tag :from_rows_new, true %>
+      <%= form.hidden_field :geojson, data: {map_add_point_target: "geojson"} %>
+        <% @row.layer.fields.each do |field| %>
+          <div>
+            <%= form.label "row[fields_values][#{field.id}]", field.label %>
+            <%= field_tag field, "row[fields_values][#{field.id}]", nil, form: dom_id(@row, :form) %>
+          </div>
+        <% end %>
       <%= form.submit t("helpers.link.row.add_this_point") %>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 </div>
