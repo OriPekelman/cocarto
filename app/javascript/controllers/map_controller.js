@@ -11,8 +11,6 @@ export default class extends Controller {
   static targets = ['geojsonField', 'newRowForm', 'row', 'map', 'addButton']
   static values = {
     layerId: String,
-    sessionId: String,
-    username: String,
     geometryType: String,
     color: String
   }
