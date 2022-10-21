@@ -7,7 +7,8 @@ export default class extends Controller {
 
   static targets = ['left', 'right', 'dragbar']
 
-  mousedown () {
+  mousedown (event) {
+    event.preventDefault()
     this.dragging = true
   }
 
