@@ -40,6 +40,10 @@ class Layer < ApplicationRecord
   has_many :rows, -> { with_territory.order(:created_at) }, dependent: :delete_all, inverse_of: :layer
   has_and_belongs_to_many :territory_categories
 
+  # Query as relations
+  has_one :last_updated_row, -> { order(updated_at: :desc) }, class_name: "Row" # rubocop:disable Rails/InverseOf, Rails/HasManyOrHasOneDependent
+  has_one :last_updated_row_author, through: :last_updated_row, source: :author
+
   # Hooks
   after_update_commit -> { broadcast_i18n_replace_to self, target: "layer-name", partial: "layers/name" }
 
