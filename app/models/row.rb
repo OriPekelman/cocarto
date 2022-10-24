@@ -39,7 +39,7 @@ class Row < ApplicationRecord
   belongs_to :territory, optional: true
 
   # Through relations
-  has_one :map, through: :layer, inverse_of: :map
+  has_one :map, through: :layer, inverse_of: :rows
 
   # Hooks
   after_update_commit -> { broadcast_i18n_replace_to layer, object: Row.with_territory.includes(layer: :fields).find(id) }
