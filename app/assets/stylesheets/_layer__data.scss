@@ -42,15 +42,14 @@ table.layer__data {
       background-color: var(--color-attention-10);
     }
   }
-  .highlight-geometry {
+  .highlight-transition {
     background-color: var(--color-attention-20);
     input {
       background-color: var(--color-attention-20);
+    }
+    tr {
       transition: background-color 2s;
     }
-  }
-  tr {
-    transition: background-color 2s;
   }
 
   table-layout: fixed;
