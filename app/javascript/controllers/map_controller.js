@@ -30,6 +30,7 @@ export default class extends Controller {
     if (this.draw) {
       this.#addRow(row)
     }
+    setTimeout(() => row.classList.remove('highlight-geometry'), 1000)
     this.#extendBounds(row)
   }
 

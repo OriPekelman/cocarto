@@ -36,12 +36,21 @@ table.layer__data {
       border-bottom-right-radius: $border-radius;
     }
   }
-
   .highlight {
     background-color: var(--color-attention-10);
     input {
       background-color: var(--color-attention-10);
     }
+  }
+  .highlight-geometry {
+    background-color: var(--color-attention-20);
+    input {
+      background-color: var(--color-attention-20);
+      transition: background-color 2s;
+    }
+  }
+  tr {
+    transition: background-color 2s;
   }
 
   table-layout: fixed;
