@@ -47,7 +47,10 @@ table.layer__data {
     input {
       background-color: var(--color-attention-20);
     }
-    tr {
+  }
+  tr.bg-transition {
+    transition: background-color 2s;
+    input {
       transition: background-color 2s;
     }
   }

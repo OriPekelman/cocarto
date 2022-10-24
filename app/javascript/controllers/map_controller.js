@@ -31,6 +31,7 @@ export default class extends Controller {
       this.#addRow(row)
     }
     setTimeout(() => row.classList.remove('highlight-transition'), 1000)
+    setTimeout(() => row.classList.remove('bg-transition'), 3000)
     this.#extendBounds(row)
   }
 
