@@ -312,10 +312,10 @@ textarea[readonly] {
   }
 }
 
-input[type="radio"] ~ div.enum-values {
+input[type="radio"] ~ div.field-params {
   display: none;
 }
 
-input[type="radio"]:checked ~ div.enum-values {
+input[type="radio"]:checked ~ div.field-params {
   display: inline;
 }

@@ -25,6 +25,7 @@ class Field < ApplicationRecord
 
   # Relations
   belongs_to :layer
+  has_and_belongs_to_many :territory_categories
 
   # Validations
   validates :field_type, presence: true
@@ -52,5 +53,9 @@ class Field < ApplicationRecord
   # Type-specific coercion
   def enum_values=(new_values)
     super(new_values&.compact_blank&.uniq)
+  end
+
+  def territory_categories=(categories)
+    super(TerritoryCategory.find(categories&.compact_blank))
   end
 end

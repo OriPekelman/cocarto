@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_31_111340) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_08_124423) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -69,6 +69,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_31_111340) do
     t.enum "field_type", null: false, enum_type: "field_type"
     t.string "enum_values", array: true
     t.index ["layer_id"], name: "index_fields_on_layer_id"
+  end
+
+  create_table "fields_territory_categories", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.uuid "field_id"
+    t.uuid "territory_category_id"
+    t.index ["field_id"], name: "index_fields_territory_categories_on_field_id"
+    t.index ["territory_category_id"], name: "index_fields_territory_categories_on_territory_category_id"
   end
 
   create_table "layers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -173,6 +182,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_31_111340) do
   add_foreign_key "access_groups_users", "access_groups"
   add_foreign_key "access_groups_users", "users"
   add_foreign_key "fields", "layers"
+  add_foreign_key "fields_territory_categories", "fields"
+  add_foreign_key "fields_territory_categories", "territory_categories"
   add_foreign_key "layers", "maps"
   add_foreign_key "layers_territory_categories", "layers"
   add_foreign_key "layers_territory_categories", "territory_categories"

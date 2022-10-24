@@ -6,7 +6,7 @@ module FieldHelper
     when "float"
       number_field_tag field_name, value, opts.merge(class: "numerical", step: "any")
     when "territory"
-      render "territories/search_form", opts.merge(territory: value, field: field_name)
+      render "territories/search_form", opts.merge(territory: value, field: field_name, field_id: field.id)
     when "date"
       date_field_tag field_name, value, opts
     when "boolean"

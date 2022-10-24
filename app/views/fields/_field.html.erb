@@ -24,7 +24,7 @@ Used in layers/rows, broadcast from FieldsController and from Field hooks. %>
             <%= b.radio_button required: field.new_record?, disabled: (field.persisted? && (field.field_type != b.value)) %> <%# field type can only be set initially %>
             <%= b.text %>
             <% if b.object == "enum" %>
-              <div class="enum-values" data-controller="enum-values">
+              <div class="field-params" data-controller="enum-values">
                 <template data-enum-values-target="template">
                   <%= form.text_field :enum_values, value: nil, multiple: true, data: {enum_values_target: "value", action: "focusout->enum-values#newValue"} %>
                 </template>
@@ -33,6 +33,12 @@ Used in layers/rows, broadcast from FieldsController and from Field hooks. %>
                     <%= form.text_field :enum_values, value: val, multiple: true, data: {enum_values_target: "value", action: "focusout->enum-values#newValue"} %>
                   <% end %>
                 <% end %>
+              </div>
+            <% elsif b.object == "territory" %>
+              <div class="field-params">
+              <%= form.collection_check_boxes :territory_category_ids, TerritoryCategory.all, :id, :to_s do |b| %>
+                <div><%= b.label { b.check_box(disabled: field.persisted?) + b.text } %></div>
+              <% end %>
               </div>
             <% end %>
           <% end %>
