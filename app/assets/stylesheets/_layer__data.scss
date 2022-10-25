@@ -36,23 +36,18 @@ table.layer__data {
       border-bottom-right-radius: $border-radius;
     }
   }
-  .highlight {
+
+  .highlight,
+  .highlight input {
     background-color: var(--color-attention-10);
-    input {
-      background-color: var(--color-attention-10);
-    }
   }
-  .highlight-transition {
+  .highlight-transition,
+  .highlight-transition input {
     background-color: var(--color-attention-20);
-    input {
-      background-color: var(--color-attention-20);
-    }
   }
-  tr.bg-transition {
+  .bg-transition,
+  .bg-transition input {
     transition: background-color 2s;
-    input {
-      transition: background-color 2s;
-    }
   }
 
   table-layout: fixed;
