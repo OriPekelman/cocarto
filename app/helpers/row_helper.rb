@@ -1,5 +1,5 @@
 module RowHelper
-  def row_tr(row)
+  def row_tr(row, extra_class)
     data_attributes = {
       controller: "row",
       row_lng_min_value: row.geo_lng_min,
@@ -10,7 +10,7 @@ module RowHelper
       action: "focusin->map#highlightFeatures"
     }
 
-    tag.tr id: dom_id(row), data: data_attributes, class: "row" do
+    tag.tr id: dom_id(row), data: data_attributes, class: class_names("row", extra_class) do
       row_tag_calculated_data(row) +
         row_tag_data_cols(row) +
         row_tag_actions(row)

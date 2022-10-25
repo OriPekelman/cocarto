@@ -37,11 +37,17 @@ table.layer__data {
     }
   }
 
-  .highlight {
+  .highlight,
+  .highlight input {
     background-color: var(--color-attention-10);
-    input {
-      background-color: var(--color-attention-10);
-    }
+  }
+  .highlight-transition,
+  .highlight-transition input {
+    background-color: var(--color-attention-20);
+  }
+  .bg-transition,
+  .bg-transition input {
+    transition: background-color 2s;
   }
 
   table-layout: fixed;
