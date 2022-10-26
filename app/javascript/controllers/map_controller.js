@@ -130,20 +130,11 @@ export default class extends Controller {
   }
 
   #initRowDraw () {
-    const rwOptions = {
+    this.draw = new MapboxDraw({
       displayControlsDefault: false,
       styles: drawStyles,
       userProperties: true
-    }
-
-    const roOptions = {
-      displayControlsDefault: false,
-      styles: drawStyles,
-      userProperties: true
-    }
-
-    const editable = this.geometryTypeValue !== 'territory'
-    this.draw = new MapboxDraw(editable ? rwOptions : roOptions)
+    })
     this.map.addControl(this.draw)
 
     this.map.on('draw.create', ({ features }) => {
