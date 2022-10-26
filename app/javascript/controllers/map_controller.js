@@ -1,7 +1,7 @@
 /* global ResizeObserver */
 import { Controller } from '@hotwired/stimulus'
 
-import { newMap, maplibreGLFeaturesStyle, geocoderApi } from 'lib/map_helpers'
+import { newMap, drawStyles, geocoderApi } from 'lib/map_helpers'
 import PresenceTrackers from 'lib/presence_trackers'
 import MapboxDraw from '@mapbox/mapbox-gl-draw'
 import MaplibreGeocoder from '@maplibre/maplibre-gl-geocoder'
@@ -132,13 +132,13 @@ export default class extends Controller {
   #initRowDraw () {
     const rwOptions = {
       displayControlsDefault: false,
-      styles: maplibreGLFeaturesStyle(),
+      styles: drawStyles,
       userProperties: true
     }
 
     const roOptions = {
       displayControlsDefault: false,
-      styles: maplibreGLFeaturesStyle(),
+      styles: drawStyles,
       userProperties: true
     }
 
