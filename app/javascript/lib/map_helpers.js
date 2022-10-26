@@ -108,20 +108,20 @@ const pointStyles = [
 ]
 
 const lineStyles = [
-    // line stroke
-    {
-      id: 'gl-draw-line',
-      type: 'line',
-      filter: ['all', ['==', '$type', 'LineString'], ['!=', 'mode', 'static']],
-      layout: {
-        'line-cap': 'round',
-        'line-join': 'round'
-      },
-      paint: {
-        'line-color': ['coalesce', ['get', 'user_stroke'], '#555'],
-        'line-width': ['coalesce', ['get', 'user_stroke-width'], 2]
-      }
+  // line stroke
+  {
+    id: 'gl-draw-line',
+    type: 'line',
+    filter: ['all', ['==', '$type', 'LineString'], ['!=', 'mode', 'static']],
+    layout: {
+      'line-cap': 'round',
+      'line-join': 'round'
+    },
+    paint: {
+      'line-color': ['coalesce', ['get', 'user_stroke'], '#555'],
+      'line-width': ['coalesce', ['get', 'user_stroke-width'], 2]
     }
+  }
 ]
 
 const polygonStyles = [
@@ -161,31 +161,31 @@ const polygonStyles = [
       'line-color': ['coalesce', ['get', 'user_stroke'], '#555'],
       'line-width': ['coalesce', ['get', 'user_stroke-width'], 2]
     }
-  },
+  }
 ]
 
 // When editing lines and polygons, vertices are hilighted
 const vertexStyles = [
-    // vertex point halos
-    {
-      id: 'gl-draw-polygon-and-line-vertex-halo-active',
-      type: 'circle',
-      filter: ['all', ['==', 'meta', 'vertex'], ['==', '$type', 'Point'], ['!=', 'mode', 'static']],
-      paint: {
-        'circle-radius': 5,
-        'circle-color': '#FFF'
-      }
-    },
-    // vertex points
-    {
-      id: 'gl-draw-polygon-and-line-vertex-active',
-      type: 'circle',
-      filter: ['all', ['==', 'meta', 'vertex'], ['==', '$type', 'Point'], ['!=', 'mode', 'static']],
-      paint: {
-        'circle-radius': 3,
-        'circle-color': ['coalesce', ['get', 'user_stroke'], '#555'],
-      }
-    },
+  // vertex point halos
+  {
+    id: 'gl-draw-polygon-and-line-vertex-halo-active',
+    type: 'circle',
+    filter: ['all', ['==', 'meta', 'vertex'], ['==', '$type', 'Point'], ['!=', 'mode', 'static']],
+    paint: {
+      'circle-radius': 5,
+      'circle-color': '#FFF'
+    }
+  },
+  // vertex points
+  {
+    id: 'gl-draw-polygon-and-line-vertex-active',
+    type: 'circle',
+    filter: ['all', ['==', 'meta', 'vertex'], ['==', '$type', 'Point'], ['!=', 'mode', 'static']],
+    paint: {
+      'circle-radius': 3,
+      'circle-color': ['coalesce', ['get', 'user_stroke'], '#555']
+    }
+  }
 ]
 
 const drawStyles = [pointStyles, lineStyles, polygonStyles, vertexStyles].flat()

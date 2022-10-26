@@ -29,8 +29,6 @@ export default class extends Controller {
 
     const geolocate = newGeolocateControl()
     this.map.addControl(geolocate)
-    this.map.on('load', function () {
-      geolocate.trigger()
-    })
+    this.map.on('load', () => geolocate.trigger())
   }
 }

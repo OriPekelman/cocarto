@@ -10,7 +10,6 @@ import maplibregl from 'maplibre-gl'
 export default class extends Controller {
   static targets = ['geojsonField', 'newRowForm', 'row', 'map', 'addButton', 'defaultLatitude', 'defaultLongitude', 'defaultZoom']
   static values = {
-    geometryType: String,
     defaultLatitude: Number,
     defaultLongitude: Number,
     defaultZoom: Number
@@ -51,9 +50,8 @@ export default class extends Controller {
     }
   }
 
-  centerToRow (event) {
-    const row = event.target.closest('tr')
-
+  centerToRow ({ target }) {
+    const row = target.closest('tr')
     const llb = row.rowController.bounds()
 
     if (this.geometryTypeValue === 'point') {
@@ -113,11 +111,7 @@ export default class extends Controller {
     this.map.on('mousemove', e => this.trackers.mousemove(e))
     this.map.on('draw.selectionchange', e => this.#selectionChange(e))
     this.map.addControl(newGeolocateControl())
-    this.map.addControl(
-      new MaplibreGeocoder(geocoderApi, {
-        maplibregl
-      })
-    )
+    this.map.addControl(new MaplibreGeocoder(geocoderApi, { maplibregl }))
   }
 
   #initRowDraw () {
@@ -140,18 +134,15 @@ export default class extends Controller {
       const row = document.getElementById(id)
       row.rowController.update(features[0].geometry)
     })
-    this.map.on('draw.modechange', ({ mode }) => {
-      this.#modeChange(mode)
-    })
+    this.map.on('draw.modechange', ({ mode }) => this.#modeChange(mode))
   }
 
   #addRow (row) {
-    const geometry = row.rowController.geojson()
     const feature = {
       id: row.id,
       type: 'Feature',
       properties: row.rowController.propertiesValue,
-      geometry
+      geometry: row.rowController.geojson()
     }
     this.draw.add(feature)
   }
