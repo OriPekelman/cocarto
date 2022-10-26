@@ -43,22 +43,13 @@ export default class extends Controller {
   }
 
   centerToContent () {
-    if (this.geometryTypeValue === 'point' && this.rowTargets.length === 1) {
-      this.map.setCenter(this.boundingBox.getCenter())
-    } else {
-      this.map.fitBounds(this.boundingBox, { padding: 20 })
-    }
+    this.map.fitBounds(this.boundingBox, { padding: 20, maxZoom: 15 })
   }
 
   centerToRow ({ target }) {
     const row = target.closest('tr')
     const llb = row.rowController.bounds()
-
-    if (this.geometryTypeValue === 'point') {
-      this.map.setCenter(llb.getCenter())
-    } else {
-      this.map.fitBounds(llb, { padding: 20 })
-    }
+    this.map.fitBounds(llb, { padding: 20, maxZoom: 15 })
   }
 
   setDefaultCenterZoom () {
