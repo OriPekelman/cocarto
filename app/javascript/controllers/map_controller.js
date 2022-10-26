@@ -1,7 +1,7 @@
 /* global ResizeObserver */
 import { Controller } from '@hotwired/stimulus'
 
-import { newMap, drawStyles, geocoderApi } from 'lib/map_helpers'
+import { newMap, drawStyles, geocoderApi, newGeolocateControl } from 'lib/map_helpers'
 import PresenceTrackers from 'lib/presence_trackers'
 import MapboxDraw from '@mapbox/mapbox-gl-draw'
 import MaplibreGeocoder from '@maplibre/maplibre-gl-geocoder'
@@ -112,16 +112,7 @@ export default class extends Controller {
 
     this.map.on('mousemove', e => this.trackers.mousemove(e))
     this.map.on('draw.selectionchange', e => this.#selectionChange(e))
-
-    const geolocate = new maplibregl.GeolocateControl({
-      positionOptions: {
-        enableHighAccuracy: true
-      },
-      trackUserLocation: true
-    })
-
-    this.map.addControl(geolocate)
-
+    this.map.addControl(newGeolocateControl())
     this.map.addControl(
       new MaplibreGeocoder(geocoderApi, {
         maplibregl

@@ -17,6 +17,15 @@ function newMap (node, center, zoom) {
   })).addControl(new maplibre.ScaleControl())
 }
 
+function newGeolocateControl () {
+  return new maplibre.GeolocateControl({
+    positionOptions: {
+      enableHighAccuracy: true
+    },
+    trackUserLocation: true
+  })
+}
+
 const geocoderApi = {
   forwardGeocode: async (config) => {
     const features = []
@@ -181,4 +190,4 @@ const vertexStyles = [
 
 const drawStyles = [pointStyles, lineStyles, polygonStyles, vertexStyles].flat()
 
-export { newMap, drawStyles, geocoderApi }
+export { newMap, drawStyles, geocoderApi, newGeolocateControl }
