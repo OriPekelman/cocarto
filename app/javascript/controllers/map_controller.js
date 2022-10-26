@@ -113,18 +113,8 @@ export default class extends Controller {
     })
     this.map.addControl(this.draw)
 
-    this.map.on('draw.create', ({ features }) => {
-      this.geojsonFieldTarget.value = JSON.stringify(features[0].geometry)
-      this.newRowFormTarget.requestSubmit()
-      // When we submit the drawn row, we get one back from the server through turbo
-      // So we remove the one we’ve just drawn
-      this.draw.delete(features[0].id)
-    })
-    this.map.on('draw.update', ({ features }) => {
-      const id = features[0].id
-      const row = document.getElementById(id)
-      row.rowController.update(features[0].geometry)
-    })
+    this.map.on('draw.create', ({ features }) => this.#onDrawCreate(features))
+    this.map.on('draw.update', ({ features }) => this.#onDrawUpdate(features))
     this.map.on('draw.modechange', ({ mode }) => this.#modeChange(mode))
   }
 
@@ -154,5 +144,19 @@ export default class extends Controller {
     } else {
       this.addButtonTarget.classList.remove('active')
     }
+  }
+
+  #onDrawCreate (features) {
+    this.geojsonFieldTarget.value = JSON.stringify(features[0].geometry)
+    this.newRowFormTarget.requestSubmit()
+    // When we submit the drawn row, we get one back from the server through turbo
+    // So we remove the one we’ve just drawn
+    this.draw.delete(features[0].id)
+  }
+
+  #onDrawUpdate (features) {
+    const id = features[0].id
+    const row = document.getElementById(id)
+    row.rowController.update(features[0].geometry)
   }
 }
