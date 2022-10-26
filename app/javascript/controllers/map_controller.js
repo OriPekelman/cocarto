@@ -86,6 +86,11 @@ export default class extends Controller {
     this.draw.changeMode('simple_select', opt)
   }
 
+  exportMapAsImage ({ target }) {
+    target.href = this.map.getCanvas().toDataURL()
+  }
+
+  // Private functions
   #selectionChange ({ features }) {
     const highlightedRows = document.querySelectorAll('tr.highlight')
     highlightedRows.forEach(row => row.classList.remove('highlight'))
@@ -96,11 +101,6 @@ export default class extends Controller {
     })
   }
 
-  exportMapAsImage ({ target }) {
-    target.href = this.map.getCanvas().toDataURL()
-  }
-
-  // Private functions
   #initMap () {
     this.map = newMap(this.mapTarget, [this.defaultLongitudeValue, this.defaultLatitudeValue], this.defaultZoomValue)
 
