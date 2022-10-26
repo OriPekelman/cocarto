@@ -12,7 +12,6 @@ export default class extends Controller {
   static values = {
     layerId: String,
     geometryType: String,
-    color: String,
     defaultLatitude: Number,
     defaultLongitude: Number,
     defaultZoom: Number
@@ -134,13 +133,13 @@ export default class extends Controller {
   #initRowDraw () {
     const rwOptions = {
       displayControlsDefault: false,
-      styles: maplibreGLFeaturesStyle(this.colorValue),
+      styles: maplibreGLFeaturesStyle(),
       userProperties: true
     }
 
     const roOptions = {
       displayControlsDefault: false,
-      styles: maplibreGLFeaturesStyle(this.colorValue),
+      styles: maplibreGLFeaturesStyle(),
       userProperties: true
     }
 

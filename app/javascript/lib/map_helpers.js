@@ -61,7 +61,7 @@ config.query +
 // Points, line strings and polygons are styled following
 // https://maplibre.org/maplibre-gl-js-docs/style-spec
 // This function returns the styles for the features (not the basemap)
-function maplibreGLFeaturesStyle (color) {
+function maplibreGLFeaturesStyle () {
   return [
     {
       id: 'highlight-active-points',
@@ -83,7 +83,7 @@ function maplibreGLFeaturesStyle (color) {
         ['==', 'meta', 'feature']],
       paint: {
         'circle-radius': 6,
-        'circle-color': ['coalesce', ['get', 'user_color'], color]
+        'circle-color': ['get', 'user_marker-color']
       }
     },
     {
@@ -102,8 +102,8 @@ function maplibreGLFeaturesStyle (color) {
       type: 'fill',
       filter: ['all', ['==', '$type', 'Polygon'], ['!=', 'mode', 'static']],
       paint: {
-        'fill-color': ['coalesce', ['get', 'user_fill'], color],
-        'fill-outline-color': ['coalesce', ['get', 'user_outline-color'], color],
+        'fill-color': ['coalesce', ['get', 'user_fill'], '#555'],
+        'fill-outline-color': ['coalesce', ['get', 'user_outline-color'], '#555'],
         'fill-opacity': 0.1
       }
     },
@@ -116,7 +116,7 @@ function maplibreGLFeaturesStyle (color) {
         ['==', 'meta', 'midpoint']],
       paint: {
         'circle-radius': 3,
-        'circle-color': ['coalesce', ['get', 'user_color'], color]
+        'circle-color': ['coalesce', ['get', 'user_stroke'], '#555']
       }
     },
     // polygon outline stroke
@@ -130,7 +130,7 @@ function maplibreGLFeaturesStyle (color) {
         'line-join': 'round'
       },
       paint: {
-        'line-color': ['coalesce', ['get', 'user_stroke'], color],
+        'line-color': ['coalesce', ['get', 'user_stroke'], '#555'],
         'line-width': ['coalesce', ['get', 'user_stroke-width'], 2]
       }
     },
@@ -151,7 +151,7 @@ function maplibreGLFeaturesStyle (color) {
       filter: ['all', ['==', 'meta', 'vertex'], ['==', '$type', 'Point'], ['!=', 'mode', 'static']],
       paint: {
         'circle-radius': 3,
-        'circle-color': ['coalesce', ['get', 'user_color'], color]
+        'circle-color': ['coalesce', ['get', 'user_stroke'], '#555'],
       }
     },
     // line stroke
@@ -164,7 +164,7 @@ function maplibreGLFeaturesStyle (color) {
         'line-join': 'round'
       },
       paint: {
-        'line-color': ['coalesce', ['get', 'user_stroke'], color],
+        'line-color': ['coalesce', ['get', 'user_stroke'], '#555'],
         'line-width': ['coalesce', ['get', 'user_stroke-width'], 2]
       }
     }
