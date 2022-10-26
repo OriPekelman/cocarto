@@ -313,6 +313,10 @@ input[type="number"] {
       outline: 2px solid var(--color-green-50);
     }
   }
+  .link-download {
+    cursor: pointer;
+    color: var(--color-grey-80);
+  }
 }
 
 @mixin button($text, $background) {
