@@ -87,7 +87,7 @@ export default class extends Controller {
     })
   }
 
-  exportMap ({ target }) {
+  exportMapAsImage ({ target }) {
     target.href = this.map.getCanvas().toDataURL()
   }
 
