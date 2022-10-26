@@ -1,4 +1,7 @@
 .dropdown {
+  .layer-dropdown-content {
+    display: none;
+  }
   .dropdown-content {
     visibility: hidden;
     position: absolute;
@@ -25,6 +28,10 @@
 
   &.is-active > .dropdown-content {
     visibility: visible;
+  }
+
+  &.is-active > .layer-dropdown-content {
+    display: block;
   }
 
   &.is-active .chevron::after {

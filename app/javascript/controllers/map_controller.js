@@ -23,7 +23,6 @@ export default class extends Controller {
   connect () {
     this.#initMap()
     this.trackers = new PresenceTrackers(this)
-    this.drawMode = `draw_${this.geometryTypeValue}`
   }
 
   rowTargetConnected (row) {
@@ -41,6 +40,13 @@ export default class extends Controller {
     this.boundingBox = null
 
     this.rowTargets.forEach(otherRow => this.#extendBounds(otherRow))
+  }
+
+  layerSelected ({ params }) {
+    this.layerId = params.layerId
+    this.drawMode = `draw_${params.geometryType}`
+    this.newRowForm = this.newRowFormTargets.find(form => form.dataset.layerId === this.layerId)
+    this.geojsonField = this.geojsonFieldTargets.find(field => field.dataset.layerId === this.layerId)
   }
 
   centerToContent () {

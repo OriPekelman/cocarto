@@ -11,8 +11,8 @@
     <% end %>
   </div>
 <% else %>
-  <%= form_with model: [row.layer, row], data: {"map-target" => "newRowForm"}, class: "is-hidden" do |form| %>
-    <%= form.hidden_field :geojson, data: {"map-target" => "geojsonField"} %>
+  <%= form_with model: [row.layer, row], data: {map_target: "newRowForm", layer_id: row.layer.id}, class: "is-hidden" do |form| %>
+    <%= form.hidden_field :geojson, data: {map_target: "geojsonField", layer_id: row.layer.id} %>
     <%= form.submit %>
   <% end %>
 <% end %>

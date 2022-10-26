@@ -23,7 +23,7 @@ class MapsController < ApplicationController
   end
 
   def show
-    @map
+    @role_type = current_user.access_groups.find_by(map: @map)&.role_type
   end
 
   def update
