@@ -87,6 +87,10 @@ export default class extends Controller {
     })
   }
 
+  exportMap ({ target }) {
+    target.href = this.map.getCanvas().toDataURL()
+  }
+
   // Private functions
   #initMap () {
     this.map = newMap(this.mapTarget)
