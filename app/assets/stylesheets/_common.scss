@@ -316,6 +316,9 @@ input[type="number"] {
   .link-download {
     cursor: pointer;
     color: var(--color-grey-80);
+    svg {
+      pointer-events: none;
+    }
   }
 }
 
