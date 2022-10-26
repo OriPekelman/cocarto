@@ -29,6 +29,7 @@
   <div data-dragbar-target="right" class="right-pane">
     <div class="layer-actions action-bar">
       <%= button_with_icon t("common.frame"), "frame.svg", data: {action: "click->map#centerToContent"} %>
+      <a download="<%= @layer.name + ".png" %>" data-action="map#exportMapAsImage" class="link-download"><%= embedded_svg("download.svg", class: "download") %> image</a>
       <%= button_with_icon t("common.colors"), "color.svg", style: "display: none;" %>
       <%= button_with_icon t("common.add"), "add_circle.svg", data: {action: "click->map#toggleMode", map_target: "addButton"} unless @layer.geometry_territory? %>
     </div>
