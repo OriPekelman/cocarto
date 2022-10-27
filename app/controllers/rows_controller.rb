@@ -40,7 +40,7 @@ class RowsController < ApplicationController
   private
 
   def set_row
-    @row = authorize Row.includes(layer: :fields).find(params[:id])
+    @row = authorize Row.includes(layer: [:fields, :map]).find(params[:id])
   end
 
   def set_layer
