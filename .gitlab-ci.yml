@@ -30,23 +30,17 @@ variables:
   before_script:
     - npm install
 
-lint-rb:
+lint-bundler:
   extends: .ruby
   stage: test
   script:
-    - make lint-rb
+    - make lint-bundler
 
-lint-js:
+lint-node:
   extends: .node
   stage: test
   script:
-    - make lint-js
-
-lint-scss:
-  extends: .node
-  stage: test
-  script:
-    - make lint-scss
+    - make lint-node
 
 lint-active-record:
   extends: .ruby
