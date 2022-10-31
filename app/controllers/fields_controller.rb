@@ -50,7 +50,7 @@ class FieldsController < ApplicationController
   private
 
   def set_field
-    @field = authorize Field.includes(:layer).find(params[:id])
+    @field = authorize Field.includes(layer: :map).find(params[:id])
   end
 
   def field_params
