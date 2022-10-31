@@ -91,6 +91,7 @@ fr:
         destroyed: La couche a été détruite avec succès.
       map:
         destroyed: La carte a été détruite avec succès.
+        update: Le centrage et le zoom par défaut ont été sauvegardés.
       row:
         added: La géométrie a été ajoutée avec succès.
         destroyed: La géométrie a été détruite avec succès.

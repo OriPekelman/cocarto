@@ -8,6 +8,9 @@
   data-controller="map dragbar restricted"
   data-map-layer-id-value="<%= @layer.id %>"
   data-map-geometry-type-value="<%= @layer.geometry_type %>"
+  data-map-default-latitude-value="<%= @layer.map.default_latitude %>"
+  data-map-default-longitude-value="<%= @layer.map.default_longitude %>"
+  data-map-default-zoom-value="<%= @layer.map.default_zoom %>"
   data-map-color-value="<%= @layer.color %>"
   data-restricted-role-value="<%= "#{@role_type}-#{current_user.id}" %>">
   <div class="data" data-dragbar-target="left">
@@ -30,6 +33,12 @@
     <div class="layer-actions action-bar">
       <%= button_with_icon t("common.frame"), "frame.svg", data: {action: "click->map#centerToContent"} %>
       <a download="<%= @layer.name + ".png" %>" data-action="map#exportMapAsImage" class="link-download"><%= embedded_svg("download.svg", class: "download") %> image</a>
+      <%= form_for @layer.map do |f| %>
+        <%= f.text_field :default_latitude, data: {map_target: "defaultLatitude"}, style: "display: none;" %>
+        <%= f.text_field :default_longitude, data: {map_target: "defaultLongitude"}, style: "display: none;" %>
+        <%= f.text_field :default_zoom, data: {map_target: "defaultZoom"}, style: "display: none;" %>
+        <%= button_with_icon t("common.save_location_map"), "map-pin.svg", data: {action: "click->map#setDefaultCenterZoom"} %>
+      <% end %>
       <%= button_with_icon t("common.colors"), "color.svg", style: "display: none;" %>
       <%= button_with_icon t("common.add"), "add_circle.svg", data: {action: "click->map#toggleMode", map_target: "addButton"} unless @layer.geometry_territory? %>
     </div>

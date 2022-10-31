@@ -38,6 +38,7 @@ fr:
     latitude: Latitude
     length: Longueur
     longitude: Longitude
+    save_location_map: enregistrer
     share: Partager…
     territory_code: Code
     updated_at: Modifié il y a %{date}
