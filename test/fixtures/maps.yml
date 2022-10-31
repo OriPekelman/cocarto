@@ -2,10 +2,13 @@
 #
 # Table name: maps
 #
-#  id         :uuid             not null, primary key
-#  name       :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id                :uuid             not null, primary key
+#  default_latitude  :float
+#  default_longitude :float
+#  default_zoom      :float
+#  name              :string
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
 #
 
 restaurants:
