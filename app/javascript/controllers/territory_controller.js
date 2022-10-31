@@ -6,7 +6,7 @@ export default class extends Controller {
   static targets = ['map', 'geometry']
 
   connect () {
-    this.map = newMap(this.mapTarget)
+    this.map = newMap(this.mapTarget, [0, 0], 1)
 
     this.bounds = null
 

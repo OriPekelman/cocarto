@@ -19,7 +19,7 @@ export default class extends Controller {
 
   // Private functions
   #initMap () {
-    this.map = newMap(this.mapTarget)
+    this.map = newMap(this.mapTarget, [0, 0], 1)
     this.#setGeojson()
     this.map.on('moveend', () => this.#setGeojson())
 

@@ -8,11 +8,14 @@ import MaplibreGeocoder from '@maplibre/maplibre-gl-geocoder'
 import maplibregl from 'maplibre-gl'
 
 export default class extends Controller {
-  static targets = ['geojsonField', 'newRowForm', 'row', 'map', 'addButton']
+  static targets = ['geojsonField', 'newRowForm', 'row', 'map', 'addButton', 'defaultLatitude', 'defaultLongitude', 'defaultZoom']
   static values = {
     layerId: String,
     geometryType: String,
-    color: String
+    color: String,
+    defaultLatitude: Number,
+    defaultLongitude: Number,
+    defaultZoom: Number
   }
 
   initialize () {
@@ -62,6 +65,14 @@ export default class extends Controller {
     }
   }
 
+  setDefaultCenterZoom () {
+    const { lng, lat } = this.map.getCenter()
+    const zoom = this.map.getZoom()
+    this.defaultLongitudeTarget.value = lng
+    this.defaultLatitudeTarget.value = lat
+    this.defaultZoomTarget.value = zoom
+  }
+
   toggleMode () {
     const newMode = this.draw.getMode() === this.drawMode ? 'simple_select' : this.drawMode
     this.draw.changeMode(newMode)
@@ -93,7 +104,7 @@ export default class extends Controller {
 
   // Private functions
   #initMap () {
-    this.map = newMap(this.mapTarget)
+    this.map = newMap(this.mapTarget, [this.defaultLongitudeValue, this.defaultLatitudeValue], this.defaultZoomValue)
 
     this.#initRowDraw()
     this.rowTargets.forEach(row => this.#addRow(row))
