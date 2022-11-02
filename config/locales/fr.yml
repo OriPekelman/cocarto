@@ -29,7 +29,7 @@ fr:
     area: Surface
     back: Retour
     colors: couleur
-    confirm: Êtes-vous sûr ?
+    confirm: Êtes-vous sûr ?
     display: Afficher
     dragbar_cursor: Curseur de la barre de défilement
     failed: 'Échec : %{msg}'
@@ -62,7 +62,7 @@ fr:
     index:
       landing_1_header_html: |
         <p>Ĝis est un outil de collaboration cartographique.<br>
-        Il permettra d’associer des informations à un territoire.</p><p>Comme par exemple :</p>
+        Il permettra d’associer des informations à un territoire.</p><p>Comme par exemple :</p>
       landing_2_examples_html: "<li>préparer le parcours et les étapes d’une randonnée,</li><li>répertorier des défauts d’infrastructure.</li>\n"
       landing_3_footer_html: |
         Nous sommes à l’écoute des besoins pour un tel outil dans des structures existantes.

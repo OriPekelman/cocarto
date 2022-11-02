@@ -62,7 +62,7 @@ en:
     index:
       landing_1_header_html: |
         <p>Ĝis is a collaborative cartography tool.<br>
-        Il can link data to a territory.</p><p>For example :</p>
+        It can link data to a territory.</p><p>For example:</p>
       landing_2_examples_html: "<li>prepare the journey and every step for a hike,</li><li>list infrastructure issues.</li>\n"
       landing_3_footer_html: |
         We’re looking for stories for such needs in existing companies.
