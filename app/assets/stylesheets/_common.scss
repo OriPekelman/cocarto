@@ -12,6 +12,8 @@ html {
 }
 
 body {
+  display: flex;
+  flex-direction: column;
   height: 100%;
   font-size: 16px;
   background: var(--color-bg-ambient-10);
@@ -168,16 +170,16 @@ label {
 
 main {
   display: flex;
-  padding-bottom: var(--footer-height);
+  flex-grow: 1;
+  justify-content: center;
 }
 
 footer {
-  bottom: 0;
-  position: fixed;
+  align-items: center;
+  display: flex;
   height: var(--footer-height);
-  width: 100%;
   background-color: var(--color-bg-ambient-30);
-  text-align: center;
+  justify-content: center;
   font-size: 14px;
   color: var(--color-grey-60);
 }
