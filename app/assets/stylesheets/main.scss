@@ -42,17 +42,29 @@ hr.solid {
 /* MAIN LANDING PAGE */
 body {
   background-color: var(--color-bg-ambient-10);
-  font-size: 18px;
+}
+
+.container {
+  display: flex;
+  gap: 2.5rem;
 }
 
 .main-text-landing {
-  padding: 64px 120px;
   font-family: var(--font-serif);
-  font-weight: 100;
-  letter-spacing: 1.111px;
+  font-size: 18px;
   color: var(--color-grey-90);
-  max-width: 950px;
+  flex-basis: 50%;
   line-height: 20px;
+}
+
+@media (max-width: 850px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .main-text-landing {
+    flex-basis: max-content;
+  }
 }
 
 .main-text-landing-ul {
