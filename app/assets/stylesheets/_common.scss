@@ -169,9 +169,10 @@ label {
 }
 
 main {
+  align-items: center;
   display: flex;
+  flex-direction: column;
   flex-grow: 1;
-  justify-content: center;
 }
 
 footer {
@@ -340,7 +341,8 @@ input[type="number"] {
 
 .container {
   padding: var(--content-padding);
-  width: var(--content-max-width);
+  max-width: var(--content-max-width);
+  width: 100%;
 }
 
 @mixin button($text, $background) {
