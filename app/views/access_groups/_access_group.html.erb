@@ -4,7 +4,7 @@
     <% if access_group.token.present? %>
       <%= form.hidden_field :token unless access_group.persisted? %>
       <% if access_group.persisted? %>
-        <div class="label-with-input" data-controller="clipboard">
+        <div class="field" data-controller="clipboard">
           <%= form.label :url_to_share, t(".url_to_share") %><br>
           <div class="input-with-button">
             <%= text_field_tag :url_to_share, share_link_url(access_group.token), data: {clipboard_target: "source"}, autocomplete: :off %>
@@ -12,20 +12,20 @@
           </div>
         </div>
       <% end %>
-      <div class="label-with-input">
+      <div class="field">
         <%= form.label :name, t(".url_name") %><br>
         <%= form.text_field :name %>
       </div>
     <% else %>
       <%= form.fields_for :users do |f| %>
-        <div class="label-with-input">
+        <div class="field">
           <%= f.label :email %><br>
           <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
         </div>
       <% end %>
     <% end %>
 
-    <div class="label-with-input">
+    <div class="field">
       <%= form.label :role_type, t(".type") %>
       <%= form.select :role_type, options_for_select(AccessGroup.role_types.map { |access_group| [AccessGroup.human_attribute_name(access_group[0]), access_group[1]] }, access_group.role_type) %>
     </div>

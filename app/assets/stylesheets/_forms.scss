@@ -1,0 +1,99 @@
+:root {
+  --input-bg-empty: #fafafa;
+  --input-border-color: var(--color-grey-60);
+  --input-border-focus: #288cf;
+  --input-outline-focus: #99ccff;
+}
+
+form header {
+  margin: 0.5rem 0;
+  padding: 0.5rem 0;
+}
+
+label {
+  font-family: var(--font-serif);
+}
+
+input,
+label,
+select,
+textarea {
+  display: block;
+  font-size: inherit;
+  max-width: 460px;
+}
+
+input:focus {
+  border-color: var(--input-border-focus);
+  box-shadow: none;
+  outline: 2px solid var(--input-outline-focus);
+}
+
+input,
+select,
+textarea {
+  border: 1px solid var(--input-border-color);
+  border-width: 1px;
+  border-radius: 2px;
+  box-shadow: 0px 1px 4px var(--color-grey-40) inset;
+  font-size: 14px;
+  padding: 0.5rem 0.625rem;
+  vertical-align: middle;
+
+  /* matches an empty input */
+  &:invalid {
+    background-color: var(--input-bg-empty);
+    border-color: var(--color-grey-50);
+  }
+}
+
+input,
+select {
+  height: 40px;
+}
+
+input:focus {
+  border-radius: 2px;
+  border: 2px solid rgba(153, 204, 255, 1);
+  border: 1px solid var(--color-green-90);
+  opacity: 1;
+  background-color: rgba(255, 255, 255, 1);
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  border: 1px solid var(--input-border-color);
+  box-shadow: 0 1px 4px var(--color-grey-30) inset;
+  display: inline-block;
+  height: 16px;
+  width: 16px;
+  accent-color: var(--color-green-70);
+}
+
+// Hide browser-specific decoration of number inputs
+input[type="number"] {
+  -moz-appearance: textfield;
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+.field {
+  display: flex;
+  gap: 0.375rem;
+  flex-direction: column;
+  font-family: var(--font-serif);
+  font-size: 14px;
+}
+
+.field--inline {
+  align-items: center;
+  flex-direction: row;
+}
+
+.field--slim {
+  font-size: 11px;
+}

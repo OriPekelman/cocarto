@@ -6,6 +6,8 @@
   }
 
   form {
-    display: contents;
+    align-items: end;
+    display: flex;
+    gap: 1rem;
   }
 }

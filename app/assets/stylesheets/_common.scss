@@ -1,5 +1,6 @@
 @use "dropdown";
 @use "restricted";
+@use "forms";
 
 * {
   box-sizing: border-box;
@@ -163,11 +164,6 @@ fieldset {
   border: none;
 }
 
-label {
-  margin-bottom: 0.2rem;
-  font-family: var(--font-serif);
-}
-
 main {
   align-items: center;
   display: flex;
@@ -192,51 +188,6 @@ h2 {
   margin-top: 0;
 }
 
-form header {
-  margin: 0.5rem 0;
-  padding: 0.5rem 0;
-}
-
-input,
-label,
-select,
-textarea {
-  display: block;
-  font-size: inherit;
-  max-width: 460px;
-  margin: 8px;
-}
-
-input:focus {
-  border-color: var(--color-info-30);
-  outline: 2px solid var(--color-info-20);
-}
-
-input,
-select,
-textarea {
-  border-color: var(--color-grey-50);
-  border-width: 1px;
-  border-radius: 2px;
-  box-shadow: 0px 1px 4px var(--color-grey-40);
-  vertical-align: middle;
-}
-
-input,
-select {
-  height: 40px;
-}
-
-input:focus {
-  border-radius: 2px;
-  border: 2px solid rgba(153, 204, 255, 1);
-  border: 1px solid var(--color-green-90);
-  box-shadow: 0px 0px 5px rgba(20, 136, 243, 0.198171) inset,
-    0px 0px 5px rgba(77, 162, 255, 0.4);
-  opacity: 1;
-  background-color: rgba(255, 255, 255, 1);
-}
-
 a b,
 a em,
 a i,
@@ -254,7 +205,6 @@ button {
   border: none;
   color: var(--color-bg);
   line-height: 1.5;
-  margin: 0.5rem 0;
   padding: 0.2rem 0.4rem;
   cursor: pointer;
   border-radius: var(--border-radius);
@@ -263,35 +213,6 @@ button {
 .centered-main {
   margin: auto;
   padding: 24px;
-}
-
-input[type="checkbox"] + label,
-input[type="radio"] + label {
-  display: inline-block;
-  align-items: center;
-  font-weight: lighter;
-  position: relative;
-  top: 1px;
-}
-
-input[type="checkbox"],
-input[type="radio"] {
-  display: inline-block;
-  margin-right: 0.5rem;
-  margin-left: 0.5rem;
-  height: 16px;
-  width: 16px;
-  accent-color: var(--color-green-70);
-}
-
-// Hide browser-specific decoration of number inputs
-input[type="number"] {
-  -moz-appearance: textfield;
-  &::-webkit-outer-spin-button,
-  &::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
 }
 
 .layer-actions {
@@ -349,7 +270,6 @@ input[type="number"] {
   border: 0;
   font-weight: lighter;
   padding: 8px;
-  margin: 8px;
   border-radius: var(--border-radius);
   text-decoration: none;
   color: $text;
@@ -386,20 +306,6 @@ input[type="number"] {
   border-width: 3px;
 }
 
-.field {
-  font-family: var(--font-serif);
-  margin-top: 16px;
-  margin-bottom: 16px;
-
-  br {
-    display: block;
-  }
-
-  label {
-    vertical-align: middle;
-  }
-}
-
 .no-decoration {
   text-decoration: none;
 }
@@ -429,15 +335,5 @@ input[type="number"] {
   svg {
     height: 16px;
     width: 16px;
-  }
-}
-
-div.label-with-input {
-  display: flex;
-  flex-direction: column;
-
-  input,
-  select {
-    margin-top: 0;
   }
 }
