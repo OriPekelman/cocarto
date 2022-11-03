@@ -1,18 +1,23 @@
 <%# params: @maps %>
-
-<div class="main-list">
-  <h2><%= Map.model_name.human(count: 2) %></h2>
-  <% @maps.includes(:layers, :last_updated_row_author).each do |map| %>
-    <%= link_to map, class: "no-decoration" do %>
-    <div class="main-element">
-      <h3><%= map.name %></h3>
-      <p>
-        <%= map.layers.size %> <%= Layer.model_name.human(count: map.layers.size) %>
-        <%= updated_at_tag(map.last_updated_row, map.last_updated_row_author) %>
-      </p>
-      <div class="next"><%= embedded_svg "chevron_droite.svg" %></div>
-    </div>
-    <% end %>
-  <% end %>
-  <%= link_to t("helpers.link.map.new"), new_map_path, class: "primary-action" %>
+<div class="container">
+  <section class="section section--small">
+    <h2 class="section__title"><%= Map.model_name.human(count: 2) %></h2>
+    <ul class="list">
+      <% @maps.includes(:layers, :last_updated_row_author).each do |map| %>
+        <li class="list-element">
+          <%= link_to map, class: "no-decoration list-element__link" do %>
+            <div class="list-element__content">
+              <h3 class="list-element__title"><%= map.name %></h3>
+              <p class="list-element__description">
+                <%= map.layers.size %> <%= Layer.model_name.human(count: map.layers.size) %>
+                <%= updated_at_tag(map.last_updated_row, map.last_updated_row_author) %>
+              </p>
+            </div>
+            <div class="list-element__extra"><%= embedded_svg "chevron_droite.svg" %></div>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+    <%= link_to t("helpers.link.map.new"), new_map_path, class: "primary-action" %>
+  </section>
 </div>
