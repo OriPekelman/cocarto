@@ -2,7 +2,7 @@
 <%# A new/editable/destroyable table header for a given field.
 Used in layers/rows, broadcast from FieldsController and from Field hooks. %>
 
-<th id="<%= dom_id(field) %>" class="field dropdown" aria-haspopup="true" data-controller="dropdown" data-dropdown-target="trigger">
+<th id="<%= dom_id(field) %>" class="dropdown" aria-haspopup="true" data-controller="dropdown" data-dropdown-target="trigger">
 
   <span data-action="click->dropdown#toggle" class="chevron">
     <%= field.label || "+" %>

@@ -28,7 +28,7 @@ module FieldHelper
     field_name = "row[fields_values][#{field.id}]"
 
     tag.td(field_tag(field, field_name, value, opts),
-      class: class_names("field", dom_id(field)),
+      class: class_names("table-field", dom_id(field)),
       data: {
         restricted_target: "restricted",
         restricted_authorizations: %W[owner editor contributor-#{author_id}].to_json # cf RowPolicy#update?
