@@ -1,6 +1,6 @@
 class MapsController < ApplicationController
   before_action :new_map, only: %i[new create]
-  before_action :set_map, only: %i[show destroy]
+  before_action :set_map, only: %i[show update destroy]
 
   after_action :verify_authorized, except: :index
   after_action :verify_policy_scoped, only: :index
@@ -26,6 +26,18 @@ class MapsController < ApplicationController
     @map
   end
 
+  def update
+    if @map.update(map_params)
+      flash.now[:notice] = t("helpers.message.map.center_and_zoom_saved")
+      respond_to do |format|
+        format.turbo_stream { render turbo_stream: [turbo_stream.update("flash", partial: "layouts/flash")] }
+        format.html { redirect_to layer_path(@map) }
+      end
+    else
+      render :show, status: :unprocessable_entity
+    end
+  end
+
   def destroy
     @map.destroy
     redirect_to maps_url, notice: t("helpers.message.map.destroyed"), status: :see_other
@@ -45,6 +57,6 @@ class MapsController < ApplicationController
   end
 
   def map_params
-    params.require(:map).permit(:name)
+    params.require(:map).permit(:name, :default_latitude, :default_longitude, :default_zoom)
   end
 end

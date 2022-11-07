@@ -28,7 +28,6 @@ en:
     app_title: Ĝis
     area: Area
     back: Back
-    colors: colors
     confirm: Are you sure?
     display: Display
     dragbar_cursor: Dragbar cursor
@@ -38,6 +37,7 @@ en:
     latitude: Latitude
     length: Length
     longitude: Longitude
+    save_location_map: save
     share: Share…
     territory_code: Code
     updated_at: Updated %{date} ago

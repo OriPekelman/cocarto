@@ -90,6 +90,7 @@ fr:
       layer:
         destroyed: La couche a été détruite avec succès.
       map:
+        center_and_zoom_saved: Le centrage et le zoom par défaut ont été sauvegardés.
         destroyed: La carte a été détruite avec succès.
       row:
         added: La géométrie a été ajoutée avec succès.

@@ -92,6 +92,7 @@ en:
       layer:
         destroyed: Layer was successfully destroyed.
       map:
+        center_and_zoom_saved: The default center and zoom has been set.
         destroyed: The map was successfully destroyed
       row:
         added: Geometry was successfully added.

@@ -28,7 +28,6 @@ fr:
     app_title: Ĝis
     area: Surface
     back: Retour
-    colors: couleur
     confirm: Êtes-vous sûr ?
     display: Afficher
     dragbar_cursor: Curseur de la barre de défilement
@@ -38,6 +37,7 @@ fr:
     latitude: Latitude
     length: Longueur
     longitude: Longitude
+    save_location_map: enregistrer
     share: Partager…
     territory_code: Code
     updated_at: Modifié il y a %{date}

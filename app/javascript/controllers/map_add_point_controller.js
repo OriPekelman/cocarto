@@ -5,6 +5,11 @@ import maplibregl from 'maplibre-gl'
 
 export default class extends Controller {
   static targets = ['map', 'geojson']
+  static values = {
+    defaultLatitude: Number,
+    defaultLongitude: Number,
+    defaultZoom: Number
+  }
 
   connect () {
     this.#initMap()
@@ -19,7 +24,7 @@ export default class extends Controller {
 
   // Private functions
   #initMap () {
-    this.map = newMap(this.mapTarget)
+    this.map = newMap(this.mapTarget, [this.defaultLongitudeValue, this.defaultLatitudeValue], this.defaultZoomValue)
     this.#setGeojson()
     this.map.on('moveend', () => this.#setGeojson())
 
