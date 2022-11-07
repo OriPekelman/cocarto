@@ -2,7 +2,10 @@
 
 <div
   class="new-row"
-  data-controller="map-add-point">
+  data-controller="map-add-point"
+  data-map-add-point-default-longitude-value="<%= @row.layer.map.default_longitude %>"
+  data-map-add-point-default-latitude-value="<%= @row.layer.map.default_latitude %>"
+  data-map-add-point-default-zoom-value="<%= @row.layer.map.default_zoom %>">
   <div class="map" data-map-add-point-target="map">
     <%= embedded_svg "center.svg", class: "crosshair" %>
   </div>
