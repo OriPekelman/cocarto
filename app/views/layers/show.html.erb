@@ -33,13 +33,14 @@
     <div class="layer-actions action-bar">
       <%= button_with_icon t("common.frame"), "frame.svg", data: {action: "click->map#centerToContent"} %>
       <a download="<%= @layer.name + ".png" %>" data-action="map#exportMapAsImage" class="link-download"><%= embedded_svg("download.svg", class: "download") %> image</a>
-      <%= form_for @layer.map do |f| %>
-        <%= f.text_field :default_latitude, data: {map_target: "defaultLatitude"}, style: "display: none;" %>
-        <%= f.text_field :default_longitude, data: {map_target: "defaultLongitude"}, style: "display: none;" %>
-        <%= f.text_field :default_zoom, data: {map_target: "defaultZoom"}, style: "display: none;" %>
-        <%= button_with_icon t("common.save_location_map"), "map-pin.svg", data: {action: "click->map#setDefaultCenterZoom"} %>
-      <% end %>
-      <%= button_with_icon t("common.colors"), "color.svg", style: "display: none;" %>
+        <%= form_for @layer.map do |f| %>
+          <div class="is-hidden">
+            <%= f.text_field :default_latitude, data: {map_target: "defaultLatitude"} %>
+            <%= f.text_field :default_longitude, data: {map_target: "defaultLongitude"} %>
+            <%= f.text_field :default_zoom, data: {map_target: "defaultZoom"} %>
+          </div>
+          <%= button_with_icon t("common.save_location_map"), "map-pin.svg", data: {action: "click->map#setDefaultCenterZoom"} %>
+        <% end %>
       <%= button_with_icon t("common.add"), "add_circle.svg", data: {action: "click->map#toggleMode", map_target: "addButton"} unless @layer.geometry_territory? %>
     </div>
     <div class="map" data-map-target="map">
