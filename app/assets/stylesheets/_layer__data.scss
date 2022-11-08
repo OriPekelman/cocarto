@@ -46,6 +46,9 @@
 
     &:last-child {
       border-right: $border;
+      height: auto;
+      position: sticky;
+      right: 0;
     }
   }
 
@@ -95,9 +98,6 @@
     color: var(--color-grey-80);
     background-color: var(--color-bg-ambient-10);
     height: 32px;
-
-    th {
-    }
   }
 
   tr.row td {
@@ -143,13 +143,6 @@
       height: 20px;
       width: 20px;
     }
-  }
-
-  th:last-child,
-  td:last-child {
-    height: auto;
-    position: sticky;
-    right: 0;
   }
 }
 

@@ -1,7 +1,7 @@
 :root {
   --input-bg-empty: #fafafa;
   --input-border-color: var(--color-grey-60);
-  --input-border-focus: #288cf;
+  --input-border-focus: #2888cf;
   --input-outline-focus: #9cf;
 }
 
@@ -21,12 +21,6 @@ textarea {
   display: block;
   font-size: inherit;
   max-width: 460px;
-}
-
-input:focus {
-  border-color: var(--input-border-focus);
-  box-shadow: none;
-  outline: 2px solid var(--input-outline-focus);
 }
 
 input,
@@ -54,10 +48,10 @@ select {
 
 input:focus {
   border-radius: 2px;
-  border: 2px solid rgb(153 204 255 / 100%);
   border: 1px solid var(--color-green-90);
   opacity: 1;
   background-color: rgb(255 255 255 / 100%);
+  outline: 2px solid var(--input-outline-focus);
 }
 
 input[type="checkbox"],
