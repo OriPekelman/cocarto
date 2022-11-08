@@ -25,6 +25,7 @@ body {
   --color-bg-ambient-10: #fffefa;
   --color-bg-ambient-20: #fcfaf3;
   --color-bg-ambient-30: #f7f4eb;
+
   /* GREY COLOR */
   --color-grey-10: #f7f7f5;
   --color-grey-20: #f0efed;
@@ -36,6 +37,7 @@ body {
   --color-grey-80: #545452;
   --color-grey-90: #3d3d3c;
   --color-grey-100: #212120;
+
   /* GREEN COLOR */
   --color-green-10: #d7e9dd;
   --color-green-20: #c3dbcb;
@@ -47,40 +49,46 @@ body {
   --color-green-80: #376647;
   --color-green-90: #1d4c2e;
   --color-green-100: #0d2e18;
+
   /* ATTENTION COLOR */
   --color-attention-10: #ffeece;
   --color-attention-20: #fdda94;
   --color-attention-30: #fabc1e;
   --color-attention-40: #915e04;
+
   /* ERROR COLOR */
   --color-error-10: #ffedee;
   --color-error-20: #fbc5c9;
   --color-error-30: #e62c41;
   --color-error-40: #b01a2b;
+
   /* INFO COLOR */
   --color-info-10: #d8f0f9;
   --color-info-20: #70caf1;
   --color-info-30: #299ae5;
   --color-info-40: #026ebb;
+
   /* SUCCES COLOR */
   --color-succes-10: #ecfadc;
   --color-succes-20: #c4ed98;
   --color-succes-30: #8bbd54;
   --color-succes-40: #46790f;
+
   /* MAIN FONT */
-  --font-serif: Georgia, "Times New Roman", Times, serif, Regular;
-  --font-sans: Verdana, Geneva, Tahoma, sans-serif;
-  --font-mono: Menlo, "DejaVu Sans Mono", monospace;
+  --font-serif: georgia, "Times New Roman", times, serif, regular;
+  --font-sans: verdana, geneva, tahoma, sans-serif;
+  --font-mono: menlo, "DejaVu Sans Mono", monospace;
+
   /* COLOR TABLE */
   --color-bg: #fff;
   --color-bg-secondary: #e9e9e9;
   --color-text: #000;
+
   /* MAP SIZE */
   --nav-height: 3.2rem;
   --toolbar-height: 4rem;
   --footer-height: 2.4rem;
   --border-radius: 4px;
-
   --content-max-width: 1440px;
   --content-padding-small: 3.25rem;
   --content-padding: 4rem;
@@ -219,7 +227,7 @@ button {
 .layer-actions {
   background-color: var(--color-bg-ambient-30);
   border-bottom: solid var(--color-grey-40);
-  padding: 0em 1em 0em 1em;
+  padding: 0 1em;
   color: var(--color-green-70);
   display: flex;
   align-items: center;
@@ -252,9 +260,11 @@ button {
       outline: 2px solid var(--color-green-50);
     }
   }
+
   .link-download {
     cursor: pointer;
     color: var(--color-grey-80);
+
     svg {
       pointer-events: none;
     }
@@ -288,6 +298,7 @@ button {
 
 .primary-action {
   @include button(white, var(--color-green-70));
+
   &:hover:not([disabled]) {
     background-color: var(--color-green-90);
   }

@@ -8,8 +8,10 @@
   // -- Fancy rounded borders --
   // We don’t collapse the borders to allow rounded cells
   border-spacing: 0;
+
   $border-radius: 6px;
   $border: solid 1px var(--color-grey-50);
+
   table-layout: fixed;
   white-space: nowrap;
   margin: 1em;
@@ -31,6 +33,7 @@
     &:first-child {
       border-top-left-radius: $border-radius;
     }
+
     &:last-child {
       border-top-right-radius: $border-radius;
     }
@@ -40,8 +43,12 @@
   td {
     border-bottom: $border;
     border-left: $border;
+
     &:last-child {
       border-right: $border;
+      height: auto;
+      position: sticky;
+      right: 0;
     }
   }
 
@@ -58,6 +65,7 @@
     td:first-child {
       border-bottom-left-radius: $border-radius;
     }
+
     td:last-child {
       overflow: hidden;
       border-bottom-right-radius: $border-radius;
@@ -68,10 +76,12 @@
   .highlight input {
     background-color: var(--color-attention-10);
   }
+
   .highlight-transition,
   .highlight-transition input {
     background-color: var(--color-attention-20);
   }
+
   .bg-transition,
   .bg-transition input {
     transition: background-color 2s;
@@ -88,8 +98,6 @@
     color: var(--color-grey-80);
     background-color: var(--color-bg-ambient-10);
     height: 32px;
-    th {
-    }
   }
 
   tr.row td {
@@ -120,7 +128,7 @@
     }
 
     input:focus {
-      background-color: RGBA(215, 233, 221, 0.5);
+      background-color: rgb(215 233 221 / 50%);
       border: 2px solid white;
       outline: 1px solid var(--color-green-90);
     }
@@ -135,13 +143,6 @@
       height: 20px;
       width: 20px;
     }
-  }
-
-  th:last-child,
-  td:last-child {
-    height: auto;
-    position: sticky;
-    right: 0;
   }
 }
 
