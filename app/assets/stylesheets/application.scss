@@ -26,17 +26,20 @@
 
 .dropdown-content-app {
   @include common.border;
+
   position: fixed;
   z-index: 3;
   display: none;
   box-shadow: var(--box-shadow) var(--color-shadow);
   line-height: 1.25px;
   overflow: visible !important;
+
   a {
     text-decoration: underline;
     padding-bottom: 1.2em;
     font-size: 14px;
     padding-top: 0.4em;
+
     &:hover {
       color: var(--color-grey-60);
     }
@@ -47,7 +50,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  padding: 20px 20px 0px 20px;
+  padding: 20px 20px 0;
   margin-top: 1em;
 }
 
@@ -67,14 +70,17 @@
   height: calc(100vh - var(--nav-height) - var(--footer-height));
   display: flex;
   width: 100%;
+
   > .data {
     overflow-y: auto;
     width: 50%;
     display: flex;
     flex-direction: column;
   }
+
   .right-pane {
     width: 50%;
+
     .map {
       width: 100%;
       right: 0;
@@ -86,12 +92,15 @@
 
 .new-row {
   width: 100%;
+
   .map {
     right: 0;
     bottom: 0;
     height: 200px;
+
     .crosshair {
       $size: 18px;
+
       width: $size;
       height: $size;
       z-index: 1;
@@ -102,6 +111,7 @@
       margin-top: calc($size / -2);
     }
   }
+
   .form {
     @media screen and (max-width: 600px) {
       padding-left: 1rem;
@@ -130,17 +140,21 @@ textarea[readonly] {
 .search-result {
   border-radius: 5px;
   border: black;
+
   ul {
     list-style-type: none;
     text-align: start;
+
     li {
       cursor: pointer;
       font-family: var(--font-sans);
+
       &.active,
       &:hover {
         color: var(--color-green-60);
         text-decoration: underline;
       }
+
       mark {
         background-color: var(--color-attention-20);
       }
@@ -153,6 +167,7 @@ textarea[readonly] {
   font-size: 12px;
   border-radius: var(--border-radius);
   padding: 1rem 2rem;
+
   h2 {
     font-size: 16px;
     color: var(--color-green-100);
@@ -167,7 +182,7 @@ textarea[readonly] {
 .dragbar {
   background-color: white;
   color: var(--color-grey-70);
-  border-style: none solid none solid;
+  border-style: none solid;
   border-width: 1px;
   height: 100%;
   width: 6px;
@@ -182,7 +197,7 @@ textarea[readonly] {
   position: absolute;
   bottom: 12rem;
   left: 50%;
-  transform: translate(-50%, 0px);
+  transform: translate(-50%, 0);
 }
 
 .svg-dragbar:active {
@@ -213,7 +228,7 @@ textarea[readonly] {
   margin-bottom: 0;
   text-align: center;
 
-  input:not([disabled]):not(:focus):hover {
+  input:not([disabled], :focus):hover {
     // Custom border on hover
     border-color: var(--color-grey-30);
     border-style: solid;
@@ -252,6 +267,7 @@ textarea[readonly] {
     max-height: 44px;
     gap: 0.3em;
   }
+
   .main-actions-right {
     display: flex;
     flex-direction: row;
@@ -279,10 +295,12 @@ textarea[readonly] {
 
 .input-with-button {
   display: flex;
+
   input {
     margin-right: -40px;
     padding-right: 40px;
   }
+
   button {
     top: 1px;
     right: -1px;
