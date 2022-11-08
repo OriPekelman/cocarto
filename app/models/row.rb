@@ -124,13 +124,26 @@ class Row < ApplicationRecord
       .to_h { |field| [field.label, values[field.id]] }
   end
 
+  # Properties keys come from https://github.com/mapbox/simplestyle-spec/
+  def default_style
+    case layer.geometry_type
+    when "point" then {"marker-color": layer.color}
+    when "line_string" then {stroke: layer.color}
+    when "polygon", "territory" then {
+      stroke: layer.color,
+      fill: layer.color
+    }
+    end
+  end
+
   def css_properties
-    layer
+    custom_style = layer
       .fields
       .filter { |field| field.type_css_property? }
       .map { |field| [field.label, values[field.id]] }
       .compact_blank
       .to_h
+    default_style.merge(custom_style)
   end
 
   def calculated_properties

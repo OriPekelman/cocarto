@@ -6,12 +6,10 @@
   class="data-with-map"
   data-action="mousemove@window->dragbar#mousemove mouseup@document->dragbar#mouseup"
   data-controller="map dragbar restricted"
-  data-map-layer-id-value="<%= @layer.id %>"
   data-map-geometry-type-value="<%= @layer.geometry_type %>"
   data-map-default-latitude-value="<%= @layer.map.default_latitude %>"
   data-map-default-longitude-value="<%= @layer.map.default_longitude %>"
   data-map-default-zoom-value="<%= @layer.map.default_zoom %>"
-  data-map-color-value="<%= @layer.color %>"
   data-restricted-role-value="<%= "#{@role_type}-#{current_user.id}" %>">
   <div class="data" data-dragbar-target="left">
     <div class="layer-actions action-bar">
