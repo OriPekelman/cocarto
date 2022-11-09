@@ -19,7 +19,7 @@
     <div class="map-data__container">
       <% @map.layers.includes(:last_updated_row_author, :fields, rows: :territory).each do |layer| %>
         <div
-          class="layer-table__container dropdown"
+          class="layer-table__container"
           data-controller="layer layer-switch"
           data-action="layer:center->map#centerToContent"
         >
