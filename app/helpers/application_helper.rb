@@ -1,11 +1,16 @@
 module ApplicationHelper
-  def embedded_svg filename, options = {}
+  # Embeds the svg file directly in the dom
+  # This allows to use `currentColor` attribute and style the file with CSS
+  # Currently accepted options that are passed to the <svg> tag:
+  # - class
+  # - style
+  def embedded_svg(filename, **options)
     file = Rails.root.join("app", "assets", "images", filename).read
     doc = Nokogiri::HTML::DocumentFragment.parse file
     svg = doc.at_css "svg"
-    if options[:class].present?
-      svg["class"] = options[:class]
-    end
+    svg["class"] = options[:class] if options[:class].present?
+    svg["style"] = options[:style] if options[:style].present?
+
     doc.to_html.html_safe # rubocop:disable Rails/OutputSafety
   end
 

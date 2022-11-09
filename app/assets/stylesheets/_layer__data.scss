@@ -31,6 +31,12 @@
   }
 }
 
+.layer-header__icon {
+  height: 24px;
+  width: 24px;
+}
+
+.layer-header__left-description,
 .layer-header__right-tools {
   display: flex;
   align-items: center;
