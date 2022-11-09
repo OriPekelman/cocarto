@@ -1,7 +1,43 @@
 // Main table of layer data
-.table-container {
+.map-data__container {
   overflow: auto;
   height: 100%;
+  padding: 0;
+}
+
+.layer-table__container {
+  margin: 0;
+  background-color: var(--color-grey-30);
+}
+
+.layer-table__header {
+  width: 100%;
+  padding-left: 4px;
+  padding-right: 4px;
+  background-color: var(--color-bg-ambient-30);
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: solid 1px white;
+  border-bottom: solid 1px var(--color-grey-40);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+
+  h3 {
+    font-size: 16px;
+    font-weight: 400;
+  }
+}
+
+.layer-table__chevron {
+  margin: 0;
+  height: 28px;
+  width: 28px;
+  border-radius: 4px;
+  border: 0.5px solid rgb(212 211 210 / 100%);
+  background-color: rgb(255 254 250 / 100%);
 }
 
 .layer__data {
@@ -14,7 +50,6 @@
 
   table-layout: fixed;
   white-space: nowrap;
-  margin: 1em;
 
   th {
     background-color: var(--color-grey-20);
@@ -54,7 +89,7 @@
 
   td {
     font-size: 12px;
-    padding: 0.5rem 0.475rem;
+    padding: 0;
   }
 
   td.table-field {
@@ -94,7 +129,7 @@
   thead {
     z-index: 1;
     position: sticky;
-    top: 0;
+    top: 32px;
     color: var(--color-grey-80);
     background-color: var(--color-bg-ambient-10);
     height: 32px;
@@ -124,7 +159,7 @@
       box-shadow: none;
       padding-inline: 0.475rem;
       margin: 0;
-      border: 0;
+      border: 2px solid transparent;
     }
 
     input:focus {

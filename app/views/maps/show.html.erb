@@ -16,16 +16,19 @@
   data-controller="map dragbar restricted"
   data-restricted-role-value="<%= "#{@role_type}-#{current_user.id}" %>">
   <div class="data" data-dragbar-target="left">
-    <div class="table-container">
+    <div class="map-data__container">
       <% @map.layers.includes(:last_updated_row_author, :fields, rows: :territory).each do |layer| %>
-        <div class="layer-table dropdown" data-controller="layer-switch">
-          <h3 class="chevron"
-            data-action="click->layer-switch#toggle click->map#layerSelected"
-            data-map-layer-id-param="<%= layer.id %>"
+        <div class="layer-table__container dropdown" data-controller="layer-switch">
+          <header class="layer-table__header"
             data-map-geometry-type-param="<%= layer.geometry_type %>"
             data-map-color-param="<%= layer.color %>">
-            <%= layer.name %>
-          </h3>
+            <h3><%= layer.name %></h3>
+            <button
+              class="layer-table__chevron chevron"
+              data-action="click->layer-switch#toggle click->map#layerSelected"
+              data-map-layer-id-param="<%= layer.id %>">
+             </button>
+          </header>
           <div class="layer-dropdown-content" data-layer-switch-target="content">
             <%= render "layers/rows", layer: layer %>
           </div>

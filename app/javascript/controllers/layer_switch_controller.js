@@ -10,7 +10,7 @@ export default class extends Controller {
   }
 
   activate () {
-    for (const layer of document.querySelectorAll('.layer-table.is-active')) {
+    for (const layer of document.querySelectorAll('.layer-table__container.is-active')) {
       layer.classList.remove('is-active')
     }
     this.element.classList.add('is-active')

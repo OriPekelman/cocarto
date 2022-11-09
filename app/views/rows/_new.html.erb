@@ -2,7 +2,7 @@
 <%# renders a hidden form for a new Row with connectors to stimulus controllers. Used in layers/edit %>
 <% if row.layer.geometry_territory? %>
   <div
-    class="new-territory"
+    class="new-territory-form__container"
     data-controller="new-territory">
    <%= render "territories/search", form: "new_territory_form", field: "row[territory_id]", territory: nil, layer_id: row.layer.id %>
     <%= form_with model: [row.layer, row], id: "new_territory_form", data: {"new-territory-target": "form"} do |form| %>
