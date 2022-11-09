@@ -46,6 +46,7 @@ class Layer < ApplicationRecord
 
   # Hooks
   after_update_commit -> { broadcast_i18n_replace_to self, target: "layer-name", partial: "layers/name" }
+  after_destroy_commit -> { broadcast_remove_to map, target: id }
 
   def geo_feature_collection
     RGeo::GeoJSON::FeatureCollection.new(rows.map(&:geo_feature))

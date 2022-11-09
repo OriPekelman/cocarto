@@ -222,3 +222,29 @@ form.table-field {
   background: none;
   line-height: initial;
 }
+
+.layer-footer {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.layer-footer__icon {
+  width: 28px;
+  height: 28px;
+  color: var(--color-green-70);
+  background-color: var(--color-bg-ambient-10);
+  border: 0.5px solid var(--color-grey-60);
+  border-radius: 4px;
+  box-shadow: 0 0 0 2.5px var(--color-bg-ambient-10),
+    0 0 0 3px var(--color-grey-60);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+
+  a {
+    width: 16px;
+    height: 16px;
+  }
+}

@@ -19,6 +19,7 @@
     <div class="map-data__container">
       <% @map.layers.includes(:last_updated_row_author, :fields, rows: :territory).each do |layer| %>
         <div
+          id="<%= layer.id %>"
           class="layer-table__container"
           data-controller="layer layer-switch"
           data-action="layer:center->map#centerToContent"
@@ -44,6 +45,13 @@
           </header>
           <div class="layer-dropdown-content" data-layer-switch-target="content">
             <%= render "layers/rows", layer: layer %>
+            <div class="layer-footer">
+              <div class="layer-footer__icon">
+                <%= link_to layer, data: {turbo_method: :delete, turbo_confirm: t("common.confirm")} do %>
+                  <%= embedded_svg "delete.svg" %>
+                <% end %>
+              </div>
+            </div>
           </div>
         </div>
       <% end %>

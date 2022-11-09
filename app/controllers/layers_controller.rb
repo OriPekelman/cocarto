@@ -40,7 +40,10 @@ class LayersController < ApplicationController
 
   def destroy
     @layer.destroy
-    redirect_to maps_url, notice: t("helpers.message.layer.destroyed"), status: :see_other
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to @layer.map, notice: t("helpers.message.layer.destroyed"), status: :see_other }
+    end
   end
 
   def schema
