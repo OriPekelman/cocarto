@@ -16,9 +16,6 @@ export default class extends Controller {
     defaultZoom: Number
   }
 
-  initialize () {
-    this.boundingBox = null
-  }
 
   connect () {
     this.#initMap()
@@ -32,14 +29,10 @@ export default class extends Controller {
     }
     setTimeout(() => row.classList.remove('highlight-transition'), 1000)
     setTimeout(() => row.classList.remove('bg-transition'), 3000)
-    this.#extendBounds(row)
   }
 
   rowTargetDisconnected (row) {
     this.draw.delete(row.id)
-    this.boundingBox = null
-
-    this.rowTargets.forEach(otherRow => this.#extendBounds(otherRow))
   }
 
   layerSelected ({ params }) {
@@ -49,8 +42,8 @@ export default class extends Controller {
     this.geojsonField = this.geojsonFieldTargets.find(field => field.dataset.layerId === this.layerId)
   }
 
-  centerToContent () {
-    this.map.fitBounds(this.boundingBox, { padding: 20, maxZoom: 15 })
+  centerToContent ({ detail }) {
+    this.map.fitBounds(detail.boundingBox, { padding: 20, maxZoom: 15 })
   }
 
   centerToRow ({ target }) {
@@ -133,16 +126,6 @@ export default class extends Controller {
       geometry: row.rowController.geojson()
     }
     this.draw.add(feature)
-  }
-
-  #extendBounds (row) {
-    const llb = row.rowController.bounds()
-
-    if (this.boundingBox === null) {
-      this.boundingBox = llb
-    } else {
-      this.boundingBox = this.boundingBox.extend(llb)
-    }
   }
 
   #modeChange (mode) {

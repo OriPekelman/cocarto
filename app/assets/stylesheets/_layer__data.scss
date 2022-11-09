@@ -31,6 +31,18 @@
   }
 }
 
+.layer-header__right-tools {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.layer-header__action {
+  height: 14px;
+  width: 14px;
+  cursor: pointer;
+}
+
 .layer-table__chevron {
   margin: 0;
   height: 28px;

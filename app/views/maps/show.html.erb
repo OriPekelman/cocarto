@@ -18,16 +18,26 @@
   <div class="data" data-dragbar-target="left">
     <div class="map-data__container">
       <% @map.layers.includes(:last_updated_row_author, :fields, rows: :territory).each do |layer| %>
-        <div class="layer-table__container dropdown" data-controller="layer-switch">
+        <div
+          class="layer-table__container dropdown"
+          data-controller="layer layer-switch"
+          data-action="layer:center->map#centerToContent"
+        >
           <header class="layer-table__header"
             data-map-geometry-type-param="<%= layer.geometry_type %>"
             data-map-color-param="<%= layer.color %>">
             <h3><%= layer.name %></h3>
-            <button
-              class="layer-table__chevron chevron"
-              data-action="click->layer-switch#toggle click->map#layerSelected"
-              data-map-layer-id-param="<%= layer.id %>">
-             </button>
+            <div class="layer-header__right-tools">
+              <span class="layer-header__action"
+                data-action="click->layer#center">
+                <%= embedded_svg "frame.svg" %>
+              </span>
+              <button
+                class="layer-table__chevron chevron"
+                data-action="click->layer-switch#toggle click->map#layerSelected"
+                data-map-layer-id-param="<%= layer.id %>">
+              </button>
+            </div>
           </header>
           <div class="layer-dropdown-content" data-layer-switch-target="content">
             <%= render "layers/rows", layer: layer %>
@@ -42,8 +52,6 @@
   </div>
   <div data-dragbar-target="right" class="right-pane">
     <div class="layer-actions action-bar">
-      <%= button_with_icon t("common.frame"), "frame.svg", data: {action: "click->map#centerToContent"} %>
-      <%= button_with_icon t("common.colors"), "color.svg", style: "display: none;" %>
       <%= button_with_icon t("common.add"), "add_circle.svg", data: {action: "click->map#toggleMode", map_target: "addButton"} %>
     </div>
     <div class="map" data-map-target="map">

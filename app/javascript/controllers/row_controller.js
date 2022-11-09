@@ -15,6 +15,7 @@ export default class extends Controller {
     // Small hack inspired by https://dev.to/leastbad/the-best-one-line-stimulus-power-move-2o90
     this.element.rowController = this
     this.element.dataset.mapTarget = 'row'
+    this.element.dataset.layerTarget = 'row'
     this.dirty = false
   }
 
