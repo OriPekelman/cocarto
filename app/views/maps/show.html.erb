@@ -51,6 +51,11 @@
                   <%= embedded_svg "delete.svg" %>
                 <% end %>
               </div>
+              <div class="layer-footer__icon">
+                <%= link_to geojson_layer_path(layer), download: "#{layer.name}.geojson" do %>
+                  <%= embedded_svg "export.svg" %>
+                <% end %>
+              </div>
             </div>
           </div>
         </div>
