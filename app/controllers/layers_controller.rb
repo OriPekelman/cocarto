@@ -30,7 +30,7 @@ class LayersController < ApplicationController
 
     layer = authorize map.layers.new(layer_params)
     if layer.save
-      redirect_to layer_path(layer)
+      redirect_to layer.map
     else
       # This line overrides the default rendering behavior, which
       # would have been to render the "create" view.
