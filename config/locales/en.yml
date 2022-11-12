@@ -70,6 +70,11 @@ en:
         if you want to talk about yours.</p>
   maps:
     show:
+      add:
+        line_string: Add a line string
+        point: Add a point
+        polygon: Add a polygon
+        territory: Add a territory
       all_maps: All maps
   territories:
     search_results:

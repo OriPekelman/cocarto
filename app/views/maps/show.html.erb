@@ -38,8 +38,11 @@
               </span>
               <button
                 class="layer-table__chevron chevron"
-                data-action="click->layer-switch#toggle click->map#layerSelected"
-                data-map-layer-id-param="<%= layer.id %>">
+                data-action="click->layer-switch#toggle click->map#layerToggle"
+                data-map-layer-id-param="<%= layer.id %>"
+                data-map-add-feature-text-param="<%= t(".add.#{layer.geometry_type}") %>"
+                data-map-geometry-type-param="<%= layer.geometry_type %>"
+                >
               </button>
             </div>
           </header>
@@ -67,10 +70,8 @@
     <%= image_tag "dragbar_cursor.svg", alt: t("common.dragbar_cursor"), class: "svg-dragbar" %>
   </div>
   <div data-dragbar-target="right" class="right-pane">
-    <div class="layer-actions action-bar">
-      <%= button_with_icon t("common.add"), "add_circle.svg", data: {action: "click->map#toggleMode", map_target: "addButton"} %>
-    </div>
     <div class="map" data-map-target="map">
+      <%= render "toolbar" %>
     </div>
   </div>
 </div>

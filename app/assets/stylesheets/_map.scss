@@ -1,0 +1,50 @@
+.map {
+  width: 100%;
+  height: 100%;
+}
+
+.map__toolbar__container {
+  display: flex;
+  width: 100%;
+  position: absolute;
+  padding: 1rem;
+  z-index: 1;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.map__toolbar__right {
+  display: flex;
+  gap: 1rem;
+
+  button {
+    margin: 0;
+  }
+}
+
+.map__toolbar__add-button {
+  height: 32px;
+  padding: 0 1rem;
+  color: white;
+  font-size: 16px;
+  background-color: var(--color-green-70);
+  border-radius: 8px;
+  border-width: 4px;
+  border-color: rgb(255 255 255 / 66%);
+  border-style: solid;
+  margin: 0;
+}
+
+.map-container {
+  width: 100%;
+}
+
+.maplibregl-ctrl-group {
+  display: flex;
+  flex-direction: row-reverse;
+  border-style: double;
+}
+
+.maplibregl-ctrl-group:not(:empty) {
+  box-shadow: none;
+}

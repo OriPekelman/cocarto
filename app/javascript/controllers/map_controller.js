@@ -8,14 +8,13 @@ import MaplibreGeocoder from '@maplibre/maplibre-gl-geocoder'
 import maplibregl from 'maplibre-gl'
 
 export default class extends Controller {
-  static targets = ['geojsonField', 'newRowForm', 'row', 'map', 'addButton', 'defaultLatitude', 'defaultLongitude', 'defaultZoom']
+  static targets = ['geojsonField', 'newRowForm', 'row', 'map', 'addButton', 'defaultLatitude', 'defaultLongitude', 'defaultZoom', 'toolbarLeft', 'toolbarRight']
   static values = {
     geometryType: String,
     defaultLatitude: Number,
     defaultLongitude: Number,
     defaultZoom: Number
   }
-
 
   connect () {
     this.#initMap()
@@ -35,11 +34,22 @@ export default class extends Controller {
     this.draw.delete(row.id)
   }
 
-  layerSelected ({ params }) {
-    this.layerId = params.layerId
-    this.drawMode = `draw_${params.geometryType}`
-    this.newRowForm = this.newRowFormTargets.find(form => form.dataset.layerId === this.layerId)
-    this.geojsonField = this.geojsonFieldTargets.find(field => field.dataset.layerId === this.layerId)
+  layerToggle ({ params }) {
+    if (this.layerId !== params.layerId) {
+      this.layerId = params.layerId
+      this.drawMode = `draw_${params.geometryType}`
+      this.newRowForm = this.newRowFormTargets.find(form => form.dataset.layerId === this.layerId)
+      this.geojsonField = this.geojsonFieldTargets.find(field => field.dataset.layerId === this.layerId)
+      if (params.geometryType !== 'territory') {
+        this.addButtonTarget.innerHTML = params.addFeatureText
+        this.addButtonTarget.classList.remove('is-hidden')
+      } else {
+        this.addButtonTarget.classList.add('is-hidden')
+      }
+    } else { // We collapsed the current layer
+      this.layerId = null
+      this.addButtonTarget.classList.add('is-hidden')
+    }
   }
 
   centerToContent ({ detail }) {
@@ -101,8 +111,19 @@ export default class extends Controller {
 
     this.map.on('mousemove', e => this.trackers.mousemove(e))
     this.map.on('draw.selectionchange', e => this.#selectionChange(e))
-    this.map.addControl(newGeolocateControl())
-    this.map.addControl(new MaplibreGeocoder(geocoderApi, { maplibregl }))
+
+    this.#addControls()
+  }
+
+  #addControls () {
+    const geolocate = newGeolocateControl()
+    this.toolbarRightTarget.appendChild(geolocate.onAdd(this.map))
+
+    const navigation = new maplibregl.NavigationControl({ showCompass: false })
+    this.toolbarRightTarget.appendChild(navigation.onAdd(this.map))
+
+    const geocoder = new MaplibreGeocoder(geocoderApi, { maplibregl })
+    this.toolbarLeftTarget.appendChild(geocoder.onAdd(this.map))
   }
 
   #initRowDraw () {
@@ -137,8 +158,8 @@ export default class extends Controller {
   }
 
   #onDrawCreate (features) {
-    this.geojsonFieldTarget.value = JSON.stringify(features[0].geometry)
-    this.newRowFormTarget.requestSubmit()
+    this.geojsonField.value = JSON.stringify(features[0].geometry)
+    this.newRowForm.requestSubmit()
     // When we submit the drawn row, we get one back from the server through turbo
     // So we remove the one we’ve just drawn
     this.draw.delete(features[0].id)

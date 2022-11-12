@@ -5,6 +5,7 @@
 @use "roles";
 @use "display_when_loaded";
 @use "list";
+@use "map";
 
 .container {
   padding: var(--content-padding-large) var(--content-padding);
@@ -80,13 +81,6 @@
 
   .right-pane {
     width: 50%;
-
-    .map {
-      width: 100%;
-      right: 0;
-      bottom: 0;
-      height: calc(100% - var(--toolbar-height));
-    }
   }
 }
 
@@ -204,12 +198,6 @@ textarea[readonly] {
   background-color: var(--color-green-60);
 }
 
-.map button {
-  margin: 0;
-  border-radius: 0;
-  border-color: var(--color-grey-30);
-}
-
 .layer-toolbar {
   font-size: 12px;
   display: flex;
@@ -235,16 +223,6 @@ textarea[readonly] {
     background-color: var(--color-bg-ambient-20);
     box-shadow: none;
   }
-}
-
-.maplibregl-ctrl-group {
-  display: flex;
-  flex-direction: row-reverse;
-  border-style: double;
-}
-
-.maplibregl-ctrl-group:not(:empty) {
-  box-shadow: none;
 }
 
 .main-actions {
