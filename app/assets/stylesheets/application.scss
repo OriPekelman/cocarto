@@ -200,16 +200,6 @@ textarea[readonly] {
   background-color: var(--color-green-60);
 }
 
-.layer-toolbar {
-  font-size: 12px;
-  display: flex;
-  justify-content: flex-end;
-  gap: 1em;
-  margin-right: 3em;
-  margin-top: 2em;
-  margin-bottom: 3em;
-}
-
 #layer-name h2 {
   font-family: var(--font-serif);
   color: var(--color-grey-90);

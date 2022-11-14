@@ -86,7 +86,6 @@ body {
 
   /* MAP SIZE */
   --nav-height: 3.2rem;
-  --toolbar-height: 4rem;
   --footer-height: 2.4rem;
   --border-radius: 4px;
   --content-max-width: 1440px;
@@ -223,23 +222,6 @@ button {
 .centered-main {
   margin: auto;
   padding: 24px;
-}
-
-.layer-actions {
-  background-color: var(--color-bg-ambient-30);
-  border-bottom: solid var(--color-grey-40);
-  padding: 0 1em;
-  color: var(--color-green-70);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: var(--toolbar-height);
-
-  .layer-actions-right {
-    display: flex;
-    flex-direction: row;
-    gap: 0.2em;
-  }
 }
 
 .action-bar {
