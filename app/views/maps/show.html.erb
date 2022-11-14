@@ -1,14 +1,14 @@
 <%# params: @map %>
 <%= turbo_stream_from @map %>
 <%= turbo_stream_i18n_from @map %>
-<div class="main-actions">
+<header class="main-actions">
   <%= link_to t(".all_maps"), maps_path %>
   <h2><%= @map.name %></h2>
   <div class="main-actions-right">
     <%= link_to t("common.share"), map_access_groups_path(@map) if policy(@map.access_groups.new).index? %>
     <%= link_to t("helpers.link.map.delete"), @map, data: {turbo_method: :delete, turbo_confirm: t("common.confirm")} if policy(@map).destroy? %>
   </div>
-</div>
+</header>
 
 <div
   class="data-with-map"
@@ -48,7 +48,7 @@
           </header>
           <div class="layer-dropdown-content" data-layer-switch-target="content">
             <%= render "layers/rows", layer: layer %>
-            <div class="layer-footer">
+            <footer class="layer-footer">
               <div class="layer-footer__icon">
                 <%= link_to layer, data: {turbo_method: :delete, turbo_confirm: t("common.confirm")} do %>
                   <%= embedded_svg "delete.svg" %>
@@ -59,11 +59,13 @@
                   <%= embedded_svg "export.svg" %>
                 <% end %>
               </div>
-            </div>
+            </footer>
           </div>
         </div>
       <% end %>
-      <%= link_to t("helpers.link.layer.new"), new_map_layer_path(@map), class: "primary-action" if policy(@map).update? %>
+      <footer class="footer__layer-list">
+        <%= link_to t("helpers.link.layer.new"), new_map_layer_path(@map), class: "primary-action new-layer-button" if policy(@map).update? %>
+      </footer>
     </div>
   </div>
   <div class="dragbar" data-dragbar-target="dragbar" data-action="mousedown->dragbar#mousedown">

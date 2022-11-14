@@ -93,6 +93,7 @@ body {
   --content-padding-small: 3.25rem;
   --content-padding: 4rem;
   --content-padding-large: 5.5rem;
+  --main-header-height: 56px;
 }
 
 .main-header {
@@ -181,7 +182,7 @@ main {
   flex-grow: 1;
 }
 
-footer {
+.footer__application {
   align-items: center;
   display: flex;
   height: var(--footer-height);
