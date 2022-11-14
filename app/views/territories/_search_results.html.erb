@@ -6,7 +6,7 @@
   <% search_results.each do |territory| %>
     <li
       data-autocomplete-target="suggestion"
-      data-autocomplete-value-param="<%= territory.name %> (<%= territory.code %>)"
+      data-autocomplete-value-param="<%= territory.to_s %>"
       data-autocomplete-id-param="<%= territory.id %>"
       data-action="click->autocomplete#selected">
       <%= highlight(territory.name, params.dig(:q)) %>

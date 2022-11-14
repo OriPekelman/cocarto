@@ -8,7 +8,7 @@
   data-autocomplete-path-value="<%= path %>"
   data-action="autocomplete:selected->row#save autocomplete:selected->new-territory#selected autocomplete:selected->dropdown#deactivate autocomplete:input->dropdown#activate">
     <%= hidden_field_tag field, territory&.id, data: {"autocomplete-target": "selected"}, form: form %>
-    <%= text_field_tag :q, territory&.name, autocomplete: "off",
+    <%= text_field_tag :q, territory&.to_s, autocomplete: "off",
           data: {
             autocomplete_target: "searchInput",
             dropdown_target: "trigger",
