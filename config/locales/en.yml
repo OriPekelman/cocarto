@@ -72,8 +72,6 @@ en:
     show:
       all_maps: All maps
   territories:
-    index:
-      search_title: Search a territory
     search_results:
       no_result: No result
   users:

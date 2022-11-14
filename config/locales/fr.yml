@@ -72,8 +72,6 @@ fr:
     show:
       all_maps: Toutes les cartes
   territories:
-    index:
-      search_title: Chercher un territoire
     search_results:
       no_result: Pas de résultat
   users:
