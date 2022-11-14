@@ -77,6 +77,9 @@ test-unit: ## Run unit tests
 test-system: ## Run system tests
 	bin/rails test:system
 
+import-france-territories: ## Import Régions, Départements and Communes
+	bin/import_france_territories
+
 help: ## Display this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 

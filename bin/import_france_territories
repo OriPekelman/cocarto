@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# Import Régions, Départements and Communes, and setup parent_ids
+
+curl http://etalab-datasets.geo.data.gouv.fr/contours-administratifs/2022/geojson/regions-50m.geojson.gz | gunzip > tmp/regions-50m.geojson
+curl http://etalab-datasets.geo.data.gouv.fr/contours-administratifs/2022/geojson/departements-50m.geojson.gz | gunzip > tmp/departements-50m.geojson
+curl http://etalab-datasets.geo.data.gouv.fr/contours-administratifs/2022/geojson/communes-50m.geojson.gz | gunzip > tmp/communes-50m.geojson
+
+rake "import:geojson[tmp/regions-50m.geojson,Régions de France,2022]"
+rake "import:geojson[tmp/departements-50m.geojson,Départements de France,2022,Régions de France,region]"
+rake "import:geojson[tmp/communes-50m.geojson,Communes de France,2022,Départements de France,departement]"
+
+rm tmp/regions-50m.geojson
+rm tmp/departements-50m.geojson
+rm tmp/communes-50m.geojson

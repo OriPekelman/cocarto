@@ -15,10 +15,12 @@ module GeojsonImporter
     Rails.logger.debug { "Reading #{uri} with #{geojson.size} features" } unless silent
 
     parent_category = find_parent_category!(parent, revision)
+    parents_cache = {}
 
     factory = RGeo::Cartesian.factory(srid: 4326)
     ActiveRecord::Base.transaction do
-      cat = TerritoryCategory.create(name: category, revision: revision)
+      TerritoryCategory.upsert({name: category, revision: revision}, unique_by: %i[name revision]) # rubocop:disable Rails/SkipsModelValidations
+      cat = TerritoryCategory.find_by!(name: category, revision: revision)
 
       features = geojson.map do |feature|
         name = feature["nom"]
@@ -30,12 +32,12 @@ module GeojsonImporter
         if geometry.geometry_type == RGeo::Feature::Polygon
           geometry = factory.multi_polygon([geometry])
         elsif geometry.geometry_type != RGeo::Feature::MultiPolygon
-          raise "Invalide geometry type #{geometry.type} for feature with name: #{name} and code: #{code}"
+          raise "Invalid geometry type #{geometry.type} for feature with name: #{name} and code: #{code}"
         end
 
         Rails.logger.debug { "  Processing geometry #{name} (#{code})}" } unless silent
         parent_id = if parent
-          parent_territory = parent_category.territories.find_by(code: feature[parent_key])
+          parent_territory = parents_cache[feature[parent_key]] || parent_category.territories.find_by(code: feature[parent_key])
           if parent_territory.nil?
             Rails.logger.debug { "  ⚠ warning: Could not find parent (#{feature[parent_key]}) for #{name} (#{code})" }
           else
@@ -52,7 +54,7 @@ module GeojsonImporter
         }
       end
 
-      Territory.insert_all(features) # rubocop:disable Rails/SkipsModelValidations
+      Territory.upsert_all(features, unique_by: %i[code territory_category_id]) # rubocop:disable Rails/SkipsModelValidations
     end
   end
 end
