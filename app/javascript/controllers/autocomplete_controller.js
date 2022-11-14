@@ -4,9 +4,7 @@ import hotkeys from 'hotkeys-js'
 export default class extends Controller {
   static targets = ['searchInput', 'selected', 'suggestion', 'suggestionList']
   static values = {
-    path: String,
-    layerId: String,
-    fieldId: String
+    path: String
   }
 
   async #processResponse (response) {
@@ -16,15 +14,10 @@ export default class extends Controller {
 
   input ({ target }) {
     if (this.searchInputTarget.value.length >= 2) {
-      const params = new URLSearchParams()
-      params.set('q', target.value)
-      if (this.layerIdValue !== '') {
-        params.set('layer_id', this.layerIdValue)
-      } else {
-        params.set('field_id', this.fieldIdValue)
-      }
+      const url = new URL(this.pathValue, window.location)
+      url.searchParams.set('q', target.value)
 
-      fetch(this.pathValue + '?' + params.toString()).then(response => {
+      fetch(url).then(response => {
         if (response.ok) {
           this.#processResponse(response)
         } else {
