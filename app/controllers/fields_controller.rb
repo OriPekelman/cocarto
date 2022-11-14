@@ -50,10 +50,10 @@ class FieldsController < ApplicationController
   private
 
   def set_field
-    @field = authorize Field.includes(layer: :map).find(params[:id])
+    @field = authorize Field.includes(:territory_categories, layer: :map).find(params[:id])
   end
 
   def field_params
-    params.require(:field).permit(:label, :layer_id, :field_type, enum_values: [])
+    params.require(:field).permit(:label, :layer_id, :field_type, enum_values: [], territory_category_ids: [])
   end
 end

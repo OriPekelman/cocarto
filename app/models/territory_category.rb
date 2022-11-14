@@ -16,6 +16,7 @@ class TerritoryCategory < ApplicationRecord
   # Relations
   has_many :territories, -> { limit(1000) }, dependent: :destroy, inverse_of: :territory_category
   has_and_belongs_to_many :layers
+  has_and_belongs_to_many :fields
 
   def to_s
     if revision.present?

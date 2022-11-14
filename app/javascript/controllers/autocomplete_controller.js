@@ -5,7 +5,8 @@ export default class extends Controller {
   static targets = ['searchInput', 'selected', 'suggestion', 'suggestionList']
   static values = {
     path: String,
-    layerId: String
+    layerId: String,
+    fieldId: String
   }
 
   async #processResponse (response) {
@@ -19,6 +20,8 @@ export default class extends Controller {
       params.set('q', target.value)
       if (this.layerIdValue !== '') {
         params.set('layer_id', this.layerIdValue)
+      } else {
+        params.set('field_id', this.fieldIdValue)
       }
 
       fetch(this.pathValue + '?' + params.toString()).then(response => {
