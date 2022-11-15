@@ -9,7 +9,6 @@ class MapsTest < ApplicationSystemTestCase
     click_button "Create a map"
     fill_in "Name", with: "Test de nouvelle couche"
     click_button "Create a layer"
-    click_link "map"
     accept_confirm do
       click_link "Delete this map"
     end
