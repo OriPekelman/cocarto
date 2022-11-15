@@ -76,6 +76,9 @@ en:
         polygon: Add a polygon
         territory: Add a territory
       all_maps: All maps
+    toolbar:
+      export_as_image: Export as image
+      set_center_and_zoom: Set center and zoom of the map
   territories:
     search_results:
       no_result: No result

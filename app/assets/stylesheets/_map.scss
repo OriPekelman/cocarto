@@ -49,15 +49,25 @@
   box-shadow: none;
 }
 
-.map__download-image {
+.map__control__icon {
   cursor: pointer;
   width: 36px;
   height: 36px;
+  display: flex;
   align-items: center;
   justify-content: center;
+  padding: 2px;
+  background-color: white;
+  border-style: double;
+  border-radius: 4px;
 
-  a {
+  // Sorry, I was a bit desperated to get those icons work correctly
+  a,
+  button,
+  form {
     color: black;
+    background: transparent;
+    padding: 0;
     width: 24px;
     height: 24px;
   }

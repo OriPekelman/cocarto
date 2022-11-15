@@ -76,6 +76,9 @@ fr:
         polygon: Ajouter un polygone
         territory: Ajouter un territoire
       all_maps: Toutes les cartes
+    toolbar:
+      export_as_image: Exporter en tant qu’image
+      set_center_and_zoom: Définir centre et zoom de la carte
   territories:
     search_results:
       no_result: Pas de résultat
