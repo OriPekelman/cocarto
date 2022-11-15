@@ -200,23 +200,6 @@ textarea[readonly] {
   background-color: var(--color-green-60);
 }
 
-#layer-name h2 {
-  font-family: var(--font-serif);
-  color: var(--color-grey-90);
-  letter-spacing: -0.2px;
-  padding-top: 0;
-  margin-bottom: 0;
-  text-align: center;
-
-  input:not([disabled], :focus):hover {
-    // Custom border on hover
-    border-color: var(--color-grey-30);
-    border-style: solid;
-    background-color: var(--color-bg-ambient-20);
-    box-shadow: none;
-  }
-}
-
 .main-actions {
   display: flex;
   align-items: center;

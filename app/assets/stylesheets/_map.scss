@@ -76,3 +76,16 @@
     pointer-events: none;
   }
 }
+
+.map__toolbar__input {
+  input:not([disabled]):focus,
+  input:not([disabled]):hover {
+    // Custom border on hover
+    border-color: var(--color-grey-30);
+    border-style: solid;
+    background-color: var(--color-bg-ambient-20);
+    box-shadow: none;
+    outline: none;
+    height: 30px;
+  }
+}
