@@ -25,6 +25,11 @@ fr:
     purple: Violet
   common:
     add: ajouter
+    add_geometry:
+      line_string: Ajouter un tracé
+      point: Ajouter un point
+      polygon: Ajouter un polygone
+      territory: Ajouter un territoire
     app_title: Ĝis
     area: Surface
     back: Retour
@@ -70,11 +75,6 @@ fr:
         si vous souhaitez faire part des vôtres.</p>
   maps:
     show:
-      add:
-        line_string: Ajouter un tracé
-        point: Ajouter un point
-        polygon: Ajouter un polygone
-        territory: Ajouter un territoire
       all_maps: Toutes les cartes
     toolbar:
       export_as_image: Exporter en tant qu’image

@@ -25,6 +25,11 @@ en:
     purple: Purple
   common:
     add: add
+    add_geometry:
+      line_string: Add a line string
+      point: Add a point
+      polygon: Add a polygon
+      territory: Add a territory
     app_title: Ĝis
     area: Area
     back: Back
@@ -70,11 +75,6 @@ en:
         if you want to talk about yours.</p>
   maps:
     show:
-      add:
-        line_string: Add a line string
-        point: Add a point
-        polygon: Add a polygon
-        territory: Add a territory
       all_maps: All maps
     toolbar:
       export_as_image: Export as image
