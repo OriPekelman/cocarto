@@ -243,15 +243,6 @@ button {
       outline: 2px solid var(--color-green-50);
     }
   }
-
-  .link-download {
-    cursor: pointer;
-    color: var(--color-grey-80);
-
-    svg {
-      pointer-events: none;
-    }
-  }
 }
 
 .container {

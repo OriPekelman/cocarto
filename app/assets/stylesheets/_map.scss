@@ -48,3 +48,21 @@
 .maplibregl-ctrl-group:not(:empty) {
   box-shadow: none;
 }
+
+.map__download-image {
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  align-items: center;
+  justify-content: center;
+
+  a {
+    color: black;
+    width: 24px;
+    height: 24px;
+  }
+
+  svg {
+    pointer-events: none;
+  }
+}

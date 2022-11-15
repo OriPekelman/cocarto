@@ -9,5 +9,13 @@
     </button>
   </div>
   <div class="map__toolbar__right" data-map-target="toolbarRight">
+    <div class="maplibregl-ctrl-group map__download-image">
+      <a
+        download="<%= @map.name + ".png" %>"
+        data-action="map#exportMapAsImage"
+      >
+        <%= embedded_svg("export_as_image.svg") %>
+      </a>
+    </div>
   </div>
 </div>
