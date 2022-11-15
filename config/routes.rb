@@ -16,7 +16,7 @@ Rails.application.routes.draw do
         get :schema
         get :geojson
       end
-      resources :rows
+      resources :rows, only: [:new, :create, :update, :destroy]
     end
     resources :maps do
       resources :layers, only: [:new]
@@ -24,7 +24,7 @@ Rails.application.routes.draw do
     end
     resources :fields, only: [:create, :update, :destroy]
     resources :territory_categories
-    resources :territories do
+    resources :territories, only: [:show] do
       collection do
         get "search"
       end

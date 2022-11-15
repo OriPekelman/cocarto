@@ -22,7 +22,7 @@ module RowHelper
   def row_tag_calculated_data(row)
     case row.layer.geometry_type
     when "territory"
-      tag.td(render("territories/search_form", form: dom_id(row, :form), field: "row[territory_id]", territory: row.territory), class: "calculated") +
+      tag.td(render("territories/search", form: dom_id(row, :form), field: "row[territory_id]", territory: row.territory), class: "calculated") +
         tag.td(row.territory.code, class: "calculated")
     when "point"
       tag.td(number_with_precision(row.geo_lng_min, precision: 6), class: "numerical calculated") +
