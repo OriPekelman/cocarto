@@ -28,7 +28,7 @@ Used in layers/rows, broadcast from FieldsController and from Field hooks. %>
 
             <%# if the field is new, or if this radio is the field type, show detailed field params %>
             <% if field.new_record? || field.field_type == radio.object %>
-              <div class="field-params">
+              <div class="field-type-parameters">
                 <% if radio.object == "enum" %>
                   <div data-controller="enum-values">
                     <template data-enum-values-target="template">

@@ -311,11 +311,3 @@ textarea[readonly] {
     padding: 8px;
   }
 }
-
-input[type="radio"] ~ div.field-params {
-  display: none;
-}
-
-input[type="radio"]:checked ~ div.field-params {
-  display: inline;
-}
