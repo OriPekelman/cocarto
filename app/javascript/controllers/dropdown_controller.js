@@ -21,7 +21,8 @@ export default class extends Controller {
       }).then(({ x, y }) => {
         Object.assign(content.style, {
           left: `${x}px`,
-          top: `${y}px`
+          top: `${y}px`,
+          'min-width': `${this.triggerTarget.offsetWidth}px`
         })
       })
     })
