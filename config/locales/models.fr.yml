@@ -65,7 +65,7 @@ fr:
         delete: Supprimer
         modify: Modifier
       field:
-        delete: Supprimer cette colonne
+        delete: Supprimer
         new: Nouvelle colonne
       layer:
         delete: supprimer
@@ -103,7 +103,7 @@ fr:
       _comment: The helpers.submit.create and helpers.submit.update keys are standard in Rails.
       field:
         create: Ajouter
-        update: Enregistrer
+        update: OK
       layer:
         create: Créer une couche
       map:
