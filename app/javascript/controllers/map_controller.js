@@ -52,7 +52,7 @@ export default class extends Controller {
     }
   }
 
-  centerToContent ({ detail }) {
+  fitBounds ({ detail }) {
     this.map.fitBounds(detail.boundingBox, { padding: 20, maxZoom: 15 })
   }
 
