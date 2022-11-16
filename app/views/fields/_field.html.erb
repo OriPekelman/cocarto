@@ -54,7 +54,7 @@ Used in layers/rows, broadcast from FieldsController and from Field hooks. %>
       </fieldset>
     <% end %>
 
-    <%# Don’t display the delete button for persisted fields, and disable it if unauthorized. cf LayerPolicy#update? %>
+    <%# Don’t display the delete button for new fields, and disable it if unauthorized. cf LayerPolicy#update? %>
     <% if field.persisted? %>
       <%= button_to field, method: :delete, class: "delete-action",
             data: {restricted_target: "restricted", restricted_authorizations: %w[owner editor].to_json} do %>
