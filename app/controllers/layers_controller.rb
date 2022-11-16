@@ -6,7 +6,7 @@ class LayersController < ApplicationController
   before_action :authenticate_user!
 
   def show
-    @role_type = current_user.access_groups.find_by(map: @layer.map)&.role_type
+    redirect_to @layer.map
   end
 
   def new
