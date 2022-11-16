@@ -24,11 +24,6 @@ export default class extends Controller {
 
   #extendBounds (row) {
     const llb = row.rowController.bounds()
-
-    if (this.boundingBox === null) {
-      this.boundingBox = llb
-    } else {
-      this.boundingBox = this.boundingBox.extend(llb)
-    }
+    this.boundingBox = llb.extend(this.boundingBox)
   }
 }
