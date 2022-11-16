@@ -1,9 +1,3 @@
-.layer-dropdown-content {
-  display: none;
-  padding: 2rem;
-  border-bottom: solid 1px var(--color-grey-40);
-}
-
 .dropdown-content {
   visibility: hidden;
   position: absolute;
@@ -32,22 +26,20 @@
   visibility: visible;
 }
 
-.is-active > .layer-dropdown-content {
-  display: block;
-}
-
 .chevron::after {
   width: 12px;
   height: 12px;
   display: inline-block;
 }
 
-.layer-table__container.is-active .chevron::after,
+.layer-table__container.is-active .layer-header__right-tools .chevron::after,
 .is-active > .chevron::after {
   content: url("data:image/svg+xml;utf-8,<svg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path d='M11.4855042,9.14250707 C11.7626013,8.97624882 12.1001402,8.95546654 12.3923477,9.08016023 L12.5144958,9.14250707 L17.5144958,12.1425071 C17.988076,12.4266552 18.1416411,13.0409155 17.8574929,13.5144958 C17.5936411,13.9542489 17.0451517,14.1180705 16.5889674,13.911725 L16.4855042,13.8574929 L11.999,11.166 L7.51449576,13.8574929 C7.07474265,14.1213448 6.51368894,14.0077807 6.20827713,13.6110362 L6.14250707,13.5144958 C5.87865521,13.0747427 5.99221934,12.5136889 6.38896384,12.2082771 L6.48550424,12.1425071 L11.4855042,9.14250707 Z' fill='currentcolor'/></svg>");
 }
 
-.layer-table__container:not(.is-active) .chevron::after,
+.layer-table__container:not(.is-active)
+  .layer-header__right-tools
+  .chevron::after,
 :not(.is-active) > .chevron::after {
   content: url("data:image/svg+xml;utf-8,<svg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path d='M16.4855042,10.1425071 C16.9590845,9.85835891 17.5733448,10.011924 17.8574929,10.4855042 C18.1213448,10.9252573 18.0077807,11.4863111 17.6110362,11.7917229 L17.5144958,11.8574929 L12.5144958,14.8574929 C12.2373987,15.0237512 11.8998598,15.0445335 11.6076523,14.9198398 L11.4855042,14.8574929 L6.48550424,11.8574929 C6.01192398,11.5733448 5.85835891,10.9590845 6.14250707,10.4855042 C6.40635894,10.0457511 6.95484827,9.88192951 7.41103258,10.088275 L7.51449576,10.1425071 L12,12.833 L16.4855042,10.1425071 Z' fill='currentcolor' /></svg>");
 }

@@ -256,3 +256,13 @@ form.table-field {
 .footer__layer-list {
   padding: 1rem;
 }
+
+.layer-table__body {
+  display: none;
+  padding: 2rem;
+  border-bottom: solid 1px var(--color-grey-40);
+}
+
+.is-active > .layer-table__body {
+  display: block;
+}
