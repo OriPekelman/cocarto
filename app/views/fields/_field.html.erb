@@ -32,10 +32,10 @@ Used in layers/rows, broadcast from FieldsController and from Field hooks. %>
                 <% if radio.object == "enum" %>
                   <div data-controller="enum-values">
                     <template data-enum-values-target="template">
-                      <%= form.text_field :enum_values, value: nil, multiple: true, data: {enum_values_target: "value", action: "focusout->enum-values#newValue"} %>
+                      <%= form.text_field :enum_values, value: nil, multiple: true, placeholder: t("helpers.placeholder.field.enum_value"), data: {enum_values_target: "value", action: "input->enum-values#valueInput"} %>
                     </template>
                     <% field.enum_values&.each do |val| %>
-                      <%= form.text_field :enum_values, value: val, multiple: true, data: {enum_values_target: "value", action: "focusout->enum-values#newValue"} %>
+                      <%= form.text_field :enum_values, value: val, multiple: true, placeholder: t("helpers.placeholder.field.enum_value"), data: {enum_values_target: "value", action: "input->enum-values#valueInput"} %>
                     <% end %>
                   </div>
                 <% elsif radio.object == "territory" %>

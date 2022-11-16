@@ -8,7 +8,7 @@ fr:
         owner: Propriétaire
         viewer: Observateur
       field:
-        enum_values: Valeurs
+        enum_values: Options du menu
         field_type: Type
         label: Nom
       field/field_types:
@@ -96,6 +96,9 @@ fr:
         added: La géométrie a été ajoutée avec succès.
         destroyed: La géométrie a été détruite avec succès.
         updated: Les propriétés géométriques ont été mises à jour avec succès.
+    placeholder:
+      field:
+        enum_value: Nouvelle option
     submit:
       _comment: The helpers.submit.create and helpers.submit.update keys are standard in Rails.
       field:
