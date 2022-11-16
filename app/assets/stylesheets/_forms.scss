@@ -91,3 +91,11 @@ input[type="number"] {
 .field--slim {
   font-size: 11px;
 }
+
+.field-type-parameters {
+  margin-left: 1em;
+}
+
+input[type="radio"]:not(:checked) ~ .field-type-parameters {
+  display: none;
+}

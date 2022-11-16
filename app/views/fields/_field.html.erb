@@ -19,26 +19,32 @@ Used in layers/rows, broadcast from FieldsController and from Field hooks. %>
         <%= form.hidden_field :layer_id %>
         <%= form.text_field :label %>
 
-        <%= form.collection_radio_buttons(:field_type, Field.field_types.keys, :to_s, -> { Field.human_attribute_name("field_types.#{_1}") }) do |b| %>
-          <%= b.label(class: "radio") do %>
-            <%= b.radio_button required: field.new_record?, disabled: (field.persisted? && (field.field_type != b.value)) %> <%# field type can only be set initially %>
-            <%= b.text %>
-            <% if b.object == "enum" %>
-              <div class="field-params" data-controller="enum-values">
-                <template data-enum-values-target="template">
-                  <%= form.text_field :enum_values, value: nil, multiple: true, data: {enum_values_target: "value", action: "focusout->enum-values#newValue"} %>
-                </template>
-                <% if field.enum_values %>
-                  <% field.enum_values.each do |val| %>
-                    <%= form.text_field :enum_values, value: val, multiple: true, data: {enum_values_target: "value", action: "focusout->enum-values#newValue"} %>
+        <%= form.collection_radio_buttons(:field_type, Field.field_types.keys,
+              :to_s, -> { Field.human_attribute_name("field_types.#{_1}") },
+              include_hidden: false) do |radio| %>
+          <%= radio.label(class: "radio") do %>
+            <%= radio.radio_button required: field.new_record?, disabled: field.persisted? %> <%# field type can only be set initially %>
+            <%= radio.text %>
+
+            <%# if the field is new, or if this radio is the field type, show detailed field params %>
+            <% if field.new_record? || field.field_type == radio.object %>
+              <div class="field-type-parameters">
+                <% if radio.object == "enum" %>
+                  <div data-controller="enum-values">
+                    <template data-enum-values-target="template">
+                      <%= form.text_field :enum_values, value: nil, multiple: true, data: {enum_values_target: "value", action: "focusout->enum-values#newValue"} %>
+                    </template>
+                    <% field.enum_values&.each do |val| %>
+                      <%= form.text_field :enum_values, value: val, multiple: true, data: {enum_values_target: "value", action: "focusout->enum-values#newValue"} %>
+                    <% end %>
+                  </div>
+                <% elsif radio.object == "territory" %>
+                  <%= form.collection_check_boxes(:territory_category_ids, TerritoryCategory.all,
+                        :id, :to_s,
+                        include_hidden: false) do |check| %>
+                    <div><%= check.label { check.check_box(disabled: field.persisted?) + check.text } %></div>
                   <% end %>
                 <% end %>
-              </div>
-            <% elsif b.object == "territory" %>
-              <div class="field-params">
-              <%= form.collection_check_boxes :territory_category_ids, TerritoryCategory.all, :id, :to_s do |b| %>
-                <div><%= b.label { b.check_box(disabled: field.persisted?) + b.text } %></div>
-              <% end %>
               </div>
             <% end %>
           <% end %>
