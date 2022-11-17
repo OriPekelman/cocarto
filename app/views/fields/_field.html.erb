@@ -8,7 +8,7 @@ Used in layers/rows, broadcast from FieldsController and from Field hooks. %>
     <%= field.label || "+" %>
   </span>
 
-  <div class="dropdown-content" role="menu" data-dropdown-target="content">
+  <div class="dropdown__content" role="menu" data-dropdown-target="content">
     <%# The namespace option makes sure the labels identify the radio buttons in the right forms %>
     <%= form_with model: field, namespace: dom_id(field), class: "field" do |form| %>
       <%# Disable the whole form in unauthorized. cf LayerPolicy#update?> %>

@@ -1,4 +1,4 @@
-.dropdown-content {
+.dropdown__content {
   visibility: hidden;
   position: absolute;
   background-color: var(--color-bg);
@@ -6,7 +6,6 @@
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow) var(--color-shadow);
   color: var(--color-text);
-  padding: 0.2rem;
   font-size: 80%;
   top: 0;
   left: 0;
@@ -22,7 +21,12 @@
   }
 }
 
-.is-active > .dropdown-content {
+.dropdown__content--padded {
+  // note: replace with context-specific variants
+  padding: 0.2rem;
+}
+
+.is-active > .dropdown__content {
   visibility: visible;
 }
 
