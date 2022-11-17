@@ -8,7 +8,7 @@ fr:
         owner: Propriétaire
         viewer: Observateur
       field:
-        enum_values: Valeurs
+        enum_values: Options du menu
         field_type: Type
         label: Nom
       field/field_types:
@@ -65,7 +65,7 @@ fr:
         delete: Supprimer
         modify: Modifier
       field:
-        delete: Supprimer cette colonne
+        delete: Supprimer
         new: Nouvelle colonne
       layer:
         delete: supprimer
@@ -96,11 +96,14 @@ fr:
         added: La géométrie a été ajoutée avec succès.
         destroyed: La géométrie a été détruite avec succès.
         updated: Les propriétés géométriques ont été mises à jour avec succès.
+    placeholder:
+      field:
+        enum_value: Nouvelle option
     submit:
       _comment: The helpers.submit.create and helpers.submit.update keys are standard in Rails.
       field:
         create: Ajouter
-        update: Enregistrer
+        update: OK
       layer:
         create: Créer une couche
       map:

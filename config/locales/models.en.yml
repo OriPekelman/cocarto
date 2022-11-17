@@ -8,7 +8,7 @@ en:
         owner: Owner
         viewer: Viewer
       field:
-        enum_values: Valeurs
+        enum_values: Menu options
         field_type: Type
         label: Name
       field/field_types:
@@ -98,6 +98,9 @@ en:
         added: Geometry was successfully added.
         destroyed: Geometry was successfully destroyed.
         updated: Geometry properties were successfully updated.
+    placeholder:
+      field:
+        enum_value: New option
     submit:
       _comment: The helpers.submit.create and helpers.submit.update keys are standard in Rails.
       field:

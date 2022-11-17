@@ -8,9 +8,11 @@ export default class extends Controller {
     this.#addNewInput()
   }
 
-  newValue (event) {
+  valueInput (event) {
+    const valueIndex = this.valueTargets.findIndex(e => e === event.target)
+
     // Did we modify the last input?
-    if (this.valueTargets[this.valueTargets.length - 1] === event.target) {
+    if (valueIndex === this.valueTargets.length - 1) {
       // Did we actually set a value ?
       if (event.target.value !== '') {
         // Then let’s add a new input for an extra value
@@ -18,6 +20,8 @@ export default class extends Controller {
       }
     } else if (event.target.value === '') {
       // If the input is empty (and it wasn’t the last input) we remove it
+      const previousValue = this.valueTargets[Math.max(valueIndex - 1, 0)]
+      previousValue.select()
       event.target.remove()
     }
   }
