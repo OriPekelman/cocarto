@@ -45,7 +45,8 @@ class Layer < ApplicationRecord
   has_one :last_updated_row_author, through: :last_updated_row, source: :author
 
   # Hooks
-  after_update_commit -> { broadcast_i18n_replace_to self, target: "layer-name", partial: "layers/name" }
+  after_create_commit -> { broadcast_i18n_append_to map, target: dom_id(map, "layers") }
+  after_update_commit -> { broadcast_i18n_replace_to map }
   after_destroy_commit -> { broadcast_remove_to map }
 
   def geo_feature_collection

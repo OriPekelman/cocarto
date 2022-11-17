@@ -22,9 +22,11 @@
     <div
       class="map-data__container"
       data-controller="layer-selection">
-      <% @map.layers.includes(:last_updated_row_author, :fields, rows: :territory).order(:created_at, :id).each do |layer| %>
-       <%= render layer %>
-      <% end %>
+      <div id="<%= dom_id(@map, "layers") %>">
+        <% @map.layers.includes(:last_updated_row_author, :fields, rows: :territory).order(:created_at, :id).each do |layer| %>
+          <%= render layer %>
+        <% end %>
+      </div>
       <footer class="footer__layer-list">
         <%= link_to t("helpers.link.layer.new"), new_map_layer_path(@map), class: "primary-action new-layer-button" if policy(@map).update? %>
       </footer>
