@@ -24,7 +24,7 @@ label {
   font-family: var(--font-serif);
 }
 
-input,
+input:not([type="checkbox"], [type="radio"], [type="submit"], [type="button"]),
 label,
 select,
 textarea {
@@ -33,15 +33,13 @@ textarea {
   max-width: 460px;
 }
 
-input,
+input:not([type="checkbox"], [type="radio"], [type="submit"], [type="button"]),
 select,
 textarea {
   border: 1px solid var(--input-border-color);
-  border-width: 1px;
   border-radius: 2px;
   box-shadow: 0 1px 4px var(--color-grey-40) inset;
-  font-size: 14px;
-  padding: 0.5rem 0.625rem;
+  padding: 0.5rem;
   vertical-align: middle;
 
   /* matches an empty input */
@@ -49,11 +47,6 @@ textarea {
     background-color: var(--input-bg-empty);
     border-color: var(--color-grey-50);
   }
-}
-
-input,
-select {
-  height: 40px;
 }
 
 input:focus {
@@ -70,8 +63,9 @@ input[type="radio"] {
   box-shadow: 0 1px 4px var(--color-grey-30) inset;
   display: inline-block;
   height: 16px;
-  width: 16px;
+  width: 20px;
   accent-color: var(--color-green-70);
+  vertical-align: middle;
 }
 
 // Hide browser-specific decoration of number inputs
