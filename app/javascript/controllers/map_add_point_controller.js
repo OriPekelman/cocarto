@@ -1,4 +1,5 @@
 import { Controller } from '@hotwired/stimulus'
+import maplibregl from 'maplibre-gl'
 
 import { newMap, newGeolocateControl } from 'lib/map_helpers'
 
@@ -29,6 +30,9 @@ export default class extends Controller {
 
     const geolocate = newGeolocateControl()
     this.map.addControl(geolocate)
+    this.map.addControl(new maplibregl.NavigationControl({
+      showCompass: false
+    }))
     this.map.on('load', () => geolocate.trigger())
   }
 }

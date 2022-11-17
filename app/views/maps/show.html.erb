@@ -1,33 +1,42 @@
 <%# params: @map %>
-<div class="main-actions">
+<%= turbo_stream_from @map %>
+<%= turbo_stream_i18n_from @map %>
+<header class="main-actions">
   <%= link_to t(".all_maps"), maps_path %>
+  <h2><%= @map.name %></h2>
   <div class="main-actions-right">
     <%= link_to t("common.share"), map_access_groups_path(@map) if policy(@map.access_groups.new).index? %>
     <%= link_to t("helpers.link.map.delete"), @map, data: {turbo_method: :delete, turbo_confirm: t("common.confirm")} if policy(@map).destroy? %>
   </div>
-</div>
-<div class="container">
-  <section class="section section--small">
-    <h2 class="section__title"><%= @map.name %></h2>
-    <ul class="list">
-      <% @map.layers.includes(:rows, :last_updated_row_author).each do |layer| %>
-        <li class="list-element">
-          <div class="list-element__content">
-            <h3 class="list-element__title"><%= layer.name %></h3>
-            <p class="list-element__description">
-              <span class="color-marker" style="background-color: <%= layer.color %>"></span>
-              <%= layer.rows.size %> <%= Layer.human_attribute_name(layer.geometry_type, count: layer.rows.size) %>
-              <%= updated_at_tag(layer.last_updated_row, layer.last_updated_row_author) %>
-            </p>
+</header>
 
-            <div class="list-element__actions">
-              <%= link_to t("common.display"), layer_path(layer) %><%= link_to t("helpers.link.row.add_point"), new_layer_row_path(layer) if policy(layer).edit? && layer.geometry_point? %>
-            </div>
-          </div>
-        </li>
+<div
+  class="data-with-map"
+  data-action="mousemove@window->dragbar#mousemove mouseup@document->dragbar#mouseup"
+  data-controller="map dragbar restricted"
+  data-map-default-longitude-value="<%= @map.default_longitude %>"
+  data-map-default-latitude-value="<%= @map.default_latitude %>"
+  data-map-default-zoom-value="<%= @map.default_zoom %>"
+  data-restricted-role-value="<%= "#{@role_type}-#{current_user.id}" %>">
+  <div class="data" data-dragbar-target="left">
+    <div
+      class="map-data__container"
+      data-controller="layer-selection">
+      <% @map.layers.includes(:last_updated_row_author, :fields, rows: :territory).order(:created_at, :id).each do |layer| %>
+       <%= render layer %>
       <% end %>
-    </ul>
-
-    <%= link_to t("helpers.link.layer.new"), new_map_layer_path(@map), class: "primary-action" if policy(@map).update? %>
-  </section>
+      <footer class="footer__layer-list">
+        <%= link_to t("helpers.link.layer.new"), new_map_layer_path(@map), class: "primary-action new-layer-button" if policy(@map).update? %>
+      </footer>
+    </div>
+  </div>
+  <div class="dragbar" data-dragbar-target="dragbar" data-action="mousedown->dragbar#mousedown">
+    <%= image_tag "dragbar_cursor.svg", alt: t("common.dragbar_cursor"), class: "svg-dragbar" %>
+  </div>
+  <div data-dragbar-target="right" class="right-pane">
+    <div class="map" data-map-target="map">
+      <%= render "toolbar" %>
+    </div>
+  </div>
+</div>
 </div>

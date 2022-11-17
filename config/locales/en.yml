@@ -24,29 +24,26 @@ en:
     pink: Pink
     purple: Purple
   common:
-    add: add
+    add_geometry:
+      line_string: Add a line string
+      point: Add a point
+      polygon: Add a polygon
+      territory: Add a territory
     app_title: Ĝis
     area: Area
     back: Back
     confirm: Are you sure?
-    display: Display
     dragbar_cursor: Dragbar cursor
     failed: 'Failed: %{msg}'
-    frame: frame
     hello: Hello
     latitude: Latitude
     length: Length
     longitude: Longitude
-    save_location_map: save
     share: Share…
     territory_code: Code
     updated_at: Updated %{date} ago
     updated_at_by: Updated %{date} ago by %{user}
     user_not_authorized: You are not authorized to perform this action.
-  layers:
-    show:
-      export: geojson
-      map: map
   layouts:
     application:
       change_language: Change language
@@ -71,6 +68,9 @@ en:
   maps:
     show:
       all_maps: All maps
+    toolbar:
+      export_as_image: Export as image
+      set_center_and_zoom: Set center and zoom of the map
   territories:
     search_results:
       no_result: No result

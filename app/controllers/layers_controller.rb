@@ -6,7 +6,7 @@ class LayersController < ApplicationController
   before_action :authenticate_user!
 
   def show
-    @role_type = current_user.access_groups.find_by(map: @layer.map)&.role_type
+    redirect_to @layer.map
   end
 
   def new
@@ -30,7 +30,7 @@ class LayersController < ApplicationController
 
     layer = authorize map.layers.new(layer_params)
     if layer.save
-      redirect_to layer_path(layer)
+      redirect_to layer.map
     else
       # This line overrides the default rendering behavior, which
       # would have been to render the "create" view.
@@ -40,7 +40,10 @@ class LayersController < ApplicationController
 
   def destroy
     @layer.destroy
-    redirect_to maps_url, notice: t("helpers.message.layer.destroyed"), status: :see_other
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to @layer.map, notice: t("helpers.message.layer.destroyed"), status: :see_other }
+    end
   end
 
   def schema

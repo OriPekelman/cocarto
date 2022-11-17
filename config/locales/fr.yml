@@ -24,29 +24,26 @@ fr:
     pink: Rose
     purple: Violet
   common:
-    add: ajouter
+    add_geometry:
+      line_string: Ajouter un tracé
+      point: Ajouter un point
+      polygon: Ajouter un polygone
+      territory: Ajouter un territoire
     app_title: Ĝis
     area: Surface
     back: Retour
     confirm: Êtes-vous sûr ?
-    display: Afficher
     dragbar_cursor: Curseur de la barre de défilement
     failed: 'Échec : %{msg}'
-    frame: cadrer
     hello: Bonjour
     latitude: Latitude
     length: Longueur
     longitude: Longitude
-    save_location_map: enregistrer
     share: Partager…
     territory_code: Code
     updated_at: Modifié il y a %{date}
     updated_at_by: Modifié il y a %{date} par %{user}
     user_not_authorized: Vous n’avez pas la permission d’effectuer cette action.
-  layers:
-    show:
-      export: geojson
-      map: carte
   layouts:
     application:
       change_language: Changer la langue
@@ -71,6 +68,9 @@ fr:
   maps:
     show:
       all_maps: Toutes les cartes
+    toolbar:
+      export_as_image: Exporter en tant qu’image
+      set_center_and_zoom: Définir centre et zoom de la carte
   territories:
     search_results:
       no_result: Pas de résultat

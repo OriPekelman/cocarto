@@ -68,13 +68,12 @@ fr:
         delete: Supprimer
         new: Nouvelle colonne
       layer:
-        delete: supprimer
         new: Ajouter une nouvelle couche
       map:
         delete: Supprimer cette carte
         new: Créer une nouvelle carte
       row:
-        add_point: Ajouter des points
+        add_point: Lien pour ajout simplifié de points (par exemple sur téléphone mobile)
         add_this_point: Ajouter ce point
       territory:
         new: Ajouter le territoire
