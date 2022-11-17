@@ -11,24 +11,26 @@ Rails.application.routes.draw do
       root "maps#index", as: :authenticated_root
     end
 
-    resources :layers do
+    resources :maps, except: [:edit] do
+      resources :layers, only: [:new]
+      resources :access_groups, only: [:index, :create, :update, :destroy], shallow: true
+    end
+    resources :layers, except: [:index, :new, :edit] do
       member do
         get :schema
         get :geojson
       end
       resources :rows, only: [:new, :create, :update, :destroy]
     end
-    resources :maps do
-      resources :layers, only: [:new]
-      resources :access_groups, only: [:index, :create, :update, :destroy], shallow: true
-    end
     resources :fields, only: [:create, :update, :destroy]
-    resources :territory_categories
+
+    resources :territory_categories, only: [:index, :show]
     resources :territories, only: [:show] do
       collection do
         get "search"
       end
     end
+
     get "/:locale" => "main#index"
     get "share/:token", to: "access_groups#enter_by_link", as: "share_link"
   end
