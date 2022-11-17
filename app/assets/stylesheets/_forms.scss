@@ -5,6 +5,8 @@
   --input-outline-focus: #9cf;
 }
 
+// General form rules
+// Rules not using BEM classes are deprecated; use .form__ classes instead (and create new ones as needed)
 form {
   display: block;
   max-width: 460px;
@@ -79,7 +81,9 @@ input[type="number"] {
   }
 }
 
-.field {
+.field, // deprecated, use form__field instead (“field” is ambiguous and may refer to the Field model)
+.form__field {
+  // A sub-unit of a form. Can be nested.
   display: flex;
   gap: 0.375rem;
   flex-direction: column;
@@ -87,13 +91,15 @@ input[type="number"] {
   font-size: 14px;
 }
 
-.field--inline {
+.form__field--inline {
   align-items: center;
   flex-direction: row;
 }
 
-.field--slim {
-  font-size: 11px;
+.form__field--slim {
+  font-size: 13px;
+  font-weight: lighter;
+  gap: 0.2rem;
 }
 
 .field-type-parameters {
