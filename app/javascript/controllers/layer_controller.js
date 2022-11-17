@@ -1,5 +1,9 @@
 import { Controller } from '@hotwired/stimulus'
 
+// This controller handles informations concerning a single layer
+// - what is its bounding box (handling adding/removing rows)
+// - is it shown or collapsed
+
 export default class extends Controller {
   static targets = ['row']
 
@@ -19,6 +23,12 @@ export default class extends Controller {
   center () {
     if (this.boundingBox !== null) {
       this.dispatch('center', { detail: { boundingBox: this.boundingBox } })
+    }
+  }
+
+  toggleTable () {
+    if (this.element.classList.toggle('is-active')) {
+      this.dispatch('opened', { details: this.element })
     }
   }
 

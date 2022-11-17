@@ -1,8 +1,9 @@
 <div
   id="<%= dom_id(layer) %>"
   class="layer-table__container"
-  data-controller="layer layer-switch"
-  data-action="layer:center->map#fitBounds"
+  data-controller="layer"
+  data-layer-selection-target="layer"
+  data-action="layer:center->map#fitBounds layer:opened->layer-selection#opened"
 >
   <header class="layer-table__header"
     data-map-geometry-type-param="<%= layer.geometry_type %>"
@@ -18,7 +19,7 @@
       </span>
       <button
         class="layer-table__chevron chevron"
-        data-action="click->layer-switch#toggle click->map#layerToggle"
+        data-action="layer#toggleTable map#layerToggle"
         data-map-layer-id-param="<%= layer.id %>"
         data-map-add-feature-text-param="<%= t("common.add_geometry.#{layer.geometry_type}") %>"
         data-map-geometry-type-param="<%= layer.geometry_type %>"

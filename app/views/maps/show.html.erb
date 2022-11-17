@@ -19,7 +19,10 @@
   data-map-default-zoom-value="<%= @map.default_zoom %>"
   data-restricted-role-value="<%= "#{@role_type}-#{current_user.id}" %>">
   <div class="data" data-dragbar-target="left">
-    <div class="map-data__container">
+    <div
+      class="map-data__container"
+      data-controller="layer-selection"
+      >
       <% @map.layers.includes(:last_updated_row_author, :fields, rows: :territory).order(:created_at, :id).each do |layer| %>
        <%= render layer %>
       <% end %>
