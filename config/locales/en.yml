@@ -24,7 +24,6 @@ en:
     pink: Pink
     purple: Purple
   common:
-    add: add
     add_geometry:
       line_string: Add a line string
       point: Add a point
@@ -34,24 +33,17 @@ en:
     area: Area
     back: Back
     confirm: Are you sure?
-    display: Display
     dragbar_cursor: Dragbar cursor
     failed: 'Failed: %{msg}'
-    frame: frame
     hello: Hello
     latitude: Latitude
     length: Length
     longitude: Longitude
-    save_location_map: save
     share: Share…
     territory_code: Code
     updated_at: Updated %{date} ago
     updated_at_by: Updated %{date} ago by %{user}
     user_not_authorized: You are not authorized to perform this action.
-  layers:
-    show:
-      export: geojson
-      map: map
   layouts:
     application:
       change_language: Change language
