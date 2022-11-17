@@ -32,8 +32,8 @@
     <%= render "layers/rows", layer: layer %>
 
     <footer class="layer-footer">
-      <div>
-        <%= link_to  t("helpers.link.row.add_point"), new_layer_row_path(layer) if policy(layer).edit? && layer.geometry_point? %>
+      <div data-restricted-target="restricted" data-restricted-authorizations="<%= %w[owner editor contributor].to_json %>"> <%# Cf policy(layer).edit? %>
+        <%= link_to  t("helpers.link.row.add_point"), new_layer_row_path(layer) if layer.geometry_point? %>
       </div>
       <div class="layer-footer__icon">
         <%= link_to layer, data: {turbo_method: :delete, turbo_confirm: t("common.confirm")} do %>

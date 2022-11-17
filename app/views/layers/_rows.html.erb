@@ -18,11 +18,7 @@
 
       <%= render layer.fields %>
 
-      <% if policy(layer).update? %>
-        <%= render Field.new(layer: layer) %>
-      <% else %>
-        <th id="<% dom_id(Field.new) %>"></th>
-      <% end %>
+      <%= render Field.new(layer: layer) %>
     </tr>
   </thead>
   <tbody id="<%= dom_id(layer, "rows") %>">
