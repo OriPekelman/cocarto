@@ -5,9 +5,19 @@
   --input-outline-focus: #9cf;
 }
 
+form {
+  display: block;
+  max-width: 460px;
+  text-align: left;
+}
+
 form header {
   margin: 0.5rem 0;
   padding: 0.5rem 0;
+}
+
+fieldset {
+  border: none;
 }
 
 label {
