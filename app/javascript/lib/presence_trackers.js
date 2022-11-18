@@ -53,7 +53,7 @@ class PresenceTrackers {
     this.trackers = new Map()
     this.lastMoveSent = Date.now()
     this.map = mapController.map
-    this.#initActionCable(mapController.layerIdValue)
+    this.#initActionCable(mapController.mapIdValue)
   }
 
   mousemove ({ lngLat }) {
@@ -74,10 +74,10 @@ class PresenceTrackers {
     }
   }
 
-  #initActionCable (layerId) {
+  #initActionCable (mapId) {
     const _this = this
     this.cid = window.crypto.randomUUID()
-    this.channel = consumer.subscriptions.create({ channel: 'PresenceTrackerChannel', layer: layerId, cid: this.cid }, {
+    this.channel = consumer.subscriptions.create({ channel: 'PresenceTrackerChannel', map: mapId, cid: this.cid }, {
       connected () {
         console.log('PresenceTrackerChannel connected')
       },
