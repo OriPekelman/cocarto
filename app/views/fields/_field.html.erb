@@ -46,9 +46,12 @@ Used in layers/rows, broadcast from FieldsController and from Field hooks. %>
                 <% elsif radio.object == "territory" %>
                   <div class="field-form__type-param form__field form__field--slim">
                     <%= form.collection_check_boxes(:territory_category_ids, TerritoryCategory.all,
-                                                    :id, :to_s,
-                                                    include_hidden: false) do |check| %>
-                      <%= check.label { check.check_box(disabled: field.persisted?) + check.text } %>
+                          :id, :to_s,
+                          include_hidden: false) do |check| %>
+                      <%= check.label do %>
+                        <%= check.check_box(disabled: field.persisted?) %>
+                        <%= check.text %>
+                      <% end %>
                     <% end %>
                   </div>
                 <% end %>
