@@ -7,8 +7,7 @@ export default class extends Controller {
   static values = {
     placement: { type: String, default: 'bottom-start' },
     offset: Number,
-    loaded: Boolean,
-    exclusive: { type: Boolean, default: true }
+    loaded: Boolean
   }
 
   connect () {
@@ -30,9 +29,6 @@ export default class extends Controller {
   }
 
   activate () {
-    if (this.exclusiveValue) {
-      this.#deactivateAllDropdowns()
-    }
     this.#adjustPosition()
     this.element.classList.add('is-active')
   }
@@ -43,12 +39,6 @@ export default class extends Controller {
 
   clickOutside (event) {
     this.deactivate()
-  }
-
-  #deactivateAllDropdowns () {
-    for (const dropdown of document.querySelectorAll('.dropdown.is-active')) {
-      dropdown.classList.remove('is-active')
-    }
   }
 
   #adjustPosition () {
