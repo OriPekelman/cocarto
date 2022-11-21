@@ -44,6 +44,11 @@ en:
     updated_at: Updated %{date} ago
     updated_at_by: Updated %{date} ago by %{user}
     user_not_authorized: You are not authorized to perform this action.
+  layers:
+    layer:
+      center_on_layer: Center map on this layer
+      center_on_row: Center map on this row
+      delete_row: Delete this row
   layouts:
     application:
       change_language: Change language

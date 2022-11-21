@@ -39,14 +39,14 @@ module RowHelper
   end
 
   def row_tag_actions(row)
-    remove = button_to([row.layer, row], method: :delete, form: {data: {"turbo-confirm": t("common.confirm")}}) do
+    remove = button_to([row.layer, row], method: :delete, title: t("layers.layer.delete_row"), form: {data: {"turbo-confirm": t("common.confirm")}}) do
       embedded_svg("remove_item.svg", class: "icon--sm")
     end
     tag.td(id: dom_id(row, "actions"), class: "table-actions") do
       tag.div(class: "table-actions__container") do
         row_tag_form(row) +
           remove +
-          button_tag(data: {action: "click->map#centerToRow"}) do
+          button_tag(data: {action: "click->map#centerToRow"}, title: t("layers.layer.center_on_row")) do
             embedded_svg("center.svg", class: "icon--sm")
           end
       end
