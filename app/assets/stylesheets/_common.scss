@@ -215,27 +215,6 @@ button {
   padding: 24px;
 }
 
-.action-bar {
-  a,
-  button {
-    font-size: 8px;
-    text-decoration: none;
-    background-color: var(--color-bg-ambient-10);
-    margin: 0.5rem 0;
-    padding: 5px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-family: var(--font-sans);
-    height: 45px;
-    width: 45px;
-
-    &.active {
-      outline: 2px solid var(--color-green-50);
-    }
-  }
-}
-
 .container {
   padding: var(--content-padding);
   max-width: var(--content-max-width);
@@ -288,13 +267,6 @@ button {
   text-decoration: none;
 }
 
-.small-icon {
-  svg {
-    height: 16px;
-    width: 16px;
-  }
-}
-
 .section {
   display: flex;
   gap: 2.875rem;
@@ -317,4 +289,9 @@ button {
   color: var(--color-text);
   font-size: 1.5rem;
   font-weight: 400;
+}
+
+.icon--sm {
+  width: 16px;
+  height: 16px;
 }
