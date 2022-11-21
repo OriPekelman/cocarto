@@ -1,11 +1,10 @@
 <div
   id="<%= dom_id(layer) %>"
-  class="layer-table__container"
+  class="layer-container"
   data-controller="layer"
   data-layer-selection-target="layer"
-  data-action="layer:center->map#fitBounds layer:opened->layer-selection#opened"
->
-  <header class="layer-table__header"
+  data-action="layer:center->map#fitBounds layer:opened->layer-selection#opened">
+  <header class="layer-header"
     data-map-geometry-type-param="<%= layer.geometry_type %>"
     data-map-color-param="<%= layer.color %>">
     <div class="layer-header__left-description">
@@ -18,12 +17,11 @@
         <%= embedded_svg "frame.svg" %>
       </span>
       <button
-        class="layer-table__chevron chevron"
+        class="layer-header__chevron chevron"
         data-action="layer#toggleTable map#layerToggle"
         data-map-layer-id-param="<%= layer.id %>"
         data-map-add-feature-text-param="<%= t("common.add_geometry.#{layer.geometry_type}") %>"
-        data-map-geometry-type-param="<%= layer.geometry_type %>"
-        >
+        data-map-geometry-type-param="<%= layer.geometry_type %>">
       </button>
     </div>
   </header>
@@ -33,7 +31,7 @@
 
     <footer class="layer-footer">
       <div data-restricted-target="restricted" data-restricted-authorizations="<%= %w[owner editor contributor].to_json %>"> <%# Cf policy(layer).edit? %>
-        <%= link_to  t("helpers.link.row.add_point"), new_layer_row_path(layer) if layer.geometry_point? %>
+        <%= link_to t("helpers.link.row.add_point"), new_layer_row_path(layer) if layer.geometry_point? %>
       </div>
       <div class="layer-footer__icon">
         <%= link_to layer, data: {turbo_method: :delete, turbo_confirm: t("common.confirm")} do %>

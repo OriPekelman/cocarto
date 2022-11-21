@@ -11,24 +11,15 @@ export default class extends Controller {
   }
 
   connect () {
-    const trigger = this.triggerTarget
-    const content = this.contentTarget
-
-    autoUpdate(trigger, content, () => {
-      computePosition(trigger, content, {
-        placement: this.placementValue,
-        middleware: [offset(this.offsetNumber), flip()]
-      }).then(({ x, y }) => {
-        Object.assign(content.style, {
-          left: `${x}px`,
-          top: `${y}px`
-        })
-      })
-    })
+    autoUpdate(this.triggerTarget, this.contentTarget, () => { this.#adjustPosition() })
     this.loadedValue = true
   }
 
-  toggle () {
+  toggle (event) {
+    if (this.contentTarget.contains(event.target)) {
+      return
+    }
+
     if (this.element.classList.contains('is-active')) {
       this.deactivate()
     } else {
@@ -40,6 +31,7 @@ export default class extends Controller {
     if (this.exclusiveValue) {
       this.#deactivateAllDropdowns()
     }
+    this.#adjustPosition()
     this.element.classList.add('is-active')
   }
 
@@ -51,5 +43,18 @@ export default class extends Controller {
     for (const dropdown of document.querySelectorAll('.dropdown.is-active')) {
       dropdown.classList.remove('is-active')
     }
+  }
+
+  #adjustPosition () {
+    computePosition(this.triggerTarget, this.contentTarget, {
+      placement: this.placementValue,
+      middleware: [offset(this.offsetValue), flip()]
+    }).then(({ x, y }) => {
+      Object.assign(this.contentTarget.style, {
+        left: `${x}px`,
+        top: `${y}px`,
+        'min-width': `${this.triggerTarget.offsetWidth}px`
+      })
+    })
   }
 }

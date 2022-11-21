@@ -1,0 +1,24 @@
+// Rules specific to the Field model forms
+
+.field-form__main-content {
+  padding: 1rem;
+  display: flex;
+  gap: 0.8rem;
+  flex-direction: column;
+}
+
+.field-form__footer-content {
+  padding: 1rem;
+  display: flex;
+  gap: 1rem;
+  background-color: var(--color-bg-ambient-30);
+  border-radius: 0 0 var(--border-radius) var(--border-radius);
+}
+
+.field-form__type-param {
+  margin: 0.5rem 0 0.5rem 1rem;
+}
+
+.field-form__type-radio:not(:checked) ~ .field-form__type-param {
+  display: none;
+}

@@ -73,6 +73,8 @@ body {
   --color-succes-20: #c4ed98;
   --color-succes-30: #8bbd54;
   --color-succes-40: #46790f;
+  --box-shadow: 0 1px 6px;
+  --color-shadow: var(--color-grey-30);
 
   /* MAIN FONT */
   --font-serif: georgia, "Times New Roman", times, serif, regular;
@@ -164,16 +166,6 @@ button[disabled]:hover {
   filter: none;
 }
 
-form {
-  display: block;
-  max-width: 460px;
-  text-align: left;
-}
-
-fieldset {
-  border: none;
-}
-
 main {
   align-items: center;
   display: flex;
@@ -204,7 +196,6 @@ a strong,
 button {
   display: inline-block;
   line-height: 1.5;
-  margin: 0.5rem 0;
   padding: 0.1rem 0.2rem;
   border: 0;
 }

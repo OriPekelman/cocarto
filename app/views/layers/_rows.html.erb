@@ -1,19 +1,19 @@
 <%# params: layer %>
 <%# renders a full table of editable rows for a layer %>
 
-<table class="layer__data display-when-loaded" data-controller="display-when-loaded">
+<table class="layer-table display-when-loaded" data-controller="display-when-loaded">
   <thead class="resizable">
     <tr>
       <% if layer.geometry_territory? %>
-        <th class="calculated"></th>
-        <th class="calculated"><%= t("common.territory_code") %></th>
+        <th><span class="layer-table__header"></span></th>
+        <th><span class="layer-table__header"><%= t("common.territory_code") %></span></th>
       <% elsif layer.geometry_point? %>
-        <th class="calculated"><%= t("common.longitude") %></th>
-        <th class="calculated"><%= t("common.latitude") %></th>
+        <th><span class="layer-table__header"><%= t("common.longitude") %></span></th>
+        <th><span class="layer-table__header"><%= t("common.latitude") %></span></th>
       <% elsif layer.geometry_line_string? %>
-        <th class="calculated"><%= t("common.length") %></th>
+        <th><span class="layer-table__header"><%= t("common.length") %></span></th>
       <% elsif layer.geometry_polygon? %>
-        <th class="calculated"><%= t("common.area") %></th>
+        <th><span class="layer-table__header"><%= t("common.area") %></span></th>
       <% end %>
 
       <%= render layer.fields %>
