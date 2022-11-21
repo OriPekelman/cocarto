@@ -1,4 +1,5 @@
 import { Controller } from '@hotwired/stimulus'
+import { useClickOutside } from 'stimulus-use'
 import { computePosition, offset, autoUpdate, flip } from '@floating-ui/dom'
 
 export default class extends Controller {
@@ -13,6 +14,7 @@ export default class extends Controller {
   connect () {
     autoUpdate(this.triggerTarget, this.contentTarget, () => { this.#adjustPosition() })
     this.loadedValue = true
+    useClickOutside(this)
   }
 
   toggle (event) {
@@ -37,6 +39,10 @@ export default class extends Controller {
 
   deactivate () {
     this.element.classList.remove('is-active')
+  }
+
+  clickOutside (event) {
+    this.deactivate()
   }
 
   #deactivateAllDropdowns () {
