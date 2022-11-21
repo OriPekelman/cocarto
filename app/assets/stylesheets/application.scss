@@ -171,11 +171,6 @@ textarea[readonly] {
   }
 }
 
-.field_with_errors {
-  background-color: var(--color-attention-30);
-  display: inline-block;
-}
-
 .dragbar {
   background-color: white;
   color: var(--color-grey-70);
@@ -234,13 +229,6 @@ textarea[readonly] {
 
 .main-actions + .container {
   padding-top: var(--content-padding-small);
-}
-
-.color-marker {
-  width: 8px;
-  height: 16px;
-  display: inline-block;
-  border-radius: 4px;
 }
 
 .new-territory-form__container {
