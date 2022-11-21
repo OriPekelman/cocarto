@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_08_124423) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_21_101452) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -124,8 +124,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_08_124423) do
     t.virtual "geo_length", type: :decimal, as: "st_length((line_string)::geography)", stored: true
     t.virtual "geo_area", type: :decimal, as: "st_area((polygon)::geography)", stored: true
     t.index ["author_id"], name: "index_rows_on_author_id"
+    t.index ["created_at"], name: "index_rows_on_created_at"
     t.index ["layer_id"], name: "index_rows_on_layer_id"
     t.index ["territory_id"], name: "index_rows_on_territory_id"
+    t.index ["updated_at"], name: "index_rows_on_updated_at"
     t.check_constraint "num_nonnulls(point, line_string, polygon, territory_id) = 1"
   end
 
