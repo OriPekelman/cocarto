@@ -123,6 +123,12 @@ body {
   padding: 3.5rem 4rem;
 }
 
+@media (max-width: 850px) {
+  .main-nav {
+    padding: 0 0.5rem;
+  }
+}
+
 .main-nav__title {
   font-weight: lighter;
   letter-spacing: -0.58px;
@@ -219,7 +225,8 @@ button {
 }
 
 .centered-main {
-  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
   padding: 24px;
 }
 
