@@ -9,7 +9,7 @@
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
 
-  <%= f.submit t("devise.passwords.send_reset_password"), class: "submit_form" %>
+  <%= f.submit t("devise.passwords.send_reset_password"), class: "form__button form__button--confirm" %>
   <%= render "devise/shared/links" %>
 <% end %>
 

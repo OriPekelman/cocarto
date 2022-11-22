@@ -18,7 +18,7 @@
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
-  <%= f.submit t("devise.passwords.submit_change_password"), class: "submit_form" %>
+  <%= f.submit t("devise.passwords.submit_change_password"), class: "form__button form__button--confirm" %>
   <%= render "devise/shared/links" %>
 <% end %>
 
