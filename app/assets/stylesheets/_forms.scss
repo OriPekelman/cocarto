@@ -91,7 +91,6 @@ input[type="number"] {
   margin-bottom: 0.5rem;
 }
 
-.field, // deprecated, use form__field instead (“field” is ambiguous and may refer to the Field model)
 .form__field {
   // A sub-unit of a form. Can be nested.
   display: flex;
