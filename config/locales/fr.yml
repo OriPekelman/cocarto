@@ -44,6 +44,11 @@ fr:
     updated_at: Modifié il y a %{date}
     updated_at_by: Modifié il y a %{date} par %{user}
     user_not_authorized: Vous n’avez pas la permission d’effectuer cette action.
+  layers:
+    layer:
+      center_on_layer: Centrer la carte sur cette couche
+      center_on_row: Centrer la carte sur cette ligne
+      delete_row: Supprimer cette ligne
   layouts:
     application:
       change_language: Changer la langue
