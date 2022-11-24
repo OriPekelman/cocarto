@@ -135,24 +135,24 @@ input[type="number"] {
 
 .form__button--confirm {
   background-color: var(--color-green-70);
-}
 
-.form__button--confirm:hover:not([disabled]) {
-  background-color: var(--color-green-90);
-}
+  &:hover:not([disabled]) {
+    background-color: var(--color-green-90);
+  }
 
-.form__button--confirm:active {
-  background-color: black;
+  &:active {
+    background-color: black;
+  }
 }
 
 .form__button--delete {
   background-color: var(--color-attention-30);
-}
 
-.form__button--delete:hover:not([disabled]) {
-  background-color: var(--color-attention-40);
-}
+  &:hover:not([disabled]) {
+    background-color: var(--color-attention-40);
+  }
 
-.form__button--delete:active {
-  background-color: black;
+  &:active {
+    background-color: black;
+  }
 }
