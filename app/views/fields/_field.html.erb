@@ -2,6 +2,11 @@
 <%# A new/editable/destroyable table header for a given field.
 Used in layers/rows, broadcast from FieldsController and from Field hooks. %>
 
+<%# The id is necessary because the submit button is outside of the form element. %>
+<%# The submit button is outside the form to be next to the delete that is a form on its own. %>
+<%# When the field is new (without id), we use the layer to identify the form. %>
+<% form_id = field.persisted? ? dom_id(field, :form) : dom_id(field.layer, :new_field) %>
+
 <th id="<%= dom_id(field) %>" class="dropdown" aria-haspopup="true"
     data-controller="dropdown"
     data-dropdown-target="trigger"
@@ -14,8 +19,7 @@ Used in layers/rows, broadcast from FieldsController and from Field hooks. %>
 
   <div class="dropdown__content" role="menu" data-dropdown-target="content">
     <%# The namespace option makes sure the labels identify the radio buttons in the right forms. %>
-    <%# The id is necessary because the submit button is outside of the form element. %>
-    <%= form_with model: field, namespace: dom_id(field), id: dom_id(field, :form)do |form| %>
+    <%= form_with model: field, namespace: dom_id(field), id: form_id do |form| %>
       <%# Disable the whole form in unauthorized. cf LayerPolicy#update?> %>
       <fieldset class="field-form__main-content" data-restricted-target="restricted" data-restricted-authorizations="<%= %w[owner editor].to_json %>">
         <% if field.new_record? %>
@@ -63,7 +67,7 @@ Used in layers/rows, broadcast from FieldsController and from Field hooks. %>
     <% end %>
 
     <div class="field-form__footer-content">
-      <%= submit_tag t("helpers.submit.field.update"), class: "form__button form__button--slim form__button--confirm", form: dom_id(field, :form) %>
+      <%= submit_tag t("helpers.submit.field.update"), class: "form__button form__button--slim form__button--confirm", form: form_id %>
       <%# Don’t display the delete button for new fields, and disable it if unauthorized. cf LayerPolicy#update? %>
       <% if field.persisted? %>
         <%= button_to field, method: :delete, class: "form__button form__button--slim form__button--delete",
