@@ -10,6 +10,11 @@
   background-color: var(--color-grey-30);
 }
 
+.layer-container.is-active {
+  z-index: var(--active-layer-z-index);
+  position: relative;
+}
+
 .layer-header {
   width: 100%;
   padding-left: 4px;
@@ -23,7 +28,7 @@
   border-bottom: solid 1px var(--color-grey-40);
   position: sticky;
   top: 0;
-  z-index: 1;
+  z-index: var(--layer-header-z-index);
 
   h3 {
     font-size: 16px;
@@ -136,7 +141,7 @@
   }
 
   thead {
-    z-index: 1;
+    z-index: var(--layer-table-thead-z-index);
     position: sticky;
     top: 32px;
     color: var(--color-grey-80);

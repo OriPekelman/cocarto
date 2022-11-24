@@ -8,7 +8,7 @@
   color: var(--color-text);
   top: 0;
   left: 0;
-  z-index: 1000;
+  z-index: var(--dropdown-z-index);
 
   a {
     text-decoration: none;
