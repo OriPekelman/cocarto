@@ -95,6 +95,14 @@ body {
   --content-padding: 4rem;
   --content-padding-large: 5.5rem;
   --main-header-height: 56px;
+
+  /* Z-indexes */
+  --dropdown-z-index: 1000;
+  --dragbar-z-index: 100;
+  --active-layer-z-index: 10;
+  --layer-header-z-index: 2;
+  --layer-table-thead-z-index: 1;
+  --map-overlay-z-index: 1;
 }
 
 .main-header {
