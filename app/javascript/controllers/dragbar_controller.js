@@ -1,11 +1,14 @@
 import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
+  static targets = ['left', 'right', 'dragbar']
+
   connect () {
     this.dragging = false
+    this.dragbarTarget.addEventListener('mousedown', e => this.mousedown(e))
+    window.addEventListener('mousemove', e => this.mousemove(e))
+    document.addEventListener('mouseup', () => this.mouseup())
   }
-
-  static targets = ['left', 'right', 'dragbar']
 
   mousedown (event) {
     event.preventDefault()

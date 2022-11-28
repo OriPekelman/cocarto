@@ -162,13 +162,9 @@ textarea[readonly] {
   height: 26px;
   width: 26px;
   position: absolute;
-  bottom: 12rem;
+  bottom: 2rem;
   left: 50%;
   transform: translate(-50%, 0);
-}
-
-.svg-dragbar:active {
-  background-color: var(--color-green-60);
 }
 
 .main-actions {
