@@ -67,15 +67,17 @@ en:
         delete: Supprimer
         modify: Modify
       field:
-        delete: Delete this column
+        delete: Delete
         new: New column
       layer:
+        add_point: Link for simple point adding (e.g. mobile phone)
+        delete: Delete
+        geojson_export: Download geojson
         new: Add a new layer
       map:
         delete: Delete this map
         new: Build a new map
       row:
-        add_point: Link for simple point adding (e.g. mobile phone)
         add_this_point: Add this point
       territory:
         new: Add the territory

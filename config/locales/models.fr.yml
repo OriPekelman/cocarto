@@ -68,12 +68,14 @@ fr:
         delete: Supprimer
         new: Nouvelle colonne
       layer:
+        add_point: Lien pour ajout simplifié de points (par exemple sur téléphone mobile)
+        delete: Supprimer
+        geojson_export: Télécharger le geojson
         new: Ajouter une nouvelle couche
       map:
         delete: Supprimer cette carte
         new: Créer une nouvelle carte
       row:
-        add_point: Lien pour ajout simplifié de points (par exemple sur téléphone mobile)
         add_this_point: Ajouter ce point
       territory:
         new: Ajouter le territoire
