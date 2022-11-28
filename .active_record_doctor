@@ -25,7 +25,7 @@ ActiveRecordDoctor.configure do
   ]
 
   detector :incorrect_dependent_option, ignore_associations: [
-    # See https://gitlab.com/CodeursEnLiberte/gxis/-/issues/192
+    # See https://gitlab.com/CodeursEnLiberte/cocarto/-/issues/192
     "Layer.fields",
     "Layer.rows",
   ]

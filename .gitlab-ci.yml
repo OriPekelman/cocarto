@@ -3,7 +3,7 @@ default:
 
 variables:
   GITLAB_CI_POSTGRES_HOST: postgis-postgis
-  GITLAB_CI_POSTGRES_DB: gxis_test
+  GITLAB_CI_POSTGRES_DB: cocarto_test
   POSTGRES_USER: postgres
   POSTGRES_PASSWORD: postgres
   SAST_EXCLUDED_PATHS: vendor
@@ -99,7 +99,7 @@ test-system:
       junit:
         - test-system/*.xml
 
-# Security testing (see https://gitlab.com/CodeursEnLiberte/gxis/-/security/dashboard)
+# Security testing (see https://gitlab.com/CodeursEnLiberte/cocarto/-/security/dashboard)
 include:
   - template: Security/Dependency-Scanning.gitlab-ci.yml
   - template: Security/Secret-Detection.gitlab-ci.yml

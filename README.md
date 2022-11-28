@@ -1,10 +1,10 @@
-# Ĝis
+# cocarto
 
 ## Context
 
 ***Collaborative and historized edition of geographical data***
 
-Ĝis is a tool for managing geographical-related data that doesn’t require a geomatic engineer experience.  It is a web application that lets you create, edit data sets that include geographical data; multiple users can collaborate in realtime on the same data.
+**cocarto** is a tool for managing geographical-related data that doesn’t require a geomatic engineer experience.  It is a web application that lets you create, edit data sets that include geographical data; multiple users can collaborate in realtime on the same data.
 
 It’s just tabular data with an extra column for the geometry; a spreadsheet of geographical data.
 
@@ -22,7 +22,7 @@ If you want to report a bug, ask for an improvement or submit a fix, open an iss
 
 ### Technical dependencies
 
-Ĝis is a [Ruby on rails](https://rubyonrails.org/) monolith application. We use [turbo](https://turbo.hotwired.dev/) for interactivity and [stimulus](https://stimulus.hotwired.dev/) for the small bits that need javascript.
+**cocarto** is a [Ruby on rails](https://rubyonrails.org/) monolith application. We use [turbo](https://turbo.hotwired.dev/) for interactivity and [stimulus](https://stimulus.hotwired.dev/) for the small bits that need javascript.
 
 In order to work on it, you will need:
 - postgresql with postgis
@@ -30,7 +30,7 @@ In order to work on it, you will need:
 
 ### Create the database roles
 
-By default, the app will try to connect to the database with the user `gxis` and the password `gxis`.
+By default, the app will try to connect to the database with the user `cocarto` and the password `cocarto`.
 
 To create that user, run:
 
