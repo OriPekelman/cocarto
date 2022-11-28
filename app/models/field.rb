@@ -35,7 +35,7 @@ class Field < ApplicationRecord
 
   # Hooks
   after_create_commit -> do
-    broadcast_i18n_before_to layer.map, target: dom_id(Field.new)
+    broadcast_i18n_before_to layer.map, target: dom_id(layer, :new_field)
     layer.rows.each do |row|
       broadcast_i18n_before_to layer.map, target: dom_id(row, "actions"), partial: "fields/td", locals: {field: self, value: nil, form_id: dom_id(row, :form), author_id: row.author_id}
     end
