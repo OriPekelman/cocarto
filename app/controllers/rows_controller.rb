@@ -21,19 +21,19 @@ class RowsController < ApplicationController
     end
   end
 
-  def destroy
-    @row.destroy
-    respond_to do |format|
-      format.turbo_stream
-      format.html { redirect_to @row.layer, notice: t("helpers.message.row.destroyed") }
-    end
-  end
-
   def update
     @row.update(row_params)
     respond_to do |format|
       format.turbo_stream
       format.html { redirect_to layer_path(@row.layer), notice: t("helpers.message.row.updated") }
+    end
+  end
+
+  def destroy
+    @row.destroy
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to @row.layer, notice: t("helpers.message.row.destroyed") }
     end
   end
 

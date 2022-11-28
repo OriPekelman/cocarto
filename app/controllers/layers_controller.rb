@@ -5,24 +5,9 @@ class LayersController < ApplicationController
   before_action :set_layer, only: %i[show update destroy schema geojson]
   before_action :authenticate_user!
 
-  def show
-    redirect_to @layer.map
-  end
-
   def new
     map = current_user.maps.find(params["map_id"])
     @layer = authorize map.layers.new
-  end
-
-  def update
-    if @layer.update(layer_params)
-      respond_to do |format|
-        format.turbo_stream
-        format.html { redirect_to layer_path(@layer) }
-      end
-    else
-      render :show, status: :unprocessable_entity
-    end
   end
 
   def create
@@ -35,6 +20,21 @@ class LayersController < ApplicationController
       # This line overrides the default rendering behavior, which
       # would have been to render the "create" view.
       render "new", status: :unprocessable_entity
+    end
+  end
+
+  def show
+    redirect_to @layer.map
+  end
+
+  def update
+    if @layer.update(layer_params)
+      respond_to do |format|
+        format.turbo_stream
+        format.html { redirect_to layer_path(@layer) }
+      end
+    else
+      render :show, status: :unprocessable_entity
     end
   end
 
