@@ -20,7 +20,7 @@ export default class extends Controller {
       }
     } else if (event.target.value === '') {
       // If the input is empty (and it wasn’t the last input) we remove it
-      const previousValue = this.valueTargets[Math.max(valueIndex - 1, 0)]
+      const previousValue = this.valueTargets.at(Math.max(valueIndex - 1, 0))
       previousValue.select()
       event.target.remove()
     }
