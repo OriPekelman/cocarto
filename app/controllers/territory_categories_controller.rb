@@ -1,6 +1,6 @@
 class TerritoryCategoriesController < ApplicationController
   def index
-    @categories = scope_policy(TerritoryCategory)
+    @categories = policy_scope(TerritoryCategory)
   end
 
   def show
