@@ -7,9 +7,9 @@ default: &default
 
 development:
   <<: *default
-  database: gxis
-  username: <%= ENV['POSTGRES_USER'] or 'gxis' %>
-  password: <%= ENV['POSTGRES_PASSWORD'] or 'gxis' %>
+  database: cocarto
+  username: <%= ENV['POSTGRES_USER'] or 'cocarto' %>
+  password: <%= ENV['POSTGRES_PASSWORD'] or 'cocarto' %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -17,9 +17,9 @@ development:
 test:
   <<: *default
   host: <%= ENV.fetch('GITLAB_CI_POSTGRES_HOST') { 'localhost' } %>
-  database: <%= ENV.fetch('GITLAB_CI_POSTGRES_DB') { 'gxis_test' } %>
-  username: <%= ENV['POSTGRES_USER'] or 'gxis' %>
-  password: <%= ENV['POSTGRES_PASSWORD'] or 'gxis' %>
+  database: <%= ENV.fetch('GITLAB_CI_POSTGRES_DB') { 'cocarto_test' } %>
+  username: <%= ENV['POSTGRES_USER'] or 'cocarto' %>
+  password: <%= ENV['POSTGRES_PASSWORD'] or 'cocarto' %>
 
 
 production:

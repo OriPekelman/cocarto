@@ -29,7 +29,7 @@ en:
       point: Add a point
       polygon: Add a polygon
       territory: Add a territory
-    app_title: Ĝis
+    app_title: cocarto
     area: Area
     back: Back
     confirm: Are you sure?
@@ -63,12 +63,12 @@ en:
   main:
     index:
       landing_1_header_html: |
-        <p>Ĝis is a collaborative cartography tool.<br>
+        <p><b>cocarto</b> is a collaborative cartography tool.<br>
         It can link data to a territory.</p><p>For example:</p>
       landing_2_examples_html: "<li>prepare the journey and every step for a hike,</li><li>list infrastructure issues.</li>\n"
       landing_3_footer_html: |
         We’re looking for stories for such needs in existing companies.
-        <a href=" https://gitlab.com/CodeursEnLiberte/gxis/-/blob/main/README.md#user-content-how-to-contribute" target="_blank">Contact us</a>
+        <a href=" https://gitlab.com/CodeursEnLiberte/cocarto/-/blob/main/README.md#user-content-how-to-contribute" target="_blank">Contact us</a>
         if you want to talk about yours.</p>
   maps:
     show:

@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
 function linux() {
-    command="psql -c \"create user gxis with password 'gxis' superuser\""
+    command="psql -c \"create user cocarto with password 'cocarto' superuser\""
     sudo su postgres -c "$command"
 }
 
 function macos() {
-    psql -c "create user gxis with password 'gxis' superuser"
+    psql -c "create user cocarto with password 'cocarto' superuser"
 }
 
 case $(uname -s) in
