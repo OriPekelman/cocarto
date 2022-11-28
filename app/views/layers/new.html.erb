@@ -6,7 +6,7 @@
   data-new-layer-default-color-value="<%= Layer::COLORS[:blue] %>">
   <div class="modal__container">
     <h2><%= t("helpers.link.layer.new") %></h2>
-    <%= form_with(model: @layer) do |form| %>
+    <%= form_with(model: @layer, id: dom_id(@layer)) do |form| %>
       <%= form.hidden_field :map_id %>
 
       <div class="form_field">
@@ -47,7 +47,7 @@
 
     <div class="modal__footer">
       <%= link_to t("common.back"), map_path(@layer.map), class: "secondary-action" %>
-      <%= form.submit class: "form__button form__button--confirm" %>
+      <%= form.submit class: "form__button form__button--confirm", form: dom_id(@layer) %>
     </div>
   <% end %>
 

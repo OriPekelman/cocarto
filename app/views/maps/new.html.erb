@@ -3,7 +3,7 @@
 <div class="centered-main new-layer modal">
   <div class="modal__container">
     <h2><%= t("helpers.link.map.new") %></h2>
-    <%= form_with(model: @map) do |form| %>
+    <%= form_with(model: @map, id: dom_id(@map)) do |form| %>
       <div class="form__field">
         <%= form.label :name %>
         <%= form.text_field :name %>
@@ -11,7 +11,7 @@
     </div>
     <div class="modal__footer">
       <%= link_to t("common.back"), maps_path, class: "secondary-action" %>
-      <%= form.submit class: "form__button form__button--confirm" %>
+      <%= form.submit class: "form__button form__button--confirm", form: dom_id(@map) %>
     </div>
   <% end %>
 </div>
