@@ -48,4 +48,14 @@ class LayerTest < ActiveSupport::TestCase
       assert_equal users(:cassini), layers(:restaurants).last_updated_row_author
     end
   end
+
+  class DependentDestruction < LayerTest
+    test "destroying a layer destroys its fields" do
+      layer = layers(:restaurants)
+      territory_field = fields(:restaurant_ville)
+
+      assert_nothing_raised { layer.destroy! }
+      assert_raises(ActiveRecord::RecordNotFound) { territory_field.reload }
+    end
+  end
 end
