@@ -4,37 +4,37 @@
     <% if access_group.token.present? %>
       <%= form.hidden_field :token unless access_group.persisted? %>
       <% if access_group.persisted? %>
-        <div class="field" data-controller="clipboard">
-          <%= form.label :url_to_share, t(".url_to_share") %><br>
+        <div class="form__field" data-controller="clipboard">
+          <%= form.label :url_to_share, t(".url_to_share") %>
           <div class="input-with-button">
             <%= text_field_tag :url_to_share, share_link_url(access_group.token), data: {clipboard_target: "source"}, autocomplete: :off %>
             <button data-action="clipboard#copy"><%= embedded_svg "copy.svg" %></button>
           </div>
         </div>
       <% end %>
-      <div class="field">
+      <div class="form__field">
         <%= form.label :name, t(".url_name") %><br>
         <%= form.text_field :name %>
       </div>
     <% else %>
       <%= form.fields_for :users do |f| %>
-        <div class="field">
-          <%= f.label :email %><br>
+        <div class="form__field">
+          <%= f.label :email %>
           <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
         </div>
       <% end %>
     <% end %>
 
-    <div class="field">
+    <div class="form__field">
       <%= form.label :role_type, t(".type") %>
       <%= form.select :role_type, options_for_select(AccessGroup.role_types.map { |access_group| [AccessGroup.human_attribute_name(access_group[0]), access_group[1]] }, access_group.role_type) %>
     </div>
 
     <% if access_group.persisted? %>
-      <%= form.submit t("helpers.link.access_group.modify"), class: "submit_form" %>
-      <%= link_to t("helpers.link.access_group.delete"), access_group, data: {turbo_method: :delete, turbo_confirm: delete_message}, class: "delete-action" %>
+      <%= form.submit t("helpers.link.access_group.modify"), class: "form__button form__button--confirm" %>
+      <%= link_to t("helpers.link.access_group.delete"), access_group, data: {turbo_method: :delete, turbo_confirm: delete_message}, class: "form__button form__button--delete" %>
     <% else %>
-      <%= form.submit t("helpers.link.access_group.create"), class: "submit_form" %>
+      <%= form.submit t("helpers.link.access_group.create"), class: "form__button form__button--confirm" %>
     <% end %>
   <% end %>
 </div>

@@ -1,51 +1,53 @@
 <%# params: @layer %>
 
 <div
-  class="centered-main new-layer"
+  class="centered-main new-layer modal"
   data-controller="new-layer"
   data-new-layer-default-color-value="<%= Layer::COLORS[:blue] %>">
-  <h2><%= t("helpers.link.layer.new") %></h2>
-  <%= form_with(model: @layer) do |form| %>
-    <%= form.hidden_field :map_id %>
+  <div class="modal__container">
+    <h2><%= t("helpers.link.layer.new") %></h2>
+    <%= form_with(model: @layer) do |form| %>
+      <%= form.hidden_field :map_id %>
 
-    <div class="field">
-      <%= form.label :name %>
-      <%= form.text_field :name %>
-    </div>
+      <div class="form_field">
+        <%= form.label :name %>
+        <%= form.text_field :name %>
+      </div>
 
-    <h3><%= Layer.human_attribute_name(:color) %></h3>
-    <div class="color-selection">
-      <% Layer::COLORS.each do |key, rgb| %>
-        <div>
-          <%= form.radio_button :color, rgb, checked: key == :blue, data: {"new-layer-color-param": rgb, action: "new-layer#colorSelected"} %>
-          <%= form.label :color, t(key, scope: "colors"), value: rgb %>
-        </div>
-      <% end %>
-    </div>
-
-    <h3><%= Layer.human_attribute_name(:geometry_type) %></h3>
-    <div class="geometry-type-selector">
-      <% Layer.geometry_types.keys.each do |type| %>
-        <%= form.label "geometry_type_#{type}" do %>
-          <%= form.radio_button :geometry_type, type, checked: type == "point", data: {"new-layer-type-param": type, action: "new-layer#typeSelected"} %>
-          <div>
-            <div data-new-layer-target="icon"><%= embedded_svg "#{type}.svg" %></div>
-            <%= Layer.human_attribute_name(type).capitalize %>
+      <h3><%= Layer.human_attribute_name(:color) %></h3>
+      <div class="color-selection__container">
+        <% Layer::COLORS.each do |key, rgb| %>
+          <div class="color-selection__option">
+            <%= form.radio_button :color, rgb, checked: key == :blue, data: {"new-layer-color-param": rgb, action: "new-layer#colorSelected"} %>
+            <%= form.label :color, t(key, scope: "colors"), value: rgb %>
           </div>
         <% end %>
-      <% end %>
+      </div>
+
+      <h3><%= Layer.human_attribute_name(:geometry_type) %></h3>
+      <div class="geometry-type-selector">
+        <% Layer.geometry_types.keys.each do |type| %>
+          <%= form.label "geometry_type_#{type}" do %>
+            <%= form.radio_button :geometry_type, type, checked: type == "point", data: {"new-layer-type-param": type, action: "new-layer#typeSelected"} %>
+            <div>
+              <div data-new-layer-target="icon"><%= embedded_svg "#{type}.svg" %></div>
+              <%= Layer.human_attribute_name(type).capitalize %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+
+      <div class="territory-categories is-hidden" data-new-layer-target="territoryCategories">
+        <h3><%= TerritoryCategory.model_name.human(count: 2) %></h3>
+        <%= form.collection_check_boxes :territory_category_ids, TerritoryCategory.all, :id, :to_s do |b| %>
+          <div><%= b.label { b.check_box + b.text } %></div>
+        <% end %>
+      </div>
     </div>
 
-    <div class="territory-categories is-hidden" data-new-layer-target="territoryCategories">
-      <h3><%= TerritoryCategory.model_name.human(count: 2) %></h3>
-      <%= form.collection_check_boxes :territory_category_ids, TerritoryCategory.all, :id, :to_s do |b| %>
-        <div><%= b.label { b.check_box + b.text } %></div>
-      <% end %>
-    </div>
-
-    <div class="actions">
+    <div class="modal__footer">
       <%= link_to t("common.back"), map_path(@layer.map), class: "secondary-action" %>
-      <%= form.submit class: "primary-action" %>
+      <%= form.submit class: "form__button form__button--confirm" %>
     </div>
   <% end %>
 

@@ -88,19 +88,16 @@
   }
 
   .form {
-    @media screen and (max-width: 600px) {
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @media (max-width: 850px) {
+    .form {
       padding-left: 1rem;
     }
-    @media screen and (min-width: 600px) {
-      width: 30%;
-      margin-left: auto;
-      margin-right: auto;
-    }
   }
-}
-
-.actions {
-  display: flex;
 }
 
 .is-hidden {

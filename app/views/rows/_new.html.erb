@@ -7,7 +7,7 @@
    <%= render "territories/search", form: "new_territory_form", field: "row[territory_id]", territory: nil, layer_id: row.layer.id %>
     <%= form_with model: [row.layer, row], id: "new_territory_form", data: {"new-territory-target": "form"} do |form| %>
       <%= form.hidden_field :layer_id %>
-      <%= form.submit t("helpers.link.territory.new"), class: "new-territory primary-action", disabled: true, data: {"new-territory-target": "submit", action: "new-territory#save"} %>
+      <%= form.submit t("helpers.link.territory.new"), class: "form__button form__button--confirm", disabled: true, data: {"new-territory-target": "submit", action: "new-territory#save"} %>
     <% end %>
   </div>
 <% else %>

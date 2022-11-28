@@ -1,16 +1,17 @@
 <%# params: @map %>
 
-<div class="centered-main new-layer">
-  <h2><%= t("helpers.link.map.new") %></h2>
-  <%= form_with(model: @map) do |form| %>
-    <div class="field">
-      <%= form.label :name %>
-      <%= form.text_field :name %>
+<div class="centered-main new-layer modal">
+  <div class="modal__container">
+    <h2><%= t("helpers.link.map.new") %></h2>
+    <%= form_with(model: @map) do |form| %>
+      <div class="form__field">
+        <%= form.label :name %>
+        <%= form.text_field :name %>
+      </div>
     </div>
-
-    <div class="actions">
+    <div class="modal__footer">
       <%= link_to t("common.back"), maps_path, class: "secondary-action" %>
-      <%= form.submit class: "primary-action" %>
+      <%= form.submit class: "form__button form__button--confirm" %>
     </div>
   <% end %>
 </div>

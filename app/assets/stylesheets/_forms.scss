@@ -81,11 +81,16 @@ input[type="number"] {
   }
 }
 
+.form__container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
 .form__header {
   margin-bottom: 0.5rem;
 }
 
-.field, // deprecated, use form__field instead (“field” is ambiguous and may refer to the Field model)
 .form__field {
   // A sub-unit of a form. Can be nested.
   display: flex;
@@ -121,7 +126,7 @@ input[type="number"] {
   text-decoration: none;
   cursor: pointer;
   font-family: var(--font-serif);
-  height: 40px;
+  height: 36px;
   min-width: 80px;
   line-height: 1.5;
   width: fit-content;
