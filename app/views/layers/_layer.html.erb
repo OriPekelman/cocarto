@@ -4,9 +4,7 @@
   data-controller="layer"
   data-layer-selection-target="layer"
   data-action="layer:center->map#fitBounds layer:opened->layer-selection#opened">
-  <header class="layer-header"
-    data-map-geometry-type-param="<%= layer.geometry_type %>"
-    data-map-color-param="<%= layer.color %>">
+  <header class="layer-header">
     <div class="layer-header__left-description">
       <%= embedded_svg "#{layer.geometry_type}.svg", class: "layer-header__icon", style: "color: #{layer.color}" %>
       <%= render "layers/name", layer: layer %>

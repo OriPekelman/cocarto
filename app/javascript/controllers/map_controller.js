@@ -11,7 +11,6 @@ export default class extends Controller {
   static targets = ['geojsonField', 'newRowForm', 'row', 'map', 'addButton', 'defaultLatitude', 'defaultLongitude', 'defaultZoom', 'toolbarLeft', 'toolbarRight']
   static values = {
     mapId: String,
-    geometryType: String,
     defaultLatitude: Number,
     defaultLongitude: Number,
     defaultZoom: Number
