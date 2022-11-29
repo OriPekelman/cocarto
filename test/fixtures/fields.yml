@@ -38,6 +38,7 @@ restaurant_ville:
   layer: restaurants
   label: "Ville"
   field_type: "territory"
+  territory_categories: ["communes"]
 
 restaurant_date:
   layer: restaurants

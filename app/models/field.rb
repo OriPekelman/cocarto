@@ -54,6 +54,8 @@ class Field < ApplicationRecord
   end
 
   after_destroy_commit -> do
+    return if layer.destroyed?
+
     broadcast_remove_to layer.map
     Turbo::StreamsChannel.broadcast_remove_to layer.map, targets: ".#{dom_id(self)}"
   end

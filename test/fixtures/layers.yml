@@ -22,9 +22,10 @@
 restaurants:
   map: restaurants
   name: "Restaurants"
-  geometry_type: 'point'
+  geometry_type: "point"
 
 hiking:
   map: hiking
   name: hiking path
-  geometry_type: 'territory'
+  geometry_type: "territory"
+  territory_categories: regions
