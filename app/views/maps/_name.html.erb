@@ -1,0 +1,14 @@
+<%# params: map %>
+<%# renders a form for a map name %>
+
+<h2 id="<%= dom_id(map, :name) %>">
+  <%= form_with model: map do |form| %>
+    <%= form.text_field :name,
+          data: {
+            restricted_target: "restricted",
+            restricted_authorizations: %w[owner].to_json # cf MapPolicy#update?
+          },
+          onfocusout: "this.form.requestSubmit()",
+          class: "input--restricted map__name__input" %>
+  <% end %>
+</h2>

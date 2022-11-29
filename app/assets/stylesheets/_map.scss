@@ -79,4 +79,8 @@ input:not([type="checkbox"], [type="radio"], [type="submit"], [type="button"]) {
   &.map__toolbar__input {
     height: 30px;
   }
+
+  &.map__name__input {
+    text-align: center;
+  }
 }

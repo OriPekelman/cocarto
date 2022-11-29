@@ -23,4 +23,11 @@ class Map < ApplicationRecord
   has_one :layer_with_last_updated_row, -> { joins(:rows).order("rows.updated_at": :desc) }, class_name: "Layer" # rubocop:disable Rails/InverseOf, Rails/HasManyOrHasOneDependent
   has_one :last_updated_row, through: :layer_with_last_updated_row, source: :last_updated_row
   has_one :last_updated_row_author, through: :last_updated_row, source: :author
+
+  # Hooks
+  after_update_commit do
+    if name_previously_changed?
+      broadcast_i18n_replace_to self, target: dom_id(self, :name), partial: "maps/name"
+    end
+  end
 end
