@@ -39,6 +39,7 @@ class MapsController < ApplicationController
   end
 
   def destroy
+    @map.strict_loading!(false) # deletion in cascade to layers: :fields would trigger a violation
     @map.destroy
     redirect_to maps_url, notice: t("helpers.message.map.destroyed"), status: :see_other
   end
