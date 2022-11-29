@@ -87,7 +87,7 @@ class LayersController < ApplicationController
         headers["Access-Control-Allow-Origin"] = "*"
         headers["Access-Control-Allow-Methods"] = "GET OPTIONS"
         headers["Access-Control-Allow-Headers"] = "*"
-        sign_in User.new(access_groups: [access_group])
+        sign_in User.new(access_groups: [access_group], remember_me: false)
       else
         render plain: t("api.bad_key"), status: :unauthorized
       end

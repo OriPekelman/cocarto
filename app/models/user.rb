@@ -51,6 +51,14 @@ class User < ApplicationRecord
 
   def email_required? = false
 
+  self.remember_for = 2.months
+
+  def remember_me
+    # Override from Devise::rememberable to enable it by default
+    # See https://github.com/heartcombo/devise/issues/1513
+    super.nil? ? true : super
+  end
+
   def display_name
     if email
       email.split("@")[0]

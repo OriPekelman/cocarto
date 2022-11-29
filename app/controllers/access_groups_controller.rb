@@ -33,7 +33,7 @@ class AccessGroupsController < ApplicationController
     if user_signed_in?
       access_group.users << current_user unless access_group.users.exists?(current_user.id)
     else
-      user = access_group.users.create(email: nil)
+      user = access_group.users.create(email: nil, remember_me: false)
       sign_in user
     end
     redirect_to access_group.map
