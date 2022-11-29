@@ -1,4 +1,5 @@
 class FieldsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_field, only: %i[update destroy]
 
   def create

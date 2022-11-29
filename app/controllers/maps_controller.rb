@@ -1,4 +1,5 @@
 class MapsController < ApplicationController
+  before_action :authenticate_user!
   before_action :new_map, only: %i[new create]
   before_action :set_map, only: %i[show update destroy]
 
