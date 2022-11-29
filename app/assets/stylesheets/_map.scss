@@ -73,15 +73,10 @@
   }
 }
 
-.map__toolbar__input {
-  input:not([disabled]):focus,
-  input:not([disabled]):hover {
-    // Custom border on hover
-    border-color: var(--color-grey-30);
-    border-style: solid;
-    background-color: var(--color-bg-ambient-20);
-    box-shadow: none;
-    outline: none;
+input:not([type="checkbox"], [type="radio"], [type="submit"], [type="button"]) {
+  // TODO: remove the above line once we use BEM for general forms rules (see _forms.scss)
+
+  &.map__toolbar__input {
     height: 30px;
   }
 }

@@ -1,13 +1,14 @@
 <%# params: layer %>
 <%# renders a form for a layer name %>
 
-<h3 class="restricted map__toolbar__input">
+<h3>
   <%= form_with model: layer do |form| %>
     <%= form.text_field :name,
           data: {
             restricted_target: "restricted",
             restricted_authorizations: %w[owner editor].to_json # cf LayerPolicy#update?
           },
-          onfocusout: "this.form.requestSubmit()" %>
+          onfocusout: "this.form.requestSubmit()",
+          class: "input--restricted map__toolbar__input" %>
   <% end %>
 </h3>
