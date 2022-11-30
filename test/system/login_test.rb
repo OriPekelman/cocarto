@@ -23,10 +23,10 @@ class LoginTest < ApplicationSystemTestCase
   test "login and logout" do
     sign_in_as(users("reclus"), "refleurir")
     visit map_path(id: maps("boat"))
-    assert_text "Boating trip"
+    assert_field "map[name]", with: "Boating trip"
 
     sign_out
     visit map_path(id: maps("boat"))
-    assert_no_text "Boating trip"
+    assert_no_field "map[name]"
   end
 end

@@ -18,7 +18,7 @@ class AccessGroupsTest < ApplicationSystemTestCase
   test "we can generate a link for an anonymous access" do
     # Let’s be sure we can’t access the page
     visit map_path(id: maps("boat"))
-    assert_no_text "Boating trip"
+    assert_no_field "map[name]"
 
     # Create a link
     sign_in_as(users("reclus"), "refleurir")
@@ -33,6 +33,6 @@ class AccessGroupsTest < ApplicationSystemTestCase
     # We sign out and we can access the page
     sign_out
     visit(url)
-    assert_text "Boating trip"
+    assert_field "map[name]", with: "Boating trip"
   end
 end
