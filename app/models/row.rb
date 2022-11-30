@@ -78,7 +78,8 @@ class Row < ApplicationRecord
       .map { "\"#{territory_field}\".#{_1} AS \"#{territory_field}_#{_1}\"" }
       .join(", ")
 
-    joins("LEFT JOIN territories AS \"#{territory_field}\" ON \"#{territory_field}\".id = (values->>'#{territory_field}')::uuid")
+    sql = Arel.sql("LEFT JOIN territories AS \"#{territory_field}\" ON \"#{territory_field}\".id = (values->>'#{territory_field}')::uuid")
+    joins(sql)
       .select(prefixed_columns)
   end
 
