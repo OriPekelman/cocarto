@@ -35,7 +35,7 @@
 #  fk_rails_...  (territory_id => territories.id)
 #
 
-one:
+antipode:
   layer: restaurants
   point: POINT(2.37516 48.88661)
   author: reclus

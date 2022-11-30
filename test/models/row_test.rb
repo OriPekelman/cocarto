@@ -60,11 +60,21 @@ class RowTest < ActiveSupport::TestCase
     end
 
     test "territory value is returned as Territory object" do
-      assert_equal territories("paris"), restaurant_with_value(field("Ville"), territories("paris").id).fields_values[field("Ville")]
+      antipode = rows("antipode")
+      antipode.fields_values = {field("Ville").id => territories("paris").id}
+      antipode.save!
+
+      antipode_from_db = layers("restaurants").rows_with_territories.find(antipode.id)
+      assert_equal territories("paris"), antipode_from_db.fields_values[field("Ville")]
     end
 
     test "invalid territory identifier is ignored" do
-      assert_nil restaurant_with_value(field("Ville"), "invalid_identifier").fields_values[field("Ville")]
+      antipode = rows("antipode")
+      antipode.fields_values = {field("Ville").id => "invalid identifier"}
+      antipode.save!
+
+      antipode_from_db = layers("restaurants").rows_with_territories.find(antipode.id)
+      assert_nil antipode_from_db.fields_values[field("Ville")]
     end
 
     # Set values from user input
