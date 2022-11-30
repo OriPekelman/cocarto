@@ -3,6 +3,7 @@
 
 <h2 id="<%= dom_id(map, :name) %>">
   <%= form_with model: map do |form| %>
+    <%= form.label :name, hidden: true %>
     <%= form.text_field :name,
           data: {
             restricted_target: "restricted",

@@ -3,6 +3,7 @@
 
 <h3>
   <%= form_with model: layer do |form| %>
+    <%= form.label :name, hidden: true %>
     <%= form.text_field :name,
           data: {
             restricted_target: "restricted",

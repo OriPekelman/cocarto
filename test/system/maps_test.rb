@@ -20,7 +20,7 @@ class MapsTest < ApplicationSystemTestCase
     sign_in_as(users("reclus"), "refleurir")
 
     visit map_path(id: maps("restaurants"))
-    assert_field "map[name]", with: "Restaurants"
+    assert_field "Name", with: "Restaurants"
   end
 
   test "visit an unpermitted map" do

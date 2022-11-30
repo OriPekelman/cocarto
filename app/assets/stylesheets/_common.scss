@@ -20,6 +20,11 @@ body {
   background: var(--color-bg-ambient-10);
 }
 
+[hidden] {
+  // Prevent overriding the hidden html attribute with another display: rule
+  display: none !important;
+}
+
 :root {
   /* AMBIENT COLOR */
   --color-bg-ambient-10: #fffefa;
