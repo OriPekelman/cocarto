@@ -16,7 +16,7 @@ class AccessGroupPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      scope.where(map: @user.maps.merge(AccessGroup.owner))
+      scope.where(map: user.maps.merge(AccessGroup.owner))
     end
   end
 end

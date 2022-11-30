@@ -6,7 +6,7 @@ class MapControllerTest < ActionDispatch::IntegrationTest
   test "acces control" do
     restaurants = maps(:restaurants)
     get map_url(id: restaurants.id)
-    assert_redirected_to root_path(locale: :en)
+    assert_redirected_to new_user_session_path
 
     sign_in users(:cassini)
     get map_url(id: restaurants.id)

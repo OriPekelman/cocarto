@@ -2,8 +2,8 @@ require "securerandom"
 
 class LayersController < ApplicationController
   before_action :access_by_apikey, only: %i[geojson]
-  before_action :set_layer, only: %i[show update destroy schema geojson]
   before_action :authenticate_user!
+  before_action :set_layer, only: %i[show update destroy schema geojson]
 
   def new
     map = current_user.maps.find(params["map_id"])
