@@ -65,9 +65,10 @@ class Layer < ApplicationRecord
     style["color"] = new_color
   end
 
-  def rows_with_territories
-    fields
-      .filter { _1.type_territory? }
-      .reduce(rows) { |scoped, field| scoped.with_territory_column(field.id) }
+  # Dynamic Fields Associations
+  # return all the names for the dynamic associations.
+  # They can be used in `.includes` or `.preload`/`.eager_load` for the rows of this layer.
+  def fields_association_names
+    fields.type_territory.map(&:association_name)
   end
 end

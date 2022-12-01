@@ -68,4 +68,6 @@ class Field < ApplicationRecord
   def territory_categories=(categories)
     super(TerritoryCategory.find(categories&.compact_blank))
   end
+
+  include FieldValuesAssociations::AssociationName
 end

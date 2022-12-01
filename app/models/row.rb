@@ -44,9 +44,12 @@ class Row < ApplicationRecord
   has_one :map, through: :layer, inverse_of: :rows
 
   # Hooks
-  after_update_commit -> { broadcast_i18n_replace_to layer.map, object: layer.rows_with_territories.with_territory.includes(:territory, layer: :fields).find(id) }
+  after_update_commit -> { broadcast_i18n_replace_to layer.map, object: Row.with_territory.includes(:territory, *layer.fields_association_names, layer: :fields).find(id) }
   after_destroy_commit -> { broadcast_remove_to layer.map }
   after_create_commit -> { broadcast_i18n_append_to map, target: dom_id(layer, "rows"), locals: {extra_class: "highlight-transition bg-transition"}, object: Row.with_territory.includes(:territory, layer: :fields).find(id) }
+
+  # Dynamic Fields Associations
+  include FieldValuesAssociations::RowAssociations
 
   # We use postgis functions to convert to geojson
   # This makes the load be on postgres’ side, not rails (C implementation)
@@ -71,18 +74,6 @@ class Row < ApplicationRecord
              )
   end
 
-  scope :with_territory_column, ->(territory_field) do
-    # Warning: column names can only be 63 chars.
-    prefixed_columns = Territory
-      .attribute_names
-      .map { "\"#{territory_field}\".#{_1} AS \"#{territory_field}_#{_1}\"" }
-      .join(", ")
-
-    sql = Arel.sql("LEFT JOIN territories AS \"#{territory_field}\" ON \"#{territory_field}\".id = (values->>'#{territory_field}')::uuid")
-    joins(sql)
-      .select(prefixed_columns)
-  end
-
   # Values accessors:
   # fields_values and fields_values= have two roles
   # - make sure the values in the DB and from user input are for existing fields of the layer
@@ -94,11 +85,8 @@ class Row < ApplicationRecord
     db_values = values
     layer.fields.to_h do |field|
       value = db_values[field.id]
-      if field.type_territory? && attributes["#{field.id}_id"].present?
-        attributes = self.attributes
-          .filter { _1.starts_with?(field.id) }
-          .transform_keys { _1.delete_prefix("#{field.id}_") }
-        value = Territory.instantiate(attributes)
+      if field.type_territory?
+        value = association(field.association_name).target
       end
       [field, value]
     end

@@ -62,7 +62,7 @@ class RowTest < ActiveSupport::TestCase
     test "territory value is returned as Territory object" do
       antipode = rows("antipode")
 
-      antipode_from_db = layers("restaurants").rows_with_territories.find(antipode.id)
+      antipode_from_db = layers("restaurants").rows.includes(layers("restaurants").fields_association_names).find(antipode.id)
       assert_equal territories("paris"), antipode_from_db.fields_values[field("Ville")]
     end
 
@@ -71,7 +71,7 @@ class RowTest < ActiveSupport::TestCase
       antipode.fields_values = {field("Ville").id => "invalid identifier"}
       antipode.save!
 
-      antipode_from_db = layers("restaurants").rows_with_territories.find(antipode.id)
+      antipode_from_db = layers("restaurants").rows.includes(layers("restaurants").fields_association_names).find(antipode.id)
       assert_nil antipode_from_db.fields_values[field("Ville")]
     end
 

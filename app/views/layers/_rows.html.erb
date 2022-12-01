@@ -22,7 +22,7 @@
     </tr>
   </thead>
   <tbody id="<%= dom_id(layer, "rows") %>">
-  <%= render layer.rows_with_territories %>
+  <%= render layer.rows.includes(layer.fields_association_names) %>
   </tbody>
 </table>
 
