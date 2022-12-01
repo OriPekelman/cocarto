@@ -98,7 +98,7 @@ class Row < ApplicationRecord
         attributes = self.attributes
           .filter { _1.starts_with?(field.id) }
           .transform_keys { _1.delete_prefix("#{field.id}_") }
-        value = Territory.new(attributes)
+        value = Territory.instantiate(attributes)
       end
       [field, value]
     end
