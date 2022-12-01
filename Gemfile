@@ -34,6 +34,7 @@ gem "http_accept_language"
 gem "rails-i18n", "~> 7.0"
 gem "skylight"
 gem "premailer-rails", github: "Intrepidd/premailer-rails", branch: "support-propshaft" # Waiting for https://github.com/fphilipe/premailer-rails/pull/266
+gem "view_component"
 
 gem "foreman", "~> 0.87.2"
 

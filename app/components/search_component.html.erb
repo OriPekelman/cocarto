@@ -1,14 +1,11 @@
-<%# params: field, territory, form, layer_id, field_id %>
-
-<% path = search_territories_path(layer_id: local_assigns[:layer_id], field_id: local_assigns[:field_id]) %>
 <div
   class="territory-search dropdown"
   data-controller="autocomplete dropdown"
   data-row-autosave-param="true"
   data-autocomplete-path-value="<%= path %>"
-  data-action="autocomplete:selected->row#save autocomplete:selected->new-territory#selected autocomplete:selected->dropdown#deactivate autocomplete:input->dropdown#activate">
-    <%= hidden_field_tag field, territory&.id, data: {"autocomplete-target": "selected"}, form: form %>
-    <%= text_field_tag :q, territory&.to_s, autocomplete: "off",
+  data-action="<%= actions %>">
+    <%= hidden_field_tag @field, @territory&.id, data: {"autocomplete-target": "selected"}, form: @form %>
+    <%= text_field_tag :q, @territory&.to_s, autocomplete: "off",
           data: {
             autocomplete_target: "searchInput",
             dropdown_target: "trigger",

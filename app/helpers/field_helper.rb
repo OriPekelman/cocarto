@@ -6,7 +6,7 @@ module FieldHelper
     when "float"
       number_field_tag field_name, value, opts.merge(class: "numerical", step: "any")
     when "territory"
-      render "territories/search", opts.merge(territory: value, field: field_name, field_id: field.id)
+      render SearchComponent.new(field: field_name, territory: value, form: opts[:form], field_id: field.id, layer_id: nil)
     when "date"
       date_field_tag field_name, value, opts
     when "boolean"
