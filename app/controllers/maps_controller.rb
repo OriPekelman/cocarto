@@ -29,7 +29,9 @@ class MapsController < ApplicationController
 
   def update
     if @map.update(map_params)
-      flash.now[:notice] = t("helpers.message.map.center_and_zoom_saved")
+      if [:default_latitude, :default_longitude, :default_zoom].any? { _1.in? @map.previous_changes }
+        flash.now[:notice] = t("helpers.message.map.center_and_zoom_saved")
+      end
       respond_to do |format|
         format.turbo_stream { render turbo_stream: [turbo_stream.update("flash", partial: "layouts/flash")] }
         format.html { redirect_to layer_path(@map) }
