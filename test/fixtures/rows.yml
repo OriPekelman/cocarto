@@ -39,6 +39,9 @@ antipode:
   layer: restaurants
   point: POINT(2.37516 48.88661)
   author: reclus
+  values: <%= {
+    ActiveRecord::FixtureSet.identify(:restaurant_ville, :uuid) => ActiveRecord::FixtureSet.identify(:paris, :uuid) 
+    }.to_json %>
 
 two:
   layer: hiking

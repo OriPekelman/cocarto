@@ -61,8 +61,6 @@ class RowTest < ActiveSupport::TestCase
 
     test "territory value is returned as Territory object" do
       antipode = rows("antipode")
-      antipode.fields_values = {field("Ville").id => territories("paris").id}
-      antipode.save!
 
       antipode_from_db = layers("restaurants").rows_with_territories.find(antipode.id)
       assert_equal territories("paris"), antipode_from_db.fields_values[field("Ville")]
