@@ -64,4 +64,10 @@ class Layer < ApplicationRecord
   def color=(new_color)
     style["color"] = new_color
   end
+
+  def rows_with_territories
+    fields
+      .filter { _1.type_territory? }
+      .reduce(rows) { |scoped, field| scoped.with_territory_column(field.id) }
+  end
 end
