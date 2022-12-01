@@ -41,14 +41,6 @@ class LayerTest < ActiveSupport::TestCase
     end
   end
 
-  class Queries < LayerTest
-    test "#last_updated_row, #last_updated_row_author" do
-      row = layers(:restaurants).rows.create!(author: users(:cassini), point: "POINT(0.0001 0.0001)")
-      assert_equal row, layers(:restaurants).last_updated_row
-      assert_equal users(:cassini), layers(:restaurants).last_updated_row_author
-    end
-  end
-
   class DependentDestruction < LayerTest
     test "destroying a layer destroys its fields" do
       layer = layers(:restaurants)
@@ -56,6 +48,14 @@ class LayerTest < ActiveSupport::TestCase
 
       assert_nothing_raised { layer.destroy! }
       assert_raises(ActiveRecord::RecordNotFound) { territory_field.reload }
+    end
+  end
+
+  class Queries < LayerTest
+    test "#last_updated_row" do
+      row = layers(:restaurants).rows.create!(author: users(:cassini), point: "POINT(0.0001 0.0001)")
+      layer = Layer.where(id: layers(:restaurants)).with_last_updated_row_id.includes(:last_updated_row).first
+      assert_equal row, layer.last_updated_row
     end
   end
 end
