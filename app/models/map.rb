@@ -19,10 +19,13 @@ class Map < ApplicationRecord
   has_many :users, through: :access_groups, inverse_of: :maps
   has_many :rows, through: :layers, inverse_of: :map
 
-  # Query as relations
-  has_one :layer_with_last_updated_row, -> { joins(:rows).order("rows.updated_at": :desc) }, class_name: "Layer" # rubocop:disable Rails/InverseOf, Rails/HasManyOrHasOneDependent
-  has_one :last_updated_row, through: :layer_with_last_updated_row, source: :last_updated_row
-  has_one :last_updated_row_author, through: :last_updated_row, source: :author
+  # Query as scopes
+  scope :with_last_updated_row_id, -> do
+    joins(:rows)
+      .order("maps.id, rows.updated_at DESC")
+      .select("DISTINCT ON (maps.id) maps.*, rows.id as computed_last_updated_row_id")
+  end
+  belongs_to :last_updated_row, class_name: "Row", optional: true, foreign_key: "computed_last_updated_row_id" # rubocop:disable Rails/InverseOf
 
   # Hooks
   after_update_commit do

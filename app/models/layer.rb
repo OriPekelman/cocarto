@@ -40,9 +40,13 @@ class Layer < ApplicationRecord
   has_many :rows, -> { with_territory.order(:created_at) }, dependent: :delete_all, inverse_of: :layer # note: having a scope on the relation breaks statement caching and strict_loading
   has_and_belongs_to_many :territory_categories
 
-  # Query as relations
-  has_one :last_updated_row, -> { order(updated_at: :desc) }, class_name: "Row" # rubocop:disable Rails/InverseOf, Rails/HasManyOrHasOneDependent
-  has_one :last_updated_row_author, through: :last_updated_row, source: :author
+  # Query as scopes
+  scope :with_last_updated_row_id, -> do
+    joins(:rows)
+      .order("layers.id, rows.updated_at DESC")
+      .select("DISTINCT ON (layers.id) layers.*, rows.id as computed_last_updated_row_id")
+  end
+  belongs_to :last_updated_row, class_name: "Row", optional: true, foreign_key: "computed_last_updated_row_id" # rubocop:disable Rails/InverseOf
 
   # Hooks
   after_create_commit -> { broadcast_i18n_append_to map, target: dom_id(map, "layers") }
