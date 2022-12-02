@@ -1,0 +1,16 @@
+// “Card”. Can be used in a dropdown__content.
+
+.card__main-content {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.card__footer-content {
+  background-color: var(--color-bg-ambient-30);
+  border-radius: 0 0 var(--border-radius) var(--border-radius);
+  padding: 1rem;
+  display: flex;
+  gap: 1rem;
+}
