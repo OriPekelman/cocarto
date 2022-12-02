@@ -79,8 +79,10 @@ body {
   --color-succes-20: #c4ed98;
   --color-succes-30: #8bbd54;
   --color-succes-40: #46790f;
+
+  /* SHADOW */
   --box-shadow: 0 1px 6px;
-  --color-shadow: var(--color-grey-30);
+  --color-shadow: #21212048; // --color-grey-100, 30% opacity
 
   /* MAIN FONT */
   --font-serif: georgia, "Times New Roman", times, serif, regular;
