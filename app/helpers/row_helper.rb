@@ -35,7 +35,9 @@ module RowHelper
   end
 
   def row_tag_data_cols(row)
-    safe_join(row.fields_values.map { |field, value| field_td(field, value, dom_id(row, :form), row.author_id) })
+    safe_join(row.fields_values.map { |field, value|
+      render FieldTdComponent.new(field: field, value: value, form_id: dom_id(row, :form), author_id: row.author_id)
+    })
   end
 
   def row_tag_actions(row)
