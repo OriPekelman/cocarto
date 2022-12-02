@@ -1,3 +1,14 @@
+.dropdown {
+  user-select: none;
+  /* stylelint-disable property-no-vendor-prefix */
+  -webkit-user-select: none;
+  /* stylelint-enable property-no-vendor-prefix */
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
 .dropdown__content {
   visibility: hidden;
   position: absolute;
@@ -9,6 +20,14 @@
   top: 0;
   left: 0;
   z-index: var(--dropdown-z-index);
+
+  &:hover {
+    cursor: initial;
+    user-select: initial;
+    /* stylelint-disable property-no-vendor-prefix */
+    -webkit-user-select: none;
+    /* stylelint-enable property-no-vendor-prefix */
+  }
 
   a {
     text-decoration: none;
