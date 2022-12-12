@@ -9,6 +9,7 @@ class FieldTdComponent < ViewComponent::Base
   end
 
   private
+
   def html_class
     class_names("table-field", dom_id(@field))
   end

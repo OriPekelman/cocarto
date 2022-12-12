@@ -1,0 +1,14 @@
+<tr
+  id="<%= dom_id(@row) %>"
+  class="<%= classes %>"
+  data-controller="row"
+  data-action="focusin->map#highlightFeatures"
+  data-row-lng-min-value="<%= @row.geo_lng_min %>"
+  data-row-lat-min-value="<%= @row.geo_lat_min %>"
+  data-row-lng-max-value="<%= @row.geo_lng_max %>"
+  data-row-lat-max-value="<%= @row.geo_lat_max %>"
+  data-row-properties-value="<%= @row.css_properties.to_json %>">
+  <%= row_tag_calculated_data(@row) %>
+  <%= row_tag_data_cols(@row) %>
+  <%= row_tag_actions(@row) %>
+</tr>

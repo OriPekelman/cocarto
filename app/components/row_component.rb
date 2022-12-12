@@ -1,23 +1,16 @@
-module RowHelper
-  def row_tr(row, extra_class)
-    data_attributes = {
-      controller: "row",
-      row_lng_min_value: row.geo_lng_min,
-      row_lat_min_value: row.geo_lat_min,
-      row_lng_max_value: row.geo_lng_max,
-      row_lat_max_value: row.geo_lat_max,
-      row_properties_value: row.css_properties,
-      action: "focusin->map#highlightFeatures"
-    }
+# frozen_string_literal: true
 
-    tag.tr id: dom_id(row), data: data_attributes, class: class_names("row", extra_class) do
-      row_tag_calculated_data(row) +
-        row_tag_data_cols(row) +
-        row_tag_actions(row)
-    end
+class RowComponent < ViewComponent::Base
+  def initialize(row:, extra_class: "")
+    @row = row
+    @extra_class = extra_class
   end
 
   private
+
+  def classes
+    class_names("row", @extra_class)
+  end
 
   def row_tag_calculated_data(row)
     case row.layer.geometry_type
@@ -42,14 +35,14 @@ module RowHelper
 
   def row_tag_actions(row)
     remove = button_to([row.layer, row], method: :delete, title: t("layers.layer.delete_row"), form: {data: {"turbo-confirm": t("common.confirm")}}) do
-      embedded_svg("remove_item.svg", class: "icon--sm")
+      helpers.embedded_svg("remove_item.svg", class: "icon--sm")
     end
     tag.td(id: dom_id(row, "actions"), class: "table-actions") do
       tag.div(class: "table-actions__container") do
         row_tag_form(row) +
           remove +
           button_tag(data: {action: "click->map#centerToRow"}, title: t("layers.layer.center_on_row")) do
-            embedded_svg("center.svg", class: "icon--sm")
+            helpers.embedded_svg("center.svg", class: "icon--sm")
           end
       end
     end
