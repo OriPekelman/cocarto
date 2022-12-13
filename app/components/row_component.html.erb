@@ -8,7 +8,23 @@
   data-row-lng-max-value="<%= @row.geo_lng_max %>"
   data-row-lat-max-value="<%= @row.geo_lat_max %>"
   data-row-properties-value="<%= @row.css_properties.to_json %>">
-  <%= row_tag_calculated_data(@row) %>
-  <%= row_tag_data_cols(@row) %>
-  <%= row_tag_actions(@row) %>
+
+  <%= row_tag_calculated_data %>
+
+  <% @row.fields_values.each do |field, value| %>
+    <%= render FieldTdComponent.new(field: field, value: value, form_id: form_id, author_id: @row.author_id) %>
+  <% end %>
+
+  <td id="<%= dom_id(@row, "actions") %>" class="table-actions">
+    <div class="table-actions__container">
+      <%= button_to([@row.layer, @row], method: :delete, title: t("layers.layer.delete_row"), form: {data: {"turbo-confirm": t("common.confirm")}}) do %>
+        <%= helpers.embedded_svg("remove_item.svg", class: "icon--sm") %>
+      <% end %>
+      <%= row_tag_form %>
+      <button data-action="map#centerToRow" title="<%= t("layers.layer.center_on_row") %>">
+        <%= helpers.embedded_svg("center.svg", class: "icon--sm") %>
+      </button>
+    </div>
+  </td>
+
 </tr>
