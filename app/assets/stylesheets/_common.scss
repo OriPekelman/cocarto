@@ -2,6 +2,7 @@
 @use "restricted";
 @use "forms";
 @use "card";
+@use "header";
 @use "buttons";
 
 * {
@@ -75,7 +76,7 @@ body {
   --color-info-30: #299ae5;
   --color-info-40: #026ebb;
 
-  /* SUCCES COLOR */
+  /* SUCCESS COLOR */
   --color-succes-10: #ecfadc;
   --color-succes-20: #c4ed98;
   --color-succes-30: #8bbd54;
@@ -95,7 +96,7 @@ body {
   --color-bg-secondary: #e9e9e9;
   --color-text: #000;
 
-  /* MAP SIZE */
+  /* APP SIZES */
   --nav-height: 3.2rem;
   --footer-height: 2.4rem;
   --border-radius: 4px;
@@ -103,7 +104,8 @@ body {
   --content-padding-small: 3.25rem;
   --content-padding: 4rem;
   --content-padding-large: 5.5rem;
-  --main-header-height: 56px;
+  --header-height: 56px;
+  --welcome-header-height: 164px;
 
   /* Z-indexes */
   --dropdown-z-index: 1000;
@@ -112,40 +114,6 @@ body {
   --layer-header-z-index: 2;
   --layer-table-thead-z-index: 1;
   --map-overlay-z-index: 1;
-}
-
-.main-header {
-  background-color: var(--color-bg-ambient-20);
-  border-bottom: 0.5px solid var(--color-grey-40);
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
-
-.main-nav {
-  border: 0;
-  display: flex;
-  justify-content: space-between;
-  font-family: var(--font-serif);
-  align-items: center;
-  width: var(--content-max-width);
-  padding: 3.5rem 4rem;
-}
-
-@media (max-width: 850px) {
-  .main-nav {
-    padding: 0 0.5rem;
-  }
-}
-
-.main-nav__title {
-  font-weight: lighter;
-  letter-spacing: -0.58px;
-
-  a {
-    color: var(--color-green-50);
-    text-decoration: none;
-  }
 }
 
 button {

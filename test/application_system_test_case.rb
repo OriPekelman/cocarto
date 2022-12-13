@@ -23,7 +23,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
 
   def sign_out
     wait_until_dropdown_controller_ready
-    find(".header-right span").click
+    find('[title="Settings"]').click
     click_button "Sign out"
     visit("/")
   end

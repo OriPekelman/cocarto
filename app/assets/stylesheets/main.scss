@@ -1,44 +1,5 @@
 @use "common";
 
-/* HEADER */
-.main-nav__title {
-  font-size: 2.875rem;
-  letter-spacing: -1.3px;
-}
-
-.header-right {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  gap: 2rem;
-  letter-spacing: 0.44px;
-}
-
-.header-login {
-  color: var(--color-green-70);
-  text-decoration: none;
-}
-
-.button-trad {
-  padding: 4px;
-  background-color: white;
-  border-color: var(--color-grey-30);
-  border-radius: var(--border-radius);
-  border-style: double;
-  border-width: 2px;
-}
-
-.button-trad > svg {
-  display: flex;
-  justify-content: space-between;
-  margin: 6px;
-  fill: var(--color-green-40);
-}
-
-hr.solid {
-  border-top: 0.5px solid var(--color-grey-30);
-}
-
 /* MAIN LANDING PAGE */
 body {
   background-color: var(--color-bg-ambient-10);

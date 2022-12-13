@@ -22,6 +22,39 @@
 .button--large {
   font-size: 16px;
   height: 40px;
+  min-width: 40px;
+}
+
+.button--double {
+  border-color: var(--color-grey-30);
+  border-radius: var(--border-radius);
+  border-style: double;
+  border-width: 2px;
+}
+
+.button--icon {
+  background-color: var(--color-bg);
+  fill: var(--color-green-50);
+
+  &:hover:not([disabled]) {
+    background-color: var(--color-bg-ambient-10);
+  }
+}
+
+.button--link {
+  color: var(--color-green-70);
+
+  &:hover:not([disabled]) {
+    background-color: var(--color-bg-ambient-30);
+  }
+}
+
+.button--text {
+  color: var(--color-text);
+
+  &:hover:not([disabled]) {
+    background-color: var(--color-bg-ambient-30);
+  }
 }
 
 .button--confirm {

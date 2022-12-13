@@ -39,6 +39,7 @@ en:
     latitude: Latitude
     length: Length
     longitude: Longitude
+    settings: Settings
     share: Share…
     territory_code: Code
     updated_at: Updated %{date} ago
