@@ -17,38 +17,6 @@
     "desktop_browser": {
       "design": "raw"
     },
-    "windows": {
-      "picture_aspect": "no_change",
-      "background_color": "#da532c",
-      "on_conflict": "override",
-      "assets": {
-        "windows_80_ie_10_tile": false,
-        "windows_10_ie_11_edge_tiles": {
-          "small": false,
-          "medium": true,
-          "big": false,
-          "rectangle": false
-        }
-      },
-      "app_name": "cocarto"
-    },
-    "android_chrome": {
-      "picture_aspect": "background_and_margin",
-      "margin": "17%",
-      "background_color": "#ffffff",
-      "theme_color": "#ffffff",
-      "manifest": {
-        "name": "cocarto",
-        "display": "standalone",
-        "orientation": "not_set",
-        "on_conflict": "override",
-        "declared": true
-      },
-      "assets": {
-        "legacy_icon": false,
-        "low_resolution_icons": false
-      }
-    },
     "safari_pinned_tab": {
       "picture_aspect": "silhouette",
       "theme_color": "#5bbad5"
