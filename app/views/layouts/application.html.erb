@@ -18,7 +18,11 @@
 <body>
 <header class="header header--app">
   <nav class="header__nav">
-    <h1 class="header__title header__title--app"><%= link_to t("common.app_title"), user_signed_in? ? maps_path : root_path %></h1>
+    <h1>
+      <%= link_to root_path, class: "header__logo header__logo--app", title: t("common.app_title") do %>
+        <%= embedded_svg("cocato_logotype_couleur.svg") %>
+      <% end %>
+    </h1>
     <div id="flash">
       <%= render "layouts/flash" %>
     </div>
