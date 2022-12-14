@@ -1,0 +1,32 @@
+
+{
+  "master_picture": "app/assets/images/cocarto-favicon.svg",
+  "favicon_design": {
+    "ios": {
+      "picture_aspect": "background_and_margin",
+      "background_color": "#ffffff",
+      "margin": "14%",
+      "assets": {
+        "ios6_and_prior_icons": false,
+        "ios7_and_later_icons": false,
+        "precomposed_icons": false,
+        "declare_only_default_icon": true
+      },
+      "app_name": "cocarto"
+    },
+    "desktop_browser": {
+      "design": "raw"
+    },
+    "safari_pinned_tab": {
+      "picture_aspect": "silhouette",
+      "theme_color": "#4D7A5D"
+    }
+  },
+  "settings": {
+    "scaling_algorithm": "Mitchell",
+    "error_on_image_too_small": false,
+    "readme_file": false,
+    "html_code_file": false,
+    "use_path_as_is": false
+  }
+}
