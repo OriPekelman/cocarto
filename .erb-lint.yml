@@ -2,6 +2,7 @@
 EnableDefaultLinters: true
 exclude:
   - '**/vendor/**/*'
+  - 'app/views/application/_favicon.html.erb'
 linters:
   PartialInstanceVariable:
     enabled: true
