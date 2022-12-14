@@ -11,44 +11,10 @@
   padding: var(--content-padding-large) var(--content-padding);
 }
 
-.main-header {
-  height: var(--main-header-height);
-  width: initial;
-}
-
-.main-nav {
-  padding: 0 1.5rem;
-  width: 100%;
-}
-
-.main-nav__title {
-  font-size: 2rem;
-}
-
-.user-dropdown__content {
-  @include common.border;
-
-  margin-top: 1em;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 0.5em;
-  font-size: 14px;
-
-  a {
-    text-decoration: underline;
-  }
-}
-
-.user-dropdown__button {
-  @include common.button(var(--color-green-80), var(--color-green-20));
-}
-
 /* MAP */
 .data-with-map {
   height: calc(
-    100vh - var(--nav-height) - var(--footer-height) - var(--main-header-height)
+    100vh - var(--nav-height) - var(--footer-height) - var(--header-height)
   );
   display: flex;
   width: 100%;

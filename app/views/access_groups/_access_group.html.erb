@@ -31,10 +31,10 @@
     </div>
 
     <% if access_group.persisted? %>
-      <%= form.submit t("helpers.link.access_group.modify"), class: "form__button form__button--confirm" %>
-      <%= link_to t("helpers.link.access_group.delete"), access_group, data: {turbo_method: :delete, turbo_confirm: delete_message}, class: "form__button form__button--delete" %>
+      <%= form.submit t("helpers.link.access_group.modify"), class: "button button--confirm" %>
+      <%= link_to t("helpers.link.access_group.delete"), access_group, data: {turbo_method: :delete, turbo_confirm: delete_message}, class: "button button--delete" %>
     <% else %>
-      <%= form.submit t("helpers.link.access_group.create"), class: "form__button form__button--confirm" %>
+      <%= form.submit t("helpers.link.access_group.create"), class: "button button--confirm" %>
     <% end %>
   <% end %>
 </div>

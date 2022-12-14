@@ -22,7 +22,7 @@ Used in layers/rows, broadcast from FieldsController and from Field hooks. %>
   <div class="dropdown__content" role="menu" data-dropdown-target="content">
     <%= form_with model: field, namespace: element_id, id: form_id do |form| %>
       <%# Disable the whole form in unauthorized. cf LayerPolicy#update?> %>
-      <fieldset class="field-form__main-content" data-restricted-target="restricted" data-restricted-authorizations="<%= %w[owner editor].to_json %>">
+      <fieldset class="card__main-content" data-restricted-target="restricted" data-restricted-authorizations="<%= %w[owner editor].to_json %>">
         <% if field.new_record? %>
           <h3 class="form__header"><%= t("helpers.link.field.new") %></h3>
         <% end %>
@@ -67,11 +67,11 @@ Used in layers/rows, broadcast from FieldsController and from Field hooks. %>
       </fieldset>
     <% end %>
 
-    <div class="field-form__footer-content">
-      <%= submit_tag t("helpers.submit.field.update"), class: "form__button form__button--slim form__button--confirm", form: form_id %>
+    <div class="card__footer-content">
+      <%= submit_tag t("helpers.submit.field.update"), class: "button button--slim button--confirm", form: form_id %>
       <%# Don’t display the delete button for new fields, and disable it if unauthorized. cf LayerPolicy#update? %>
       <% if field.persisted? %>
-        <%= button_to field, method: :delete, class: "form__button form__button--slim form__button--delete",
+        <%= button_to field, method: :delete, class: "button button--slim button--delete",
               data: {restricted_target: "restricted", restricted_authorizations: %w[owner editor].to_json} do %>
           <%= t("helpers.link.field.delete") %>
         <% end %>

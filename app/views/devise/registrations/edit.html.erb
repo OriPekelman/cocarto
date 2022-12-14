@@ -31,7 +31,7 @@
     <%= f.password_field :current_password, autocomplete: "current-password" %>
   </div>
 
-  <%= f.submit t("devise.registrations.update"), class: "form__button form__button--confirm" %>
+  <%= f.submit t("devise.registrations.update"), class: "button button--confirm" %>
   <p><%= t("devise.registrations.unhappy") %> <%= button_to t("devise.registrations.cancel_my_account"), registration_path(resource_name), data: {confirm: t("devise.confirmations.confirmation")}, method: :delete, type: "button", "aria-haspopup": true, class: "delete-action" %></p>
   <%= link_to t("common.back"), :back %>
 <% end %>

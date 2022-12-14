@@ -1,0 +1,82 @@
+.button {
+  color: white;
+  border: 0;
+  font-size: 14px;
+  padding: 8px;
+  border-radius: var(--border-radius);
+  text-decoration: none;
+  cursor: pointer;
+  font-family: var(--font-serif);
+  height: 36px;
+  min-width: 80px;
+  line-height: 1.5;
+  width: fit-content;
+}
+
+.button--slim {
+  height: 28px;
+  font-size: 11px;
+  line-height: 1;
+}
+
+.button--large {
+  font-size: 16px;
+  height: 40px;
+  min-width: 40px;
+}
+
+.button--double {
+  border-color: var(--color-grey-30);
+  border-radius: var(--border-radius);
+  border-style: double;
+  border-width: 2px;
+}
+
+.button--icon {
+  background-color: var(--color-bg);
+  fill: var(--color-green-50);
+
+  &:hover:not([disabled]) {
+    background-color: var(--color-bg-ambient-10);
+  }
+}
+
+.button--link {
+  color: var(--color-green-70);
+
+  &:hover:not([disabled]) {
+    background-color: var(--color-bg-ambient-30);
+  }
+}
+
+.button--text {
+  color: var(--color-text);
+
+  &:hover:not([disabled]) {
+    background-color: var(--color-bg-ambient-30);
+  }
+}
+
+.button--confirm {
+  background-color: var(--color-green-70);
+
+  &:hover:not([disabled]) {
+    background-color: var(--color-green-90);
+  }
+
+  &:active {
+    background-color: black;
+  }
+}
+
+.button--delete {
+  background-color: var(--color-attention-30);
+
+  &:hover:not([disabled]) {
+    background-color: var(--color-attention-40);
+  }
+
+  &:active {
+    background-color: black;
+  }
+}
