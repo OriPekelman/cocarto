@@ -65,6 +65,7 @@ group :development do
   gem "rails-erd"
   gem "active_record_doctor"
   gem "letter_opener_web"
+  gem "rails_real_favicon"
 end
 
 group :test do
