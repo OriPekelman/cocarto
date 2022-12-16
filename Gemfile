@@ -53,6 +53,8 @@ group :development, :test do
 end
 
 group :development do
+  gem "localhost"
+
   # Access an interactive console on exception pages or by calling "console" anywhere in the code.
   gem "web-console"
   # Display performance information such as SQL time and flame graphs for each request in your browser.
