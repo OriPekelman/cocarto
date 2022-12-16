@@ -1,6 +1,5 @@
-// Action Cable provides the framework to deal with WebSockets in Rails.
-// You can generate new channels where WebSocket features live using the `bin/rails generate channel` command.
+// Reuse the hotwired/turbo stream websocket for all the action cable subscriptions.
 
-import { createConsumer } from '@rails/actioncable'
+import { cable } from '@hotwired/turbo-rails'
 
-export default createConsumer()
+export default await cable.getConsumer()

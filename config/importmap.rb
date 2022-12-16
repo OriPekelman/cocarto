@@ -11,7 +11,6 @@ pin "maplibre-gl", to: "https://ga.jspm.io/npm:maplibre-gl@2.4.0/dist/maplibre-g
 pin_all_from "app/javascript/controllers", under: "controllers"
 pin_all_from "app/javascript/channels", under: "channels"
 pin_all_from "app/javascript/lib", under: "lib"
-pin "@rails/actioncable", to: "https://ga.jspm.io/npm:@rails/actioncable@7.0.4/app/assets/javascripts/actioncable.esm.js"
 pin "@mapbox/mapbox-gl-draw", to: "https://ga.jspm.io/npm:@mapbox/mapbox-gl-draw@1.3.0/dist/mapbox-gl-draw.js"
 pin "@floating-ui/dom", to: "https://cdn.skypack.dev/@floating-ui/dom?min"
 pin "hotkeys-js", to: "https://ga.jspm.io/npm:hotkeys-js@3.10.1/dist/hotkeys.esm.js"
