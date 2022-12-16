@@ -44,9 +44,9 @@ class Row < ApplicationRecord
   has_one :map, through: :layer, inverse_of: :rows
 
   # Hooks
-  after_update_commit -> { broadcast_i18n_replace_to layer.map, object: Row.with_territory.includes(:territory, *layer.fields_association_names, layer: :fields).find(id) }
+  after_update_commit -> { broadcast_i18n_replace_to layer.map, html: render }
   after_destroy_commit -> { broadcast_remove_to layer.map }
-  after_create_commit -> { broadcast_i18n_append_to map, target: dom_id(layer, "rows"), locals: {extra_class: "highlight-transition bg-transition"}, object: Row.with_territory.includes(:territory, layer: :fields).find(id) }
+  after_create_commit -> { broadcast_i18n_append_to map, target: dom_id(layer, "rows"), html: render(extra_class: "highlight-transition bg-transition") }
 
   # Dynamic Fields Associations
   include FieldValuesAssociations::RowAssociations
@@ -160,5 +160,10 @@ class Row < ApplicationRecord
     else
       {}
     end
+  end
+
+  def render(**kwargs)
+    row = Row.with_territory.includes(:territory, *layer.fields_association_names, layer: :fields).find(id)
+    ApplicationController.render(RowComponent.new(row: row, **kwargs), layout: false)
   end
 end
