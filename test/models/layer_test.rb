@@ -55,6 +55,7 @@ class LayerTest < ActiveSupport::TestCase
     test "#last_updated_row" do
       row = layers(:restaurants).rows.create!(author: users(:cassini), point: "POINT(0.0001 0.0001)")
       layer = Layer.where(id: layers(:restaurants)).with_last_updated_row_id.includes(:last_updated_row).first
+
       assert_equal row, layer.last_updated_row
     end
   end

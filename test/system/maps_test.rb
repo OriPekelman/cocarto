@@ -12,6 +12,7 @@ class MapsTest < ApplicationSystemTestCase
     accept_confirm do
       click_link "Delete this map"
     end
+
     assert_text "The map was successfully destroyed"
     assert_no_text "Test de nouvelle carte"
   end
@@ -20,6 +21,7 @@ class MapsTest < ApplicationSystemTestCase
     sign_in_as(users("reclus"), "refleurir")
 
     visit map_path(id: maps("restaurants"))
+
     assert_field "Name", with: "Restaurants"
   end
 
@@ -27,6 +29,7 @@ class MapsTest < ApplicationSystemTestCase
     sign_in_as(users("reclus"), "refleurir")
 
     visit map_path(id: maps("hiking"))
+
     assert_text "You are not authorized to perform this action."
   end
 end

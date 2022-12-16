@@ -10,6 +10,10 @@ class MapsController < ApplicationController
     @maps = policy_scope(Map)
   end
 
+  def show
+    @role_type = current_user.access_groups.find_by(map: @map)&.role_type
+  end
+
   def new
   end
 
@@ -21,10 +25,6 @@ class MapsController < ApplicationController
       # would have been to render the "create" view.
       render "new", status: :unprocessable_entity
     end
-  end
-
-  def show
-    @role_type = current_user.access_groups.find_by(map: @map)&.role_type
   end
 
   def update
