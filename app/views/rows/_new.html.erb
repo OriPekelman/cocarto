@@ -6,7 +6,6 @@
     data-controller="new-territory">
     <%= render SearchComponent.new(form: "new_territory_form", field: "row[territory_id]", layer_id: row.layer.id, field_id: nil, territory: nil) %>
     <%= form_with model: [row.layer, row], id: "new_territory_form", data: {"new-territory-target": "form"} do |form| %>
-      <%= form.hidden_field :layer_id %>
       <%= form.submit t("helpers.link.territory.new"), class: "button button--confirm", disabled: true, data: {"new-territory-target": "submit", action: "new-territory#save"} %>
     <% end %>
   </div>
