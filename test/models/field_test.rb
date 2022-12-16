@@ -26,9 +26,11 @@ class FieldTest < ActiveSupport::TestCase
       field = layers(:restaurants).fields.type_text.create!
 
       field.type_integer!
+
       assert_predicate field, :type_integer?
 
       field.reload
+
       assert_predicate field, :type_text?
     end
   end

@@ -5,6 +5,7 @@ class AccessGroupsTest < ApplicationSystemTestCase
     sign_in_as(users("reclus"), "refleurir")
     visit map_path(id: maps("boat"))
     click_link "Share…"
+
     assert_field "access_group_users_attributes_0_email", with: "elisee.reclus@commune.paris"
     assert_field "access_group_users_attributes_0_email", with: "cassini@carto.gouv.fr"
   end
@@ -12,12 +13,14 @@ class AccessGroupsTest < ApplicationSystemTestCase
   test "a viewer can see the map, but not the roles" do
     sign_in_as(users("cassini"), "générations12345")
     visit map_path(id: maps("boat"))
+
     assert_no_link "Share…"
   end
 
   test "we can generate a link for an anonymous access" do
     # Let’s be sure we can’t access the page
     visit map_path(id: maps("boat"))
+
     assert_no_field "Name"
 
     # Create a link
@@ -33,6 +36,7 @@ class AccessGroupsTest < ApplicationSystemTestCase
     # We sign out and we can access the page
     sign_out
     visit(url)
+
     assert_field "Name", with: "Boating trip"
   end
 end

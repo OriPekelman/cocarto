@@ -5,6 +5,10 @@ class LayersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_layer, only: %i[show update destroy schema geojson]
 
+  def show
+    redirect_to @layer.map
+  end
+
   def new
     map = current_user.maps.find(params["map_id"])
     @layer = authorize map.layers.new
@@ -21,10 +25,6 @@ class LayersController < ApplicationController
       # would have been to render the "create" view.
       render "new", status: :unprocessable_entity
     end
-  end
-
-  def show
-    redirect_to @layer.map
   end
 
   def update

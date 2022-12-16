@@ -18,6 +18,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     fill_in "user_email", with: user.email
     fill_in "user_password", with: password
     click_button "Log in"
+
     assert_text "Maps"
   end
 

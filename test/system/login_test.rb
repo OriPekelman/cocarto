@@ -8,6 +8,7 @@ class LoginTest < ApplicationSystemTestCase
     fill_in "user_password", with: "canne à sucre"
     fill_in "user_password_confirmation", with: "canne à sucre"
     click_button "Sign up"
+
     assert_selector "span", text: "cabiai@amazonas.br"
 
     wait_until_dropdown_controller_ready
@@ -17,16 +18,19 @@ class LoginTest < ApplicationSystemTestCase
     fill_in "user_email", with: "cabiai@amazonas.br"
     fill_in "user_password", with: "canne à sucre"
     click_button "Log in"
+
     assert_selector "span", text: "cabiai@amazonas.br"
   end
 
   test "login and logout" do
     sign_in_as(users("reclus"), "refleurir")
     visit map_path(id: maps("boat"))
+
     assert_field "Name", with: "Boating trip"
 
     sign_out
     visit map_path(id: maps("boat"))
+
     assert_no_field "Name"
   end
 end

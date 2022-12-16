@@ -5,6 +5,7 @@ class PresenceTrackerChannelTest < ActionCable::Channel::TestCase
     test "authorized user can connect to the presence channel" do
       stub_connection current_user: users(:cassini)
       subscribe map: maps(:hiking).id
+
       assert_predicate subscription, :confirmed?
     end
 

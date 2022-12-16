@@ -63,6 +63,7 @@ class RowTest < ActiveSupport::TestCase
       antipode = rows("antipode")
 
       antipode_from_db = layers("restaurants").rows.includes(layers("restaurants").fields_association_names).find(antipode.id)
+
       assert_equal territories("paris"), antipode_from_db.fields_values[field("Ville")]
     end
 
@@ -72,6 +73,7 @@ class RowTest < ActiveSupport::TestCase
       antipode.save!
 
       antipode_from_db = layers("restaurants").rows.includes(layers("restaurants").fields_association_names).find(antipode.id)
+
       assert_nil antipode_from_db.fields_values[field("Ville")]
     end
 
@@ -79,24 +81,28 @@ class RowTest < ActiveSupport::TestCase
     test "value is saved" do
       row = Row.new(layer: layer)
       row.assign_attributes(fields_values: {field("Name").id => "Le Bastringue"})
+
       assert_equal "Le Bastringue", row.values[field("Name").id]
     end
 
     test "invalid field identifier is not saved" do
       row = Row.new(layer: layer)
       row.assign_attributes(fields_values: {invalid_field_identifier: "whatever"})
+
       assert_nil row.values[:invalid_field_identifier]
     end
 
     test "valid territory id is saved" do
       row = Row.new(layer: layer)
       row.assign_attributes(fields_values: {field("Ville").id => territories("paris").id})
+
       assert_equal territories("paris").id, row.values[field("Ville").id]
     end
 
     test "invalid territory id is ignored" do
       row = Row.new(layer: layer)
       row.assign_attributes(fields_values: {field("Ville").id => "invalid_identifier"})
+
       assert_nil row.values[field("Ville").id]
     end
   end

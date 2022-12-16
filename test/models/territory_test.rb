@@ -39,6 +39,7 @@ class TerritoryTest < ActiveSupport::TestCase
 
   test "import from geojson" do
     regions = TerritoryCategory.includes(:territories).find_by(name: "Régions")
+
     assert_equal 18, regions.territories.length
 
     # Test that it calls the with_geojson scope
@@ -47,6 +48,7 @@ class TerritoryTest < ActiveSupport::TestCase
 
   test "we have geojson and geojson bounding" do # rubocop:disable Minitest/MultipleAssertions
     guadeloupe = Territory.find_by(name: "Guadeloupe")
+
     assert_in_epsilon guadeloupe.geo_lng_min, -61.801
     assert_in_epsilon guadeloupe.geo_lat_min, 15.947
     assert_in_epsilon guadeloupe.geo_lng_max, -61.29
@@ -55,6 +57,7 @@ class TerritoryTest < ActiveSupport::TestCase
 
   test "search for autocomplete" do
     results = Territory.name_autocomplete("Breta")
+
     assert_equal "Bretagne", results[0].name
   end
 end

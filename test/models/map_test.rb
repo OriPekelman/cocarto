@@ -17,6 +17,7 @@ class MapTest < ActiveSupport::TestCase
     test "#last_updated_row" do
       row = maps(:restaurants).layers.last.rows.create!(author: users(:cassini), point: "POINT(0.0001 0.0001)")
       map = Map.where(id: maps(:restaurants)).with_last_updated_row_id.includes(:last_updated_row).first
+
       assert_equal row, map.last_updated_row
     end
   end
