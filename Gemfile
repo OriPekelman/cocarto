@@ -4,9 +4,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "3.1.3"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 7.0"
+gem "rails"
 # Use postgresql as the database for Active Record
-gem "pg", "~> 1.2"
+gem "pg"
 gem "activerecord-postgres_enum"
 gem "activerecord-postgis-adapter"
 gem "rgeo-geojson"
@@ -14,32 +14,32 @@ gem "rgeo-geojson"
 gem "puma", "~> 5.0"
 gem "pundit"
 gem "propshaft"
-gem "dartsass-rails", "~> 0.4.0"
+gem "dartsass-rails"
 gem "turbo-rails"
 gem "hotwire-rails"
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem "jbuilder", "~> 2.7"
+gem "jbuilder"
 # Use Redis adapter to run Action Cable in production
-gem "redis", "~> 4.0"
+gem "redis"
 # Use Active Model has_secure_password
-# gem "bcrypt", "~> 3.1.7"
+# gem "bcrypt"
 gem "importmap-rails"
 # Use Active Storage variant
-# gem "image_processing", "~> 1.2"
+# gem "image_processing"
 gem "rubyzip"
 # Used for authentification
 gem "devise"
 gem "devise_invitable"
 gem "http_accept_language"
-gem "rails-i18n", "~> 7.0"
+gem "rails-i18n"
 gem "skylight"
 gem "premailer-rails", github: "Intrepidd/premailer-rails", branch: "support-propshaft" # Waiting for https://github.com/fphilipe/premailer-rails/pull/266
 gem "view_component"
 
-gem "foreman", "~> 0.87.2"
+gem "foreman"
 
 # Reduces boot times through caching; required in config/boot.rb
-gem "bootsnap", ">= 1.4.4", require: false
+gem "bootsnap", require: false
 
 group :development, :test do
   # Call "byebug" anywhere in the code to stop execution and get a debugger console
@@ -48,17 +48,17 @@ group :development, :test do
   gem "rubocop-rails", require: false
   gem "rubocop-minitest", require: false
   # Verifies that we have all translations
-  gem "i18n-tasks", "~> 1.0.10"
+  gem "i18n-tasks"
   gem "erb_lint", require: false
 end
 
 group :development do
   # Access an interactive console on exception pages or by calling "console" anywhere in the code.
-  gem "web-console", ">= 4.1.0"
+  gem "web-console"
   # Display performance information such as SQL time and flame graphs for each request in your browser.
   # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
-  gem "rack-mini-profiler", "~> 2.0"
-  gem "listen", "~> 3.3"
+  gem "rack-mini-profiler"
+  gem "listen"
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem "spring"
   gem "annotate"
