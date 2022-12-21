@@ -1,16 +1,14 @@
-@use "common";
-
 /* MAIN LANDING PAGE */
-body {
+.landing-page__body {
   background-color: var(--color-bg-ambient-10);
 }
 
-.container {
+.landing-page__container {
   display: flex;
   gap: 2.5rem;
 }
 
-.main-text-landing {
+.landing-page__main-text {
   font-family: var(--font-serif);
   font-size: 18px;
   color: var(--color-grey-90);
@@ -19,19 +17,19 @@ body {
 }
 
 @media (max-width: 850px) {
-  .container {
+  .landing-page__container {
     flex-direction: column;
   }
 
-  .main-text-landing {
+  .landing-page__main-text-landing {
     flex-basis: max-content;
   }
 }
 
-.main-text-landing-ul {
+.landing-page__main-text__ul {
   margin-left: 1em;
 }
 
-.main-text-landing-p {
+.landing-page__main-text__p {
   margin-top: 1em;
 }
