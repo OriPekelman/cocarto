@@ -6,10 +6,7 @@
 @use "roles";
 @use "list";
 @use "map";
-
-.container {
-  padding: var(--content-padding-large) var(--content-padding);
-}
+@use "landing-page";
 
 /* MAP */
 .data-with-map {
