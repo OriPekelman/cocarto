@@ -203,13 +203,6 @@ button {
   width: 100%;
 }
 
-@mixin border() {
-  background-color: var(--color-bg);
-  border-style: double;
-  border-color: var(--color-grey-100);
-  border-width: 3px;
-}
-
 .no-decoration {
   text-decoration: none;
 }
@@ -245,9 +238,11 @@ button {
 
 .modal {
   margin: 32px;
-  @include border;
-
   padding: 0;
+  background-color: var(--color-bg);
+  border-style: double;
+  border-color: var(--color-grey-100);
+  border-width: 3px;
 }
 
 .modal__container {
