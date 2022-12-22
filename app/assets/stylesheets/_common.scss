@@ -203,41 +203,6 @@ button {
   width: 100%;
 }
 
-@mixin button($text, $background) {
-  border: 0;
-  font-weight: lighter;
-  padding: 8px;
-  border-radius: var(--border-radius);
-  text-decoration: none;
-  color: $text;
-  background-color: $background;
-  cursor: pointer;
-  font-family: var(--font-serif);
-  height: 40px;
-  line-height: 1.5;
-  width: fit-content;
-
-  &:focus {
-    background-color: $background;
-  }
-}
-
-.primary-action {
-  @include button(white, var(--color-green-70));
-
-  &:hover:not([disabled]) {
-    background-color: var(--color-green-90);
-  }
-}
-
-.delete-action {
-  @include button(white, var(--color-error-40));
-}
-
-.secondary-action {
-  @include button(var(--color-green-80), var(--color-green-20));
-}
-
 @mixin border() {
   background-color: var(--color-bg);
   border-style: double;

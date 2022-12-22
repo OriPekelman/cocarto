@@ -42,8 +42,8 @@
         </div>
       </div>
       <% else %>
-        <%= link_to t(".sign_in"), new_user_session_path, class: "secondary-action" %>
-        <%= link_to t(".sign_up"), new_user_registration_path, class: "primary-action" %>
+        <%= link_to t(".sign_in"), new_user_session_path, class: "button button--large button--alternate" %>
+        <%= link_to t(".sign_up"), new_user_registration_path, class: "button button--large button--confirm" %>
       <% end %>
     </div>
   </nav>

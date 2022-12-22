@@ -11,6 +11,7 @@
   min-width: 80px;
   line-height: 1.5;
   width: fit-content;
+  text-align: center;
 }
 
 .button--slim {
@@ -62,6 +63,19 @@
 
   &:hover:not([disabled]) {
     background-color: var(--color-green-90);
+  }
+
+  &:active {
+    background-color: black;
+  }
+}
+
+.button--alternate {
+  color: var(--color-green-80);
+  background-color: var(--color-green-20);
+
+  &:hover:not([disabled]) {
+    background-color: var(--color-green-30);
   }
 
   &:active {

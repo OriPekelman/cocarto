@@ -46,7 +46,7 @@
     </div>
 
     <div class="modal__footer">
-      <%= link_to t("common.back"), map_path(@layer.map), class: "secondary-action" %>
+      <%= link_to t("common.back"), map_path(@layer.map), class: "button button--alternate" %>
       <%= form.submit class: "button button--confirm", form: dom_id(@layer) %>
     </div>
   <% end %>
