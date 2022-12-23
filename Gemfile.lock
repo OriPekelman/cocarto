@@ -1,12 +1,3 @@
-GIT
-  remote: https://github.com/Intrepidd/premailer-rails.git
-  revision: f3883119809499ac72a7818f5ec7706c10ff00b6
-  branch: support-propshaft
-  specs:
-    premailer-rails (1.11.1)
-      actionmailer (>= 3)
-      premailer (~> 1.7, >= 1.7.9)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -123,7 +114,7 @@ GEM
       ferrum (~> 0.13.0)
     dartsass-rails (0.4.0)
       railties (>= 6.0.0)
-    date (3.3.2)
+    date (3.3.3)
     devise (4.8.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -140,7 +131,7 @@ GEM
       rainbow
       rubocop
       smart_properties
-    erubi (1.11.0)
+    erubi (1.12.0)
     ferrum (0.13)
       addressable (~> 2.5)
       concurrent-ruby (~> 1.1)
@@ -210,7 +201,7 @@ GEM
       minitest (>= 5.0)
       ruby-progressbar
     msgpack (1.6.0)
-    net-imap (0.3.2)
+    net-imap (0.3.4)
       date
       net-protocol
     net-pop (0.1.2)
@@ -235,17 +226,21 @@ GEM
       addressable
       css_parser (>= 1.12.0)
       htmlentities (>= 4.0.0)
+    premailer-rails (1.12.0)
+      actionmailer (>= 3)
+      net-smtp
+      premailer (~> 1.7, >= 1.7.9)
     propshaft (0.6.4)
       actionpack (>= 7.0.0)
       activesupport (>= 7.0.0)
       rack
       railties (>= 7.0.0)
     public_suffix (5.0.1)
-    puma (5.6.5)
+    puma (6.0.1)
       nio4r (~> 2.0)
     pundit (2.2.0)
       activesupport (>= 3.0.0)
-    racc (1.6.1)
+    racc (1.6.2)
     rack (2.2.4)
     rack-mini-profiler (3.0.0)
       rack (>= 1.2.0)
@@ -403,9 +398,9 @@ DEPENDENCIES
   localhost
   minitest-reporters
   pg
-  premailer-rails!
+  premailer-rails
   propshaft
-  puma (~> 5.0)
+  puma
   pundit
   rack-mini-profiler
   rails

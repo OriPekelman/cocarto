@@ -11,7 +11,7 @@ gem "activerecord-postgres_enum"
 gem "activerecord-postgis-adapter"
 gem "rgeo-geojson"
 # Use Puma as the app server
-gem "puma", "~> 5.0"
+gem "puma"
 gem "pundit"
 gem "propshaft"
 gem "dartsass-rails"
@@ -33,7 +33,7 @@ gem "devise_invitable"
 gem "http_accept_language"
 gem "rails-i18n"
 gem "skylight"
-gem "premailer-rails", github: "Intrepidd/premailer-rails", branch: "support-propshaft" # Waiting for https://github.com/fphilipe/premailer-rails/pull/266
+gem "premailer-rails"
 gem "view_component"
 
 gem "foreman"
