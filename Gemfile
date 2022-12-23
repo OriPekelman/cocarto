@@ -11,7 +11,7 @@ gem "activerecord-postgres_enum"
 gem "activerecord-postgis-adapter"
 gem "rgeo-geojson"
 # Use Puma as the app server
-gem "puma", "~> 5.0"
+gem "puma"
 gem "pundit"
 gem "propshaft"
 gem "dartsass-rails"
