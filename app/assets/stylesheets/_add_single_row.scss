@@ -1,0 +1,37 @@
+.add-single-row__container {
+  width: 100%;
+}
+
+.add-single-row__map {
+  right: 0;
+  bottom: 0;
+  height: 200px;
+}
+
+.add-single-row__crosshair {
+  $size: 18px;
+
+  width: $size;
+  height: $size;
+  z-index: var(--map-overlay-z-index);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: calc($size / -2);
+  margin-top: calc($size / -2);
+}
+
+.add-single-row__form {
+  padding: 2rem;
+  width: 400px;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 850px) {
+  .add-single-row__form {
+    padding: 1rem;
+    margin-left: 0;
+  }
+}
