@@ -49,11 +49,11 @@ class PresenceTracker {
 }
 
 class PresenceTrackers {
-  constructor (mapController) {
+  constructor (map, mapId) {
     this.trackers = new Map()
     this.lastMoveSent = Date.now()
-    this.map = mapController.map
-    this.#initActionCable(mapController.mapIdValue)
+    this.map = map
+    this.#initActionCable(mapId)
   }
 
   mousemove ({ lngLat }) {
