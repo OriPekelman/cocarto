@@ -16,7 +16,7 @@
         <% @row.layer.fields.each do |field| %>
           <div>
             <%= form.label "row[fields_values][#{field.id}]", field.label %>
-            <%= field_tag field, "row[fields_values][#{field.id}]", nil, form: dom_id(@row, :form) %>
+            <%= FieldTdComponent.new(field: field, value: nil, form_id: dom_id(@row, :form), author_id: nil).field_tag %>
           </div>
         <% end %>
       <%= form.submit t("helpers.link.row.add_this_point") %>
