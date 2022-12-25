@@ -11,6 +11,7 @@ export default class extends Controller {
   }
 
   static targets = ['geojsonField', 'newRowForm', 'row']
+  static outlets = ['layer']
 
   initialize () {
     this.boundingBox = null
@@ -32,6 +33,11 @@ export default class extends Controller {
   }
 
   toggleTable () {
+    // Close the other active layer if it exists
+    if (this.hasLayerOutlet && this.layerOutletElement !== this.element) {
+      this.layerOutletElement.classList.remove('is-active')
+    }
+
     const opened = this.element.classList.toggle('is-active')
     const detail = {
       layerController: this,

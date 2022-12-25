@@ -2,8 +2,8 @@
   id="<%= dom_id(layer) %>"
   class="layer-container"
   data-controller="layer"
-  data-layer-selection-target="layer"
-  data-action="layer:center->map#fitBounds layer:toggled->layer-selection#opened layer:toggled->map#layerToggled"
+  data-layer-layer-outlet=".layer-container.is-active"
+  data-action="layer:center->map#fitBounds layer:toggled->map#layerToggled"
   data-layer-add-feature-text-value="<%= t("common.add_geometry.#{layer.geometry_type}") %>"
   data-layer-geometry-type-value="<%= layer.geometry_type %>">
   <header class="layer-header">
