@@ -2,7 +2,7 @@ import { Controller } from '@hotwired/stimulus'
 import MapState from 'lib/map_state'
 
 export default class extends Controller {
-  static targets = ['geojsonField', 'newRowForm', 'row', 'map', 'addButton', 'defaultLatitude', 'defaultLongitude', 'defaultZoom', 'toolbarLeft', 'toolbarRight']
+  static targets = ['row', 'map', 'addButton', 'defaultLatitude', 'defaultLongitude', 'defaultZoom', 'toolbarLeft', 'toolbarRight']
   static values = {
     mapId: String,
     defaultLatitude: Number,
@@ -37,22 +37,15 @@ export default class extends Controller {
     this.mapState.getDraw().delete(row.id)
   }
 
-  layerToggle ({ params }) {
-    if (this.layerId !== params.layerId) {
-      this.mapState.setActiveLayer({
-        layerId: params.layerId,
-        geometryType: params.geometryType,
-        newRowForm: this.newRowFormTargets.find(form => form.dataset.layerId === params.layerId),
-        geojsonField: this.geojsonFieldTargets.find(field => field.dataset.layerId === params.layerId)
-      })
+  layerToggled ({ detail }) {
+    if (detail.opened) {
+      this.mapState.setActiveLayer(detail)
+    }
 
-      if (params.geometryType !== 'territory') {
-        this.addButtonTarget.innerHTML = params.addFeatureText
-        this.addButtonTarget.classList.remove('is-hidden')
-      } else {
-        this.addButtonTarget.classList.add('is-hidden')
-      }
-    } else { // We collapsed the current layer
+    if (detail.opened && detail.geometryType !== 'territory') {
+      this.addButtonTarget.innerHTML = detail.addFeatureText
+      this.addButtonTarget.classList.remove('is-hidden')
+    } else {
       this.addButtonTarget.classList.add('is-hidden')
     }
   }

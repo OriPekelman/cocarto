@@ -5,7 +5,12 @@ import { Controller } from '@hotwired/stimulus'
 // - is it shown or collapsed
 
 export default class extends Controller {
-  static targets = ['row']
+  static values = {
+    geometryType: String,
+    addFeatureText: String
+  }
+
+  static targets = ['geojsonField', 'newRowForm', 'row']
 
   initialize () {
     this.boundingBox = null
@@ -27,9 +32,19 @@ export default class extends Controller {
   }
 
   toggleTable () {
-    if (this.element.classList.toggle('is-active')) {
-      this.dispatch('opened', { details: this.element })
+    const opened = this.element.classList.toggle('is-active')
+    const detail = {
+      layerController: this,
+      opened,
+      geometryType: this.geometryTypeValue,
+      addFeatureText: this.addFeatureTextValue
     }
+    this.dispatch('toggled', { detail })
+  }
+
+  createRow (geometry) {
+    this.geojsonFieldTarget.value = JSON.stringify(geometry)
+    this.newRowFormTarget.requestSubmit()
   }
 
   #extendBounds (row) {

@@ -63,11 +63,9 @@ class MapState {
     this.draw.changeMode('simple_select', { featureIds: [featureId] })
   }
 
-  setActiveLayer ({ layerId, geometryType, newRowForm, geojsonField }) {
-    this.layerId = layerId
+  setActiveLayer ({ geometryType, layerController }) {
+    this.currentLayerController = layerController
     this.drawMode = `draw_${geometryType}`
-    this.newRowForm = newRowForm
-    this.geojsonField = geojsonField
   }
 
   addRow (row) {
@@ -91,8 +89,7 @@ class MapState {
   }
 
   #featureCreated (feature) {
-    this.geojsonField.value = JSON.stringify(feature.geometry)
-    this.newRowForm.requestSubmit()
+    this.currentLayerController.createRow(feature.geometry)
     // When we submit the drawn row, we get one back from the server through turbo
     // So we remove the one we’ve just drawn
     // Later we’ll be smarter to avoid destruction and recreation

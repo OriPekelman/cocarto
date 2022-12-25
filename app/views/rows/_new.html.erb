@@ -6,12 +6,12 @@
     data-controller="new-territory">
     <%= render SearchComponent.new(form: dom_id(row.layer, :new_territory_form), field: "row[territory_id]", layer_id: row.layer.id, field_id: nil, territory: nil) %>
     <%= form_with model: [row.layer, row], id: dom_id(row.layer, :new_territory_form), data: {"new-territory-target": "form"} do |form| %>
-      <%= form.submit t("helpers.link.territory.new"), class: "button button--confirm", disabled: true, data: {"new-territory-target": "submit", action: "new-territory#save"} %>
+      <%= form.submit t("helpers.link.territory.new"), class: "button button--confirm", disabled: true, data: {new_territory_target: "submit", action: "new-territory#save"} %>
     <% end %>
   </div>
 <% else %>
-  <%= form_with model: [row.layer, row], data: {map_target: "newRowForm", layer_id: row.layer.id}, class: "is-hidden" do |form| %>
-    <%= form.hidden_field :geojson, data: {map_target: "geojsonField", layer_id: row.layer.id} %>
+  <%= form_with model: [row.layer, row], data: {layer_target: "newRowForm", layer_id: row.layer.id}, class: "is-hidden" do |form| %>
+    <%= form.hidden_field :geojson, data: {layer_target: "geojsonField", layer_id: row.layer.id} %>
     <%= form.submit %>
   <% end %>
 <% end %>
