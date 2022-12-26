@@ -10,25 +10,15 @@ export default class extends Controller {
     addFeatureText: String
   }
 
-  static targets = ['geojsonField', 'newRowForm', 'row']
-  static outlets = ['layer']
-
-  initialize () {
-    this.boundingBox = null
-  }
-
-  rowTargetConnected (row) {
-    this.#extendBounds(row)
-  }
-
-  rowTargetDisconnected () {
-    this.boundingBox = null
-    this.rowTargets.forEach(otherRow => this.#extendBounds(otherRow))
-  }
+  static targets = ['geojsonField', 'newRowForm']
+  static outlets = ['layer', 'row']
 
   center () {
-    if (this.boundingBox !== null) {
-      this.dispatch('center', { detail: { boundingBox: this.boundingBox } })
+    const boundingBox = this.rowOutlets
+      .map(row => row.bounds())
+      .reduce((bbox, bounds) => bbox.extend(bounds))
+    if (boundingBox !== null) {
+      this.dispatch('center', { detail: { boundingBox } })
     }
   }
 
@@ -51,10 +41,5 @@ export default class extends Controller {
   createRow (geometry) {
     this.geojsonFieldTarget.value = JSON.stringify(geometry)
     this.newRowFormTarget.requestSubmit()
-  }
-
-  #extendBounds (row) {
-    const llb = row.rowController.bounds()
-    this.boundingBox = llb.extend(this.boundingBox)
   }
 }

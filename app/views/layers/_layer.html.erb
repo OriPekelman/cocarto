@@ -3,6 +3,7 @@
   class="layer-container"
   data-controller="layer"
   data-layer-layer-outlet=".layer-container.is-active"
+  data-layer-row-outlet="#<%= dom_id(layer) %> .row"
   data-action="layer:center->map#fitBounds layer:toggled->map#layerToggled"
   data-layer-add-feature-text-value="<%= t("common.add_geometry.#{layer.geometry_type}") %>"
   data-layer-geometry-type-value="<%= layer.geometry_type %>">
