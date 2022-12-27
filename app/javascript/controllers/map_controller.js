@@ -30,8 +30,6 @@ export default class extends Controller {
     if (this.mapState) {
       this.mapState.addRow(controller)
     }
-    setTimeout(() => element.classList.remove('highlight-transition'), 1000)
-    setTimeout(() => element.classList.remove('bg-transition'), 3000)
   }
 
   rowOutletDisconnected (row) {

@@ -16,6 +16,8 @@ export default class extends Controller {
     // Small hack inspired by https://dev.to/leastbad/the-best-one-line-stimulus-power-move-2o90
     this.element.rowController = this
     this.dirty = false
+    setTimeout(() => this.element.classList.remove('highlight-transition'), 1000)
+    setTimeout(() => this.element.classList.remove('bg-transition'), 3000)
   }
 
   setDirty () {
