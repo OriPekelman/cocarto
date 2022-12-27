@@ -38,7 +38,7 @@ export default class extends Controller {
     this.mapState.getDraw().delete(row.id)
   }
 
-  layerToggled ({ detail }) {
+  layerToggled (detail) {
     if (detail.opened) {
       this.mapState.setActiveLayer(detail)
     }

@@ -35,7 +35,7 @@ export default class extends Controller {
       geometryType: this.geometryTypeValue,
       addFeatureText: this.addFeatureTextValue
     }
-    this.dispatch('toggled', { detail })
+    this.mapOutlet.layerToggled(detail)
   }
 
   createRow (geometry) {
