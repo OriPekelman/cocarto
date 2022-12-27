@@ -61,10 +61,6 @@ export default class extends Controller {
     this.mapState.getDraw().changeMode(newMode)
   }
 
-  highlightFeatures (event) {
-    this.mapState.setSelectedFeature(event.target.closest('tr').id)
-  }
-
   exportMapAsImage ({ target }) {
     target.href = this.mapState.getImage()
   }

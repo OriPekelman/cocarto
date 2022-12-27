@@ -49,4 +49,8 @@ export default class extends Controller {
   zoomToFeature () {
     this.mapOutlet.mapState.setVisibleBounds(this.bounds())
   }
+
+  highlight () {
+    this.mapOutlet.mapState.setSelectedFeature(this.element.id)
+  }
 }
