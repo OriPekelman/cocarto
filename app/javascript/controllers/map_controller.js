@@ -2,7 +2,8 @@ import { Controller } from '@hotwired/stimulus'
 import MapState from 'lib/map_state'
 
 export default class extends Controller {
-  static targets = ['row', 'map', 'addButton', 'defaultLatitude', 'defaultLongitude', 'defaultZoom', 'toolbarLeft', 'toolbarRight']
+  static targets = ['map', 'addButton', 'defaultLatitude', 'defaultLongitude', 'defaultZoom', 'toolbarLeft', 'toolbarRight']
+  static outlets = ['row']
   static values = {
     mapId: String,
     defaultLatitude: Number,
@@ -21,19 +22,19 @@ export default class extends Controller {
       rightToolbar: this.toolbarRightTarget
     })
 
-    this.rowTargets.forEach(row => this.mapState.addRow(row))
+    this.rowOutlets.forEach(row => this.mapState.addRow(row))
   }
 
-  rowTargetConnected (row) {
+  rowOutletConnected (controller, element) {
     // a row can be connected when  isn’t initialized yet
     if (this.mapState) {
-      this.mapState.addRow(row)
+      this.mapState.addRow(controller)
     }
-    setTimeout(() => row.classList.remove('highlight-transition'), 1000)
-    setTimeout(() => row.classList.remove('bg-transition'), 3000)
+    setTimeout(() => element.classList.remove('highlight-transition'), 1000)
+    setTimeout(() => element.classList.remove('bg-transition'), 3000)
   }
 
-  rowTargetDisconnected (row) {
+  rowOutletDisconnected (row) {
     this.mapState.getDraw().delete(row.id)
   }
 
@@ -48,15 +49,6 @@ export default class extends Controller {
     } else {
       this.addButtonTarget.classList.add('is-hidden')
     }
-  }
-
-  fitBounds ({ detail }) {
-    this.mapState.setVisibleBounds(detail.boundingBox)
-  }
-
-  centerToRow ({ target }) {
-    const row = target.closest('tr')
-    this.mapState.setVisibleBounds(row.rowController.bounds())
   }
 
   setDefaultCenterZoom () {

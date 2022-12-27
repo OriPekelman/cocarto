@@ -11,14 +11,14 @@ export default class extends Controller {
   }
 
   static targets = ['geojsonField', 'newRowForm']
-  static outlets = ['layer', 'row']
+  static outlets = ['map', 'layer', 'row']
 
   center () {
     const boundingBox = this.rowOutlets
       .map(row => row.bounds())
       .reduce((bbox, bounds) => bbox.extend(bounds))
     if (boundingBox !== null) {
-      this.dispatch('center', { detail: { boundingBox } })
+      this.mapOutlet.mapState.setVisibleBounds(boundingBox)
     }
   }
 
