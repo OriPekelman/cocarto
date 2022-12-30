@@ -1,25 +1,23 @@
 <%# params: row %>
 
 <div
-  class="new-row"
+  class="add-single-row__container"
   data-controller="map-add-point"
   data-map-add-point-default-longitude-value="<%= @row.layer.map.default_longitude %>"
   data-map-add-point-default-latitude-value="<%= @row.layer.map.default_latitude %>"
   data-map-add-point-default-zoom-value="<%= @row.layer.map.default_zoom %>">
-  <div class="map" data-map-add-point-target="map">
-    <%= embedded_svg "center.svg", class: "crosshair" %>
+  <div class="add-single-row__map" data-map-add-point-target="map">
+    <%= embedded_svg "center.svg", class: "add-single-row__crosshair" %>
   </div>
-  <div class="form">
-    <%= form_with model: [@row.layer, @row], id: dom_id(@row, :form) do |form| %>
+    <%= form_with model: [@row.layer, @row], id: dom_id(@row, :form), class: "add-single-row__form form__container" do |form| %>
       <%= hidden_field_tag :from_rows_new, true %>
       <%= form.hidden_field :geojson, data: {map_add_point_target: "geojson"} %>
         <% @row.layer.fields.each do |field| %>
-          <div>
+          <div class="form__field">
             <%= form.label "row[fields_values][#{field.id}]", field.label %>
             <%= FieldTdComponent.new(field: field, value: nil, form_id: dom_id(@row, :form), author_id: nil).field_tag %>
           </div>
         <% end %>
-      <%= form.submit t("helpers.link.row.add_this_point") %>
+      <%= form.submit t("helpers.link.row.add_this_point"), class: "button button--confirm" %>
     <% end %>
-  </div>
 </div>

@@ -7,6 +7,7 @@
 @use "list";
 @use "map";
 @use "landing-page";
+@use "add_single_row";
 
 /* MAP */
 .data-with-map {
@@ -25,41 +26,6 @@
 
   .right-pane {
     width: 50%;
-  }
-}
-
-.new-row {
-  width: 100%;
-
-  .map {
-    right: 0;
-    bottom: 0;
-    height: 200px;
-
-    .crosshair {
-      $size: 18px;
-
-      width: $size;
-      height: $size;
-      z-index: var(--map-overlay-z-index);
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      margin-left: calc($size / -2);
-      margin-top: calc($size / -2);
-    }
-  }
-
-  .form {
-    width: 30%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  @media (max-width: 850px) {
-    .form {
-      padding-left: 1rem;
-    }
   }
 }
 
