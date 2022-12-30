@@ -20,7 +20,7 @@
       <% end %>
     </div>
     <footer class="footer__layer-list">
-      <%= link_to t("helpers.link.layer.new"), new_map_layer_path(@map), class: "primary-action" if policy(@map).update? %>
+      <%= link_to t("helpers.link.layer.new"), new_map_layer_path(@map), class: "button button--large button--confirm" if policy(@map).update? %>
     </footer>
   </div>
 <% end %>

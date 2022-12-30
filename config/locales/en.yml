@@ -35,7 +35,6 @@ en:
     confirm: Are you sure?
     dragbar_cursor: Dragbar cursor
     failed: 'Failed: %{msg}'
-    hello: Hello
     latitude: Latitude
     length: Length
     longitude: Longitude

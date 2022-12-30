@@ -35,7 +35,6 @@ fr:
     confirm: Êtes-vous sûr ?
     dragbar_cursor: Curseur de la barre de défilement
     failed: 'Échec : %{msg}'
-    hello: Bonjour
     latitude: Latitude
     length: Longueur
     longitude: Longitude
