@@ -1,0 +1,39 @@
+.map_document__container {
+  height: calc(
+    100vh - var(--nav-height) - var(--footer-height) - var(--header-height)
+  );
+  display: flex;
+  width: 100%;
+}
+
+.map_document__data {
+  overflow-y: auto;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.map_document__right_pane {
+  width: 50%;
+}
+
+.map_document__dragbar {
+  background-color: white;
+  color: var(--color-grey-70);
+  border-style: none solid;
+  border-width: 1px;
+  height: 100%;
+  width: 6px;
+  z-index: var(--dragbar-z-index);
+  position: relative;
+  cursor: ew-resize;
+}
+
+.map_document__dragbar__svg {
+  height: 26px;
+  width: 26px;
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
