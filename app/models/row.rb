@@ -36,7 +36,7 @@
 #
 class Row < ApplicationRecord
   # Relations
-  belongs_to :layer
+  belongs_to :layer, touch: true
   belongs_to :author, class_name: "User"
   belongs_to :territory, optional: true
 

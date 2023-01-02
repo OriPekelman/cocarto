@@ -29,6 +29,7 @@ class LayersController < ApplicationController
 
   def update
     if @layer.update(layer_params)
+      @layer.broadcast_i18n_replace_to @layer.map
       respond_to do |format|
         format.turbo_stream
         format.html { redirect_to layer_path(@layer) }
