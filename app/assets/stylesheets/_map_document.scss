@@ -1,8 +1,6 @@
 .map_document__container {
-  height: calc(
-    100vh - var(--nav-height) - var(--footer-height) - var(--header-height)
-  );
   display: flex;
+  height: 100%;
   width: 100%;
 }
 
