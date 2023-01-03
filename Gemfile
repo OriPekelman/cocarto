@@ -35,6 +35,7 @@ gem "rails-i18n"
 gem "skylight"
 gem "premailer-rails"
 gem "view_component"
+gem "cache_with_locale"
 
 gem "foreman"
 
