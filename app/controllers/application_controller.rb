@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
     :switch_locale # make sure locale is around all the rest
 
   def switch_locale(&action)
-    locale = params[:locale] || http_accept_language.compatible_language_from(I18n.available_locales)
+    locale = params.delete(:locale) || http_accept_language.compatible_language_from(I18n.available_locales)
     I18n.with_locale(locale, &action)
   end
 
