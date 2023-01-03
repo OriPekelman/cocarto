@@ -8,26 +8,7 @@
 @use "map";
 @use "landing-page";
 @use "add_single_row";
-
-/* MAP */
-.data-with-map {
-  height: calc(
-    100vh - var(--nav-height) - var(--footer-height) - var(--header-height)
-  );
-  display: flex;
-  width: 100%;
-
-  > .data {
-    overflow-y: auto;
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .right-pane {
-    width: 50%;
-  }
-}
+@use "map_document";
 
 .is-hidden {
   display: none;
@@ -73,27 +54,6 @@ textarea[readonly] {
     font-size: 16px;
     color: var(--color-green-100);
   }
-}
-
-.dragbar {
-  background-color: white;
-  color: var(--color-grey-70);
-  border-style: none solid;
-  border-width: 1px;
-  height: 100%;
-  width: 6px;
-  z-index: var(--dragbar-z-index);
-  position: relative;
-  cursor: ew-resize;
-}
-
-.svg-dragbar {
-  height: 26px;
-  width: 26px;
-  position: absolute;
-  bottom: 2rem;
-  left: 50%;
-  transform: translate(-50%, 0);
 }
 
 .main-actions {
