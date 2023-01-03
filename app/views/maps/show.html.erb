@@ -16,7 +16,9 @@
     data-controller="layer-selection">
     <div id="<%= dom_id(@map, "layers") %>">
       <% @map.layers.includes(:fields).order(:created_at, :id).each do |layer| %>
-        <%= render layer %>
+        <% cache layer do %>
+          <%= render layer %>
+        <% end %>
       <% end %>
     </div>
     <footer class="footer__layer-list">

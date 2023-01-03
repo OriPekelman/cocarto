@@ -50,7 +50,6 @@ class Layer < ApplicationRecord
 
   # Hooks
   after_create_commit -> { broadcast_i18n_append_to map, target: dom_id(map, "layers") }
-  after_update_commit -> { broadcast_i18n_replace_to map }
   after_destroy_commit -> { broadcast_remove_to map }
 
   def geo_feature_collection
