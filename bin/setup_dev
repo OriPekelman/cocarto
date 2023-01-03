@@ -3,12 +3,14 @@
 function linux() {
   sudo apt install graphviz
   sudo apt install npm nodejs
+  sudo apt install redis
 }
 
 function macos() {
   brew install postgis
   brew install graphviz
   brew install npm node
+  brew install redis
 }
 
 case $(uname -s) in

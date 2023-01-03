@@ -26,6 +26,7 @@ If you want to report a bug, ask for an improvement or submit a fix, open an iss
 
 In order to work on it, you will need:
 - postgresql with postgis
+- redis running locally
 - [rbenv](https://github.com/rbenv/rbenv-installer#rbenv-installer--doctor-scripts)
 
 ### Create the database roles
@@ -42,7 +43,8 @@ Those values can also be modified in `config/database.yml`.
 
 On a new installation, run
 
-    make setup-dev
+    make setup-dev 
+    make setup
 
 That command will install the gem `bundler`, the dependencies and will initialize the database. The database will contain two users:
 
@@ -57,7 +59,7 @@ To run the server, run:
 
     make dev
 
-That command will automatically run `make install` to install new dependencies and run database migrations. The app then runs at `http://localhost:5000`.
+That command will automatically run `make install` to install new dependencies and run database migrations. The app then runs at `https://localhost:3000`.
 
 ### Run the tests
 
