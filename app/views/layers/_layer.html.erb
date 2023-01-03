@@ -3,7 +3,9 @@
   class="layer-container"
   data-controller="layer"
   data-layer-selection-target="layer"
-  data-action="layer:center->map#fitBounds layer:opened->layer-selection#opened">
+  data-action="layer:center->map#fitBounds layer:toggled->layer-selection#opened layer:toggled->map#layerToggled"
+  data-layer-add-feature-text-value="<%= t("common.add_geometry.#{layer.geometry_type}") %>"
+  data-layer-geometry-type-value="<%= layer.geometry_type %>">
   <header class="layer-header">
     <div class="layer-header__left-description">
       <%= embedded_svg "#{layer.geometry_type}.svg", class: "layer-header__icon", style: "color: #{layer.color}" %>
@@ -17,10 +19,7 @@
       </span>
       <button
         class="layer-header__chevron chevron"
-        data-action="layer#toggleTable map#layerToggle"
-        data-map-layer-id-param="<%= layer.id %>"
-        data-map-add-feature-text-param="<%= t("common.add_geometry.#{layer.geometry_type}") %>"
-        data-map-geometry-type-param="<%= layer.geometry_type %>">
+        data-action="layer#toggleTable">
       </button>
     </div>
   </header>
