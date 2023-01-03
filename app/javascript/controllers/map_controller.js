@@ -2,7 +2,8 @@ import { Controller } from '@hotwired/stimulus'
 import MapState from 'lib/map_state'
 
 export default class extends Controller {
-  static targets = ['row', 'map', 'addButton', 'defaultLatitude', 'defaultLongitude', 'defaultZoom', 'toolbarLeft', 'toolbarRight']
+  static targets = ['map', 'addButton', 'defaultLatitude', 'defaultLongitude', 'defaultZoom', 'toolbarLeft', 'toolbarRight']
+  static outlets = ['row']
   static values = {
     mapId: String,
     defaultLatitude: Number,
@@ -21,23 +22,21 @@ export default class extends Controller {
       rightToolbar: this.toolbarRightTarget
     })
 
-    this.rowTargets.forEach(row => this.mapState.addRow(row))
+    this.rowOutlets.forEach(row => this.mapState.addRow(row))
   }
 
-  rowTargetConnected (row) {
+  rowOutletConnected (controller, element) {
     // a row can be connected when  isn’t initialized yet
     if (this.mapState) {
-      this.mapState.addRow(row)
+      this.mapState.addRow(controller)
     }
-    setTimeout(() => row.classList.remove('highlight-transition'), 1000)
-    setTimeout(() => row.classList.remove('bg-transition'), 3000)
   }
 
-  rowTargetDisconnected (row) {
+  rowOutletDisconnected (row) {
     this.mapState.getDraw().delete(row.id)
   }
 
-  layerToggled ({ detail }) {
+  layerToggled (detail) {
     if (detail.opened) {
       this.mapState.setActiveLayer(detail)
     }
@@ -50,15 +49,6 @@ export default class extends Controller {
     }
   }
 
-  fitBounds ({ detail }) {
-    this.mapState.setVisibleBounds(detail.boundingBox)
-  }
-
-  centerToRow ({ target }) {
-    const row = target.closest('tr')
-    this.mapState.setVisibleBounds(row.rowController.bounds())
-  }
-
   setDefaultCenterZoom () {
     const { lng, lat, zoom } = this.mapState.getCurrentView()
     this.defaultLongitudeTarget.value = lng
@@ -69,10 +59,6 @@ export default class extends Controller {
   toggleMode () {
     const newMode = this.mapState.getDraw().getMode() === this.mapState.getDrawMode() ? 'simple_select' : this.mapState.getDrawMode()
     this.mapState.getDraw().changeMode(newMode)
-  }
-
-  highlightFeatures (event) {
-    this.mapState.setSelectedFeature(event.target.closest('tr').id)
   }
 
   exportMapAsImage ({ target }) {

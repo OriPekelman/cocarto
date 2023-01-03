@@ -2,7 +2,8 @@
   id="<%= dom_id(@row) %>"
   class="<%= classes %>"
   data-controller="row"
-  data-action="focusin->map#highlightFeatures"
+  data-row-map-outlet=".data-with-map"
+  data-action="focusin->row#highlight"
   data-row-lng-min-value="<%= @row.geo_lng_min %>"
   data-row-lat-min-value="<%= @row.geo_lat_min %>"
   data-row-lng-max-value="<%= @row.geo_lng_max %>"
@@ -21,7 +22,7 @@
         <%= helpers.embedded_svg("remove_item.svg", class: "icon--sm") %>
       <% end %>
       <%= row_tag_form %>
-      <button data-action="map#centerToRow" title="<%= t("layers.layer.center_on_row") %>">
+      <button data-action="row#zoomToFeature" title="<%= t("layers.layer.center_on_row") %>">
         <%= helpers.embedded_svg("center.svg", class: "icon--sm") %>
       </button>
     </div>

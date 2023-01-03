@@ -3,6 +3,7 @@ import maplibre from 'maplibre-gl'
 
 export default class extends Controller {
   static targets = ['form', 'geojson']
+  static outlets = ['map']
   static values = {
     lngMin: Number,
     lngMax: Number,
@@ -14,9 +15,9 @@ export default class extends Controller {
   connect () {
     // Small hack inspired by https://dev.to/leastbad/the-best-one-line-stimulus-power-move-2o90
     this.element.rowController = this
-    this.element.dataset.mapTarget = 'row'
-    this.element.dataset.layerTarget = 'row'
     this.dirty = false
+    setTimeout(() => this.element.classList.remove('highlight-transition'), 1000)
+    setTimeout(() => this.element.classList.remove('bg-transition'), 3000)
   }
 
   setDirty () {
@@ -43,5 +44,13 @@ export default class extends Controller {
   update (geojson) {
     this.geojsonTarget.value = JSON.stringify(geojson)
     this.formTarget.requestSubmit()
+  }
+
+  zoomToFeature () {
+    this.mapOutlet.mapState.setVisibleBounds(this.bounds())
+  }
+
+  highlight () {
+    this.mapOutlet.mapState.setSelectedFeature(this.element.id)
   }
 }

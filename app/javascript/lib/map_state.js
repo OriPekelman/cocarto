@@ -68,12 +68,12 @@ class MapState {
     this.drawMode = `draw_${geometryType}`
   }
 
-  addRow (row) {
+  addRow (controller) {
     this.draw.add({
-      id: row.id,
+      id: controller.element.id,
       type: 'Feature',
-      properties: row.rowController.propertiesValue,
-      geometry: row.rowController.geojson()
+      properties: controller.propertiesValue,
+      geometry: controller.geojson()
     })
   }
 
