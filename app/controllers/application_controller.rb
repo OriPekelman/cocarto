@@ -4,8 +4,13 @@ class ApplicationController < ActionController::Base
   after_action :verify_authorized, except: :index # rubocop:disable Rails/LexicallyScopedActionFilter
   after_action :verify_policy_scoped, only: :index # rubocop:disable Rails/LexicallyScopedActionFilter
 
+  before_action :set_sentry_user
   around_action :rescue_unauthorized,
     :switch_locale # make sure locale is around all the rest
+
+  def set_sentry_user
+    Sentry.set_user(id: current_user.id) if current_user.present?
+  end
 
   def switch_locale(&action)
     locale = params.delete(:locale) || http_accept_language.compatible_language_from(I18n.available_locales)
