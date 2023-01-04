@@ -56,6 +56,7 @@ group :development, :test do
   # Verifies that we have all translations
   gem "i18n-tasks"
   gem "erb_lint", require: false
+  gem "dotenv-rails"
 end
 
 group :development do

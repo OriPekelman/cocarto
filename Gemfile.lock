@@ -128,6 +128,10 @@ GEM
     devise_invitable (2.0.6)
       actionmailer (>= 5.0)
       devise (>= 4.6)
+    dotenv (2.8.1)
+    dotenv-rails (2.8.1)
+      dotenv (= 2.8.1)
+      railties (>= 3.2)
     erb_lint (0.3.1)
       activesupport
       better_html (>= 2.0.1)
@@ -395,6 +399,7 @@ DEPENDENCIES
   dartsass-rails
   devise
   devise_invitable
+  dotenv-rails
   erb_lint
   foreman
   hotwire-rails
