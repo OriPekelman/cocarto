@@ -37,6 +37,10 @@ gem "cache_with_locale"
 # rails additions
 gem "premailer-rails"
 gem "view_component"
+# perfs and errors
+gem "skylight"
+gem "sentry-ruby"
+gem "sentry-rails"
 
 gem "foreman"
 
