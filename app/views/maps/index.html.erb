@@ -10,7 +10,7 @@
               <h3 class="list-element__title"><%= map.name %></h3>
               <p class="list-element__description">
                 <%= map.layers.size %> <%= Layer.model_name.human(count: map.layers.size) %>
-                <%= updated_at_tag(map.last_updated_row, map.last_updated_row.author) %>
+                <%= updated_at_tag(map.last_updated_row, map.last_updated_row&.author) %>
               </p>
             </div>
             <div class="list-element__extra"><%= embedded_svg "chevron_droite.svg" %></div>

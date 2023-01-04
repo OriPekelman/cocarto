@@ -21,8 +21,8 @@ class Map < ApplicationRecord
 
   # Query as scopes
   scope :with_last_updated_row_id, -> do
-    joins(:rows)
-      .order("maps.id, rows.updated_at DESC")
+    left_outer_joins(:rows)
+      .order("maps.id, rows.updated_at DESC NULLS LAST")
       .select("DISTINCT ON (maps.id) maps.*, rows.id as computed_last_updated_row_id")
   end
   belongs_to :last_updated_row, class_name: "Row", optional: true, foreign_key: "computed_last_updated_row_id" # rubocop:disable Rails/InverseOf
