@@ -11,11 +11,15 @@ linters:
   ErbSafety:
     enabled: true
     exclude:
-      - '**/app/views/territories/_geometry.html.erb' # Use inline disable comment once https://github.com/Shopify/erb-lint/pull/249 is merged
+      # Use inline disable comment once https://github.com/Shopify/erb-lint/pull/249 is merged
+      - '**/app/views/territories/_geometry.html.erb'
+      - '**/app/views/layouts/_sentry.html.erb'
   RequireScriptNonce:
     enabled: true
     exclude:
-      - '**/app/views/territories/_geometry.html.erb' # Use inline disable comment once https://github.com/Shopify/erb-lint/pull/249 is merged
+      # Use inline disable comment once https://github.com/Shopify/erb-lint/pull/249 is merged
+      - '**/app/views/territories/_geometry.html.erb'
+      - '**/app/views/layouts/_sentry.html.erb'
   Rubocop:
     enabled: true
     rubocop_config:
