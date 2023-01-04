@@ -49,6 +49,7 @@ fr:
       center_on_layer: Centrer la carte sur cette couche
       center_on_row: Centrer la carte sur cette ligne
       delete_row: Supprimer cette ligne
+      toggle_layer: Afficher la table de cette couche
   layouts:
     application:
       change_language: Changer la langue
