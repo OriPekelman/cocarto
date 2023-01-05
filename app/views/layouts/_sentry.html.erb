@@ -1,0 +1,14 @@
+<%# Sentry configuration for javascript (see also _sentry.html.erb for ruby configuration) %>
+<% return unless Rails.env.production? || ENV["COCARTO_DEBUG_SENTRY"].present? %>
+
+<script src="https://js.sentry-cdn.com/<%= ENV.fetch("SENTRY_PUBLIC_KEY") %>.min.js" crossorigin="anonymous"></script>
+<script>
+  Sentry.onLoad(function() {
+    Sentry.init({
+      release: "<%= (ENV.fetch("CONTAINER_VERSION") { "dev" }) %>", <%# Set by Scalingo, see https://doc.scalingo.com/platform/app/environment#runtime-environment-variables %>
+      environment: "<%= Rails.env %>",
+      tracesSampleRate: 1.0
+    });
+    Sentry.setUser({ id: "<%= current_user&.id %>" });
+  });
+</script>

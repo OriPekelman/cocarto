@@ -30,12 +30,17 @@ gem "rubyzip"
 # Used for authentification
 gem "devise"
 gem "devise_invitable"
+# i18n
 gem "http_accept_language"
 gem "rails-i18n"
-gem "skylight"
+gem "cache_with_locale"
+# rails additions
 gem "premailer-rails"
 gem "view_component"
-gem "cache_with_locale"
+# perfs and errors
+gem "skylight"
+gem "sentry-ruby"
+gem "sentry-rails"
 
 gem "foreman"
 
@@ -51,6 +56,7 @@ group :development, :test do
   # Verifies that we have all translations
   gem "i18n-tasks"
   gem "erb_lint", require: false
+  gem "dotenv-rails"
 end
 
 group :development do
