@@ -52,7 +52,7 @@ fr:
   layouts:
     application:
       change_language: Changer la langue
-      footer_html: Développé par <a href="https://www.codeursenliberté.fr" target="_blank">codeurs en liberté</a>, une coopérative d’indépendant·e·s dans le domaine de l’informatique.
+      footer_html: Développé par <a href="https://www.codeursenliberté.fr" target="_blank">codeurs en liberté</a>, une coopérative d’indépendant·e·s dans le domaine de l’informatique. <a href="/legal">Mentions légales</a>
       preferences: Préférences
       sign_in: connexion
       sign_out: déconnexion
