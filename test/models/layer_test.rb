@@ -23,7 +23,7 @@ require "test_helper"
 class LayerTest < ActiveSupport::TestCase
   class Validation < LayerTest
     test "create a new layer" do
-      assert_changes -> { maps(:restaurants).layers.count }, from: 1, to: 2 do
+      assert_changes -> { maps(:restaurants).layers.count }, from: 2, to: 3 do
         Layer.create! geometry_type: :point, map: maps(:restaurants)
       end
 
@@ -57,6 +57,11 @@ class LayerTest < ActiveSupport::TestCase
       layer = Layer.where(id: layers(:restaurants)).with_last_updated_row_id.includes(:last_updated_row).first
 
       assert_equal row, layer.last_updated_row
+    end
+
+    test "#with_last_updated_row_id" do
+      # Scoping with_last_updated_row_id should not exclude layers without rows
+      assert_includes maps(:restaurants).layers.with_last_updated_row_id, layers(:empty_restaurants_layer)
     end
   end
 end

@@ -20,5 +20,10 @@ class MapTest < ActiveSupport::TestCase
 
       assert_equal row, map.last_updated_row
     end
+
+    test "#with_last_updated_row_id" do
+      # Scoping with_last_updated_row_id should not exclude maps without rows
+      assert_includes Map.all.with_last_updated_row_id, maps(:boat)
+    end
   end
 end

@@ -24,6 +24,11 @@ restaurants:
   name: "Restaurants"
   geometry_type: "point"
 
+empty_restaurants_layer:
+  map: restaurants
+  name: "Layer vide"
+  geometry_type: "polygon"
+
 hiking:
   map: hiking
   name: hiking path
