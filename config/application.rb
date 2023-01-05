@@ -27,6 +27,6 @@ module Cocarto
     #
     config.time_zone = "Europe/Paris"
     # config.eager_load_paths << Rails.root.join("extras")
-    config.active_record.strict_loading_by_default = true
+    config.active_record.strict_loading_by_default = true unless defined?(Rails::Console)
   end
 end
