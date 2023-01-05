@@ -8,7 +8,6 @@ import PresenceTrackers from 'lib/presence_trackers'
 class MapState {
   constructor ({ target, mapId, lng, lat, zoom, leftToolbar, rightToolbar }) {
     this.map = newMap(target, [lng, lat], zoom)
-    this.trackers = new PresenceTrackers(this)
 
     this.draw = new MapboxDraw({
       displayControlsDefault: false,
