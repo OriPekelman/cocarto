@@ -1,6 +1,6 @@
 <%# For now view components must be cached at the template level
 https://github.com/ViewComponent/view_component/discussions/42#discussioncomment-2822874 %>
-<% cache @row do %>
+<% cache [@row, @row.layer.fields] do %>
   <tr
     id="<%= dom_id(@row) %>"
     class="<%= classes %>"
