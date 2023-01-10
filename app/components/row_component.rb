@@ -22,12 +22,12 @@ class RowComponent < ViewComponent::Base
       tag.td(render(SearchComponent.new(form: form_id, field: "row[territory_id]", territory: @row.territory, field_id: nil, layer_id: @row.layer_id), class: "calculated")) +
         tag.td(@row.territory.code, class: "calculated")
     when "point"
-      tag.td(number_with_precision(@row.geo_lng_min, precision: 6), class: "numerical calculated") +
-        tag.td(number_with_precision(@row.geo_lat_min, precision: 6), class: "numerical calculated")
+      tag.td(number_with_precision(@row.geo_lng_min, precision: 6), class: "layer-table__td__numerical calculated") +
+        tag.td(number_with_precision(@row.geo_lat_min, precision: 6), class: "layer-table__td__numerical calculated")
     when "line_string"
-      tag.td(number_to_human(@row.geo_length, units: :length), class: "numerical calculated")
+      tag.td(number_to_human(@row.geo_length, units: :length), class: "layer-table__td__numerical calculated")
     when "polygon"
-      tag.td(number_to_human(@row.geo_area, units: :area), class: "numerical calculated")
+      tag.td(number_to_human(@row.geo_area, units: :area), class: "layer-table__td__numerical calculated")
     end
   end
 

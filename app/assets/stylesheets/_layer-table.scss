@@ -158,11 +158,6 @@
       margin-top: 0;
       margin-bottom: 0;
     }
-
-    &.numerical {
-      font-family: var(--font-mono);
-      text-align: right;
-    }
   }
 
   td.calculated,
@@ -195,6 +190,11 @@
       width: 20px;
     }
   }
+}
+
+.layer-table__td__numerical {
+  font-family: var(--font-mono);
+  text-align: right;
 }
 
 .layer-table__header {
