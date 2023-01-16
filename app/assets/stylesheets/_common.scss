@@ -21,6 +21,7 @@ body {
   height: 100%;
   font-size: 16px;
   background: var(--color-bg-ambient-10);
+  font-family: var(--font-serif);
 }
 
 [hidden] {
@@ -114,10 +115,6 @@ body {
   --layer-header-z-index: 2;
   --layer-table-thead-z-index: 1;
   --map-overlay-z-index: 1;
-}
-
-button {
-  font-family: var(--font-serif);
 }
 
 button:active {
