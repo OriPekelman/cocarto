@@ -95,12 +95,7 @@ class Row < ApplicationRecord
   def fields_values=(new_fields_values)
     cleaned_values = layer.fields.to_h do |field|
       value = new_fields_values[field.id]
-      if field.type_territory?
-        value = Territory.exists?(id: value) ? value : nil
-      elsif field.type_css_property? && field.label == "stroke-width" && value.present?
-        value = value.to_i
-      end
-      [field.id, value]
+      [field.id, field.cast(value)]
     end
 
     self.values = cleaned_values
