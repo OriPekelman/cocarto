@@ -21,13 +21,4 @@ class ColumnStatsComponent < ViewComponent::Base
       tag.td(sum, class: "layer-table__td__numerical calculated")
     end
   end
-
-  def stats(field)
-    if field.type_integer? || field.type_float?
-      sum = @layer.rows.sum(Arel.sql("(values->>'#{field.id}')::numeric"))
-      number_to_human(sum)
-    elsif field.type_boolean?
-      @layer.rows.where("(values->>'#{field.id}')::bool").length
-    end
-  end
 end

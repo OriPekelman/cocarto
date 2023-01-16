@@ -1,12 +1,7 @@
-
-<tfoot id="<%= dom_id(@layer, :stats) %>">
-  <tr>
-    <%= calculated_columns %>
-
+<tr id="<%= dom_id(@layer, :stats) %>">
+  <%= calculated_columns %>
   <% @layer.fields.each do |field| %>
-    <td class="layer-table__td__numerical calculated"> <%= stats field %> </td>
+    <td class="layer-table__td__numerical layer-table__td__stats calculated"> <%= number_to_human(field.sum) %> </td>
   <% end %>
-
-  <td>
-  </td>
+  <td></td>
 </tr>
