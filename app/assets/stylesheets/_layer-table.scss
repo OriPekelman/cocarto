@@ -107,14 +107,13 @@
 
   td {
     font-size: 12px;
-    padding: 0;
   }
 
   td.table-field {
     padding: 0;
   }
 
-  tr:last-child {
+  tfoot {
     td:first-child {
       border-bottom-left-radius: $border-radius;
     }

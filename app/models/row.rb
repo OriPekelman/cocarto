@@ -46,7 +46,7 @@ class Row < ApplicationRecord
   # Hooks
   after_update_commit -> { broadcast_i18n_replace_to layer.map, html: render }
   after_destroy_commit -> { broadcast_remove_to layer.map }
-  after_create_commit -> { broadcast_i18n_append_to map, target: dom_id(layer, "rows"), html: render(extra_class: "highlight-transition bg-transition") }
+  after_create_commit -> { broadcast_i18n_before_to map, target: dom_id(layer, :stats), html: render(extra_class: "highlight-transition bg-transition") }
 
   # Dynamic Fields Associations
   include FieldValuesAssociations::RowAssociations
