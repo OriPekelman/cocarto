@@ -17,7 +17,9 @@ class FerrumLogger
           Kernel.puts arg["value"]
         when "object"
           Kernel.puts arg["preview"]["properties"].map { |x| [x["name"], x["value"]] }.to_h
-          Kernel.puts arg["preview"]["description"]
+          if arg["subtype"] == "error"
+            raise Minitest::Assertion, arg["description"]
+          end
         end
       end
 
