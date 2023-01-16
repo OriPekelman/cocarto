@@ -1,0 +1,29 @@
+.legal__container {
+  max-width: 850px;
+  line-height: 1.5;
+  font-family: var(--font-serif);
+}
+
+.legal__h1 {
+  margin: 24px 0 16px;
+  color: var(--color-green-90);
+}
+
+.legal__h2 {
+  margin: 16px 0 12px;
+  color: var(--color-green-80);
+}
+
+.legal__h3 {
+  margin: 8px 0 0;
+  color: var(--color-green-70);
+}
+
+.legal__ul {
+  margin-left: 32px;
+}
+
+.legal__code {
+  font-family: monospace;
+  font-size: 0.8em;
+}
