@@ -1,0 +1,11 @@
+
+<tr>
+  <%= calculated_columns %>
+
+  <% @layer.fields.each do |field| %>
+    <td class="layer-table__td__numerical calculated"> <%= stats field %> </td>
+  <% end %>
+
+  <td>
+  </td>
+</tr>

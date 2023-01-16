@@ -33,7 +33,7 @@ class FieldTdComponent < ViewComponent::Base
   private
 
   def html_class
-    class_names("table-field", dom_id(@field))
+    class_names("table-field", dom_id(@field), ("layer-table__td__boolean" if @field.type_boolean?))
   end
 
   def authorizations

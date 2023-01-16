@@ -97,5 +97,13 @@ class Field < ApplicationRecord
     ActiveModel::Type.lookup(active_model_type) if active_model_type
   end
 
+  def sum
+    if type_integer? || type_float?
+      layer.rows.sum(Arel.sql("(values->>'#{id}')::numeric"))
+    elsif type_boolean?
+      layer.rows.where("(values->>'#{id}')::bool").length
+    end
+  end
+
   include FieldValuesAssociations::AssociationName
 end
