@@ -24,7 +24,7 @@ class Field < ApplicationRecord
   attr_readonly :field_type
 
   # Relations
-  belongs_to :layer
+  belongs_to :layer, touch: true
   has_and_belongs_to_many :territory_categories
 
   # Validations
