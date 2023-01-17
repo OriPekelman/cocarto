@@ -71,5 +71,31 @@ class Field < ApplicationRecord
     super(TerritoryCategory.find(categories&.compact_blank))
   end
 
+  # HTML only speaks in strings
+  # It casts to its native representation
+  def cast(value)
+    if type_territory?
+      Territory.exists?(id: value) ? value : nil
+    elsif type_css_property? && label == "stroke-width"
+      ActiveModel::Type.lookup(:integer).cast(value)
+    elsif active_model
+      active_model.cast(value)
+    else
+      value
+    end
+  end
+
+  def active_model
+    active_model_type = {
+      "text" => :string,
+      "float" => :float,
+      "integer" => :integer,
+      "date" => :date,
+      "boolean" => :boolean
+    }[field_type]
+
+    ActiveModel::Type.lookup(active_model_type) if active_model_type
+  end
+
   include FieldValuesAssociations::AssociationName
 end
