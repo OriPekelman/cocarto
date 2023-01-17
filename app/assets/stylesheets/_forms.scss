@@ -22,10 +22,6 @@ fieldset {
   border: none;
 }
 
-label {
-  font-family: var(--font-serif);
-}
-
 input:not([type="checkbox"], [type="radio"], [type="submit"], [type="button"]),
 label,
 select,
@@ -95,7 +91,6 @@ input[type="number"] {
   display: flex;
   gap: 0.6rem;
   flex-direction: column;
-  font-family: var(--font-serif);
   font-size: 14px;
   font-weight: normal;
 }
