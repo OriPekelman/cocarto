@@ -16,7 +16,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     browser_options: {
       # "allow-insecure-localhost" => nil, # this works when connecting to 127.0.0.1
       # "ignore-certificate-errors-spki-list" => nil # this needs something from the localhost gem
-      "ignore-certificate-errors" => nil # this is undocumented? but works locally (when connecting by hostname)
+      # "ignore-certificate-errors" => nil # this is undocumented? but works locally (when connecting by hostname)
     }
   }
 
@@ -28,6 +28,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   driven_by :cuprite, options: driver_options
 
   def sign_in_as(user, password)
+    page.driver.browser.command("Security.setIgnoreCertificateErrors", ignore: true)
     visit user_session_path
     fill_in "user_email", with: user.email
     fill_in "user_password", with: password
