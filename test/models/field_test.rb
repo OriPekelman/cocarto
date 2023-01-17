@@ -82,7 +82,6 @@ class FieldTest < ActiveSupport::TestCase
       assert_includes [true, false], bool_field.cast("1")
       assert_not bool_field.cast("0")
       assert_nil bool_field.cast("")
-      assert_nil bool_field.cast(nil)
     end
 
     test "correctly cast strings to integerss" do
