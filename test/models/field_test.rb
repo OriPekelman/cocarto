@@ -75,5 +75,51 @@ class FieldTest < ActiveSupport::TestCase
 
       assert_equal %w[a b c], field.enum_values
     end
+
+    test "correctly cast strings to booleans" do
+      bool_field = Field.type_boolean.new
+
+      assert_includes [true, false], bool_field.cast("1")
+      assert_not bool_field.cast("0")
+      assert_nil bool_field.cast("")
+      assert_nil bool_field.cast(nil)
+    end
+
+    test "correctly cast strings to integerss" do
+      int_field = Field.type_integer.new
+
+      assert_equal 42, int_field.cast("42")
+      assert_nil int_field.cast("")
+    end
+
+    test "correctly cast strings to floats" do
+      float_field = Field.type_float.new
+
+      assert_in_epsilon 3.14, float_field.cast("3.14")
+      assert_nil float_field.cast("")
+      assert_nil float_field.cast(nil)
+    end
+
+    test "don’t cast fields that don’t need to" do
+      enum_field = Field.type_enum.new(enum_values: %w[a b c])
+
+      assert_equal "b", enum_field.cast("b")
+
+      text_field = Field.type_text.new
+
+      assert_equal "hello", text_field.cast("hello")
+      assert_equal "", text_field.cast("")
+    end
+
+    test "correcly cast css-properties" do
+      stroke = Field.type_css_property.new(label: "stroke-width")
+
+      assert_equal 3, stroke.cast("3")
+      assert_nil stroke.cast("")
+
+      color = Field.type_css_property.new(label: "color")
+
+      assert_equal "333", color.cast("333")
+    end
   end
 end
