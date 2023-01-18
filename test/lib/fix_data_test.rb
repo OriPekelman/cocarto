@@ -14,6 +14,7 @@ class FixDataTest < ActiveSupport::TestCase
       bool_field.id => "1"
     }
     row = layer.rows.create(values: values, author: users(:reclus), point: "POINT(1 1)")
+    layer.rows.create(values: {int_field.id => ""}, author: users(:reclus), point: "POINT(1 1)")
 
     Cocarto::Application.load_tasks
     Rake::Task["fix_data:fields_values_type"].invoke

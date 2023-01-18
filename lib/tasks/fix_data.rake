@@ -19,8 +19,10 @@ def query(field_type, casted)
     WHERE field_type='#{field_type}'
   )
   UPDATE rows
-    SET values = jsonb_set(values, ARRAY[filtered_fields.id], CASE WHEN values->>filtered_fields.id = '' THEN null ELSE to_jsonb((values->>filtered_fields.id)::#{casted}) END)
-    FROM filtered_fields
+    SET values = COALESCE(
+      jsonb_set(values, ARRAY[filtered_fields.id], CASE WHEN values->>filtered_fields.id = '' THEN null ELSE to_jsonb((values->>filtered_fields.id)::#{casted}) END),
+      '{}'::jsonb
+    )    FROM filtered_fields
     WHERE
       values->>filtered_fields.id IS NOT NULL
       AND jsonb_typeof(values->filtered_fields.id) = 'string'
