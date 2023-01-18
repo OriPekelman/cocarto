@@ -1,7 +1,7 @@
 class RowsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_row, only: %i[destroy update]
-  before_action :set_layer, only: %i[create new update]
+  before_action :set_layer, only: %i[create new update destroy]
 
   def new
     @row = authorize @layer.rows.new

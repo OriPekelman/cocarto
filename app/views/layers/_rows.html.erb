@@ -24,6 +24,9 @@
   <tbody id="<%= dom_id(layer, "rows") %>">
   <%= render RowComponent.with_collection(layer.rows.includes(:territory, *layer.fields_association_names)) %>
   </tbody>
+  <tfoot>
+    <%= render ColumnStatsComponent.new(layer: layer) %>
+  </tfoot>
 </table>
 
 <%= render "rows/new", row: Row.new(layer: layer) %>

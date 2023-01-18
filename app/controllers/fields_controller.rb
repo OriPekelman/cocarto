@@ -15,7 +15,7 @@ class FieldsController < ApplicationController
       format.turbo_stream do
         render turbo_stream: [
           turbo_stream.update("flash", partial: "layouts/flash"),
-          turbo_stream.replace(ActionView::RecordIdentifier.dom_id(@field.layer, :new_field), Field.new(layer: @field.layer)) # Clear the “new_field” form
+          turbo_stream.replace(helpers.dom_id(@field.layer, :new_field), Field.new(layer: @field.layer)) # Clear the “new_field” form
         ]
       end
       format.html { redirect_to @field.layer }
@@ -51,7 +51,7 @@ class FieldsController < ApplicationController
   private
 
   def set_field
-    @field = authorize Field.includes(:territory_categories, layer: [:map, :rows]).find(params[:id])
+    @field = authorize Field.includes(:territory_categories, layer: [:map, :rows, :fields]).find(params[:id])
   end
 
   def field_params

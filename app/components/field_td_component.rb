@@ -11,9 +11,9 @@ class FieldTdComponent < ViewComponent::Base
   def field_tag
     case @field.field_type
     when "integer"
-      number_field_tag field_name, @value, opts.merge(class: "numerical", step: "1")
+      number_field_tag field_name, @value, opts.merge(class: "layer-table__td__numerical", step: "1")
     when "float"
-      number_field_tag field_name, @value, opts.merge(class: "numerical", step: "any")
+      number_field_tag field_name, @value, opts.merge(class: "layer-table__td__numerical", step: "any")
     when "territory"
       render SearchComponent.new(field: field_name, territory: @value, form: opts[:form], field_id: @field.id, layer_id: nil)
     when "date"
@@ -33,7 +33,7 @@ class FieldTdComponent < ViewComponent::Base
   private
 
   def html_class
-    class_names("table-field", dom_id(@field))
+    class_names("table-field", dom_id(@field), ("layer-table__td__boolean" if @field.type_boolean?))
   end
 
   def authorizations
