@@ -62,8 +62,14 @@ en:
   length:
     thousand: km
     unit: m
-  main:
-    index:
+  maps:
+    show:
+      all_maps: All maps
+    toolbar:
+      export_as_image: Export as image
+      set_center_and_zoom: Set center and zoom of the map
+  pages:
+    presentation:
       landing_1_header_html: |
         <p><b>cocarto</b> is a collaborative cartography tool.<br>
         It can link data to a territory.</p><p>For example:</p>
@@ -72,12 +78,6 @@ en:
         We’re looking for stories for such needs in existing companies.
         <a href=" https://gitlab.com/CodeursEnLiberte/cocarto/-/blob/main/README.md#user-content-how-to-contribute" target="_blank">Contact us</a>
         if you want to talk about yours.</p>
-  maps:
-    show:
-      all_maps: All maps
-    toolbar:
-      export_as_image: Export as image
-      set_center_and_zoom: Set center and zoom of the map
   territories:
     search_results:
       no_result: No result
