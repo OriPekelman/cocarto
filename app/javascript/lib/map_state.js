@@ -25,6 +25,7 @@ class MapState {
 
     this.trackers = new PresenceTrackers(this.map, mapId)
 
+    this.map.on('load', e => { target.dataset.loaded = 'loaded' }) // System tests: Avoid interacting with the map before it's ready
     this.map.on('draw.selectionchange', e => this.#mapSelectionChanged(e))
     this.map.on('draw.create', ({ features }) => this.#featureCreated(features[0]))
     this.map.on('draw.update', ({ features }) => this.#featureUpdated(features[0]))
