@@ -50,18 +50,16 @@ gem "bootsnap", require: false
 group :development, :test do
   # Call "byebug" anywhere in the code to stop execution and get a debugger console
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
+  gem "localhost" # use https in development
   gem "standard"
   gem "rubocop-rails", require: false
   gem "rubocop-minitest", require: false
-  # Verifies that we have all translations
-  gem "i18n-tasks"
+  gem "i18n-tasks" # Verifies that we have all translations
   gem "erb_lint", require: false
   gem "dotenv-rails"
 end
 
 group :development do
-  gem "localhost"
-
   # Access an interactive console on exception pages or by calling "console" anywhere in the code.
   gem "web-console"
   # Display performance information such as SQL time and flame graphs for each request in your browser.
