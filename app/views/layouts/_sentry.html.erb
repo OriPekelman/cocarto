@@ -7,7 +7,8 @@
     Sentry.init({
       release: "<%= (ENV.fetch("CONTAINER_VERSION") { "dev" }) %>", <%# Set by Scalingo, see https://doc.scalingo.com/platform/app/environment#runtime-environment-variables %>
       environment: "<%= Rails.env %>",
-      tracesSampleRate: 1.0
+      sampleRate: 1.0, <%# Send all errors %>
+      tracesSampleRate: 0.05 <%# Send only 5% of transactions %>
     });
     Sentry.setUser({ id: "<%= current_user&.id %>" });
   });
