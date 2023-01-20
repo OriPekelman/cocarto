@@ -2,8 +2,8 @@ import { Controller } from '@hotwired/stimulus'
 import MapState from 'lib/map_state'
 
 export default class extends Controller {
-  static targets = ['map', 'addButton', 'defaultLatitude', 'defaultLongitude', 'defaultZoom', 'toolbarLeft', 'toolbarRight']
-  static outlets = ['row']
+  static targets = ['map', 'row', 'addButton', 'defaultLatitude', 'defaultLongitude', 'defaultZoom', 'toolbarLeft', 'toolbarRight']
+
   static values = {
     mapId: String,
     defaultLatitude: Number,
@@ -22,17 +22,17 @@ export default class extends Controller {
       rightToolbar: this.toolbarRightTarget
     })
 
-    this.rowOutlets.forEach(row => this.mapState.addRow(row))
+    this.rowTargets.forEach(row => this.mapState.addRow(row.rowController))
   }
 
-  rowOutletConnected (controller, element) {
-    // a row can be connected when  isn’t initialized yet
+  rowTargetConnected (row) {
+    // a row can be connected when the map isn’t initialized yet
     if (this.mapState) {
-      this.mapState.addRow(controller)
+      this.mapState.addRow(row.rowController)
     }
   }
 
-  rowOutletDisconnected (row) {
+  rowTargetDisconnected (row) {
     this.mapState.getDraw().delete(row.id)
   }
 
