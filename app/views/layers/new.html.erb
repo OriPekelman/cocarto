@@ -1,7 +1,7 @@
 <%# params: @layer %>
 
 <div
-  class="centered-main modal"
+  class="container--centered bordered-box"
   data-controller="new-layer"
   data-new-layer-default-color-value="<%= Layer::COLORS[:blue] %>">
   <%= form_with(model: @layer, id: dom_id(@layer), class: "form__container") do |form| %>

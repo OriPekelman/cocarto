@@ -1,6 +1,6 @@
 <%# params: @map %>
 
-<div class="centered-main modal">
+<div class="container--centered bordered-box">
   <%= form_with(model: @map, id: dom_id(@map), class: "form__container") do |form| %>
     <div class="card__main-content">
       <h2 class="form__header"><%= t("helpers.link.map.new") %></h2>
