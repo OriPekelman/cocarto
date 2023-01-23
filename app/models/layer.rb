@@ -48,6 +48,18 @@ class Layer < ApplicationRecord
   end
   belongs_to :last_updated_row, class_name: "Row", optional: true, foreign_key: "computed_last_updated_row_id" # rubocop:disable Rails/InverseOf
 
+  def bounding_box
+    rows.left_outer_joins(:territory)
+      .unscope(:order)
+      .reselect(<<-SQL.squish
+    min(COALESCE(rows.geo_lng_min, territories.geo_lng_min)) as geo_lng_min,
+    min(COALESCE(rows.geo_lat_min, territories.geo_lat_min)) as geo_lat_min,
+    max(COALESCE(rows.geo_lng_max, territories.geo_lng_max)) as geo_lng_max,
+    max(COALESCE(rows.geo_lat_max, territories.geo_lat_max)) as geo_lat_max
+    SQL
+               )[0]
+  end
+
   # Hooks
   after_create_commit -> { broadcast_i18n_append_to map, target: dom_id(map, "layers") }
   after_update_commit -> do

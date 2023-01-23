@@ -13,10 +13,15 @@
     </div>
     <div class="layer-header__right-tools">
       <% if layer.rows.size > 0 %>
+        <% bbox = layer.bounding_box %>
         <span
           class="layer-header__action"
           title="<%= t(".center_on_layer") %>"
-          data-action="click->layer#center">
+          data-map-lng-min-param="<%= bbox["geo_lng_min"] %>"
+          data-map-lng-max-param="<%= bbox["geo_lng_max"] %>"
+          data-map-lat-min-param="<%= bbox["geo_lat_min"] %>"
+          data-map-lat-max-param="<%= bbox["geo_lat_max"] %>"
+          data-action="click->map#center">
           <%= embedded_svg "frame.svg" %>
         </span>
       <% end %>

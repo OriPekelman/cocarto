@@ -72,4 +72,8 @@ export default class extends Controller {
   highlight (event) {
     this.mapState.setSelectedFeature(event.currentTarget.id)
   }
+
+  center ({ params: { bounds } }) {
+    this.mapState.setVisibleBounds(bounds)
+  }
 }
