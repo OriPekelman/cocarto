@@ -37,10 +37,10 @@
         <% end %>
       </div>
 
-      <div class="territory-categories is-hidden" data-new-layer-target="territoryCategories">
-        <h3><%= TerritoryCategory.model_name.human(count: 2) %></h3>
+      <h3 class="form__header" hidden data-new-layer-target="territoryCategories"><%= TerritoryCategory.model_name.human(count: 2) %></h3>
+      <div class="form__field" hidden data-new-layer-target="territoryCategories">
         <%= form.collection_check_boxes :territory_category_ids, TerritoryCategory.all, :id, :to_s do |b| %>
-          <div><%= b.label { b.check_box + b.text } %></div>
+          <%= b.label(class: "form__field form__field--large form__field--inline") { b.check_box + b.text } %>
         <% end %>
       </div>
     </div>
