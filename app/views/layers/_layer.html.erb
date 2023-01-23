@@ -6,32 +6,8 @@
   data-layer-map-outlet=".map_document__container"
   data-layer-add-feature-text-value="<%= t("common.add_geometry.#{layer.geometry_type}") %>"
   data-layer-geometry-type-value="<%= layer.geometry_type %>">
-  <header class="layer-header">
-    <div class="layer-header__left-description">
-      <%= embedded_svg "#{layer.geometry_type}.svg", class: "layer-header__icon", style: "color: #{layer.color}" %>
-      <%= render "layers/name", layer: layer %>
-    </div>
-    <div class="layer-header__right-tools">
-      <% if layer.rows.size > 0 %>
-        <% bbox = layer.bounding_box %>
-        <span
-          class="layer-header__action"
-          title="<%= t(".center_on_layer") %>"
-          data-map-lng-min-param="<%= bbox["geo_lng_min"] %>"
-          data-map-lng-max-param="<%= bbox["geo_lng_max"] %>"
-          data-map-lat-min-param="<%= bbox["geo_lat_min"] %>"
-          data-map-lat-max-param="<%= bbox["geo_lat_max"] %>"
-          data-action="click->map#center">
-          <%= embedded_svg "frame.svg" %>
-        </span>
-      <% end %>
-      <button
-        class="layer-header__chevron chevron"
-        title="<%= t(".toggle_layer") %>"
-        data-action="layer#toggleTable">
-      </button>
-    </div>
-  </header>
+
+  <%= render "layers/table_header", layer: layer %>
 
   <div class="layer-table__body">
     <%= render "layers/rows", layer: layer %>

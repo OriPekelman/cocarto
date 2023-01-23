@@ -1,0 +1,22 @@
+<header class="layer-header" id="<%= dom_id(layer, :header) %>">
+  <div class="layer-header__left-description">
+    <%= embedded_svg "#{layer.geometry_type}.svg", class: "layer-header__icon", style: "color: #{layer.color}" %>
+    <%= render "layers/name", layer: layer %>
+  </div>
+  <div class="layer-header__right-tools">
+    <% if layer.rows.size > 0 %>
+      <span
+        class="layer-header__action"
+        title="<%= t(".center_on_layer") %>"
+        data-action="click->map#center"
+        data-map-bounds-param="<%= layer.rows.bounding_box.to_json %>">
+        <%= embedded_svg "frame.svg" %>
+      </span>
+    <% end %>
+    <button
+      class="layer-header__chevron chevron"
+      title="<%= t(".toggle_layer") %>"
+      data-action="layer#toggleTable">
+    </button>
+  </div>
+</header>
