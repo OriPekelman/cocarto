@@ -3,7 +3,6 @@ import maplibre from 'maplibre-gl'
 
 export default class extends Controller {
   static targets = ['form', 'geojson']
-  static outlets = ['map']
   static values = {
     lngMin: Number,
     lngMax: Number,
@@ -47,10 +46,6 @@ export default class extends Controller {
   }
 
   zoomToFeature () {
-    this.mapOutlet.mapState.setVisibleBounds(this.bounds())
-  }
-
-  highlight () {
-    this.mapOutlet.mapState.setSelectedFeature(this.element.id)
+    this.dispatch('zoomToFeature', { detail: { bounds: this.bounds() } })
   }
 }

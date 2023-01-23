@@ -10,12 +10,12 @@ export default class extends Controller {
     addFeatureText: String
   }
 
-  static targets = ['geojsonField', 'newRowForm']
-  static outlets = ['map', 'layer', 'row']
+  static targets = ['geojsonField', 'newRowForm', 'row']
+  static outlets = ['map', 'layer']
 
   center () {
-    const boundingBox = this.rowOutlets
-      .map(row => row.bounds())
+    const boundingBox = this.rowTargets
+      .map(row => row.rowController.bounds())
       .reduce((bbox, bounds) => bbox.extend(bounds))
     if (boundingBox !== null) {
       this.mapOutlet.mapState.setVisibleBounds(boundingBox)
