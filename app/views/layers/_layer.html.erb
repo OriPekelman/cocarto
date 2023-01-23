@@ -12,11 +12,14 @@
       <%= render "layers/name", layer: layer %>
     </div>
     <div class="layer-header__right-tools">
-      <span class="layer-header__action"
-        title="<%= t(".center_on_layer") %>"
-        data-action="click->layer#center">
-        <%= embedded_svg "frame.svg" %>
-      </span>
+      <% if layer.rows.size > 0 %>
+        <span
+          class="layer-header__action"
+          title="<%= t(".center_on_layer") %>"
+          data-action="click->layer#center">
+          <%= embedded_svg "frame.svg" %>
+        </span>
+      <% end %>
       <button
         class="layer-header__chevron chevron"
         title="<%= t(".toggle_layer") %>"
