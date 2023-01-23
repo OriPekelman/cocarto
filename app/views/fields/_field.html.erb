@@ -68,7 +68,6 @@ Used in layers/rows, broadcast from FieldsController and from Field hooks. %>
     <% end %>
 
     <div class="card__footer-content">
-      <%= submit_tag t("helpers.submit.field.update"), class: "button button--slim button--confirm", form: form_id %>
       <%# Don’t display the delete button for new fields, and disable it if unauthorized. cf LayerPolicy#update? %>
       <% if field.persisted? %>
         <%= button_to field, method: :delete, class: "button button--slim button--delete",
@@ -76,6 +75,7 @@ Used in layers/rows, broadcast from FieldsController and from Field hooks. %>
           <%= t("helpers.link.field.delete") %>
         <% end %>
       <% end %>
+      <%= submit_tag t("helpers.submit.field.update"), class: "button button--slim button--confirm", form: form_id %>
     </div>
   </div>
 </th>
