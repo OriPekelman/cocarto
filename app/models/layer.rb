@@ -37,7 +37,7 @@ class Layer < ApplicationRecord
   # Relations
   belongs_to :map
   has_many :fields, dependent: :destroy
-  has_many :rows, -> { with_territory.order(:created_at) }, dependent: :delete_all, inverse_of: :layer # note: having a scope on the relation breaks statement caching and strict_loading
+  has_many :rows, dependent: :delete_all, inverse_of: :layer # note: having a scope on the relation breaks statement caching and strict_loading
   has_and_belongs_to_many :territory_categories
 
   # Query as scopes
@@ -47,18 +47,6 @@ class Layer < ApplicationRecord
       .select("DISTINCT ON (layers.id) layers.*, rows.id as computed_last_updated_row_id")
   end
   belongs_to :last_updated_row, class_name: "Row", optional: true, foreign_key: "computed_last_updated_row_id" # rubocop:disable Rails/InverseOf
-
-  def bounding_box
-    rows.left_outer_joins(:territory)
-      .unscope(:order)
-      .reselect(<<-SQL.squish
-    min(COALESCE(rows.geo_lng_min, territories.geo_lng_min)) as geo_lng_min,
-    min(COALESCE(rows.geo_lat_min, territories.geo_lat_min)) as geo_lat_min,
-    max(COALESCE(rows.geo_lng_max, territories.geo_lng_max)) as geo_lng_max,
-    max(COALESCE(rows.geo_lat_max, territories.geo_lat_max)) as geo_lat_max
-    SQL
-               )[0]
-  end
 
   # Hooks
   after_create_commit -> { broadcast_i18n_append_to map, target: dom_id(map, "layers") }
