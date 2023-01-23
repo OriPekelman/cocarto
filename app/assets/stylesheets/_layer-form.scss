@@ -1,0 +1,53 @@
+// Rules specific to the Layer model forms
+.layer-form__color-field {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.layer-form__type-field {
+  display: flex;
+  justify-content: space-between;
+
+  input[type="radio"] {
+    display: none;
+  }
+
+  .layer-form__type-option {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    padding: 4px 4px 8px;
+    cursor: pointer;
+    svg {
+      width: 48px;
+      height: 48px;
+      margin: 8px;
+      outline: 1px solid var(--color-grey-50);
+      background-color: var(--color-bg-ambient-20);
+    }
+  }
+
+  .layer-form__type-option:hover {
+    background-color: var(--color-bg-ambient-20);
+    svg {
+      outline: 1px solid var(--color-grey-100);
+      background-color: white;
+    }
+  }
+
+  [type="radio"]:checked + .layer-form__type-option {
+    background-color: var(--color-green-10);
+    svg {
+      outline: 2px solid var(--color-green-70);
+      background-color: var(--color-bg-ambient-20);
+    }
+  }
+
+  [type="radio"]:disabled + .layer-form__type-option {
+    background-color: var(--color-grey-20);
+    svg {
+      outline: 1px solid var(--color-grey-50);
+      background-color: var(--color-bg-ambient-20);
+    }
+  }
+}
