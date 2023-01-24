@@ -363,6 +363,9 @@ GEM
       activesupport (>= 5.2.0, < 8.0)
       concurrent-ruby (~> 1.0)
       method_source (~> 1.0)
+    view_component-fragment_caching (0.2.1)
+      rails (~> 7.0)
+      view_component (~> 2.43)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.2.0)
@@ -431,6 +434,7 @@ DEPENDENCIES
   turbo-rails
   tzinfo-data
   view_component
+  view_component-fragment_caching
   web-console
 
 RUBY VERSION
