@@ -105,5 +105,23 @@ class RowTest < ActiveSupport::TestCase
 
       assert_nil row.values[field("Ville").id]
     end
+
+    test "compute bounds" do # rubocop:disable Minitest/MultipleAssertions
+      bounds = layer.rows.bounding_box
+
+      assert_in_epsilon 2.37516, bounds[0]
+      assert_in_epsilon 48.88661, bounds[1]
+      assert_in_epsilon 2.37516, bounds[2]
+      assert_in_epsilon 48.88661, bounds[3]
+
+      layer.rows.create(point: "POINT(2 40)", author: users("reclus"))
+      layer.rows.create(point: "POINT(3 50)", author: users("reclus"))
+      extended_bounds = layer.rows.bounding_box
+
+      assert_in_epsilon 2, extended_bounds[0]
+      assert_in_epsilon 40, extended_bounds[1]
+      assert_in_epsilon 3, extended_bounds[2]
+      assert_in_epsilon 50, extended_bounds[3]
+    end
   end
 end
