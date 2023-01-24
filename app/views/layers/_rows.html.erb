@@ -21,7 +21,7 @@
       <%= render Field.new(layer: layer) %>
     </tr>
   </thead>
-  <tbody id="<%= dom_id(layer, "rows") %>">
+  <tbody id="<%= dom_id(layer, :rows) %>">
   <%= render RowComponent.with_collection(layer.rows.includes(:territory, *layer.fields_association_names)) %>
   </tbody>
   <tfoot>
