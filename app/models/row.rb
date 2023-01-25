@@ -161,4 +161,15 @@ class Row < ApplicationRecord
     row = Row.with_territory.includes(:territory, *layer.fields_association_names, layer: :fields).find(id)
     ApplicationController.render(RowComponent.new(row: row, **kwargs), layout: false)
   end
+
+  def self.bounding_box
+    left_outer_joins(:territory)
+      .select(<<-SQL.squish
+    min(COALESCE(rows.geo_lng_min, territories.geo_lng_min)) as geo_lng_min,
+    min(COALESCE(rows.geo_lat_min, territories.geo_lat_min)) as geo_lat_min,
+    max(COALESCE(rows.geo_lng_max, territories.geo_lng_max)) as geo_lng_max,
+    max(COALESCE(rows.geo_lat_max, territories.geo_lat_max)) as geo_lat_max
+    SQL
+             )[0].values_at("geo_lng_min", "geo_lat_min", "geo_lng_max", "geo_lat_max")
+  end
 end

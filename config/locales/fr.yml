@@ -46,9 +46,10 @@ fr:
     user_not_authorized: Vous n’avez pas la permission d’effectuer cette action.
   layers:
     layer:
-      center_on_layer: Centrer la carte sur cette couche
       center_on_row: Centrer la carte sur cette ligne
       delete_row: Supprimer cette ligne
+    table_header:
+      center_on_layer: Centrer la carte sur cette couche
       toggle_layer: Afficher la table de cette couche
   layouts:
     application:

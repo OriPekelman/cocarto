@@ -22,7 +22,7 @@
     </tr>
   </thead>
   <tbody id="<%= dom_id(layer, :rows) %>">
-  <%= render RowComponent.with_collection(layer.rows.includes(:territory, *layer.fields_association_names)) %>
+  <%= render RowComponent.with_collection(layer.rows.with_territory.order(:created_at).includes(:territory, *layer.fields_association_names)) %>
   </tbody>
   <tfoot>
     <%= render ColumnStatsComponent.new(layer: layer) %>

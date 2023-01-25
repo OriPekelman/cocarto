@@ -37,7 +37,7 @@ class Layer < ApplicationRecord
   # Relations
   belongs_to :map
   has_many :fields, dependent: :destroy
-  has_many :rows, -> { with_territory.order(:created_at) }, dependent: :delete_all, inverse_of: :layer # note: having a scope on the relation breaks statement caching and strict_loading
+  has_many :rows, dependent: :delete_all, inverse_of: :layer # note: having a scope on the relation breaks statement caching and strict_loading
   has_and_belongs_to_many :territory_categories
 
   # Query as scopes
@@ -53,6 +53,7 @@ class Layer < ApplicationRecord
   after_update_commit -> do
     html = ApplicationController.render(ColumnStatsComponent.new(layer: self), layout: false)
     broadcast_i18n_replace_to map, target: dom_id(self, :stats), html: html
+    broadcast_i18n_replace_to map, target: dom_id(self, :header)
   end
   after_destroy_commit -> { broadcast_remove_to map }
 

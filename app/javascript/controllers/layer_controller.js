@@ -13,15 +13,6 @@ export default class extends Controller {
   static targets = ['geojsonField', 'newRowForm', 'row']
   static outlets = ['map', 'layer']
 
-  center () {
-    const boundingBox = this.rowTargets
-      .map(row => row.rowController.bounds())
-      .reduce((bbox, bounds) => bbox.extend(bounds))
-    if (boundingBox !== null) {
-      this.mapOutlet.mapState.setVisibleBounds(boundingBox)
-    }
-  }
-
   toggleTable () {
     // Close the other active layer if it exists
     if (this.hasLayerOutlet && this.layerOutletElement !== this.element) {
