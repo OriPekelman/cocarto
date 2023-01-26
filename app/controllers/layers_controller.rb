@@ -57,7 +57,10 @@ class LayersController < ApplicationController
   end
 
   def geojson
-    send_data RGeo::GeoJSON.encode(@layer.geo_feature_collection).to_json, filename: "#{@layer.name}.geojson", type: "application/geo+json"
+    data = Rails.cache.fetch([@layer, "geojson"]) do
+      RGeo::GeoJSON.encode(@layer.geo_feature_collection).to_json
+    end
+    send_data data, filename: "#{@layer.name}.geojson", type: "application/geo+json"
   end
 
   private
