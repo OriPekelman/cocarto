@@ -20,7 +20,7 @@ class RowComponent < ViewComponent::Base
     case @row.layer.geometry_type
     when "territory"
       tag.td(render(SearchComponent.new(form: form_id, field: "row[territory_id]", territory: @row.territory, field_id: nil, layer_id: @row.layer_id), class: "calculated")) +
-        tag.td(@row.territory.code, class: "calculated")
+        tag.td(@row.territory.code, class: "layer-table__td__numerical calculated")
     when "point"
       tag.td(number_with_precision(@row.geo_lng_min, precision: 6), class: "layer-table__td__numerical calculated") +
         tag.td(number_with_precision(@row.geo_lat_min, precision: 6), class: "layer-table__td__numerical calculated")
