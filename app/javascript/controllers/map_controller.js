@@ -65,10 +65,6 @@ export default class extends Controller {
     target.href = this.mapState.getImage()
   }
 
-  zoomToFeature ({ detail: { bounds } }) {
-    this.mapState.setVisibleBounds(bounds)
-  }
-
   highlight (event) {
     this.mapState.setSelectedFeature(event.currentTarget.id)
   }
