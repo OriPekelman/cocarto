@@ -38,7 +38,11 @@ class FieldTdComponent < ViewComponent::Base
 
   def opts
     {
-      data: {action: "input->row#setDirty focusout->row#save"},
+      data: {
+        action: "input->row#setDirty focusout->row#save",
+        restricted_target: "restricted",
+        restricted_authorizations: @authorizations
+      },
       form: @form_id,
       autocomplete: :off
     }
