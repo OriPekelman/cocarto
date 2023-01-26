@@ -18,7 +18,11 @@ https://github.com/ViewComponent/view_component/discussions/42#discussioncomment
 
     <td id="<%= dom_id(@row, "actions") %>" class="table-actions">
       <div class="table-actions__container">
-        <%= button_to([@row.layer, @row], method: :delete, title: t("layers.layer.delete_row"), form: {data: {"turbo-confirm": t("common.confirm")}}) do %>
+        <%= button_to([@row.layer, @row],
+              method: :delete,
+              title: t("layers.layer.delete_row"),
+              form: {data: {"turbo-confirm": t("common.confirm")}},
+              data: {restricted_target: "restricted", restricted_hidden: true, restricted_authorizations: %w[owner editor].to_json}) do %>
           <%= helpers.embedded_svg("remove_item.svg", class: "icon--sm") %>
         <% end %>
         <%= row_tag_form %>
