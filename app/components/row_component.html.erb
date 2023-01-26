@@ -13,7 +13,7 @@ https://github.com/ViewComponent/view_component/discussions/42#discussioncomment
       <%= row_tag_calculated_data %>
 
       <% @row.fields_values.each do |field, value| %>
-        <%= render FieldTdComponent.new(field: field, value: value, form_id: form_id, author_id: @row.author_id) %>
+        <%= render FieldTdComponent.new(field: field, value: value, form_id: form_id, authorizations: RowPolicy.authorizations(@row)) %>
       <% end %>
 
     <td id="<%= dom_id(@row, "actions") %>" class="table-actions">

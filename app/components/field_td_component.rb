@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 class FieldTdComponent < ViewComponent::Base
-  def initialize(field:, value:, form_id:, author_id:)
+  def initialize(field:, value:, form_id:, authorizations:)
     @field = field
     @value = value
     @form_id = form_id
-    @author_id = author_id
+    @authorizations = authorizations
   end
 
   def field_tag
@@ -34,10 +34,6 @@ class FieldTdComponent < ViewComponent::Base
 
   def html_class
     class_names("table-field", dom_id(@field), ("layer-table__td__boolean" if @field.type_boolean?))
-  end
-
-  def authorizations
-    %W[owner editor contributor-#{@author_id}].to_json # cf RowPolicy#update?
   end
 
   def opts

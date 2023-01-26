@@ -37,7 +37,7 @@ class Field < ApplicationRecord
   after_create_commit -> do
     broadcast_i18n_before_to layer.map, target: dom_id(layer, :new_field)
     layer.rows.each do |row|
-      td = FieldTdComponent.new(field: self, value: nil, form_id: dom_id(row, :form), author_id: row.author_id)
+      td = FieldTdComponent.new(field: self, value: nil, form_id: dom_id(row, :form), authorizations: RowPolicy.authorizations(row))
       broadcast_i18n_before_to(layer.map, target: dom_id(row, "actions"), html: ApplicationController.render(td, layout: false))
     end
   end
@@ -47,7 +47,7 @@ class Field < ApplicationRecord
     if type_enum? && enum_values_previously_changed?
       # issue #200: update all the rows so that the <select> options reflect the available enum values.
       layer.rows.each do |row|
-        td = FieldTdComponent.new(field: self, value: nil, form_id: dom_id(row, :form), author_id: row.author_id)
+        td = FieldTdComponent.new(field: self, value: nil, form_id: dom_id(row, :form), authorizations: RowPolicy.authorizations(row))
         target = "##{dom_id(row)} .#{dom_id(self)}"
         # note: we need to use the `targets:` param when using `replace_to` to a css selector.
         broadcast_i18n_replace_to(layer.map, target: nil, targets: target, html: ApplicationController.render(td, layout: false))
