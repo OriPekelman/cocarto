@@ -109,10 +109,6 @@
     font-size: 12px;
   }
 
-  td.table-field {
-    padding: 0;
-  }
-
   tfoot {
     td:first-child {
       border-bottom-left-radius: $border-radius;
@@ -159,7 +155,6 @@
     }
   }
 
-  td.calculated,
   td.table-field {
     input,
     select {
