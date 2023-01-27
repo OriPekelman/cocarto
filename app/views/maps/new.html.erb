@@ -1,15 +1,15 @@
 <%# params: @map %>
 
-<div class="centered-main new-layer modal">
-  <div class="modal__container">
-    <h2><%= t("helpers.link.map.new") %></h2>
-    <%= form_with(model: @map, id: dom_id(@map)) do |form| %>
+<div class="container--centered bordered-box">
+  <%= form_with(model: @map, id: dom_id(@map), class: "form__container") do |form| %>
+    <div class="card__main-content">
+      <h2 class="form__header"><%= t("helpers.link.map.new") %></h2>
       <div class="form__field">
         <%= form.label :name %>
         <%= form.text_field :name %>
       </div>
     </div>
-    <div class="modal__footer">
+    <div class="card__footer-content">
       <%= link_to t("common.back"), maps_path, class: "button button--alternate" %>
       <%= form.submit class: "button button--confirm", form: dom_id(@map) %>
     </div>

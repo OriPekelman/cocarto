@@ -20,9 +20,9 @@ export default class extends Controller {
 
   typeSelected ({ params }) {
     if (params.type === 'territory') {
-      this.territoryCategoriesTarget.classList.remove('is-hidden')
+      this.territoryCategoriesTargets.forEach(t => t.removeAttribute('hidden'))
     } else {
-      this.territoryCategoriesTarget.classList.add('is-hidden')
+      this.territoryCategoriesTargets.forEach(t => t.setAttribute('hidden', true))
     }
   }
 }
