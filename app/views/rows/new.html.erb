@@ -15,7 +15,7 @@
         <% @row.layer.fields.each do |field| %>
           <div class="form__field">
             <%= form.label "row[fields_values][#{field.id}]", field.label %>
-            <%= FieldTdComponent.new(field: field, value: nil, form_id: dom_id(@row, :form), authorizations: policy(@row).authorizations).field_tag %>
+            <%= FieldTdComponent.new(field: field, value: nil, form_id: dom_id(@row, :form), authorizations: RowPolicy.authorizations(@row)).field_tag %>
           </div>
         <% end %>
       <%= form.submit t("helpers.link.row.add_this_point"), class: "button button--confirm" %>
