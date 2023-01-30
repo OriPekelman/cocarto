@@ -162,6 +162,10 @@ class Row < ApplicationRecord
     ApplicationController.render(RowComponent.new(row: row, **kwargs), layout: false)
   end
 
+  def bounding_box
+    [geo_lng_min, geo_lat_min, geo_lng_max, geo_lat_max]
+  end
+
   def self.bounding_box
     left_outer_joins(:territory)
       .select(<<-SQL.squish
