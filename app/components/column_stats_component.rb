@@ -10,15 +10,15 @@ class ColumnStatsComponent < ViewComponent::Base
   def calculated_columns
     case @layer.geometry_type
     when "territory"
-      tag.td(nil, class: "calculated") + tag.td(nil, class: "calculated")
+      tag.td(nil) + tag.td(nil)
     when "point"
-      tag.td(nil, class: "calculated") + tag.td(nil, class: "calculated")
+      tag.td(nil) + tag.td(nil)
     when "line_string"
       sum = number_to_human(@layer.rows.sum(:geo_length), units: :length)
-      tag.td(sum, class: "layer-table__td__numerical calculated")
+      tag.td(sum, class: "layer-table__td__numerical")
     when "polygon"
       sum = number_to_human(@layer.rows.sum(:geo_area), units: :area)
-      tag.td(sum, class: "layer-table__td__numerical calculated")
+      tag.td(sum, class: "layer-table__td__numerical")
     end
   end
 end

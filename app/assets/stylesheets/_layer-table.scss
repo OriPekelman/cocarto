@@ -109,10 +109,6 @@
     font-size: 12px;
   }
 
-  td.table-field {
-    padding: 0;
-  }
-
   tfoot {
     td:first-child {
       border-bottom-left-radius: $border-radius;
@@ -148,7 +144,7 @@
     position: sticky;
     top: 32px;
     color: var(--color-grey-80);
-    background-color: var(--color-bg-ambient-10);
+    background-color: var(--color-grey-30);
     height: 32px;
   }
 
@@ -159,7 +155,6 @@
     }
   }
 
-  td.calculated,
   td.table-field {
     input,
     select {
@@ -194,10 +189,15 @@
 .layer-table__td__numerical {
   font-family: var(--font-mono);
   text-align: right;
+  padding: 0.2rem 0.5rem;
 }
 
 .layer-table__td__boolean {
   text-align: center;
+}
+
+.layer-table__tr__stats {
+  height: 24px;
 }
 
 .layer-table__td__stats {

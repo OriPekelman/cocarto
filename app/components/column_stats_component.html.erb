@@ -1,7 +1,7 @@
-<tr id="<%= dom_id(@layer, :stats) %>">
+<tr id="<%= dom_id(@layer, :stats) %>" class="layer-table__tr__stats">
   <%= calculated_columns %>
   <% @layer.fields.each do |field| %>
-    <td class="layer-table__td__numerical layer-table__td__stats calculated"> <%= number_to_human(field.sum) %> </td>
+    <td class="layer-table__td__numerical layer-table__td__stats"> <%= number_to_human(field.sum) %> </td>
   <% end %>
   <td></td>
 </tr>
