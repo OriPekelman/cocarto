@@ -1,8 +1,8 @@
 .button {
   color: white;
   border: 0;
-  font-size: 14px;
-  padding: 8px;
+  font-size: 16px;
+  padding: 6px 16px;
   border-radius: var(--border-radius);
   text-decoration: none;
   cursor: pointer;
@@ -21,7 +21,7 @@
 }
 
 .button--large {
-  font-size: 16px;
+  font-size: 18px;
   height: 40px;
   min-width: 40px;
 }
