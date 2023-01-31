@@ -16,10 +16,6 @@
 .map__toolbar__right {
   display: flex;
   gap: 1rem;
-
-  button {
-    margin: 0;
-  }
 }
 
 .map__toolbar__add-button {
@@ -38,31 +34,53 @@
 .maplibregl-ctrl-group {
   display: flex;
   flex-direction: row-reverse;
-  border-style: double;
 }
 
 .maplibregl-ctrl-group:not(:empty) {
-  box-shadow: none;
+  border-radius: 4px;
+  background-color: var(--color-bg);
+  box-shadow: inset 0 0 0 1px var(--color-grey-30),
+    inset 0 0 0 2px var(--color-bg), inset 0 0 0 2.5px var(--color-grey-50);
+
+  &:hover:not([disabled]) {
+    background-color: var(--color-bg-ambient-20);
+    box-shadow: inset 0 0 0 1px var(--color-grey-30),
+      inset 0 0 0 2px var(--color-bg), inset 0 0 0 2.5px var(--color-grey-70);
+    fill: var(--color-green-80);
+  }
+}
+
+.maplibregl-ctrl-group button {
+  height: 36px;
+
+  &:not(:disabled):hover {
+    background: transparent;
+  }
 }
 
 .map__control__icon {
   cursor: pointer;
   width: 36px;
   height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2px;
-  background-color: white;
-  border-style: double;
+  padding: 6px;
   border-radius: 4px;
+  background-color: var(--color-bg);
+  box-shadow: inset 0 0 0 1px var(--color-grey-30),
+    inset 0 0 0 2px var(--color-bg), inset 0 0 0 2.5px var(--color-grey-50);
+  fill: black; // TODO use --color-green-40 / --color-green-80 here and for .maplibregl-ctrl-group
+
+  &:hover:not([disabled]) {
+    background-color: var(--color-bg-ambient-20);
+    box-shadow: inset 0 0 0 1px var(--color-grey-30),
+      inset 0 0 0 2px var(--color-bg), inset 0 0 0 2.5px var(--color-grey-70);
+  }
 
   // Sorry, I was a bit desperated to get those icons work correctly
   a,
   button,
   form {
     color: black;
-    background: transparent;
+    background: transparent; // TODO: remove it once we use our own icons for export_as_image and map-pin
     padding: 0;
     width: 24px;
     height: 24px;
