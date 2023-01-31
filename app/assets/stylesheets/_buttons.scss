@@ -46,6 +46,7 @@
   color: var(--color-green-70);
 
   &:hover:not([disabled]) {
+    color: var(--color-green-90);
     background-color: var(--color-bg-ambient-30);
   }
 }
@@ -60,6 +61,7 @@
 
 .button--confirm {
   background-color: var(--color-green-70);
+  letter-spacing: 0.44px;
 
   &:hover:not([disabled]) {
     background-color: var(--color-green-90);
