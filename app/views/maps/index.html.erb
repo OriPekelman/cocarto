@@ -1,6 +1,6 @@
 <%# params: @maps %>
 <div class="container">
-  <section class="section section--small">
+  <section class="section">
     <h2 class="section__title"><%= Map.model_name.human(count: 2) %></h2>
     <ul class="list">
       <% @maps.with_last_updated_row_id.includes(last_updated_row: :author).each do |map| %>

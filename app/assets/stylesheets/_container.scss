@@ -1,3 +1,4 @@
+// Content layout for all regular pages (everything but maps/show)
 .container {
   padding: var(--content-padding);
   max-width: var(--content-max-width);
@@ -11,29 +12,22 @@
   padding: 24px;
 }
 
-.container--centered {
-  margin-left: auto;
-  margin-right: auto;
-  min-width: 500px;
-}
-
 .section {
   display: flex;
-  gap: 2.875rem;
+  gap: 46px;
   flex-direction: column;
-  max-width: 520px;
+  max-width: 600px;
 }
 
-.bordered-box {
-  margin: 32px;
-  background-color: var(--color-bg);
-  border-style: double;
-  border-color: var(--color-grey-100);
-  border-width: 3px;
+.section + .section {
+  margin-top: 64px;
 }
 
-.section--small {
-  max-width: 520px;
+.section--center {
+  // Default is left
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 500px;
 }
 
 .section__title {
@@ -47,4 +41,11 @@
   color: var(--color-text);
   font-size: 1.5rem;
   font-weight: 400;
+}
+
+.bordered-box {
+  background-color: var(--color-bg);
+  border-style: double;
+  border-color: var(--color-grey-100);
+  border-width: 3px;
 }
