@@ -10,7 +10,29 @@
         title="<%= t(".center_on_layer") %>"
         data-action="click->map#center"
         data-map-bounds-param="<%= layer.rows.bounding_box.to_json %>">
-        <%= embedded_svg "frame.svg" %>
+        <%= embedded_svg "frame.svg", class: "icon--sm button--link" %>
+      </span>
+    <% end %>
+    <span class="layer-header__action"
+      title="<%= t(".hide_layer_on_map") %>"
+      data-layer-target="hideButton"
+      data-action="click->layer#hideOnMap">
+      <%= embedded_svg "eye.svg", class: "icon--sm button--link" %>
+    </span>
+    <span class="layer-header__action"
+      title="<%= t(".show_layer_on_map") %>"
+      data-layer-target="showButton"
+      data-action="click->layer#showOnMap"
+      hidden >
+      <%= embedded_svg "eye-off.svg", class: "icon--sm button--link" %>
+    </span>
+    <% if layer.rows.size > 0 %>
+      <span
+        class="layer-header__action"
+        title="<%= t(".center_on_layer") %>"
+        data-action="click->map#center"
+        data-map-bounds-param="<%= layer.rows.bounding_box.to_json %>">
+        <%= embedded_svg "frame.svg", class: "icon--sm button--link" %>
       </span>
     <% end %>
     <button
