@@ -29,8 +29,13 @@ export default class extends Controller {
   #setEnabled (element, enabled) {
     if (enabled) {
       element.removeAttribute('disabled')
+      element.hidden = false
     } else {
       element.setAttribute('disabled', true)
+      // Some targets will also be hidden (like the delete button)
+      if ('restrictedHidden' in element.dataset) {
+        element.hidden = true
+      }
     }
   }
 }

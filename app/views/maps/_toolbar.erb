@@ -5,7 +5,9 @@
     <button
       class="button map__toolbar__add-button is-hidden"
       data-map-target="addButton"
-      data-action="map#toggleMode">
+      data-action="map#toggleMode"
+      data-restricted-target="restricted"
+      data-restricted-authorizations="<%= %w[owner editor contributor].to_json %>">
     </button>
   </div>
   <div class="map__toolbar__right" data-map-target="toolbarRight">
