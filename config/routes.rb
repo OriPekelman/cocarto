@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     devise_for :users
 
     unauthenticated do
-      root "main#index"
+      root "pages#presentation"
     end
 
     authenticated :user do
@@ -31,8 +31,8 @@ Rails.application.routes.draw do
       end
     end
 
-    get "/:locale" => "main#index"
-    get "/legal" => "main#legal"
+    get "/legal" => "pages#legal"
+    get "/presentation" => "pages#presentation"
     get "share/:token", to: "access_groups#enter_by_link", as: "share_link"
   end
 
