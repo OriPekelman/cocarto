@@ -10,7 +10,7 @@ export default class extends Controller {
     addFeatureText: String
   }
 
-  static targets = ['geojsonField', 'newRowForm', 'row']
+  static targets = ['geojsonField', 'newRowForm', 'row', 'hideButton', 'showButton']
   static outlets = ['map', 'layer']
 
   toggleTable () {
@@ -32,5 +32,17 @@ export default class extends Controller {
   createRow (geometry) {
     this.geojsonFieldTarget.value = JSON.stringify(geometry)
     this.newRowFormTarget.requestSubmit()
+  }
+
+  showOnMap () {
+    this.hideButtonTarget.hidden = false
+    this.showButtonTarget.hidden = true
+    this.mapOutlet.addRows(this.rowTargets)
+  }
+
+  hideOnMap () {
+    this.hideButtonTarget.hidden = true
+    this.showButtonTarget.hidden = false
+    this.mapOutlet.removeRows(this.rowTargets)
   }
 }
