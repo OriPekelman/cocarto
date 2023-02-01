@@ -38,23 +38,23 @@ en:
       failure: Could not authenticate you from %{kind} because "%{reason}".
       success: Successfully authenticated from %{kind} account.
     passwords:
-      change_password_if_you_want: Leave blank if you don't want to change it
+      change_password_if_you_want: Leave blank if you don’t want to change it.
       current_password: Current password
       forgot_your_password: Forgot your password?
-      need_current_password: We need your current password to confirm your changes
+      need_current_password: We need your current password to confirm your changes.
       new_password: New password
       no_token: You can't access this page without coming from a password reset email. If you do come from a password reset email, please make sure you used the full URL provided.
       password: Password
       password_confirmation: Confirm new password
       send_instructions: You will receive an email with instructions on how to reset your password in a few minutes.
       send_paranoid_instructions: If your email address exists in our database, you will receive a password recovery link at your email address in a few minutes.
-      send_reset_password: Send me reset password instructions
+      send_reset_password: Send instructions
       submit_change_password: Change my password
       updated: Your password has been changed successfully. You are now signed in.
       updated_not_active: Your password has been changed successfully.
     registrations:
       cancel_my_account: Cancel my account
-      characters_minimum: Characters minimum
+      characters_minimum: characters minimum
       currently_waiting_confirmation_for: Currently waiting confirmation for
       destroyed: Bye! Your account has been successfully cancelled. We hope to see you again soon.
       sign_up: Sign up

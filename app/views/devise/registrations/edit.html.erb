@@ -1,38 +1,48 @@
-<div class="centered-main">
-<h2><%= t("devise.sessions.preferences") %></h2>
+<div class="container">
+  <div class="section">
+    <h2 class="section__title"><%= t("devise.sessions.preferences") %></h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {method: :put, class: "form__container"}) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {method: :put, class: "form"}) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="form__field--slim">
-    <%= f.label :email %><br>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+      <div class="form__field">
+        <%= f.label :email %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      </div>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div> <%= t("devise.registrations.currently_waiting_confirmation_for") %> <%= resource.unconfirmed_email %></div>
-  <% end %>
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div> <%= t("devise.registrations.currently_waiting_confirmation_for") %> <%= resource.unconfirmed_email %></div>
+      <% end %>
 
-  <div class="form__field--slim">
-    <%= f.label :password, t("devise.passwords.password") %> <i><%= t("devise.passwords.change_password_if_you_want") %></i><br>
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <i><%= @minimum_password_length %> <%= t("devise.registrations.characters_minimum") %></i>
+      <div class="form__field">
+        <%= f.label :password, t("devise.passwords.password") %> <i><%= t("devise.passwords.change_password_if_you_want") %></i>
+        <%= f.password_field :password, autocomplete: "new-password" %>
+        <% if @minimum_password_length %>
+          <i><%= @minimum_password_length %> <%= t("devise.registrations.characters_minimum") %></i>
+        <% end %>
+      </div>
+
+      <div class="form__field">
+        <%= f.label :password_confirmation, t("devise.passwords.password_confirmation") %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+      </div>
+
+      <div class="form__field">
+        <%= f.label :current_password, t("devise.passwords.current_password") %><i><%= t("devise.passwords.need_current_password") %> </i>
+        <%= f.password_field :current_password, autocomplete: "current-password" %>
+      </div>
+
+      <div class="form__buttons-bar">
+        <%= link_to t("common.back"), :back, class: "button button--large button--link" %>
+        <%= f.submit t("devise.registrations.update"), class: "button button--confirm" %>
+      </div>
     <% end %>
   </div>
 
-  <div class="form__field--slim">
-    <%= f.label :password_confirmation, t("devise.passwords.password_confirmation") %>
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  <div class="section">
+    <div class="form__field form__field--large form__field--inline">
+      <label><%= t("devise.registrations.unhappy") %></label>
+      <%= button_to t("devise.registrations.cancel_my_account"), registration_path(resource_name), data: {confirm: t("devise.confirmations.confirmation")}, method: :delete, type: "button", "aria-haspopup": true, class: "button button--link" %>
+    </div>
   </div>
-
-  <div class="form__field--slim">
-    <%= f.label :current_password, t("devise.passwords.current_password") %><i><%= t("devise.passwords.need_current_password") %> </i>
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
-
-  <%= f.submit t("devise.registrations.update"), class: "button button--confirm" %>
-  <p><%= t("devise.registrations.unhappy") %> <%= button_to t("devise.registrations.cancel_my_account"), registration_path(resource_name), data: {confirm: t("devise.confirmations.confirmation")}, method: :delete, type: "button", "aria-haspopup": true, class: "button button--large button--delete" %></p>
-  <%= link_to t("common.back"), :back %>
-<% end %>
 </div>
