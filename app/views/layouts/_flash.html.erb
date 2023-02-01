@@ -1,5 +1,7 @@
-<% flash.each do |flash_type, message| %>
-  <div class="flash__message">
-    <%= message %>
-  </div>
-<% end %>
+<div class="flash__container">
+  <% flash.each do |flash_type, message| %>
+    <div class="<%= class_names("flash__message", "flash__message--#{flash_type}") %>">
+      <%= message %>
+    </div>
+  <% end %>
+</div>
