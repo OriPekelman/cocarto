@@ -3,12 +3,8 @@ en:
   access_groups:
     access_group:
       delete_self: Are you sure? You won’t be able to access the map anymore.
-      type: Role type
-      url_name: Link description
-      url_to_share: Link to share
-    index:
-      new: Create a new access
-      new_link: Create a sharing link
+      new_link: New sharing link
+      new_role: New group
   api:
     bad_key: Bad API key
   area:

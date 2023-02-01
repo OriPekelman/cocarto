@@ -5,7 +5,6 @@
 @use "field-form";
 @use "flash";
 @use "layer-form";
-@use "roles";
 @use "list";
 @use "map";
 @use "landing-page";
@@ -97,21 +96,3 @@ textarea[readonly] {
   align-items: center;
 }
 
-.input-with-button {
-  display: flex;
-
-  input {
-    margin-right: -40px;
-    padding-right: 40px;
-  }
-
-  button {
-    top: 1px;
-    right: -1px;
-    width: 38px;
-    height: 38px;
-    margin: 0;
-    position: relative;
-    padding: 8px;
-  }
-}

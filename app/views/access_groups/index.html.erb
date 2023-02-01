@@ -1,21 +1,15 @@
-<div class="main-actions">
-  <%= link_to t("common.back"), @map %>
-</div>
 <div class="container">
-  <section class="section roles">
+  <div class="section">
     <h2 class="section__title"><%= AccessGroup.model_name.human(count: 2) %></h2>
-
-    <div class="role__form">
+    <ul>
       <%= render @access_groups %>
-    </div>
-    <div class="role__form">
-      <h3 class="subsection__title"><%= t(".new") %></h3>
-      <%= render AccessGroup.new(map: @map, users: [User.new]) %>
-    </div>
 
-    <div class="role__form">
-      <h3 class="subsection__title"><%= t(".new_link") %></h3>
+      <%= render AccessGroup.new(map: @map, users: [User.new]) %>
+
       <%= render AccessGroup.new(map: @map, token: Devise.friendly_token.first(16)) %>
-    </div>
-  </section>
+    </ul>
+  </div>
+  <div class="section">
+    <%= link_to t("common.back"), @map, class: "button button--link" %>
+  </div>
 </div>
