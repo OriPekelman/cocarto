@@ -40,22 +40,6 @@
   padding: 0;
 }
 
-.list-element__extra {
-  background-color: white;
-  border-radius: 4px;
-  border: 1px solid var(--color-grey-50);
-  display: flex;
-  outline: 1px solid var(--color-grey-30);
-  outline-offset: 1.5px;
-  padding: 0.75rem 0.5rem;
-
-  svg {
-    width: 24px;
-    height: 24px;
-    fill: var(--color-green-50);
-  }
-}
-
 .list-element__actions {
   color: var(--color-grey-60);
 }

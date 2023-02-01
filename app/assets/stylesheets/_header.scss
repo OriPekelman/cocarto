@@ -16,12 +16,6 @@
   padding-inline: 4rem;
 }
 
-@media (max-width: 850px) {
-  .header--large {
-    padding-inline: 0.5rem;
-  }
-}
-
 .header__nav {
   width: 100%;
   display: flex;
@@ -64,5 +58,4 @@
   align-items: center;
   justify-content: space-around;
   gap: 2rem;
-  letter-spacing: 0.44px;
 }
