@@ -240,6 +240,7 @@ form.table-field {
 }
 
 .layer-footer {
+  width: 100%;
   display: flex;
   gap: 1rem;
   justify-content: flex-end;
@@ -273,9 +274,12 @@ form.table-field {
 .layer-table__body {
   display: none;
   padding: 2rem;
+  flex-direction: column;
+  gap: 16px;
+  align-items: start;
   border-bottom: solid 1px var(--color-grey-40);
 }
 
 .is-active > .layer-table__body {
-  display: block;
+  display: flex;
 }
