@@ -94,6 +94,7 @@ test-system:
       - test-system/*.xml
       # We always save the screenshots to help the debugs
       - tmp/screenshots/*
+      - tmp/capybara/*
     when: always
     reports:
       junit:
