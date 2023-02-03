@@ -52,9 +52,9 @@ export default class extends Controller {
 
     if (detail.opened && detail.geometryType !== 'territory') {
       this.addButtonTarget.innerHTML = detail.addFeatureText
-      this.addButtonTarget.classList.remove('is-hidden')
+      this.addButtonTarget.hidden = false
     } else {
-      this.addButtonTarget.classList.add('is-hidden')
+      this.addButtonTarget.hidden = true
     }
   }
 
