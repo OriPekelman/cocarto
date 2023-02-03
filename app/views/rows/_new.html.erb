@@ -10,7 +10,7 @@
     <% end %>
   </div>
 <% else %>
-  <%= form_with model: [row.layer, row], data: {layer_target: "newRowForm", layer_id: row.layer.id}, class: "is-hidden" do |form| %>
+  <%= form_with model: [row.layer, row], data: {layer_target: "newRowForm", layer_id: row.layer.id}, html: {hidden: true} do |form| %>
     <%= form.hidden_field :geojson, data: {layer_target: "geojsonField", layer_id: row.layer.id} %>
     <%= form.submit %>
   <% end %>

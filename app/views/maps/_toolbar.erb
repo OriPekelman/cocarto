@@ -3,7 +3,8 @@
   </div>
   <div>
     <button
-      class="button map__toolbar__add-button is-hidden"
+      class="button map__toolbar__add-button"
+      hidden="hidden"
       data-map-target="addButton"
       data-action="map#toggleMode"
       data-restricted-target="restricted"
@@ -23,11 +24,9 @@
     </div>
     <div class="map__control__icon">
       <%= form_for @map do |f| %>
-        <div class="is-hidden">
-          <%= f.text_field :default_latitude, data: {map_target: "defaultLatitude"} %>
-          <%= f.text_field :default_longitude, data: {map_target: "defaultLongitude"} %>
-          <%= f.text_field :default_zoom, data: {map_target: "defaultZoom"} %>
-        </div>
+        <%= f.hidden_field :default_latitude, data: {map_target: "defaultLatitude"} %>
+        <%= f.hidden_field :default_longitude, data: {map_target: "defaultLongitude"} %>
+        <%= f.hidden_field :default_zoom, data: {map_target: "defaultZoom"} %>
         <button
           data-action="map#setDefaultCenterZoom"
           title="<%= t(".set_center_and_zoom") %>"

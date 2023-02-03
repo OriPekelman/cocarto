@@ -13,10 +13,6 @@
 @use "map_document";
 @use "legal";
 
-.is-hidden {
-  display: none;
-}
-
 input[readonly],
 textarea[readonly] {
   background-color: var(--color-bg-ambient-20);

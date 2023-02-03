@@ -34,7 +34,7 @@ class RowComponent < ViewComponent::Base
   def row_tag_form
     form_with method: :patch, model: [@row.layer, @row], id: form_id, data: {row_target: "form", action: "row#save"} do |form|
       row_tag_geojson(form) +
-        form.button("save", class: "is-hidden")
+        form.button("save", hidden: true)
     end
   end
 
