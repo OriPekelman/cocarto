@@ -50,6 +50,8 @@ en:
       delete_row: Delete this row
     table_header:
       center_on_layer: Center map on this layer
+      hide_layer_on_map: Hide this layer on the map
+      show_layer_on_map: Show this layer on the map
       toggle_layer: Display the table for this layer
   layouts:
     application:

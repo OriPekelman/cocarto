@@ -50,6 +50,8 @@ fr:
       delete_row: Supprimer cette ligne
     table_header:
       center_on_layer: Centrer la carte sur cette couche
+      hide_layer_on_map: Masquer cette couche sur la carte
+      show_layer_on_map: Affiche cette couche sur la carte
       toggle_layer: Afficher la table de cette couche
   layouts:
     application:
