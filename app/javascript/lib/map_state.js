@@ -45,7 +45,7 @@ class MapState {
   }
 
   getImage () {
-    this.map.getCanvas().toDataURL()
+    return this.map.getCanvas().toDataURL()
   }
 
   getCurrentView () {

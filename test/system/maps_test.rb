@@ -32,4 +32,14 @@ class MapsTest < ApplicationSystemTestCase
 
     assert_text "You are not authorized to perform this action."
   end
+
+  test "download as an image" do
+    sign_in_as(users("reclus"), "refleurir")
+
+    visit map_path(id: maps("restaurants"))
+    click_link "Export as image", href: nil
+    wait_all_downloads
+
+    assert_path_exists("#{Capybara.save_path}/Restaurants.png")
+  end
 end
