@@ -38,23 +38,23 @@ fr:
       failure: 'Nous n''avons pas pu vous authentifier via %{kind} : ''%{reason}''.'
       success: Authentifié avec succès via %{kind}.
     passwords:
-      change_password_if_you_want: Laissez vide si vous ne voulez pas le changer
+      change_password_if_you_want: Laissez vide si vous ne voulez pas le changer.
       current_password: Mot de passe actuel
       forgot_your_password: Mot de passe oublié ?
-      need_current_password: Nous avons besoin de votre mot de passe actuel pour confirmer vos modifications
+      need_current_password: Nous avons besoin de votre mot de passe actuel pour confirmer vos modifications.
       new_password: Nouveau mot de passe
       no_token: Vous ne pouvez accéder à cette page sans passer par un e-mail de réinitialisation de mot de passe. Si vous êtes passé par un e-mail de ce type, assurez-vous d'utiliser l'URL complète.
       password: Mot de passe
       password_confirmation: Confirmez le nouveau mot de passe
       send_instructions: Vous allez recevoir les instructions de réinitialisation du mot de passe dans quelques instants.
       send_paranoid_instructions: Si votre e-mail existe dans notre base de données, vous allez recevoir un lien de réinitialisation par e-mail.
-      send_reset_password: Envoyez-moi les instructions pour renouveller mon mot de passe
+      send_reset_password: Envoyer les instructions
       submit_change_password: Changer mon mot de passe
       updated: Votre mot de passe a été édité avec succès, vous êtes maintenant connecté.
       updated_not_active: Votre mot de passe a été changé avec succès.
     registrations:
       cancel_my_account: Supprimer mon compte
-      characters_minimum: Caractères minimum
+      characters_minimum: caractères minimum
       currently_waiting_confirmation_for: En attente de confirmation pour
       destroyed: Votre compte a été supprimé avec succès. Nous espérons vous revoir bientôt.
       sign_up: Inscription
@@ -70,7 +70,7 @@ fr:
     sessions:
       already_signed_out: Déconnecté.
       log_in: Connexion
-      preferences: Préferences utilisateur
+      preferences: Préférences
       remember_me: Se souvenir de moi
       signed_in: Connecté.
       signed_out: Déconnecté.

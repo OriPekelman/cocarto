@@ -1,27 +1,32 @@
-<div class="centered-main">
-<h2><%= t("devise.sessions.log_in") %></h2>
+<div class="container">
+  <div class="section">
+    <h2 class="section__title"><%= t("devise.sessions.log_in") %></h2>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "form__container"}) do |f| %>
-  <div class="form__field--slim">
-    <%= f.label :email %>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "elisee.reclus@commune.paris" %>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "form"}) do |f| %>
+      <div class="form__field">
+        <%= f.label :email %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "elisee.reclus@commune.paris" %>
+      </div>
+
+      <div class="form__field">
+        <%= f.label :password, t("devise.passwords.password") %>
+        <%= f.password_field :password, autocomplete: "current-password" %>
+      </div>
+
+      <% if devise_mapping.rememberable? %>
+        <div class="form__field form__field--inline">
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me, t("devise.sessions.remember_me") %>
+        </div>
+      <% end %>
+
+      <div class="form__buttons-bar">
+        <%= f.submit t("devise.sessions.log_in"), class: "button button--confirm" %>
+      </div>
+    <% end %>
   </div>
 
-  <div class="form__field--slim">
-    <%= f.label :password, t("devise.passwords.password") %>
-    <%= f.password_field :password, autocomplete: "current-password" %>
+  <div class="section">
+    <%= render "devise/shared/links" %>
   </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="form__field form__field--inline">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me, t("devise.sessions.remember_me") %>
-    </div>
-  <% end %>
-
-  <%= f.submit t("devise.sessions.log_in"), class: "button button--confirm" %>
-
-  <%= render "devise/shared/links" %>
-<% end %>
-
 </div>

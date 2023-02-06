@@ -12,6 +12,8 @@
   <div class="layer-table__body">
     <%= render "layers/rows", layer: layer %>
 
+    <%= render "rows/new", row: Row.new(layer: layer) %>
+
     <footer class="layer-footer">
       <div data-restricted-target="restricted" data-restricted-authorizations="<%= %w[owner editor contributor].to_json %>"> <%# Cf policy(layer).edit? %>
         <%= link_to t("helpers.link.layer.add_point"), new_layer_row_path(layer) if layer.geometry_point? %>

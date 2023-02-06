@@ -44,6 +44,7 @@
 
 .button--link {
   color: var(--color-green-70);
+  background-color: transparent;
 
   &:hover:not([disabled]) {
     color: var(--color-green-90);
@@ -53,6 +54,7 @@
 
 .button--text {
   color: var(--color-text);
+  background-color: transparent;
 
   &:hover:not([disabled]) {
     background-color: var(--color-bg-ambient-30);
@@ -94,5 +96,26 @@
 
   &:active {
     background-color: black;
+  }
+}
+
+.form__input-with-button {
+  // Special input with button
+  display: flex;
+
+  input {
+    width: 100%;
+    margin-right: -35px;
+    padding-right: 35px;
+  }
+
+  button {
+    top: 1px;
+    right: -1px;
+    width: 33px;
+    height: 33px;
+    margin: 0;
+    position: relative;
+    padding: 6px;
   }
 }

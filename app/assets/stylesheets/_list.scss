@@ -6,23 +6,28 @@
   border-top: 1px solid var(--color-grey-40);
 }
 
-.list-element__link {
-  align-items: center;
+.list-element__row {
+  padding: 16px 0;
   display: flex;
-  gap: 1rem;
   justify-content: space-between;
-  padding: 0.75rem 0.625rem 1.125rem 0;
+  align-items: center;
+  gap: 16px;
+}
+
+.list-element__row--grid {
+  align-items: flex-start;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+}
+
+.list-element__row--link {
+  text-decoration: none;
 }
 
 .list-element__content {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
-}
-
-/* in case .list-element doesn't have a .link-element__link */
-.list-element > .list-element__content {
-  padding: 0.75rem 0 1.125rem;
+  gap: 8px;
 }
 
 .list-element__title {
@@ -33,25 +38,14 @@
 }
 
 .list-element__description {
-  align-items: center;
   color: var(--color-grey-60);
   display: flex;
+  align-items: center;
   gap: 0.375rem;
   padding: 0;
 }
 
-.list-element__actions {
-  color: var(--color-grey-60);
-}
-
-.list-element__actions a + a {
-  margin-left: 1.25rem;
-  position: relative;
-}
-
-.list-element__actions a + a::before {
-  content: "–";
-  left: -0.875rem;
-  pointer-events: none;
-  position: absolute;
+.list-element__button {
+  width: auto;
+  min-width: 117px;
 }

@@ -1,11 +1,11 @@
 <%# params: @maps %>
 <div class="container">
-  <section class="section section--small">
+  <section class="section">
     <h2 class="section__title"><%= Map.model_name.human(count: 2) %></h2>
     <ul class="list">
       <% @maps.with_last_updated_row_id.includes(last_updated_row: :author).each do |map| %>
         <li class="list-element">
-          <%= link_to map, class: "no-decoration list-element__link" do %>
+          <%= link_to map, class: "list-element__row list-element__row--link" do %>
             <div class="list-element__content">
               <h3 class="list-element__title"><%= map.name %></h3>
               <p class="list-element__description">

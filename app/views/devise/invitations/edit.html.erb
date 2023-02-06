@@ -1,20 +1,25 @@
-<h2><%= t "devise.invitations.edit.header" %></h2>
+<div class="container">
+  <div class="section">
+    <h2 class="section__title"><%= t "devise.invitations.edit.header" %></h2>
+    <%= form_for(resource, as: resource_name, url: invitation_path(resource_name), html: {method: :put, class: "form"}) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+      <%= f.hidden_field :invitation_token, readonly: true %>
 
-<%= form_for(resource, as: resource_name, url: invitation_path(resource_name), html: {method: :put, class: "form__container"}) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-  <%= f.hidden_field :invitation_token, readonly: true %>
+      <% if f.object.class.require_password_on_accepting %>
+        <div class="form__field">
+          <%= f.label :password, t("devise.passwords.password") %>
+          <%= f.password_field :password %>
+        </div>
 
-  <% if f.object.class.require_password_on_accepting %>
-    <div class="form__field">
-      <%= f.label :password, t("devise.passwords.password") %><br>
-      <%= f.password_field :password %>
-    </div>
+        <div class="form__field">
+          <%= f.label :password_confirmation, t("devise.passwords.password_confirmation") %>
+          <%= f.password_field :password_confirmation %>
+        </div>
+      <% end %>
 
-    <div class="form__field">
-      <%= f.label :password_confirmation, t("devise.passwords.password_confirmation") %><br>
-      <%= f.password_field :password_confirmation %>
-    </div>
-  <% end %>
-
-  <%= f.submit t("devise.invitations.edit.submit_button") %>
-<% end %>
+      <div class="form__buttons-bar">
+        <%= f.submit t("devise.invitations.edit.submit_button") %>
+      </div>
+    <% end %>
+  </div>
+</div>

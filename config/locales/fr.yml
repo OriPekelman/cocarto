@@ -3,12 +3,8 @@ fr:
   access_groups:
     access_group:
       delete_self: Êtes-vous sûr ? Vous ne pourrez plus accéder à la carte.
-      type: Type de rôle
-      url_name: Description du lien
-      url_to_share: Lien à partager
-    index:
-      new: Créer un nouveau rôle
-      new_link: Créer un nouveau lien de partage
+      new_link: Nouveau lien de partage
+      new_role: Nouveau groupe
   api:
     bad_key: Mauvaise clé d’API
   area:

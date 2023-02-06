@@ -5,7 +5,10 @@ en:
       access_group:
         contributor: Contributor
         editor: Editor
+        name: Description
         owner: Owner
+        role_type: Role
+        url_to_share: Link to share
         viewer: Viewer
       field:
         enum_values: Menu options
@@ -63,9 +66,7 @@ en:
     _comment: The "helpers" scope is for model-specific keys. For general purpose labels, use the "common" scope.
     link:
       access_group:
-        create: Create
         delete: Supprimer
-        modify: Modify
       field:
         delete: Delete
         new: New column
@@ -104,6 +105,10 @@ en:
         enum_value: New option
     submit:
       _comment: The helpers.submit.create and helpers.submit.update keys are standard in Rails.
+      access_group:
+        create: Invite
+        create_link: Create link
+        update: Enregistrer
       field:
         create: Add a field
         update: Save
