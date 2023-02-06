@@ -30,10 +30,11 @@
   margin: 0;
 }
 
-.subsection__title {
+.section__title--small {
   color: var(--color-text);
-  font-size: 1.5rem;
+  font-size: 32px;
   font-weight: 400;
+  margin: 0;
 }
 
 .bordered-box {
