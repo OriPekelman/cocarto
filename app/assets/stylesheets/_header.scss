@@ -5,7 +5,6 @@
   justify-content: space-between;
   align-items: center;
   gap: 32px;
-
 }
 
 .header--app {
@@ -38,7 +37,7 @@
 
 .header__logo--app {
   svg {
-    padding-block: 8px;
+    padding: 6px 0 10px;
     height: 40px;
   }
 }
@@ -54,5 +53,5 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-  gap: 2rem;
+  gap: 32px;
 }
