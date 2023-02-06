@@ -20,16 +20,18 @@ Used in layers/rows, broadcast from FieldsController and from Field hooks. %>
   </span>
 
   <div class="dropdown__content" role="menu" data-dropdown-target="content">
-    <%= form_with model: field, namespace: element_id, id: form_id do |form| %>
+    <%= form_with model: field, namespace: element_id, id: form_id, class: "form" do |form| %>
       <%# Disable the whole form in unauthorized. cf LayerPolicy#update?> %>
-      <fieldset class="card__main-content" data-restricted-target="restricted" data-restricted-authorizations="<%= %w[owner editor].to_json %>">
+      <fieldset class="card__main-content form" data-restricted-target="restricted" data-restricted-authorizations="<%= %w[owner editor].to_json %>">
         <% if field.new_record? %>
           <h3 class="form__header"><%= t("helpers.link.field.new") %></h3>
         <% end %>
         <%= form.hidden_field :layer_id %>
-        <%= form.text_field :label, class: "form__field form__field--slim form__text-field" %>
+        <div class="form__field">
+          <%= form.text_field :label %>
+        </div>
 
-        <div class="form__field form__field--slim">
+        <div class="form__field">
           <%= form.collection_radio_buttons(:field_type, Field.field_types.keys,
                 :to_s, -> { Field.human_attribute_name("field_types.#{_1}") },
                 include_hidden: false) do |radio| %>
@@ -40,7 +42,7 @@ Used in layers/rows, broadcast from FieldsController and from Field hooks. %>
                 <%= radio.radio_button class: "field-form__type-radio", required: field.new_record?, disabled: field.persisted? %>
                 <%= radio.text %>
                 <% if radio.object == "enum" %>
-                  <div class="field-form__type-param form__field form__field--slim" data-controller="enum-values">
+                  <div class="field-form__type-param form__field" data-controller="enum-values">
                     <template data-enum-values-target="template">
                       <%= form.text_field :enum_values, value: nil, multiple: true, placeholder: t("helpers.placeholder.field.enum_value"), data: {enum_values_target: "value", action: "input->enum-values#valueInput"} %>
                     </template>
@@ -49,7 +51,7 @@ Used in layers/rows, broadcast from FieldsController and from Field hooks. %>
                     <% end %>
                   </div>
                 <% elsif radio.object == "territory" %>
-                  <div class="field-form__type-param form__field form__field--slim">
+                  <div class="field-form__type-param form__field">
                     <%= form.collection_check_boxes(:territory_category_ids, TerritoryCategory.all,
                           :id, :to_s,
                           include_hidden: false) do |check| %>
@@ -68,10 +70,10 @@ Used in layers/rows, broadcast from FieldsController and from Field hooks. %>
     <% end %>
 
     <div class="card__footer-content">
-      <%= submit_tag t("helpers.submit.field.update"), class: "button button--slim button--confirm", form: form_id, data: {restricted_target: "restricted", restricted_authorizations: %w[owner editor].to_json} %>
+      <%= submit_tag t("helpers.submit.field.update"), class: "button button--confirm", form: form_id, data: {restricted_target: "restricted", restricted_authorizations: %w[owner editor].to_json} %>
       <%# Don’t display the delete button for new fields, and disable it if unauthorized. cf LayerPolicy#update? %>
       <% if field.persisted? %>
-        <%= button_to field, method: :delete, class: "button button--slim button--delete",
+        <%= button_to field, method: :delete, class: "button button--delete",
               data: {restricted_target: "restricted", restricted_authorizations: %w[owner editor].to_json} do %>
           <%= t("helpers.link.field.delete") %>
         <% end %>

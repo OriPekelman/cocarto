@@ -20,6 +20,7 @@
   top: 0;
   left: 0;
   z-index: var(--dropdown-z-index);
+  text-align: initial; // reset alignment when the dropdown is displayed from a table header (with text centered)
 
   &:hover {
     cursor: initial;

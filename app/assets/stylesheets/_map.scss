@@ -92,14 +92,13 @@
   }
 }
 
-input:not([type="checkbox"], [type="radio"], [type="submit"], [type="button"]) {
-  // TODO: remove the above line once we use BEM for general forms rules (see _forms.scss)
+.map__toolbar__input {
+  padding: 7px 9px 9px;
+  height: 30px;
+}
 
-  &.map__toolbar__input {
-    height: 30px;
-  }
-
-  &.map__name__input {
-    text-align: center;
-  }
+.map__name__input {
+  padding: 7px 9px 9px;
+  line-height: 20px;
+  text-align: center;
 }
