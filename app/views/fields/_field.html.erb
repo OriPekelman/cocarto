@@ -27,7 +27,9 @@ Used in layers/rows, broadcast from FieldsController and from Field hooks. %>
           <h3 class="form__header"><%= t("helpers.link.field.new") %></h3>
         <% end %>
         <%= form.hidden_field :layer_id %>
-        <%= form.text_field :label, class: "form__field" %>
+        <div class="form__field">
+          <%= form.text_field :label %>
+        </div>
 
         <div class="form__field">
           <%= form.collection_radio_buttons(:field_type, Field.field_types.keys,
