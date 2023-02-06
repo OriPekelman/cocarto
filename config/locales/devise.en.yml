@@ -52,11 +52,14 @@ en:
       submit_change_password: Change my password
       updated: Your password has been changed successfully. You are now signed in.
       updated_not_active: Your password has been changed successfully.
+    placeholder:
+      email: 'ex: elisee.reclus@commune.paris'
     registrations:
       cancel_my_account: Cancel my account
       characters_minimum: characters minimum
       currently_waiting_confirmation_for: Currently waiting confirmation for
       destroyed: Bye! Your account has been successfully cancelled. We hope to see you again soon.
+      log_in_instead_html: Already have an account? <a href="%{url}">Sign in instead</a>.
       sign_up: Sign up
       signed_up: Welcome! You have signed up successfully.
       signed_up_but_inactive: You have signed up successfully. However, we could not sign you in because your account is not yet activated.
@@ -72,6 +75,7 @@ en:
       log_in: Log in
       preferences: User preferences
       remember_me: Remember me
+      sign_up_instead_html: Don’t have an account yet? <a href="%{url}">Sign up here</a>.
       signed_in: Signed in successfully.
       signed_out: Signed out successfully.
     unlocks:

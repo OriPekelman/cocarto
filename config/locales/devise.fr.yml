@@ -52,11 +52,14 @@ fr:
       submit_change_password: Changer mon mot de passe
       updated: Votre mot de passe a été édité avec succès, vous êtes maintenant connecté.
       updated_not_active: Votre mot de passe a été changé avec succès.
+    placeholder:
+      email: 'ex: elisee.reclus@commune.paris'
     registrations:
       cancel_my_account: Supprimer mon compte
       characters_minimum: caractères minimum
       currently_waiting_confirmation_for: En attente de confirmation pour
       destroyed: Votre compte a été supprimé avec succès. Nous espérons vous revoir bientôt.
+      log_in_instead_html: Si vous avez déjà un compte, vous pouvez <a href="%{url}">vous connecter</a>.
       sign_up: Inscription
       signed_up: Bienvenue, vous êtes connecté.
       signed_up_but_inactive: Vous êtes bien enregistré. Vous ne pouvez cependant pas vous connecter car votre compte n'est pas encore activé.
@@ -72,6 +75,7 @@ fr:
       log_in: Connexion
       preferences: Préférences
       remember_me: Se souvenir de moi
+      sign_up_instead_html: Si vous n’avez pas encore de compte, vous pouvez <a href="%{url}">vous inscrire</a>.
       signed_in: Connecté.
       signed_out: Déconnecté.
     unlocks:
