@@ -1,5 +1,8 @@
 <nav class="navbar">
-  <%= link_to t("common.back"), :back, class: "button button--link" %>
+  <%= link_to :back, class: "button button--link button--with-icon" do %>
+    <%= embedded_svg "chevron_gauche.svg" %>
+    <%= t("common.back") %>
+<% end %>
 </nav>
 
 <div class="container">
