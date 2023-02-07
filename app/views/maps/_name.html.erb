@@ -1,7 +1,7 @@
 <%# params: map %>
 <%# renders a form for a map name %>
 
-<h2 id="<%= dom_id(map, :name) %>">
+<h2 class="navbar__title" id="<%= dom_id(map, :name) %>">
   <%= form_with model: map do |form| %>
     <%= form.label :name, hidden: true %>
     <%= form.text_field :name,

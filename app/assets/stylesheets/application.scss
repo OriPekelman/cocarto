@@ -53,38 +53,3 @@ textarea[readonly] {
     color: var(--color-green-100);
   }
 }
-
-.main-actions {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: var(--nav-height);
-  overflow: hidden;
-  padding-inline: 1.5rem;
-  width: 100%;
-
-  h2 {
-    margin: 0;
-  }
-
-  a {
-    font-size: 15px;
-    text-decoration: none;
-    background-color: var(--color-bg-ambient-10);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-height: 44px;
-    gap: 0.3em;
-  }
-
-  .main-actions-right {
-    display: flex;
-    flex-direction: row;
-    gap: 0.2em;
-  }
-}
-
-.main-actions + .container {
-  padding-top: var(--content-padding-small);
-}

@@ -37,6 +37,23 @@
   margin: 0;
 }
 
+.navbar {
+  width: 100%;
+  height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2px 8px 0;
+}
+
+.navbar__title {
+  margin: 0;
+}
+
+.navbar + .container {
+  padding-top: 8px;
+}
+
 .bordered-box {
   background-color: var(--color-bg);
   border-style: double;
