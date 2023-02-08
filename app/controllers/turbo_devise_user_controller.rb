@@ -1,6 +1,5 @@
 class TurboDeviseUserController < ApplicationController
   before_action :skip_authorization
-  layout "pages"
 
   class Responder < ActionController::Responder
     def to_turbo_stream
