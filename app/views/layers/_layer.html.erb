@@ -18,14 +18,16 @@
       <div data-restricted-target="restricted" data-restricted-authorizations="<%= %w[owner editor contributor].to_json %>"> <%# Cf policy(layer).edit? %>
         <%= link_to t("helpers.link.layer.add_point"), new_layer_row_path(layer) if layer.geometry_point? %>
       </div>
-      <div class="layer-footer__icon">
-        <%= link_to layer, data: {turbo_method: :delete, turbo_confirm: t("common.confirm")}, title: t("helpers.link.layer.delete") do %>
-          <%= embedded_svg "delete.svg" %>
+      <div class="form__buttons-bar">
+        <%= link_to layer, title: t("helpers.link.layer.delete"),
+              class: "icon-button icon-button--small",
+              data: {turbo_method: :delete, turbo_confirm: t("common.confirm"),
+                     restricted_target: "restricted", restricted_authorizations: '["owner"]'} do %> <%# Cf policy(layer).destroy? %>
+          <%= embedded_svg "supprimer.svg" %>
         <% end %>
-      </div>
-      <div class="layer-footer__icon">
-        <%= link_to geojson_layer_path(layer), download: "#{layer.name}.geojson", title: t("helpers.link.layer.geojson_export") do %>
-          <%= embedded_svg "export.svg" %>
+        <%= link_to geojson_layer_path(layer), title: t("helpers.link.layer.geojson_export"),
+              class: "icon-button icon-button--small", download: "#{layer.name}.geojson" do %>
+          <%= embedded_svg "exporter.svg" %>
         <% end %>
       </div>
     </footer>
