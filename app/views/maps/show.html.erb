@@ -7,7 +7,7 @@
     <%= t(".all_maps") %>
   <% end %>
   <%= render "name", map: @map %>
-  <div class="buttons-bar">
+  <div class="buttons-bar buttons-bar--tight">
     <%= link_to t("common.share"), map_access_groups_path(@map), class: "button button--link" if policy(@map.access_groups.new).index? %>
     <%= link_to t("helpers.link.map.delete"), @map, data: {turbo_method: :delete, turbo_confirm: t("common.confirm")}, class: "button button--link" if policy(@map).destroy? %>
   </div>

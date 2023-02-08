@@ -1,9 +1,9 @@
 <header class="layer-header" id="<%= dom_id(layer, :header) %>">
-  <div class="layer-header__left-description">
+  <div class="buttons-bar">
     <%= embedded_svg "#{layer.geometry_type}.svg", class: "layer-header__icon", style: "color: #{layer.color}" %>
     <%= render "layers/name", layer: layer %>
   </div>
-  <div class="layer-header__right-tools">
+  <div class="buttons-bar">
     <% if layer.rows.size > 0 %>
       <span
         class="layer-header__action"
