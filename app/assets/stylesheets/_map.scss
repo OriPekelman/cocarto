@@ -19,16 +19,10 @@
 }
 
 .map__toolbar__add-button {
-  height: 32px;
-  padding: 0 1rem;
-  color: white;
-  font-size: 16px;
-  background-color: var(--color-green-70);
+  padding: 0 12px;
   border-radius: 8px;
-  border-width: 4px;
-  border-color: rgb(255 255 255 / 66%);
-  border-style: solid;
-  margin: 0;
+  border: 4px solid rgba(#4d7a5d, 64%);
+  background-clip: padding-box;
 }
 
 .maplibregl-ctrl-group {
