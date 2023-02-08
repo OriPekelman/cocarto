@@ -141,12 +141,20 @@ button {
   outline: none;
 }
 
-button:disabled,
 input:disabled {
   background: var(--color-bg-ambient-20);
   border-color: var(--color-bg-ambient-20);
   color: var(--color-grey-80);
   cursor: not-allowed;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+a[disabled] {
+  // Make `a` elements support disabled. This does not prevent keyboard navigation, and prevents cursor changes.
+  pointer-events: none !important;
 }
 
 button[disabled]:hover {
