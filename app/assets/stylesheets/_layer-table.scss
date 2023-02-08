@@ -56,6 +56,14 @@
   background-color: rgb(255 254 250 / 100%);
 }
 
+.layer-container.is-active .layer__indicator {
+  transform: rotate(-90deg);
+}
+
+.layer-container:not(.is-active) .layer__indicator {
+  transform: rotate(90deg);
+}
+
 .layer-table {
   // -- Fancy rounded borders --
   // We don’t collapse the borders to allow rounded cells
@@ -206,6 +214,9 @@
   text-decoration: underline;
   text-underline-offset: 0.2em;
   text-decoration-color: var(--color-grey-50);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 form.table-field {
