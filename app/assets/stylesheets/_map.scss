@@ -58,6 +58,25 @@
   }
 }
 
+.maplibregl-ctrl-geocoder {
+  // Make the geocoder input look like our inputs
+  box-shadow: none;
+}
+
+.mapboxgl-ctrl-geocoder--input {
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  border: 1px solid var(--input-border-color);
+  border-radius: 2px;
+  box-shadow: 0 1px 4px var(--color-grey-40) inset;
+
+  &:focus {
+    outline: none;
+    border-color: var(--input-border-focus-color);
+    box-shadow: 0 0 0 1px #9cf, 0 0 5px 0 #4da2ff66, inset 0 0 5px 0 #1488f333;
+  }
+}
+
 .map__control__icon {
   cursor: pointer;
   width: 36px;
