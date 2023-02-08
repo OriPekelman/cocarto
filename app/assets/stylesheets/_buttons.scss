@@ -1,8 +1,10 @@
 .button {
-  display: block;
   color: white;
   border: 0;
   font-size: 16px;
+  display: block flex; // buttons themselves can contain text and icon; center it
+  align-items: center;
+  justify-content: center;
   padding: 6px 16px;
   border-radius: var(--border-radius);
   text-decoration: none;

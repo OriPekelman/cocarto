@@ -15,10 +15,15 @@
     <%= render "rows/new", row: Row.new(layer: layer) %>
 
     <footer class="layer-footer">
-      <div data-restricted-target="restricted" data-restricted-authorizations="<%= %w[owner editor contributor].to_json %>"> <%# Cf policy(layer).edit? %>
-        <%= link_to t("helpers.link.layer.add_point"), new_layer_row_path(layer) if layer.geometry_point? %>
-      </div>
       <div class="form__buttons-bar">
+        <% if layer.geometry_point? %>
+          <%= link_to new_layer_row_path(layer), title: t(".simplified_form_explanation"),
+                class: "button button--slim button--link",
+                target: "_blank", rel: "noopener",
+                data: {restricted_target: "restricted", restricted_authorizations: '["owner", "editor", "contributor"]'} do %> <%# Cf policy(layer).edit? %>
+            <%= t(".new_point_form") %>
+          <% end %>
+        <% end %>
         <%= link_to layer, title: t("helpers.link.layer.delete"),
               class: "icon-button icon-button--small",
               data: {turbo_method: :delete, turbo_confirm: t("common.confirm"),
