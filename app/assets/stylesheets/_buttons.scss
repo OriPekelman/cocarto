@@ -145,6 +145,13 @@
   }
 }
 
+.buttons-bar {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 16px;
+}
+
 .button--with-icon {
   display: flex;
   padding-inline-start: 8px;

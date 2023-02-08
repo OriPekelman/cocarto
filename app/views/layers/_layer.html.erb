@@ -15,7 +15,7 @@
     <%= render "rows/new", row: Row.new(layer: layer) %>
 
     <footer class="layer-footer">
-      <div class="form__buttons-bar">
+      <div class="buttons-bar">
         <% if layer.geometry_point? %>
           <%= link_to new_layer_row_path(layer), title: t(".simplified_form_explanation"),
                 class: "button button--slim button--link",
