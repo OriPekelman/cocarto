@@ -17,8 +17,9 @@ https://github.com/ViewComponent/view_component/discussions/42#discussioncomment
       <% end %>
 
     <td id="<%= dom_id(@row, "actions") %>" class="table-actions">
-      <div class="table-actions__container">
+      <div class="buttons-bar buttons-bar--tight">
         <%= button_to([@row.layer, @row],
+              class: "icon-button icon-button--small",
               method: :delete,
               title: t("layers.layer.delete_row"),
               form: {data: {"turbo-confirm": t("common.confirm")}},
@@ -27,6 +28,7 @@ https://github.com/ViewComponent/view_component/discussions/42#discussioncomment
         <% end %>
         <%= row_tag_form %>
         <button
+          class="icon-button icon-button--small"
           title="<%= t("layers.layer.center_on_row") %>"
           data-action="map#center"
           data-map-bounds-param="<%= @row.bounding_box.to_json %>">
