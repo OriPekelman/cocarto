@@ -53,6 +53,16 @@
   }
 }
 
+.button--with-icon {
+  display: flex;
+  padding-inline-start: 8px;
+  fill: currentcolor;
+
+  &:hover:not([disabled]) {
+    fill: currentcolor;
+  }
+}
+
 .button--text {
   color: var(--color-text);
   background-color: transparent;

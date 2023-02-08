@@ -1,3 +1,9 @@
+<nav class="navbar">
+  <%= link_to @map, class: "button button--link button--with-icon" do %>
+    <%= embedded_svg "chevron_gauche.svg" %>
+    <%= t("common.back") %>
+  <% end %>
+</nav>
 <div class="container">
   <div class="section">
     <h2 class="section__title"><%= AccessGroup.model_name.human(count: 2) %></h2>
@@ -8,8 +14,5 @@
 
       <%= render AccessGroup.new(map: @map, token: Devise.friendly_token.first(16)) %>
     </ul>
-  </div>
-  <div class="section">
-    <%= link_to t("common.back"), @map, class: "button button--link" %>
   </div>
 </div>
