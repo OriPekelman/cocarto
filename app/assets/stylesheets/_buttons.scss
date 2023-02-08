@@ -8,7 +8,6 @@
   text-decoration: none;
   cursor: pointer;
   height: 36px;
-  min-width: 80px;
   line-height: 1.5;
   width: fit-content;
   text-align: center;
@@ -75,6 +74,7 @@
 .button--confirm {
   background-color: var(--color-green-70);
   letter-spacing: 0.44px;
+  min-width: 80px;
 
   &:hover:not([disabled]) {
     background-color: var(--color-green-90);
