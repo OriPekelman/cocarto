@@ -52,6 +52,10 @@
   }
 }
 
+.maplibregl-ctrl-group button + button {
+  border-top: 0; // fix a border above the zoom-out button
+}
+
 .maplibregl-ctrl-geocoder {
   // Make the geocoder input look like our inputs
   box-shadow: none;
