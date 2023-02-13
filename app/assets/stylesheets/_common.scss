@@ -116,14 +116,6 @@ body {
   --map-overlay-z-index: 1;
 }
 
-button:active {
-  filter: brightness(0.85);
-}
-
-button:hover {
-  cursor: pointer;
-}
-
 a {
   color: var(--color-green-70);
 }
@@ -134,14 +126,12 @@ p {
 }
 
 a b,
-a strong,
-button {
+a strong {
   border: none;
   color: var(--color-grey-80);
   outline: none;
 }
 
-button:disabled,
 input:disabled {
   background: var(--color-bg-ambient-20);
   border-color: var(--color-bg-ambient-20);
@@ -149,8 +139,13 @@ input:disabled {
   cursor: not-allowed;
 }
 
-button[disabled]:hover {
-  filter: none;
+button:disabled {
+  cursor: not-allowed;
+}
+
+a[disabled] {
+  // Make `a` elements support disabled. This does not prevent keyboard navigation, and prevents cursor changes.
+  pointer-events: none !important;
 }
 
 main {

@@ -20,10 +20,9 @@ export default class extends Controller {
 
     // Enable or disable the restricted target
     // https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/disabled
-    const supportsDisabling = 'button,fieldset,keygen,optgroup,option,select,textarea,input'
-    if (restricted.matches(supportsDisabling)) {
-      this.#setEnabled(restricted, enabled)
-    }
+    const supportsDisabling = 'button,fieldset,keygen,optgroup,option,select,textarea,input,a'
+    console.assert(restricted.matches(supportsDisabling), 'This element does not support disabling.', restricted)
+    this.#setEnabled(restricted, enabled)
   }
 
   #setEnabled (element, enabled) {

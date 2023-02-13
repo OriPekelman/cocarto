@@ -69,7 +69,6 @@ fr:
         delete: Supprimer
         new: Nouvelle colonne
       layer:
-        add_point: Lien pour ajout simplifié de points (par exemple sur téléphone mobile)
         delete: Supprimer
         geojson_export: Télécharger le geojson
         new: Ajouter une nouvelle couche

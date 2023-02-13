@@ -44,6 +44,8 @@ fr:
     layer:
       center_on_row: Centrer la carte sur cette ligne
       delete_row: Supprimer cette ligne
+      new_point_form: Formulaire simplifié
+      simplified_form_explanation: Saisie simplifiée de nouveau point, par exemple sur téléphone mobile
     table_header:
       center_on_layer: Centrer la carte sur cette couche
       hide_layer_on_map: Masquer cette couche sur la carte

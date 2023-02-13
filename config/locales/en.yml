@@ -44,6 +44,8 @@ en:
     layer:
       center_on_row: Center map on this row
       delete_row: Delete this row
+      new_point_form: Simplified form
+      simplified_form_explanation: Simplified point input, for example using a mobile phone
     table_header:
       center_on_layer: Center map on this layer
       hide_layer_on_map: Hide this layer on the map

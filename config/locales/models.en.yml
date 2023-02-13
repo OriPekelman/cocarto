@@ -71,7 +71,6 @@ en:
         delete: Delete
         new: New column
       layer:
-        add_point: Link for simple point adding (e.g. mobile phone)
         delete: Delete
         geojson_export: Download geojson
         new: Add a new layer
