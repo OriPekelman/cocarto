@@ -2,8 +2,8 @@
 <%= turbo_stream_from @map %>
 <%= turbo_stream_i18n_from @map %>
 <nav class="navbar">
-  <%= link_to maps_path, class: "button button--link button--with-icon" do %>
-    <%= embedded_svg "chevron_gauche.svg" %>
+  <%= link_to maps_path, class: "button button--link" do %>
+    <%= embedded_svg "chevron_gauche.svg", class: "icon--narrow icon--tinted" %>
     <%= t(".all_maps") %>
   <% end %>
   <%= render "name", map: @map %>

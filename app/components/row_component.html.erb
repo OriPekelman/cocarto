@@ -23,14 +23,14 @@ https://github.com/ViewComponent/view_component/discussions/42#discussioncomment
               title: t("layers.layer.delete_row"),
               form: {data: {"turbo-confirm": t("common.confirm")}},
               data: {restricted_target: "restricted", restricted_hidden: true, restricted_authorizations: %w[owner editor].to_json}) do %>
-          <%= helpers.embedded_svg("remove_item.svg", class: "icon--sm") %>
+          <%= helpers.embedded_svg("remove_item.svg", class: "icon--small icon--tinted") %>
         <% end %>
         <%= row_tag_form %>
         <button
           title="<%= t("layers.layer.center_on_row") %>"
           data-action="map#center"
           data-map-bounds-param="<%= @row.bounding_box.to_json %>">
-          <%= helpers.embedded_svg("center.svg", class: "icon--sm") %>
+          <%= helpers.embedded_svg("center.svg", class: "icon--small icon--tinted") %>
         </button>
       </div>
     </td>
