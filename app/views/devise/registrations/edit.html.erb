@@ -50,7 +50,7 @@
       <label><%= t("devise.registrations.unhappy") %></label>
 
       <%= button_to t("devise.registrations.cancel_my_account"),
-            registration_path(resource_name), data: {confirm: t("devise.confirmations.confirmation")},
+            registration_path(resource_name), data: {turbo_confirm: t("devise.confirmations.confirmation")},
             method: :delete, type: "button", "aria-haspopup": true, class: "button button--delete" %>
     </div>
   </div>
