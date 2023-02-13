@@ -46,6 +46,16 @@ en:
         parent: part of
       territory_category:
         revision: revision
+      user:
+        maps: maps
+        rows: rows
+    errors:
+      models:
+        user:
+          attributes:
+            base:
+              restrict_dependent_destroy:
+                has_many: We can’t delete your account yet; your %{record} must be deleted first.
     models:
       access_group:
         one: Access

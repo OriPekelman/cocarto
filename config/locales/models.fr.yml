@@ -46,6 +46,16 @@ fr:
         parent: partie de
       territory_category:
         revision: version
+      user:
+        maps: cartes
+        rows: rangées
+    errors:
+      models:
+        user:
+          attributes:
+            base:
+              restrict_dependent_destroy:
+                has_many: Nous ne pouvons pas supprimer votre compte tout de suite ; vos %{record} doivent d’abord être supprimées.
     models:
       access_group: Accès
       layer:
