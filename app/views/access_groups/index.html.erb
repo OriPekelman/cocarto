@@ -1,6 +1,6 @@
 <nav class="navbar">
-  <%= link_to @map, class: "button button--link button--with-icon" do %>
-    <%= embedded_svg "chevron_gauche.svg" %>
+  <%= link_to @map, class: "button button--link" do %>
+    <%= embedded_svg "chevron_gauche.svg", class: "icon--narrow icon--tinted" %>
     <%= t("common.back") %>
   <% end %>
 </nav>

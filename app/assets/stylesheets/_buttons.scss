@@ -1,19 +1,19 @@
+// Text buttons
 .button {
-  color: white;
-  border: 0;
-  font-size: 16px;
   display: block flex; // buttons themselves can contain text and icon; center it
   align-items: center;
   justify-content: center;
+  width: fit-content;
+  height: 36px;
   padding: 6px 16px;
+  border: 0;
   border-radius: var(--border-radius);
   text-decoration: none;
   cursor: pointer;
-  height: 36px;
-  line-height: 1.5;
-  width: fit-content;
-  text-align: center;
   font-family: var(--font-serif);
+  font-size: 16px;
+  color: white;
+  line-height: 1.5;
 
   &[disabled] {
     background: var(--color-bg-ambient-20);
@@ -92,20 +92,31 @@
   }
 }
 
+// Icon buttons
 .icon-button {
+  cursor: pointer;
   height: 36px;
   width: 36px;
   padding: 6px;
   border-radius: 4px;
-  background-color: var(--color-bg);
   color: var(--color-green-70);
-  fill: currentcolor;
+
+  &:hover:not([disabled]) {
+    color: var(--color-green-80);
+  }
+
+  &[disabled] {
+    color: var(--color-grey-70);
+  }
+}
+
+.icon-button--double-bordered {
+  background-color: var(--color-bg);
   box-shadow: inset 0 0 0 0.5px var(--color-grey-60),
     inset 0 0 0 2.5px var(--color-bg), inset 0 0 0 3px var(--color-grey-50);
 
   &:hover:not([disabled]) {
     background-color: var(--color-bg-ambient-10);
-    color: var(--color-green-80);
     box-shadow: inset 0 0 0 0.5px var(--color-grey-60),
       inset 0 0 0 2.5px var(--color-bg), inset 0 0 0 3px var(--color-grey-70);
   }
@@ -113,7 +124,6 @@
   &[disabled] {
     background: var(--color-bg-ambient-20);
     border-color: var(--color-bg-ambient-20);
-    color: var(--color-grey-70);
   }
 }
 
@@ -145,18 +155,20 @@
   }
 }
 
-.button--with-icon {
+// Buttons bar
+.buttons-bar {
   display: flex;
-  padding-inline-start: 8px;
-  fill: currentcolor;
-
-  &:hover:not([disabled]) {
-    fill: currentcolor;
-  }
+  justify-content: start;
+  align-items: center;
+  gap: 16px;
 }
 
+.buttons-bar--tight {
+  gap: 2px;
+}
+
+// Special input with button
 .form__input-with-button {
-  // Special input with button
   display: flex;
 
   input {

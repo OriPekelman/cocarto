@@ -2,12 +2,12 @@
 <%= turbo_stream_from @map %>
 <%= turbo_stream_i18n_from @map %>
 <nav class="navbar">
-  <%= link_to maps_path, class: "button button--link button--with-icon" do %>
-    <%= embedded_svg "chevron_gauche.svg" %>
+  <%= link_to maps_path, class: "button button--link" do %>
+    <%= embedded_svg "chevron_gauche.svg", class: "icon--narrow icon--tinted" %>
     <%= t(".all_maps") %>
   <% end %>
   <%= render "name", map: @map %>
-  <div class="form__buttons-bar">
+  <div class="buttons-bar buttons-bar--tight">
     <%= link_to t("common.share"), map_access_groups_path(@map), class: "button button--link" if policy(@map.access_groups.new).index? %>
     <%= link_to t("helpers.link.map.delete"), @map, data: {turbo_method: :delete, turbo_confirm: t("common.confirm")}, class: "button button--link" if policy(@map).destroy? %>
   </div>

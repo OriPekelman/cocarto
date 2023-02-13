@@ -15,7 +15,7 @@
     <%= render "rows/new", row: Row.new(layer: layer) %>
 
     <footer class="layer-footer">
-      <div class="form__buttons-bar">
+      <div class="buttons-bar">
         <% if layer.geometry_point? %>
           <%= link_to new_layer_row_path(layer), title: t(".simplified_form_explanation"),
                 class: "button button--slim button--link",
@@ -25,14 +25,14 @@
           <% end %>
         <% end %>
         <%= link_to layer, title: t("helpers.link.layer.delete"),
-              class: "icon-button icon-button--small",
+              class: "icon-button icon-button--double-bordered icon-button--small",
               data: {turbo_method: :delete, turbo_confirm: t("common.confirm"),
                      restricted_target: "restricted", restricted_authorizations: '["owner"]'} do %> <%# Cf policy(layer).destroy? %>
-          <%= embedded_svg "supprimer.svg" %>
+          <%= embedded_svg "supprimer.svg", class: "icon--tinted" %>
         <% end %>
         <%= link_to geojson_layer_path(layer), title: t("helpers.link.layer.geojson_export"),
-              class: "icon-button icon-button--small", download: "#{layer.name}.geojson" do %>
-          <%= embedded_svg "exporter.svg" %>
+              class: "icon-button icon-button--double-bordered icon-button--small", download: "#{layer.name}.geojson" do %>
+          <%= embedded_svg "exporter.svg", class: "icon--tinted" %>
         <% end %>
       </div>
     </footer>
