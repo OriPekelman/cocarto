@@ -25,6 +25,7 @@ gem "redis"
 # gem "bcrypt"
 gem "importmap-rails"
 # Use Active Storage variant
+gem "aws-sdk-s3"
 # gem "image_processing"
 gem "rubyzip"
 # Used for authentification
