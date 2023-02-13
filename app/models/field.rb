@@ -20,7 +20,7 @@
 #
 class Field < ApplicationRecord
   # Attributes
-  enum :field_type, {text: "text", float: "float", integer: "integer", territory: "territory", date: "date", boolean: "boolean", css_property: "css_property", enum: "enum", attachment: "attachement"}, prefix: :type
+  enum :field_type, {text: "text", float: "float", integer: "integer", territory: "territory", date: "date", boolean: "boolean", css_property: "css_property", enum: "enum", files: "files"}, prefix: :type
   attr_readonly :field_type
 
   # Relations

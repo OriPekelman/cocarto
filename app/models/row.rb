@@ -35,6 +35,8 @@
 #  fk_rails_...  (territory_id => territories.id)
 #
 class Row < ApplicationRecord
+  has_many_attached :files
+
   # Relations
   belongs_to :layer, touch: true
   belongs_to :author, class_name: "User", inverse_of: :rows
@@ -87,6 +89,8 @@ class Row < ApplicationRecord
       value = db_values[field.id]
       if field.type_territory?
         value = association(field.association_name).target
+      elsif field.type_files?
+        value = files_by_field(field)
       end
       [field, value]
     end
@@ -95,6 +99,19 @@ class Row < ApplicationRecord
   def fields_values=(new_fields_values)
     cleaned_values = layer.fields.to_h do |field|
       value = new_fields_values[field.id]
+
+      # TODO: for multiple files, we must iterate on all attachements
+      if field.type_files?
+        blob = ActiveStorage::Blob.create_and_upload!(
+          io: value,
+          filename: value.original_filename,
+          content_type: value.content_type
+        )
+        # Rails 7.1 `attach(value) will return the blob and we won’t need to create it separately
+        files.attach(blob)
+        value = (values[field.id] || []) << blob.id
+      end
+
       [field.id, field.cast(value)]
     end
 
@@ -158,7 +175,7 @@ class Row < ApplicationRecord
   end
 
   def render(**kwargs)
-    row = Row.with_territory.includes(:territory, *layer.fields_association_names, layer: :fields).find(id)
+    row = Row.with_attached_files.with_territory.includes(:territory, *layer.fields_association_names, layer: :fields).find(id)
     ApplicationController.render(RowComponent.new(row: row, **kwargs), layout: false)
   end
 
@@ -175,5 +192,17 @@ class Row < ApplicationRecord
     max(COALESCE(rows.geo_lat_max, territories.geo_lat_max)) as geo_lat_max
     SQL
              )[0].values_at("geo_lng_min", "geo_lat_min", "geo_lng_max", "geo_lat_max")
+  end
+
+  private
+
+  def files_by_field(field)
+    files_by_id = files.index_by { |file| file.blob_id }
+    if field.type_files?
+      blob_ids = values[field.id] || []
+      blob_ids.map { |blob_id| files_by_id[blob_id] }
+    else
+      raise "Field #{field.id} is not an file"
+    end
   end
 end
