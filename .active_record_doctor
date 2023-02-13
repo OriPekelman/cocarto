@@ -1,6 +1,7 @@
 ActiveRecordDoctor.configure do
   detector :undefined_table_references, ignore_models: [
-    "ApplicationRecord" # Remove after https://github.com/gregnavis/active_record_doctor/pull/91
+    "ApplicationRecord", # Remove after https://github.com/gregnavis/active_record_doctor/pull/91
+    "ActiveStorage::Record"
   ]
 
   detector :short_primary_key_type, ignore_tables: [
@@ -22,6 +23,10 @@ ActiveRecordDoctor.configure do
     # Default values set in schema
     "Layer.style",
     "Row.values",
+  ], ignore_models: [
+    "ActiveStorage::Blob",
+    "ActiveStorage::VariantRecord",
+    "ActiveStorage::Attachment",
   ]
 
   detector :incorrect_dependent_option, ignore_associations: [
