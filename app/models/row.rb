@@ -37,7 +37,7 @@
 class Row < ApplicationRecord
   # Relations
   belongs_to :layer, touch: true
-  belongs_to :author, class_name: "User"
+  belongs_to :author, class_name: "User", inverse_of: :rows
   belongs_to :territory, optional: true
 
   # Through relations
