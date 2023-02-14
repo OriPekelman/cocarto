@@ -7,7 +7,7 @@
   padding: 0;
 }
 
-// outside container for each layer (collapsable)
+// Outside container for each layer
 .layer-container {
   margin: 0;
   background-color: var(--color-grey-30);
@@ -18,7 +18,7 @@
   position: relative;
 }
 
-// header of layer
+// Layer header, in a layer-container. Always visible
 .layer-header {
   width: 100%;
   padding-left: 16px;
@@ -67,7 +67,24 @@
   transform: rotate(90deg);
 }
 
-// Table of layer rows
+// Layer contents (collapses)
+.layer-contents {
+  padding: 32px;
+  flex-direction: column;
+  gap: 16px;
+  align-items: start;
+  border-bottom: solid 1px var(--color-grey-40);
+}
+
+.layer-container.is-active > .layer-contents {
+  display: flex;
+}
+
+.layer-container:not(.is-active) > .layer-contents {
+  display: none;
+}
+
+// Actual table of layer rows
 .layer-table {
   // -- Fancy rounded borders --
   // We don’t collapse the borders to allow rounded cells
@@ -183,19 +200,6 @@
   }
 }
 
-.layer-table__body {
-  display: none;
-  padding: 2rem;
-  flex-direction: column;
-  gap: 16px;
-  align-items: start;
-  border-bottom: solid 1px var(--color-grey-40);
-}
-
-.is-active > .layer-table__body {
-  display: flex;
-}
-
 .layer-table__td--numerical {
   font-family: var(--font-mono);
   text-align: right;
@@ -228,7 +232,7 @@
   align-items: center;
 }
 
-.table-actions {
+.layer-table--td-actions {
   background-color: var(--color-grey-30);
   padding: 2px;
 }
