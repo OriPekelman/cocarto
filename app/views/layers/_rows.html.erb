@@ -5,15 +5,15 @@
   <thead class="resizable">
     <tr>
       <% if layer.geometry_territory? %>
-        <th><span class="layer-table__header"></span></th>
-        <th><span class="layer-table__header"><%= t("common.territory_code") %></span></th>
+        <th class="layer-table__th"></th>
+        <th class="layer-table__th"><%= t("common.territory_code") %></th>
       <% elsif layer.geometry_point? %>
-        <th><span class="layer-table__header"><%= t("common.longitude") %></span></th>
-        <th><span class="layer-table__header"><%= t("common.latitude") %></span></th>
+        <th class="layer-table__th"><%= t("common.longitude") %></th>
+        <th class="layer-table__th"><%= t("common.latitude") %></th>
       <% elsif layer.geometry_line_string? %>
-        <th><span class="layer-table__header"><%= t("common.length") %></span></th>
+        <th class="layer-table__th"><%= t("common.length") %></th>
       <% elsif layer.geometry_polygon? %>
-        <th><span class="layer-table__header"><%= t("common.area") %></span></th>
+        <th class="layer-table__th"><%= t("common.area") %></th>
       <% end %>
 
       <%= render layer.fields %>
