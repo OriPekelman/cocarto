@@ -1,10 +1,13 @@
-// Main table of layer data
+// Layer data tables
+
+// left pane of main page
 .map-data__container {
   overflow: auto;
   height: 100%;
   padding: 0;
 }
 
+// outside container for each layer (collapsable)
 .layer-container {
   margin: 0;
   background-color: var(--color-grey-30);
@@ -15,6 +18,7 @@
   position: relative;
 }
 
+// header of layer
 .layer-header {
   width: 100%;
   padding-left: 16px;
@@ -63,6 +67,7 @@
   transform: rotate(90deg);
 }
 
+// Table of layer rows
 .layer-table {
   // -- Fancy rounded borders --
   // We don’t collapse the borders to allow rounded cells
@@ -186,21 +191,34 @@
   }
 }
 
-.layer-table__td__numerical {
+.layer-table__body {
+  display: none;
+  padding: 2rem;
+  flex-direction: column;
+  gap: 16px;
+  align-items: start;
+  border-bottom: solid 1px var(--color-grey-40);
+}
+
+.is-active > .layer-table__body {
+  display: flex;
+}
+
+.layer-table__td--numerical {
   font-family: var(--font-mono);
   text-align: right;
   padding: 0.2rem 0.5rem;
 }
 
-.layer-table__td__boolean {
+.layer-table__td--boolean {
   text-align: center;
 }
 
-.layer-table__tr__stats {
+.layer-table__tr--stats {
   height: 24px;
 }
 
-.layer-table__td__stats {
+.layer-table__td--stats {
   padding: 0.2rem 0.5rem;
 }
 
@@ -243,6 +261,7 @@ form.table-field {
   line-height: initial;
 }
 
+// Footer for each layer
 .layer-footer {
   width: 100%;
   display: flex;
@@ -271,19 +290,7 @@ form.table-field {
   }
 }
 
+// Footer for the layer list
 .footer__layer-list {
   padding: 16px;
-}
-
-.layer-table__body {
-  display: none;
-  padding: 2rem;
-  flex-direction: column;
-  gap: 16px;
-  align-items: start;
-  border-bottom: solid 1px var(--color-grey-40);
-}
-
-.is-active > .layer-table__body {
-  display: flex;
 }
