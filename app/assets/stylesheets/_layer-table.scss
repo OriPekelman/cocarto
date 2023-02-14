@@ -77,7 +77,6 @@
   $border: solid 1px var(--color-grey-50);
 
   table-layout: fixed;
-  white-space: nowrap;
 
   th {
     background-color: var(--color-grey-20);
@@ -151,13 +150,6 @@
     color: var(--color-grey-80);
     background-color: var(--color-grey-30);
     height: 32px;
-  }
-
-  tr.row td {
-    button {
-      margin-top: 0;
-      margin-bottom: 0;
-    }
   }
 
   td.table-field {
