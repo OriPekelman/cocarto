@@ -78,9 +78,9 @@ class MapState {
   }
 
   #mapSelectionChanged ({ features }) {
-    const highlightedRows = document.querySelectorAll('tr.highlight')
-    highlightedRows.forEach(row => row.classList.remove('highlight'))
-    features.map(getRowFromFeature).forEach(row => row.classList.add('highlight'))
+    const highlightedRows = document.querySelectorAll('.layer-table__tr--highlight')
+    highlightedRows.forEach(row => row.classList.remove('layer-table__tr--highlight'))
+    features.map(getRowFromFeature).forEach(row => row.classList.add('layer-table__tr--highlight'))
   }
 
   #featureUpdated (feature) {
