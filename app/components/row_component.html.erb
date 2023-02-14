@@ -16,7 +16,7 @@ https://github.com/ViewComponent/view_component/discussions/42#discussioncomment
         <%= render FieldTdComponent.new(field: field, value: value, form_id: form_id, authorizations: RowPolicy.authorizations(@row)) %>
       <% end %>
 
-    <td id="<%= dom_id(@row, "actions") %>" class="layer-table--td-actions">
+    <td id="<%= dom_id(@row, "actions") %>" class="layer-table__td layer-table__td-actions">
       <div class="buttons-bar buttons-bar--tight">
         <%= button_to([@row.layer, @row],
               class: "icon-button icon-button--small",

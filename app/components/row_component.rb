@@ -19,15 +19,15 @@ class RowComponent < ViewComponent::Base
   def row_tag_calculated_data
     case @row.layer.geometry_type
     when "territory"
-      tag.td(render(SearchComponent.new(form: form_id, field: "row[territory_id]", territory: @row.territory, field_id: nil, layer_id: @row.layer_id)), class: "table-field") +
-        tag.td(@row.territory.code, class: "layer-table__td--numerical")
+      tag.td(render(SearchComponent.new(form: form_id, field: "row[territory_id]", territory: @row.territory, field_id: nil, layer_id: @row.layer_id)), class: "layer-table__td") +
+        tag.td(@row.territory.code, class: "layer-table__td layer-table__td--numerical")
     when "point"
-      tag.td(number_with_precision(@row.geo_lng_min, precision: 6), class: "layer-table__td--numerical") +
-        tag.td(number_with_precision(@row.geo_lat_min, precision: 6), class: "layer-table__td--numerical")
+      tag.td(number_with_precision(@row.geo_lng_min, precision: 6), class: "layer-table__td layer-table__td--numerical") +
+        tag.td(number_with_precision(@row.geo_lat_min, precision: 6), class: "layer-table__td layer-table__td--numerical")
     when "line_string"
-      tag.td(number_to_human(@row.geo_length, units: :length), class: "layer-table__td--numerical")
+      tag.td(number_to_human(@row.geo_length, units: :length), class: "layer-table__td layer-table__td--numerical")
     when "polygon"
-      tag.td(number_to_human(@row.geo_area, units: :area), class: "layer-table__td--numerical")
+      tag.td(number_to_human(@row.geo_area, units: :area), class: "layer-table__td layer-table__td--numerical")
     end
   end
 
