@@ -50,3 +50,12 @@ cassini:
   encrypted_password: <%= Devise::Encryptor.digest(User, "générations12345") %>
   <<: *DEFAULTS
 
+louise_michel:
+  email: louise.michel@commune.paris
+  encrypted_password: <%= Devise::Encryptor.digest(User, "refleurir") %>
+  <<: *DEFAULTS
+
+bakounine:
+  email: bakounine@commune.paris
+  encrypted_password: <%= Devise::Encryptor.digest(User, "refleurir") %>
+  <<: *DEFAULTS
