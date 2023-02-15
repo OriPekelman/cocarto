@@ -84,3 +84,19 @@
   justify-content: start;
   gap: 32px;
 }
+
+@media print {
+  .header__logo,
+  #flash,
+  .header__right {
+    display: none;
+  }
+
+  .header--container {
+    border: none;
+  }
+
+  .header__cartouche {
+    margin: auto;
+  }
+}
