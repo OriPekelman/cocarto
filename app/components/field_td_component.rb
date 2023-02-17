@@ -25,7 +25,7 @@ class FieldTdComponent < ViewComponent::Base
       check_box_tag field_name, "1", @value == "1" || @value, opts
     when "enum"
       select_tag field_name, options_for_select(@field.enum_values, @value), opts.merge(include_blank: true)
-    when "file"
+    when "files"
       # TODO: for multiple files, the name must be followed by [], and opts.merge(multiple: true)
       file_tag = file_field_tag field_name, opts
       urls = (@value || []).map { |val| link_to val.filename, url_for(val) }

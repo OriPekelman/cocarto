@@ -19,6 +19,7 @@ fr:
         css_property: Propriété CSS
         date: Date
         enum: Menu local
+        files: Fichiers
         float: Nombre décimal
         integer: Nombre entier
         territory: Territoire
