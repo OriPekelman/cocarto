@@ -121,6 +121,7 @@ ignore_unused:
   - 'devise.*'
   - 'errors.messages.*'
   - 'activerecord.attributes.*'
+  - 'activerecord.errors.*'
   - 'activerecord.models.*'
   - 'helpers.submit.*'
   - 'colors.*'

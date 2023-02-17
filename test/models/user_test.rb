@@ -32,7 +32,23 @@
 require "test_helper"
 
 class UserTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test "destroy" do # rubocop:disable Minitest/MultipleAssertions
+    user = users(:reclus)
+    user.destroy
+
+    assert_not user.destroyed?
+    assert_equal [{error: :"restrict_dependent_destroy.has_many", record: "rows"}], user.errors.details[:base]
+
+    user.rows.destroy_all
+    user.errors.clear
+    user.destroy
+
+    assert_not user.destroyed?
+    assert_equal [{error: :"restrict_dependent_destroy.has_many", record: "maps"}], user.errors.details[:base]
+
+    user.access_groups.destroy_all
+    user.destroy
+
+    assert_predicate user, :destroyed?
+  end
 end

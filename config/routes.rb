@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   scope "(:locale)", locale: Regexp.union(I18n.available_locales.map(&:to_s)) do
-    devise_for :users, skip: :invitations
+    devise_for :users, skip: :invitations, controllers: {registrations: "users/registrations"}
 
     devise_scope :user do
       # Just the wanted subset of invitable routes

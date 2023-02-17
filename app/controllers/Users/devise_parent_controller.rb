@@ -1,6 +1,8 @@
-class TurboDeviseUserController < ApplicationController
+class Users::DeviseParentController < ApplicationController
   before_action :skip_authorization
 
+  # TODO: Temporary fix for Devise and Turbo. Will be fixed in Devise 4.9.0.
+  # See https://github.com/heartcombo/devise/pull/5548
   class Responder < ActionController::Responder
     def to_turbo_stream
       controller.render(options.merge(formats: :html))
