@@ -37,3 +37,20 @@
 .legal__indented {
   margin-inline: 16px;
 }
+
+.legal__table {
+  text-align: left;
+  margin-inline: 16px;
+
+  th {
+    vertical-align: top;
+  }
+
+  th,
+  td {
+    padding-inline: 8px;
+    border: 0.5px solid var(--color-grey-90);
+  }
+
+  border-collapse: collapse;
+}
