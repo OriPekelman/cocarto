@@ -3,6 +3,13 @@
   line-height: 1.5;
 }
 
+.legal__nav {
+  margin: 24px 0 16px;
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+}
+
 .legal__h1 {
   margin: 24px 0 16px;
   color: var(--color-green-90);
@@ -25,4 +32,8 @@
 .legal__code {
   font-family: monospace;
   font-size: 0.8em;
+}
+
+.legal__indented {
+  margin-inline: 32px;
 }

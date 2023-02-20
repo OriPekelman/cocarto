@@ -38,6 +38,8 @@ Rails.application.routes.draw do
     end
 
     get "/legal" => "pages#legal"
+    get "/legal/conditions" => "pages#legal_conditions"
+    get "/legal/data" => "pages#legal_data"
     get "/presentation" => "pages#presentation"
     get "share/:token", to: "access_groups#enter_by_link", as: "share_link"
   end

@@ -4,6 +4,12 @@ class PagesController < ApplicationController
   def legal
   end
 
+  def legal_conditions
+  end
+
+  def legal_data
+  end
+
   def presentation
   end
 end
