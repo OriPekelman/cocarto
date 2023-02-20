@@ -49,7 +49,8 @@ class RowsController < ApplicationController
   end
 
   def row_params
-    # TODO: for multiple files, we need field_values: {file_field_id: []} to allow repeated values
-    params.require(:row).permit(:geojson, :territory_id, fields_values: @layer.fields.ids)
+    simple_fields = @layer.fields.reject(&:multiple?).map(&:id)
+    multiple_fields = @layer.fields.filter(&:multiple?).map { |field| {field.id => []} }
+    params.require(:row).permit(:geojson, :territory_id, fields_values: simple_fields + multiple_fields)
   end
 end
