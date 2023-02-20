@@ -39,6 +39,8 @@ gem "cache_with_locale"
 gem "premailer-rails"
 gem "view_component"
 gem "view_component-fragment_caching"
+gem "active_link_to"
+
 # perfs and errors
 gem "sentry-ruby"
 gem "sentry-rails"
