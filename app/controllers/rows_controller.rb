@@ -41,7 +41,7 @@ class RowsController < ApplicationController
   private
 
   def set_row
-    @row = authorize Row.includes(layer: [:fields, :map]).find(params[:id])
+    @row = authorize Row.with_attached_files.includes(layer: [:fields, :map]).find(params[:id])
   end
 
   def set_layer
@@ -49,6 +49,7 @@ class RowsController < ApplicationController
   end
 
   def row_params
+    # TODO: for multiple files, we need field_values: {file_field_id: []} to allow repeated values
     params.require(:row).permit(:geojson, :territory_id, fields_values: @layer.fields.ids)
   end
 end
