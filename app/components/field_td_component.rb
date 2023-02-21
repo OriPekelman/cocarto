@@ -26,8 +26,7 @@ class FieldTdComponent < ViewComponent::Base
     when "enum"
       select_tag field_name, options_for_select(@field.enum_values, @value), opts.merge(include_blank: true)
     when "files"
-      # for multiple files, the name must be followed by []
-      file_tag = file_field_tag field_name + "[]", opts.merge(multiple: true)
+      file_tag = file_field_tag field_name, opts.merge(multiple: true)
       urls = (@value || []).map { |val| link_to val.filename, url_for(val) }
       safe_join(urls) + file_tag
     else
@@ -56,6 +55,10 @@ class FieldTdComponent < ViewComponent::Base
   end
 
   def field_name
-    "row[fields_values][#{@field.id}]"
+    if @field.multiple?
+      "row[fields_values][#{@field.id}][]"
+    else
+      "row[fields_values][#{@field.id}]"
+    end
   end
 end
