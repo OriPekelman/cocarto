@@ -34,12 +34,16 @@ fr:
     latitude: Latitude
     length: Longueur
     longitude: Longitude
+    save: Sauvegarder
     settings: Réglages
     share: Partager…
     territory_code: Code
     updated_at: Modifié il y a %{date}
     updated_at_by: Modifié il y a %{date} par %{user}
     user_not_authorized: Vous n’avez pas la permission d’effectuer cette action.
+  field:
+    add_attachments: Ajouter des pièces jointes
+    existing_attachments: Pièces jointes présentes
   layers:
     layer:
       center_on_row: Centrer la carte sur cette ligne

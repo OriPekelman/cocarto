@@ -25,9 +25,7 @@ class FieldTdComponent < ViewComponent::Base
     when "enum"
       select_tag field_name, options_for_select(@field.enum_values, @value), opts.merge(include_blank: true)
     when "files"
-      file_tag = file_field_tag field_name, opts.merge(multiple: true)
-      urls = (@value || []).map { |val| link_to val.filename, url_for(val) }
-      safe_join(urls) + file_tag
+      render FileFieldModalComponent.new(value: @value, field: @field, field_name: field_name, opts: opts, row: @row)
     else
       text_field_tag field_name, @value, opts.merge(class: "input")
     end

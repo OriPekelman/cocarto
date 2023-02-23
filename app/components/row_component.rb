@@ -32,7 +32,7 @@ class RowComponent < ViewComponent::Base
   end
 
   def row_tag_form
-    form_with method: :patch, model: [@row.layer, @row], id: form_id, data: {row_target: "form", action: "row#save"}, html: {hidden: true}, multipart: true do |form|
+    form_with method: :patch, model: [@row.layer, @row], id: form_id, data: {row_target: "form", action: "row#save"}, html: {hidden: true} do |form|
       row_tag_geojson(form) +
         form.button("save", hidden: true)
     end
