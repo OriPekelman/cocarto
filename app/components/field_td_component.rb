@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
 class FieldTdComponent < ViewComponent::Base
-  def initialize(field:, value:, form_id:, authorizations:)
+  def initialize(field:, value:, row:)
     @field = field
     @value = value
-    @form_id = form_id
-    @authorizations = authorizations
+    @row = row
   end
 
   def field_tag
@@ -47,9 +46,9 @@ class FieldTdComponent < ViewComponent::Base
       data: {
         action: "input->row#setDirty focusout->row#save",
         restricted_target: "restricted",
-        restricted_authorizations: @authorizations
+        restricted_authorizations: RowPolicy.authorizations(@row)
       },
-      form: @form_id,
+      form: dom_id(@row, :form),
       autocomplete: :off
     }
   end
