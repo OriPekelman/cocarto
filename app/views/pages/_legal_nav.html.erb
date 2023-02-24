@@ -1,0 +1,23 @@
+
+<h2 class="legal__h3">Préambule</h2>
+<p>
+  Cette page concerne le <b>site</b> <b><a href="https://cocarto.com">cocarto.com</a></b>.
+</p>
+<p>
+  Le <b>logiciel</b> <a href="https://gitlab.com/CodeursEnLiberte/cocarto">cocarto</a>, quant à lui, est un logiciel libre (distribué sous la licence libre <a href="https://www.gnu.org/licenses/agpl-3.0.html">AGPL v3</a>).
+  Ce document-ci ne concerne pas les éventuelles autres installations du logiciel cocarto sur d’autres serveurs. <br>
+</p>
+
+<p>
+  Ce document date du 24 février 2023. L’historique des modifications est consultable sur
+  <a href="https://gitlab.com/CodeursEnLiberte/cocarto/-/blob/main/app/views/main/legal.html.erb">le dépôt git du projet</a>.
+</p>
+
+<nav class="legal__nav legal__h1">
+  <%= active_link_to "Mentions légales", legal_path,
+        class: "legal__nav-item button", class_active: "button--confirm", class_inactive: "button--link", active: :exclusive %>
+  <%= active_link_to "Conditions générales d’utilisation", legal_conditions_path,
+        class: "legal__nav-item button", class_active: "button--confirm", class_inactive: "button--link", active: :exclusive %>
+  <%= active_link_to "Politique de confidentialité", legal_data_path,
+        class: "legal__nav-item button", class_active: "button--confirm", class_inactive: "button--link", active: :exclusive %>
+</nav>
