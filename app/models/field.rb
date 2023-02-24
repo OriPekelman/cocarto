@@ -105,7 +105,7 @@ class Field < ApplicationRecord
     end
   end
 
-  # Does this field can have multiple values (array, attached files…)
+  # Can this field have multiple values (array, attached files…)
   def multiple? = type_files?
 
   include FieldValuesAssociations::AssociationName
