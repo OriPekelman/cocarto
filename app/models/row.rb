@@ -100,16 +100,19 @@ class Row < ApplicationRecord
     cleaned_values = layer.fields.to_h do |field|
       value = new_fields_values[field.id]
 
-      # TODO: for multiple files, we must iterate on all attachements
-      if field.type_files?
-        blob = ActiveStorage::Blob.create_and_upload!(
-          io: value,
-          filename: value.original_filename,
-          content_type: value.content_type
-        )
-        # Rails 7.1 `attach(value) will return the blob and we won’t need to create it separately
-        files.attach(blob)
-        value = (values[field.id] || []) << blob.id
+      if field.type_files? && value.present?
+        new_blob_ids = value.map { |file|
+          blob = ActiveStorage::Blob.create_and_upload!(
+            io: file,
+            filename: file.original_filename,
+            content_type: file.content_type
+          )
+          # Rails 7.1 `attach(value) will return the blob and we won’t need to create it separately
+          files.attach(blob)
+          blob.id
+        }
+        existing_blob_ids = values[field.id] || []
+        value = existing_blob_ids + new_blob_ids
       end
 
       [field.id, field.cast(value)]
