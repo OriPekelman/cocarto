@@ -43,6 +43,7 @@ en:
     user_not_authorized: You are not authorized to perform this action.
   field:
     add_attachments: Add attachments
+    attach_file: Attach a file
     existing_attachments: Existing attachments
     take_picture: Take a picture
   layers:

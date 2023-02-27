@@ -33,7 +33,20 @@
         </span>
         <ul data-file-list-target="list" class="field-form__file-input__file-list"></ul>
       </label>
-      <%= f.file_field @field_name, multiple: true, name: @field_name, include_hidden: false %>
+      <label data-controller="file-list">
+        <span class="button button--slim button--with-icon button--alternate">
+          <%= t "field.attach_file" %>
+          <%= helpers.embedded_svg "upload-cloud.svg", class: "icon--small" %>
+          <input
+            type="file"
+            name="<%= @field_name %>"
+            data-file-list-target="input"
+            data-action="change->file-list#update"
+            multiple
+            hidden>
+        </span>
+        <ul data-file-list-target="list" class="field-form__file-input__file-list"></ul>
+      </label>
     </div>
     <div class="card__footer-content">
       <%= f.submit t("common.save"), class: "button button--confirm" %>
