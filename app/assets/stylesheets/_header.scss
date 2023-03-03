@@ -59,6 +59,25 @@
   height: var(--welcome-header-height);
 }
 
+@media (max-width: 850px) {
+  .header {
+    flex-direction: column;
+    gap: 8px;
+    padding-block: 8px;
+    padding-inline: 8px;
+    align-items: start;
+  }
+
+  .header--app,
+  .header--large {
+    height: revert;
+  }
+
+  .header__cartouche {
+    margin-top: 0;
+  }
+}
+
 .header__right {
   display: flex;
   align-items: center;
