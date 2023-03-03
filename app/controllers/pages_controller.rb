@@ -11,5 +11,6 @@ class PagesController < ApplicationController
   end
 
   def presentation
+    @header_mode = :cartouche # see layouts/_header
   end
 end

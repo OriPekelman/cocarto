@@ -1,6 +1,9 @@
-.header {
+.header--container {
   background-color: var(--color-bg-ambient-20);
   border-bottom: 0.5px solid var(--color-grey-40);
+}
+
+.header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -17,6 +20,8 @@
   height: var(--welcome-header-height);
   min-height: var(--welcome-header-height);
   padding-inline: 64px;
+  max-width: var(--content-max-width);
+  margin: auto;
 }
 
 .header__logo {
@@ -49,9 +54,14 @@
   }
 }
 
+.header__cartouche {
+  margin-top: var(--welcome-header-height);
+  height: var(--welcome-header-height);
+}
+
 .header__right {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: start;
   gap: 32px;
 }
