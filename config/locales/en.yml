@@ -53,8 +53,9 @@ en:
       toggle_layer: Display the table for this layer
   layouts:
     application:
-      change_language: Change language
       footer_html: Made by <a href="https://www.codeursenliberté.fr" target="_blank">codeurs en liberté</a>, an indie software cooperative. <a href="/legal">Legal mentions</a>
+    header:
+      change_language: Change language
       preferences: Preferences
       sign_in: Log in
       sign_out: Sign out
@@ -70,14 +71,61 @@ en:
       set_center_and_zoom: Set center and zoom of the map
   pages:
     presentation:
-      landing_1_header_html: |
-        <p><b>cocarto</b> is a collaborative cartography tool.<br>
-        It can link data to a territory.</p><p>For example:</p>
-      landing_2_examples_html: "<li>prepare the journey and every step for a hike,</li><li>list infrastructure issues.</li>\n"
-      landing_3_footer_html: |
-        We’re looking for stories for such needs in existing companies.
-        <a href=" https://gitlab.com/CodeursEnLiberte/cocarto/-/blob/main/README.md#user-content-how-to-contribute" target="_blank">Contact us</a>
-        if you want to talk about yours.</p>
+      action_create_account: Create an account
+      action_email: Contact
+      action_gitlab: Code
+      action_mastodon: Mastodon
+      action_newsletter: Newsletter
+      section_1_html: |
+        <p>
+          <b>cocarto</b> is a <b>collaborative</b> tool for collecting and managing <b>structured</b> and <b>geospatialized</b> data.
+        </p>
+        For exemple:
+        <ul>
+          <li>the route and the legs of a hike in Corsica,</li>
+          <li>the automobile equipment rate by department in 2019,</li>
+          <li>the cycling infrastructure in the 19th district of Paris.</li>
+        </ul>
+      section_2_html: |
+        <span>You don't need to be a specialist to create a <b>cohesive</b> and <b>reusable</b> database:</span>
+        <ul>
+          <li>A map is composed of several layers of homogeneous geographical objects: points, lines, polygons, administrative territories.</li>
+          <li>Each layer defines typed attributes: numbers, text, dates, lists, booleans, images…</li>
+        </ul>
+        <p>
+          cocarto guarantees the <b>validity of the data</b> entered. It is not possible to put text for a boolean attribute or a number.<br>
+          The administrative territories are referenced: no ambiguity on the postal or INSEE code, or on the spelling.
+        </p>
+      section_3_html: |
+        <p>
+          <b>cocarto</b> is designed for teamwork.
+        </p>
+        <p>
+          When you work with several people on the same map, each other's contributions appear in <b>real time</b>.<br>
+          You have precise control over who can access your data: read-only, write-only, or one-time contribution…
+        </p>
+        Coming soon:
+        <ul>
+          <li>changes history management and rollback;</li>
+          <li>import, export, re-import…</li>
+          <li>and <a href="https://gitlab.com/CodeursEnLiberte/cocarto/-/issues" target="_blank">many other things</a>.</li>
+        </ul>
+      section_4_html: |
+        <p>
+          <b>cocarto</b> is <b>free</b> and <b>open-source</b> software.
+          You can work directly on <a href="https://cocarto.com">cocarto.com</a>, or install the software on your own servers.
+        </p>
+        <p>
+          cocarto is built in a <b>transparent</b> way by <a href="https://www.codeursenlibertés.fr" target="_blank">Codeurs en Liberté</a>, our small cooperative company. We will not be bought by a tech giant.
+          You can follow the development <a href="https://gitlab.com/codeursenliberte.fr/cocarto" target="_blank">on the project page</a> or via <a href="https://buttondown.email/cocarto" target="_blank">our newsletter</a>.
+        </p>
+        <p>
+          The idea of cocarto came to us through contact with structures and administrations that share data, in a more or less artisanal and often uncomfortable way.
+          We are listening to the remarks!<br>
+        </p>
+        <p>
+          <b><a href="mailto:bonjour@cocarto.com">Contact us</a> with your ideas.</b>
+        </p>
   territories:
     search_results:
       no_result: No result

@@ -6,6 +6,8 @@ exclude:
 linters:
   PartialInstanceVariable:
     enabled: true
+    exclude:
+      - '**/app/views/layouts/_header.html.erb'
   DeprecatedClasses:
     enabled: true
   ErbSafety:

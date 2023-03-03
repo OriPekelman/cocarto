@@ -53,8 +53,9 @@ fr:
       toggle_layer: Afficher la table de cette couche
   layouts:
     application:
-      change_language: Changer la langue
       footer_html: Développé par <a href="https://www.codeursenliberté.fr" target="_blank">codeurs en liberté</a>, une coopérative d’indépendant·e·s dans le domaine de l’informatique. <a href="/legal">Mentions légales</a>
+    header:
+      change_language: Changer la langue
       preferences: Préférences
       sign_in: connexion
       sign_out: déconnexion
@@ -70,14 +71,61 @@ fr:
       set_center_and_zoom: Définir centre et zoom de la carte
   pages:
     presentation:
-      landing_1_header_html: |
-        <p><b>cocarto</b> est un outil de collaboration cartographique.<br>
-        Il permettra d’associer des informations à un territoire.</p><p>Comme par exemple :</p>
-      landing_2_examples_html: "<li>préparer le parcours et les étapes d’une randonnée,</li><li>répertorier des défauts d’infrastructure.</li>\n"
-      landing_3_footer_html: |
-        Nous sommes à l’écoute des besoins pour un tel outil dans des structures existantes.
-        <a href=" https://gitlab.com/CodeursEnLiberte/cocarto/-/blob/main/README.md#user-content-how-to-contribute" target="_blank">Contactez-nous</a>
-        si vous souhaitez faire part des vôtres.</p>
+      action_create_account: Créer mon compte
+      action_email: Contact
+      action_gitlab: Code
+      action_mastodon: Mastodon
+      action_newsletter: Infolettre
+      section_1_html: |
+        <p>
+          <b>cocarto</b> est un outil de saisie <b>collaborative</b> de données <b>structurées</b> et <b>géospatialisées</b>.
+        </p>
+        Par exemple :
+        <ul>
+          <li>le parcours et les étapes d’une randonnée en Corse,</li>
+          <li>le taux d’équipement automobile par département en 2019,</li>
+          <li>les infrastructures cyclables dans le 19e à Paris.</li>
+        </ul>
+      section_2_html: |
+        <span>Pas besoin d’être spécialiste pour créer une base de données <b>cohérente</b> et <b>réutilisable</b> :</span>
+        <ul>
+          <li>Une carte est composée de plusieurs couches d’objets géographiques homogènes : des points, tracés, polygones, territoires administratifs.</li>
+          <li>Chaque couche définit des attributs typés : nombres, texte, dates, liste, booléens, images…</li>
+        </ul>
+        <p>
+          cocarto garantit la <b>validité des données</b> saisies. Il est impossible de mettre du texte pour un attribut booléen ou un nombre.<br>
+          Les territoires administratifs sont référencés : pas d’ambigüité sur le code postal ou INSEE, ou sur l’orthographe.
+        </p>
+      section_3_html: |
+        <p>
+          <b>cocarto</b> est pensé pour le travail d’équipe.
+        </p>
+        <p>
+          Quand vous travaillez à plusieurs sur la même carte, les contributions des uns et des autres apparaissent en <b>temps réel</b>.<br>
+          Vous contrôlez de façon précise qui peut accéder à vos données : en lecture seule, en écriture, ou en contribution ponctuelle…
+        </p>
+        À venir :
+        <ul>
+          <li>gestion de l’historique des modifications et retour en arrière ;</li>
+          <li>import, export, réimport…</li>
+          <li>et <a href="https://gitlab.com/CodeursEnLiberte/cocarto/-/issues" target="_blank">beaucoup d’autres choses</a>.</li>
+        </ul>
+      section_4_html: |
+        <p>
+          <b>cocarto</b> est un logiciel <b>libre</b> et <b>open-source</b>.
+          Vous pouvez travailler directement sur <a href="https://cocarto.com">cocarto.com</a>, ou bien installer le logiciel sur vos propres serveurs.
+        </p>
+        <p>
+          cocarto est construit de façon <b>transparente</b> par <a href="https://www.codeursenlibertés.fr" target="_blank">Codeurs en Liberté</a>, notre petite société coopérative. Nous ne serons pas rachetés par un géant de la tech.
+          Vous pouvez suivre le développement <a href="https://gitlab.com/codeursenliberte.fr/cocarto" target="_blank">sur la page du projet</a> ou via <a href="https://buttondown.email/cocarto" target="_blank">notre infolettre</a>.
+        </p>
+        <p>
+          L’idée de cocarto nous est venue au contact de structures et d’administrations qui partagent des données, de façon plus ou moins artisanale et souvent inconfortable.
+          Nous sommes à l’écoute des remarques !<br>
+        </p>
+        <p>
+          <b><a href="mailto:bonjour@cocarto.com">Contactez-nous</a> pour nous faire part de vos idées.</b>
+        </p>
   territories:
     search_results:
       no_result: Pas de résultat

@@ -5,6 +5,12 @@
   width: 100%;
 }
 
+@media (max-width: 850px) {
+  .container {
+    padding: 2rem 1rem;
+  }
+}
+
 .section {
   display: flex;
   gap: 46px;
@@ -14,6 +20,12 @@
 
 .section + .section {
   margin-top: 64px;
+}
+
+@media (max-width: 850px) {
+  .section + .section {
+    margin-top: 32px;
+  }
 }
 
 .section--center {

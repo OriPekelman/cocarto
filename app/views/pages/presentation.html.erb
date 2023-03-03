@@ -1,11 +1,55 @@
-<div class="container landing-page__container">
-  <div class="landing-page__main-text">
-    <%= t(".landing_1_header_html") %>
-    <ul class="landing-page__main-text__ul ">
-      <%= t(".landing_2_examples_html") %>
-    </ul>
-    <p class="landing-page__main-text__p">
-      <%= t(".landing_3_footer_html") %>
-    </p>
+<div class="container container--landing-page">
+  <div class="section section--landing-page">
+    <div class="landing-section__block landing-section__block--text">
+      <%= t(".section_1_html") %>
+    </div>
+    <div class="landing-section__block landing-section__block--illustration">
+      <%= image_tag("screenshots/map.jpg") %>
+      <%= link_to t(".action_create_account"), new_user_registration_path, class: "button button--large button--confirm landing-section__call-to-action" %>
+    </div>
+  </div>
+
+  <div class="section section--landing-page">
+    <div class="landing-section__block landing-section__block--text">
+      <%= t(".section_2_html") %>
+    </div>
+    <div class="landing-section__block landing-section__block--illustration">
+      <%= image_tag("screenshots/table.png") %>
+      <%= link_to t(".action_create_account"), new_user_registration_path, class: "button button--large button--confirm landing-section__call-to-action" %>
+    </div>
+  </div>
+
+  <div class="section section--landing-page">
+    <div class="landing-section__block landing-section__block--text">
+      <%= t(".section_3_html") %>
+    </div>
+    <div class="landing-section__block landing-section__block--illustration">
+      <%= image_tag("screenshots/cooperation.png") %>
+      <%= link_to t(".action_create_account"), new_user_registration_path, class: "button button--large button--confirm landing-section__call-to-action" %>
+    </div>
+  </div>
+
+  <div class="section section--landing-page">
+    <div class="landing-section__block landing-section__block--text">
+      <%= t(".section_4_html") %>
+    </div>
+    <div class="landing-section__block landing-section__block--actions">
+      <a href="https://gitlab.com/codeursenliberte/cocarto" target="_blank" class="icon-button icon-button--action">
+        <%= embedded_svg("actions/gitlab.svg") %>
+        <span><%= t(".action_gitlab") %></span>
+      </a>
+      <a href="https://mapstodon.space/@cocarto" target="_blank" class="icon-button icon-button--action">
+        <%= embedded_svg("actions/mastodon.svg") %>
+        <span><%= t(".action_mastodon") %></span>
+      </a>
+      <a href="mailto:bonjour@cocarto.com" class="icon-button icon-button--action">
+        <%= embedded_svg("actions/email.svg", style: "fill: var(--color-green-10)") %>
+        <span><%= t(".action_email") %></span>
+      </a>
+      <a href="https://buttondown.email/cocarto" target="_blank" class="icon-button icon-button--action">
+        <%= embedded_svg("actions/newsletter.svg", style: "fill: var(--color-green-10)") %>
+        <span><%= t(".action_newsletter") %></span>
+      </a>
+    </div>
   </div>
 </div>
