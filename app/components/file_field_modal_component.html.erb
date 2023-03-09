@@ -7,6 +7,7 @@
 </button>
 <template id="<%= id %>">
   <%= form_with method: :patch, model: [@row.layer, @row], multipart: true, html: {class: "form"} do |f| %>
+    <%= hidden_field_tag "context", "modal" %>
     <div class="card__main-content">
       <h3><%= t "field.existing_attachments" %></h3>
       <% @value.each do |file| %>
@@ -16,7 +17,7 @@
       <%= f.file_field @field_name, multiple: true, name: @field_name, include_hidden: false %>
     </div>
     <div class="card__footer-content">
-      <%= f.submit t("common.save"), class: "button button--confirm", data: {action: "modal#close"} %>
+      <%= f.submit t("common.save"), class: "button button--confirm" %>
     </div>
   <% end %>
 </template>
