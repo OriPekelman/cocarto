@@ -11,4 +11,10 @@ export default class extends Controller {
   close () {
     this.overlayTarget.classList.remove('modal__overlay--active')
   }
+
+  closeFromOutside (event) {
+    if (event.target === this.overlayTarget) {
+      this.close()
+    }
+  }
 }
