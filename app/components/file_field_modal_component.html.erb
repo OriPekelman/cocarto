@@ -14,10 +14,7 @@
         <%= link_to file.filename, url_for(file) %>
       <% end %>
       <h3><%= t "field.add_attachments" %></h3>
-      <label
-        data-controller="feature-detection file-list"
-        data-feature-detection-tag-value="input"
-        data-feature-detection-attribute-value="capture">
+      <label data-controller="camera-feature-detection file-list">
         <span class="button button--slim button--with-icon button--alternate">
           <%= t "field.take_picture" %>
           <%= helpers.embedded_svg "camera.svg", class: "icon--small" %>
