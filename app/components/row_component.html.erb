@@ -10,7 +10,7 @@ https://github.com/ViewComponent/view_component/discussions/42#discussioncomment
     data-action="focusin->map#highlight"
     data-row-properties-value="<%= @row.css_properties.to_json %>">
 
-      <%= row_tag_calculated_data %>
+      <%= calculated_columns %>
 
       <% @row.fields_values.each do |field, value| %>
         <%= render FieldTdComponent.new(field: field, value: value, form_id: form_id, authorizations: RowPolicy.authorizations(@row)) %>

@@ -4,6 +4,7 @@
 <table class="layer-table">
   <thead class="layer-table__thead">
     <tr>
+      <%# calculated columns first %>
       <% if layer.geometry_territory? %>
         <th class="layer-table__th"></th>
         <th class="layer-table__th"><%= t("common.territory_code") %></th>
@@ -25,6 +26,6 @@
   <%= render RowComponent.with_collection(layer.rows.with_attached_files.with_territory.order(:created_at).includes(:territory, *layer.fields_association_names)) %>
   </tbody>
   <tfoot>
-    <%= render ColumnStatsComponent.new(layer: layer) %>
+    <%= render StatsFooterComponent.new(layer: layer) %>
   </tfoot>
 </table>

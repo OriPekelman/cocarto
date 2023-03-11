@@ -51,7 +51,7 @@ class Layer < ApplicationRecord
   # Hooks
   after_create_commit -> { broadcast_i18n_append_to map, target: dom_id(map, "layers") }
   after_update_commit -> do
-    html = ApplicationController.render(ColumnStatsComponent.new(layer: self), layout: false)
+    html = ApplicationController.render(StatsFooterComponent.new(layer: self), layout: false)
     broadcast_i18n_replace_to map, target: dom_id(self, :stats), html: html
     broadcast_i18n_replace_to map, target: dom_id(self, :header), partial: "layers/table_header"
   end

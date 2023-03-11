@@ -40,7 +40,10 @@ antipode:
   point: POINT(2.37516 48.88661)
   author: reclus
   values: <%= {
-    ActiveRecord::FixtureSet.identify(:restaurant_ville, :uuid) => ActiveRecord::FixtureSet.identify(:paris, :uuid) 
+    ActiveRecord::FixtureSet.identify(:restaurant_ville, :uuid) => ActiveRecord::FixtureSet.identify(:paris, :uuid),
+    ActiveRecord::FixtureSet.identify(:restaurant_name, :uuid) => "L’Antipode",
+    ActiveRecord::FixtureSet.identify(:restaurant_rating, :uuid) => "9",
+    ActiveRecord::FixtureSet.identify(:restaurant_table_size, :uuid) => "70"
     }.to_json %>
 
 two:

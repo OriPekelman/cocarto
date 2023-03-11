@@ -98,9 +98,12 @@ class Field < ApplicationRecord
   end
 
   def sum
-    if type_integer? || type_float?
-      layer.rows.sum(Arel.sql("(values->>'#{id}')::numeric"))
-    elsif type_boolean?
+    case field_type
+    when "integer"
+      layer.rows.sum(Arel.sql("(values->>'#{id}')::integer"))
+    when "float"
+      layer.rows.sum(Arel.sql("(values->>'#{id}')::float"))
+    when "boolean"
       layer.rows.where("(values->>'#{id}')::bool").size
     end
   end

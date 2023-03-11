@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ColumnStatsComponent < ViewComponent::Base
+class StatsFooterComponent < ViewComponent::Base
   def initialize(layer:)
     @layer = layer
   end

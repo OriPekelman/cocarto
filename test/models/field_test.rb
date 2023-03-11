@@ -121,4 +121,16 @@ class FieldTest < ActiveSupport::TestCase
       assert_equal "333", color.cast("333")
     end
   end
+
+  class SumTest < FieldTest
+    test "Float sum has correct value and type" do
+      assert_in_delta(9.0, fields(:restaurant_rating).sum)
+      assert_equal Float, fields(:restaurant_rating).sum.class
+    end
+
+    test "Integer sum has correct value and type" do
+      assert_equal 70, fields(:restaurant_table_size).sum
+      assert_equal Integer, fields(:restaurant_table_size).sum.class
+    end
+  end
 end
