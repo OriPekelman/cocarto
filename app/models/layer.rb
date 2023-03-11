@@ -36,8 +36,8 @@ class Layer < ApplicationRecord
 
   # Relations
   belongs_to :map
-  has_many :fields, dependent: :destroy
-  has_many :rows, dependent: :delete_all, inverse_of: :layer # note: having a scope on the relation breaks statement caching and strict_loading
+  has_many :fields, -> { order(:created_at) }, dependent: :destroy, inverse_of: :layer
+  has_many :rows, dependent: :delete_all, inverse_of: :layer
   has_and_belongs_to_many :territory_categories
 
   # Query as scopes
