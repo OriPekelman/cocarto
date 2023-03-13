@@ -44,6 +44,7 @@ en:
   field:
     add_attachments: Add attachments
     existing_attachments: Existing attachments
+    take_picture: Take a picture
   layers:
     layer:
       center_on_row: Center map on this row

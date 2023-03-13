@@ -44,6 +44,7 @@ fr:
   field:
     add_attachments: Ajouter des pièces jointes
     existing_attachments: Pièces jointes présentes
+    take_picture: Prendre une photo
   layers:
     layer:
       center_on_row: Centrer la carte sur cette ligne
