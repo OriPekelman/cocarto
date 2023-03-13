@@ -92,6 +92,16 @@
   }
 }
 
+.button--close {
+  color: var(--color-green-70);
+  background-color: transparent;
+  padding: 6px;
+
+  &:hover:not([disabled]) {
+    color: var(--color-green-90);
+  }
+}
+
 // Icon buttons
 .icon-button {
   cursor: pointer;
@@ -219,4 +229,11 @@
     position: relative;
     padding: 6px;
   }
+}
+
+.button--with-icon {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px;
+  width: 100%;
 }

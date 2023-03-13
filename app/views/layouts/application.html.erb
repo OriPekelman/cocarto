@@ -16,8 +16,11 @@
   <%= stylesheet_link_tag "application.css", "data-turbo-track": "reload" %>
 </head>
 
-<body>
+<body data-controller="modal" data-action="keydown.esc->modal#close">
+
+<%= render "layouts/modal" %>
 <%= render "layouts/header" %>
+
 <main>
   <%= yield %>
 </main>

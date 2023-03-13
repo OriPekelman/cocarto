@@ -34,12 +34,16 @@ en:
     latitude: Latitude
     length: Length
     longitude: Longitude
+    save: Save
     settings: Settings
     share: Share…
     territory_code: Code
     updated_at: Updated %{date} ago
     updated_at_by: Updated %{date} ago by %{user}
     user_not_authorized: You are not authorized to perform this action.
+  field:
+    add_attachments: Add attachments
+    existing_attachments: Existing attachments
   layers:
     layer:
       center_on_row: Center map on this row

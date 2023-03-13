@@ -25,7 +25,11 @@ class RowsController < ApplicationController
   def update
     @row.update(row_params)
     respond_to do |format|
-      format.turbo_stream
+      if params[:context] == "modal"
+        format.turbo_stream { render turbo_stream: [turbo_stream.replace("modal-container", partial: "layouts/modal")] }
+      else
+        format.turbo_stream
+      end
       format.html { redirect_to layer_path(@row.layer), notice: t("helpers.message.row.updated") }
     end
   end

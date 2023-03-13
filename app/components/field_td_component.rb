@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
 class FieldTdComponent < ViewComponent::Base
-  def initialize(field:, value:, form_id:, authorizations:)
+  def initialize(field:, value:, row:)
     @field = field
     @value = value
-    @form_id = form_id
-    @authorizations = authorizations
+    @row = row
   end
 
   def field_tag
@@ -26,9 +25,7 @@ class FieldTdComponent < ViewComponent::Base
     when "enum"
       select_tag field_name, options_for_select(@field.enum_values, @value), opts.merge(include_blank: true)
     when "files"
-      file_tag = file_field_tag field_name, opts.merge(multiple: true)
-      urls = (@value || []).map { |val| link_to val.filename, url_for(val) }
-      safe_join(urls) + file_tag
+      render FileFieldModalComponent.new(value: @value, field: @field, field_name: field_name, opts: opts, row: @row)
     else
       text_field_tag field_name, @value, opts.merge(class: "input")
     end
@@ -47,9 +44,9 @@ class FieldTdComponent < ViewComponent::Base
       data: {
         action: "input->row#setDirty focusout->row#save",
         restricted_target: "restricted",
-        restricted_authorizations: @authorizations
+        restricted_authorizations: RowPolicy.authorizations(@row)
       },
-      form: @form_id,
+      form: dom_id(@row, :form),
       autocomplete: :off
     }
   end

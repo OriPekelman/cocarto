@@ -42,6 +42,11 @@ en:
           other: territories
       map:
         name: Name
+      row:
+        files:
+          one: 1 file
+          other: "%{count} files"
+          zero: ''
       territory:
         code: identifier
         parent: part of
