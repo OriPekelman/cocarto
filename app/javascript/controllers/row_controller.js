@@ -5,9 +5,14 @@ export default class extends Controller {
   static values = { properties: Object }
 
   connect () {
+    this.dirty = false
+
     // Small hack inspired by https://dev.to/leastbad/the-best-one-line-stimulus-power-move-2o90
     this.element.rowController = this
-    this.dirty = false
+    // Ensure rows are connected to RowController (and their .rowController is set) before they are connected to MapController
+    this.element.dataset.mapTarget = 'row'
+
+    // Clear any transition class
     setTimeout(() => this.element.classList.remove('layer-table__tr--transition'), 3000)
     setTimeout(() => this.element.classList.remove('layer-table__tr--created'), 1000)
   }
