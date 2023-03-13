@@ -1,10 +1,8 @@
 # frozen_string_literal: true
 
 class FieldTdComponent < ViewComponent::Base
-  def initialize(field:, value:, row:)
+  def initialize(field:)
     @field = field
-    @value = value
-    @row = row
   end
 
   private
