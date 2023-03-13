@@ -43,7 +43,9 @@ fr:
     user_not_authorized: Vous n’avez pas la permission d’effectuer cette action.
   field:
     add_attachments: Ajouter des pièces jointes
+    attach_file: Joindre un fichier
     existing_attachments: Pièces jointes présentes
+    take_picture: Prendre une photo
   layers:
     layer:
       center_on_row: Centrer la carte sur cette ligne
