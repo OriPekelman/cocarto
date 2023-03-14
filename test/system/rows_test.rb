@@ -42,6 +42,12 @@ class RowsTest < ApplicationSystemTestCase
     fill_in "Rating", with: "5"
     fill_in "Table Size", with: "9"
 
+    # The territory suggestions are fetched when the query input changes;
+    # See SearchComponent and autocomplete_controller.js
+    # TODO: we need to tweak the autocomplete field identifier, "#q" is not sufficient.
+    find("#q").native.send_keys("Paris")
+    find("li", text: "Paris (75056) Île-de-France").click
+
     # The point location is set via js after the page is loaded; wait for the geojson field value to be set. (Also, it’s invisible.)
     # See views/rows/new.html.erb and map_add_point_controller.js
     find("#row_geojson[value*='{\"type\":\"Point\",\"coordinates\":']", visible: false)
