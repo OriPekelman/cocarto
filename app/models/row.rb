@@ -53,6 +53,9 @@ class Row < ApplicationRecord
   # Dynamic Fields Associations
   include FieldValuesAssociations::RowAssociations
 
+  # Validations
+  validate :validate_geometry
+
   # We use postgis functions to convert to geojson
   # This makes the load be on postgres’ side, not rails (C implementation)
   # We also compute the bounding box
@@ -128,7 +131,17 @@ class Row < ApplicationRecord
 
   def geojson=(new_geojson)
     raise "Can not set the geojson of a territory" if layer.geometry_territory?
-    self.geometry = RGeo::GeoJSON.decode(new_geojson, geo_factory: RGEO_FACTORY)
+
+    begin
+      # raises if the geometry is not valid
+      # e.g. bowtie polygon
+      # While such a geometry is a valid geojson,
+      # it’s not a valid OGC geometry.
+      # Hence we reject it.
+      self.geometry = RGeo::GeoJSON.decode(new_geojson, geo_factory: RGEO_FACTORY)
+    rescue => e
+      @geojson_error = e
+    end
   end
 
   # Geojson export (used when exporting a layer as json)
@@ -206,6 +219,12 @@ class Row < ApplicationRecord
       blob_ids.map { |blob_id| files_by_id[blob_id] }
     else
       raise "Field #{field.id} is not an file"
+    end
+  end
+
+  def validate_geometry
+    if @geojson_error
+      errors.add(:geojson, :invalid_geometry)
     end
   end
 end
