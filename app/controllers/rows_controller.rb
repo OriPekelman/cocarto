@@ -11,26 +11,33 @@ class RowsController < ApplicationController
   def create
     from_rows_new = params[:from_rows_new]
     @row = authorize Row.create(layer: @layer, **row_params, author: current_user)
-    if from_rows_new
-      flash[:notice] = t("helpers.message.row.added")
-      redirect_to new_layer_row_path
-    else
-      respond_to do |format|
-        format.turbo_stream
-        format.html { redirect_to layer_path(@row.layer) }
+    if @row.valid?
+      if from_rows_new
+        flash[:notice] = t("helpers.message.row.added")
+        redirect_to new_layer_row_path
+      else
+        respond_to do |format|
+          format.turbo_stream
+          format.html { redirect_to layer_path(@row.layer) }
+        end
       end
+    else
+      render_error
     end
   end
 
   def update
-    @row.update(row_params)
-    respond_to do |format|
-      if params[:context] == "modal"
-        format.turbo_stream { render turbo_stream: [turbo_stream.replace("modal-container", partial: "layouts/modal")] }
-      else
-        format.turbo_stream
+    if @row.update(row_params)
+      respond_to do |format|
+        if params[:context] == "modal"
+          format.turbo_stream { render turbo_stream: [turbo_stream.replace("modal-container", partial: "layouts/modal")] }
+        else
+          format.turbo_stream
+        end
+        format.html { redirect_to layer_path(@row.layer), notice: t("helpers.message.row.updated") }
       end
-      format.html { redirect_to layer_path(@row.layer), notice: t("helpers.message.row.updated") }
+    else
+      render_error [turbo_stream.replace(@row, html: @row.render)]
     end
   end
 
@@ -39,6 +46,14 @@ class RowsController < ApplicationController
     respond_to do |format|
       format.turbo_stream
       format.html { redirect_to @row.layer, notice: t("helpers.message.row.destroyed") }
+    end
+  end
+
+  def render_error(extra_content = [])
+    flash.now[:error] = @row.errors.first.full_message
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: [turbo_stream.replace("flash", partial: "layouts/flash")] + extra_content }
+      format.html { redirect_to @row.map }
     end
   end
 
