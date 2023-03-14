@@ -14,7 +14,7 @@
       <%= form.hidden_field :geojson, data: {map_add_point_target: "geojson"} %>
         <% @row.layer.fields.each do |field| %>
           <div class="form__field">
-            <%= form.label "row[fields_values][#{field.id}]", field.label %>
+            <%= form.label sanitize_to_id("fields_values[#{field.id}]"), field.label %>
             <%= render FieldValueComponent.new(field: field, value: nil, row: @row) %>
           </div>
         <% end %>
