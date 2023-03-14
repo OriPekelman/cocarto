@@ -69,6 +69,12 @@ class MapState {
   }
 
   addRow (controller) {
+    if (controller == null) {
+      // Prevent trying to add a row to the map if its controller is nil.
+      // This may happen during turbo restoration visits (cache), because the row target is connected to the mapController before it is connected to its rowController.
+      // See #262
+      return
+    }
     this.draw.add({
       id: controller.element.id,
       type: 'Feature',
