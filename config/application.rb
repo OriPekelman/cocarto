@@ -28,5 +28,8 @@ module Cocarto
     config.time_zone = "Europe/Paris"
     # config.eager_load_paths << Rails.root.join("extras")
     config.active_record.strict_loading_by_default = true unless defined?(Rails::Console)
+
+    # We want to customize error messages
+    config.active_model.i18n_customize_full_message = true
   end
 end

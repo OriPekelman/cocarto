@@ -57,6 +57,11 @@ fr:
         rows: rangées
     errors:
       models:
+        row:
+          attributes:
+            geojson:
+              format: "%{message}"
+              invalid_geometry: La géométrie est invalide.
         user:
           attributes:
             base:
