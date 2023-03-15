@@ -18,7 +18,11 @@ class RowsController < ApplicationController
       else
         respond_to do |format|
           format.turbo_stream
-          format.html { redirect_to layer_path(@row.layer) }
+          if from_rows_new
+            redirect_to new_layer_row_path
+          else
+            format.html { redirect_to @row.map }
+          end
         end
       end
     else
@@ -34,7 +38,7 @@ class RowsController < ApplicationController
         else
           format.turbo_stream
         end
-        format.html { redirect_to layer_path(@row.layer), notice: t("helpers.message.row.updated") }
+        format.html { redirect_to @row.map, notice: t("helpers.message.row.updated") }
       end
     else
       render_error [turbo_stream.replace(@row, html: @row.render)]
