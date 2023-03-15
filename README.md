@@ -71,7 +71,9 @@ That command will automatically run `make install` to install new dependencies a
 
 We follow the conventions from [StandardRB](https://github.com/testdouble/standard) and [StandardJS](https://standardjs.com/).
 
-## Importing Territories
+## Importing
+
+### Territories
 
 Territories are reference geometries (like countries of the world) that are available to all users.
 The territories are grouped into TerritoryCategories that have each a revision to handle evolution over time.
@@ -90,6 +92,29 @@ If you want to set the parent of a territories, you need to pass as an extra-par
 
 
     rake import:geojson[http://etalab-datasets.geo.data.gouv.fr/contours-administratifs/2022/geojson/departements-100m.geojson,Départements de France,2022,Régions de France,region]
+
+### Mock data
+
+The `import_rows:random` thor task inserts new random rows in a layer:
+```
+Usage:
+  thor import_rows:random
+
+Options:
+  l, [--layer=layer_id]         # The layer in which to insert rows
+  c, [--count=N]                # How many new rows
+                                # Default: 100
+  a, [--author=user_id]         # Row author
+      [--lat-min=N]             # min latitude
+                                # Default: 42.3287
+      [--lat-max=N]             # max latitude
+                                # Default: 51.0857
+      [--long-min=N]            # min longitude
+                                # Default: -4.7955
+      [--long-max=N]            # max longitude
+                                # Default: 8.2581
+  s, [--stream], [--no-stream]  # Stream broadcast to frontend (slower)
+```
 
 ## Hosting
 
