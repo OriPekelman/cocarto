@@ -1,16 +1,16 @@
 require "thor"
 
-class Moulinette < Thor
-  desc "rows", "Insert new random rows in a layer"
+class ImportRows < Thor
+  desc "random", "Insert new random rows in a layer"
   option :layer, required: false, type: :string, aliases: :l, desc: "The layer in which to insert rows", banner: "layer_id"
   option :count, required: false, type: :numeric, aliases: :c, desc: "How many new rows", default: 100
-  option :author, required: false, type: :string, aliases: [:user, :a, :u], desc: "Row author", banner: "user_id"
+  option :author, required: false, type: :string, aliases: :a, desc: "Row author", banner: "user_id"
+  option :lat_min, required: false, type: :numeric, desc: "min latitude", default: 42.3287 # France Métropolitaine
+  option :lat_max, required: false, type: :numeric, desc: "max latitude", default: 51.0857
+  option :long_min, required: false, type: :numeric, desc: "min longitude", default: -4.7955
+  option :long_max, required: false, type: :numeric, desc: "max longitude", default: 8.2581
   option :stream, required: false, type: :boolean, aliases: [:s], desc: "Stream broadcast to frontend (slower)"
-  option :lat_min, required: false, type: :numeric, default: 42.3287 # France Métropolitaine
-  option :lat_max, required: false, type: :numeric, default: 51.0857
-  option :long_min, required: false, type: :numeric, default: -4.7955
-  option :long_max, required: false, type: :numeric, default: 8.2581
-  def rows
+  def random
     layer = Layer.find_by(id: options[:layer]) || Layer.all.sample
     layer.strict_loading!(false)
     row_count = options[:count]
@@ -36,7 +36,8 @@ class Moulinette < Thor
         author_id: author.id
       }.merge(geometry_generator.call)
     end
-    if(options[:stream])
+
+    if options[:stream]
       Row.create!(entries)
     else
       Row.insert_all!(entries) # rubocop:disable Rails/SkipsModelValidations
