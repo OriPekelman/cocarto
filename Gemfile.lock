@@ -455,6 +455,7 @@ DEPENDENCIES
   sentry-ruby
   spring
   standard
+  thor
   turbo-rails
   tzinfo-data
   view_component
@@ -465,4 +466,4 @@ RUBY VERSION
    ruby 3.2.0p0
 
 BUNDLED WITH
-   2.3.26
+   2.4.3

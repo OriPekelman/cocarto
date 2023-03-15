@@ -76,6 +76,7 @@ group :development do
   gem "active_record_doctor"
   gem "letter_opener_web"
   gem "rails_real_favicon"
+  gem "thor"
 end
 
 group :test do
