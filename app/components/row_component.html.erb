@@ -12,7 +12,9 @@ https://github.com/ViewComponent/view_component/discussions/42#discussioncomment
       <%= calculated_columns %>
 
       <% @row.fields_values.each do |field, value| %>
-        <%= render FieldTdComponent.new(field: field, value: value, row: @row) %>
+        <%= render FieldTdComponent.new(field: field) do %>
+          <% render FieldValueComponent.new(field: field, value: value, row: @row) %>
+        <% end %>
       <% end %>
 
     <td id="<%= dom_id(@row, "actions") %>" class="layer-table__td layer-table__td-actions">

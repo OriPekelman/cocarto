@@ -19,6 +19,13 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   if ENV["CI"] == "true"
     driver_options[:url] = "http://browserless-chrome:3000"
   end
+  # On mac, chrome headless breaks webgl since version 109.
+  # Using --enable-gpu, --use-gl --use-angle does not seem to help.
+  # https://bugs.chromium.org/p/chromium/issues/detail?id=765284
+  if ENV["COCARTO_DEBUG_WORKAROUND_HEADLESS_CHROME_WEBGL_MAC"].present?
+    driver_options[:headless] = false
+    driver_options[:browser_options] = {"accept-lang" => "en"}
+  end
 
   driven_by :cuprite, options: driver_options
 

@@ -14,8 +14,8 @@
       <%= form.hidden_field :geojson, data: {map_add_point_target: "geojson"} %>
         <% @row.layer.fields.each do |field| %>
           <div class="form__field">
-            <%= form.label "row[fields_values][#{field.id}]", field.label %>
-            <%= FieldTdComponent.new(field: field, value: nil, row: @row).field_tag %>
+            <%= form.label sanitize_to_id("fields_values[#{field.id}]"), field.label %>
+            <%= render FieldValueComponent.new(field: field, value: nil, row: @row) %>
           </div>
         <% end %>
       <%= form.submit t("helpers.link.row.add_this_point"), class: "button button--confirm" %>
