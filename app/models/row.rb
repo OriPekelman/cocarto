@@ -224,7 +224,13 @@ class Row < ApplicationRecord
 
   def validate_geometry
     if @geojson_error
-      errors.add(:geojson, :invalid_geometry)
+      if @geojson_error.is_a? RGeo::Error::InvalidGeometry
+        errors.add(:geojson, :invalid_geometry)
+      elsif @geojson_error.is_a? JSON::ParserError
+        errors.add(:geojson, :invalid_json)
+      else
+        errors.add(:geojson, @geojson_error.message)
+      end
     end
   end
 end
