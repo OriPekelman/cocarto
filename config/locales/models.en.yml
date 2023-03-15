@@ -57,6 +57,11 @@ en:
         rows: rows
     errors:
       models:
+        row:
+          attributes:
+            geojson:
+              format: "%{message}"
+              invalid_geometry: The geometry is invalid.
         user:
           attributes:
             base:
