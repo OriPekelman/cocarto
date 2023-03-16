@@ -7,6 +7,21 @@ module ImportExport
       @stream = stream
     end
 
+    def csv(csv, author)
+      lines = CSV.parse(csv, headers: true)
+
+      lines.each do |line|
+        values = line.to_h
+        geojson = values.delete("geojson")
+        values = values.transform_keys do |k|
+          @layer.fields.find_by(label: k).id
+        end
+        row = @layer.rows.new(values: values, author: author)
+        row.geojson = geojson # Set the geojson after new because the geometry setter requires the layer to be set, to know which actual column to use.
+        row.save!
+      end
+    end
+
     def create_random_rows(row_count, author, lat_range, long_range)
       geometry_proc = -> { random_geometry(@layer.geometry_type, lat_range, long_range) }
       values_proc = proc { @layer.fields.to_h { [_1.id, random_value(_1)] } }

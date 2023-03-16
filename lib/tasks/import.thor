@@ -1,6 +1,21 @@
 class Import < Thor
   def self.exit_on_failure? = true
 
+  desc "csv", "import csv"
+  option :layer, required: true, type: :string, aliases: :l, desc: "The layer in which to insert rows", banner: "layer_id"
+  option :file, required: true, type: :string, aliases: :f, desc: "CSV file"
+  option :author, required: true, type: :string, aliases: :a, desc: "Row author", banner: "user_id"
+  option :stream, required: false, type: :boolean, aliases: :s, desc: "Stream broadcast to frontend (slower)"
+  def csv
+    layer = Layer.find_by(id: options[:layer])
+    author = User.find_by(id: options[:author])
+
+    csv = File.read(options[:file])
+
+    import = ImportExport::Importer.new(layer)
+    import.csv(csv, author)
+  end
+
   desc "random", "Insert new random rows in a layer"
   option :layer, required: false, type: :string, aliases: :l, desc: "The layer in which to insert rows", banner: "layer_id"
   option :count, required: false, type: :numeric, aliases: :c, desc: "How many new rows", default: 100
