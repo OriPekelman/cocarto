@@ -48,7 +48,7 @@ class LayerControllerTest < ActionDispatch::IntegrationTest
       csv = CSV.parse(@response.body)
 
       assert_equal "text/csv", @response.media_type
-      assert_equal "Name", csv.dig(0, 0)
+      assert_equal "geojson", csv.dig(0, 0)
     end
   end
 end

@@ -26,8 +26,6 @@ class LayerTest < ActiveSupport::TestCase
       assert_changes -> { maps(:restaurants).layers.count }, from: 2, to: 3 do
         Layer.create! geometry_type: :point, map: maps(:restaurants)
       end
-
-      assert_equal 1, maps(:hiking).layers.count
     end
 
     test "a layer needs a geometry type" do

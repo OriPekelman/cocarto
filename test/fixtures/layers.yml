@@ -29,8 +29,18 @@ empty_restaurants_layer:
   name: "Layer vide"
   geometry_type: "polygon"
 
-hiking:
+hiking_regions:
   map: hiking
-  name: hiking path
+  name: Hiking regions
   geometry_type: "territory"
   territory_categories: regions
+
+hiking_paths:
+  map: hiking
+  name: hiking paths
+  geometry_type: "line_string"
+
+hiking_zones:
+  map: hiking
+  name: hiking zones
+  geometry_type: "polygon"

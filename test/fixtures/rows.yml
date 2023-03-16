@@ -46,7 +46,20 @@ antipode:
     ActiveRecord::FixtureSet.identify(:restaurant_table_size, :uuid) => "70"
     }.to_json %>
 
-two:
-  layer: hiking
+idf:
+  layer: hiking_regions
   territory: idf
+  author: cassini
+
+hiking_path:
+  layer: hiking_paths
+  line_string: LINESTRING (2.7495973454757348 48.803795844321314, 2.834344424093956 48.752477596511795, 2.7702114997347564 48.728309677729015, 2.829763500925992 48.69354793463103)
+  author: cassini
+  values: <%= {
+    ActiveRecord::FixtureSet.identify(:hiking_paths_document, :uuid) => [ActiveRecord::FixtureSet.identify(:touladi_files_blob, :uuid)]
+  }.to_json %>
+
+hiking_zone:
+  layer: hiking_zones
+  polygon: POLYGON ((2.747403413340095 48.84348962036873, 2.8877638137743986 48.7960960723714, 2.7510023979661753 48.73679111224652, 2.639433874544153 48.80083744377515, 2.747403413340095 48.84348962036873))
   author: cassini
