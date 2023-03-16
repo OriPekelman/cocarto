@@ -91,7 +91,7 @@ class Row < ApplicationRecord
     layer.fields.to_h do |field|
       value = db_values[field.id]
       if field.type_territory?
-        value = association(field.association_name).target
+        value = association(field.association_name).reader
       elsif field.type_files?
         value = files_by_field(field)
       end

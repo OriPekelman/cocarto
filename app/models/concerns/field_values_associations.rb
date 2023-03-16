@@ -48,6 +48,21 @@ module FieldValuesAssociations
       end
     end
 
+    # Also overload _read_attribute:
+    # - it’s the method used by and BelonsToAssociation#stale_state. Otherwise, #stale_state is always nil, which makes #stale_target? always return false.
+    # - it allows loading the association of a single object, without preloading.
+    # E.g., given a row r and a territory field f, this returns the territory:
+    # `row.association(field.association_name).reader`
+    # Note: the reader method defined by belongs_to is implemented as `association(:#{name}).reader`.
+    def _read_attribute(attr_name, &block)
+      if attr_name.starts_with? Internal::FOREIGN_KEY_PREFIX
+        field_id = attr_name.delete_prefix(Internal::FOREIGN_KEY_PREFIX).delete("'")
+        values[field_id]
+      else
+        super
+      end
+    end
+
     class_methods do
       # Return the type of the “foreign key”
       # This is used for preloading in ActiveRecord::Associations::Preloader::Association.
