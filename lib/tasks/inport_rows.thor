@@ -12,7 +12,6 @@ class ImportRows < Thor
   option :stream, required: false, type: :boolean, aliases: [:s], desc: "Stream broadcast to frontend (slower)"
   def random
     layer = Layer.find_by(id: options[:layer]) || Layer.all.sample
-    layer.strict_loading!(false)
     row_count = options[:count]
     author = User.find_by(id: options.author) || User.joins(:access_groups).where(access_groups: layer.map.access_groups.find_by(role_type: %i[owner editor contributor])).sample
 
