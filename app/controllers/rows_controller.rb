@@ -33,11 +33,7 @@ class RowsController < ApplicationController
   def update
     if @row.update(row_params)
       respond_to do |format|
-        if params[:context] == "modal"
-          format.turbo_stream { render turbo_stream: [turbo_stream.replace("modal-container", partial: "layouts/modal")] }
-        else
-          format.turbo_stream
-        end
+        format.turbo_stream
         format.html { redirect_to @row.map, notice: t("helpers.message.row.updated") }
       end
     else

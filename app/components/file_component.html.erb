@@ -2,7 +2,6 @@
   <turbo-frame id="modal">
     <div data-modal-target="content">
       <%= form_with method: :patch, model: [@row.layer, @row], multipart: true, html: {class: "form"} do |f| %>
-        <%= hidden_field_tag "context", "modal" %>
         <div class="card__main-content">
           <h3><%= t "field.existing_attachments" %></h3>
           <% @value.each do |file| %>
