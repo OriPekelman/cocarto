@@ -25,7 +25,10 @@ class FieldValueComponent < ViewComponent::Base
     when "enum"
       select_tag field_name, options_for_select(@field.enum_values, @value), opts.merge(include_blank: true)
     when "files"
-      render FileFieldModalComponent.new(value: @value, field: @field, field_name: field_name, opts: opts, row: @row)
+      link_to Row.human_attribute_name(:files, count: @value.length),
+        layer_row_field_path(@row.layer_id, @row.id, @field.id),
+        data: {turbo_frame: "modal"},
+        class: "button button--slim button--link"
     else
       text_field_tag field_name, @value, opts.merge(class: "input")
     end
