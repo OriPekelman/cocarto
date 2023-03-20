@@ -26,7 +26,9 @@ Rails.application.routes.draw do
         get :schema
         get :geojson
       end
-      resources :rows, only: [:new, :create, :update, :destroy]
+      resources :rows, only: [:new, :create, :update, :destroy] do
+        resources :fields, only: [:show]
+      end
     end
     resources :fields, only: [:create, :update, :destroy]
 

@@ -1,6 +1,11 @@
 class FieldsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_field, only: %i[update destroy]
+  before_action :set_field, only: %i[show update destroy]
+
+  def show
+    raise NotImplementedError unless @field.type_files?
+    @row = Row.with_attached_files.includes(layer: [:fields]).find(params[:row_id])
+  end
 
   def create
     @field = authorize Field.new(field_params)
