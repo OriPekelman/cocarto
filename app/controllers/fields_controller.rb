@@ -5,6 +5,8 @@ class FieldsController < ApplicationController
   def show
     raise NotImplementedError unless @field.type_files?
     @row = Row.with_attached_files.includes(layer: [:fields]).find(params[:row_id])
+    content = FileComponent.new(value: @row.fields_values[@field], field_name: "row[fields_values][#{@field.id}][]", row: @row).render_in(view_context)
+    render ModalComponent.new.with_content(content)
   end
 
   def create
