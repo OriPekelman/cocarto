@@ -8,6 +8,21 @@ class ApplicationController < ActionController::Base
   around_action :rescue_unauthorized,
     :switch_locale # make sure locale is around all the rest
 
+  def render(*content)
+    # When the request is made to be displayed in a tubro-frame modal, we wrap in a specific component
+    if request.headers["Turbo-Frame"] == "modal"
+      # When we are wrapping an other ViewComponent, we can’t call twice `render`
+      # See https://viewcomponent.org/guide/getting-started.html#rendering-viewcomponents-to-strings-inside-controller-actions
+      if content.size == 1 && content[0].is_a?(ViewComponent::Base)
+        super ModalComponent.new.with_content(content[0].render_in(view_context))
+      else
+        super ModalComponent.new.with_content(super(*content))
+      end
+    else
+      super(*content)
+    end
+  end
+
   def set_sentry_user
     Sentry.set_user(id: current_user.id) if current_user.present?
   end
