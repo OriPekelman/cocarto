@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
 
   def render(*content)
     # When the request is made to be displayed in a tubro-frame modal, we wrap in a specific component
-    if request.headers["Turbo-Frame"] == "modal"
+    if turbo_frame_request_id == "modal"
       # When we are wrapping an other ViewComponent, we can’t call twice `render`
       # See https://viewcomponent.org/guide/getting-started.html#rendering-viewcomponents-to-strings-inside-controller-actions
       if content.size == 1 && content[0].is_a?(ViewComponent::Base)
