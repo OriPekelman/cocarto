@@ -26,7 +26,7 @@ class FieldValueComponent < ViewComponent::Base
       select_tag field_name, options_for_select(@field.enum_values, @value), opts.merge(include_blank: true)
     when "files"
       link_to Row.human_attribute_name(:files, count: @value.length),
-        layer_row_field_path(@row.layer_id, @row.id, @field.id),
+        edit_layer_row_path(@row.layer_id, @row.id, field_id: @field.id),
         data: {turbo_frame: "modal"},
         class: "button button--slim button--link"
     else

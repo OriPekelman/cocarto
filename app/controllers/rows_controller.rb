@@ -1,11 +1,17 @@
 class RowsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_row, only: %i[destroy update]
+  before_action :set_row, only: %i[destroy update edit]
   before_action :set_layer, only: %i[create new update destroy]
 
   def new
     @row = authorize @layer.rows.new
     @values = {}
+  end
+
+  def edit
+    field = Field.find(params[:field_id])
+    raise NotImplementedError unless field.type_files?
+    render FileComponent.new(value: @row.fields_values[field], field_name: "row[fields_values][#{field.id}][]", row: @row)
   end
 
   def create
@@ -70,6 +76,6 @@ class RowsController < ApplicationController
   def row_params
     simple_fields = @layer.fields.reject(&:multiple?).map(&:id)
     multiple_fields = @layer.fields.filter(&:multiple?).map { |field| {field.id => []} }
-    params.require(:row).permit(:geojson, :territory_id, fields_values: simple_fields + multiple_fields)
+    params.require(:row).permit(:geojson, :territory_id, :field_id, fields_values: simple_fields + multiple_fields)
   end
 end
