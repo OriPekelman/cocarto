@@ -60,9 +60,9 @@ Rails.application.configure do
   config.cache_store = :redis_cache_store, {
     url: ENV.fetch("REDIS_URL"),
     connect_timeout: 20,
-    read_timeout: 0.2,
-    write_timeout: 0.2,
-    reconnect_attempts: 2,
+    read_timeout: 0.4,
+    write_timeout: 0.4,
+    reconnect_attempts: 4,
     pool_size: 5,
     pool_timeout: 5
   }
