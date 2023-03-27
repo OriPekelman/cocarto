@@ -1,5 +1,4 @@
 .modal__overlay {
-  visibility: hidden;
   position: fixed;
   display: flex;
   justify-content: space-around;
@@ -10,10 +9,6 @@
   height: 100%;
   background-color: rgb(255 255 255 / 50%);
   z-index: var(--modal-z-index);
-}
-
-.modal__overlay--active {
-  visibility: visible;
 }
 
 .modal__navbar {

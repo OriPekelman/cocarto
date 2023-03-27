@@ -1,11 +1,17 @@
 class RowsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_row, only: %i[destroy update]
+  before_action :set_row, only: %i[destroy update edit]
   before_action :set_layer, only: %i[create new update destroy]
 
   def new
     @row = authorize @layer.rows.new
     @values = {}
+  end
+
+  def edit
+    field = Field.find(params[:field_id])
+    raise NotImplementedError unless field.type_files?
+    render FileComponent.new(value: @row.fields_values[field], field_name: "row[fields_values][#{field.id}][]", row: @row)
   end
 
   def create
@@ -33,11 +39,7 @@ class RowsController < ApplicationController
   def update
     if @row.update(row_params)
       respond_to do |format|
-        if params[:context] == "modal"
-          format.turbo_stream { render turbo_stream: [turbo_stream.replace("modal-container", partial: "layouts/modal")] }
-        else
-          format.turbo_stream
-        end
+        format.turbo_stream
         format.html { redirect_to @row.map, notice: t("helpers.message.row.updated") }
       end
     else
@@ -74,6 +76,6 @@ class RowsController < ApplicationController
   def row_params
     simple_fields = @layer.fields.reject(&:multiple?).map(&:id)
     multiple_fields = @layer.fields.filter(&:multiple?).map { |field| {field.id => []} }
-    params.require(:row).permit(:geojson, :territory_id, fields_values: simple_fields + multiple_fields)
+    params.require(:row).permit(:geojson, :territory_id, :field_id, fields_values: simple_fields + multiple_fields)
   end
 end
