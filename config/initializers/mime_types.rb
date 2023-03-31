@@ -3,3 +3,4 @@
 # Add new mime types for use in respond_to blocks:
 # Mime::Type.register "text/richtext", :rtf
 Mime::Type.register "application/geo+json", :geojson
+Mime::Type.register "application/schema+json", :jsonschema, %w[application/schema-instance+json]

@@ -94,8 +94,9 @@ en:
       layer:
         delete: Delete
         export: Exporter…
-        export_csv: csv
-        export_geojson: geojson
+        export_csv: CSV
+        export_geojson: GeoJSON
+        export_jsonschema: JSON Schema
         new: Add a new layer
       map:
         delete: Delete this map

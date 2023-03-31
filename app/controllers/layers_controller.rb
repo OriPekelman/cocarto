@@ -3,7 +3,7 @@ require "securerandom"
 class LayersController < ApplicationController
   before_action :access_by_apikey, only: %i[show], if: -> { request.format.to_sym.in? ImportExport::Exporter::FORMATS }
   before_action :authenticate_user!
-  before_action :set_layer, only: %i[show update destroy schema]
+  before_action :set_layer, only: %i[show update destroy]
 
   def show
     respond_to do |format|
@@ -53,15 +53,6 @@ class LayersController < ApplicationController
     end
   end
 
-  def schema
-    properties = @layer.fields.all.map { |f| field_schema(f) }.to_h
-
-    render json: {
-      type: :object,
-      properties: properties
-    }.to_json
-  end
-
   private
 
   def set_layer
@@ -70,16 +61,6 @@ class LayersController < ApplicationController
 
   def layer_params
     params.require(:layer).permit(:name, :geometry_type, :map_id, :color, territory_category_ids: [])
-  end
-
-  def field_schema(field)
-    mapping = {
-      "text" => :string,
-      "float" => :number,
-      "integer" => :integer
-    }
-
-    [field.id, type: mapping[field.field_type], title: field.label]
   end
 
   def access_by_apikey

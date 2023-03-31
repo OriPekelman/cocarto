@@ -2,7 +2,7 @@ require "csv"
 
 module ImportExport
   class Exporter
-    FORMATS = %w[geojson csv]
+    FORMATS = %i[geojson jsonschema csv]
 
     def initialize(layer)
       @layer = layer
@@ -27,6 +27,27 @@ module ImportExport
       RGeo::GeoJSON::Feature.new(feature, row.id, row.geo_properties.merge(row.css_properties).merge(row.calculated_properties))
     end
 
+    # JSON Schema
+    def jsonschema
+      properties = @layer.fields.all.map { |f| field_schema(f) }.to_h
+
+      {
+        type: :object,
+        properties: properties
+      }.to_json
+    end
+
+    def field_schema(field)
+      mapping = {
+        "text" => :string,
+        "float" => :number,
+        "integer" => :integer
+      }
+
+      [field.id, type: mapping[field.field_type], title: field.label]
+    end
+
+    # CSV
     def csv
       CSV.generate do |csv|
         rows = @layer.rows.with_attached_files.includes(*@layer.fields_association_names)
