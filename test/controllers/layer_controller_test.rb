@@ -3,34 +3,60 @@ require "test_helper"
 class LayerControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
 
-  test "geojson endpoint" do
-    sign_in users(:reclus)
-    restaurants = layers(:restaurants)
-    get geojson_layer_url(id: restaurants.id)
+  class ExportTest < LayerControllerTest
+    test "export fails when not connected" do
+      get layer_url(layers(:restaurants), format: :geojson)
 
-    assert_equal "application/geo+json", @response.media_type
-    geojson = JSON.parse(@response.body)
+      assert_response :unauthorized
+    end
 
-    assert_equal "Point", geojson.dig("features", 0, "geometry", "type")
-  end
+    test "export works when connected" do
+      sign_in users(:reclus)
+      get layer_url(layers(:restaurants), format: :geojson)
 
-  test "geojson endpoint with token" do
-    restaurants = layers(:restaurants)
-    get geojson_layer_url(id: restaurants.id), headers: {"x-auth-key": "BAD"}
+      assert_response :success
+    end
 
-    assert_response 401
+    test "export works when using token in param or in header" do
+      get layer_url(layers(:restaurants), format: :geojson, authkey: "let me in")
 
-    get geojson_layer_url(id: restaurants.id), headers: {"x-auth-key": "let me in"}
-    geojson = JSON.parse(@response.body)
+      assert_response :success
 
-    assert_equal "Point", geojson.dig("features", 0, "geometry", "type")
-  end
+      get layer_url(layers(:restaurants), format: :geojson), headers: {"x-auth-key": "let me in"}
 
-  test "geojson endpoint with token as param" do
-    restaurants = layers(:restaurants)
-    get geojson_layer_url(id: restaurants.id), params: {authkey: "let me in"}
-    geojson = JSON.parse(@response.body)
+      assert_response :success
+    end
 
-    assert_equal "Point", geojson.dig("features", 0, "geometry", "type")
+    test "export fails when using wrong token" do
+      get layer_url(layers(:restaurants), format: :geojson, headers: {"x-auth-key": "BAD"})
+
+      assert_response :unauthorized
+    end
+
+    test "geojson is correctly formed" do
+      get layer_url(layers(:restaurants), format: :geojson, authkey: "let me in")
+
+      geojson = JSON.parse(@response.body)
+
+      assert_equal "application/geo+json", @response.media_type
+      assert_equal "Point", geojson.dig("features", 0, "geometry", "type")
+    end
+
+    test "jsonschema is correctly formed" do
+      get layer_url(layers(:restaurants), format: :jsonschema, authkey: "let me in")
+      schema = JSON.parse(@response.body)
+
+      assert_equal "application/schema+json", @response.media_type
+      assert_equal "object", schema["type"]
+    end
+
+    test "csv is correctly formed" do
+      get layer_url(layers(:restaurants), format: :csv, authkey: "let me in")
+
+      csv = CSV.parse(@response.body)
+
+      assert_equal "text/csv", @response.media_type
+      assert_equal "Name", csv.dig(0, 0)
+    end
   end
 end
