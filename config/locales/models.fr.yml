@@ -91,7 +91,9 @@ fr:
         new: Nouvelle colonne
       layer:
         delete: Supprimer
-        geojson_export: Télécharger le geojson
+        export: Export…
+        export_csv: csv
+        export_geojson: geojson
         new: Ajouter une nouvelle couche
       map:
         delete: Supprimer cette carte

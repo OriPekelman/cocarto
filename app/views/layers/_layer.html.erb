@@ -30,10 +30,17 @@
                      restricted_target: "restricted", restricted_authorizations: '["owner"]'} do %> <%# Cf policy(layer).destroy? %>
           <%= embedded_svg "supprimer.svg", class: "icon--tinted" %>
         <% end %>
-        <%= link_to geojson_layer_path(layer), title: t("helpers.link.layer.geojson_export"),
-              class: "icon-button icon-button--double-bordered icon-button--small", download: "#{layer.name}.geojson" do %>
-          <%= embedded_svg "exporter.svg", class: "icon--tinted" %>
-        <% end %>
+        <div class="dropdown" data-controller="dropdown" data-action="click->dropdown#toggle" data-dropdown-target="trigger" title="<%= t("common.settings") %>">
+          <button class="icon-button icon-button--double-bordered icon-button--small" title="<%= t("helpers.link.layer.export") %>">
+            <%= embedded_svg "exporter.svg", class: "icon--tinted" %>
+          </button>
+          <div class="dropdown__content" data-dropdown-target="content">
+            <div class="card__main-content">
+              <%= link_to t("helpers.link.layer.export_geojson"), geojson_layer_path(layer), download: "#{layer.name}.geojson" %>
+              <%= link_to t("helpers.link.layer.export_csv"), layer_path(layer, format: :csv), download: "#{layer.name}.csv" %>
+            </div>
+          </div>
+        </div>
       </div>
     </footer>
   </div>

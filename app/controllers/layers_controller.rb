@@ -6,7 +6,14 @@ class LayersController < ApplicationController
   before_action :set_layer, only: %i[show update destroy schema geojson]
 
   def show
-    redirect_to map_path(@layer.map, params: {open: helpers.dom_id(@layer)})
+    respond_to do |format|
+      format.html { redirect_to map_path(@layer.map, params: {open: helpers.dom_id(@layer)}) }
+      format.csv do
+        exporter = ImportExport::Exporter.new(@layer)
+        data = exporter.csv
+        send_data data, filename: "#{@layer.name}.csv", type: "application/geo+json"
+      end
+    end
   end
 
   def new
