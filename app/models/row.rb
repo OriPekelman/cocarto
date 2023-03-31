@@ -144,12 +144,6 @@ class Row < ApplicationRecord
     end
   end
 
-  # Geojson export (used when exporting a layer as json)
-  def geo_feature
-    feature = RGeo::GeoJSON.decode(geojson)
-    RGeo::GeoJSON::Feature.new(feature, id, geo_properties.merge(css_properties).merge(calculated_properties))
-  end
-
   def geo_properties
     layer
       .fields

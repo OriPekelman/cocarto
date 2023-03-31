@@ -1,17 +1,16 @@
 require "securerandom"
 
 class LayersController < ApplicationController
-  before_action :access_by_apikey, only: %i[geojson]
+  before_action :access_by_apikey, only: %i[show], if: -> { request.format.to_sym.in? ImportExport::Exporter::FORMATS }
   before_action :authenticate_user!
-  before_action :set_layer, only: %i[show update destroy schema geojson]
+  before_action :set_layer, only: %i[show update destroy schema]
 
   def show
     respond_to do |format|
       format.html { redirect_to map_path(@layer.map, params: {open: helpers.dom_id(@layer)}) }
-      format.csv do
-        exporter = ImportExport::Exporter.new(@layer)
-        data = exporter.csv
-        send_data data, filename: "#{@layer.name}.csv", type: "application/geo+json"
+      format.any(*ImportExport::Exporter::FORMATS) do
+        data = ImportExport::Exporter.new(@layer).export(request.format.to_sym)
+        send_data data, filename: "#{@layer.name}.#{request.format.to_sym}", type: Mime[request.format]
       end
     end
   end
@@ -61,13 +60,6 @@ class LayersController < ApplicationController
       type: :object,
       properties: properties
     }.to_json
-  end
-
-  def geojson
-    data = Rails.cache.fetch([@layer, "geojson"]) do
-      RGeo::GeoJSON.encode(@layer.geo_feature_collection).to_json
-    end
-    send_data data, filename: "#{@layer.name}.geojson", type: "application/geo+json"
   end
 
   private

@@ -57,10 +57,6 @@ class Layer < ApplicationRecord
   end
   after_destroy_commit -> { broadcast_remove_to map }
 
-  def geo_feature_collection
-    RGeo::GeoJSON::FeatureCollection.new(rows.map(&:geo_feature))
-  end
-
   def color
     style["color"] || COLORS[:blue]
   end

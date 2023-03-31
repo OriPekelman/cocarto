@@ -1,13 +1,19 @@
 class Export < Thor
   def self.exit_on_failure? = true
 
-  desc "csv", "export csv"
-  option :layer, required: false, type: :string, aliases: :l, desc: "The layer to export", banner: "layer_id"
-  option :file, required: true, type: :string, aliases: :f, desc: "CSV file"
-  def csv
-    layer = Layer.find_by(id: options[:layer]) || Layer.all.sample
+  default_command :export
 
-    exporter = ImportExport::Exporter.new(layer)
-    File.write(options[:file], exporter.csv)
+  desc "export", "export a layer"
+  option :layer, required: true, type: :string, aliases: :l, desc: "The layer to export ", banner: "layer_id"
+  option :format, required: true, type: :string, aliases: :f, desc: "Export format, one of #{ImportExport::Exporter::FORMATS}"
+  option :path, required: false, type: :string, aliases: :p, desc: "output file"
+  def export
+    layer = Layer.find_by(id: options[:layer])
+    format = options[:format].to_sym
+    file = options[:file] || "#{layer.id}.#{options[:format]}"
+
+    File.write(file, ImportExport::Exporter.new(layer).export(format))
+
+    puts "Exported to #{file}"
   end
 end

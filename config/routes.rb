@@ -24,7 +24,6 @@ Rails.application.routes.draw do
     resources :layers, except: [:index, :new, :edit] do
       member do
         get :schema
-        get :geojson
       end
       resources :rows, only: [:new, :create, :edit, :update, :destroy]
     end
@@ -42,6 +41,7 @@ Rails.application.routes.draw do
     get "/legal/data" => "pages#legal_data"
     get "/presentation" => "pages#presentation"
     get "share/:token", to: "access_groups#enter_by_link", as: "share_link"
+    get "layers/:id/geojson", to: redirect("layers/%{id}.geojson")
   end
 
   if Rails.env.development?

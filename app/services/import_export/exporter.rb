@@ -2,8 +2,29 @@ require "csv"
 
 module ImportExport
   class Exporter
+    FORMATS = %w[geojson csv]
+
     def initialize(layer)
       @layer = layer
+    end
+
+    def export(format)
+      raise ArgumentError unless format.in? FORMATS
+
+      send(format)
+    end
+
+    # GeoJSON
+    def geojson
+      Rails.cache.fetch([@layer, "geojson"]) do
+        collection = RGeo::GeoJSON::FeatureCollection.new(@layer.rows.map { geo_feature(_1) })
+        RGeo::GeoJSON.encode(collection).to_json
+      end
+    end
+
+    def geo_feature(row)
+      feature = RGeo::GeoJSON.decode(row.geojson)
+      RGeo::GeoJSON::Feature.new(feature, row.id, row.geo_properties.merge(row.css_properties).merge(row.calculated_properties))
     end
 
     def csv
