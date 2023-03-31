@@ -22,7 +22,11 @@ Rails.application.routes.draw do
       resources :access_groups, only: [:index, :create, :update, :destroy], shallow: true
     end
     resources :layers, except: [:index, :new, :edit] do
-      resources :rows, only: [:new, :create, :edit, :update, :destroy]
+      resources :rows, only: [:new, :create, :edit, :update, :destroy] do
+        collection do
+          resource :import, only: [:show, :create], controller: :import
+        end
+      end
     end
     resources :fields, only: [:create, :update, :destroy]
 
