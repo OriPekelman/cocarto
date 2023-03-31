@@ -6,7 +6,7 @@ class LayersController < ApplicationController
   before_action :set_layer, only: %i[show update destroy schema geojson]
 
   def show
-    redirect_to @layer.map
+    redirect_to map_path(@layer.map, params: {open: helpers.dom_id(@layer)})
   end
 
   def new
@@ -19,7 +19,7 @@ class LayersController < ApplicationController
 
     layer = authorize map.layers.new(layer_params)
     if layer.save
-      redirect_to layer.map
+      redirect_to layer
     else
       # This line overrides the default rendering behavior, which
       # would have been to render the "create" view.

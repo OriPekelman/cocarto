@@ -13,6 +13,16 @@ export default class extends Controller {
   static targets = ['geojsonField', 'newRowForm', 'row', 'hideButton', 'showButton']
   static outlets = ['map', 'layer']
 
+  connect () {
+    // If the url contains ?open=id we open this layer
+    // We use the query string and not an achor because of a turbo bug with redirections
+    // See https://github.com/hotwired/turbo/issues/211
+    const id = new URL(document.location).searchParams.get('open')
+    if (id === this.element.id && !this.element.classList.contains('is-active')) {
+      this.toggleTable()
+    }
+  }
+
   toggleTable () {
     // Close the other active layer if it exists
     if (this.hasLayerOutlet && this.layerOutletElement !== this.element) {
