@@ -14,3 +14,12 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
 end
+
+class ActionDispatch::IntegrationTest
+  # Make the Controllers tests run in english by default.
+  # This also makes the url helper methods (e.g. `layer_url`) easier to use,
+  # because the first parameter can be implicitly the model.
+  def setup
+    self.default_url_options = {locale: I18n.default_locale}
+  end
+end

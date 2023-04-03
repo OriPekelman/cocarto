@@ -1,12 +1,18 @@
 require "securerandom"
 
 class LayersController < ApplicationController
-  before_action :access_by_apikey, only: %i[geojson]
+  before_action :access_by_apikey, only: %i[show], if: -> { request.format.to_sym.in? ImportExport::Exporter::FORMATS }
   before_action :authenticate_user!
-  before_action :set_layer, only: %i[show update destroy schema geojson]
+  before_action :set_layer, only: %i[show update destroy]
 
   def show
-    redirect_to map_path(@layer.map, params: {open: helpers.dom_id(@layer)})
+    respond_to do |format|
+      format.html { redirect_to map_path(@layer.map, params: {open: helpers.dom_id(@layer)}) }
+      format.any(*ImportExport::Exporter::FORMATS) do
+        data = ImportExport::Exporter.new(@layer).export(request.format.to_sym)
+        send_data data, filename: "#{@layer.name}.#{request.format.to_sym}", type: Mime[request.format]
+      end
+    end
   end
 
   def new
@@ -47,22 +53,6 @@ class LayersController < ApplicationController
     end
   end
 
-  def schema
-    properties = @layer.fields.all.map { |f| field_schema(f) }.to_h
-
-    render json: {
-      type: :object,
-      properties: properties
-    }.to_json
-  end
-
-  def geojson
-    data = Rails.cache.fetch([@layer, "geojson"]) do
-      RGeo::GeoJSON.encode(@layer.geo_feature_collection).to_json
-    end
-    send_data data, filename: "#{@layer.name}.geojson", type: "application/geo+json"
-  end
-
   private
 
   def set_layer
@@ -71,16 +61,6 @@ class LayersController < ApplicationController
 
   def layer_params
     params.require(:layer).permit(:name, :geometry_type, :map_id, :color, territory_category_ids: [])
-  end
-
-  def field_schema(field)
-    mapping = {
-      "text" => :string,
-      "float" => :number,
-      "integer" => :integer
-    }
-
-    [field.id, type: mapping[field.field_type], title: field.label]
   end
 
   def access_by_apikey

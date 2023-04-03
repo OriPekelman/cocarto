@@ -16,4 +16,11 @@ class FieldValuesAssociationsTest < ActiveSupport::TestCase
     assert_equal territories(:paris), rows.first.association(fields(:restaurant_ville).association_name).target
     assert_equal rows.first, rows.first.association(fields(:restaurant_ville).association_name).owner
   end
+
+  test "loading an association without preloading or eager loading" do
+    row = rows(:antipode)
+    field = fields(:restaurant_ville)
+
+    assert_equal territories(:paris), row.association(field.association_name).reader
+  end
 end

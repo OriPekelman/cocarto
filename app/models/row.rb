@@ -91,7 +91,7 @@ class Row < ApplicationRecord
     layer.fields.to_h do |field|
       value = db_values[field.id]
       if field.type_territory?
-        value = association(field.association_name).target
+        value = association(field.association_name).reader
       elsif field.type_files?
         value = files_by_field(field)
       end
@@ -142,12 +142,6 @@ class Row < ApplicationRecord
     rescue => e
       @geojson_error = e
     end
-  end
-
-  # Geojson export (used when exporting a layer as json)
-  def geo_feature
-    feature = RGeo::GeoJSON.decode(geojson)
-    RGeo::GeoJSON::Feature.new(feature, id, geo_properties.merge(css_properties).merge(calculated_properties))
   end
 
   def geo_properties

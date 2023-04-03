@@ -5,10 +5,6 @@ class LayerPolicy < ApplicationPolicy
 
   def show? = access_group.present?
 
-  def schema? = show?
-
-  def geojson? = show?
-
   def edit? = update? || access_group&.contributor?
 
   def update? = access_group&.owner? || access_group&.editor?
