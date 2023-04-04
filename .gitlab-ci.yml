@@ -1,5 +1,5 @@
 default:
-  image: ruby:3.2.0
+  image: ruby:3.2.2
 
 variables:
   GITLAB_CI_POSTGRES_HOST: postgis-postgis
