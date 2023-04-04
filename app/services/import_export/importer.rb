@@ -16,7 +16,8 @@ module ImportExport
         values = values.transform_keys do |k|
           @layer.fields.find_by(label: k).id
         end
-        row = @layer.rows.new(values: values, author: author)
+        row = @layer.rows.new(author: author)
+        row.fields_values = values
         row.geojson = geojson # Set the geojson after new because the geometry setter requires the layer to be set, to know which actual column to use.
         row.save!
       end
