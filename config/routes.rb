@@ -42,7 +42,6 @@ Rails.application.routes.draw do
     get "/legal/data" => "pages#legal_data"
     get "/presentation" => "pages#presentation"
     get "share/:token", to: "access_groups#enter_by_link", as: "share_link"
-    get "layers/:id/schema", to: redirect("layers/%{id}.schema.json")
     get "layers/:id/geojson", to: redirect("layers/%{id}.geojson")
   end
 
