@@ -2,6 +2,7 @@
   <%= form_with url: layer_import_path(@layer), html: {class: "form"} do |f| %>
     <div class="card__main-content">
       <h3><%= t(".import_data") %></h3>
+      <p><%= t(".warning") %></p>
       <%= render "layouts/errors", resource: @layer %>
       <%= f.file_field :file %>
     </div>
