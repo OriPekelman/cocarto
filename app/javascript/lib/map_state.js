@@ -56,7 +56,7 @@ class MapState {
   }
 
   setVisibleBounds (bounds) {
-    this.map.fitBounds(bounds, { padding: 40, maxZoom: 14 })
+    this.map.fitBounds(bounds, { padding: 40, maxZoom: 17 })
   }
 
   setSelectedFeature (featureId) {
