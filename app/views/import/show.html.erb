@@ -1,9 +1,9 @@
 <%= turbo_frame_tag(@layer, :import) do %>
-  <%= form_with url: layer_import_path(@layer), multipart: true, html: {class: "form"} do |f| %>
+  <%= form_with url: layer_import_path(@layer), html: {class: "form"} do |f| %>
     <div class="card__main-content">
       <h3><%= t(".import_data") %></h3>
       <%= render "layouts/errors", resource: @layer %>
-      <input type="file" name="file">
+      <%= f.file_field :file %>
     </div>
     <div class="card__footer-content">
       <%= f.submit t("common.save"), class: "button button--confirm" %>
