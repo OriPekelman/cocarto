@@ -22,4 +22,12 @@ module ImportExport
 
     EXPORTERS[format].new(layer).export
   end
+
+  # Naive column mapping, field name => field id.
+  # Used as the :mapping option for import
+  def self.default_field_mapping(layer)
+    layer.fields.to_h do |field|
+      [field.label, field.id]
+    end
+  end
 end

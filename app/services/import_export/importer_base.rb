@@ -8,6 +8,7 @@ module ImportExport
     def initialize(layer, input, **options)
       @layer = layer
       @input = input
+      @mapping = options[:mapping] || ImportExport.default_field_mapping(layer)
       @author = options[:author]
       @stream = options[:stream]
     end

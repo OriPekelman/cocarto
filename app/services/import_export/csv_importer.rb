@@ -7,7 +7,7 @@ module ImportExport
         values = line.to_h
         geojson = values.delete("geojson")
         values = values.transform_keys do |k|
-          @layer.fields.find_by(label: k).id
+          @mapping[k] || k
         end
         row = @layer.rows.new(author: @author)
         row.fields_values = values
