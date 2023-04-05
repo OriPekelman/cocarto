@@ -93,10 +93,11 @@ en:
         new: New column
       layer:
         delete: Delete
-        export: Exporter…
+        export: Export…
         export_csv: CSV
         export_geojson: GeoJSON
         export_jsonschema: JSON Schema
+        import: Importer…
         new: Add a new layer
       map:
         delete: Delete this map

@@ -78,6 +78,8 @@ class Field < ApplicationRecord
   def cast(value)
     if type_territory?
       Territory.exists?(id: value) ? value : nil
+    elsif type_files?
+      value.is_a?(Array) ? value : nil
     elsif type_css_property? && label == "stroke-width"
       ActiveModel::Type.lookup(:integer).cast(value)
     elsif active_model

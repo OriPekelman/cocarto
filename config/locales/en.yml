@@ -46,6 +46,13 @@ en:
     attach_file: Attach a file
     existing_attachments: Existing attachments
     take_picture: Take a picture
+  import:
+    create:
+      import_failed: Import failed
+      import_successful: Import succeeded
+    show:
+      import_data: Import data
+      warning: This feature is still experimental; expect bugs, and please do contact us if you get into trouble.
   layers:
     layer:
       center_on_row: Center map on this row

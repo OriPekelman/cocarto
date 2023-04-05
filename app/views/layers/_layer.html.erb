@@ -30,9 +30,13 @@
                      restricted_target: "restricted", restricted_authorizations: '["owner"]'} do %> <%# Cf policy(layer).destroy? %>
           <%= embedded_svg "supprimer.svg", class: "icon--tinted" %>
         <% end %>
+        <%= link_to layer_import_path(layer), title: t("helpers.link.layer.import"),
+              class: "icon-button icon-button--double-bordered icon-button--small", data: {turbo_frame: "modal"} do %>
+          <%= embedded_svg "file-up.svg" %>
+        <% end %>
         <div class="dropdown" data-controller="dropdown" data-action="click->dropdown#toggle" data-dropdown-target="trigger" title="<%= t("common.settings") %>">
           <button class="icon-button icon-button--double-bordered icon-button--small" title="<%= t("helpers.link.layer.export") %>">
-            <%= embedded_svg "exporter.svg", class: "icon--tinted" %>
+            <%= embedded_svg "file-down.svg" %>
           </button>
           <div class="dropdown__content" data-dropdown-target="content">
             <div class="card__main-content">

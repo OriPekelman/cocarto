@@ -46,6 +46,13 @@ fr:
     attach_file: Joindre un fichier
     existing_attachments: Pièces jointes présentes
     take_picture: Prendre une photo
+  import:
+    create:
+      import_failed: 'Échec de l’import '
+      import_successful: Import réussi
+    show:
+      import_data: Importer des données
+      warning: Cette fonctionnalité est expérimentale; attendez-vous à des bugs, et n’hésitez pas à nous en parler.
   layers:
     layer:
       center_on_row: Centrer la carte sur cette ligne
