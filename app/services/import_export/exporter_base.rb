@@ -37,7 +37,9 @@ module ImportExport
     end
 
     def exported_row_statistics(row)
-      row.calculated_properties
+      {}
+
+      # TODO: configure and use row.calculated_properties
     end
 
     def exported_row_field_values(row)
