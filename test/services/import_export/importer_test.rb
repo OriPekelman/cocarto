@@ -36,4 +36,26 @@ class ImporterTest < ActiveSupport::TestCase
     assert_equal "L’Antipode", row.fields_values[fields(:restaurant_name)]
     assert_equal 70, row.fields_values[fields(:restaurant_table_size)]
   end
+
+  test "reimport should only update the values" do
+    layers(:restaurants).rows.destroy_all
+    csv = <<~CSV
+      Name,Rating,Table Size,Ville,Date,Decision,geojson
+      Le Bastringue,5,70,75056,,,"{""type"":""Point"",""coordinates"":[2.37516,48.88661]}"
+    CSV
+
+    ImportExport.import(layers(:restaurants), :csv, csv, author: users(:reclus), key_field: "Name")
+    row = layers(:restaurants).rows.first
+
+    assert_equal 5, row.fields_values[fields(:restaurant_rating)]
+
+    new_csv = <<~CSV
+      Name,Rating
+      Le Bastringue,10
+    CSV
+    ImportExport.import(layers(:restaurants), :csv, new_csv, author: users(:reclus), key_field: "Name")
+
+    assert_equal 1, layers(:restaurants).rows.count
+    assert_equal 10, row.reload.fields_values[fields(:restaurant_rating)]
+  end
 end

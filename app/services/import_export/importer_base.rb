@@ -9,6 +9,7 @@ module ImportExport
       @layer = layer
       @input = input
       @mapping = options[:mapping] || ImportExport.default_field_mapping(layer)
+      @key_field = options[:key_field]
       @author = options[:author]
       @stream = options[:stream]
     end
