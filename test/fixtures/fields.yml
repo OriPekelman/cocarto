@@ -49,3 +49,8 @@ restaurant_decision:
   layer: restaurants
   label: "Decision"
   field_type: "boolean"
+
+hiking_paths_document:
+  layer: hiking_paths
+  label: "Document"
+  field_type: "files"

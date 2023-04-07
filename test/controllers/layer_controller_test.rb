@@ -42,21 +42,13 @@ class LayerControllerTest < ActionDispatch::IntegrationTest
       assert_equal "Point", geojson.dig("features", 0, "geometry", "type")
     end
 
-    test "jsonschema is correctly formed" do
-      get layer_url(layers(:restaurants), format: :jsonschema, authkey: "let me in")
-      schema = JSON.parse(@response.body)
-
-      assert_equal "application/schema+json", @response.media_type
-      assert_equal "object", schema["type"]
-    end
-
     test "csv is correctly formed" do
       get layer_url(layers(:restaurants), format: :csv, authkey: "let me in")
 
       csv = CSV.parse(@response.body)
 
       assert_equal "text/csv", @response.media_type
-      assert_equal "Name", csv.dig(0, 0)
+      assert_equal "geojson", csv.dig(0, 0)
     end
   end
 end

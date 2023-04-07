@@ -1,15 +1,15 @@
 require "securerandom"
 
 class LayersController < ApplicationController
-  before_action :access_by_apikey, only: %i[show], if: -> { request.format.to_sym.in? ImportExport::Exporter::FORMATS }
+  before_action :access_by_apikey, only: %i[show], if: -> { request.format.to_sym.in? ImportExport::EXPORTERS.keys }
   before_action :authenticate_user!
   before_action :set_layer, only: %i[show update destroy]
 
   def show
     respond_to do |format|
       format.html { redirect_to map_path(@layer.map, params: {open: helpers.dom_id(@layer)}) }
-      format.any(*ImportExport::Exporter::FORMATS) do
-        data = ImportExport::Exporter.new(@layer).export(request.format.to_sym)
+      format.any(*ImportExport::EXPORTERS.keys) do
+        data = ImportExport.export(@layer, request.format.to_sym)
         send_data data, filename: "#{@layer.name}.#{request.format.to_sym}", type: Mime[request.format]
       end
     end

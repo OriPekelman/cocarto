@@ -1,0 +1,4 @@
+touladi_files_attachment:
+  name: files
+  record: hiking_path (Row)
+  blob: touladi_files_blob

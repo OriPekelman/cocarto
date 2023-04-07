@@ -96,7 +96,6 @@ en:
         export: Export…
         export_csv: CSV
         export_geojson: GeoJSON
-        export_jsonschema: JSON Schema
         import: Importer…
         new: Add a new layer
       map:

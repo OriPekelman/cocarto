@@ -40,7 +40,6 @@
           </button>
           <div class="dropdown__content" data-dropdown-target="content">
             <div class="card__main-content">
-              <%= link_to t("helpers.link.layer.export_jsonschema"), layer_path(layer, format: :jsonschema), download: "#{layer.name}.schema.json" %>
               <%= link_to t("helpers.link.layer.export_geojson"), layer_path(layer, format: :geojson), download: "#{layer.name}.geojson" %>
               <%= link_to t("helpers.link.layer.export_csv"), layer_path(layer, format: :csv), download: "#{layer.name}.csv" %>
             </div>

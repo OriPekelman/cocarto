@@ -94,7 +94,6 @@ fr:
         export: Exporter…
         export_csv: CSV
         export_geojson: GeoJSON
-        export_jsonschema: JSON Schema
         import: Importer…
         new: Ajouter une nouvelle couche
       map:

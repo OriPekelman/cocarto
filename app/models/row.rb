@@ -144,13 +144,6 @@ class Row < ApplicationRecord
     end
   end
 
-  def geo_properties
-    layer
-      .fields
-      .reject { |field| field.type_css_property? }
-      .to_h { |field| [field.label, values[field.id]] }
-  end
-
   # Properties keys come from https://github.com/mapbox/simplestyle-spec/
   def default_style
     case layer.geometry_type
