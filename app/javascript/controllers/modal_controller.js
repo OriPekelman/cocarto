@@ -3,7 +3,8 @@ import { Controller } from '@hotwired/stimulus'
 export default class extends Controller {
   static targets = ['content']
 
-  close () {
+  close (event) {
+    event.preventDefault()
     this.element.parentElement.removeAttribute('src')
     this.element.remove()
   }
