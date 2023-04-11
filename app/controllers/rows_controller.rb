@@ -66,7 +66,7 @@ class RowsController < ApplicationController
   private
 
   def set_row
-    @row = authorize Row.with_attached_files.includes(layer: [:fields, :map]).find(params[:id])
+    @row = authorize Row.find(params[:id]).reload_with_fields_values(layer: [:fields, :map])
   end
 
   def set_layer

@@ -79,6 +79,20 @@ class Row < ApplicationRecord
              )
   end
 
+  # Preload all the fields values
+  # @layer must be specified: in theory, a query of Rows could be for several layers.
+  # In practice, this is to be used to load the rows of a specific layer and preload dynamic associations.
+  scope :with_fields_values, ->(layer) do
+    with_attached_files.with_territory.includes(:territory, *layer.fields_association_names)
+  end
+
+  # Reload self with the fields values (and additional associations)
+  def reload_with_fields_values(additional_includes = nil)
+    relation = layer.rows_with_fields_values
+    relation = relation.includes(additional_includes) if additional_includes.present?
+    relation.find(id)
+  end
+
   # Values accessors:
   # fields_values and fields_values= have two roles
   # - make sure the values in the DB and from user input are for existing fields of the layer
@@ -178,7 +192,7 @@ class Row < ApplicationRecord
   end
 
   def render(**kwargs)
-    row = Row.with_attached_files.with_territory.includes(:territory, *layer.fields_association_names, layer: :fields).find(id)
+    row = reload_with_fields_values(layer: :fields)
     ApplicationController.render(RowComponent.new(row: row, **kwargs), layout: false)
   end
 

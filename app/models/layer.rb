@@ -48,6 +48,9 @@ class Layer < ApplicationRecord
   end
   belongs_to :last_updated_row, class_name: "Row", optional: true, foreign_key: "computed_last_updated_row_id" # rubocop:disable Rails/InverseOf
 
+  # Helper to preload rows fields values
+  def rows_with_fields_values = rows.with_fields_values(self)
+
   # Hooks
   after_create_commit -> { broadcast_i18n_append_to map, target: dom_id(map, "layers") }
   after_update_commit -> do
