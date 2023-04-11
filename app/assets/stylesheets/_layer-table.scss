@@ -104,10 +104,6 @@
   th {
     border-top: $border;
 
-    &:hover {
-      background-color: var(--color-grey-30);
-    }
-
     &:first-child {
       border-top-left-radius: $border-radius;
     }
@@ -161,6 +157,10 @@
 }
 
 .layer-table__th--field {
+  &:hover {
+    background-color: var(--color-grey-30);
+  }
+
   span {
     display: flex;
     justify-content: center;
