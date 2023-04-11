@@ -23,7 +23,7 @@
     </tr>
   </thead>
   <tbody id="<%= dom_id(layer, :rows) %>">
-  <%= render RowComponent.with_collection(layer.rows.with_attached_files.with_territory.order(:created_at).includes(:territory, *layer.fields_association_names)) %>
+  <%= render RowComponent.with_collection(layer.rows_with_fields_values.order(:created_at)) %>
   </tbody>
   <tfoot>
     <%= render StatsFooterComponent.new(layer: layer) %>

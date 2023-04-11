@@ -4,10 +4,7 @@ module ImportExport
 
     def initialize(layer)
       @layer = layer
-      @rows = @layer.rows
-        .with_territory
-        .with_attached_files
-        .includes(:territory, *@layer.fields_association_names)
+      @rows = @layer.rows_with_fields_values
     end
 
     def export
