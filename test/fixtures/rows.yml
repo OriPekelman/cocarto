@@ -42,8 +42,8 @@ antipode:
   values: <%= {
     ActiveRecord::FixtureSet.identify(:restaurant_ville, :uuid) => ActiveRecord::FixtureSet.identify(:paris, :uuid),
     ActiveRecord::FixtureSet.identify(:restaurant_name, :uuid) => "L’Antipode",
-    ActiveRecord::FixtureSet.identify(:restaurant_rating, :uuid) => "9",
-    ActiveRecord::FixtureSet.identify(:restaurant_table_size, :uuid) => "70"
+    ActiveRecord::FixtureSet.identify(:restaurant_rating, :uuid) => 9,
+    ActiveRecord::FixtureSet.identify(:restaurant_table_size, :uuid) => 70
     }.to_json %>
 
 idf:

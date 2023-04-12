@@ -4,7 +4,7 @@ class ExporterTest < ActiveSupport::TestCase
   class Geojson < ExporterTest
     test "points layer" do
       geojson = <<~GEOJSON.squish
-        {"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[2.37516,48.88661]},"properties":{"Name":"L’Antipode","Rating":"9","Table Size":"70","Ville":"75056","Date":null,"Decision":null}}]}
+        {"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[2.37516,48.88661]},"properties":{"Name":"L’Antipode","Rating":9,"Table Size":70,"Ville":"75056","Date":null,"Decision":null}}]}
       GEOJSON
       assert_equal geojson, ImportExport.export(layers(:restaurants), :geojson)
     end
@@ -39,7 +39,7 @@ class ExporterTest < ActiveSupport::TestCase
 
     test "territory field" do
       geojson = <<~GEOJSON.squish
-        {"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[2.37516,48.88661]},"properties":{"Name":"L’Antipode","Rating":"9","Table Size":"70","Ville":"75056","Date":null,"Decision":null}}]}
+        {"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[2.37516,48.88661]},"properties":{"Name":"L’Antipode","Rating":9,"Table Size":70,"Ville":"75056","Date":null,"Decision":null}}]}
       GEOJSON
       assert_equal geojson, ImportExport.export(layers(:restaurants), :geojson)
     end
