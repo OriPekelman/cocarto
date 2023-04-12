@@ -11,7 +11,7 @@ export default class extends Controller {
 
   closeFromOutside (event) {
     if (!this.contentTarget.contains(event.target)) {
-      this.close()
+      this.close(event)
     }
   }
 
