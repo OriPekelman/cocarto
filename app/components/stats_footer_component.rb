@@ -15,10 +15,10 @@ class StatsFooterComponent < ViewComponent::Base
       tag.td(nil) + tag.td(nil)
     when "line_string"
       sum = number_to_human(@layer.rows.sum(:geo_length), units: :length)
-      tag.td(sum, class: "layer-table__td--numerical")
+      tag.td(sum, class: "layer-table__td--stats")
     when "polygon"
       sum = number_to_human(@layer.rows.sum(:geo_area), units: :area)
-      tag.td(sum, class: "layer-table__td--numerical")
+      tag.td(sum, class: "layer-table__td--stats")
     end
   end
 end

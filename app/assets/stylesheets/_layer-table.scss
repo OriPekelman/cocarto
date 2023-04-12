@@ -168,6 +168,13 @@
   }
 }
 
+.layer-table__tr {
+}
+
+.layer-table__tr--stats {
+  height: 24px;
+}
+
 .layer-table__tr--highlight,
 .layer-table__tr--highlight input {
   background-color: var(--color-attention-10);
@@ -183,9 +190,13 @@
   background-color: var(--color-attention-20);
 }
 
+// Table Cells
 .layer-table__td {
   font-size: 12px;
+}
 
+// Editable cells
+.layer-table__td--field {
   input,
   select {
     border-radius: 0;
@@ -210,6 +221,7 @@
   }
 }
 
+// Field cells with number values
 .layer-table__td--numerical {
   font-family: var(--font-mono);
   text-align: right;
@@ -219,19 +231,18 @@
   }
 }
 
+// Boolean Field cells
 .layer-table__td--boolean {
   text-align: center;
 }
 
-.layer-table__td-actions {
+// Action Cell (rightmost)
+.layer-table__td--actions {
   background-color: var(--color-grey-30);
   padding: 2px;
 }
 
-.layer-table__tr--stats {
-  height: 24px;
-}
-
+// Stats cells (left and footer)
 .layer-table__td--stats {
   padding: 0.2rem 0.5rem;
 }

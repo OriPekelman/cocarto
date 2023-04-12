@@ -8,7 +8,7 @@ class FieldTdComponent < ViewComponent::Base
   private
 
   def html_class
-    class_names("layer-table__td", dom_id(@field),
+    class_names("layer-table__td", "layer-table__td--field", dom_id(@field),
       "layer-table__td--boolean" => @field.type_boolean?,
       "layer-table__td--numerical" => (@field.type_integer? || @field.type_float?))
   end
