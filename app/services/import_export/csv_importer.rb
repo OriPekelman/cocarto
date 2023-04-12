@@ -11,7 +11,7 @@ module ImportExport
         end
 
         row = if @key_field.present?
-          @layer.rows.where("values->>? ilike ? ", @mapping[@key_field], values[@mapping[@key_field]]).take
+          @layer.rows.where("values->>? ilike ? ", @key_field, values[@key_field]).take
         end
         row = @layer.rows.new if row.nil?
 

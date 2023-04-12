@@ -44,7 +44,7 @@ class ImporterTest < ActiveSupport::TestCase
       Le Bastringue,5,70,75056,,,"{""type"":""Point"",""coordinates"":[2.37516,48.88661]}"
     CSV
 
-    ImportExport.import(layers(:restaurants), :csv, csv, author: users(:reclus), key_field: "Name")
+    ImportExport.import(layers(:restaurants), :csv, csv, author: users(:reclus), key_field: fields(:restaurant_name).id)
     row = layers(:restaurants).rows.first
 
     assert_equal 5, row.fields_values[fields(:restaurant_rating)]
@@ -53,7 +53,7 @@ class ImporterTest < ActiveSupport::TestCase
       Name,Rating
       Le Bastringue,10
     CSV
-    ImportExport.import(layers(:restaurants), :csv, new_csv, author: users(:reclus), key_field: "Name")
+    ImportExport.import(layers(:restaurants), :csv, new_csv, author: users(:reclus), key_field: fields(:restaurant_name).id)
 
     assert_equal 1, layers(:restaurants).rows.count
     assert_equal 10, row.reload.fields_values[fields(:restaurant_rating)]
