@@ -120,7 +120,6 @@
 
     &:last-child {
       border-right: $border;
-      position: sticky;
       right: 0;
     }
   }
@@ -138,21 +137,21 @@
 }
 
 .layer-table__thead {
-  height: 32px;
 }
 
 .layer-table__th {
   color: var(--color-grey-80);
   background-color: var(--color-grey-20);
-  padding: 0.625rem 0.375rem;
+  padding-inline: 8px;
   resize: horizontal;
+  overflow: hidden; // Needed for resize:horizontal
   font-size: 10px;
   font-weight: 400;
   letter-spacing: 0.8px;
   text-align: center;
   text-transform: uppercase;
   text-decoration: underline;
-  text-underline-offset: 0.2em;
+  text-underline-offset: 2px;
   text-decoration-color: var(--color-grey-50);
 }
 
@@ -165,14 +164,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    white-space: nowrap;
   }
 }
 
 .layer-table__tr {
+  height: 32px;
 }
 
 .layer-table__tr--stats {
-  height: 24px;
 }
 
 .layer-table__tr--highlight,
@@ -193,23 +193,29 @@
 // Table Cells
 .layer-table__td {
   font-size: 12px;
+  position: relative;
 }
 
 // Editable cells
 .layer-table__td--field {
+  background: var(--color-bg);
 }
 
 // Cells with text input
 .layer-table__td--field:not(.layer-table__td--boolean) {
   input,
   select {
-    border-radius: 0;
-    height: 34px;
+    font-family: var(--font-sans);
+    position: absolute;
+    height: 100%;
     width: 100%;
-    box-shadow: none;
-    padding-inline: 0.475rem;
+    top: 0;
     margin: 0;
+    padding-block: 0;
+    padding-inline: 6px;
+    border-radius: 0;
     border: 2px solid transparent;
+    background: transparent;
   }
 
   input:focus {
@@ -221,11 +227,9 @@
 
 // Field cells with number values
 .layer-table__td--numerical {
-  font-family: var(--font-mono);
-  text-align: right;
-
   input {
-    padding: 0.2rem 0.5rem;
+    font-family: var(--font-mono);
+    text-align: right;
   }
 }
 
@@ -236,6 +240,7 @@
     justify-content: center;
     align-items: center;
     height: 30px;
+
     > input[type="checkbox"] {
       border: 1px solid var(--input-border-color);
       box-shadow: 0 1px 4px var(--color-grey-30) inset;
@@ -249,19 +254,21 @@
 // Action Cell (rightmost)
 .layer-table__td--actions {
   background-color: var(--color-grey-30);
-  padding: 2px;
+  padding-inline: 2px;
 }
 
 // Stats cells (left and footer)
 .layer-table__td--stats {
-  padding: 0.2rem 0.5rem;
+  font-family: var(--font-mono);
+  text-align: right;
+  padding-inline: 8px;
 }
 
 // Footer for each layer
 .layer-footer {
   width: 100%;
   display: flex;
-  gap: 1rem;
+  gap: 16px;
   justify-content: flex-end;
   align-items: baseline;
 }
