@@ -197,6 +197,10 @@
 
 // Editable cells
 .layer-table__td--field {
+}
+
+// Cells with text input
+.layer-table__td--field:not(.layer-table__td--boolean) {
   input,
   select {
     border-radius: 0;
@@ -213,12 +217,6 @@
     border: 2px solid white;
     outline: 1px solid var(--color-green-90);
   }
-
-  input[type="checkbox"] {
-    border: 1px solid var(--color-grey-60);
-    height: 20px;
-    width: 20px;
-  }
 }
 
 // Field cells with number values
@@ -231,9 +229,21 @@
   }
 }
 
-// Boolean Field cells
+// Boolean Field cells: center checkbox and make the whole cell clickable
 .layer-table__td--boolean {
-  text-align: center;
+  > label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    > input[type="checkbox"] {
+      border: 1px solid var(--input-border-color);
+      box-shadow: 0 1px 4px var(--color-grey-30) inset;
+      height: 16px;
+      width: 16px;
+      accent-color: var(--color-green-70);
+    }
+  }
 }
 
 // Action Cell (rightmost)
