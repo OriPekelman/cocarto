@@ -21,6 +21,8 @@ class ImporterTest < ActiveSupport::TestCase
   end
 
   test "import with mapping" do
+    layers(:restaurants).rows.destroy_all
+
     mapping = {
       "Nom" => fields(:restaurant_name).id,
       "Convives" => fields(:restaurant_table_size).id
