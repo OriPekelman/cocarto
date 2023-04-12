@@ -5,14 +5,15 @@ class Import < Thor
   option :layer, required: true, type: :string, aliases: :l, desc: "The layer in which to insert rows", banner: "layer_id"
   option :file, required: true, type: :string, aliases: :f, desc: "CSV file"
   option :author, required: true, type: :string, aliases: :a, desc: "Row author", banner: "user_id"
+  option :key_field, required: false, type: :string, aliases: :k, desc: "Identifier column name"
   option :stream, required: false, type: :boolean, aliases: :s, desc: "Stream broadcast to frontend (slower)"
   def csv
     layer = Layer.find_by(id: options[:layer])
     author = User.find_by(id: options[:author])
-
+    key_field = layer.fields.find_by(label: options[:key_field]).id
     csv = File.read(options[:file])
 
-    ImportExport.import(layer, :csv, csv, author: author, stream: options[:stream])
+    ImportExport.import(layer, :csv, csv, author: author, key_field: key_field, stream: options[:stream])
   end
 
   desc "random", "Insert new random rows in a layer"
