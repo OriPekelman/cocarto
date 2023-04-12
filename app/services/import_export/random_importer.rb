@@ -1,36 +1,22 @@
-require "csv"
-
 module ImportExport
-  class Importer
-    def initialize(layer, stream: false)
-      @layer = layer
-      @stream = stream
+  class RandomImporter < ImporterBase
+    # Additional @options:
+    # row_count, lat_range, long_range
+    def initialize(*args, **options)
+      @row_count = options.delete(:row_count)
+      @lat_range = options.delete(:lat_range)
+      @long_range = options.delete(:long_range)
+      super
     end
 
-    def csv(csv, author)
-      lines = CSV.parse(csv, headers: true)
-
-      lines.each do |line|
-        values = line.to_h
-        geojson = values.delete("geojson")
-        values = values.transform_keys do |k|
-          @layer.fields.find_by(label: k).id
-        end
-        row = @layer.rows.new(author: author)
-        row.fields_values = values
-        row.geojson = geojson # Set the geojson after new because the geometry setter requires the layer to be set, to know which actual column to use.
-        row.save!
-      end
-    end
-
-    def create_random_rows(row_count, author, lat_range, long_range)
-      geometry_proc = -> { random_geometry(@layer.geometry_type, lat_range, long_range) }
+    def import_rows
+      geometry_proc = -> { random_geometry }
       values_proc = proc { @layer.fields.to_h { [_1.id, random_value(_1)] } }
 
-      entries = row_count.times.map do
+      entries = @row_count.times.map do
         {
           layer_id: @layer.id,
-          author_id: author.id,
+          author_id: @author.id,
           values: values_proc.call
         }.merge(geometry_proc.call)
       end
@@ -44,9 +30,9 @@ module ImportExport
 
     private
 
-    def random_geometry(geometry_type, lat_range, long_range)
-      point_generator = proc { RGEO_FACTORY.point(rand(long_range), rand(lat_range)) }
-      case geometry_type
+    def random_geometry
+      point_generator = proc { RGEO_FACTORY.point(rand(@long_range), rand(@lat_range)) }
+      case @layer.geometry_type
       when "point"
         {point: point_generator.call}
       when "line_string"

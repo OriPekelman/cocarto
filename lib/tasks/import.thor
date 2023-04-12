@@ -12,8 +12,7 @@ class Import < Thor
 
     csv = File.read(options[:file])
 
-    import = ImportExport::Importer.new(layer)
-    import.csv(csv, author)
+    ImportExport.import(layer, :csv, csv, author: author, stream: options[:stream])
   end
 
   desc "random", "Insert new random rows in a layer"
@@ -32,7 +31,6 @@ class Import < Thor
 
     puts "Adding #{row_count} #{Layer.human_attribute_name(layer.geometry_type, count: row_count)} to #{layer.id} (#{layer.map.name}:#{layer.name}) as #{author.id} (#{author.display_name})"
 
-    import = ImportExport::Importer.new(layer, stream: options[:stream])
-    import.create_random_rows(row_count, author, options[:lat_min]..options[:lat_max], options[:long_min]..options[:long_max])
+    ImportExport.import(layer, :random, nil, author: author, stream: options[:stream], row_count: row_count, lat_range: options[:lat_min]..options[:lat_max], long_range: options[:long_min]..options[:long_max])
   end
 end
