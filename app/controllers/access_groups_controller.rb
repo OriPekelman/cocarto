@@ -3,25 +3,24 @@ class AccessGroupsController < ApplicationController
   before_action :set_access_group, only: %i[update destroy]
 
   def index
-    @map = current_user.maps.find(params["map_id"])
-
+    @access_groups = policy_scope(AccessGroup).where(map_id: params["map_id"])
+    @map = Map.find(params["map_id"])
     authorize @map.access_groups.new
-    @access_groups = policy_scope(@map.access_groups).includes(:users)
   end
 
   def create
-    @map = current_user.maps.find(params["map_id"])
-    @access_group = authorize @map.access_groups.new(create_access_group_params)
+    map = Map.find(params["map_id"])
+    access_group = authorize map.access_groups.new(create_access_group_params)
 
-    if @access_group.save
-      @access_group.users.each do |user|
+    if access_group.save
+      access_group.users.each do |user|
         if user.invitation_sent_at.blank?
           user.invite!
         end
       end
-      redirect_to map_access_groups_path(@map), notice: t("helpers.message.access_group.created")
+      redirect_to map_access_groups_path(map), notice: t("helpers.message.access_group.created")
     else
-      redirect_to map_access_groups_path(@map), alert: t("common.failed", msg: @access_group.errors.full_messages.to_sentence)
+      redirect_to map_access_groups_path(map), alert: t("common.failed", msg: access_group.errors.full_messages.to_sentence)
     end
   end
 
