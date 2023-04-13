@@ -1,7 +1,7 @@
-<tr id="<%= dom_id(@layer, :stats) %>" class="layer-table__tr--stats">
+<tr id="<%= dom_id(@layer, :stats) %>" class="layer-table__tr layer-table__tr--stats">
   <%= calculated_columns %>
   <% @layer.fields.each do |field| %>
-    <td class="layer-table__td layer-table__td--numerical layer-table__td--stats"> <%= field.sum %> </td>
+    <td class="layer-table__td layer-table__td--stats"> <%= number_with_delimiter(field.sum) %> </td>
   <% end %>
-  <td></td>
+  <td class="layer-table__td layer-table__td--actions"></td>
 </tr>

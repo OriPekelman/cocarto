@@ -18,10 +18,10 @@ class FieldValueComponent < ViewComponent::Base
     when "date"
       date_field_tag field_name, @value, opts
     when "boolean"
-      # This is a temporary hack until the data is cleaned in the database
-      # The task fix_data:fields_values_type will change "1" to `true`
-      # Once the task ran, we can use only @value
-      check_box_tag field_name, "1", @value == "1" || @value, opts
+      full_name = "#{dom_id(@row)}-#{field_name}"
+      label_tag full_name do
+        check_box_tag field_name, "1", @value, opts.merge(id: sanitize_to_id(full_name))
+      end
     when "enum"
       select_tag field_name, options_for_select(@field.enum_values, @value), opts.merge(include_blank: true)
     when "files"

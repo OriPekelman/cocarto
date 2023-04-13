@@ -1,8 +1,7 @@
 .dropdown {
   user-select: none;
-  /* stylelint-disable property-no-vendor-prefix */
+  /* stylelint-disable-next-line property-no-vendor-prefix */
   -webkit-user-select: none;
-  /* stylelint-enable property-no-vendor-prefix */
 
   &:hover {
     cursor: pointer;
@@ -25,9 +24,8 @@
   &:hover {
     cursor: initial;
     user-select: initial;
-    /* stylelint-disable property-no-vendor-prefix */
+    /* stylelint-disable-next-line property-no-vendor-prefix */
     -webkit-user-select: none;
-    /* stylelint-enable property-no-vendor-prefix */
   }
 
   a {
