@@ -1,4 +1,5 @@
 class AccessGroupsController < ApplicationController
+  before_action :authenticate_user!, except: :enter_by_link
   before_action :set_access_group, only: %i[update destroy]
 
   def index
