@@ -59,6 +59,10 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     assert page.has_css?('[data-dropdown-loaded-value="true"]')
   end
 
+  def find_map_loaded
+    find ".maplibregl-map[data-loaded]", wait: 10
+  end
+
   def wait_all_downloads
     downloads = Pathname.new(Capybara.save_path)
     Timeout.timeout(DOWNLOAD_TIMEOUT) do

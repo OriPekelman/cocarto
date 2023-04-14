@@ -6,7 +6,7 @@ class RowsTest < ApplicationSystemTestCase
 
     visit map_path(id: maps("restaurants"))
     # We make sure to wait that the map is loaded
-    map = find ".maplibregl-map[data-loaded]", wait: 10
+    map = find_map_loaded
     click_on "Display the table for this layer", match: :first
     click_on "Add a point"
 
@@ -19,7 +19,7 @@ class RowsTest < ApplicationSystemTestCase
     sign_in_as(users("reclus"), "refleurir")
 
     visit map_path(id: maps("restaurants"))
-    map = find ".maplibregl-map[data-loaded]", wait: 10
+    map = find_map_loaded
     click_on "Display the table for this layer", match: :first
 
     assert_selector ".row", count: 1
