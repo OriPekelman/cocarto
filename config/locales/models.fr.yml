@@ -57,6 +57,11 @@ fr:
         rows: rangées
     errors:
       models:
+        access_group:
+          attributes:
+            map:
+              format: "%{message}"
+              must_have_an_owner: La carte doit avoir au moins un un utilisateur propriétaire. Commencez par donner le rôle de propriétaire à un autre utilisateur.
         row:
           attributes:
             geojson:

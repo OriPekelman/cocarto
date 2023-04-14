@@ -57,6 +57,11 @@ en:
         rows: rows
     errors:
       models:
+        access_group:
+          attributes:
+            map:
+              format: "%{message}"
+              must_have_an_owner: The map must have at least one owner. Please promote another user to “owner” first.
         row:
           attributes:
             geojson:
@@ -87,7 +92,7 @@ en:
     _comment: The "helpers" scope is for model-specific keys. For general purpose labels, use the "common" scope.
     link:
       access_group:
-        delete: Supprimer
+        delete: Delete
       field:
         delete: Delete
         new: New column
@@ -96,7 +101,7 @@ en:
         export: Export…
         export_csv: CSV
         export_geojson: GeoJSON
-        import: Importer…
+        import: Import…
         new: Add a new layer
       map:
         delete: Delete this map
@@ -131,7 +136,7 @@ en:
       access_group:
         create: Invite
         create_link: Create link
-        update: Enregistrer
+        update: Save
       field:
         create: Add a field
         update: Save
