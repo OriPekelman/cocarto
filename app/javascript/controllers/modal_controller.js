@@ -15,9 +15,9 @@ export default class extends Controller {
     }
   }
 
-  submitEnd (e) {
-    if (e.detail.success) {
-      this.close()
+  submitEnd (event) {
+    if (event.detail.success) {
+      this.close(event)
     }
   }
 }
