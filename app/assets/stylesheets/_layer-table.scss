@@ -233,7 +233,7 @@
 }
 
 // Field cells with number values
-.layer-table__td--numerical {
+.layer-table__td--field.layer-table__td--numerical {
   input {
     font-family: var(--font-mono);
     text-align: right;
@@ -241,7 +241,7 @@
 }
 
 // Boolean Field cells: center checkbox and make the whole cell clickable
-.layer-table__td--boolean {
+.layer-table__td--field.layer-table__td--boolean {
   > label {
     display: flex;
     justify-content: center;
