@@ -37,6 +37,7 @@ class MapsTest < ApplicationSystemTestCase
     sign_in_as(users("reclus"), "refleurir")
 
     visit map_path(id: maps("restaurants"))
+    find_map_loaded
     click_link "Export as image", href: nil
     wait_all_downloads
 
