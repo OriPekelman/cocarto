@@ -24,7 +24,7 @@
         <%= form.text_field :name %>
         <%= form.label :users %>
         <%= form.fields_for :users do |f| %>
-          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true %>
         <% end %>
         <% if access_group.token.present? %>
           <% if access_group.persisted? %>
