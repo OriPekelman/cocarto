@@ -7,6 +7,6 @@ export default class extends Controller {
 
   update () {
     const files = Array.from(this.inputTarget.files)
-    this.listTarget.innerHTML = files.map(file => `<li>${file.name}</li>`).join('')
+    this.listTarget.innerHTML = files.map(file => file.name).join(', ')
   }
 }
