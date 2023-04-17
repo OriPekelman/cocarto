@@ -3,7 +3,7 @@
 # Table name: users
 #
 #  id                     :uuid             not null, primary key
-#  email                  :string           default("")
+#  email                  :string
 #  encrypted_password     :string           default(""), not null
 #  invitation_accepted_at :datetime
 #  invitation_created_at  :datetime
@@ -45,12 +45,14 @@ class User < ApplicationRecord
   # Through relations
   has_many :maps, through: :access_groups, dependent: :restrict_with_error
 
+  # Validation
+  validates :email, presence: true, allow_nil: true
+  def email_required? = false # Disable default devise presence validation
+
   # Devise overrides
   def password_required?
     false
   end
-
-  def email_required? = false
 
   self.remember_for = 2.months
 

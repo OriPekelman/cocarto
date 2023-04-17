@@ -3,7 +3,7 @@
 # Table name: users
 #
 #  id                     :uuid             not null, primary key
-#  email                  :string           default("")
+#  email                  :string
 #  encrypted_password     :string           default(""), not null
 #  invitation_accepted_at :datetime
 #  invitation_created_at  :datetime
@@ -32,6 +32,34 @@
 require "test_helper"
 
 class UserTest < ActiveSupport::TestCase
+  class Validation < UserTest
+    test "email presence or nil" do
+      u1 = User.create(email: nil)
+      u2 = User.create(email: "")
+
+      assert_predicate u1, :persisted?
+      assert_not_predicate u2, :persisted?
+      assert_equal [{error: :blank}], u2.errors.details[:email]
+    end
+
+    test "email multiple nil is allowed" do
+      u1 = User.create(email: nil)
+      u2 = User.create(email: nil)
+
+      assert_predicate u1, :persisted?
+      assert_predicate u2, :persisted?
+    end
+
+    test "email uniqueness" do
+      u1 = User.create(email: "a@a.a")
+      u2 = User.create(email: "a@a.a")
+
+      assert_predicate u1, :persisted?
+      assert_not_predicate u2, :persisted?
+      assert_equal [{error: :taken, value: "a@a.a"}], u2.errors.details[:email]
+    end
+  end
+
   test "destroy" do # rubocop:disable Minitest/MultipleAssertions
     user = users(:reclus)
     user.destroy
