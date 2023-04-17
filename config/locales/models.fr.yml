@@ -114,9 +114,9 @@ fr:
         destroyed: L’accès a été détruit avec succès.
         updated: L’accès a été mis à jour avec succès.
       field:
-        created: Nouvel attribut %{name} créé
-        destroyed: Le champ a été détruit avec succès.
-        updated: Le champ a été mis à jour avec succès.
+        created: Nouvelle colonne %{name} créée.
+        destroyed: La colonne a bien été détruite.
+        updated: La colonne a bien été mise à jour.
       layer:
         destroyed: La couche a été détruite avec succès.
       map:
