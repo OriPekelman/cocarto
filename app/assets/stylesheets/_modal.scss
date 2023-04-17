@@ -11,6 +11,11 @@
   z-index: var(--modal-z-index);
 }
 
+.modal {
+  min-width: 400px;
+  max-width: 600px;
+}
+
 .modal__navbar {
   display: flex;
   justify-content: end;
