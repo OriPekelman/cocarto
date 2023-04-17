@@ -204,15 +204,14 @@
 }
 
 // Editable cells
-.layer-table__td--field {
+.layer-table__td--editable {
   background: var(--color-bg);
 }
 
-// Cells with text input
-.layer-table__td--field:not(.layer-table__td--boolean) {
+// Field cells with text input
+.layer-table__td--field {
   input,
   select {
-    font-family: var(--font-sans);
     position: absolute;
     height: 100%;
     width: 100%;
@@ -232,8 +231,15 @@
   }
 }
 
+// Field cells with text (or text-like) values
+.layer-table__td--text {
+  input {
+    font-family: var(--font-sans);
+  }
+}
+
 // Field cells with number values
-.layer-table__td--field.layer-table__td--numerical {
+.layer-table__td--numerical {
   input {
     font-family: var(--font-mono);
     text-align: right;
@@ -241,7 +247,7 @@
 }
 
 // Boolean Field cells: center checkbox and make the whole cell clickable
-.layer-table__td--field.layer-table__td--boolean {
+.layer-table__td--checkbox {
   > label {
     display: flex;
     justify-content: center;

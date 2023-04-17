@@ -7,9 +7,22 @@ class FieldTdComponent < ViewComponent::Base
 
   private
 
-  def html_class
-    class_names("layer-table__td", "layer-table__td--field", dom_id(@field),
-      "layer-table__td--boolean" => @field.type_boolean?,
-      "layer-table__td--numerical" => (@field.type_integer? || @field.type_float?))
+  def html_class_names
+    type_specific_names = case @field.field_type
+    when "text", "territory", "date", "css_property", "enum"
+      %w[layer-table__td--field layer-table__td--text]
+    when "float", "integer"
+      %w[layer-table__td--field layer-table__td--numerical]
+    when "boolean"
+      %w[layer-table__td--checkbox]
+    when "files"
+      %w[]
+    else
+      raise ArgumentError
+    end
+
+    class_names("layer-table__td", "layer-table__td--editable",
+      type_specific_names,
+      dom_id(@field)) # used to mass-update a field css when a field is modified. See field#after_update_commit
   end
 end
