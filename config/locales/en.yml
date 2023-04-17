@@ -51,9 +51,15 @@ en:
       import_failed: Import failed
       import_successful: Import succeeded
     show:
+      attention: This feature is still experimental; expect bugs, and please do contact us if you get into trouble.
       import_data: Import data
-      key_field: id field
-      warning: This feature is still experimental; expect bugs, and please do contact us if you get into trouble.
+      key_field: ID column
+      key_field_info_html: |
+        If you want to update data, you need to specify a column to use  to identify preexisting data.<br/>
+        The row attributes will be replaced by the ones from the imported file; attributes missing from the files will be left as-is.<br/>
+        New rows in the imported file will be appended to the layer.
+      reimport: Reimport existing data
+      save: Import
   layers:
     layer:
       center_on_row: Center map on this row

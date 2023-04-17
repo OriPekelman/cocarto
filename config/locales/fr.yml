@@ -51,9 +51,15 @@ fr:
       import_failed: 'Échec de l’import '
       import_successful: Import réussi
     show:
-      import_data: Importer des données
+      attention: Cette fonctionnalité est expérimentale; attendez-vous à des bugs, et n’hésitez pas à nous en parler.
+      import_data: Import de données
       key_field: Colonne d’identifiant
-      warning: Cette fonctionnalité est expérimentale; attendez-vous à des bugs, et n’hésitez pas à nous en parler.
+      key_field_info_html: |
+        Pour mettre à jour des données, spécifiez une colonne servant à identifier le rang préexistant.<br/>
+        Les attributs de chaque rang seront remplacés par ceux présents dans le fichier importé; les attributs absents du fichier ne seront pas supprimés. <br/>
+        Les nouveaux rangs dans le fichier seront rajoutés à la table.
+      reimport: Réimport de données existantes
+      save: Importer
   layers:
     layer:
       center_on_row: Centrer la carte sur cette ligne

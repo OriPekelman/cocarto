@@ -38,6 +38,16 @@ input[type="number"] {
   margin: 0 0 4px;
 }
 
+.form__details {
+  .form__details-summary {
+    margin: 0 0 16px;
+  }
+
+  .form__details-contents {
+    margin: 8px 0 8px 16px;
+  }
+}
+
 .form__field {
   // A sub-unit of a form. Can be nested.
   // Most form input labels and inputs should be inside a form__field div
@@ -111,6 +121,6 @@ input[type="number"] {
 }
 
 .form__field--file {
-  align-items: start;
+  align-items: center;
   flex-direction: row;
 }

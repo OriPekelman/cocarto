@@ -20,7 +20,8 @@ class ImportController < ApplicationController
   private
 
   def import_params
-    params.permit(:file, :key_field)
+    params.slice(:key_field, :file)
+      .permit(:key_field, :file)
   end
 
   def set_layer
