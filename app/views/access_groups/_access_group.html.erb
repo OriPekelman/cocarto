@@ -15,18 +15,12 @@
 
     <div class="list-element__row list-element__row--grid">
       <div class="form__field">
-        <%= form.label :role_type %>
         <%= form.select :role_type, options_for_select(AccessGroup.role_types.map { |access_group| [AccessGroup.human_attribute_name(access_group[0]), access_group[1]] }, access_group.role_type) %>
       </div>
 
       <div class="form__field">
-        <%= form.label :name %>
-        <%= form.text_field :name %>
-        <%= form.label :users %>
-        <%= form.fields_for :users do |f| %>
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true %>
-        <% end %>
         <% if access_group.token.present? %>
+          <%= form.text_field :name %>
           <% if access_group.persisted? %>
             <%= form.label :url_to_share %>
             <div class="form__input-with-button" data-controller="clipboard">
@@ -34,7 +28,11 @@
               <button data-action="clipboard#copy"><%= embedded_svg "copy.svg" %></button>
             </div>
           <% end %>
-        <% end %>
+        <% else %>
+          <%= form.fields_for :users do |f| %>
+            <%= f.email_field :email, autofocus: access_group.new_record?, required: true %>
+          <% end %>
+      <% end %>
       </div>
 
       <div class="form__field">
