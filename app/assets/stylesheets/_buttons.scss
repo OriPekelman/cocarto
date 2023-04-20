@@ -233,7 +233,9 @@
 
 .button--with-icon {
   display: flex;
+  gap: 8px;
   justify-content: space-between;
   padding: 6px;
   width: 100%;
+  white-space: nowrap;
 }

@@ -108,3 +108,8 @@ input[type="number"] {
 .form__field--large {
   font-size: 16px;
 }
+
+.form__field--file {
+  align-items: start;
+  flex-direction: row;
+}
