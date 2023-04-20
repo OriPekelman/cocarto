@@ -21,7 +21,25 @@
 require "test_helper"
 
 class RoleTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  class Validations < RoleTest
+    test "last owner can’t kick themselves" do
+      owner_role = access_groups("restaurants_reclus")
+      owner_role.map.access_groups.excluding(owner_role).destroy_all # Make sure it’s the only role
+
+      owner_role.destroy
+
+      assert_not_predicate owner_role, :destroyed?
+      assert_equal({map: [{error: :must_have_an_owner}]}, owner_role.errors.details)
+    end
+
+    test "last owner can’t demote themselves" do
+      owner_role = access_groups("restaurants_reclus")
+      owner_role.map.access_groups.excluding(owner_role).destroy_all # Make sure it’s the only role
+
+      owner_role.update(role_type: :editor)
+
+      assert_predicate owner_role, :has_changes_to_save?
+      assert_equal({map: [{error: :must_have_an_owner}]}, owner_role.errors.details)
+    end
+  end
 end
