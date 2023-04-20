@@ -1,19 +1,14 @@
 <%# params: @map %>
 
-<div class="container">
-  <div class="section section--center bordered-box">
-    <%= form_with(model: @map, id: dom_id(@map), class: "form") do |form| %>
-      <div class="card__main-content">
-        <h2 class="form__header"><%= t("helpers.link.map.new") %></h2>
-        <div class="form__field form__field--large">
-          <%= form.label :name %>
-          <%= form.text_field :name, autofocus: true %>
-        </div>
-      </div>
-      <div class="card__footer-content">
-        <%= link_to t("common.back"), maps_path, class: "button button--alternate" %>
-        <%= form.submit class: "button button--confirm", form: dom_id(@map) %>
-      </div>
-    <% end %>
+<%= form_with(model: @map, id: dom_id(@map), class: "form") do |form| %>
+  <div class="card__main-content">
+    <h2 class="form__header"><%= t("helpers.link.map.new") %></h2>
+    <div class="form__field form__field--large">
+      <%= form.label :name %>
+      <%= form.text_field :name, autofocus: true %>
+    </div>
   </div>
-</div>
+  <div class="card__footer-content">
+    <%= form.submit class: "button button--confirm", form: dom_id(@map) %>
+  </div>
+<% end %>
