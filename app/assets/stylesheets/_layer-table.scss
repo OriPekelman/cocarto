@@ -143,9 +143,6 @@
 .layer-table__th {
   color: var(--color-grey-80);
   background-color: var(--color-grey-20);
-  padding-inline: 8px;
-  resize: horizontal;
-  overflow: hidden; // Needed for resize:horizontal
   font-size: 10px;
   font-weight: 400;
   letter-spacing: 0.8px;
@@ -156,17 +153,25 @@
   text-decoration-color: var(--color-grey-50);
 }
 
+.layer-table-th__contents {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  padding-inline: 8px;
+}
+
+.layer-table-th__contents--resizable {
+  resize: horizontal;
+  overflow: hidden;
+}
+
 .layer-table__th--field {
   &:hover {
     background-color: var(--color-grey-30);
   }
 
-  span {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    white-space: nowrap;
-  }
+  white-space: nowrap;
 }
 
 .layer-table__tr {
