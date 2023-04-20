@@ -116,9 +116,9 @@ en:
         destroyed: Access was successfully destroyed.
         updated: Access was successfully updated.
       field:
-        created: New field %{name} created
-        destroyed: Field was successfully destroyed.
-        updated: Field was successfully updated.
+        created: New column %{name} created.
+        destroyed: Column successfully destroyed.
+        updated: Column successfully updated.
       layer:
         destroyed: Layer was successfully destroyed.
       map:
@@ -138,7 +138,7 @@ en:
         create_link: Create link
         update: Save
       field:
-        create: Add a field
+        create: Add
         update: Save
       layer:
         create: Create a layer
