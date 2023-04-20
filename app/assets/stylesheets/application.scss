@@ -13,6 +13,7 @@
 @use "map_document";
 @use "legal";
 @use "modal";
+@use "message";
 
 input[readonly],
 textarea[readonly] {
@@ -41,17 +42,5 @@ textarea[readonly] {
         background-color: var(--color-attention-20);
       }
     }
-  }
-}
-
-#error-explanation {
-  background-color: var(--color-attention-20);
-  font-size: 12px;
-  border-radius: var(--border-radius);
-  padding: 1rem 2rem;
-
-  h2 {
-    font-size: 16px;
-    color: var(--color-green-100);
   }
 }

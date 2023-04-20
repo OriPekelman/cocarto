@@ -1,0 +1,39 @@
+.message {
+  padding: 8px 16px;
+  border-radius: var(--border-radius);
+  font-family: var(--font-sans);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.message__title {
+  font-size: 16px;
+}
+
+.message__list {
+  padding-inline-start: 16px;
+}
+
+// Note: :notice and :alert are the default Rails flash types
+.message--notice,
+.message--info {
+  color: var(--color-info-40);
+  background-color: var(--color-info-10);
+}
+
+.message--alert,
+.message--attention {
+  color: var(--color-attention-40);
+  background-color: var(--color-attention-10);
+}
+
+.message--success {
+  color: var(--color-succes-40);
+  background-color: var(--color-succes-10);
+}
+
+.message--error {
+  color: var(--color-error-40);
+  background-color: var(--color-error-10);
+}

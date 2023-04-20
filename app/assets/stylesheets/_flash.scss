@@ -7,34 +7,3 @@
   max-width: 500px;
   align-items: center;
 }
-
-.flash__message {
-  padding: 8px 16px;
-  width: 100%;
-  font-family: var(--font-sans);
-
-  &::before {
-    content: "•"; // TODO: use the Information/SuccessCircle/WarningCircle/Error icons
-  }
-}
-
-// Note: :notice and :alert are the default Rails flash types, we support also :success and :error
-.flash__message--notice {
-  color: var(--color-info-40);
-  background-color: var(--color-info-10);
-}
-
-.flash__message--alert {
-  color: var(--color-attention-40);
-  background-color: var(--color-attention-10);
-}
-
-.flash__message--success {
-  color: var(--color-succes-40);
-  background-color: var(--color-succes-10);
-}
-
-.flash__message--error {
-  color: var(--color-error-40);
-  background-color: var(--color-error-10);
-}
