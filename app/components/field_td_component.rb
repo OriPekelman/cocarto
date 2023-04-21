@@ -16,7 +16,7 @@ class FieldTdComponent < ViewComponent::Base
     when "boolean"
       %w[layer-table__td--checkbox]
     when "files"
-      %w[]
+      %w[layer-table__td--field layer-table__td--files]
     else
       raise ArgumentError
     end

@@ -25,10 +25,12 @@ class FieldValueComponent < ViewComponent::Base
     when "enum"
       select_tag field_name, options_for_select(@field.enum_values, @value), opts.merge(include_blank: true)
     when "files"
-      link_to Row.human_attribute_name(:files, count: (@value || []).length),
+      name = @value.present? ? Row.human_attribute_name(:files, count: @value.length) : t("common.ellipsis")
+      link_to name,
         edit_layer_row_path(@row.layer_id, @row.id, field_id: @field.id),
         data: {turbo_frame: "modal"},
-        class: "button button--slim button--link"
+        title: t("field.add_attachments"),
+        class: "layer-table-td__files-button"
     else
       text_field_tag field_name, @value, opts.merge(class: "input")
     end
