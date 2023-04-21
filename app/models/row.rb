@@ -23,11 +23,12 @@
 #
 # Indexes
 #
-#  index_rows_on_author_id     (author_id)
-#  index_rows_on_created_at    (created_at)
-#  index_rows_on_layer_id      (layer_id)
-#  index_rows_on_territory_id  (territory_id)
-#  index_rows_on_updated_at    (updated_at)
+#  index_rows_on_author_id          (author_id)
+#  index_rows_on_created_at         (created_at)
+#  index_rows_on_geom_web_mercator  (geom_web_mercator) USING gist
+#  index_rows_on_layer_id           (layer_id)
+#  index_rows_on_territory_id       (territory_id)
+#  index_rows_on_updated_at         (updated_at)
 #
 # Foreign Keys
 #
@@ -75,8 +76,7 @@ class Row < ApplicationRecord
       COALESCE(rows.geo_lng_min, territories.geo_lng_min) as geo_lng_min,
       COALESCE(rows.geo_lat_min, territories.geo_lat_min) as geo_lat_min,
       COALESCE(rows.geo_lng_max, territories.geo_lng_max) as geo_lng_max,
-      COALESCE(rows.geo_lat_max, territories.geo_lat_max) as geo_lat_max,
-      COALESCE(rows.geom_web_mercator, territories.geom_web_mercator) as geo_lat_max
+      COALESCE(rows.geo_lat_max, territories.geo_lat_max) as geo_lat_max
     SQL
              )
   end

@@ -68,10 +68,57 @@ class Layer < ApplicationRecord
     style["color"] = new_color
   end
 
+  def as_mvt(x, y, z)
+    sql = sanitized_select_as_mvt(x, y, z)
+    records = ActiveRecord::Base.connection.execute(sql)
+    ActiveRecord::Base.connection.unescape_bytea(records[0]["mvt"])
+  end
+
   # Dynamic Fields Associations
   # return all the names for the dynamic associations.
   # They can be used in `.includes` or `.preload`/`.eager_load` for the rows of this layer.
   def fields_association_names
     fields.type_territory.map(&:association_name)
+  end
+
+  private
+
+  def sanitized_select_as_mvt(x, y, z)
+    query = <<-SQL
+      WITH
+        -- first select the geometries that might be in the tiles
+        geoms AS (
+          SELECT
+            COALESCE(rows.geom_web_mercator, territories.geom_web_mercator) AS geom
+          FROM
+            rows
+          LEFT JOIN
+            territories ON territories.id = rows.territory_id
+          WHERE
+            rows.layer_id = :layer_id
+        ),
+
+        -- transform those geometries into the right format for MVT
+        mvt_geom AS (
+          SELECT
+            ST_AsMVTGeom(geom, ST_TileEnvelope(:z, :x, :y))
+          FROM
+            geoms
+          WHERE
+            -- the `&&` operator compares the bounding box of the two geometries using the spatial index
+            -- this where condition won’t change the end result, but will improve the performances
+            geom && ST_TileEnvelope(:z, :x, :y)
+        )
+
+      SELECT
+        -- generate the tile
+        -- the parameter of ST_AsMVT must be rows, not records
+        -- that is why we must do sub-requests
+        ST_AsMVT(mvt_geom.*, 'layer') AS mvt
+      FROM
+        mvt_geom
+    SQL
+
+    Layer.sanitize_sql_array([query, x: x, y: y, z: z, layer_id: id])
   end
 end

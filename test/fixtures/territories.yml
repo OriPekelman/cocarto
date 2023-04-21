@@ -21,6 +21,7 @@
 # Indexes
 #
 #  index_territories_on_code_and_territory_category_id  (code,territory_category_id) UNIQUE
+#  index_territories_on_geom_web_mercator               (geom_web_mercator) USING gist
 #  index_territories_on_name                            (name) USING gin
 #  index_territories_on_parent_id                       (parent_id)
 #  index_territories_on_territory_category_id           (territory_category_id)

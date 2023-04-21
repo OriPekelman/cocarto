@@ -23,11 +23,12 @@
 #
 # Indexes
 #
-#  index_rows_on_author_id     (author_id)
-#  index_rows_on_created_at    (created_at)
-#  index_rows_on_layer_id      (layer_id)
-#  index_rows_on_territory_id  (territory_id)
-#  index_rows_on_updated_at    (updated_at)
+#  index_rows_on_author_id          (author_id)
+#  index_rows_on_created_at         (created_at)
+#  index_rows_on_geom_web_mercator  (geom_web_mercator) USING gist
+#  index_rows_on_layer_id           (layer_id)
+#  index_rows_on_territory_id       (territory_id)
+#  index_rows_on_updated_at         (updated_at)
 #
 # Foreign Keys
 #
