@@ -75,7 +75,8 @@ class Row < ApplicationRecord
       COALESCE(rows.geo_lng_min, territories.geo_lng_min) as geo_lng_min,
       COALESCE(rows.geo_lat_min, territories.geo_lat_min) as geo_lat_min,
       COALESCE(rows.geo_lng_max, territories.geo_lng_max) as geo_lng_max,
-      COALESCE(rows.geo_lat_max, territories.geo_lat_max) as geo_lat_max
+      COALESCE(rows.geo_lat_max, territories.geo_lat_max) as geo_lat_max,
+      COALESCE(rows.geom_web_mercator, territories.geom_web_mercator) as geo_lat_max
     SQL
              )
   end
