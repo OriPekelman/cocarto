@@ -38,25 +38,17 @@ require "test_helper"
 
 class RowTest < ActiveSupport::TestCase
   class FieldsValuesTest < RowTest
-    def layer
-      layers("restaurants")
-    end
-
-    def field(field_label)
-      layer.fields.find_by(label: field_label)
-    end
-
-    def restaurant_with_value(field, value)
-      layer.rows.new(values: {field.id => value})
-    end
-
     # Read values from DB
     test "value is returned" do
-      assert_equal "Le Bastringue", restaurant_with_value(field("Name"), "Le Bastringue").fields_values[field("Name")]
+      row = layers(:restaurants).rows.new(values: {fields(:restaurant_name).id => "Le Bastringue"})
+
+      assert_equal "Le Bastringue", row.fields_values[fields(:restaurant_name)]
     end
 
     test "invalid field identifier is filtered" do
-      assert_nil layer.rows.new(values: {invalid_field_identifier: "whatever"}).fields_values[:invalid_field_identifier]
+      row = layers(:restaurants).rows.new(values: {invalid_field_identifier: "whatever"})
+
+      assert_nil row.fields_values[:invalid_field_identifier]
     end
 
     test "territory value is returned as Territory object" do
@@ -64,49 +56,51 @@ class RowTest < ActiveSupport::TestCase
 
       antipode_from_db = layers("restaurants").rows.includes(layers("restaurants").fields_association_names).find(antipode.id)
 
-      assert_equal territories("paris"), antipode_from_db.fields_values[field("Ville")]
+      assert_equal territories("paris"), antipode_from_db.fields_values[fields(:restaurant_ville)]
     end
 
     test "invalid territory identifier is ignored" do
       antipode = rows("antipode")
-      antipode.fields_values = {field("Ville").id => "invalid identifier"}
+      antipode.fields_values = {fields(:restaurant_ville).id => "invalid identifier"}
       antipode.save!
 
       antipode_from_db = layers("restaurants").rows.includes(layers("restaurants").fields_association_names).find(antipode.id)
 
-      assert_nil antipode_from_db.fields_values[field("Ville")]
+      assert_nil antipode_from_db.fields_values[fields(:restaurant_ville)]
     end
 
     # Set values from user input
     test "value is saved" do
-      row = Row.new(layer: layer)
-      row.assign_attributes(fields_values: {field("Name").id => "Le Bastringue"})
+      row = layers(:restaurants).rows.new
+      row.fields_values = {fields(:restaurant_name).id => "Le Bastringue"}
 
-      assert_equal "Le Bastringue", row.values[field("Name").id]
+      assert_equal "Le Bastringue", row.values[fields(:restaurant_name).id]
     end
 
     test "invalid field identifier is not saved" do
-      row = Row.new(layer: layer)
-      row.assign_attributes(fields_values: {invalid_field_identifier: "whatever"})
+      row = layers(:restaurants).rows.new
+      row.fields_values = {invalid_field_identifier: "whatever"}
 
       assert_nil row.values[:invalid_field_identifier]
     end
 
     test "valid territory id is saved" do
-      row = Row.new(layer: layer)
-      row.assign_attributes(fields_values: {field("Ville").id => territories("paris").id})
+      row = layers(:restaurants).rows.new
+      row.fields_values = {fields(:restaurant_ville).id => territories("paris").id}
 
-      assert_equal territories("paris").id, row.values[field("Ville").id]
+      assert_equal territories("paris").id, row.values[fields(:restaurant_ville).id]
     end
 
     test "invalid territory id is ignored" do
-      row = Row.new(layer: layer)
-      row.assign_attributes(fields_values: {field("Ville").id => "invalid_identifier"})
+      row = layers(:restaurants).rows.new
+      row.fields_values = {fields(:restaurant_ville).id => "invalid_identifier"}
 
-      assert_nil row.values[field("Ville").id]
+      assert_nil row.values[fields(:restaurant_ville).id]
+
     end
 
     test "compute bounds" do # rubocop:disable Minitest/MultipleAssertions
+      layer = layers(:restaurants)
       bounds = layer.rows.bounding_box
 
       assert_in_epsilon 2.37516, bounds[0]
