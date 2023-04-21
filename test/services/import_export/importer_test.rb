@@ -10,12 +10,8 @@ class ImporterTest < ActiveSupport::TestCase
   test "import csv" do
     layers(:restaurants).rows.destroy_all
 
-    csv = <<~CSV
-      Name,Rating,Table Size,Ville,Date,Decision,geojson
-      L’Antipode,9,70,75056,,,"{""type"":""Point"",""coordinates"":[2.37516,48.88661]}"
-    CSV
-
-    assert_changes -> { layers(:restaurants).rows.count }, from: 0, to: 1 do
+    csv = file_fixture("restaurants.csv").read
+    assert_changes -> { layers(:restaurants).rows.count }, from: 0, to: 2 do
       ImportExport.import(layers(:restaurants), :csv, csv, author: users(:reclus))
     end
   end
@@ -41,15 +37,13 @@ class ImporterTest < ActiveSupport::TestCase
 
   test "reimport should only update the values" do
     layers(:restaurants).rows.destroy_all
-    csv = <<~CSV
-      Name,Rating,Table Size,Ville,Date,Decision,geojson
-      Le Bastringue,5,70,75056,,,"{""type"":""Point"",""coordinates"":[2.37516,48.88661]}"
-    CSV
+
+    csv = file_fixture("restaurants.csv").read
 
     ImportExport.import(layers(:restaurants), :csv, csv, author: users(:reclus), key_field: fields(:restaurant_name).id)
-    row = layers(:restaurants).rows.first
+    bastringue = layers(:restaurants).rows.last
 
-    assert_equal 5, row.fields_values[fields(:restaurant_rating)]
+    assert_equal 5, bastringue.fields_values[fields(:restaurant_rating)]
 
     new_csv = <<~CSV
       Name,Rating
@@ -57,7 +51,7 @@ class ImporterTest < ActiveSupport::TestCase
     CSV
     ImportExport.import(layers(:restaurants), :csv, new_csv, author: users(:reclus), key_field: fields(:restaurant_name).id)
 
-    assert_equal 1, layers(:restaurants).rows.count
-    assert_equal 10, row.reload.fields_values[fields(:restaurant_rating)]
+    assert_equal 2, layers(:restaurants).rows.count
+    assert_equal 10, bastringue.reload.fields_values[fields(:restaurant_rating)]
   end
 end

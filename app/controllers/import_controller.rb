@@ -5,9 +5,9 @@ class ImportController < ApplicationController
   end
 
   def create
-    path = params[:file].path
+    path = import_params[:file].path
     csv = File.read(path)
-    ImportExport.import(@layer, :csv, csv, author: current_user, stream: true)
+    ImportExport.import(@layer, :csv, csv, key_field: import_params[:key_field], author: current_user, stream: true)
     respond_to do |format|
       format.turbo_stream
       format.html { redirect_to @layer, notice: t(".import_successful") }
@@ -18,6 +18,11 @@ class ImportController < ApplicationController
   end
 
   private
+
+  def import_params
+    params.slice(:key_field, :file)
+      .permit(:key_field, :file)
+  end
 
   def set_layer
     @layer = authorize Layer.find(params[:layer_id])
