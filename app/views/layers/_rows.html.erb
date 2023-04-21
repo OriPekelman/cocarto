@@ -6,15 +6,15 @@
     <tr class="layer-table__tr">
       <%# calculated columns first %>
       <% if layer.geometry_territory? %>
-        <th class="layer-table__th"></th>
-        <th class="layer-table__th"><%= t("common.territory_code") %></th>
+        <th class="layer-table__th "></th>
+        <th class="layer-table__th layer-table__th--stats"><%= t("common.territory_code") %></th>
       <% elsif layer.geometry_point? %>
-        <th class="layer-table__th"><%= t("common.longitude") %></th>
-        <th class="layer-table__th"><%= t("common.latitude") %></th>
+        <th class="layer-table__th layer-table__th--stats"><%= t("common.longitude") %></th>
+        <th class="layer-table__th layer-table__th--stats"><%= t("common.latitude") %></th>
       <% elsif layer.geometry_line_string? %>
-        <th class="layer-table__th"><%= t("common.length") %></th>
+        <th class="layer-table__th layer-table__th--stats"><%= t("common.length") %></th>
       <% elsif layer.geometry_polygon? %>
-        <th class="layer-table__th"><%= t("common.area") %></th>
+        <th class="layer-table__th layer-table__th--stats"><%= t("common.area") %></th>
       <% end %>
 
       <%= render layer.fields %>
