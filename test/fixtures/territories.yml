@@ -10,6 +10,7 @@
 #  geo_lng_max           :decimal(, )
 #  geo_lng_min           :decimal(, )
 #  geojson               :text
+#  geom_web_mercator     :geometry         geometry, 0
 #  geometry              :geometry         multipolygon, 4326
 #  name                  :string
 #  created_at            :datetime         not null
