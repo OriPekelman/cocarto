@@ -114,10 +114,15 @@ class Row < ApplicationRecord
   end
 
   def fields_values=(new_fields_values)
-    cleaned_values = layer.fields.to_h do |field|
-      value = new_fields_values[field.id]
+    # Filter invalid field IDs
+    filtered_values = new_fields_values.filter { _1.in? layer.field_ids }
 
-      if field.type_files? && value.present?
+    # Cast values
+    casted_values = filtered_values.to_h do |field_id, value|
+      field = layer.fields.find(field_id)
+
+      if field.type_files?
+        # Create blobs for Files fields
         new_blob_ids = value.map { |file|
           blob = ActiveStorage::Blob.create_and_upload!(
             io: file,
@@ -128,14 +133,15 @@ class Row < ApplicationRecord
           files.attach(blob)
           blob.id
         }
-        existing_blob_ids = values[field.id] || []
+        existing_blob_ids = values[field_id] || []
         value = existing_blob_ids + new_blob_ids
       end
 
-      [field.id, field.cast(value)]
+      [field_id, field.cast(value)]
     end
 
-    self.values = cleaned_values
+    # Keep other values intact
+    values.update(casted_values)
   end
 
   # Accessor to the correct geometry attribute (row.point, row.line_string or row.polygon)
