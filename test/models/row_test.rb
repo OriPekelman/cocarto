@@ -96,7 +96,14 @@ class RowTest < ActiveSupport::TestCase
       row.fields_values = {fields(:restaurant_ville).id => "invalid_identifier"}
 
       assert_nil row.values[fields(:restaurant_ville).id]
+    end
 
+    test "partial values hash do not clear other valid values" do
+      row = Row.new(layer: layers(:restaurants), values: {fields(:restaurant_name).id => "Le Bastringue", fields(:restaurant_rating).id => 5})
+      row.fields_values = {fields(:restaurant_name).id => "Le Bistrot"}
+
+      assert_equal "Le Bistrot", row.values[fields(:restaurant_name).id]
+      assert_equal 5, row.values[fields(:restaurant_rating).id]
     end
 
     test "compute bounds" do # rubocop:disable Minitest/MultipleAssertions
