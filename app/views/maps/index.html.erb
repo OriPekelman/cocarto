@@ -18,6 +18,6 @@
         </li>
       <% end %>
     </ul>
-    <%= link_to t("helpers.link.map.new"), new_map_path, class: "button button--large button--confirm" %>
+    <%= link_to t("helpers.link.map.new"), new_map_path, class: "button button--large button--confirm", data: {turbo_frame: "modal"} %>
   </section>
 </div>
