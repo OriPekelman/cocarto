@@ -268,6 +268,24 @@
   }
 }
 
+// Files Field cells: customize the a to make it look clickable
+.layer-table__td--files {
+  .layer-table-td__files-button {
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-family: var(--font-sans);
+    color: var(--color-text);
+    padding-inline: 8px;
+
+    &:hover {
+      background-color: var(--color-bg-ambient-30);
+    }
+  }
+}
+
 // Action Cell (rightmost)
 .layer-table__td--actions {
   background-color: var(--color-grey-30);

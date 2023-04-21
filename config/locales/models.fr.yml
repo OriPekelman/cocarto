@@ -46,7 +46,7 @@ fr:
         files:
           one: 1 fichier
           other: "%{count} fichiers"
-          zero: ''
+          zero: aucun fichier
       territory:
         code: identifiant
         parent: partie de

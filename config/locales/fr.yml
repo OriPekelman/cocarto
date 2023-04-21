@@ -30,6 +30,7 @@ fr:
     back: Retour
     confirm: Êtes-vous sûr ?
     dragbar_cursor: Curseur de la barre de défilement
+    ellipsis: "…"
     failed: 'Échec : %{msg}'
     latitude: Latitude
     length: Longueur

@@ -30,6 +30,7 @@ en:
     back: Back
     confirm: Are you sure?
     dragbar_cursor: Dragbar cursor
+    ellipsis: "…"
     failed: 'Failed: %{msg}'
     latitude: Latitude
     length: Length
