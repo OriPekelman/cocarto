@@ -32,6 +32,7 @@ class AccessGroup < ApplicationRecord
   validates :role_type, presence: true
 
   # Hooks
+  before_update :map_must_have_an_owner
   before_destroy :map_must_have_an_owner
 
   def map_must_have_an_owner
