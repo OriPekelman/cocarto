@@ -50,5 +50,19 @@ class LayerControllerTest < ActionDispatch::IntegrationTest
       assert_equal "text/csv", @response.media_type
       assert_equal "geojson", csv.dig(0, 0)
     end
+
+    test "mvt of a layer with some data in it" do
+      sign_in users(:reclus)
+      get url_for(controller: :layers, action: :mvt, id: layers(:restaurants).id, x: 518, y: 352, z: 10)
+
+      assert @response.body.size > 0
+    end
+
+    test "mvt of a layer with no data because there is nothing on that tile" do
+      sign_in users(:reclus)
+      get url_for(controller: :layers, action: :mvt, id: layers(:restaurants).id, x: 100, y: 100, z: 10)
+
+      assert_equal 0, @response.body.size
+    end
   end
 end
