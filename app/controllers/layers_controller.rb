@@ -57,7 +57,9 @@ class LayersController < ApplicationController
     # MVT is a vector tile format used to render features on a map
     # A tile in the xyz is defined by its zoom level (z) and position on the map
     # This functions returs the MVT tile of the current layer
-    send_data @layer.as_mvt(params[:x], params[:y], params[:z])
+    x, y, z = params[:x], params[:y], params[:z]
+    tile = Rails.cache.fetch([@layer, "mvt", x, y, z]) { @layer.as_mvt(x, y, z) }
+    send_data tile
   end
 
   private
