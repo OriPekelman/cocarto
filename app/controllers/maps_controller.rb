@@ -12,6 +12,10 @@ class MapsController < ApplicationController
 
   def show
     @role_type = current_user.access_groups.find_by(map: @map)&.role_type
+    respond_to do |format|
+      format.html
+      format.style { render json: @map.style(url_for(Layer)) }
+    end
   end
 
   def new

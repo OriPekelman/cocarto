@@ -81,6 +81,50 @@ class Layer < ApplicationRecord
     fields.type_territory.map(&:association_name)
   end
 
+  def maplibre_source(base_url)
+    {
+      type: "vector",
+      tiles: ["#{base_url}/#{id}/mvt/{z}/{x}/{y}"]
+    }
+  end
+
+  def maplibre_style
+    layer_id = dom_id(self)
+
+    type = {
+      "point" => "circle",
+      "line_string" => "line",
+      "polygon" => "fill",
+      "territory" => "fill"
+    }[geometry_type]
+
+    paint = case geometry_type
+    when "point"
+      {
+        "circle-color": color,
+        "circle-radius": 6
+      }
+    when "line_string"
+      {
+        "line-color": color,
+        "line-width": 2
+      }
+    when "polygon", "territory"
+      {
+        "fill-color": color,
+        "fill-opacity": 0.5
+      }
+    end
+
+    {
+      id: layer_id,
+      source: layer_id,
+      type: type,
+      paint: paint,
+      "source-layer": "layer" # This name is defined when building the mvt tiles
+    }
+  end
+
   private
 
   def sanitized_select_as_mvt(x, y, z)
