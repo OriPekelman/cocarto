@@ -38,7 +38,8 @@ class Map < ApplicationRecord
     # The demotiles is very basic, only country borders
     # One must define a basemap as a maplibre style (e.g. from a provider such as maptiler)
     base_map = ENV["DEFAULT_MAP_STYLE"] || "https://demotiles.maplibre.org/style.json"
-    style = JSON.parse(Net::HTTP.get(URI(base_map)))
+    json = Rails.cache.fetch(base_map, expires_in: 24.hours) { Net::HTTP.get(URI(base_map)) }
+    style = JSON.parse(json)
 
     layers.each do |layer|
       style["sources"][dom_id(layer)] = layer.maplibre_source(base_url)
