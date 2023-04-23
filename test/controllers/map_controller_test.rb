@@ -19,4 +19,13 @@ class MapControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
   end
+
+  test "get a style" do
+    sign_in users(:reclus)
+    get map_url(id: maps(:restaurants).id, format: :style)
+    style = JSON.parse(response.body) # rubocop:disable Rails/ResponseParsedBody
+    layer_ids = style["layers"].pluck("id")
+
+    assert_includes layer_ids, dom_id(layers(:restaurants))
+  end
 end
