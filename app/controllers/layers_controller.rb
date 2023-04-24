@@ -3,7 +3,7 @@ require "securerandom"
 class LayersController < ApplicationController
   before_action :access_by_apikey, only: %i[show], if: -> { request.format.to_sym.in? ImportExport::EXPORTERS.keys }
   before_action :authenticate_user!
-  before_action :set_layer, only: %i[show update destroy]
+  before_action :set_layer, only: %i[show update destroy mvt]
 
   def show
     respond_to do |format|
@@ -51,6 +51,15 @@ class LayersController < ApplicationController
       format.turbo_stream
       format.html { redirect_to @layer.map, notice: t("helpers.message.layer.destroyed"), status: :see_other }
     end
+  end
+
+  def mvt
+    # MVT is a vector tile format used to render features on a map
+    # A tile in the xyz is defined by its zoom level (z) and position on the map
+    # This functions returs the MVT tile of the current layer
+    x, y, z = params[:x], params[:y], params[:z]
+    tile = Rails.cache.fetch([@layer, "mvt", x, y, z]) { @layer.as_mvt(x, y, z) }
+    send_data tile
   end
 
   private

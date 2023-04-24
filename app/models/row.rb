@@ -2,31 +2,33 @@
 #
 # Table name: rows
 #
-#  id           :uuid             not null, primary key
-#  geo_area     :decimal(, )
-#  geo_lat_max  :decimal(, )
-#  geo_lat_min  :decimal(, )
-#  geo_length   :decimal(, )
-#  geo_lng_max  :decimal(, )
-#  geo_lng_min  :decimal(, )
-#  geojson      :text
-#  line_string  :geometry         linestring, 4326
-#  point        :geometry         point, 4326
-#  polygon      :geometry         polygon, 4326
-#  values       :jsonb            not null
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
-#  author_id    :uuid             not null
-#  layer_id     :uuid             not null
-#  territory_id :uuid
+#  id                :uuid             not null, primary key
+#  geo_area          :decimal(, )
+#  geo_lat_max       :decimal(, )
+#  geo_lat_min       :decimal(, )
+#  geo_length        :decimal(, )
+#  geo_lng_max       :decimal(, )
+#  geo_lng_min       :decimal(, )
+#  geojson           :text
+#  geom_web_mercator :geometry         geometry, 0
+#  line_string       :geometry         linestring, 4326
+#  point             :geometry         point, 4326
+#  polygon           :geometry         polygon, 4326
+#  values            :jsonb            not null
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  author_id         :uuid             not null
+#  layer_id          :uuid             not null
+#  territory_id      :uuid
 #
 # Indexes
 #
-#  index_rows_on_author_id     (author_id)
-#  index_rows_on_created_at    (created_at)
-#  index_rows_on_layer_id      (layer_id)
-#  index_rows_on_territory_id  (territory_id)
-#  index_rows_on_updated_at    (updated_at)
+#  index_rows_on_author_id          (author_id)
+#  index_rows_on_created_at         (created_at)
+#  index_rows_on_geom_web_mercator  (geom_web_mercator) USING gist
+#  index_rows_on_layer_id           (layer_id)
+#  index_rows_on_territory_id       (territory_id)
+#  index_rows_on_updated_at         (updated_at)
 #
 # Foreign Keys
 #

@@ -10,6 +10,7 @@
 #  geo_lng_max           :decimal(, )
 #  geo_lng_min           :decimal(, )
 #  geojson               :text
+#  geom_web_mercator     :geometry         geometry, 0
 #  geometry              :geometry         multipolygon, 4326
 #  name                  :string
 #  created_at            :datetime         not null
@@ -20,6 +21,7 @@
 # Indexes
 #
 #  index_territories_on_code_and_territory_category_id  (code,territory_category_id) UNIQUE
+#  index_territories_on_geom_web_mercator               (geom_web_mercator) USING gist
 #  index_territories_on_name                            (name) USING gin
 #  index_territories_on_parent_id                       (parent_id)
 #  index_territories_on_territory_category_id           (territory_category_id)

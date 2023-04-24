@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_14_134817) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_21_074003) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -152,8 +152,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_14_134817) do
     t.virtual "geo_lat_max", type: :decimal, as: "st_ymax((COALESCE(point, line_string, polygon))::box3d)", stored: true
     t.virtual "geo_length", type: :decimal, as: "st_length((line_string)::geography)", stored: true
     t.virtual "geo_area", type: :decimal, as: "st_area((polygon)::geography)", stored: true
+    t.virtual "geom_web_mercator", type: :geometry, limit: {:srid=>0, :type=>"geometry"}, as: "st_transform(COALESCE(point, line_string, polygon), 3857)", stored: true
     t.index ["author_id"], name: "index_rows_on_author_id"
     t.index ["created_at"], name: "index_rows_on_created_at"
+    t.index ["geom_web_mercator"], name: "index_rows_on_geom_web_mercator", using: :gist
     t.index ["layer_id"], name: "index_rows_on_layer_id"
     t.index ["territory_id"], name: "index_rows_on_territory_id"
     t.index ["updated_at"], name: "index_rows_on_updated_at"
@@ -174,7 +176,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_14_134817) do
     t.virtual "geo_lng_max", type: :decimal, as: "st_xmax((geometry)::box3d)", stored: true
     t.virtual "geo_lat_max", type: :decimal, as: "st_ymax((geometry)::box3d)", stored: true
     t.virtual "geo_area", type: :decimal, as: "st_area((geometry)::geography)", stored: true
+    t.virtual "geom_web_mercator", type: :geometry, limit: {:srid=>0, :type=>"geometry"}, as: "st_transform(geometry, 3857)", stored: true
     t.index ["code", "territory_category_id"], name: "index_territories_on_code_and_territory_category_id", unique: true
+    t.index ["geom_web_mercator"], name: "index_territories_on_geom_web_mercator", using: :gist
     t.index ["name"], name: "index_territories_on_name", opclass: :gin_trgm_ops, using: :gin
     t.index ["parent_id"], name: "index_territories_on_parent_id"
     t.index ["territory_category_id"], name: "index_territories_on_territory_category_id"

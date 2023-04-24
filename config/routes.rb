@@ -27,6 +27,9 @@ Rails.application.routes.draw do
           resource :import, only: [:show, :create], controller: :import
         end
       end
+      member do
+        get "/mvt/:z/:x/:y/", action: :mvt
+      end
     end
     resources :fields, only: [:create, :update, :destroy]
 

@@ -11,6 +11,8 @@ class LayerPolicy < ApplicationPolicy
 
   def destroy? = access_group&.owner?
 
+  def mvt? = show?
+
   private
 
   def access_group
