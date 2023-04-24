@@ -8,6 +8,7 @@ fr:
         name: Description
         owner: Propriétaire
         role_type: Rôle
+        token_group: Lien de partage
         url_to_share: Lien à partager
         viewer: Observateur
       field:
