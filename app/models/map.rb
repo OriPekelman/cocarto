@@ -11,6 +11,8 @@
 #  updated_at        :datetime         not null
 #
 class Map < ApplicationRecord
+  include Mvt::MapStyle
+
   # Relations
   has_many :access_groups, dependent: :destroy, inverse_of: :map
   has_many :layers, dependent: :destroy
@@ -32,20 +34,5 @@ class Map < ApplicationRecord
     if name_previously_changed?
       broadcast_i18n_replace_to self, target: dom_id(self, :name), partial: "maps/name"
     end
-  end
-
-  def style(base_url)
-    # The demotiles is very basic, only country borders
-    # One must define a basemap as a maplibre style (e.g. from a provider such as maptiler)
-    base_map = ENV["DEFAULT_MAP_STYLE"] || "https://demotiles.maplibre.org/style.json"
-    json = Rails.cache.fetch(base_map, expires_in: 24.hours) { Net::HTTP.get(URI(base_map)) }
-    style = JSON.parse(json)
-
-    layers.each do |layer|
-      style["sources"][dom_id(layer)] = layer.maplibre_source(base_url)
-      style["layers"] << layer.maplibre_style
-    end
-
-    style
   end
 end
