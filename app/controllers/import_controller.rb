@@ -6,7 +6,7 @@ class ImportController < ApplicationController
 
   def create
     path = import_params[:file].path
-    csv = File.read(path)
+    csv = File.open(path)
     ImportExport.import(@layer, :csv, csv, key_field: import_params[:key_field], author: current_user, stream: true)
     respond_to do |format|
       format.turbo_stream

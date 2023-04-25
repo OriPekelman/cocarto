@@ -1,9 +1,9 @@
 module ImportExport
   class CsvImporter < ImporterBase
     def import_rows
-      lines = CSV.parse(@input, headers: true)
+      csv = CSV.new(@input, headers: true)
 
-      lines.each do |line|
+      csv.each do |line|
         values = line.to_h
         geojson = values.delete("geojson")
         values = values.transform_keys do |k|
