@@ -2,6 +2,10 @@
 # It contains data that wil be rendered by maplibre-gl-js according to a style
 # This concern contains the functions to generate the Vector Tiles and the style to render them
 module Mvt
+  # Name of the layer in the tile
+  # We use one tileset per layer to allow a fine grained refreshing of the tiles when geometries change
+  # Because we use one tileset per layer, it’s always the same name
+  TILE_LAYER_ID = "layer"
   module LayerTiles
     def as_mvt(x, y, z)
       sql = sanitized_select_as_mvt(x, y, z)
@@ -42,12 +46,12 @@ module Mvt
           -- generate the tile
           -- the parameter of ST_AsMVT must be rows, not records
           -- that is why we must do sub-requests
-          ST_AsMVT(mvt_geom.*, 'layer') AS mvt
+          ST_AsMVT(mvt_geom.*, :tile_layer_id) AS mvt
         FROM
           mvt_geom
       SQL
 
-      Layer.sanitize_sql_array([query, x: x, y: y, z: z, layer_id: id])
+      Layer.sanitize_sql_array([query, x: x, y: y, z: z, layer_id: id, tile_layer_id: TILE_LAYER_ID])
     end
   end
 
@@ -92,7 +96,7 @@ module Mvt
         source: layer_id,
         type: type,
         paint: paint,
-        "source-layer": "layer" # This name is defined when building the mvt tiles
+        "source-layer": TILE_LAYER_ID
       }
     end
   end
