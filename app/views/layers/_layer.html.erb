@@ -8,6 +8,7 @@
   data-layer-geometry-type-value="<%= layer.geometry_type %>">
 
   <%= render "layers/table_header", layer: layer %>
+  <div id="<%= dom_id(layer, :updates) %>" hidden></div>
 
   <div class="layer-contents">
     <%= render "layers/rows", layer: layer %>

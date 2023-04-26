@@ -51,9 +51,11 @@ class Row < ApplicationRecord
   has_one :map, through: :layer, inverse_of: :rows
 
   # Hooks
+  after_create_commit -> { broadcast_i18n_append_to map, target: dom_id(layer, :rows), html: render(extra_class: "layer-table__tr--transition layer-table__tr--created") }
   after_update_commit -> { broadcast_i18n_replace_to layer.map, html: render }
   after_destroy_commit -> { broadcast_remove_to layer.map }
-  after_create_commit -> { broadcast_i18n_append_to map, target: dom_id(layer, :rows), html: render(extra_class: "layer-table__tr--transition layer-table__tr--created") }
+
+  after_commit :after_geometry_changed, on: [:create, :update, :destroy]
 
   # Dynamic Fields Associations
   include FieldValuesAssociations::RowAssociations
@@ -287,6 +289,12 @@ class Row < ApplicationRecord
         warnings.add(:geometry, :multiple_items)
       end
       self.geometry = geometry.first
+    end
+  end
+
+  def after_geometry_changed
+    if previous_changes.key?(layer.geometry_type)
+      broadcast_i18n_append_to layer.map, target: dom_id(layer, :updates), partial: "layers/update", locals: {layer_id: layer_id}
     end
   end
 end

@@ -2,7 +2,7 @@ import { Controller } from '@hotwired/stimulus'
 import MapState from 'lib/map_state'
 
 export default class extends Controller {
-  static targets = ['map', 'row', 'addButton', 'defaultLatitude', 'defaultLongitude', 'defaultZoom', 'toolbarLeft', 'toolbarRight']
+  static targets = ['map', 'row', 'addButton', 'defaultLatitude', 'defaultLongitude', 'defaultZoom', 'toolbarLeft', 'toolbarRight', 'layerUpdate']
 
   static values = {
     mapId: String,
@@ -80,5 +80,9 @@ export default class extends Controller {
 
   center ({ params: { bounds } }) {
     this.mapState.setVisibleBounds(bounds)
+  }
+
+  layerUpdateTargetConnected (update) {
+    console.log('Update!', update.dataset.layerId)
   }
 }
