@@ -160,7 +160,7 @@ class Row < ApplicationRecord
       # While such a geometry is a valid geojson,
       # it’s not a valid OGC geometry.
       # Hence we reject it.
-      self.geometry = RGeo::GeoJSON.decode(new_geojson, geo_factory: RGEO_FACTORY)
+      self.geometry = RGeo::GeoJSON.decode(new_geojson, geo_factory: RGEO_FACTORY).check_validity!
     rescue => e
       @geojson_error = e
     end
