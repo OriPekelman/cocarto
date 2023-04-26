@@ -3,3 +3,6 @@
 # Add new mime types for use in respond_to blocks:
 # Mime::Type.register "text/richtext", :rtf
 Mime::Type.register "application/geo+json", :geojson
+
+# The style description of the map for rendening in maplibre
+Mime::Type.register "application/style+json", :style

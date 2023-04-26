@@ -11,6 +11,8 @@
 #  updated_at        :datetime         not null
 #
 class Map < ApplicationRecord
+  include Mvt::MapStyle
+
   # Relations
   has_many :access_groups, dependent: :destroy, inverse_of: :map
   has_many :layers, dependent: :destroy
