@@ -67,6 +67,12 @@ class MapState {
     this.drawMode = `draw_${geometryType}`
   }
 
+  refresh (layer) {
+    const cache = this.map.style.sourceCaches[layer]
+    cache.clearTiles()
+    cache.update(this.map.transform)
+  }
+
   #mapSelectionChanged ({ features }) {
     features.map(getRowFromFeature).forEach(row => row.rowController.highlight())
   }

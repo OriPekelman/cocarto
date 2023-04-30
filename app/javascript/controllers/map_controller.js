@@ -71,6 +71,6 @@ export default class extends Controller {
   }
 
   layerUpdateTargetConnected (update) {
-    console.log('Update!', update.dataset.layerId)
+    this.mapState.refresh(update.dataset.layerId)
   }
 }
