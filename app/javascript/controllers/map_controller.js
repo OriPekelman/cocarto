@@ -23,28 +23,6 @@ export default class extends Controller {
       rightToolbar: this.toolbarRightTarget,
       style: this.styleUrlValue
     })
-
-    this.addRows(this.rowTargets)
-  }
-
-  rowTargetConnected (row) {
-    // a row can be connected when the map isn’t initialized yet
-    if (this.mapState) {
-      this.mapState.addRow(row.rowController)
-    }
-  }
-
-  rowTargetDisconnected (row) {
-    this.mapState.getDraw().delete(row.id)
-  }
-
-  addRows (rows) {
-    rows.forEach(row => this.mapState.addRow(row.rowController))
-  }
-
-  removeRows (rows) {
-    const ids = rows.map(row => row.id)
-    this.mapState.getDraw().delete(ids)
   }
 
   layerToggled (detail) {

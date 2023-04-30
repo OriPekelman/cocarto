@@ -1,5 +1,5 @@
 /* global ResizeObserver */
-import { newMap, drawStyles, geocoderApi, newGeolocateControl } from 'lib/map_helpers'
+import { newMap, geocoderApi, newGeolocateControl } from 'lib/map_helpers'
 import MapboxDraw from '@mapbox/mapbox-gl-draw'
 import MaplibreGeocoder from '@maplibre/maplibre-gl-geocoder'
 import maplibregl from 'maplibre-gl'
@@ -11,7 +11,6 @@ class MapState {
 
     this.draw = new MapboxDraw({
       displayControlsDefault: false,
-      styles: drawStyles,
       userProperties: true
     })
     this.map.addControl(this.draw)
@@ -66,21 +65,6 @@ class MapState {
   setActiveLayer ({ geometryType, layerController }) {
     this.currentLayerController = layerController
     this.drawMode = `draw_${geometryType}`
-  }
-
-  addRow (controller) {
-    if (controller == null) {
-      // Prevent trying to add a row to the map if its controller is nil.
-      // This may happen during turbo restoration visits (cache), because the row target is connected to the mapController before it is connected to its rowController.
-      // See #262
-      return
-    }
-    this.draw.add({
-      id: controller.element.id,
-      type: 'Feature',
-      properties: controller.propertiesValue,
-      geometry: controller.geojson()
-    })
   }
 
   #mapSelectionChanged ({ features }) {
