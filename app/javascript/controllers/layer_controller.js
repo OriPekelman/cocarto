@@ -55,12 +55,12 @@ export default class extends Controller {
   showOnMap () {
     this.hideButtonTarget.hidden = false
     this.showButtonTarget.hidden = true
-    this.mapOutlet.addRows(this.rowTargets)
+    this.mapOutlet.showLayer(this.element.id)
   }
 
   hideOnMap () {
     this.hideButtonTarget.hidden = true
     this.showButtonTarget.hidden = false
-    this.mapOutlet.removeRows(this.rowTargets)
+    this.mapOutlet.hideLayer(this.element.id)
   }
 }

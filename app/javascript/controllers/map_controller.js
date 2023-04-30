@@ -25,6 +25,14 @@ export default class extends Controller {
     })
   }
 
+  showLayer (layerId) {
+    this.mapState.getMap().setLayoutProperty(layerId, 'visibility', 'visible')
+  }
+
+  hideLayer (layerId) {
+    this.mapState.getMap().setLayoutProperty(layerId, 'visibility', 'none')
+  }
+
   layerToggled (detail) {
     if (detail.opened) {
       this.mapState.setActiveLayer(detail)
