@@ -73,4 +73,8 @@ export default class extends Controller {
   layerUpdateTargetConnected (update) {
     this.mapState.refresh(update.dataset.layerId)
   }
+
+  registerLayer (layerId) {
+    this.mapState.registerLayer(layerId)
+  }
 }

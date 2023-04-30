@@ -73,6 +73,11 @@ class MapState {
     cache.update(this.map.transform)
   }
 
+  registerLayer (layerId) {
+    this.map.on('mouseenter', layerId, function () { this.map.getCanvas().style.cursor = 'pointer' })
+    this.map.on('mouseleave', layerId, function () { this.map.getCanvas().style.cursor = '' })
+  }
+
   #mapSelectionChanged ({ features }) {
     features.map(getRowFromFeature).forEach(row => row.rowController.highlight())
   }

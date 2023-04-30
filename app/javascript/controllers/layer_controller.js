@@ -22,6 +22,7 @@ export default class extends Controller {
       if (id === this.element.id && !this.element.classList.contains('is-active')) {
         this.toggleTable()
       }
+      this.mapOutlet.registerLayer(this.element.id)
     })
   }
 
