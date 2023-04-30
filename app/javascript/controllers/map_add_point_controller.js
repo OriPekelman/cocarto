@@ -8,7 +8,8 @@ export default class extends Controller {
   static values = {
     defaultLatitude: Number,
     defaultLongitude: Number,
-    defaultZoom: Number
+    defaultZoom: Number,
+    styleUrl: String
   }
 
   connect () {
@@ -24,7 +25,7 @@ export default class extends Controller {
 
   // Private functions
   #initMap () {
-    this.map = newMap(this.mapTarget, [this.defaultLongitudeValue, this.defaultLatitudeValue], this.defaultZoomValue)
+    this.map = newMap(this.mapTarget, [this.defaultLongitudeValue, this.defaultLatitudeValue], this.defaultZoomValue, this.styleUrlValue)
     this.#setGeojson()
     this.map.on('moveend', () => this.#setGeojson())
 

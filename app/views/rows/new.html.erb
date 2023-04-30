@@ -5,7 +5,8 @@
   data-controller="map-add-point"
   data-map-add-point-default-longitude-value="<%= @row.layer.map.default_longitude %>"
   data-map-add-point-default-latitude-value="<%= @row.layer.map.default_latitude %>"
-  data-map-add-point-default-zoom-value="<%= @row.layer.map.default_zoom %>">
+  data-map-add-point-default-zoom-value="<%= @row.layer.map.default_zoom %>"
+  data-map-add-point-style-url-value="<%= map_url(@row.map, format: :style, only_path: false) %>">
   <div class="add-single-row__map" data-map-add-point-target="map">
     <%= embedded_svg "center.svg", class: "add-single-row__crosshair" %>
   </div>
