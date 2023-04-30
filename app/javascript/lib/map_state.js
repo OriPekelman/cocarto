@@ -6,8 +6,8 @@ import maplibregl from 'maplibre-gl'
 import PresenceTrackers from 'lib/presence_trackers'
 
 class MapState {
-  constructor ({ target, mapId, lng, lat, zoom, leftToolbar, rightToolbar }) {
-    this.map = newMap(target, [lng, lat], zoom)
+  constructor ({ target, mapId, lng, lat, zoom, leftToolbar, rightToolbar, style }) {
+    this.map = newMap(target, [lng, lat], zoom, style)
 
     this.draw = new MapboxDraw({
       displayControlsDefault: false,

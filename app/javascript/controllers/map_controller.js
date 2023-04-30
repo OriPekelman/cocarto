@@ -6,6 +6,7 @@ export default class extends Controller {
 
   static values = {
     mapId: String,
+    styleUrl: String,
     defaultLatitude: Number,
     defaultLongitude: Number,
     defaultZoom: Number
@@ -19,7 +20,8 @@ export default class extends Controller {
       lat: this.defaultLatitudeValue,
       zoom: this.defaultZoomValue,
       leftToolbar: this.toolbarLeftTarget,
-      rightToolbar: this.toolbarRightTarget
+      rightToolbar: this.toolbarRightTarget,
+      style: this.styleUrlValue
     })
 
     this.addRows(this.rowTargets)
