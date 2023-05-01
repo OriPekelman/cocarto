@@ -66,38 +66,63 @@ module Mvt
     def maplibre_style
       layer_id = dom_id(self)
 
-      type = {
-        "point" => "circle",
-        "line_string" => "line",
-        "polygon" => "fill",
-        "territory" => "fill"
-      }[geometry_type]
-
-      paint = case geometry_type
+      case geometry_type
       when "point"
-        {
-          "circle-color": color,
-          "circle-radius": 6
-        }
+        [{
+          id: layer_id,
+          source: layer_id,
+          type: "circle",
+          paint: {
+            "circle-color": color,
+            "circle-radius": 6
+          },
+          "source-layer": TILE_LAYER_ID
+        },
+          {
+            id: layer_id + "outline",
+            source: layer_id,
+            type: "circle",
+            paint: {
+              "circle-stroke-color": "#fff",
+              "circle-radius": 4,
+              "circle-stroke-width": 1,
+              "circle-opacity": 0
+            },
+            "source-layer": TILE_LAYER_ID
+          }]
       when "line_string"
-        {
-          "line-color": color,
-          "line-width": 2
-        }
+        [{
+          id: layer_id,
+          source: layer_id,
+          type: "line",
+          paint: {
+            "line-color": color,
+            "line-width": 2
+          },
+          "source-layer": TILE_LAYER_ID
+        }]
       when "polygon", "territory"
-        {
-          "fill-color": color,
-          "fill-opacity": 0.5
-        }
+        [{
+          id: layer_id,
+          source: layer_id,
+          type: "fill",
+          paint: {
+            "fill-color": color,
+            "fill-opacity": 0.1
+          },
+          "source-layer": TILE_LAYER_ID
+        },
+          {
+            id: layer_id + "outline",
+            source: layer_id,
+            type: "line",
+            paint: {
+              "line-color": color,
+              "line-width": 2
+            },
+            "source-layer": TILE_LAYER_ID
+          }]
       end
-
-      {
-        id: layer_id,
-        source: layer_id,
-        type: type,
-        paint: paint,
-        "source-layer": TILE_LAYER_ID
-      }
     end
   end
 
@@ -111,7 +136,7 @@ module Mvt
 
       layers.each do |layer|
         style["sources"][dom_id(layer)] = layer.maplibre_source(base_url)
-        style["layers"] << layer.maplibre_style
+        style["layers"].concat(layer.maplibre_style)
       end
 
       style
