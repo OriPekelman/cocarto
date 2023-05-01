@@ -21,7 +21,9 @@ module Mvt
           -- first select the geometries that might be in the tiles
           geoms AS (
             SELECT
-              COALESCE(rows.geom_web_mercator, territories.geom_web_mercator) AS geom
+              COALESCE(rows.geom_web_mercator, territories.geom_web_mercator) AS geom,
+              feature_id AS id,
+              rows.id as original_id
             FROM
               rows
             LEFT JOIN
@@ -33,7 +35,9 @@ module Mvt
           -- transform those geometries into the right format for MVT
           mvt_geom AS (
             SELECT
-              ST_AsMVTGeom(geom, ST_TileEnvelope(:z, :x, :y))
+              ST_AsMVTGeom(geom, ST_TileEnvelope(:z, :x, :y)) as geom,
+              id,
+              original_id
             FROM
               geoms
             WHERE
@@ -46,7 +50,7 @@ module Mvt
           -- generate the tile
           -- the parameter of ST_AsMVT must be rows, not records
           -- that is why we must do sub-requests
-          ST_AsMVT(mvt_geom.*, :tile_layer_id) AS mvt
+          ST_AsMVT(mvt_geom.*, :tile_layer_id, NULL, NULL, 'id') AS mvt
         FROM
           mvt_geom
       SQL
