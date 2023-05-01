@@ -151,6 +151,10 @@ class Row < ApplicationRecord
     self[layer.geometry_type] = new_geometry
   end
 
+  def geometry
+    self[layer.geometry_type]
+  end
+
   def geojson=(new_geojson)
     raise "Can not set the geojson of a territory" if layer.geometry_territory?
 
@@ -227,8 +231,8 @@ class Row < ApplicationRecord
 
     # Geometry attributes are RGeo types; we can rely on its validity checks.
     # Invalid reasons are defined in RGeo::Error
-    unless self[layer.geometry_type]&.valid?
-      errors.add(:geometry, :invalid, reason: self[layer.geometry_type].invalid_reason)
+    unless geometry&.valid?
+      errors.add(:geometry, :invalid, reason: geometry.invalid_reason)
     end
   end
 end
