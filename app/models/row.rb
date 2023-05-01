@@ -146,7 +146,7 @@ class Row < ApplicationRecord
     values.update(casted_values)
   end
 
-  # Accessor to the correct geometry attribute (row.point, row.line_string or row.polygon)
+  # Setter to the correct geometry attribute (row.point, row.line_string or row.polygon)
   def geometry=(new_geometry)
     self[layer.geometry_type] = new_geometry
   end
@@ -154,16 +154,7 @@ class Row < ApplicationRecord
   def geojson=(new_geojson)
     raise "Can not set the geojson of a territory" if layer.geometry_territory?
 
-    begin
-      # raises if the geometry is not valid
-      # e.g. bowtie polygon
-      # While such a geometry is a valid geojson,
-      # it’s not a valid OGC geometry.
-      # Hence we reject it.
-      self.geometry = RGeo::GeoJSON.decode(new_geojson, geo_factory: RGEO_FACTORY).check_validity!
-    rescue => e
-      @geojson_error = e
-    end
+    self.geometry = RGeo::GeoJSON.decode(new_geojson, geo_factory: RGEO_FACTORY)
   end
 
   # Properties keys come from https://github.com/mapbox/simplestyle-spec/
@@ -232,14 +223,12 @@ class Row < ApplicationRecord
   end
 
   def validate_geometry
-    if @geojson_error
-      if @geojson_error.is_a? RGeo::Error::InvalidGeometry
-        errors.add(:geojson, :invalid_geometry)
-      elsif @geojson_error.is_a? JSON::ParserError
-        errors.add(:geojson, :invalid_json)
-      else
-        errors.add(:geojson, @geojson_error.message)
-      end
+    return if layer.geometry_territory?
+
+    # Geometry attributes are RGeo types; we can rely on its validity checks.
+    # Invalid reasons are defined in RGeo::Error
+    unless self[layer.geometry_type]&.valid?
+      errors.add(:geometry, :invalid, reason: self[layer.geometry_type].invalid_reason)
     end
   end
 end
