@@ -29,6 +29,8 @@ class MapState {
     this.map.on('draw.create', ({ features }) => this.#featureCreated(features[0]))
     this.map.on('draw.update', ({ features }) => this.#featureUpdated(features[0]))
     this.map.on('mousemove', e => this.trackers.mousemove(e))
+
+    this.hoveredFeature = null
   }
 
   getMap () {
@@ -74,8 +76,8 @@ class MapState {
   }
 
   registerLayer (layerId) {
-    this.map.on('mouseenter', layerId, function () { this.map.getCanvas().style.cursor = 'pointer' })
-    this.map.on('mouseleave', layerId, function () { this.map.getCanvas().style.cursor = '' })
+    this.map.on('mouseenter', layerId, e => this.#mouseEnterFeature(e))
+    this.map.on('mouseleave', layerId, e => this.#mouseLeaveFeature(e))
   }
 
   #mapSelectionChanged ({ features }) {
@@ -93,6 +95,23 @@ class MapState {
     // So we remove the one we’ve just drawn
     // Later we’ll be smarter to avoid destruction and recreation
     this.draw.delete(feature.id)
+  }
+
+  #mouseEnterFeature (e) {
+    this.map.getCanvas().style.cursor = 'pointer'
+    if (this.hoveredFeature) {
+      this.map.setFeatureState(this.hoveredFeature, { hover: false })
+    }
+    this.hoveredFeature = e.features[0]
+    this.map.setFeatureState(this.hoveredFeature, { hover: true })
+  }
+
+  #mouseLeaveFeature (e, layerId) {
+    this.map.getCanvas().style.cursor = ''
+    if (this.hoveredFeature) {
+      this.map.setFeatureState(this.hoveredFeature, { hover: false })
+      this.hoveredFeature = null
+    }
   }
 }
 

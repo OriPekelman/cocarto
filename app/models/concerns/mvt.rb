@@ -73,15 +73,26 @@ module Mvt
       case geometry_type
       when "point"
         [{
-          id: layer_id,
+          id: layer_id + "hover",
           source: layer_id,
           type: "circle",
           paint: {
-            "circle-color": color,
-            "circle-radius": 6
+            "circle-color": "#fff",
+            "circle-radius": 8,
+            "circle-opacity": ["case", ["boolean", ["feature-state", "hover"], false], 1, 0]
           },
           "source-layer": TILE_LAYER_ID
         },
+          {
+            id: layer_id,
+            source: layer_id,
+            type: "circle",
+            paint: {
+              "circle-color": color,
+              "circle-radius": 6
+            },
+            "source-layer": TILE_LAYER_ID
+          },
           {
             id: layer_id + "outline",
             source: layer_id,
@@ -96,15 +107,26 @@ module Mvt
           }]
       when "line_string"
         [{
-          id: layer_id,
+          id: layer_id + "hover",
           source: layer_id,
           type: "line",
           paint: {
-            "line-color": color,
-            "line-width": 2
+            "line-color": "#fff",
+            "line-width": 6,
+            "line-opacity": ["case", ["boolean", ["feature-state", "hover"], false], 1, 0]
           },
           "source-layer": TILE_LAYER_ID
-        }]
+        },
+          {
+            id: layer_id,
+            source: layer_id,
+            type: "line",
+            paint: {
+              "line-color": color,
+              "line-width": 2
+            },
+            "source-layer": TILE_LAYER_ID
+          }]
       when "polygon", "territory"
         [{
           id: layer_id,
@@ -112,7 +134,7 @@ module Mvt
           type: "fill",
           paint: {
             "fill-color": color,
-            "fill-opacity": 0.1
+            "fill-opacity": ["case", ["boolean", ["feature-state", "hover"], false], 0.8, 0.1]
           },
           "source-layer": TILE_LAYER_ID
         },
