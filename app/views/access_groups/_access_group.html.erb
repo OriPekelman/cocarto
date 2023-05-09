@@ -1,51 +1,6 @@
-<% delete_message = access_group.users.include?(current_user) ? t(".delete_self") : t("common.confirm") %>
-
-<li class="list-element" id="<%= access_group.build_dom_id %>">
-  <%= form_with(model: access_group.new_record? ? [access_group.map, access_group] : access_group) do |form| %>
-    <% if access_group.new_record? %>
-      <div class="list-element__row">
-        <h3 class="list-element__title">
-          <%= access_group.token.present? ? t(".new_link") : t(".new_role") %>
-        </h3>
-        <% if access_group.token.present? %>
-          <%= form.hidden_field :token %>
-        <% end %>
-      </div>
-    <% end %>
-
-    <div class="list-element__row list-element__row--grid">
-      <div class="form__field">
-        <%= form.select :role_type, options_for_select(AccessGroup.role_types.map { |access_group| [AccessGroup.human_attribute_name(access_group[0]), access_group[1]] }, access_group.role_type) %>
-      </div>
-
-      <div class="form__field">
-        <% if access_group.token.present? %>
-          <%= form.text_field :name %>
-          <% if access_group.persisted? %>
-            <%= form.label :url_to_share %>
-            <div class="form__input-with-button" data-controller="clipboard">
-              <%= text_field_tag :url_to_share, share_link_url(access_group.token), data: {clipboard_target: "source"}, autocomplete: :off, readonly: true %>
-              <button data-action="clipboard#copy"><%= embedded_svg "copy.svg" %></button>
-            </div>
-          <% end %>
-        <% else %>
-          <%= form.fields_for :users do |f| %>
-            <%= f.email_field :email, autofocus: access_group.new_record?, required: true %>
-          <% end %>
-      <% end %>
-      </div>
-
-      <div class="form__field">
-        <% if access_group.token.present? && access_group.new_record? %>
-          <%= form.submit t("helpers.submit.access_group.create_link"), class: "list-element__button button button--confirm" %>
-        <% else %>
-          <%= form.submit class: "list-element__button button button--confirm" %>
-        <% end %>
-
-        <% if access_group.persisted? %>
-          <%= link_to t("helpers.link.access_group.delete"), access_group, data: {turbo_method: :delete, turbo_confirm: delete_message}, class: "list-element__button button button--delete" %>
-        <% end %>
-      </div>
-    </div>
-  <% end %>
-</li>
+<div id="<%= dom_id(access_group) %>">
+  <% template_name = ["access_group",
+       access_group.token.present? ? "with_token" : "user_specific",
+       access_group.new_record? ? "new" : nil].compact.join("_") %>
+  <%= render template_name, access_group: access_group %>
+</div>

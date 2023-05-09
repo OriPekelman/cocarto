@@ -1,11 +1,13 @@
+<div class="card__main-content card--large">
+  <h2 class="form__header"><%= t("activerecord.attributes.map.access_groups") %></h2>
+  <nav class="buttons-bar">
+    <%= active_link_to t(".user_specific"), map_access_groups_path(@map, scope: "user_specific"),
+          class: "button", class_active: "button--confirm", class_inactive: "button--link", active: :exact %>
+    <%= active_link_to t(".with_token"), map_access_groups_path(@map, scope: "with_token"),
+          class: "button", class_active: "button--confirm", class_inactive: "button--link", active: :exact %>
+  </nav>
 
-<div class="card__main-content">
-  <h2 class="section__title"><%= AccessGroup.model_name.human(count: 2) %></h2>
-  <ul>
-    <%= render @access_groups.includes(:users) %>
+  <%= render @access_groups.includes(:users) %>
 
-    <%= render AccessGroup.new(map: @map, users: [User.new]) %>
-
-    <%= render AccessGroup.new(map: @map, token: AccessGroup.new_token) %>
-  </ul>
+  <%= render @new_group %>
 </div>

@@ -1,10 +1,22 @@
 ---
 en:
   access_groups:
-    access_group:
-      delete_self: Are you sure? You won’t be able to access the map anymore.
-      new_link: New sharing link
-      new_role: New group
+    access_group_user_specific:
+      invitation_accepted_at: Invitation accepted %{at}
+      invitation_sent_at: 'Invitation sent %{at} '
+    access_group_user_specific_new:
+      header: New user
+    access_group_with_token:
+      anonymous_users:
+        one: "%{count} anonymous users have opened this link"
+        other: "%{count} anonymous users have opened this link "
+        zero: No access through this link yet
+    access_group_with_token_new:
+      title: New link
+    confirm_delete_self: Are you sure? You won’t be able to access the map anymore.
+    index:
+      user_specific: Users
+      with_token: Links
   api:
     bad_key: Bad API key
   area:
@@ -38,7 +50,6 @@ en:
     longitude: Longitude
     save: Save
     settings: Settings
-    share: Share…
     territory_code: Code
     updated_at: Updated %{date} ago
     updated_at_by: Updated %{date} ago by %{user}
@@ -151,5 +162,8 @@ en:
   territories:
     search_results:
       no_result: No result
+  time:
+    formats:
+      sentence: on %d %b %Y at %H:%M
   users:
     anonymous: anonymous

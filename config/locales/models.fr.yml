@@ -42,6 +42,7 @@ fr:
           one: territoire
           other: territoires
       map:
+        access_groups: Partage et permissions
         name: Nom
       row:
         files:
@@ -135,7 +136,7 @@ fr:
       access_group:
         create: Inviter
         create_link: Créer le lien
-        update: Enregistrer
+        update: OK
       field:
         create: Ajouter
         update: OK

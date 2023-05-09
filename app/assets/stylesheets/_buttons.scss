@@ -175,6 +175,35 @@
   padding: 8px;
 }
 
+.icon-button--confirm {
+  color: white;
+  background-color: var(--color-green-70);
+
+  &:hover:not([disabled], :active) {
+    color: white;
+    background-color: var(--color-green-90);
+  }
+
+  &:hover:active {
+    color: white;
+    background-color: black;
+  }
+}
+
+.icon-button--alternate {
+  color: var(--color-green-80);
+  background-color: var(--color-green-20);
+
+  &:hover:not([disabled], :active) {
+    background-color: var(--color-green-30);
+  }
+
+  &:hover:active {
+    color: white;
+    background-color: var(--color-green-80);
+  }
+}
+
 .icon-button--action {
   // hoverable icon with text below
   height: 80px;
@@ -241,13 +270,12 @@
   }
 
   button {
-    top: 1px;
-    right: -1px;
-    width: 33px;
-    height: 33px;
-    margin: 0;
+    height: 100%;
+    aspect-ratio: 1 / 1;
     position: relative;
-    padding: 6px;
+    top: 1px;
+    right: 2px;
+    border-radius: 0;
   }
 }
 

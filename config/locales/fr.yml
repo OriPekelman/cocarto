@@ -1,10 +1,22 @@
 ---
 fr:
   access_groups:
-    access_group:
-      delete_self: Êtes-vous sûr ? Vous ne pourrez plus accéder à la carte.
-      new_link: Nouveau lien de partage
-      new_role: Nouveau groupe
+    access_group_user_specific:
+      invitation_accepted_at: Invitation acceptée %{at}
+      invitation_sent_at: 'Invitation envoyée %{at} '
+    access_group_user_specific_new:
+      header: Nouvel utilisateur
+    access_group_with_token:
+      anonymous_users:
+        one: "%{count} utilisateur anonyme a accédé à ce lien"
+        other: "%{count} utilisateurs anonymes ont accédé à ce lien"
+        zero: Encore aucun accès enregistré par ce lien
+    access_group_with_token_new:
+      title: Nouveau lien
+    confirm_delete_self: Êtes-vous sûr ? Vous ne pourrez plus accéder à la carte.
+    index:
+      user_specific: Utilisateurs
+      with_token: Liens
   api:
     bad_key: Mauvaise clé d’API
   area:
@@ -38,7 +50,6 @@ fr:
     longitude: Longitude
     save: Sauvegarder
     settings: Réglages
-    share: Partager…
     territory_code: Code
     updated_at: Modifié il y a %{date}
     updated_at_by: Modifié il y a %{date} par %{user}
@@ -151,5 +162,8 @@ fr:
   territories:
     search_results:
       no_result: Pas de résultat
+  time:
+    formats:
+      sentence: le %d %B %Y à %H:%M
   users:
     anonymous: anonyme
