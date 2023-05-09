@@ -134,13 +134,6 @@ a strong {
   outline: none;
 }
 
-input:disabled {
-  background: var(--color-bg-ambient-20);
-  border-color: var(--color-bg-ambient-20);
-  color: var(--color-grey-80);
-  cursor: not-allowed;
-}
-
 button:disabled {
   cursor: not-allowed;
 }
