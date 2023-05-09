@@ -38,9 +38,14 @@
   color: var(--color-green-70);
   background-color: transparent;
 
-  &:hover:not([disabled]) {
+  &:hover:not([disabled], :active) {
     color: var(--color-green-90);
     background-color: var(--color-bg-ambient-30);
+  }
+
+  &:hover:active {
+    color: var(--color-green-100);
+    background-color: var(--color-bg-ambient-40);
   }
 }
 
@@ -48,8 +53,12 @@
   color: var(--color-text);
   background-color: transparent;
 
-  &:hover:not([disabled]) {
+  &:hover:not([disabled], :active) {
     background-color: var(--color-bg-ambient-30);
+  }
+
+  &:hover:active {
+    background-color: var(--color-bg-ambient-40);
   }
 }
 
@@ -58,11 +67,11 @@
   letter-spacing: 0.44px;
   min-width: 80px;
 
-  &:hover:not([disabled]) {
+  &:hover:not([disabled], :active) {
     background-color: var(--color-green-90);
   }
 
-  &:active {
+  &:hover:active {
     background-color: black;
   }
 }
@@ -71,34 +80,41 @@
   color: var(--color-green-80);
   background-color: var(--color-green-20);
 
-  &:hover:not([disabled]) {
+  &:hover:not([disabled], :active) {
     background-color: var(--color-green-30);
   }
 
-  &:active {
-    background-color: black;
+  &:hover:active {
+    background-color: var(--color-green-80);
   }
 }
 
 .button--delete {
-  background-color: var(--color-attention-30);
+  color: var(--color-text);
+  background-color: var(--color-attention-20);
 
-  &:hover:not([disabled]) {
-    background-color: var(--color-attention-40);
+  &:hover:not([disabled], :active) {
+    color: var(--color-text);
+    background-color: var(--color-attention-30);
   }
 
-  &:active {
-    background-color: black;
+  &:hover:active {
+    color: white;
+    background-color: var(--color-attention-40);
   }
 }
 
 .button--close {
-  color: var(--color-green-70);
+  color: var(--color-green-50);
   background-color: transparent;
   padding: 6px;
 
-  &:hover:not([disabled]) {
-    color: var(--color-green-90);
+  &:hover:not([disabled], :active) {
+    color: var(--color-green-70);
+  }
+
+  &:hover:active {
+    color: var(--color-green-100);
   }
 }
 
@@ -112,8 +128,12 @@
   color: var(--color-green-70);
   background: none;
 
-  &:hover:not([disabled]) {
+  &:hover:not([disabled], :active) {
     color: var(--color-green-80);
+  }
+
+  &:hover:active {
+    color: var(--color-green-100);
   }
 
   &[disabled] {
