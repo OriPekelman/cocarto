@@ -11,12 +11,16 @@
   z-index: var(--modal-z-index);
 }
 
+.modal__box {
+  position: relative;
+}
+
+.modal__close-button {
+  position: absolute;
+  inset: 0 0 auto auto;
+}
+
 .modal {
   min-width: 400px;
   max-width: 600px;
-}
-
-.modal__navbar {
-  display: flex;
-  justify-content: end;
 }
