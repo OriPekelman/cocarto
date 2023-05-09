@@ -64,9 +64,9 @@ fr:
               must_have_an_owner: La carte doit avoir au moins un un utilisateur propriétaire. Commencez par donner le rôle de propriétaire à un autre utilisateur.
         row:
           attributes:
-            geojson:
+            geometry:
               format: "%{message}"
-              invalid_geometry: La géométrie est invalide.
+              invalid: La géométrie est invalide. (%{reason})
         user:
           attributes:
             base:
