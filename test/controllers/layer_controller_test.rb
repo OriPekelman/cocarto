@@ -64,5 +64,13 @@ class LayerControllerTest < ActionDispatch::IntegrationTest
 
       assert_equal 0, @response.body.size
     end
+
+    test "computed columns are exported" do
+      sign_in users(:cassini)
+      get layer_url(layers(:hiking_paths), format: :geojson)
+      geojson = JSON.parse(@response.body)
+
+      assert_in_delta(19720.582, geojson.dig("features", 0, "properties", "calculated_length"))
+    end
   end
 end

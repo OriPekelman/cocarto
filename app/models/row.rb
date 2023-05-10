@@ -183,12 +183,15 @@ class Row < ApplicationRecord
     default_style.merge(custom_style)
   end
 
+  # We round to 4 digits because of testing issues 🤷
+  # Depending on the architecture, floats can be different
+  # A precision down to a milimeter should be enough
   def calculated_properties
     case layer.geometry_type
     when "line_string"
-      {calculated_length: geo_length}
+      {calculated_length: geo_length.to_f.round(3)}
     when "polygon", "territory"
-      {calculated_area: geo_area}
+      {calculated_area: geo_area.to_f.round(3)}
     else
       {}
     end
