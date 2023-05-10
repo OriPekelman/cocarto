@@ -8,7 +8,7 @@ module ImportExport
     end
 
     def export
-      Rails.cache.fetch([@layer, "format"]) { export_rows }
+      Rails.cache.fetch([@layer, ImportExport::EXPORTERS.key(self.class)]) { export_rows }
     end
 
     def export_rows = raise NotImplementedError
