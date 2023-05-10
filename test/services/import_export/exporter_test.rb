@@ -11,28 +11,28 @@ class ExporterTest < ActiveSupport::TestCase
 
     test "line layer" do
       geojson = <<~GEOJSON.squish
-        {"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"LineString","coordinates":[[2.749597345,48.803795844],[2.834344424,48.752477597],[2.7702115,48.728309678],[2.829763501,48.693547935]]},"properties":{"Document":"touladi.png"}}]}
+        {"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"LineString","coordinates":[[2.749597345,48.803795844],[2.834344424,48.752477597],[2.7702115,48.728309678],[2.829763501,48.693547935]]},"properties":{"Document":"touladi.png","calculated_length":"19720.5819932494"}}]}
       GEOJSON
       assert_equal geojson, ImportExport.export(layers(:hiking_paths), :geojson)
     end
 
     test "polygon layer" do
       geojson = <<~GEOJSON.squish
-        {"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Polygon","coordinates":[[[2.747403413,48.84348962],[2.887763814,48.796096072],[2.751002398,48.736791112],[2.639433875,48.800837444],[2.747403413,48.84348962]]]},"properties":{}}]}
+        {"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Polygon","coordinates":[[[2.747403413,48.84348962],[2.887763814,48.796096072],[2.751002398,48.736791112],[2.639433875,48.800837444],[2.747403413,48.84348962]]]},"properties":{"calculated_area":"108167884.855568"}}]}
       GEOJSON
       assert_equal geojson, ImportExport.export(layers(:hiking_zones), :geojson)
     end
 
     test "territory layer" do
       geojson = <<~GEOJSON.squish
-        {"type":"FeatureCollection","features":[{"type":"Feature","geometry":null,"properties":{"territory":"11"}}]}
+        {"type":"FeatureCollection","features":[{"type":"Feature","geometry":null,"properties":{"territory":"11","calculated_area":"12003436297.6057"}}]}
       GEOJSON
       assert_equal geojson, ImportExport.export(layers(:hiking_regions), :geojson)
     end
 
     test "files field" do
       geojson = <<~GEOJSON.squish
-        {"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"LineString","coordinates":[[2.749597345,48.803795844],[2.834344424,48.752477597],[2.7702115,48.728309678],[2.829763501,48.693547935]]},"properties":{"Document":"touladi.png"}}]}
+        {"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"LineString","coordinates":[[2.749597345,48.803795844],[2.834344424,48.752477597],[2.7702115,48.728309678],[2.829763501,48.693547935]]},"properties":{"Document":"touladi.png","calculated_length":"19720.5819932494"}}]}
       GEOJSON
       assert_equal geojson, ImportExport.export(layers(:hiking_paths), :geojson)
     end
@@ -56,32 +56,32 @@ class ExporterTest < ActiveSupport::TestCase
 
     test "line layer" do
       csv = <<~CSV
-        geojson,Document
-        "{""type"":""LineString"",""coordinates"":[[2.749597345,48.803795844],[2.834344424,48.752477597],[2.7702115,48.728309678],[2.829763501,48.693547935]]}",touladi.png
+        geojson,Document,calculated_length
+        "{""type"":""LineString"",""coordinates"":[[2.749597345,48.803795844],[2.834344424,48.752477597],[2.7702115,48.728309678],[2.829763501,48.693547935]]}",touladi.png,19720.5819932494
       CSV
       assert_equal csv, ImportExport.export(layers(:hiking_paths), :csv)
     end
 
     test "polygon layer" do
       csv = <<~CSV
-        geojson
-        "{""type"":""Polygon"",""coordinates"":[[[2.747403413,48.84348962],[2.887763814,48.796096072],[2.751002398,48.736791112],[2.639433875,48.800837444],[2.747403413,48.84348962]]]}"
+        geojson,calculated_area
+        "{""type"":""Polygon"",""coordinates"":[[[2.747403413,48.84348962],[2.887763814,48.796096072],[2.751002398,48.736791112],[2.639433875,48.800837444],[2.747403413,48.84348962]]]}",108167884.855568
       CSV
       assert_equal csv, ImportExport.export(layers(:hiking_zones), :csv)
     end
 
     test "territory layer" do
       csv = <<~CSV
-        territory
-        11
+        territory,calculated_area
+        11,12003436297.6057
       CSV
       assert_equal csv, ImportExport.export(layers(:hiking_regions), :csv)
     end
 
     test "files field" do
       csv = <<~CSV
-        geojson,Document
-        "{""type"":""LineString"",""coordinates"":[[2.749597345,48.803795844],[2.834344424,48.752477597],[2.7702115,48.728309678],[2.829763501,48.693547935]]}",touladi.png
+        geojson,Document,calculated_length
+        "{""type"":""LineString"",""coordinates"":[[2.749597345,48.803795844],[2.834344424,48.752477597],[2.7702115,48.728309678],[2.829763501,48.693547935]]}",touladi.png,19720.5819932494
       CSV
       assert_equal csv, ImportExport.export(layers(:hiking_paths), :csv)
     end
