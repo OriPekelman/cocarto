@@ -186,9 +186,9 @@ class Row < ApplicationRecord
   def calculated_properties
     case layer.geometry_type
     when "line_string"
-      {calculated_length: geo_length}
+      {calculated_length: geo_length.to_f}
     when "polygon", "territory"
-      {calculated_area: geo_area}
+      {calculated_area: geo_area.to_f}
     else
       {}
     end

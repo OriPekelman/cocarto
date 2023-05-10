@@ -11,28 +11,28 @@ class ExporterTest < ActiveSupport::TestCase
 
     test "line layer" do
       geojson = <<~GEOJSON.squish
-        {"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"LineString","coordinates":[[2.749597345,48.803795844],[2.834344424,48.752477597],[2.7702115,48.728309678],[2.829763501,48.693547935]]},"properties":{"Document":"touladi.png","calculated_length":"19720.5819932494"}}]}
+        {"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"LineString","coordinates":[[2.749597345,48.803795844],[2.834344424,48.752477597],[2.7702115,48.728309678],[2.829763501,48.693547935]]},"properties":{"Document":"touladi.png","calculated_length":19720.5819932494}}]}
       GEOJSON
       assert_equal geojson, ImportExport.export(layers(:hiking_paths), :geojson)
     end
 
     test "polygon layer" do
       geojson = <<~GEOJSON.squish
-        {"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Polygon","coordinates":[[[2.747403413,48.84348962],[2.887763814,48.796096072],[2.751002398,48.736791112],[2.639433875,48.800837444],[2.747403413,48.84348962]]]},"properties":{"calculated_area":"108167884.855568"}}]}
+        {"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Polygon","coordinates":[[[2.747403413,48.84348962],[2.887763814,48.796096072],[2.751002398,48.736791112],[2.639433875,48.800837444],[2.747403413,48.84348962]]]},"properties":{"calculated_area":108167884.855568}}]}
       GEOJSON
       assert_equal geojson, ImportExport.export(layers(:hiking_zones), :geojson)
     end
 
     test "territory layer" do
       geojson = <<~GEOJSON.squish
-        {"type":"FeatureCollection","features":[{"type":"Feature","geometry":null,"properties":{"territory":"11","calculated_area":"12003436297.6057"}}]}
+        {"type":"FeatureCollection","features":[{"type":"Feature","geometry":null,"properties":{"territory":"11","calculated_area":12003436297.6057}}]}
       GEOJSON
       assert_equal geojson, ImportExport.export(layers(:hiking_regions), :geojson)
     end
 
     test "files field" do
       geojson = <<~GEOJSON.squish
-        {"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"LineString","coordinates":[[2.749597345,48.803795844],[2.834344424,48.752477597],[2.7702115,48.728309678],[2.829763501,48.693547935]]},"properties":{"Document":"touladi.png","calculated_length":"19720.5819932494"}}]}
+        {"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"LineString","coordinates":[[2.749597345,48.803795844],[2.834344424,48.752477597],[2.7702115,48.728309678],[2.829763501,48.693547935]]},"properties":{"Document":"touladi.png","calculated_length":19720.5819932494}}]}
       GEOJSON
       assert_equal geojson, ImportExport.export(layers(:hiking_paths), :geojson)
     end

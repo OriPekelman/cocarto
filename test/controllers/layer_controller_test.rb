@@ -70,7 +70,7 @@ class LayerControllerTest < ActionDispatch::IntegrationTest
       get layer_url(layers(:hiking_paths), format: :geojson)
       geojson = JSON.parse(@response.body)
 
-      assert_equal "19720.5819932494", geojson.dig("features", 0, "properties", "calculated_length")
+      assert_equal 19720.5819932494, geojson.dig("features", 0, "properties", "calculated_length")
     end
   end
 end
