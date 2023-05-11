@@ -65,9 +65,13 @@ class AccessGroupsController < ApplicationController
 
   def create_access_group_params
     create_params = params.require(:access_group).permit(:role_type, :token, :name, users_attributes: [:email])
-    if (existing_user = User.find_by(email: create_params.dig(:users_attributes, "0", :email)))
-      create_params.delete(:users_attributes)
-      create_params[:users] = [existing_user]
+    email = create_params.dig(:users_attributes, "0", :email)
+    if email.present?
+      existing_user = User.find_by(email: create_params.dig(:users_attributes, "0", :email))
+      if existing_user.present?
+        create_params.delete(:users_attributes)
+        create_params[:users] = [existing_user]
+      end
     end
 
     create_params
