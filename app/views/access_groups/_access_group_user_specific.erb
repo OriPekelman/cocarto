@@ -1,0 +1,27 @@
+<%= form_with model: access_group do |form| %>
+  <div class="list-element__row list-element__row--grid">
+    <div class="form__field">
+      <%= form.select :role_type, options_for_select(AccessGroup.role_types.map { |access_group| [AccessGroup.human_attribute_name(access_group[0]), access_group[1]] }, access_group.role_type) %>
+    </div>
+
+    <div class="form__field">
+      <%= form.fields_for :users do |f| %>
+        <%= f.email_field :email, readonly: true %>
+        <% if f.object.invitation_accepted_at %>
+          <em><%= t(".invitation_accepted_at", at: I18n.l(f.object.invitation_accepted_at, format: :sentence)) %></em>
+        <% elsif f.object.invitation_sent_at %>
+          <em><%= t(".invitation_sent_at", at: I18n.l(f.object.invitation_sent_at, format: :sentence)) %></em>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="form__field">
+      <%= form.submit class: "button button--slim button--confirm" %>
+
+      <% delete_message = access_group.users.include?(current_user) ? t("access_groups.confirm_delete_self") : t("common.confirm") %>
+      <%= link_to t("helpers.link.access_group.delete"), access_group,
+                  class: "button button--slim button--link",
+                  data: {turbo_method: :delete, turbo_confirm: delete_message} %>
+    </div>
+  </div>
+<% end %>

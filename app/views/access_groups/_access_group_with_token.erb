@@ -1,0 +1,28 @@
+<%= form_with model: access_group do |form| %>
+  <div class="list-element__row list-element__row--grid">
+    <div class="form__field">
+      <%= form.select :role_type, options_for_select(AccessGroup.role_types.map { |access_group| [AccessGroup.human_attribute_name(access_group[0]), access_group[1]] }, access_group.role_type) %>
+    </div>
+
+    <div class="form__field">
+      <%= form.text_field :name %>
+      <div class="form__field">
+        <%= form.label :url_to_share %>
+        <div class="form__input-with-button" data-controller="clipboard">
+          <%= text_field_tag :url_to_share, share_link_url(access_group.token), data: {clipboard_target: "source"}, autocomplete: :off, readonly: true %>
+          <button data-action="clipboard#copy" class="icon-button icon-button--alternate" title="Copier"><%= embedded_svg "copy.svg" %></button>
+        </div>
+      </div>
+      <em><%= t(".anonymous_users", count: access_group.users.count) %></em>
+    </div>
+
+    <div class="form__field">
+      <%= form.submit class: "button button--slim button--confirm" %>
+
+      <% delete_message = access_group.users.include?(current_user) ? t("access_groups.confirm_delete_self") : t("common.confirm") %>
+      <%= link_to t("helpers.link.access_group.delete"), access_group,
+                  class: "button button--slim button--link",
+                  data: {turbo_method: :delete, turbo_confirm: delete_message} %>
+    </div>
+  </div>
+<% end %>

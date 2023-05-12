@@ -1,0 +1,22 @@
+<%= form_with model: [access_group.map, access_group] do |form| %>
+  <h3 class="form__header"><%= t(".title")  %></h3>
+  <%= form.hidden_field :token %>
+
+  <div class="list-element__row list-element__row--grid">
+    <div class="form__field">
+      <%= form.label :role_type %>
+      <%= form.select :role_type, options_for_select(AccessGroup.role_types.map { |access_group| [AccessGroup.human_attribute_name(access_group[0]), access_group[1]] }, access_group.role_type) %>
+    </div>
+
+    <div class="form__field">
+      <%= form.label :name %>
+      <%= form.text_field :name %>
+    </div>
+
+    <div class="form__field">
+      <%= form.button class: "button button--confirm" do %>
+        <%= t("helpers.submit.access_group.create_link") %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

@@ -42,6 +42,7 @@ en:
           one: territory
           other: territories
       map:
+        access_groups: Sharing and permissions
         name: Name
       row:
         files:
