@@ -30,6 +30,25 @@ class AccessGroup < ApplicationRecord
 
   # Validations
   validates :role_type, presence: true
+  validates :token, presence: true, allow_nil: true # token is either nil or set, never blank
+  validates :name, presence: true, if: -> { token.present? }
+  validates :name, absence: true, if: -> { token.blank? }
+  validate :either_token_or_user_specific
+  validate :user_map_access_uniqueness
+
+  def either_token_or_user_specific
+    errors.add(:users, :present) if token.present? && users.with_email.exists?
+    errors.add(:users, :equal_to, count: 1) if token.nil? && users.size != 1
+    errors.add(:users, :invalid) if token.nil? && users.first&.email.nil?
+  end
+
+  def user_map_access_uniqueness
+    users.each do |user|
+      if map.access_groups.merge(user.access_groups).where.not(id: self).exists?
+        errors.add(:base, :unique_access_group, user_email: user.email)
+      end
+    end
+  end
 
   # Hooks
   before_update :map_must_have_an_owner
@@ -41,6 +60,14 @@ class AccessGroup < ApplicationRecord
 
     errors.add(:map, :must_have_an_owner)
     throw(:abort)
+  end
+
+  # Scopes
+  scope :with_token, -> { where.not(token: nil) }
+  scope :user_specific, -> { where(token: nil) }
+
+  def self.new_token
+    Devise.friendly_token.first(16)
   end
 
   def build_dom_id

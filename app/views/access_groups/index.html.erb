@@ -12,7 +12,7 @@
 
       <%= render AccessGroup.new(map: @map, users: [User.new]) %>
 
-      <%= render AccessGroup.new(map: @map, token: Devise.friendly_token.first(16)) %>
+      <%= render AccessGroup.new(map: @map, token: AccessGroup.new_token) %>
     </ul>
   </div>
 </div>

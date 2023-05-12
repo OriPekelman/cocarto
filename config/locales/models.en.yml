@@ -8,6 +8,7 @@ en:
         name: Description
         owner: Owner
         role_type: Role
+        token_group: Sharing link
         url_to_share: Link to share
         viewer: Viewer
       field:

@@ -60,23 +60,37 @@ class UserTest < ActiveSupport::TestCase
     end
   end
 
-  test "destroy" do # rubocop:disable Minitest/MultipleAssertions
-    user = users(:reclus)
-    user.destroy
+  class Hooks < UserTest
+    test "access group is copied when email is set" do
+      user = User.create
+      token_group = maps(:restaurants).access_groups.create(role_type: :viewer, name: "My group", token: AccessGroup.new_token, users: [user])
 
-    assert_not user.destroyed?
-    assert_equal [{error: :"restrict_dependent_destroy.has_many", record: "rows"}], user.errors.details[:base]
+      assert_changes -> { token_group.users.count }, from: 1, to: 0 do
+        user.update!(email: "email@example.com")
+      end
+      # a new user_specific access_group is created
+      assert_equal 1, user.access_groups.size
+      assert_nil user.access_groups.first.token
+    end
 
-    user.rows.destroy_all
-    user.errors.clear
-    user.destroy
+    test "destroy" do # rubocop:disable Minitest/MultipleAssertions
+      user = users(:reclus)
+      user.destroy
 
-    assert_not user.destroyed?
-    assert_equal [{error: :"restrict_dependent_destroy.has_many", record: "maps"}], user.errors.details[:base]
+      assert_not user.destroyed?
+      assert_equal [{error: :"restrict_dependent_destroy.has_many", record: "rows"}], user.errors.details[:base]
 
-    user.access_groups.destroy_all
-    user.destroy
+      user.rows.destroy_all
+      user.errors.clear
+      user.destroy
 
-    assert_predicate user, :destroyed?
+      assert_not user.destroyed?
+      assert_equal [{error: :"restrict_dependent_destroy.has_many", record: "maps"}], user.errors.details[:base]
+
+      user.access_groups.destroy_all
+      user.destroy
+
+      assert_predicate user, :destroyed?
+    end
   end
 end

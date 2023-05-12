@@ -49,6 +49,21 @@ class User < ApplicationRecord
   validates :email, presence: true, allow_nil: true
   def email_required? = false # Disable default devise presence validation
 
+  scope :with_email, -> { where.not(email: nil) }
+  scope :without_email, -> { where(email: nil) }
+
+  # Hooks
+  before_update :copy_access_groups
+
+  def copy_access_groups
+    if email_changed?(from: nil)
+      access_groups.includes(:map, :users).with_token.each do |access_group|
+        access_group.users.destroy(self)
+        AccessGroup.create(map: access_group.map, role_type: access_group.role_type, users: [self])
+      end
+    end
+  end
+
   # Devise overrides
   def password_required?
     false
