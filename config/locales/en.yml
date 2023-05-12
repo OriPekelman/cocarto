@@ -28,6 +28,7 @@ en:
     app_title: cocarto
     area: Area
     back: Back
+    close: Close
     confirm: Are you sure?
     dragbar_cursor: Dragbar cursor
     ellipsis: "…"
