@@ -28,6 +28,7 @@ fr:
     app_title: cocarto
     area: Surface
     back: Retour
+    close: Fermer
     confirm: Êtes-vous sûr ?
     dragbar_cursor: Curseur de la barre de défilement
     ellipsis: "…"
