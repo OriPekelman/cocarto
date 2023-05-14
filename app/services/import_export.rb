@@ -1,7 +1,8 @@
 module ImportExport
   IMPORTERS = {
     random: RandomImporter,
-    csv: CsvImporter
+    csv: CsvImporter,
+    geojson: GeojsonImporter
   }
 
   # Import entry point

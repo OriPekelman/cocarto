@@ -1,19 +1,20 @@
 class Import < Thor
   def self.exit_on_failure? = true
 
-  desc "csv", "import csv"
+  desc "import", "Import a file to an existing layer"
   option :layer, required: true, type: :string, aliases: :l, desc: "The layer in which to insert rows", banner: "layer_id"
-  option :file, required: true, type: :string, aliases: :f, desc: "CSV file"
+  option :file, required: true, type: :string, aliases: :f, desc: "Source file"
+  option :format, type: :string, enum: ["csv", "geojson"], default: :csv, desc: "File format"
   option :author, required: true, type: :string, aliases: :a, desc: "Row author", banner: "user_id"
   option :key_field, required: false, type: :string, aliases: :k, desc: "Identifier column name"
   option :stream, required: false, type: :boolean, aliases: :s, desc: "Stream broadcast to frontend (slower)"
-  def csv
+  def import
     layer = Layer.find_by(id: options[:layer])
     author = User.find_by(id: options[:author])
     key_field = layer.fields.find_by(label: options[:key_field]).id if options[:key_field]
-    csv = File.read(options[:file])
+    input = File.read(options[:file])
 
-    ImportExport.import(layer, :csv, csv, author: author, key_field: key_field, stream: options[:stream])
+    ImportExport.import(layer, options[:format].to_sym, input, author: author, key_field: key_field, stream: options[:stream])
   end
 
   desc "random", "Insert new random rows in a layer"
