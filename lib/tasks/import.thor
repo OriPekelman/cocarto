@@ -10,7 +10,7 @@ class Import < Thor
   def csv
     layer = Layer.find_by(id: options[:layer])
     author = User.find_by(id: options[:author])
-    key_field = layer.fields.find_by(label: options[:key_field]).id
+    key_field = layer.fields.find_by(label: options[:key_field]).id if options[:key_field]
     csv = File.read(options[:file])
 
     ImportExport.import(layer, :csv, csv, author: author, key_field: key_field, stream: options[:stream])
