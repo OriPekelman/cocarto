@@ -20,6 +20,11 @@
 #
 class AccessGroup < ApplicationRecord
   # Attributes
+  # role_types can be compared by index, lower is stronger:
+  # irb> AccessGroup.role_types.values.index("editor")
+  # => 1
+  # irb> AccessGroup.role_types.values.index("viewer")
+  # => 3
   enum :role_type, {owner: "owner", editor: "editor", contributor: "contributor", viewer: "viewer"}
 
   # Relationships
@@ -68,5 +73,9 @@ class AccessGroup < ApplicationRecord
 
   def self.new_token
     Devise.friendly_token.first(16)
+  end
+
+  def is_stronger_role_than(other_group)
+    AccessGroup.role_types.values.index(self.role_type) < AccessGroup.role_types.values.index(other_group.role_type)
   end
 end

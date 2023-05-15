@@ -20,8 +20,8 @@
 #
 require "test_helper"
 
-class RoleTest < ActiveSupport::TestCase
-  class Validations < RoleTest
+class AccessGroupTest < ActiveSupport::TestCase
+  class Validations < AccessGroupTest
     test "name required for token access_groups" do
       access_group = maps(:restaurants).access_groups.owner.new(token: AccessGroup.new_token)
 
@@ -102,6 +102,20 @@ class RoleTest < ActiveSupport::TestCase
 
       assert_predicate owner_role, :has_changes_to_save?
       assert_equal({map: [{error: :must_have_an_owner}]}, owner_role.errors.details)
+    end
+  end
+
+  class RoleStrength < AccessGroupTest
+    test "is_stronger_role_than" do
+      group1 = AccessGroup.new(role_type: "owner")
+      group2 = AccessGroup.new(role_type: "viewer")
+
+      assert group1.is_stronger_role_than(group2)
+
+      group1 = AccessGroup.new(role_type: "editor")
+      group2 = AccessGroup.new(role_type: "editor")
+
+      assert_not group1.is_stronger_role_than(group2)
     end
   end
 end
