@@ -55,15 +55,6 @@ class User < ApplicationRecord
   # Hooks
   before_update :copy_access_groups
 
-  def copy_access_groups
-    if email_changed?(from: nil)
-      access_groups.includes(:map, :users).with_token.each do |access_group|
-        access_group.users.destroy(self)
-        AccessGroup.create(map: access_group.map, role_type: access_group.role_type, users: [self])
-      end
-    end
-  end
-
   # Devise overrides
   def password_required?
     false
@@ -82,6 +73,40 @@ class User < ApplicationRecord
       email.split("@")[0]
     else
       I18n.t("users.anonymous")
+    end
+  end
+
+  # Convert token access groups to user-specific groups when changing the user to non-anonymous
+  def copy_access_groups
+    if email_changed?(from: nil)
+      access_groups.includes(:map, :users).with_token.each do |access_group|
+        access_group.users.destroy(self)
+        AccessGroup.create(map: access_group.map, role_type: access_group.role_type, users: [self])
+      end
+    end
+  end
+
+  # Assign a token group to the user; depending on the case, add the user to the group,
+  # create a new user-specific group, or change the existing user-specific group.
+  def assign_access_group(access_group)
+    raise ArgumentError if access_group.token.blank?
+
+    existing_access_group = access_groups.find_by(map: access_group.map)
+    return if existing_access_group == access_group
+
+    if existing_access_group.nil? # self does not already have access to the map
+      if email.nil? # anonymous user: add them to the with_token group
+        access_group.users << self
+      else # user with email: create a user_specific group with similar properties
+        AccessGroup.create(map: access_group.map, role_type: access_group.role_type, users: [self])
+      end
+    elsif access_group.is_stronger_role_than(existing_access_group) # self already has a lower access to the map
+      if email.nil? # anonymous user: switch them to the better group
+        existing_access_group.users.destroy(self)
+        access_group.users << self
+      else # user with email: update their user_specific group role
+        existing_access_group.update!(role_type: access_group.role_type)
+      end
     end
   end
 end
