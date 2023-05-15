@@ -69,14 +69,4 @@ class AccessGroup < ApplicationRecord
   def self.new_token
     Devise.friendly_token.first(16)
   end
-
-  def build_dom_id
-    if persisted?
-      dom_id(self)
-    elsif token.present?
-      "new_access_group_by_token"
-    else
-      "new_access_group_by_email"
-    end
-  end
 end
