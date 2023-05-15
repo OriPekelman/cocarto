@@ -9,7 +9,7 @@
       <div class="form__field">
         <%= form.label :url_to_share %>
         <div class="form__input-with-button" data-controller="clipboard">
-          <%= text_field_tag :url_to_share, share_link_url(access_group.token), data: {clipboard_target: "source"}, autocomplete: :off, readonly: true %>
+          <%= text_field_tag :url_to_share, map_shared_url(access_group.token), data: {clipboard_target: "source"}, autocomplete: :off, readonly: true %>
           <button data-action="clipboard#copy" class="icon-button icon-button--alternate" title="Copier"><%= embedded_svg "copy.svg" %></button>
         </div>
       </div>

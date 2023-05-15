@@ -1,7 +1,5 @@
 class MapPolicy < ApplicationPolicy
   def user_owns_record
-    return false if user.nil?
-
     if record.new_record?
       record.access_groups.find { _1.owner? && _1.users.include?(user) }.present?
     else
@@ -11,7 +9,9 @@ class MapPolicy < ApplicationPolicy
 
   def create? = user_owns_record
 
-  def show? = user&.access_groups&.find_by(map: record).present?
+  def show? = user.access_groups.find_by(map: record).present?
+
+  def shared? = show?
 
   def update? = user_owns_record
 

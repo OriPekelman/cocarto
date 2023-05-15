@@ -33,7 +33,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :invitable, :database_authenticatable, :registerable,
-    :recoverable, :rememberable, :validatable
+    :recoverable, :rememberable, :validatable, :access_group_token_authenticatable
 
   # The belongs_to :invited_by relation is added automatically by invitable
   has_many :invitations, class_name: "User", foreign_key: :invited_by_id, inverse_of: :invited_by, dependent: :nullify

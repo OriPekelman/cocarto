@@ -1,7 +1,6 @@
 require "securerandom"
 
 class LayersController < ApplicationController
-  before_action :access_by_apikey, only: %i[show], if: -> { request.format.to_sym.in? ImportExport::EXPORTERS.keys }
   before_action :authenticate_user!
   before_action :set_layer, only: %i[show edit update destroy mvt]
 
@@ -9,6 +8,7 @@ class LayersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to map_path(@layer.map, params: {open: helpers.dom_id(@layer)}) }
       format.any(*ImportExport::EXPORTERS.keys) do
+        allow_origin_everywhere
         data = ImportExport.export(@layer, request.format.to_sym)
         send_data data, filename: "#{@layer.name}.#{request.format.to_sym}", type: Mime[request.format]
       end
@@ -77,18 +77,9 @@ class LayersController < ApplicationController
     params.require(:layer).permit(:name, :geometry_type, :map_id, :color, territory_category_ids: [])
   end
 
-  def access_by_apikey
-    token = params["authkey"] || request.headers["X-Auth-Key"]
-    if token.present? && !user_signed_in?
-      access_group = AccessGroup.find_by(token: token)
-      if access_group.present?
-        headers["Access-Control-Allow-Origin"] = "*"
-        headers["Access-Control-Allow-Methods"] = "GET OPTIONS"
-        headers["Access-Control-Allow-Headers"] = "*"
-        sign_in User.new(access_groups: [access_group], remember_me: false)
-      else
-        render plain: t("api.bad_key"), status: :unauthorized
-      end
-    end
+  def allow_origin_everywhere
+    headers["Access-Control-Allow-Origin"] = "*"
+    headers["Access-Control-Allow-Methods"] = "GET OPTIONS"
+    headers["Access-Control-Allow-Headers"] = "*"
   end
 end
