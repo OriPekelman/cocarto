@@ -13,6 +13,7 @@
 # Indexes
 #
 #  index_access_groups_on_map_id  (map_id)
+#  index_access_groups_on_token   (token) UNIQUE
 #
 # Foreign Keys
 #
@@ -76,6 +77,6 @@ class AccessGroup < ApplicationRecord
   end
 
   def is_stronger_role_than(other_group)
-    AccessGroup.role_types.values.index(self.role_type) < AccessGroup.role_types.values.index(other_group.role_type)
+    AccessGroup.role_types.values.index(role_type) < AccessGroup.role_types.values.index(other_group.role_type)
   end
 end

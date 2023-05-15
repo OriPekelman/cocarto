@@ -13,6 +13,7 @@
 # Indexes
 #
 #  index_access_groups_on_map_id  (map_id)
+#  index_access_groups_on_token   (token) UNIQUE
 #
 # Foreign Keys
 #

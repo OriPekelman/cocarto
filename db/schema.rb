@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_21_074003) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_15_145036) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -51,6 +51,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_21_074003) do
     t.text "token"
     t.text "name"
     t.index ["map_id"], name: "index_access_groups_on_map_id"
+    t.index ["token"], name: "index_access_groups_on_token", unique: true
   end
 
   create_table "access_groups_users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
