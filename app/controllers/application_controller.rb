@@ -30,10 +30,6 @@ class ApplicationController < ActionController::Base
     {locale: I18n.locale}
   end
 
-  def after_sign_in_path_for(resource_or_scope)
-    maps_path
-  end
-
   def rescue_unauthorized
     yield
   rescue Pundit::NotAuthorizedError
