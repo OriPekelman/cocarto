@@ -89,6 +89,9 @@ fr:
       map_token:
         one: Lien
         other: Liens
+      row:
+        one: Rangée
+        other: Rangées
       territory:
         one: Territoire
         other: Territoires

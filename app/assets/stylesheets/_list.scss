@@ -41,8 +41,11 @@
   color: var(--color-grey-60);
   display: flex;
   align-items: center;
-  gap: 0.375rem;
   padding: 0;
+  span:not(:first-child):before{
+    content: "-";
+    padding-inline: 4px;
+  }
 }
 
 .list-element__button {

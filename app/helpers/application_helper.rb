@@ -20,7 +20,7 @@ module ApplicationHelper
     end
   end
 
-  def updated_at_tag(record, author = nil)
+  def map_updated_at_span(record, author = nil)
     return if record.nil?
 
     text = if author.present?
@@ -28,8 +28,6 @@ module ApplicationHelper
     else
       t("common.updated_at", date: time_ago_in_words(record.updated_at))
     end
-    tag.span title: l(record.updated_at, format: :long) do
-      "- " + text
-    end
+    tag.span text, title: l(record.updated_at, format: :long)
   end
 end
