@@ -1,23 +1,21 @@
 class MapPolicy < ApplicationPolicy
-  def user_owns_record
-    if record.new_record?
-      record.access_groups.find { _1.owner? && _1.users.include?(user) }.present?
-    else
-      record.access_groups.owner.merge(user.access_groups).exists?
-    end
-  end
+  def create? = map_access&.is_at_least(:owner)
 
-  def create? = user_owns_record
-
-  def show? = user.access_groups.find_by(map: record).present?
+  def show? = map_access.present?
 
   def shared? = show?
 
-  def update? = user_owns_record
+  def update? = create?
 
-  def destroy? = user_owns_record
+  def destroy? = create?
 
   class Scope < Scope
     def resolve = user.maps
+  end
+
+  private
+
+  def map_access
+    @map_access ||= user.access_for_map(record)
   end
 end

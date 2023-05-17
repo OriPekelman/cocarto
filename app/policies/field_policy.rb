@@ -1,9 +1,9 @@
 class FieldPolicy < ApplicationPolicy
   def new? = create?
 
-  def create? = access_group&.owner? || access_group&.editor?
+  def create? = map_access&.is_at_least(:editor)
 
-  def show? = access_group.present?
+  def show? = map_access.present?
 
   def edit? = create?
 
@@ -13,7 +13,7 @@ class FieldPolicy < ApplicationPolicy
 
   private
 
-  def access_group
-    user.access_groups.find_by(map: record.layer.map)
+  def map_access
+    @map_access ||= user.access_for_map(record)
   end
 end

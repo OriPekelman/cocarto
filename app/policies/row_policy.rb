@@ -1,19 +1,16 @@
 class RowPolicy < ApplicationPolicy
-  def new?
-    access_group&.owner? || access_group&.editor? || access_group&.contributor?
-  end
+  def new? = create?
 
-  def create? = new?
+  def create? = map_access&.is_at_least(:contributor)
 
   # A contributor can only update its own fields
   # Owner and editor can always update
   def update?
-    access_group&.owner? || access_group&.editor? || (access_group&.contributor? && user == record.author)
+    map_access&.is_at_least(:editor) ||
+      (map_access&.is_at_least(:contributor) && (user == record.author || user.anonymous_tag == record.anonymous_tag))
   end
 
-  def destroy?
-    access_group&.owner? || access_group&.editor?
-  end
+  def destroy? = map_access&.is_at_least(:editor)
 
   # This method is used to generate data-attributes
   # that will be used to disable client-side some features
@@ -27,7 +24,7 @@ class RowPolicy < ApplicationPolicy
 
   private
 
-  def access_group
-    user.access_groups.find_by(map: record.layer.map)
+  def map_access
+    @map_access ||= user.access_for_map(record.layer.map)
   end
 end
