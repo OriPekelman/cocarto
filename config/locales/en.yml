@@ -90,6 +90,8 @@ en:
     new:
       header: New link
   maps:
+    index:
+      create_account: Create an account
     sharing:
       header: Sharing and permissions
     show:

@@ -90,6 +90,8 @@ fr:
     new:
       header: Nouveau lien
   maps:
+    index:
+      create_account: Créer un compte
     sharing:
       header: Partage et permissions
     show:
