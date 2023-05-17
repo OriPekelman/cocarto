@@ -33,4 +33,18 @@ class LoginTest < ApplicationSystemTestCase
 
     assert_no_field "Name"
   end
+
+  test "redirection after signin" do # rubocop:disable Minitest/MultipleAssertions
+    visit map_path(id: maps("boat"))
+
+    assert_text "You need to sign in or sign up before continuing."
+    assert_current_path user_session_path
+
+    fill_in "user_email", with: users("reclus").email
+    fill_in "user_password", with: "refleurir"
+    click_button "Log in"
+
+    assert_field "Name", with: "Boating trip"
+    assert_current_path map_path(id: maps("boat"))
+  end
 end

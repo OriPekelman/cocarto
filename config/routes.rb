@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     end
 
     authenticated :user do
-      root "maps#index", as: :authenticated_root
+      root "maps#index", as: :user_root
     end
 
     resources :maps, except: [:edit] do
