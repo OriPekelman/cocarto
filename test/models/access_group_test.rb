@@ -48,11 +48,11 @@ class AccessGroupTest < ActiveSupport::TestCase
     test "only anonymous users for token access_groups" do
       access_group = maps(:restaurants).access_groups.owner.create(token: AccessGroup.new_token, name: "My group", users: [User.new])
 
-      assert_predicate access_group, :valid?
+      assert_predicate access_group, :persisted?
 
-      access_group.users = [users(:louise_michel)]
+      access_group = maps(:restaurants).access_groups.owner.create(token: AccessGroup.new_token, name: "My group", users: [users(:louise_michel)])
 
-      assert_not_predicate access_group, :valid?
+      assert_not_predicate access_group, :persisted?
       assert_equal [{error: :present}], access_group.errors.details[:users]
     end
 
@@ -70,18 +70,18 @@ class AccessGroupTest < ActiveSupport::TestCase
     test "user must have email for user_specific access_groups" do
       access_group = maps(:restaurants).access_groups.owner.create(users: [User.new])
 
-      assert_not_predicate access_group, :valid?
+      assert_not_predicate access_group, :persisted?
       assert_equal [{error: :invalid}], access_group.errors.details[:users]
     end
 
     test "no two access groups for the same user and map" do
       access_group1 = maps(:restaurants).access_groups.owner.create(users: [users(:louise_michel)])
 
-      assert_predicate access_group1, :valid?
+      assert_predicate access_group1, :persisted?
 
       access_group2 = maps(:restaurants).access_groups.owner.create(users: [users(:louise_michel)])
 
-      assert_not_predicate access_group2, :valid?
+      assert_not_predicate access_group2, :persisted?
       assert_equal [{error: :unique_access_group, user_email: "louise.michel@commune.paris"}], access_group2.errors.details[:base]
     end
 

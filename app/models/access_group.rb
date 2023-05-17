@@ -43,7 +43,7 @@ class AccessGroup < ApplicationRecord
   validate :user_map_access_uniqueness
 
   def either_token_or_user_specific
-    errors.add(:users, :present) if token.present? && users.with_email.exists?
+    errors.add(:users, :present) if token.present? && users.find { _1.email.present? }
     errors.add(:users, :equal_to, count: 1) if token.nil? && users.size != 1
     errors.add(:users, :invalid) if token.nil? && users.first&.email.nil?
   end
