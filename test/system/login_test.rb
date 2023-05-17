@@ -9,17 +9,17 @@ class LoginTest < ApplicationSystemTestCase
     fill_in "user_password_confirmation", with: "canne à sucre"
     click_button "Sign up"
 
-    assert_button "cabiai@amazonas.br"
+    assert_button "cabiai"
 
     wait_until_dropdown_controller_ready
-    click_button "cabiai@amazonas.br"
+    click_button "cabiai"
     click_button "Sign out"
     click_link "Log in"
     fill_in "user_email", with: "cabiai@amazonas.br"
     fill_in "user_password", with: "canne à sucre"
     click_button "Log in"
 
-    assert_button "cabiai@amazonas.br"
+    assert_button "cabiai"
   end
 
   test "login and logout" do
