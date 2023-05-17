@@ -18,6 +18,19 @@ class ImporterTest < ActiveSupport::TestCase
         ImportExport.import(layers(:restaurants), :csv, csv, author: users(:reclus))
       end
     end
+
+    test "csv column separator detection" do
+      layers(:restaurants).rows.destroy_all
+
+      csv = <<~CSV
+        Nom;Convives;geojson
+        L’Antipode;70;"{""type"":""Point"",""coordinates"":[2.37516,48.88661]}"
+      CSV
+
+      assert_changes -> { layers(:restaurants).rows.count }, from: 0, to: 1 do
+        ImportExport.import(layers(:restaurants), :csv, csv, author: users(:reclus))
+      end
+    end
   end
 
   class Mapping < ImporterTest
