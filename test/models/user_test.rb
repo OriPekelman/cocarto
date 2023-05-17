@@ -75,57 +75,57 @@ class UserTest < ActiveSupport::TestCase
 
       assert_predicate user, :destroyed?
     end
+  end
 
-    test "access group is copied when email is set" do
-      user = User.create
-      token_group = maps(:restaurants).access_groups.create(role_type: :viewer, name: "My group", token: AccessGroup.new_token, users: [user])
+  class AssignMapToken < UserTest
+    def create_token(role_type)
+      maps(:restaurants).map_tokens.create(role_type: role_type, name: "A link name")
+    end
 
-      assert_changes -> { token_group.users.count }, from: 1, to: 0 do
-        user.update!(email: "email@example.com")
-      end
-      # a new user_specific access_group is created
-      assert_equal 1, user.access_groups.size
-      assert_nil user.access_groups.first.token
+    test "assign a token to an anonymous user" do
+      # first token should be set, second should be ignored because it’s a lower type, last token should replace because it’s a promotion
+      user = MapTokenAuthenticatable::AnonymousUser.new
+      user.tokens_array = []
+
+      contributor_token = create_token(:contributor)
+      assert_changes(-> { user.map_tokens.dup }, from: [], to: [contributor_token]) { user.assign_map_token(contributor_token) }
+
+      viewer_token = create_token(:viewer)
+      assert_no_changes(-> { user.map_tokens.dup }) { user.assign_map_token(viewer_token) }
+
+      editor_token = create_token(:editor)
+      assert_changes(-> { user.map_tokens.dup }, from: [contributor_token], to: [editor_token]) { user.assign_map_token(editor_token) }
+    end
+
+    test "assign a map token to a named user" do
+      # first token should be set, second should be ignored because it’s a lower type, last token should replace because it’s a promotion
+      # Since this is a user with an email, a user_role is created, then modified.
+      user = User.create(email: "a@a.a", password: "secret")
+
+      contributor_token = create_token(:contributor)
+      assert_changes(-> { user.user_roles.pluck(:role_type) }, from: [], to: ["contributor"]) { user.assign_map_token(contributor_token) }
+
+      viewer_token = create_token(:viewer)
+      assert_no_changes(-> { user.user_roles.pluck(:role_type) }) { user.assign_map_token(viewer_token) }
+
+      editor_token = create_token(:editor)
+      assert_changes(-> { user.user_roles.pluck(:role_type) }, from: ["contributor"], to: ["editor"]) { user.assign_map_token(editor_token) }
     end
   end
 
-  class AssignAccessGroups < UserTest
-    def create_group(role_type, user = nil)
-      relation = maps(:restaurants).access_groups
-      if user&.email.present?
-        relation.create(role_type: role_type, users: [user])
-      else
-        relation.create(role_type: role_type, users: [user].compact, name: "A group name", token: AccessGroup.new_token)
-      end
-    end
+  class ReassignFromAnonymousUser < UserTest
+    test "reassign_from_anonymous_user" do
+      anonymous_user = MapTokenAuthenticatable::AnonymousUser.new
+      contributor_token = maps(:restaurants).map_tokens.contributor.create(name: "A link name")
+      anonymous_user.tokens_array = [contributor_token.token]
+      row = layers(:restaurants).rows.create!(author: anonymous_user, point: "POINT(0.0001 0.0001)")
 
-    test "assign a group to an anonymous user" do
-      # first group should be set, second should be ignored because it’s a lower type, last group should replace because it’s a promotion
-      user = User.create
+      real_user = User.create(email: "a@a.a", password: "secret")
+      real_user.reassign_from_anonymous_user(anonymous_user)
 
-      editor_group = create_group("editor")
-      assert_changes(-> { user.reload.access_group_ids }, from: [], to: [editor_group.id]) { user.assign_access_group(editor_group) }
-
-      viewer_group = create_group("viewer")
-      assert_no_changes(-> { user.reload.access_group_ids }) { user.assign_access_group(viewer_group) }
-
-      owner_group = create_group("owner")
-      assert_changes(-> { user.reload.access_group_ids }, from: [editor_group.id], to: [owner_group.id]) { user.assign_access_group(owner_group) }
-    end
-
-    test "assign a group to a named user" do
-      # first group should be set, second should be ignored because it’s a lower type, last group should replace because it’s a promotion
-      # Since this is a user with an email, a user-specific group is created, then modified.
-      user = User.create(email: "a@a.a", password: "secret")
-
-      editor_group = create_group("editor")
-      assert_changes(-> { user.access_groups.pluck(:role_type) }, from: [], to: ["editor"]) { user.assign_access_group(editor_group) }
-
-      viewer_group = create_group("viewer")
-      assert_no_changes(-> { user.access_groups.pluck(:role_type) }) { user.assign_access_group(viewer_group) }
-
-      new_group = create_group("owner")
-      assert_changes(-> { user.access_groups.pluck(:role_type) }, from: ["editor"], to: ["owner"]) { user.assign_access_group(new_group) }
+      assert_equal [maps(:restaurants)], real_user.maps
+      assert_equal real_user, row.reload.author
+      assert_nil row.anonymous_tag
     end
   end
 end

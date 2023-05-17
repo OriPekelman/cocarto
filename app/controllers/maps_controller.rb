@@ -21,11 +21,19 @@ class MapsController < ApplicationController
   end
 
   def shared
-    # Access made with an AccessGroup token.
-    # Authentication is already done by AccessGroupTokenAuthenticatable.
-    access_group = AccessGroup.find_by(token: params[:token])
-    current_user.assign_access_group(access_group)
-    redirect_to authorize(access_group.map)
+    # Access made with a map token.
+    # Authentication is already done by MapTokenAuthenticatable.
+    map_token = MapToken.find_by(token: params[:token])
+    current_user.assign_map_token(map_token)
+    if current_user.anonymous?
+      # Transient users only see the /share/:token url
+      @map = authorize(map_token.map)
+      @role_type = map_token.role_type
+      render :show
+    else
+      # Real users are redirected to /maps/:id
+      redirect_to authorize(map_token.map)
+    end
   end
 
   def new

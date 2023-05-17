@@ -29,6 +29,7 @@ ActiveRecordDoctor.configure do
     "ActiveStorage::VariantRecord",
     "ActiveStorage::Attachment",
     "AccessGroup",
+    "MapTokenAuthenticatable::AnonymousUser"
   ]
 
   detector :incorrect_dependent_option, ignore_associations: [

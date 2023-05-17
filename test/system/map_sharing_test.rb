@@ -44,4 +44,13 @@ class MapSharingTest < ApplicationSystemTestCase
 
     assert_field "Name", with: "Boating trip"
   end
+
+  test "anonymous access" do
+    visit map_shared_url(token: map_tokens(:restaurants_contributors).token)
+    visit map_shared_url(token: map_tokens(:boat_viewers).token)
+    click_link "All maps"
+
+    assert_text "Restaurants"
+    assert_text "Boating trip"
+  end
 end

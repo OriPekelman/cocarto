@@ -33,7 +33,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :invitable, :database_authenticatable, :registerable,
-    :recoverable, :rememberable, :validatable, :access_group_token_authenticatable
+    :recoverable, :rememberable, :validatable, :map_token_authenticatable
 
   # The belongs_to :invited_by relation is added automatically by invitable
   has_many :invitations, class_name: "User", foreign_key: :invited_by_id, inverse_of: :invited_by, dependent: :nullify
@@ -56,45 +56,32 @@ class User < ApplicationRecord
     super.nil? ? true : super
   end
 
+  ## These methods are overridden in MapTokenAuthenticatable, for anonymous Users
+  #
   def display_name
-    if email
-      email.split("@")[0]
-    else
-      I18n.t("users.anonymous")
-    end
+    email.split("@")[0]
   end
 
-  # Convert token access groups to user-specific groups when changing the user to non-anonymous
-  def copy_access_groups
-    if email_changed?(from: nil)
-      access_groups.includes(:map, :users).with_token.each do |access_group|
-        access_group.users.destroy(self)
-        AccessGroup.create(map: access_group.map, role_type: access_group.role_type, users: [self])
-      end
+  def access_for_map(map)
+    if map.new_record?
+      map.user_roles.find { _1.user_id == id }
+    else
+      map.user_roles.find_by(user_id: id)
     end
   end
 
   # Assign a token group to the user; depending on the case, add the user to the group,
   # create a new user-specific group, or change the existing user-specific group.
-  def assign_access_group(access_group)
-    raise ArgumentError if access_group.token.blank?
+  def assign_map_token(map_token)
+    existing_role = user_roles.includes(:map_token).find_by(map: map_token.map)
+    return if existing_role&.map_token == map_token
 
-    existing_access_group = access_groups.find_by(map: access_group.map)
-    return if existing_access_group == access_group
+    map_token.increment!(:access_count) # rubocop:disable Rails/SkipsModelValidations
 
-    if existing_access_group.nil? # self does not already have access to the map
-      if email.nil? # anonymous user: add them to the with_token group
-        access_group.users << self
-      else # user with email: create a user_specific group with similar properties
-        AccessGroup.create(map: access_group.map, role_type: access_group.role_type, users: [self])
-      end
-    elsif access_group.is_stronger_role_than(existing_access_group) # self already has a lower access to the map
-      if email.nil? # anonymous user: switch them to the better group
-        existing_access_group.users.destroy(self)
-        access_group.users << self
-      else # user with email: update their user_specific group role
-        existing_access_group.update!(role_type: access_group.role_type)
-      end
+    if existing_role.nil? # self does not already have access to the map
+      UserRole.create(map: map_token.map, role_type: map_token.role_type, user: self, map_token: map_token)
+    elsif map_token.is_stronger_than(existing_role) # self already has a lower access to the map
+      existing_role.update!(role_type: map_token.role_type, map_token: map_token)
     end
   end
 end
