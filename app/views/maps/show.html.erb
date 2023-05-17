@@ -8,7 +8,7 @@
   <% end %>
   <%= render "name", map: @map %>
   <div class="buttons-bar buttons-bar--tight">
-    <%= link_to t("activerecord.attributes.map.access_groups"), map_access_groups_path(@map, scope: "user_specific"), class: "button button--link", data: {turbo_frame: "modal"} if policy(@map.access_groups.new).index? %>
+    <%= link_to t("maps.sharing.header"), map_user_roles_path(@map), class: "button button--link", data: {turbo_frame: "modal"} if policy(@map.user_roles.new).index? %>
     <%= link_to t("helpers.link.map.delete"), @map, data: {turbo_method: :delete, turbo_confirm: t("common.confirm")}, class: "button button--link" if policy(@map).destroy? %>
   </div>
 </nav>

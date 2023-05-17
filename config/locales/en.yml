@@ -1,22 +1,5 @@
 ---
 en:
-  access_groups:
-    access_group_user_specific:
-      invitation_accepted_at: Invitation accepted %{at}
-      invitation_sent_at: 'Invitation sent %{at} '
-    access_group_user_specific_new:
-      header: New user
-    access_group_with_token:
-      anonymous_users:
-        one: "%{count} anonymous users have opened this link"
-        other: "%{count} anonymous users have opened this link "
-        zero: No access through this link yet
-    access_group_with_token_new:
-      title: New link
-    confirm_delete_self: Are you sure? You won’t be able to access the map anymore.
-    index:
-      user_specific: Users
-      with_token: Links
   api:
     bad_key: Bad API key
   area:
@@ -98,7 +81,17 @@ en:
   length:
     thousand: km
     unit: m
+  map_tokens:
+    map_token:
+      access_count:
+        one: "%{count} anonymous users have opened this link."
+        other: "%{count} anonymous users have opened this link."
+        zero: No access through this link yet.
+    new:
+      header: New link
   maps:
+    sharing:
+      header: Sharing and permissions
     show:
       all_maps: All maps
     toolbar:
@@ -167,5 +160,13 @@ en:
   time:
     formats:
       sentence: on %d %b %Y at %H:%M
+  user_roles:
+    new:
+      header: New user
+    user_role:
+      confirm_delete_self: Are you sure? You won’t be able to access the map anymore.
+      confirm_relegate_self: Are you sure? You won’t be able to change permissions anymore.
+      invitation_accepted_at: Invitation accepted %{at}
+      invitation_sent_at: 'Invitation sent %{at} '
   users:
     anonymous: anonymous

@@ -1,13 +1,13 @@
 require "application_system_test_case"
 
-class AccessGroupsTest < ApplicationSystemTestCase
+class MapSharingTest < ApplicationSystemTestCase
   test "the map owner can see the roles" do
     sign_in_as(users("reclus"), "refleurir")
     visit map_path(id: maps("boat"))
     click_link "Sharing and permissions"
 
-    assert_field "access_group_users_attributes_0_email", with: "elisee.reclus@commune.paris"
-    assert_field "access_group_users_attributes_0_email", with: "cassini@carto.gouv.fr"
+    assert_field "user_role_user_attributes_email", with: "elisee.reclus@commune.paris"
+    assert_field "user_role_user_attributes_email", with: "cassini@carto.gouv.fr"
   end
 
   test "a viewer can see the map, but not the roles" do
@@ -17,8 +17,9 @@ class AccessGroupsTest < ApplicationSystemTestCase
     assert_no_link "Sharing and permissions"
   end
 
-  test "we can generate a link for an anonymous access" do
+  test "generate a link for an anonymous access" do
     # Let’s be sure we can’t access the page
+    maps("boat").map_tokens.destroy_all
     visit map_path(id: maps("boat"))
 
     assert_no_field "Name"
@@ -29,8 +30,9 @@ class AccessGroupsTest < ApplicationSystemTestCase
     click_link "Sharing and permissions"
     click_link "Links"
 
-    new_link = find_by_id("new_access_group")
-    new_link.fill_in("access_group_name", with: "Test link")
+    new_link = find_by_id("new_map_token")
+    new_link.select("Editor", from: "Role")
+    new_link.fill_in("Description", with: "Test link")
     click_button "Create link"
 
     url = find("input", id: "url_to_share").value

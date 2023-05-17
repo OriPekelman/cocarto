@@ -1,0 +1,27 @@
+<%= form_with model: map_token, id: dom_id(map_token) do |form| %>
+  <div class="list-element__row list-element__row--grid">
+    <div class="form__field">
+      <%= form.select :role_type, options_for_role_type_select(map_token), {}, disabled: true %>
+    </div>
+
+    <div class="form__field">
+      <%= form.text_field :name %>
+      <div class="form__field">
+        <%= form.label :url_to_share %>
+        <div class="form__input-with-button" data-controller="clipboard">
+          <%= text_field_tag :url_to_share, map_shared_url(map_token.token), data: {clipboard_target: "source"}, autocomplete: :off, readonly: true %>
+          <button data-action="clipboard#copy" class="icon-button icon-button--alternate" title="Copier"><%= embedded_svg "copy.svg" %></button>
+        </div>
+      </div>
+      <em><%= t(".access_count", count: map_token.access_count) %></em>
+    </div>
+
+    <div class="form__field">
+      <%= form.submit class: "button button--slim button--confirm" %>
+
+      <%= link_to t("helpers.link.map_token.delete"), map_token,
+            class: "button button--slim button--link",
+            data: {turbo_method: :delete, turbo_confirm: t("common.confirm")} %>
+    </div>
+  </div>
+<% end %>

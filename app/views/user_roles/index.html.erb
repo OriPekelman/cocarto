@@ -1,0 +1,7 @@
+<div class="card__main-content card--large">
+  <%= render "maps/sharing", map: @map %>
+
+  <%= render @user_roles.includes(:user) %>
+
+  <%= render "new", user_role: @new_role %>
+</div>

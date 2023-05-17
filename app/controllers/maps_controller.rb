@@ -8,10 +8,12 @@ class MapsController < ApplicationController
 
   def index
     @maps = policy_scope(Map)
+    @new_map = Map.new
+    @new_map.user_roles.new(user: current_user, role_type: :owner)
   end
 
   def show
-    @role_type = current_user.access_groups.find_by(map: @map)&.role_type
+    @role_type = current_user.access_for_map(@map).role_type
     respond_to do |format|
       format.html
       format.style { render json: @map.style(url_for(Layer)) }
@@ -68,7 +70,7 @@ class MapsController < ApplicationController
 
   def new_map
     @map = Map.new
-    @map.access_groups.new(users: [current_user], role_type: :owner)
+    @map.user_roles.new(user: current_user, role_type: :owner)
     authorize @map
   end
 
