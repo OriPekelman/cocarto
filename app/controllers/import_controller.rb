@@ -25,6 +25,7 @@ class ImportController < ApplicationController
   end
 
   def set_layer
-    @layer = authorize Layer.find(params[:layer_id])
+    @layer = Layer.find(params[:layer_id])
+    authorize @layer.rows.new, :create?
   end
 end
