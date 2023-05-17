@@ -14,8 +14,11 @@ module ImportExport
       @stream = options[:stream]
     end
 
-    def import = import_rows
+    def import
+      ApplicationRecord.transaction { import_rows }
+    end
 
+    # implemented by subclasses
     def import_rows = raise NotImplementedError
   end
 end
