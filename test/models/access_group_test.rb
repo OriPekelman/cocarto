@@ -59,12 +59,9 @@ class AccessGroupTest < ActiveSupport::TestCase
     test "only one user for user_specific access_groups" do
       access_group = maps(:restaurants).access_groups.owner.create(users: [users(:louise_michel)])
 
-      assert_predicate access_group, :valid?
-
-      access_group.users << users(:bakounine)
-
-      assert_not_predicate access_group, :valid?
-      assert_equal [{error: :equal_to, count: 1}], access_group.errors.details[:users]
+      assert_no_changes -> { access_group.reload.users } do
+        access_group.users << users(:bakounine)
+      end
     end
 
     test "user must have email for user_specific access_groups" do
