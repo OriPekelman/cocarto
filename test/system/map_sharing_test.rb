@@ -53,4 +53,38 @@ class MapSharingTest < ApplicationSystemTestCase
     assert_text "Restaurants"
     assert_text "Boating trip"
   end
+
+  test "anonymous access then sign in" do
+    users(:bakounine).user_roles.destroy_all
+
+    visit map_shared_url(token: map_tokens(:restaurants_contributors).token)
+    sign_in_as(users(:bakounine), "refleurir")
+    click_link "Restaurants"
+
+    assert_field "Name", with: "Restaurants"
+
+    sign_out
+    visit maps_url
+
+    assert_text "You need to sign in or sign up before continuing."
+  end
+
+  test "anonymous access then sign up" do
+    visit map_shared_url(token: map_tokens(:restaurants_contributors).token)
+    wait_until_dropdown_controller_ready
+    click_button "anonymous"
+    click_link "Sign up"
+    fill_in "user_email", with: "cabiai@amazonas.br"
+    fill_in "user_password", with: "canne à sucre"
+    fill_in "user_password_confirmation", with: "canne à sucre"
+    click_button "Sign up"
+    click_link "Restaurants"
+
+    assert_field "Name", with: "Restaurants"
+
+    sign_out
+    visit maps_url
+
+    assert_text "You need to sign in or sign up before continuing."
+  end
 end
