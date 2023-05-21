@@ -7,6 +7,10 @@ export default class extends Controller {
     path: String
   }
 
+  connect () {
+    this.element.dataset[`${this.identifier}Controller`] = 'connected'
+  }
+
   async #processResponse (response) {
     this.suggestionListTarget.innerHTML = await response.text()
     this.dispatch('input')

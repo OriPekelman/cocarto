@@ -4,6 +4,7 @@ class ImportTest < ApplicationSystemTestCase
   test "import stuff" do  # rubocop:disable Minitest/MultipleAssertions
     sign_in_as(users("reclus"), "refleurir")
     visit layer_path(id: layers("restaurants"))
+    wait_until_turbo_stream_connected
 
     # Check that row is not present yet
     assert_selector "input[value='L’Antipode']", count: 1
