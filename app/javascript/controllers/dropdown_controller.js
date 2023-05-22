@@ -11,8 +11,8 @@ export default class extends Controller {
   }
 
   connect () {
+    this.element.dataset[`${this.identifier}Controller`] = 'connected'
     autoUpdate(this.triggerTarget, this.contentTarget, () => { this.#adjustPosition() })
-    this.loadedValue = true
     useClickOutside(this)
   }
 

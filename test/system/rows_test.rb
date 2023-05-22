@@ -6,7 +6,7 @@ class RowsTest < ApplicationSystemTestCase
 
     visit map_path(id: maps("restaurants"))
     # We make sure to wait that the map is loaded
-    map = find_map_loaded
+    map = wait_until_map_loaded
     click_on "Display the table for this layer", match: :first
     click_on "Add a point"
 
@@ -19,7 +19,7 @@ class RowsTest < ApplicationSystemTestCase
     sign_in_as(users("reclus"), "refleurir")
 
     visit map_path(id: maps("restaurants"))
-    map = find_map_loaded
+    map = wait_until_map_loaded
     click_on "Display the table for this layer", match: :first
 
     assert_selector ".row", count: 1
@@ -42,6 +42,9 @@ class RowsTest < ApplicationSystemTestCase
     fill_in "Rating", with: "5"
     fill_in "Table Size", with: "9"
 
+    # wait for the SearchComponent to be completely loaded
+    assert_selector ".territory-search[data-controller='autocomplete dropdown'][data-autocomplete-controller=connected][data-dropdown-controller=connected]"
+
     # The territory suggestions are fetched when the query input changes;
     # See SearchComponent and autocomplete_controller.js
     # TODO: we need to tweak the autocomplete field identifier, "#q" is not sufficient.
@@ -52,7 +55,7 @@ class RowsTest < ApplicationSystemTestCase
     # See views/rows/new.html.erb and map_add_point_controller.js
     find("#row_geojson[value*='{\"type\":\"Point\",\"coordinates\":']", visible: false)
 
-    assert_changes -> { layers(:restaurants).rows.count("*") }, from: 1, to: 2 do
+    assert_changes -> { layers(:restaurants).rows.count }, from: 1, to: 2 do
       click_on "Add this point"
     end
   end

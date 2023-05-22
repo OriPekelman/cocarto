@@ -43,7 +43,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     fill_in "user_password", with: password
     click_button "Log in"
 
-    assert_text "Maps"
+    assert_text "Signed in successfully"
   end
 
   def sign_out
@@ -56,11 +56,18 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   # We want to make sure that the dropdown controller is loaded
   # Otherwise capybara will click on the button, and nothing happens
   def wait_until_dropdown_controller_ready
-    assert page.has_css?('[data-dropdown-loaded-value="true"]')
+    find "[data-dropdown-controller=connected]", wait: 10
   end
 
-  def find_map_loaded
+  def wait_until_map_loaded
     find ".maplibregl-map[data-loaded]", wait: 10
+  end
+
+  def wait_until_turbo_stream_connected
+    # Turbo adds the `connected` attribute to <turbo-cable-stream-source> elements when the stream is up
+    # We can rely on this to ensure row broadcasts from the backend are actually received.
+    # (match: :first is needed because of turbo_stream_i18n_from. We can remove it after #196 if we stream empty frame-tags.)
+    find "turbo-cable-stream-source[channel='Turbo::StreamsChannel'][connected]", match: :first, wait: 10
   end
 
   def wait_all_downloads
