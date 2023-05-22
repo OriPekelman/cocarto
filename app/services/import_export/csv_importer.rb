@@ -1,10 +1,16 @@
 module ImportExport
   class CsvImporter < ImporterBase
+    include ImporterBase::GeometryParsing
+
     # Additional @options:
-    # encoding, col_sep
+    # - encoding
+    # - col_sep
+    # - geometry_keys, geometry_format
     def initialize(*args, **options)
       @encoding = options.delete(:encoding)
       @col_sep = options.delete(:col_sep)
+      @geometry_keys = options.delete(:geometry_keys)
+      @geometry_format = options.delete(:geometry_format)
       super
     end
 
@@ -13,9 +19,11 @@ module ImportExport
 
       csv.each do |line|
         values = line.to_h
-        geojson = values.delete("geojson")
-        geometry = RGeo::GeoJSON.decode(geojson, geo_factory: RGEO_FACTORY)
-
+        geometry = if @geometry_keys && @geometry_format
+          extract_geometry(values, @geometry_keys, @geometry_format)
+        else
+          guess_geometry(values)
+        end
         import_row(geometry, values)
       end
     end

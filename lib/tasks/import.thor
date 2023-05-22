@@ -10,6 +10,8 @@ class Import < Thor
   option :stream, required: false, type: :boolean, aliases: :s, desc: "Stream broadcast to frontend (slower)"
   option :csv_col_sep, required: false, type: :string, desc: "CSV column separator"
   option :csv_encoding, required: false, type: :string, desc: "CSV encoding"
+  option :geometry_keys, required: false, type: :array, desc: "geometry keys"
+  option :geometry_format, required: false, type: :string, desc: "geometry format, one of #{ImportExport::ImporterBase::Geometry::PARSERS.keys}"
   def import
     opts = options.dup
     layer = Layer.find_by(id: opts.delete(:layer))
