@@ -45,8 +45,6 @@ en:
     create:
       import_failed: Import failed
       import_successful: Import succeeded
-    errors:
-      inconsistent_separator: 'Invalid file: separator must be a comma, a semicolon or a tabulation. Please also make sure all the rows have the same column count.'
     show:
       attention: This feature is still experimental; expect bugs, and please do contact us if you get into trouble.
       import_data: Import data
