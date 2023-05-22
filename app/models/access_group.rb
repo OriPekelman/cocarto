@@ -13,6 +13,7 @@
 # Indexes
 #
 #  index_access_groups_on_map_id  (map_id)
+#  index_access_groups_on_token   (token) UNIQUE
 #
 # Foreign Keys
 #
@@ -20,10 +21,15 @@
 #
 class AccessGroup < ApplicationRecord
   # Attributes
+  # role_types can be compared by index, lower is stronger:
+  # irb> AccessGroup.role_types.values.index("editor")
+  # => 1
+  # irb> AccessGroup.role_types.values.index("viewer")
+  # => 3
   enum :role_type, {owner: "owner", editor: "editor", contributor: "contributor", viewer: "viewer"}
 
   # Relationships
-  has_and_belongs_to_many :users
+  has_and_belongs_to_many :users, before_add: :prevent_many_users_in_user_specific_group
   belongs_to :map
 
   accepts_nested_attributes_for :users
@@ -36,9 +42,14 @@ class AccessGroup < ApplicationRecord
   validate :either_token_or_user_specific
   validate :user_map_access_uniqueness
 
+  def prevent_many_users_in_user_specific_group(_new_user)
+    return if token.present?
+
+    throw :abort if users.exists?
+  end
+
   def either_token_or_user_specific
-    errors.add(:users, :present) if token.present? && users.with_email.exists?
-    errors.add(:users, :equal_to, count: 1) if token.nil? && users.size != 1
+    errors.add(:users, :present) if token.present? && users.find { _1.email.present? }
     errors.add(:users, :invalid) if token.nil? && users.first&.email.nil?
   end
 
@@ -70,13 +81,7 @@ class AccessGroup < ApplicationRecord
     Devise.friendly_token.first(16)
   end
 
-  def build_dom_id
-    if persisted?
-      dom_id(self)
-    elsif token.present?
-      "new_access_group_by_token"
-    else
-      "new_access_group_by_email"
-    end
+  def is_stronger_role_than(other_group)
+    AccessGroup.role_types.values.index(role_type) < AccessGroup.role_types.values.index(other_group.role_type)
   end
 end
