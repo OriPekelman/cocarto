@@ -19,6 +19,30 @@ module ImportExport
       rescue JSON::ParserError, RGeo::Error::ParseError
         # TODO: error reporting
       end
+
+      STRATEGIES = [
+        ["geojson", :geojson],
+        ["wkt", :wkt],
+        ["wkb", :wkb],
+        ["geometry", :geojson],
+        ["geometry", :wkt],
+        ["geometry", :wkb],
+        [%w[longitude latitude], :xy],
+        [%w[long lat], :xy],
+        [%w[x y], :xy]
+      ]
+
+      def guess_geometry(values)
+        geometry = nil
+        STRATEGIES.each do |strategy|
+          geometry = extract_geometry(values, Array(strategy.first), strategy.second)
+          break if geometry
+        end
+
+        geometry
+      rescue JSON::ParserError, RGeo::Error::ParseError
+        # Ignore error
+      end
     end
   end
 end

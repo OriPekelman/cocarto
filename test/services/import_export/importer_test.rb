@@ -104,5 +104,19 @@ class ImporterTest < ActiveSupport::TestCase
 
       assert_equal 2, layers(:restaurants).rows.count
     end
+
+    test "automatic column" do
+      layers(:restaurants).rows.destroy_all
+
+      csv = <<~CSV
+        Name,lat,long
+        AAA,10,10
+        BBB,20,20
+      CSV
+
+      ImportExport.import(layers(:restaurants), :csv, csv, author: users(:reclus))
+
+      assert_equal 2, layers(:restaurants).rows.count
+    end
   end
 end
