@@ -14,8 +14,36 @@ module ImportExport
       @stream = options[:stream]
     end
 
-    def import = import_rows
+    def import
+      ApplicationRecord.transaction { import_rows }
+    end
 
+    # implemented by subclasses
     def import_rows = raise NotImplementedError
+
+    # import a single row
+    def import_row(geometry, values)
+      # map keys
+      values = values.transform_keys do |k|
+        @mapping[k] || k
+      end
+
+      # find existing row to reimport
+      row = if @key_field.present?
+        @layer.rows.where("values->>? ilike ? ", @key_field, values[@key_field]).take
+      end
+      row = @layer.rows.new if row.nil?
+
+      # assign values
+      row.author = @author
+      row.fields_values = values
+      if geometry
+        # Note: geometry may be nil when reimporting a row (from e.g. a data-only table).
+        # Note: we set the geometry after the values because the geometry setter requires the layer to be known.
+        row.geometry = geometry
+      end
+
+      row.save!
+    end
   end
 end

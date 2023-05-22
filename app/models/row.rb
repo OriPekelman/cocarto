@@ -56,6 +56,7 @@ class Row < ApplicationRecord
   include FieldValuesAssociations::RowAssociations
 
   # Validations
+  before_validation :take_first_of_geometry_collection
   validate :validate_geometry
 
   # We use postgis functions to convert to geojson
@@ -231,11 +232,21 @@ class Row < ApplicationRecord
 
   def validate_geometry
     return if layer.geometry_territory?
+    return if geometry.nil?
 
     # Geometry attributes are RGeo types; we can rely on its validity checks.
     # Invalid reasons are defined in RGeo::Error
     unless geometry&.valid?
       errors.add(:geometry, :invalid, reason: geometry.invalid_reason)
+    end
+  end
+
+  def take_first_of_geometry_collection
+    if geometry.is_a? RGeo::Feature::GeometryCollection
+      if geometry.size > 1
+        Rails.logger.debug "Geometry has more than one element, skipping the others"
+      end
+      self.geometry = geometry.first
     end
   end
 end

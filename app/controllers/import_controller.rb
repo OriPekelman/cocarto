@@ -6,7 +6,7 @@ class ImportController < ApplicationController
 
   def create
     path = import_params[:file].path
-    csv = File.read(path)
+    csv = File.open(path)
     ImportExport.import(@layer, :csv, csv, key_field: import_params[:key_field], author: current_user, stream: true)
     respond_to do |format|
       format.turbo_stream
@@ -25,6 +25,7 @@ class ImportController < ApplicationController
   end
 
   def set_layer
-    @layer = authorize Layer.find(params[:layer_id])
+    @layer = Layer.find(params[:layer_id])
+    authorize @layer.rows.new, :create?
   end
 end

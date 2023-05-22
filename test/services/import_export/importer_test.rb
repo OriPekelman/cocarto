@@ -10,7 +10,7 @@ class ImporterTest < ActiveSupport::TestCase
   test "import csv" do
     layers(:restaurants).rows.destroy_all
 
-    csv = file_fixture("restaurants.csv").read
+    csv = file_fixture("restaurants.csv").open
     assert_changes -> { layers(:restaurants).rows.count }, from: 0, to: 2 do
       ImportExport.import(layers(:restaurants), :csv, csv, author: users(:reclus))
     end
@@ -38,7 +38,7 @@ class ImporterTest < ActiveSupport::TestCase
   test "reimport should only update the values" do
     layers(:restaurants).rows.destroy_all
 
-    csv = file_fixture("restaurants.csv").read
+    csv = file_fixture("restaurants.csv").open
 
     ImportExport.import(layers(:restaurants), :csv, csv, author: users(:reclus), key_field: fields(:restaurant_name).id)
     bastringue = layers(:restaurants).rows.last
