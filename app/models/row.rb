@@ -264,7 +264,7 @@ class Row < ApplicationRecord
   def take_first_of_geometry_collection
     if geometry.is_a? RGeo::Feature::GeometryCollection
       if geometry.size > 1
-        Rails.logger.debug "Geometry has more than one element, skipping the others"
+        warnings.add(:geometry, :multiple_items)
       end
       self.geometry = geometry.first
     end

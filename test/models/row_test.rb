@@ -54,6 +54,7 @@ class RowTest < ActiveSupport::TestCase
       row = Row.new(author: users(:reclus), layer: layers(:restaurants), geometry: "MULTIPOINT (10   40, 40 30, 20 20, 30 10)")
       row.validate
 
+      assert_equal [{error: :multiple_items}], row.warnings.details[:geometry]
       assert_equal RGEO_FACTORY.point(10, 40).as_text, RGEO_FACTORY.generate_wkt(row.geometry)
     end
   end
