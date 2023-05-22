@@ -2,12 +2,10 @@ import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
   static targets = ['icon', 'territoryCategories']
-  static values = {
-    defaultColor: String
-  }
 
   connect () {
-    this.setColor(this.defaultColorValue)
+    const defaultValue = this.element.elements['layer[color]'].value
+    this.setColor(defaultValue)
   }
 
   colorSelected ({ params }) {

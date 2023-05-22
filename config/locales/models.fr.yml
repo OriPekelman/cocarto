@@ -98,6 +98,7 @@ fr:
         new: Nouvelle colonne
       layer:
         delete: Supprimer
+        edit: Modifier…
         export: Exporter…
         export_csv: CSV
         export_geojson: GeoJSON
@@ -142,6 +143,7 @@ fr:
         update: OK
       layer:
         create: Créer une couche
+        update: OK
       map:
         create: Créer une carte
       row:

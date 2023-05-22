@@ -46,6 +46,32 @@
   padding: 2px;
 }
 
+.layer-header__name-button {
+  height: 28px;
+  display: flex;
+  align-items: center;
+  padding-inline: 0 16px;
+  padding-block: 6px;
+  gap: 8px;
+  color: var(--color-green-70);
+  background-color: transparent;
+  text-decoration: none;
+  border-radius: var(--border-radius);
+  border: 0.5px solid transparent;
+
+  &:hover:not([disabled], :active) {
+    color: var(--color-green-90);
+    border-color: var(--color-grey-40);
+    background-color: var(--color-bg-ambient-10);
+  }
+
+  &:hover:active {
+    color: var(--color-green-100);
+    border-color: var(--color-grey-80);
+    background-color: var(--color-bg-ambient-10);
+  }
+}
+
 .layer-header__button--bordered {
   border-radius: var(--border-radius);
   border: 0.5px solid var(--color-grey-40);

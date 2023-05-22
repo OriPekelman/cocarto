@@ -3,7 +3,7 @@ require "securerandom"
 class LayersController < ApplicationController
   before_action :access_by_apikey, only: %i[show], if: -> { request.format.to_sym.in? ImportExport::EXPORTERS.keys }
   before_action :authenticate_user!
-  before_action :set_layer, only: %i[show update destroy mvt]
+  before_action :set_layer, only: %i[show edit update destroy mvt]
 
   def show
     respond_to do |format|
@@ -18,6 +18,11 @@ class LayersController < ApplicationController
   def new
     map = current_user.maps.find(params["map_id"])
     @layer = authorize map.layers.new
+    render :form
+  end
+
+  def edit
+    render :form
   end
 
   def create
@@ -29,7 +34,7 @@ class LayersController < ApplicationController
     else
       # This line overrides the default rendering behavior, which
       # would have been to render the "create" view.
-      render "new", status: :unprocessable_entity
+      render :form, status: :unprocessable_entity
     end
   end
 

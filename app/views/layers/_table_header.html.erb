@@ -1,10 +1,15 @@
 <header class="layer-header" id="<%= dom_id(layer, :header) %>">
-  <div class="buttons-bar buttons-bar--tight">
+  <%= link_to edit_layer_path(layer), class: "layer-header__name-button", title: t("helpers.link.layer.edit"),
+        data: {turbo_frame: "modal",
+               restricted_target: "restricted", # cf LayerPolicy#update?
+               restricted_authorizations: %w[owner editor].to_json} do %>
     <div class="layer-header__icon">
       <%= embedded_svg "#{layer.geometry_type}.svg", class: "icon--regular", style: "color: #{layer.color}" %>
     </div>
-    <%= render "layers/name", layer: layer %>
-  </div>
+
+    <%= layer.name %>
+  <% end %>
+
   <div class="buttons-bar buttons-bar--tight">
     <% if layer.rows.size > 0 %>
       <button class="layer-header__icon button button--link"

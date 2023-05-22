@@ -100,6 +100,7 @@ en:
         new: New column
       layer:
         delete: Delete
+        edit: Edit…
         export: Export…
         export_csv: CSV
         export_geojson: GeoJSON
@@ -144,6 +145,7 @@ en:
         update: Save
       layer:
         create: Create a layer
+        update: Save
       map:
         create: Create a map
       row:
