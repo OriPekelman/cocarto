@@ -1,4 +1,4 @@
-<header class="layer-header" id="<%= dom_id(layer, :header) %>">
+<header class="layer-header" id="<%= dom_id(layer, :header) %>" data-action="click->layer#toggleTable:self">
   <%= link_to edit_layer_path(layer), class: "layer-header__name-button", title: t("helpers.link.layer.edit"),
         data: {turbo_frame: "modal",
                restricted_target: "restricted", # cf LayerPolicy#update?
@@ -12,20 +12,20 @@
 
   <div class="buttons-bar buttons-bar--tight">
     <% if layer.rows.size > 0 %>
-      <button class="layer-header__icon button button--link"
+      <button class="layer-header__icon button layer-header__button--link"
         title="<%= t(".center_on_layer") %>"
         data-action="click->map#center"
         data-map-bounds-param="<%= layer.rows.bounding_box.to_json %>">
         <%= embedded_svg "frame.svg", class: "icon--small" %>
       </button>
     <% end %>
-    <button class="layer-header__icon button button--link"
+    <button class="layer-header__icon button layer-header__button--link"
       title="<%= t(".hide_layer_on_map") %>"
       data-layer-target="hideButton"
       data-action="click->layer#hideOnMap">
       <%= embedded_svg "eye.svg", class: "icon--small" %>
     </button>
-    <button class="layer-header__icon button button--link"
+    <button class="layer-header__icon button layer-header__button--link"
       title="<%= t(".show_layer_on_map") %>"
       data-layer-target="showButton"
       data-action="click->layer#showOnMap"
@@ -33,7 +33,7 @@
       <%= embedded_svg "eye-off.svg", class: "icon--small" %>
     </button>
     <button
-      class="layer-header__icon button layer-header__button--bordered"
+      class="layer-header__icon button layer-header__toggle-button"
       title="<%= t(".toggle_layer") %>"
       data-action="layer#toggleTable">
       <%= embedded_svg "chevron_droite.svg", class: "icon--regular icon--tinted layer__indicator" %>
