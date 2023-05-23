@@ -19,5 +19,6 @@ if Rails.env.production? || ENV["COCARTO_DEBUG_SENTRY"].present?
         0.05 # 5% in general
       end
     end
+    config.profiles_sample_rate = 1 # The profiles_sample_rate setting is relative to the traces_sample_rate setting.
   end
 end
