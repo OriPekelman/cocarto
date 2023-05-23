@@ -1,6 +1,6 @@
 <%# params: @layer %>
 
-<%= form_with(model: @layer, id: dom_id(@layer), class: "form", data: {controller: "layer-form"}) do |form| %>
+<%= form_with(model: @layer, class: "form", data: {controller: "layer-form"}) do |form| %>
   <%= form.hidden_field :map_id %>
   <div class="card__main-content">
     <% if @layer.new_record? %>
@@ -46,6 +46,6 @@
   </div>
 
   <div class="card__footer-content">
-    <%= form.submit class: "button button--confirm", form: dom_id(@layer), data: {turbo_frame: "_top"} %>
+    <%= form.submit class: "button button--confirm", data: {turbo_frame: "_top"} %>
   </div>
 <% end %>
