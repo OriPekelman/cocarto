@@ -44,6 +44,7 @@ gem "active_link_to"
 # perfs and errors
 gem "sentry-ruby"
 gem "sentry-rails"
+gem "stackprof"
 
 gem "foreman"
 
