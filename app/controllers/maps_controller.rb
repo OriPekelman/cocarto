@@ -18,6 +18,14 @@ class MapsController < ApplicationController
     end
   end
 
+  def shared
+    # Access made with an AccessGroup token.
+    # Authentication is already done by AccessGroupTokenAuthenticatable.
+    access_group = AccessGroup.find_by(token: params[:token])
+    current_user.assign_access_group(access_group)
+    redirect_to authorize(access_group.map)
+  end
+
   def new
   end
 

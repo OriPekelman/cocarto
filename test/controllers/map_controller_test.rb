@@ -3,7 +3,7 @@ require "test_helper"
 class MapControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
 
-  test "acces control" do
+  test "access control" do
     restaurants = maps(:restaurants)
     get map_url(id: restaurants.id)
 
@@ -18,6 +18,24 @@ class MapControllerTest < ActionDispatch::IntegrationTest
     get map_url(id: restaurants.id)
 
     assert_response :success
+  end
+
+  test "anonymous access to a shared map creates a new user" do
+    assert_changes -> { User.count } do
+      get map_shared_url(access_groups(:restaurants_contributors).token)
+
+      assert_redirected_to map_url(maps(:restaurants))
+    end
+  end
+
+  test "access to a shared map as an existing user" do
+    sign_in users(:cassini)
+
+    assert_changes -> { users(:cassini).maps.count } do
+      get map_shared_url(access_groups(:restaurants_contributors).token)
+
+      assert_redirected_to map_url(maps(:restaurants))
+    end
   end
 
   test "get a style" do

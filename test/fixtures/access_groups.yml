@@ -44,7 +44,14 @@ boat_cassini:
   users: [cassini]
   role_type: viewer
 
-restaurants_token:
+restaurants_contributors:
+  name: "Contributeurs"
+  map: restaurants
+  role_type: contributor
+  token: Secret
+
+restaurants_viewers:
+  name: "Lien public"
   map: restaurants
   role_type: viewer
-  token: let me in
+  token: Pas très secret

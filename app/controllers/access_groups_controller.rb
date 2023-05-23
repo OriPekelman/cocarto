@@ -1,5 +1,5 @@
 class AccessGroupsController < ApplicationController
-  before_action :authenticate_user!, except: :enter_by_link
+  before_action :authenticate_user!
   before_action :set_access_group, only: %i[update destroy]
 
   def index
@@ -35,21 +35,6 @@ class AccessGroupsController < ApplicationController
 
   def collection_index_path(access_group)
     map_access_groups_path(access_group.map, scope: access_group.token.present? ? "with_token" : "user_specific")
-  end
-
-  # Someone access the page through a link
-  # If the user is signed in we add them to the users list of that access group
-  # Other wise, we create a user without email
-  def enter_by_link
-    skip_authorization
-    access_group = AccessGroup.find_by(token: params[:token])
-    if user_signed_in?
-      access_group.users << current_user unless access_group.users.exists?(current_user.id)
-    else
-      user = access_group.users.create(email: nil, remember_me: false)
-      sign_in user
-    end
-    redirect_to access_group.map
   end
 
   def update
