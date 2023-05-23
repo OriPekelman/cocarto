@@ -108,6 +108,8 @@
 }
 
 // The header itself can be clicked
+// :hover:not(:has(*:hover)) means “when the header itself is hovered, not one of its descendants”
+// (this doesn't work yet in firefox https://caniuse.com/css-has)
 .layer-header:hover:not(:has(*:hover)) {
   cursor: pointer;
 
