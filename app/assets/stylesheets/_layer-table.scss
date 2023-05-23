@@ -24,7 +24,7 @@
   padding-left: 16px;
   padding-right: 2px;
   background-color: var(--color-bg-ambient-30);
-  height: 32px;
+  height: 34px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -46,16 +46,87 @@
   padding: 2px;
 }
 
-.layer-header__button--bordered {
+.layer-header__button--link {
+  color: var(--color-green-70);
+  background-color: transparent;
+
+  &:hover:not([disabled], :active) {
+    color: var(--color-green-90);
+    background-color: var(--color-bg-ambient-10);
+  }
+
+  &:hover:active {
+    color: var(--color-green-100);
+    background-color: var(--color-bg-ambient-10);
+  }
+}
+
+.layer-header__name-button {
+  height: 28px;
+  display: flex;
+  align-items: center;
+  padding-inline: 0 16px;
+  padding-block: 6px;
+  gap: 8px;
+  color: var(--color-green-70);
+  background-color: transparent;
+  text-decoration: none;
   border-radius: var(--border-radius);
-  border: 0.5px solid var(--color-grey-40);
-  background-color: var(--color-bg-ambient-10);
+  border: 0.5px solid transparent;
+
+  &:hover:not([disabled], :active) {
+    color: var(--color-green-90);
+    border-color: var(--color-grey-40);
+    background-color: var(--color-bg-ambient-10);
+  }
+
+  &:hover:active {
+    color: var(--color-green-100);
+    border-color: var(--color-grey-80);
+    background-color: var(--color-bg-ambient-10);
+  }
+}
+
+.layer-header__toggle-button {
+  border-radius: var(--border-radius);
+  border: 0.5px solid transparent;
+  background-color: transparent;
   padding: 1.5px;
   color: var(--color-green-70);
 
-  &:hover:not([disabled]) {
+  &:hover:not([disabled], :active) {
     color: var(--color-green-90);
-    border-color: var(--color-grey-70);
+    border-color: var(--color-grey-40);
+    background-color: var(--color-bg-ambient-10);
+  }
+
+  &:hover:active {
+    color: var(--color-green-100);
+    border-color: var(--color-grey-80);
+    background-color: var(--color-bg-ambient-10);
+  }
+}
+
+// The header itself can be clicked
+// :hover:not(:has(*:hover)) means “when the header itself is hovered, not one of its descendants”
+// (this doesn't work yet in firefox https://caniuse.com/css-has)
+.layer-header:hover:not(:has(*:hover)) {
+  cursor: pointer;
+
+  &:not([disabled], :active) {
+    .layer-header__toggle-button {
+      color: var(--color-green-90);
+      border-color: var(--color-grey-40);
+      background-color: var(--color-bg-ambient-10);
+    }
+  }
+
+  &:active {
+    .layer-header__toggle-button {
+      color: var(--color-green-100);
+      border-color: var(--color-grey-80);
+      background-color: var(--color-bg-ambient-10);
+    }
   }
 }
 

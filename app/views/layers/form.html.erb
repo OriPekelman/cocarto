@@ -1,0 +1,51 @@
+<%# params: @layer %>
+
+<%= form_with(model: @layer, class: "form", data: {controller: "layer-form"}) do |form| %>
+  <%= form.hidden_field :map_id %>
+  <div class="card__main-content">
+    <% if @layer.new_record? %>
+      <h2 class="form__header"><%= t("helpers.link.layer.new") %></h2>
+    <% end %>
+
+    <div class="form__field form__field--large">
+      <%= form.label :name %>
+      <%= form.text_field :name, autofocus: true %>
+    </div>
+
+    <h3 class="form__header"><%= Layer.human_attribute_name(:color) %></h3>
+    <div class="form__field form__field--large layer-form__color-field">
+      <% Layer::COLORS.each do |key, rgb| %>
+        <div class="form__field form__field--large form__field--inline">
+          <%= form.radio_button :color, rgb, data: {"layer-form-color-param": rgb, action: "layer-form#colorSelected"} %>
+          <%= form.label :color, t(key, scope: "colors"), value: rgb %>
+        </div>
+      <% end %>
+    </div>
+
+    <% if @layer.new_record? %>
+      <h3 class="form__header"><%= Layer.human_attribute_name(:geometry_type) %></h3>
+      <div class="form__field form__field--large form__field--inline layer-form__type-field">
+        <% Layer.geometry_types.keys.each do |type| %>
+          <%= form.label "geometry_type_#{type}" do %>
+            <%= form.radio_button :geometry_type, type, checked: type == "point", data: {"layer-form-type-param": type, action: "layer-form#typeSelected"} %>
+            <div class="layer-form__type-option">
+              <div data-layer-form-target="icon"><%= embedded_svg "#{type}.svg" %></div>
+              <%= Layer.human_attribute_name(type).capitalize %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+
+      <h3 class="form__header" hidden data-layer-form-target="territoryCategories"><%= TerritoryCategory.model_name.human(count: 2) %></h3>
+      <div class="form__field" hidden data-layer-form-target="territoryCategories">
+        <%= form.collection_check_boxes :territory_category_ids, TerritoryCategory.all, :id, :to_s do |b| %>
+          <%= b.label(class: "form__field form__field--large form__field--inline") { b.check_box + b.text } %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="card__footer-content">
+    <%= form.submit class: "button button--confirm", data: {turbo_frame: "_top"} %>
+  </div>
+<% end %>
