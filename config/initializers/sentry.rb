@@ -3,7 +3,7 @@ if Rails.env.production? || ENV["COCARTO_DEBUG_SENTRY"].present?
   Sentry.init do |config|
     config.release = ENV.fetch("CONTAINER_VERSION") { "dev" } # Set by Scalingo, see https://doc.scalingo.com/platform/app/environment#runtime-environment-variables
     config.environment = Rails.env
-    # sentry dsn is set automatically via the SENTRY_DN environment variable
+    # sentry dsn is set automatically via the SENTRY_DSN environment variable
     config.breadcrumbs_logger = [:active_support_logger, :http_logger]
     config.sample_rate = 1 # Send all errors
     config.traces_sampler = lambda do |sampling_context|
