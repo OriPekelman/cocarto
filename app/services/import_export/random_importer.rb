@@ -13,7 +13,7 @@ module ImportExport
       geometry_proc = -> { random_geometry }
       values_proc = proc { @layer.fields.to_h { [_1.id, random_value(_1)] } }
 
-      entries = @row_count.times.map do
+      entries = Array.new(@row_count) do
         {
           layer_id: @layer.id,
           author_id: @author.id,

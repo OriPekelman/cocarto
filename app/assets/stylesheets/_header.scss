@@ -59,7 +59,7 @@
   height: var(--welcome-header-height);
 }
 
-@media (max-width: 850px) {
+@media (width <= 850px) {
   .header {
     flex-direction: column;
     gap: 8px;
