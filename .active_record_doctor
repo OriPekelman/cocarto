@@ -23,6 +23,7 @@ ActiveRecordDoctor.configure do
     # Default values set in schema
     "Layer.style",
     "Row.values",
+    "Row.feature_id"
   ], ignore_models: [
     "ActiveStorage::Blob",
     "ActiveStorage::VariantRecord",
@@ -32,5 +33,13 @@ ActiveRecordDoctor.configure do
   detector :incorrect_dependent_option, ignore_associations: [
     # See https://gitlab.com/CodeursEnLiberte/cocarto/-/issues/192
     "Layer.rows",
+  ]
+
+  detector :missing_foreign_keys, ignore_columns: [
+    "rows.feature_id"
+  ]
+
+  detector :unindexed_foreign_keys, ignore_columns: [
+    "rows.feature_id"
   ]
 end
