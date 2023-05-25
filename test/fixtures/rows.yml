@@ -18,17 +18,18 @@
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  author_id         :uuid             not null
+#  feature_id        :bigint           not null
 #  layer_id          :uuid             not null
 #  territory_id      :uuid
 #
 # Indexes
 #
-#  index_rows_on_author_id          (author_id)
-#  index_rows_on_created_at         (created_at)
-#  index_rows_on_geom_web_mercator  (geom_web_mercator) USING gist
-#  index_rows_on_layer_id           (layer_id)
-#  index_rows_on_territory_id       (territory_id)
-#  index_rows_on_updated_at         (updated_at)
+#  index_rows_on_author_id                (author_id)
+#  index_rows_on_created_at               (created_at)
+#  index_rows_on_geom_web_mercator        (geom_web_mercator) USING gist
+#  index_rows_on_layer_id_and_feature_id  (layer_id,feature_id) UNIQUE
+#  index_rows_on_territory_id             (territory_id)
+#  index_rows_on_updated_at               (updated_at)
 #
 # Foreign Keys
 #

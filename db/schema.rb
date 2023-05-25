@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_15_145036) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_25_093152) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -154,10 +154,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_15_145036) do
     t.virtual "geo_length", type: :decimal, as: "st_length((line_string)::geography)", stored: true
     t.virtual "geo_area", type: :decimal, as: "st_area((polygon)::geography)", stored: true
     t.virtual "geom_web_mercator", type: :geometry, limit: {:srid=>0, :type=>"geometry"}, as: "st_transform(COALESCE(point, line_string, polygon), 3857)", stored: true
+    t.bigserial "feature_id", null: false
     t.index ["author_id"], name: "index_rows_on_author_id"
     t.index ["created_at"], name: "index_rows_on_created_at"
     t.index ["geom_web_mercator"], name: "index_rows_on_geom_web_mercator", using: :gist
-    t.index ["layer_id"], name: "index_rows_on_layer_id"
+    t.index ["layer_id", "feature_id"], name: "index_rows_on_layer_id_and_feature_id", unique: true
     t.index ["territory_id"], name: "index_rows_on_territory_id"
     t.index ["updated_at"], name: "index_rows_on_updated_at"
     t.check_constraint "num_nonnulls(point, line_string, polygon, territory_id) = 1"
