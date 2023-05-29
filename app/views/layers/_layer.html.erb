@@ -27,7 +27,7 @@
         <%= link_to layer, title: t("helpers.link.layer.delete"),
               class: "icon-button icon-button--double-bordered icon-button--small",
               data: {turbo_method: :delete, turbo_confirm: t("common.confirm"),
-                     restricted_target: "restricted", restricted_authorizations: '["owner"]'} do %> <%# Cf policy(layer).destroy? %>
+                     restricted_target: "restricted", restricted_authorizations: '["owner", "editor"]'} do %> <%# Cf policy(layer).destroy? %>
           <%= embedded_svg "supprimer.svg", class: "icon--tinted" %>
         <% end %>
         <%= link_to layer_import_path(layer), title: t("helpers.link.layer.import"),

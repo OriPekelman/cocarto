@@ -7,7 +7,7 @@ class LayerPolicy < ApplicationPolicy
 
   def update? = create?
 
-  def destroy? = map_access&.is_at_least(:owner)
+  def destroy? = create?
 
   def mvt? = show?
 
