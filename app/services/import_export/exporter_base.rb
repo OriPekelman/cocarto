@@ -2,9 +2,10 @@ module ImportExport
   class ExporterBase
     attr_reader :layer, :rows
 
-    def initialize(layer)
+    def initialize(layer, with_ids: false)
       @layer = layer
       @rows = @layer.rows_with_fields_values
+      @with_ids = with_ids
     end
 
     def export
@@ -15,8 +16,7 @@ module ImportExport
 
     # Subclass helpers
     def exported_row_id(row)
-      {}
-      # TODO: make it configurable {id: row.id}
+      @with_ids ? {id: row.id} : {}
     end
 
     def exported_row_geometry(row)

@@ -8,6 +8,7 @@
     data-map-default-longitude-value="<%= map.default_longitude %>"
     data-map-default-latitude-value="<%= map.default_latitude %>"
     data-map-default-zoom-value="<%= map.default_zoom %>"
+    data-map-style-url-value="<%= map_url(map, format: :style, only_path: false) %>"
     data-restricted-role-value="<%= "#{role_type}-#{current_user_id}" %>">
   <div class="map_document__data" data-dragbar-target="left">
     <%= content_for :left_pane %>

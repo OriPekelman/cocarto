@@ -73,13 +73,13 @@ module Mvt
       case geometry_type
       when "point"
         [{
-          id: layer_id + "hover",
+          id: layer_id + "--hover",
           source: layer_id,
           type: "circle",
           paint: {
             "circle-color": "#fff",
             "circle-radius": 8,
-            "circle-opacity": ["case", ["boolean", ["feature-state", "hover"], false], 1, 0]
+            "circle-opacity": ["match", ["feature-state", "state"], "hover", 1, 0]
           },
           "source-layer": TILE_LAYER_ID
         },
@@ -94,7 +94,7 @@ module Mvt
             "source-layer": TILE_LAYER_ID
           },
           {
-            id: layer_id + "outline",
+            id: layer_id + "--outline",
             source: layer_id,
             type: "circle",
             paint: {
@@ -107,13 +107,13 @@ module Mvt
           }]
       when "line_string"
         [{
-          id: layer_id + "hover",
+          id: layer_id + "--hover",
           source: layer_id,
           type: "line",
           paint: {
             "line-color": "#fff",
             "line-width": 6,
-            "line-opacity": ["case", ["boolean", ["feature-state", "hover"], false], 1, 0]
+            "line-opacity": ["match", ["feature-state", "state"], "hover", 1, 0]
           },
           "source-layer": TILE_LAYER_ID
         },
@@ -134,12 +134,12 @@ module Mvt
           type: "fill",
           paint: {
             "fill-color": color,
-            "fill-opacity": ["case", ["boolean", ["feature-state", "hover"], false], 0.8, 0.1]
+            "fill-opacity": ["match", ["feature-state", "state"], "hover", 0.8, 0.1]
           },
           "source-layer": TILE_LAYER_ID
         },
           {
-            id: layer_id + "outline",
+            id: layer_id + "--outline",
             source: layer_id,
             type: "line",
             paint: {

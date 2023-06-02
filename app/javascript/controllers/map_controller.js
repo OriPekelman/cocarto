@@ -54,8 +54,11 @@ export default class extends Controller {
   }
 
   toggleMode () {
-    const newMode = this.mapState.getDraw().getMode() === this.mapState.getDrawMode() ? 'simple_select' : this.mapState.getDrawMode()
-    this.mapState.getDraw().changeMode(newMode)
+    if (this.mapState.getMode() === 'default') {
+      this.mapState.addFeatureMode()
+    } else {
+      this.mapState.defaultMode()
+    }
   }
 
   exportMapAsImage ({ target }) {

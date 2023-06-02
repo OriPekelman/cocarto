@@ -8,6 +8,8 @@ import PresenceTrackers from 'lib/presence_trackers'
 class MapState {
   constructor ({ target, mapId, lng, lat, zoom, leftToolbar, rightToolbar, style }) {
     this.map = newMap(target, [lng, lat], zoom, style)
+    this.layers = {}
+    this.mode = 'default'
 
     this.draw = new MapboxDraw({
       displayControlsDefault: false,
@@ -25,24 +27,19 @@ class MapState {
     this.trackers = new PresenceTrackers(this.map, mapId)
 
     this.map.on('load', e => { target.dataset.loaded = 'loaded' }) // System tests: Avoid interacting with the map before it's ready
-    this.map.on('draw.selectionchange', e => this.#mapSelectionChanged(e))
     this.map.on('draw.create', ({ features }) => this.#featureCreated(features[0]))
     this.map.on('draw.update', ({ features }) => this.#featureUpdated(features[0]))
     this.map.on('mousemove', e => this.trackers.mousemove(e))
-
-    this.hoveredFeature = null
+    this.map.on('click', e => this.#editFeature(e))
+    this.activeFeature = null
   }
 
   getMap () {
     return this.map
   }
 
-  getDraw () {
-    return this.draw
-  }
-
-  getDrawMode () {
-    return this.drawMode
+  getMode () {
+    return this.mode
   }
 
   getImage () {
@@ -75,48 +72,96 @@ class MapState {
     cache.update(this.map.transform)
   }
 
-  registerLayer (layerId) {
+  registerLayer ({ layerId, geometryType }) {
+    this.map.setStyle(this.style, { diff: true })
+    this.layers[layerId] = geometryType
     this.map.on('mouseenter', layerId, e => this.#mouseEnterFeature(e))
     this.map.on('mouseleave', layerId, e => this.#mouseLeaveFeature(e))
   }
 
-  #mapSelectionChanged ({ features }) {
-    features.map(getRowFromFeature).forEach(row => row.rowController.highlight())
+  addFeatureMode () {
+    if (this.mode === 'default') {
+      this.mode = 'adding'
+      this.draw.changeMode(this.drawMode)
+    }
+  }
+
+  setDefaultMode () {
+    this.mode == 'default'
+    this.draw.changeMode('simple_select')
+    this.draw.deleteAll()
+  }
+
+  #mapSelectionChanged (features) {
+    features.map(f => getRowFromId(f.properties.original_id)).forEach(row => row.rowController.highlight())
   }
 
   #featureUpdated (feature) {
-    const row = getRowFromFeature(feature)
+    const row = getRowFromId(feature.id)
     row.rowController.update(feature.geometry)
   }
 
   #featureCreated (feature) {
     this.currentLayerController.createRow(feature.geometry)
-    // When we submit the drawn row, we get one back from the server through turbo
-    // So we remove the one we’ve just drawn
-    // Later we’ll be smarter to avoid destruction and recreation
     this.draw.delete(feature.id)
+    this.mode = 'default'
+  }
+
+  #setActive (feature, state) {
+    this.activeFeature = feature
+    this.map.setFeatureState(this.activeFeature, { state })
+  }
+
+  #unsetActive () {
+    if (this.activeFeature) {
+      this.map.setFeatureState(this.activeFeature, { state: 'default' })
+      this.activeFeature = null
+    }
   }
 
   #mouseEnterFeature (e) {
     this.map.getCanvas().style.cursor = 'pointer'
-    if (this.hoveredFeature) {
-      this.map.setFeatureState(this.hoveredFeature, { hover: false })
-    }
-    this.hoveredFeature = e.features[0]
-    this.map.setFeatureState(this.hoveredFeature, { hover: true })
+    this.#unsetActive()
+    this.#setActive(e.features[0], 'hover')
   }
 
-  #mouseLeaveFeature (e, layerId) {
+  #mouseLeaveFeature (e) {
     this.map.getCanvas().style.cursor = ''
-    if (this.hoveredFeature) {
-      this.map.setFeatureState(this.hoveredFeature, { hover: false })
-      this.hoveredFeature = null
+    this.#unsetActive()
+  }
+
+  #editFeature (e) {
+    const features = this.map.queryRenderedFeatures(e.point, {
+      layers: Object.keys(this.layers)
+    });
+    if (this.mode !== 'adding') {
+      this.draw.deleteAll()
+    }
+    if (features.length > 0) {
+      this.#mapSelectionChanged(features)
+      const feature = features[0]
+
+      const feature_id = feature.properties.original_id
+      const path = `/rows/${feature_id}`
+      const url = new URL(path, window.location.origin)
+      fetch(url)
+        .then( (response) => response.json())
+        .then((geojson) => {
+          geojson.id = feature_id
+          const res = this.draw.add(geojson)
+          const geometryType = this.layers[feature.layer.id]
+          if(geometryType === "point"){
+            this.draw.changeMode('simple_select', {features: [feature_id]})
+          } else {
+            this.draw.changeMode('direct_select', {featureId: feature_id})
+          }
+        })
     }
   }
 }
 
-function getRowFromFeature (feature) {
-  return document.getElementById(feature.id)
+function getRowFromId (id) {
+  return document.getElementById('row_' + id)
 }
 
 export default MapState

@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     end
     resources :layers, except: [:index, :new] do
       resources :rows, only: [:new, :create, :edit, :update, :destroy], shallow: true
+      resources :rows, only: [:show], shallow: true, constraints: {format: "geojson"}
       member do
         get "/mvt/:z/:x/:y/", action: :mvt
       end
