@@ -27,8 +27,13 @@ module ImportExport
         ["geometry", :geojson],
         ["geometry", :wkt],
         ["geometry", :wkb],
+        ["geom", :geojson],
+        ["geom", :wkt],
+        ["geom", :wkb],
         [%w[longitude latitude], :xy],
         [%w[long lat], :xy],
+        [%w[lon lat], :xy],
+        [%w[lng lat], :xy],
         [%w[x y], :xy]
       ]
 
