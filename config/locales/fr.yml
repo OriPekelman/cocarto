@@ -63,6 +63,8 @@ fr:
     create:
       import_failed: 'Échec de l’import '
       import_successful: Import réussi
+    errors:
+      inconsistent_separator: 'Fichier invalide : le séparateur doit être une virgule, un point-virgule ou une tabulation. Vérifiez aussi que toutes les rangées ont le même nombre de colonnes.'
     show:
       attention: Cette fonctionnalité est expérimentale; attendez-vous à des bugs, et n’hésitez pas à nous en parler.
       import_data: Import de données
