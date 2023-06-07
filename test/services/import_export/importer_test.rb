@@ -75,4 +75,48 @@ class ImporterTest < ActiveSupport::TestCase
       assert_equal 10, bastringue.reload.fields_values[fields(:restaurant_rating)]
     end
   end
+
+  class GeometryFormats < ImporterTest
+    test "from wkt column" do
+      layers(:restaurants).rows.destroy_all
+
+      csv = <<~CSV
+        Name,geometry
+        AAA,POINT (10 20)
+        BBB,POINT (30 40)
+      CSV
+
+      ImportExport.import(layers(:restaurants), :csv, csv, author: users(:reclus), geometry_keys: "geometry", geometry_format: :wkt)
+
+      assert_equal 2, layers(:restaurants).rows.count
+    end
+
+    test "from lat long columns" do
+      layers(:restaurants).rows.destroy_all
+
+      csv = <<~CSV
+        Name,lat,long
+        AAA,10,10
+        BBB,20,20
+      CSV
+
+      ImportExport.import(layers(:restaurants), :csv, csv, author: users(:reclus), geometry_keys: %w[long lat], geometry_format: :xy)
+
+      assert_equal 2, layers(:restaurants).rows.count
+    end
+
+    test "automatic column" do
+      layers(:restaurants).rows.destroy_all
+
+      csv = <<~CSV
+        Name,lat,long
+        AAA,10,10
+        BBB,20,20
+      CSV
+
+      ImportExport.import(layers(:restaurants), :csv, csv, author: users(:reclus))
+
+      assert_equal 2, layers(:restaurants).rows.count
+    end
+  end
 end
