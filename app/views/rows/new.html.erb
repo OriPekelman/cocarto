@@ -9,7 +9,7 @@
   <div class="add-single-row__map" data-map-add-point-target="map">
     <%= embedded_svg "center.svg", class: "add-single-row__crosshair" %>
   </div>
-    <%= form_with model: [@row.layer, @row], id: dom_id(@row, :form), class: "add-single-row__form form" do |form| %>
+    <%= form_with model: [@row.layer, @row], id: dom_id(@row, :form), multipart: true, class: "add-single-row__form form" do |form| %>
       <%= hidden_field_tag :from_rows_new, true %>
       <%= form.hidden_field :geojson, data: {map_add_point_target: "geojson"} %>
         <% @row.layer.fields.each do |field| %>

@@ -9,9 +9,9 @@ class RowsController < ApplicationController
   end
 
   def edit
-    field = Field.find(params[:field_id])
-    raise NotImplementedError unless field.type_files?
-    render FileComponent.new(value: @row.fields_values[field], field_name: "row[fields_values][#{field.id}][]", row: @row)
+    # Only used for files fields
+    @field = Field.find(params[:field_id])
+    raise NotImplementedError unless @field.type_files?
   end
 
   def create
