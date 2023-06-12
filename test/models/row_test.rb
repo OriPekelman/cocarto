@@ -3,6 +3,7 @@
 # Table name: rows
 #
 #  id                :uuid             not null, primary key
+#  anonymous_tag     :string
 #  geo_area          :decimal(, )
 #  geo_lat_max       :decimal(, )
 #  geo_lat_min       :decimal(, )
@@ -17,13 +18,14 @@
 #  values            :jsonb            not null
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
-#  author_id         :uuid             not null
+#  author_id         :uuid
 #  feature_id        :bigint           not null
 #  layer_id          :uuid             not null
 #  territory_id      :uuid
 #
 # Indexes
 #
+#  index_rows_on_anonymous_tag            (anonymous_tag)
 #  index_rows_on_author_id                (author_id)
 #  index_rows_on_created_at               (created_at)
 #  index_rows_on_geom_web_mercator        (geom_web_mercator) USING gist

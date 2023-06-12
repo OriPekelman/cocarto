@@ -6,7 +6,7 @@ class LayerControllerTest < ActionDispatch::IntegrationTest
   class ExportTest < LayerControllerTest
     test "API access does not create a new User" do
       assert_no_changes -> { User.count } do
-        get layer_url(layers(:restaurants), format: :geojson, authkey: access_groups(:restaurants_viewers).token)
+        get layer_url(layers(:restaurants), format: :geojson, authkey: map_tokens(:restaurants_viewers).token)
       end
     end
 
@@ -24,11 +24,11 @@ class LayerControllerTest < ActionDispatch::IntegrationTest
     end
 
     test "export works when using token in param or in header" do
-      get layer_url(layers(:restaurants), format: :geojson, authkey: access_groups(:restaurants_viewers).token)
+      get layer_url(layers(:restaurants), format: :geojson, authkey: map_tokens(:restaurants_viewers).token)
 
       assert_response :success
 
-      get layer_url(layers(:restaurants), format: :geojson), headers: {"x-auth-key": access_groups(:restaurants_viewers).token}
+      get layer_url(layers(:restaurants), format: :geojson), headers: {"x-auth-key": map_tokens(:restaurants_viewers).token}
 
       assert_response :success
     end
@@ -40,7 +40,7 @@ class LayerControllerTest < ActionDispatch::IntegrationTest
     end
 
     test "geojson is correctly formed" do
-      get layer_url(layers(:restaurants), format: :geojson, authkey: access_groups(:restaurants_viewers).token)
+      get layer_url(layers(:restaurants), format: :geojson, authkey: map_tokens(:restaurants_viewers).token)
 
       geojson = JSON.parse(@response.body)
 
@@ -49,7 +49,7 @@ class LayerControllerTest < ActionDispatch::IntegrationTest
     end
 
     test "csv is correctly formed" do
-      get layer_url(layers(:restaurants), format: :csv, authkey: access_groups(:restaurants_viewers).token)
+      get layer_url(layers(:restaurants), format: :csv, authkey: map_tokens(:restaurants_viewers).token)
 
       csv = CSV.parse(@response.body)
 

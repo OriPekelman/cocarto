@@ -33,21 +33,14 @@ require "test_helper"
 
 class UserTest < ActiveSupport::TestCase
   class Validation < UserTest
-    test "email presence or nil" do
-      u1 = User.create(email: nil)
-      u2 = User.create(email: "")
+    test "email presence" do
+      u1 = User.create(email: "a@a.a", password: "secret")
+      u2 = User.create(email: "", password: "secret")
+      u3 = User.create(email: nil, password: "secret")
 
       assert_predicate u1, :persisted?
-      assert_not_predicate u2, :persisted?
       assert_equal [{error: :blank}], u2.errors.details[:email]
-    end
-
-    test "email multiple nil is allowed" do
-      u1 = User.create(email: nil)
-      u2 = User.create(email: nil)
-
-      assert_predicate u1, :persisted?
-      assert_predicate u2, :persisted?
+      assert_equal [{error: :blank}], u3.errors.details[:email]
     end
 
     test "email uniqueness" do
@@ -66,16 +59,18 @@ class UserTest < ActiveSupport::TestCase
       user.destroy
 
       assert_not user.destroyed?
-      assert_equal [{error: :"restrict_dependent_destroy.has_many", record: "rows"}], user.errors.details[:base]
 
-      user.rows.destroy_all
-      user.errors.clear
+      # Add another owner to all reclus' maps
+      maps(:restaurants).user_roles.owner.create(user: users(:cassini))
+      user_roles(:boat_cassini).update(role_type: :owner)
+      user.reload
       user.destroy
 
       assert_not user.destroyed?
-      assert_equal [{error: :"restrict_dependent_destroy.has_many", record: "maps"}], user.errors.details[:base]
+      assert_equal [{error: :"restrict_dependent_destroy.has_many", record: "rows"}], user.errors.details[:base]
 
-      user.access_groups.destroy_all
+      user.rows.destroy_all
+      user.reload
       user.destroy
 
       assert_predicate user, :destroyed?

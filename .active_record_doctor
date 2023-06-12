@@ -28,11 +28,16 @@ ActiveRecordDoctor.configure do
     "ActiveStorage::Blob",
     "ActiveStorage::VariantRecord",
     "ActiveStorage::Attachment",
+    "AccessGroup",
   ]
 
   detector :incorrect_dependent_option, ignore_associations: [
     # See https://gitlab.com/CodeursEnLiberte/cocarto/-/issues/192
     "Layer.rows",
+  ]
+
+  detector :missing_non_null_constraint, ignore_columns: [
+    "users.email"
   ]
 
   detector :missing_foreign_keys, ignore_columns: [

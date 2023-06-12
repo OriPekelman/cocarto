@@ -1,0 +1,40 @@
+# == Schema Information
+#
+# Table name: map_tokens
+#
+#  id           :uuid             not null, primary key
+#  access_count :integer          default(0), not null
+#  name         :text             not null
+#  role_type    :enum             not null
+#  token        :text             not null
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  map_id       :uuid             not null
+#
+# Indexes
+#
+#  index_map_tokens_on_map_id  (map_id)
+#  index_map_tokens_on_token   (token) UNIQUE
+#
+# Foreign Keys
+#
+#  fk_rails_...  (map_id => maps.id)
+#
+
+restaurants_contributors:
+  name: "Contributeurs"
+  map: restaurants
+  role_type: contributor
+  token: Secret
+
+restaurants_viewers:
+  name: "Lien public"
+  map: restaurants
+  role_type: viewer
+  token: Pas très secret
+
+boat_viewers:
+  name: "Les bateaux"
+  map: boat
+  role_type: viewer
+  token: Un Token

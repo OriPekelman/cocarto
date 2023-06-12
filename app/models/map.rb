@@ -14,11 +14,12 @@ class Map < ApplicationRecord
   include Mvt::MapStyle
 
   # Relations
-  has_many :access_groups, dependent: :destroy, inverse_of: :map
+  has_many :user_roles, dependent: :destroy, inverse_of: :map
+  has_many :map_tokens, dependent: :destroy, inverse_of: :map
   has_many :layers, dependent: :destroy
 
   # Through relations
-  has_many :users, through: :access_groups, inverse_of: :maps
+  has_many :users, through: :user_roles, inverse_of: :maps
   has_many :rows, through: :layers, inverse_of: :map
 
   # Query as scopes

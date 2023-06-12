@@ -39,26 +39,14 @@ class User < ApplicationRecord
   has_many :invitations, class_name: "User", foreign_key: :invited_by_id, inverse_of: :invited_by, dependent: :nullify
 
   # Relations
+  has_many :user_roles, inverse_of: :user, dependent: :destroy
   has_many :rows, foreign_key: :author_id, inverse_of: :author, dependent: :restrict_with_error
-  has_and_belongs_to_many :access_groups, inverse_of: :users
 
   # Through relations
-  has_many :maps, through: :access_groups, dependent: :restrict_with_error
+  has_many :maps, through: :user_roles, dependent: :restrict_with_error
 
   # Validation
-  validates :email, presence: true, allow_nil: true
-  def email_required? = false # Disable default devise presence validation
-
-  scope :with_email, -> { where.not(email: nil) }
-  scope :without_email, -> { where(email: nil) }
-
-  # Hooks
-  before_update :copy_access_groups
-
-  # Devise overrides
-  def password_required?
-    false
-  end
+  validates :email, presence: true
 
   self.remember_for = 2.months
 
