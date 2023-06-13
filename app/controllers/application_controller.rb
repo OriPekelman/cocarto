@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   after_action :verify_authorized, except: :index # rubocop:disable Rails/LexicallyScopedActionFilter
   after_action :verify_policy_scoped, only: :index # rubocop:disable Rails/LexicallyScopedActionFilter
 
-  before_action :set_sentry_user
+  before_action :restore_anonymous_session, :set_sentry_user
   around_action :rescue_unauthorized,
     :switch_locale # make sure locale is around all the rest
 
@@ -17,8 +17,16 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def restore_anonymous_session # See MapTokenAuthenticatable
+    if warden.authenticated? && current_user.anonymous?
+      current_user.store_tokens_array_in_session(session) # restore anonymous map tokens
+    end
+  end
+
   def set_sentry_user
-    Sentry.set_user(id: current_user.id) if current_user.present?
+    if warden.authenticated?
+      Sentry.set_user(id: current_user.anonymous? ? current_user.anonymous_tag : current_user.id)
+    end
   end
 
   def switch_locale(&action)

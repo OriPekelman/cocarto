@@ -35,7 +35,7 @@ class Import < Thor
   def random
     layer = Layer.find_by(id: options[:layer]) || Layer.all.sample
     row_count = options[:count]
-    author = User.find_by(id: options[:author]) || User.joins(:access_groups).where(access_groups: layer.map.access_groups.find_by(role_type: %i[owner editor contributor])).sample
+    author = User.find_by(id: options[:author]) || layer.map.user_roles.where(role_type: %i[owner editor contributor]).sample.user
 
     puts "Adding #{row_count} #{Layer.human_attribute_name(layer.geometry_type, count: row_count)} to #{layer.id} (#{layer.map.name}:#{layer.name}) as #{author.id} (#{author.display_name})"
 

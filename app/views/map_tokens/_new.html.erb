@@ -1,0 +1,19 @@
+<%= form_with model: [map_token.map, map_token], id: dom_id(map_token)  do |form| %>
+  <h3 class="form__header"><%= t(".header") %></h3>
+
+  <div class="list-element__row list-element__row--grid">
+    <div class="form__field">
+      <%= form.label :role_type %>
+      <%= form.select :role_type, options_for_role_type_select(map_token) %>
+    </div>
+
+    <div class="form__field">
+      <%= form.label :name %>
+      <%= form.text_field :name %>
+    </div>
+
+    <div class="form__field">
+      <%= form.button class: "button button--confirm" %>
+    </div>
+  </div>
+<% end %>

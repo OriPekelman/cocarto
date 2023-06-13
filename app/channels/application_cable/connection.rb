@@ -10,6 +10,9 @@ module ApplicationCable
 
     def find_verified_user # this checks whether a user is authenticated with devise
       if (verified_user = env["warden"].user)
+        if verified_user.anonymous?
+          verified_user.store_tokens_array_in_session(env["rack.session"]) # restore anonymous map tokens
+        end
         verified_user
       else
         reject_unauthorized_connection

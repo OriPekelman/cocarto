@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_25_093152) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_12_133014) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -127,6 +127,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_25_093152) do
     t.index ["territory_category_id"], name: "index_layers_territory_categories_on_territory_category_id"
   end
 
+  create_table "map_tokens", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.enum "role_type", null: false, enum_type: "role_type"
+    t.uuid "map_id", null: false
+    t.text "name", null: false
+    t.text "token", null: false
+    t.integer "access_count", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["map_id"], name: "index_map_tokens_on_map_id"
+    t.index ["token"], name: "index_map_tokens_on_token", unique: true
+  end
+
   create_table "maps", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -145,7 +157,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_25_093152) do
     t.geometry "polygon", limit: {:srid=>4326, :type=>"st_polygon"}
     t.geometry "line_string", limit: {:srid=>4326, :type=>"line_string"}
     t.uuid "territory_id"
-    t.uuid "author_id", null: false
+    t.uuid "author_id"
     t.virtual "geojson", type: :text, as: "st_asgeojson(COALESCE(point, line_string, polygon))", stored: true
     t.virtual "geo_lng_min", type: :decimal, as: "st_xmin((COALESCE(point, line_string, polygon))::box3d)", stored: true
     t.virtual "geo_lat_min", type: :decimal, as: "st_ymin((COALESCE(point, line_string, polygon))::box3d)", stored: true
@@ -155,6 +167,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_25_093152) do
     t.virtual "geo_area", type: :decimal, as: "st_area((polygon)::geography)", stored: true
     t.virtual "geom_web_mercator", type: :geometry, limit: {:srid=>0, :type=>"geometry"}, as: "st_transform(COALESCE(point, line_string, polygon), 3857)", stored: true
     t.bigserial "feature_id", null: false
+    t.string "anonymous_tag"
+    t.index ["anonymous_tag"], name: "index_rows_on_anonymous_tag"
     t.index ["author_id"], name: "index_rows_on_author_id"
     t.index ["created_at"], name: "index_rows_on_created_at"
     t.index ["geom_web_mercator"], name: "index_rows_on_geom_web_mercator", using: :gist
@@ -194,6 +208,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_25_093152) do
     t.index ["name", "revision"], name: "index_territory_categories_on_name_and_revision", unique: true
   end
 
+  create_table "user_roles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.enum "role_type", null: false, enum_type: "role_type"
+    t.uuid "map_id", null: false
+    t.uuid "user_id", null: false
+    t.uuid "map_token_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["map_id", "user_id"], name: "index_user_roles_on_map_id_and_user_id", unique: true
+    t.index ["map_token_id"], name: "index_user_roles_on_map_token_id"
+    t.index ["user_id"], name: "index_user_roles_on_user_id"
+  end
+
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "email"
     t.string "encrypted_password", default: "", null: false
@@ -226,10 +252,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_25_093152) do
   add_foreign_key "layers", "maps"
   add_foreign_key "layers_territory_categories", "layers"
   add_foreign_key "layers_territory_categories", "territory_categories"
+  add_foreign_key "map_tokens", "maps"
   add_foreign_key "rows", "layers"
   add_foreign_key "rows", "territories"
   add_foreign_key "rows", "users", column: "author_id"
   add_foreign_key "territories", "territories", column: "parent_id"
   add_foreign_key "territories", "territory_categories"
+  add_foreign_key "user_roles", "map_tokens"
+  add_foreign_key "user_roles", "maps"
+  add_foreign_key "user_roles", "users"
   add_foreign_key "users", "users", column: "invited_by_id"
 end

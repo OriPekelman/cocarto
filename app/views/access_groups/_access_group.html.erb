@@ -1,6 +1,0 @@
-<div id="<%= dom_id(access_group) %>">
-  <% template_name = ["access_group",
-       access_group.token.present? ? "with_token" : "user_specific",
-       access_group.new_record? ? "new" : nil].compact.join("_") %>
-  <%= render template_name, access_group: access_group %>
-</div>

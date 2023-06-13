@@ -3,6 +3,7 @@
 # Table name: rows
 #
 #  id                :uuid             not null, primary key
+#  anonymous_tag     :string
 #  geo_area          :decimal(, )
 #  geo_lat_max       :decimal(, )
 #  geo_lat_min       :decimal(, )
@@ -17,13 +18,14 @@
 #  values            :jsonb            not null
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
-#  author_id         :uuid             not null
+#  author_id         :uuid
 #  feature_id        :bigint           not null
 #  layer_id          :uuid             not null
 #  territory_id      :uuid
 #
 # Indexes
 #
+#  index_rows_on_anonymous_tag            (anonymous_tag)
 #  index_rows_on_author_id                (author_id)
 #  index_rows_on_created_at               (created_at)
 #  index_rows_on_geom_web_mercator        (geom_web_mercator) USING gist
@@ -42,7 +44,7 @@ class Row < ApplicationRecord
 
   # Relations
   belongs_to :layer, touch: true
-  belongs_to :author, class_name: "User", inverse_of: :rows
+  belongs_to :author, optional: true, class_name: "User", inverse_of: :rows
   belongs_to :territory, optional: true
 
   # Through relations
@@ -59,6 +61,7 @@ class Row < ApplicationRecord
   # Validations
   before_validation :take_first_of_geometry_collection
   validate :validate_geometry
+  validate :either_author_or_anonymous
 
   # We use postgis functions to convert to geojson
   # This makes the load be on postgres’ side, not rails (C implementation)
@@ -68,7 +71,7 @@ class Row < ApplicationRecord
   scope :with_territory, -> do
     left_outer_joins(:territory)
       .select(<<-SQL.squish
-      rows.id, layer_id, author_id,
+      rows.id, layer_id, author_id, anonymous_tag,
       values,
       rows.created_at, rows.updated_at,
       territory_id,
@@ -88,6 +91,14 @@ class Row < ApplicationRecord
   # In practice, this is to be used to load the rows of a specific layer and preload dynamic associations.
   scope :with_fields_values, ->(layer) do
     with_attached_files.with_territory.includes(:territory, *layer.fields_association_names)
+  end
+
+  def author=(user)
+    if user.anonymous?
+      self.anonymous_tag = user.anonymous_tag
+    else
+      super
+    end
   end
 
   # Reload self with the fields values (and additional associations)
@@ -220,6 +231,11 @@ class Row < ApplicationRecord
   end
 
   private
+
+  def either_author_or_anonymous
+    errors.add(:anonymous_tag, :present) if author_id.present? && anonymous_tag.present?
+    errors.add(:anonymous_tag, :blank) if author_id.blank? && anonymous_tag.blank?
+  end
 
   def files_by_field(field)
     files_by_id = files.index_by { |file| file.blob_id }

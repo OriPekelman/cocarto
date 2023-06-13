@@ -8,10 +8,12 @@ class MapsController < ApplicationController
 
   def index
     @maps = policy_scope(Map)
+    @new_map = Map.new
+    @new_map.user_roles.new(user: current_user, role_type: :owner)
   end
 
   def show
-    @role_type = current_user.access_groups.find_by(map: @map)&.role_type
+    @role_type = current_user.access_for_map(@map).role_type
     respond_to do |format|
       format.html
       format.style { render json: @map.style(url_for(Layer)) }
@@ -19,11 +21,19 @@ class MapsController < ApplicationController
   end
 
   def shared
-    # Access made with an AccessGroup token.
-    # Authentication is already done by AccessGroupTokenAuthenticatable.
-    access_group = AccessGroup.find_by(token: params[:token])
-    current_user.assign_access_group(access_group)
-    redirect_to authorize(access_group.map)
+    # Access made with a map token.
+    # Authentication is already done by MapTokenAuthenticatable.
+    map_token = MapToken.find_by(token: params[:token])
+    current_user.assign_map_token(map_token)
+    if current_user.anonymous?
+      # Transient users only see the /share/:token url
+      @map = authorize(map_token.map)
+      @role_type = map_token.role_type
+      render :show
+    else
+      # Real users are redirected to /maps/:id
+      redirect_to authorize(map_token.map)
+    end
   end
 
   def new
@@ -68,7 +78,7 @@ class MapsController < ApplicationController
 
   def new_map
     @map = Map.new
-    @map.access_groups.new(users: [current_user], role_type: :owner)
+    @map.user_roles.new(user: current_user, role_type: :owner)
     authorize @map
   end
 

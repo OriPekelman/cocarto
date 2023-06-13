@@ -18,6 +18,13 @@
         </li>
       <% end %>
     </ul>
-    <%= link_to t("helpers.link.map.new"), new_map_path, class: "button button--large button--confirm", data: {turbo_frame: "modal"} %>
+    <% if current_user.anonymous? %>
+      <div>
+        <%= link_to t(".create_account"), new_user_registration_path, class: "button button--large button--confirm" %>
+        <p><%= t("devise.registrations.log_in_instead_html", url: new_user_session_path) %></p>
+      </div>
+    <% else %>
+      <%= link_to t("helpers.link.map.new"), new_map_path, class: "button button--large button--confirm", data: {turbo_frame: "modal"} %>
+  <% end %>
   </section>
 </div>

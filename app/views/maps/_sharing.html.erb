@@ -1,0 +1,5 @@
+<h2 class="form__header"><%= t(".header") %></h2>
+<nav class="buttons-bar">
+  <%= active_link_to UserRole.model_name.human(count: 2), map_user_roles_path(map), class: "button", class_active: "button--confirm", class_inactive: "button--link" %>
+  <%= active_link_to MapToken.model_name.human(count: 2), map_map_tokens_path(map), class: "button", class_active: "button--confirm", class_inactive: "button--link" %>
+</nav>

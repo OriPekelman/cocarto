@@ -1,23 +1,19 @@
 class LayerPolicy < ApplicationPolicy
-  def new? = update?
+  def new? = create?
 
-  def create? = update?
+  def create? = map_access&.is_at_least(:editor)
 
-  def show? = access_group.present?
+  def show? = map_access.present?
 
-  def update? = access_group&.owner? || access_group&.editor?
+  def update? = create?
 
-  def destroy? = access_group&.owner?
+  def destroy? = create?
 
   def mvt? = show?
 
   private
 
-  def access_group
-    if user&.persisted?
-      user.access_groups&.find_by(map: record.map)
-    else
-      user&.access_groups&.find { |access| access.map_id == record.map.id }
-    end
+  def map_access
+    @map_access ||= user.access_for_map(record.map)
   end
 end

@@ -2,15 +2,6 @@
 en:
   activerecord:
     attributes:
-      access_group:
-        contributor: Contributor
-        editor: Editor
-        name: Description
-        owner: Owner
-        role_type: Role
-        token_group: Sharing link
-        url_to_share: Link to share
-        viewer: Viewer
       field:
         enum_values: Menu options
         field_type: Type
@@ -42,8 +33,16 @@ en:
           one: territory
           other: territories
       map:
-        access_groups: Sharing and permissions
         name: Name
+      map_token:
+        name: Description
+        role_type: Role
+        url_to_share: Link to share
+      role_types:
+        contributor: Contributor
+        editor: Editor
+        owner: Owner
+        viewer: Viewer
       row:
         files:
           one: 1 file
@@ -57,13 +56,14 @@ en:
       user:
         maps: maps
         rows: rows
+      user_role:
+        role_type: Role
     errors:
       models:
-        access_group:
+        map_token:
           attributes:
-            map:
-              format: "%{message}"
-              must_have_an_owner: The map must have at least one owner. Please promote another user to “owner” first.
+            role_type:
+              cant_be_changed: cannot be changed.
         row:
           attributes:
             geometry:
@@ -74,27 +74,31 @@ en:
             base:
               restrict_dependent_destroy:
                 has_many: We can’t delete your account yet; your %{record} must be deleted first.
+        user_role:
+          attributes:
+            map:
+              format: "%{message}"
+              must_have_an_owner: The map must have at least one owner. Please promote another user to “owner” first.
     models:
-      access_group:
-        one: Access
-        other: Accesses
       layer:
         one: Layer
         other: Layers
       map:
         one: Map
         other: Maps
+      map_token:
+        one: Link
+        other: Links
       territory:
         one: Territory
         other: Territories
       territory_category:
         one: Territory category
         other: Territory categories
+      user_role: Accès
   helpers:
     _comment: The "helpers" scope is for model-specific keys. For general purpose labels, use the "common" scope.
     link:
-      access_group:
-        delete: Delete
       field:
         delete: Delete
         new: New column
@@ -109,15 +113,15 @@ en:
       map:
         delete: Delete this map
         new: Build a new map
+      map_token:
+        delete: Delete
       row:
         add_this_point: Add this point
       territory:
         new: Add the territory
+      user_role:
+        delete: Delete
     message:
-      access_group:
-        created: Access was successfully created.
-        destroyed: Access was successfully destroyed.
-        updated: Access was successfully updated.
       field:
         created: New column %{name} created.
         destroyed: Column successfully destroyed.
@@ -127,19 +131,23 @@ en:
       map:
         center_and_zoom_saved: The default center and zoom has been set.
         destroyed: The map was successfully destroyed
+      map_token:
+        created: Link successfully created.
+        destroyed: Link successfully destroyed.
+        updated: Link successfully updated.
       row:
         added: Geometry was successfully added.
         destroyed: Geometry was successfully destroyed.
         updated: Geometry properties were successfully updated.
+      user_role:
+        created: User was successfully invited.
+        destroyed: User access was successfully removed.
+        updated: User access was successfully updated.
     placeholder:
       field:
         enum_value: New option
     submit:
       _comment: The helpers.submit.create and helpers.submit.update keys are standard in Rails.
-      access_group:
-        create: Invite
-        create_link: Create link
-        update: Save
       field:
         create: Add
         update: Save
@@ -148,5 +156,11 @@ en:
         update: Save
       map:
         create: Create a map
+      map_token:
+        create: Create link
+        update: OK
       row:
         create: Create a new row
+      user_role:
+        create: Invite
+        update: OK

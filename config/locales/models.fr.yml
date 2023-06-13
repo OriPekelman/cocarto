@@ -2,15 +2,6 @@
 fr:
   activerecord:
     attributes:
-      access_group:
-        contributor: Contributeur
-        editor: Éditeur
-        name: Description
-        owner: Propriétaire
-        role_type: Rôle
-        token_group: Lien de partage
-        url_to_share: Lien à partager
-        viewer: Observateur
       field:
         enum_values: Options du menu
         field_type: Type
@@ -42,8 +33,16 @@ fr:
           one: territoire
           other: territoires
       map:
-        access_groups: Partage et permissions
         name: Nom
+      map_token:
+        name: Description
+        role_type: Rôle
+        url_to_share: Lien à partager
+      role_types:
+        contributor: Contributeur
+        editor: Éditeur
+        owner: Propriétaire
+        viewer: Observateur
       row:
         files:
           one: 1 fichier
@@ -57,13 +56,14 @@ fr:
       user:
         maps: cartes
         rows: rangées
+      user_role:
+        role_type: Rôle
     errors:
       models:
-        access_group:
+        map_token:
           attributes:
-            map:
-              format: "%{message}"
-              must_have_an_owner: La carte doit avoir au moins un un utilisateur propriétaire. Commencez par donner le rôle de propriétaire à un autre utilisateur.
+            role_type:
+              cant_be_changed: ne peut pas être modifié.
         row:
           attributes:
             geometry:
@@ -74,25 +74,31 @@ fr:
             base:
               restrict_dependent_destroy:
                 has_many: Nous ne pouvons pas supprimer votre compte tout de suite ; vos %{record} doivent d’abord être supprimées.
+        user_role:
+          attributes:
+            map:
+              format: "%{message}"
+              must_have_an_owner: La carte doit avoir au moins un un utilisateur propriétaire. Commencez par donner le rôle de propriétaire à un autre utilisateur.
     models:
-      access_group: Accès
       layer:
         one: Couche
         other: Couches
       map:
         one: Carte
         other: Cartes
+      map_token:
+        one: Lien
+        other: Liens
       territory:
         one: Territoire
         other: Territoires
       territory_category:
         one: Catégorie de territoires
         other: Catégories de territoires
+      user_role: Accès
   helpers:
     _comment: The "helpers" scope is for model-specific keys. For general purpose labels, use the "common" scope.
     link:
-      access_group:
-        delete: Supprimer
       field:
         delete: Supprimer
         new: Nouvelle colonne
@@ -107,15 +113,15 @@ fr:
       map:
         delete: Supprimer cette carte
         new: Créer une nouvelle carte
+      map_token:
+        delete: Supprimer
       row:
         add_this_point: Ajouter ce point
       territory:
         new: Ajouter le territoire
+      user_role:
+        delete: Supprimer
     message:
-      access_group:
-        created: Accès créé avec succès.
-        destroyed: L’accès a été détruit avec succès.
-        updated: L’accès a été mis à jour avec succès.
       field:
         created: Nouvelle colonne %{name} créée.
         destroyed: La colonne a bien été détruite.
@@ -125,19 +131,23 @@ fr:
       map:
         center_and_zoom_saved: Le centrage et le zoom par défaut ont été sauvegardés.
         destroyed: La carte a été détruite avec succès.
+      map_token:
+        created: Lien créé avec succès.
+        destroyed: Lien supprimé.
+        updated: Lien mis à jour.
       row:
         added: La géométrie a été ajoutée avec succès.
         destroyed: La géométrie a été détruite avec succès.
         updated: Les propriétés géométriques ont été mises à jour avec succès.
+      user_role:
+        created: Utilisateur invité avec succès.
+        destroyed: Accès de l’utilisateur retiré.
+        updated: Accès de l’utilisateur mis à jour.
     placeholder:
       field:
         enum_value: Nouvelle option
     submit:
       _comment: The helpers.submit.create and helpers.submit.update keys are standard in Rails.
-      access_group:
-        create: Inviter
-        create_link: Créer le lien
-        update: OK
       field:
         create: Ajouter
         update: OK
@@ -146,5 +156,11 @@ fr:
         update: OK
       map:
         create: Créer une carte
+      map_token:
+        create: Créer le lien
+        update: OK
       row:
         create: Enregistrer la ligne
+      user_role:
+        create: Inviter
+        update: OK

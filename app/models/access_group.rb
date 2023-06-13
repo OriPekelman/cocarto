@@ -20,68 +20,9 @@
 #  fk_rails_...  (map_id => maps.id)
 #
 class AccessGroup < ApplicationRecord
-  # Attributes
-  # role_types can be compared by index, lower is stronger:
-  # irb> AccessGroup.role_types.values.index("editor")
-  # => 1
-  # irb> AccessGroup.role_types.values.index("viewer")
-  # => 3
   enum :role_type, {owner: "owner", editor: "editor", contributor: "contributor", viewer: "viewer"}
 
   # Relationships
-  has_and_belongs_to_many :users, before_add: :prevent_many_users_in_user_specific_group
+  has_and_belongs_to_many :users
   belongs_to :map
-
-  accepts_nested_attributes_for :users
-
-  # Validations
-  validates :role_type, presence: true
-  validates :token, presence: true, allow_nil: true # token is either nil or set, never blank
-  validates :name, presence: true, if: -> { token.present? }
-  validates :name, absence: true, if: -> { token.blank? }
-  validate :either_token_or_user_specific
-  validate :user_map_access_uniqueness
-
-  def prevent_many_users_in_user_specific_group(_new_user)
-    return if token.present?
-
-    throw :abort if users.exists?
-  end
-
-  def either_token_or_user_specific
-    errors.add(:users, :present) if token.present? && users.find { _1.email.present? }
-    errors.add(:users, :invalid) if token.nil? && users.first&.email.nil?
-  end
-
-  def user_map_access_uniqueness
-    users.each do |user|
-      if map.access_groups.merge(user.access_groups).where.not(id: self).exists?
-        errors.add(:base, :unique_access_group, user_email: user.email)
-      end
-    end
-  end
-
-  # Hooks
-  before_update :map_must_have_an_owner
-  before_destroy :map_must_have_an_owner
-
-  def map_must_have_an_owner
-    return if destroyed_by_association&.inverse_of&.name == :map
-    return if map.access_groups.owner.where.not(id: self).exists?
-
-    errors.add(:map, :must_have_an_owner)
-    throw(:abort)
-  end
-
-  # Scopes
-  scope :with_token, -> { where.not(token: nil) }
-  scope :user_specific, -> { where(token: nil) }
-
-  def self.new_token
-    Devise.friendly_token.first(16)
-  end
-
-  def is_stronger_role_than(other_group)
-    AccessGroup.role_types.values.index(role_type) < AccessGroup.role_types.values.index(other_group.role_type)
-  end
 end
