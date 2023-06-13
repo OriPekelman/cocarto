@@ -1,6 +1,10 @@
 <%= form_with method: :patch, model: [@row.layer, @row], multipart: true, html: {class: "form"} do |f| %>
   <div class="card__main-content">
-    <%= render FileFieldComponent.new(row: @row, field: @field) %>
+    <h2 class="form__header"><%= t "field.attachments" %></h2>
+    <div class="form__section">
+      <label><%= @field.label %></label>
+      <%= render FileFieldComponent.new(row: @row, field: @field) %>
+    </div>
   </div>
   <div class="card__footer-content">
     <%= f.submit t("common.save"), class: "button button--confirm" %>

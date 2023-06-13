@@ -1,41 +1,45 @@
-<h3><%= t "field.existing_attachments" %></h3>
-<% files.each do |file| %>
-  <%= link_to file.filename, url_for(file) %>
+<% if files.present? %>
+  <div class="form__field form__field--file">
+    <% files.each do |file| %>
+      <%= link_to file.filename, url_for(file) %>
+    <% end %>
+  </div>
 <% end %>
-<h3><%= t "field.add_attachments" %></h3>
 
-<div data-controller="camera-feature-detection file-list" class="form__field form__field--file">
-  <label>
-      <span class="button button--with-icon button--link">
-        <%= t "field.take_picture" %>
-        <%= helpers.embedded_svg "camera.svg", class: "icon--small" %>
-        <input
-          type="file"
-          name="<%= field_name %>"
-          accept="image/*"
-          capture="environment"
-          data-file-list-target="input"
-          data-action="change->file-list#update"
-          multiple
-          hidden>
-      </span>
-  </label>
-  <span data-file-list-target="list"></span>
-</div>
+<div class="form__field">
+  <div data-controller="camera-feature-detection file-list" class="form__field form__field--file">
+    <label>
+        <span class="button button--with-icon button--alternate">
+          <%= t "field.take_picture" %>
+          <%= helpers.embedded_svg "camera.svg", class: "icon--small" %>
+          <input
+            type="file"
+            name="<%= field_name %>"
+            accept="image/*"
+            capture="environment"
+            data-file-list-target="input"
+            data-action="change->file-list#update"
+            multiple
+            hidden>
+        </span>
+    </label>
+    <span data-file-list-target="list"></span>
+  </div>
 
-<div data-controller="file-list" class="form__field form__field--file">
-  <label>
-      <span class="button button--with-icon button--link">
-        <%= t "field.attach_file" %>
-        <%= helpers.embedded_svg "upload-cloud.svg", class: "icon--small" %>
-        <input
-          type="file"
-          name="<%= field_name %>"
-          data-file-list-target="input"
-          data-action="change->file-list#update"
-          multiple
-          hidden>
-      </span>
-  </label>
-  <span data-file-list-target="list"></span>
+  <div data-controller="file-list" class="form__field form__field--file">
+    <label>
+        <span class="button button--with-icon button--alternate">
+          <%= t "field.attach_file" %>
+          <%= helpers.embedded_svg "upload-cloud.svg", class: "icon--small" %>
+          <input
+            type="file"
+            name="<%= field_name %>"
+            data-file-list-target="input"
+            data-action="change->file-list#update"
+            multiple
+            hidden>
+        </span>
+    </label>
+    <span data-file-list-target="list"></span>
+  </div>
 </div>
