@@ -74,7 +74,7 @@ export default class extends Controller {
     target.href = this.mapState.getImage()
   }
 
-  highlight (event) {
+  selectFeature (event) {
     this.mapState.setSelectedFeature(event.currentTarget.id)
   }
 

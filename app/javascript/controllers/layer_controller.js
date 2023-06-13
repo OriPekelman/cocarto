@@ -25,6 +25,12 @@ export default class extends Controller {
     })
   }
 
+  activate () {
+    if (!this.element.classList.contains('is-active')) {
+      this.toggleTable()
+    }
+  }
+
   toggleTable () {
     // Close the other active layer if it exists
     if (this.hasLayerOutlet && this.layerOutletElement !== this.element) {
