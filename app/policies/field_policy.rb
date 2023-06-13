@@ -14,6 +14,6 @@ class FieldPolicy < ApplicationPolicy
   private
 
   def map_access
-    @map_access ||= user.access_for_map(record)
+    @map_access ||= user.access_for_map(record.layer.map)
   end
 end
