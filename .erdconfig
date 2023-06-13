@@ -4,4 +4,3 @@ filetype: png
 exclude:
     - ActiveRecord::SchemaMigration
     - ActiveRecord::InternalMetadata
-    - AccessGroup
