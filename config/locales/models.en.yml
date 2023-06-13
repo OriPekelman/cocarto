@@ -89,6 +89,9 @@ en:
       map_token:
         one: Link
         other: Links
+      row:
+        one: Row
+        other: Rows
       territory:
         one: Territory
         other: Territories

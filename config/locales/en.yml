@@ -92,6 +92,7 @@ en:
   maps:
     index:
       create_account: Create an account
+      user_role: You are %{role}
     sharing:
       header: Sharing and permissions
     show:

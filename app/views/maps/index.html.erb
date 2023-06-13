@@ -8,12 +8,16 @@
           <%= link_to map, class: "list-element__row list-element__row--link" do %>
             <div class="list-element__content">
               <h3 class="list-element__title"><%= map.name %></h3>
-              <p class="list-element__description">
-                <%= map.layers.size %> <%= Layer.model_name.human(count: map.layers.size) %>
-                <%= updated_at_tag(map.last_updated_row, map.last_updated_row&.author) %>
-              </p>
+              <div class="list-element__description">
+                <span><%= map.layers.size %> <%= Layer.model_name.human(count: map.layers.size).downcase %></span>
+                <span><%= map.rows.size %> <%= Row.model_name.human(count: map.rows.size).downcase %></span>
+                <span><%= t(".user_role", role: UserRole.human_attribute_name("role_types.#{current_user.access_for_map(map).role_type}").downcase) %></span>
+              </div>
+              <div class="list-element__description">
+                <%= map_updated_at_span(map.last_updated_row, map.last_updated_row&.author) %>
+              </div>
             </div>
-            <div class="icon-button icon-button--double-bordered icon-button--large icon-button--dimmed"><%= embedded_svg "chevron_droite.svg", class: "icon--tinted" %></div>
+            <div class="icon-button icon-button--large list-element__row--link-button"><%= embedded_svg "chevron_droite.svg", class: "icon--tinted" %></div>
           <% end %>
         </li>
       <% end %>
