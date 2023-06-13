@@ -15,7 +15,12 @@
         <% @row.layer.fields.each do |field| %>
           <div class="form__field">
             <%= form.label sanitize_to_id("fields_values[#{field.id}]"), field.label %>
-            <%= render FieldValueComponent.new(field: field, value: nil, row: @row) %>
+            <% if field.type_files? %>
+              <%# Special-case for file fields: directly embed FileFieldComponent instead of using FieldValueComponent. %>
+              <%= render FileFieldComponent.new(field: field, row: @row) %>
+            <% else %>
+              <%= render FieldValueComponent.new(field: field, value: nil, row: @row) %>
+            <% end %>
           </div>
         <% end %>
       <%= form.submit t("helpers.link.row.add_this_point"), class: "button button--confirm" %>

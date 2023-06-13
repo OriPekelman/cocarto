@@ -3,7 +3,7 @@
     <h2 class="form__header"><%= t "field.attachments" %></h2>
     <div class="form__section">
       <label><%= @field.label %></label>
-      <%= render FileFieldComponent.new(row: @row, field: @field) %>
+      <%= render FileFieldComponent.new(field: @field, row: @row) %>
     </div>
   </div>
   <div class="card__footer-content">

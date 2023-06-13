@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class FileFieldComponent < ViewComponent::Base
-  def initialize(row:, field:)
-    @row = row
+  def initialize(field:, row:)
     @field = field
+    @row = row
   end
 
   def files

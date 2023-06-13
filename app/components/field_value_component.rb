@@ -25,16 +25,12 @@ class FieldValueComponent < ViewComponent::Base
     when "enum"
       select_tag field_name, options_for_select(@field.enum_values, @value), opts.merge(include_blank: true)
     when "files"
-      if @row.new_record?
-        render FileFieldComponent.new(row: @row, field: @field)
-      else
-        name = @value.present? ? Row.human_attribute_name(:files, count: @value.length) : t("common.ellipsis")
-        link_to name,
-          edit_layer_row_path(@row.layer_id, @row.id, field_id: @field.id),
-          data: {turbo_frame: "modal"},
-          title: t("field.attachments"),
-          class: "layer-table-td__files-button"
-      end
+      name = @value.present? ? Row.human_attribute_name(:files, count: @value.length) : t("common.ellipsis")
+      link_to name,
+        edit_layer_row_path(@row.layer_id, @row.id, field_id: @field.id),
+        data: {turbo_frame: "modal"},
+        title: t("field.attachments"),
+        class: "layer-table-td__files-button"
     else
       text_field_tag field_name, @value, opts.merge(class: "input")
     end
