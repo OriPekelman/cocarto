@@ -11,7 +11,7 @@ class Import < Thor
   option :csv_col_sep, required: false, type: :string, desc: "CSV column separator"
   option :csv_encoding, required: false, type: :string, desc: "CSV encoding"
   option :geometry_keys, required: false, type: :array, desc: "geometry keys"
-  option :geometry_format, required: false, type: :string, desc: "geometry format, one of #{ImportExport::ImporterBase::Geometry::PARSERS.keys}"
+  option :geometry_format, required: false, type: :string, desc: "geometry format, one of #{ImportExport::ImporterBase::GeometryParsing::PARSERS.keys}"
   def import
     opts = options.dup
     layer = Layer.find_by(id: opts.delete(:layer))
@@ -35,7 +35,7 @@ class Import < Thor
   def random
     layer = Layer.find_by(id: options[:layer]) || Layer.all.sample
     row_count = options[:count]
-    author = User.find_by(id: options[:author]) || layer.map.user_roles.where(role_type: %i[owner editor contributor]).sample.user
+    author = User.find_by(id: options[:author]) || User.find(layer.map.user_roles.where(role_type: %i[owner editor contributor]).sample.user_id)
 
     puts "Adding #{row_count} #{Layer.human_attribute_name(layer.geometry_type, count: row_count)} to #{layer.id} (#{layer.map.name}:#{layer.name}) as #{author.id} (#{author.display_name})"
 
