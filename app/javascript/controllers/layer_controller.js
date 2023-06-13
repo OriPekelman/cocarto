@@ -1,6 +1,6 @@
 import { Controller } from '@hotwired/stimulus'
 
-// This controller handles informations concerning a single layer
+// This controller handles information concerning a single layer
 // - what is its bounding box (handling adding/removing rows)
 // - is it shown or collapsed
 
