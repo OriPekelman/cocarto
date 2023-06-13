@@ -4,9 +4,10 @@ class ApplicationController < ActionController::Base
   after_action :verify_authorized, except: :index # rubocop:disable Rails/LexicallyScopedActionFilter
   after_action :verify_policy_scoped, only: :index # rubocop:disable Rails/LexicallyScopedActionFilter
 
-  before_action :restore_anonymous_session, :set_sentry_user
-  around_action :rescue_unauthorized,
-    :switch_locale # make sure locale is around all the rest
+  around_action :switch_locale, # make sure set_locale is first so that error messages are localized
+    :restore_anonymous_session,
+    :set_sentry_user,
+    :rescue_unauthorized
 
   def render_to_body(options = {})
     # When the request is made to be displayed in a turbo-frame modal, we wrap in a specific component.
@@ -17,16 +18,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def restore_anonymous_session # See MapTokenAuthenticatable
-    if warden.authenticated? && current_user.anonymous?
-      current_user.store_tokens_array_in_session(session) # restore anonymous map tokens
-    end
-  end
-
-  def set_sentry_user
-    if warden.authenticated?
-      Sentry.set_user(id: current_user.anonymous? ? current_user.anonymous_tag : current_user.id)
-    end
+  def default_url_options
+    {locale: I18n.locale}
   end
 
   def switch_locale(&action)
@@ -34,8 +27,22 @@ class ApplicationController < ActionController::Base
     I18n.with_locale(locale, &action)
   end
 
-  def default_url_options
-    {locale: I18n.locale}
+  def restore_anonymous_session # See MapTokenAuthenticatable
+    if warden.authenticated? && current_user.anonymous?
+      current_user.store_tokens_array_in_session(session) # restore anonymous map tokens
+    end
+    yield
+  end
+
+  def set_sentry_user
+    # Note: this is where we call `current_user` for the first time in each request.
+    # It has side effects!
+    # (e.g. if the found user is invited but not signed up yet)
+    # See the Devise::FailureApp for flashes and redirections.
+    if warden.authenticated?
+      Sentry.set_user(id: current_user.anonymous? ? current_user.anonymous_tag : current_user.id)
+    end
+    yield
   end
 
   def rescue_unauthorized
