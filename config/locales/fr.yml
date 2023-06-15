@@ -31,6 +31,7 @@ fr:
     latitude: Latitude
     length: Longueur
     longitude: Longitude
+    ok: OK
     save: Sauvegarder
     settings: Réglages
     territory_code: Code
@@ -42,10 +43,7 @@ fr:
     attachments: Pièces jointes
     take_picture: Prendre une photo
   import:
-    create:
-      import_failed: 'Échec de l’import '
-      import_successful: Import réussi
-    show:
+    new:
       attention: Cette fonctionnalité est expérimentale; attendez-vous à des bugs, et n’hésitez pas à nous en parler.
       import_data: Import de données
       key_field: Colonne d’identifiant
@@ -55,10 +53,18 @@ fr:
         Les nouveaux rangs dans le fichier seront rajoutés à la table.
       reimport: Réimport de données existantes
       save: Importer
+    result:
+      failure: Échec de l’import
+      imported_rows: "%{size} rangées importées"
+      line_number: Ligne %{line_number}
+      row_failure: Non enregistré.
+      success: Import réussi
+    show:
+      title: Import terminé
   layers:
     layer:
-      center_on_row: Centrer la carte sur cette ligne
-      delete_row: Supprimer cette ligne
+      center_on_row: Centrer la carte sur cette rangée
+      delete_row: Supprimer cette rangée
       new_point_form: Formulaire simplifié
       simplified_form_explanation: Saisie simplifiée de nouveau point, par exemple sur téléphone mobile
     table_header:

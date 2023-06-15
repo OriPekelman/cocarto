@@ -25,7 +25,7 @@ Rails.application.routes.draw do
     resources :layers, except: [:index, :new] do
       resources :rows, only: [:new, :create, :edit, :update, :destroy] do
         collection do
-          resource :import, only: [:show, :create], controller: :import
+          resource :import, only: [:new, :create, :show], controller: :import
         end
       end
       member do
