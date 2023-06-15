@@ -72,6 +72,9 @@ class Row < ApplicationRecord
     left_outer_joins(:territory)
       .select(<<-SQL.squish
       rows.id, layer_id, author_id, anonymous_tag,
+      line_string,  
+      point,
+      polygon,
       values,
       rows.created_at, rows.updated_at,
       territory_id,

@@ -34,6 +34,12 @@ input[type="number"] {
   gap: 18px;
 }
 
+.form__section {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
 .form__header {
   margin: 0 0 4px;
 }

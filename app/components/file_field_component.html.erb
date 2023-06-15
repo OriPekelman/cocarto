@@ -1,0 +1,45 @@
+<% if files.present? %>
+  <div class="form__field form__field--file">
+    <% files.each do |file| %>
+      <%= link_to file.filename, url_for(file) %>
+    <% end %>
+  </div>
+<% end %>
+
+<div class="form__field">
+  <div data-controller="camera-feature-detection file-list" class="form__field form__field--file">
+    <label>
+        <span class="button button--with-icon button--alternate">
+          <%= t "field.take_picture" %>
+          <%= helpers.embedded_svg "camera.svg", class: "icon--small" %>
+          <input
+            type="file"
+            name="<%= field_name %>"
+            accept="image/*"
+            capture="environment"
+            data-file-list-target="input"
+            data-action="change->file-list#update"
+            multiple
+            hidden>
+        </span>
+    </label>
+    <span data-file-list-target="list"></span>
+  </div>
+
+  <div data-controller="file-list" class="form__field form__field--file">
+    <label>
+        <span class="button button--with-icon button--alternate">
+          <%= t "field.attach_file" %>
+          <%= helpers.embedded_svg "upload-cloud.svg", class: "icon--small" %>
+          <input
+            type="file"
+            name="<%= field_name %>"
+            data-file-list-target="input"
+            data-action="change->file-list#update"
+            multiple
+            hidden>
+        </span>
+    </label>
+    <span data-file-list-target="list"></span>
+  </div>
+</div>

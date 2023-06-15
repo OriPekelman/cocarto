@@ -38,9 +38,8 @@ en:
     updated_at_by: Updated %{date} ago by %{user}
     user_not_authorized: You are not authorized to perform this action.
   field:
-    add_attachments: Add attachments
-    attach_file: Attach a file
-    existing_attachments: Existing attachments
+    attach_file: Add a file
+    attachments: Attachments
     take_picture: Take a picture
   import:
     create:
