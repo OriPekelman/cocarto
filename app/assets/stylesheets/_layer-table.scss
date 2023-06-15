@@ -258,17 +258,17 @@
 }
 
 .layer-table__tr--highlight,
-.layer-table__tr--highlight input {
+.layer-table__tr--highlight .layer-table__td {
   background-color: var(--color-attention-10);
 }
 
 .layer-table__tr--transition,
-.layer-table__tr--transition input {
+.layer-table__tr--transition .layer-table__td {
   transition: background-color 2s;
 }
 
 .layer-table__tr--created,
-.layer-table__tr--created input {
+.layer-table__tr--created .layer-table__td {
   background-color: var(--color-attention-20);
 }
 

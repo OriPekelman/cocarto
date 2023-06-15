@@ -15,22 +15,52 @@ class RowsTest < ApplicationSystemTestCase
     end
   end
 
-  test "add rows to the table" do
+  test "add rows to the table" do # rubocop:disable Minitest/MultipleAssertions
     sign_in_as(users("reclus"), "refleurir")
 
     visit map_path(id: maps("restaurants"))
     map = wait_until_map_loaded
+
+    # Open the layer table
     click_on "Display the table for this layer", match: :first
 
+    assert_selector ".layer-container.is-active"
     assert_selector ".row", count: 1
 
+    # Add a second point
     click_on "Add a point"
-    map.click
+    map.click(x: 50, y: 0)
 
+    assert_selector ".row", count: 2
+
+    # Add a third point
     click_on "Add a point"
-    map.click(x: 100, y: 100) # The offset is there to avoid clicking on the previously created marker
+    map.click(x: 100, y: 0)
 
     assert_selector ".row", count: 3
+
+    # Click on the map background
+    map.click(x: 0, y: 100)
+
+    assert_no_selector ".layer-table__tr--highlight"
+
+    # Reselect the second point
+    map.click(x: 50, y: 0)
+
+    assert_selector ".layer-table__tr--highlight"
+
+    # Close the layer table and deselect
+    click_on "Display the table for this layer", match: :first
+    map.click(x: 0, y: 100)
+
+    assert_no_selector ".layer-container.is-active"
+    assert_no_selector ".layer-table__tr--highlight"
+
+    # Reselect the second point
+    map.click(x: 50, y: 0)
+
+    assert_selector ".layer-container.is-active"
+    assert_selector ".layer-table__tr--highlight"
   end
 
   test "add a point from the rows/new form" do

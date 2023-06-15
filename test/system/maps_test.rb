@@ -17,17 +17,15 @@ class MapsTest < ApplicationSystemTestCase
     assert_no_text "Test de nouvelle carte"
   end
 
-  test "visit an existing owned map" do
+  test "access only permitted map" do
     sign_in_as(users("reclus"), "refleurir")
 
+    # restaurants is owned by reclus
     visit map_path(id: maps("restaurants"))
 
     assert_field "Name", with: "Restaurants"
-  end
 
-  test "visit an unpermitted map" do
-    sign_in_as(users("reclus"), "refleurir")
-
+    # reclus has no access to hiking
     visit map_path(id: maps("hiking"))
 
     assert_text "You are not authorized to perform this action."

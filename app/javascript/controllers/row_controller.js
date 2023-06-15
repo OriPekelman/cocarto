@@ -35,4 +35,18 @@ export default class extends Controller {
     this.geojsonTarget.value = JSON.stringify(geojson)
     this.formTarget.requestSubmit()
   }
+
+  focus () {
+    this.highlight({ scroll: false })
+  }
+
+  highlight ({ scroll = true } = {}) {
+    const currentHighlightedRows = document.querySelectorAll('.layer-table__tr--highlight')
+    currentHighlightedRows.forEach(row => row.classList.remove('layer-table__tr--highlight'))
+    this.dispatch('highlighted')
+    this.element.classList.add('layer-table__tr--highlight')
+    if (scroll) {
+      this.element.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    }
+  }
 }
