@@ -28,7 +28,6 @@ ActiveRecordDoctor.configure do
     "ActiveStorage::Blob",
     "ActiveStorage::VariantRecord",
     "ActiveStorage::Attachment",
-    "AccessGroup",
     "MapTokenAuthenticatable::AnonymousUser"
   ]
 
