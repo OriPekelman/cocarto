@@ -32,6 +32,11 @@ en:
         territory:
           one: territory
           other: territories
+      layer/geometry_type_description:
+        line_string: line strings layer
+        point: points layer
+        polygon: polygons layer
+        territory: territories layer
       map:
         name: Name
       map_token:

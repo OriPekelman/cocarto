@@ -9,7 +9,8 @@
 
     <div class="form__field form__field--large">
       <%= form.label :name %>
-      <%= form.text_field :name, autofocus: true %>
+      <%= form.text_field :name, autofocus: true,
+            placeholder: (@layer.persisted? ? @layer.geometry_type_description : nil) %>
     </div>
 
     <h3 class="form__header"><%= Layer.human_attribute_name(:color) %></h3>
@@ -30,7 +31,7 @@
             <%= form.radio_button :geometry_type, type, checked: type == "point", data: {"layer-form-type-param": type, action: "layer-form#typeSelected"} %>
             <div class="layer-form__type-option">
               <div data-layer-form-target="icon"><%= embedded_svg "#{type}.svg" %></div>
-              <%= Layer.human_attribute_name(type).capitalize %>
+              <%= Layer.human_attribute_name(type, count: 2).capitalize %>
             </div>
           <% end %>
         <% end %>
