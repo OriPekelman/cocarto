@@ -91,7 +91,11 @@ fr:
   maps:
     index:
       create_account: Créer un compte
-      user_role: Vous êtes %{role}
+      role_description:
+        contributor: Vous êtes contributeur.
+        editor: Vous êtes éditeur.
+        owner: Vous êtes propriétaire.
+        viewer: Vous avec accès en lecture seule.
     sharing:
       header: Partage et permissions
     show:
