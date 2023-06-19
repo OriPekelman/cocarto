@@ -91,7 +91,11 @@ en:
   maps:
     index:
       create_account: Create an account
-      user_role: You are %{role}
+      role_description:
+        contributor: You are a contributor.
+        editor: You are an editor.
+        owner: You have full ownership.
+        viewer: You have readonly access.
     sharing:
       header: Sharing and permissions
     show:

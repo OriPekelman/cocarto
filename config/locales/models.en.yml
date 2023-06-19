@@ -32,6 +32,11 @@ en:
         territory:
           one: territory
           other: territories
+      layer/geometry_type_description:
+        line_string: line strings layer
+        point: points layer
+        polygon: polygons layer
+        territory: territories layer
       map:
         name: Name
       map_token:
@@ -98,7 +103,7 @@ en:
       territory_category:
         one: Territory category
         other: Territory categories
-      user_role: Accès
+      user_role: Access
   helpers:
     _comment: The "helpers" scope is for model-specific keys. For general purpose labels, use the "common" scope.
     link:

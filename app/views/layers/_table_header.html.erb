@@ -7,7 +7,7 @@
       <%= embedded_svg "#{layer.geometry_type}.svg", class: "icon--regular", style: "color: #{layer.color}" %>
     </div>
 
-    <%= layer.name %>
+    <%= layer.name.presence || layer.geometry_type_description %>
   <% end %>
 
   <div class="buttons-bar buttons-bar--tight">

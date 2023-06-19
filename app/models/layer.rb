@@ -63,6 +63,10 @@ class Layer < ApplicationRecord
   end
   after_destroy_commit -> { broadcast_remove_to map }
 
+  def geometry_type_description
+    Layer.human_attribute_name("geometry_type_description.#{geometry_type}")
+  end
+
   def color
     style["color"] || COLORS[:blue]
   end

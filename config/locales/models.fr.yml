@@ -32,6 +32,11 @@ fr:
         territory:
           one: territoire
           other: territoires
+      layer/geometry_type_description:
+        line_string: couche de tracés
+        point: couche de points
+        polygon: couche de polygones
+        territory: couche de territoires
       map:
         name: Nom
       map_token:

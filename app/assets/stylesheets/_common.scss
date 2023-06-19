@@ -150,6 +150,10 @@ main {
   flex-grow: 1;
 }
 
+.turbo-progress-bar {
+  background-color: var(--color-green-70);
+}
+
 .footer__application {
   align-items: center;
   display: flex;

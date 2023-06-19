@@ -11,7 +11,7 @@
               <div class="list-element__description">
                 <span><%= map.layers.size %> <%= Layer.model_name.human(count: map.layers.size).downcase %></span>
                 <span><%= map.rows.size %> <%= Row.model_name.human(count: map.rows.size).downcase %></span>
-                <span><%= t(".user_role", role: UserRole.human_attribute_name("role_types.#{current_user.access_for_map(map).role_type}").downcase) %></span>
+                <span><%= t(".role_description.#{current_user.access_for_map(map).role_type}") %></span>
               </div>
               <div class="list-element__description">
                 <%= map_updated_at_span(map.last_updated_row, map.last_updated_row&.author) %>
