@@ -43,6 +43,13 @@ require "test_helper"
 
 class RowTest < ActiveSupport::TestCase
   class GeometryTest < RowTest
+    test "empty geometry is invalid" do
+      row = Row.new(author: users(:reclus), layer: layers(:hiking_zones))
+      row.validate
+
+      assert_equal [{error: :required}], row.errors.details[:geometry]
+    end
+
     test "invalid geometry is invalid" do
       row = Row.new(author: users(:reclus), layer: layers(:hiking_zones), geometry: "POLYGON ((0 0, 0 1, 1 0, 1 1, 0 0))")
       row.validate

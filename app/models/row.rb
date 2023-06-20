@@ -60,6 +60,7 @@ class Row < ApplicationRecord
 
   # Validations
   before_validation :take_first_of_geometry_collection
+  validate :validate_geometry_presence
   validate :validate_geometry
   validate :either_author_or_anonymous
 
@@ -247,6 +248,14 @@ class Row < ApplicationRecord
       blob_ids.map { |blob_id| files_by_id[blob_id] }
     else
       raise "Field #{field.id} is not an file"
+    end
+  end
+
+  def validate_geometry_presence
+    return if layer.geometry_territory?
+
+    if geometry.nil?
+      errors.add(:geometry, :required)
     end
   end
 
