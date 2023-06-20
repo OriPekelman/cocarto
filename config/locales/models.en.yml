@@ -74,6 +74,7 @@ en:
             geometry:
               format: "%{message}"
               invalid: The geometry is invalid. (%{reason})
+              multiple_items: The geometry being added has multiple elements; only the first one will be used.
         user:
           attributes:
             base:

@@ -74,6 +74,7 @@ fr:
             geometry:
               format: "%{message}"
               invalid: La géométrie est invalide. (%{reason})
+              multiple_items: La géométrie ajoutée a plusieurs éléments ; seul le premier sera pris en compte.
         user:
           attributes:
             base:
