@@ -36,12 +36,11 @@ module ImportExport
 
       # assign values
       row.author = @author
-      row.fields_values = values
       if geometry
         # Note: geometry may be nil when reimporting a row (from e.g. a data-only table).
-        # Note: we set the geometry after the values because the geometry setter requires the layer to be known.
         row.geometry = geometry
       end
+      row.fields_values = values
 
       row.save!
     end
