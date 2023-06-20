@@ -26,11 +26,18 @@ class LayersController < ApplicationController
   end
 
   def create
-    map = current_user.maps.find(layer_params["map_id"])
+    map = current_user.maps.includes(:layers).find(layer_params["map_id"])
 
     layer = authorize map.layers.new(layer_params)
     if layer.save
-      redirect_to layer
+      respond_to do |format|
+        format.turbo_stream do
+          # redirect to the layer if it’s the first layer (we’re actually creating a new map)
+          # otherwise do nothing, the new layer is streamed via turbo.
+          redirect_to layer if map.layers.length == 1
+        end
+        format.html { redirect_to layer }
+      end
     else
       # This line overrides the default rendering behavior, which
       # would have been to render the "create" view.
@@ -43,7 +50,7 @@ class LayersController < ApplicationController
       @layer.broadcast_i18n_replace_to @layer.map
       respond_to do |format|
         format.turbo_stream
-        format.html { redirect_to layer_path(@layer) }
+        format.html { redirect_to @layer }
       end
     else
       render :show, status: :unprocessable_entity

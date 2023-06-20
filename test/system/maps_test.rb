@@ -4,7 +4,7 @@ class MapsTest < ApplicationSystemTestCase
   test "create and destroy a map" do
     sign_in_as(users("reclus"), "refleurir")
 
-    visit new_map_path
+    click_on "Build a new map"
     fill_in "Name", with: "Test de nouvelle carte"
     click_button "Create a map"
     fill_in "Name", with: "Test de nouvelle couche"
