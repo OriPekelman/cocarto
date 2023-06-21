@@ -142,16 +142,23 @@ class Row < ApplicationRecord
 
       if field.type_files?
         # Create blobs for Files fields
-        new_blob_ids = value.map { |file|
-          blob = ActiveStorage::Blob.create_and_upload!(
-            io: file,
-            filename: file.original_filename,
-            content_type: file.content_type
-          )
-          # Rails 7.1 `attach(value) will return the blob and we won’t need to create it separately
-          files.attach(blob)
-          blob.id
-        }
+        new_blob_ids = if value.is_a?(Array) && value.each { _1.is_a? ActionDispatch::Http::UploadedFile }
+          # Note: refactor file import to properly support addition / removal.
+          # value should be an array of existing blob ids and new ActionDispatch::Http::UploadedFile.
+          # We also wouldn’t have to rely in the existing value and this code could be moved to Field#cast
+          value.map { |file|
+            blob = ActiveStorage::Blob.create_and_upload!(
+              io: file,
+              filename: file.original_filename,
+              content_type: file.content_type
+            )
+            # Rails 7.1 `attach(value) will return the blob and we won’t need to create it separately
+            files.attach(blob)
+            blob.id
+          }
+        else
+          []
+        end
         existing_blob_ids = values[field_id] || []
         value = existing_blob_ids + new_blob_ids
       end
