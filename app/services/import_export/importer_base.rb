@@ -43,7 +43,7 @@ module ImportExport
         begin
           import_rows
         rescue ImportGlobalError => e
-          @result.global_error = e.cause
+          @result.global_error = e.cause || e
         end
 
         raise ActiveRecord::Rollback unless @result.success?
