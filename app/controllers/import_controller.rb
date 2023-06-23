@@ -8,9 +8,13 @@ class ImportController < ApplicationController
   end
 
   def create
-    path = import_params[:file].path
-    csv = File.open(path)
-    @result = ImportExport.import(@layer, :csv, csv, key_field: import_params[:key_field], author: current_user, stream: true)
+    if import_params[:file].present?
+      path = import_params[:file].path
+      csv = File.open(path)
+      @result = ImportExport.import(@layer, :csv, csv, key_field: import_params[:key_field], author: current_user, stream: true)
+    elsif import_params[:url].present?
+      @result = ImportExport.import(@layer, :wfs, import_params[:url], key_field: import_params[:key_field], input_layer_name: import_params[:input_layer_name], author: current_user, stream: true)
+    end
     if @result.success?
       render "show"
     else
@@ -21,8 +25,9 @@ class ImportController < ApplicationController
   private
 
   def import_params
-    params.slice(:key_field, :file)
-      .permit(:key_field, :file)
+    # TODO: `slice` is needed because we don't have proper ImportOperation resources yet.
+    keys = [:key_field, :file, :url, :input_layer_name]
+    params.slice(*keys).permit(*keys)
   end
 
   def set_layer

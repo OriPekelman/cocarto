@@ -45,12 +45,18 @@ en:
   import:
     new:
       attention: This feature is still experimental; expect bugs, and please do contact us if you get into trouble.
+      from_file: From a file
+      from_file_csv: Upload a file (csv)
+      from_url: From an URL
+      from_url_layer_name: Layer name (Feature Type)
+      from_url_wfs: URL of a WFS server
       import_data: Data import
       key_field: ID column
       key_field_info_html: |
         If you want to update data, you need to specify a column to use  to identify preexisting data.<br/>
         The row attributes will be replaced by the ones from the imported file; attributes missing from the files will be left as-is.<br/>
         New rows in the imported file will be appended to the layer.
+      or: or
       reimport: Reimport existing data
       save: Import
     result:
