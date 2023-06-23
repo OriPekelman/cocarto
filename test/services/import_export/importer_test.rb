@@ -78,6 +78,10 @@ class ImporterTest < ActiveSupport::TestCase
 
       assert_not result.success?
       assert_equal({geometry: [{error: :required}]}, result.entity_results[0].validation_errors.details)
+
+      result = ImportExport.import(layers(:restaurants), :csv, csv, author: users(:reclus), ignore_empty_geometry_rows: true)
+
+      assert_predicate result, :success?
     end
 
     test "bad geometry" do
