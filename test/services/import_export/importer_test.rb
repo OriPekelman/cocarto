@@ -1,4 +1,6 @@
 require "test_helper"
+require "webrick"
+require "fixtures/mock_wks_server"
 
 class ImporterTest < ActiveSupport::TestCase
   class Random < ImporterTest
@@ -30,6 +32,20 @@ class ImporterTest < ActiveSupport::TestCase
       assert_changes -> { layers(:restaurants).rows.count }, from: 0, to: 1 do
         ImportExport.import(layers(:restaurants), :csv, csv, author: users(:reclus))
       end
+    end
+  end
+
+  class WFS < ImporterTest
+    include MockWfsServer
+
+    test "wfs import" do
+      assert_changes -> { layers(:hiking_paths).rows.count }, from: 1, to: 5 do
+        result = ImportExport.import(layers(:hiking_paths), :wfs, "http://localhost:9090", input_layer_name: "TEST_FEATURE_NAME", author: users(:reclus))
+
+        assert_predicate result, :success?
+      end
+
+      assert_predicate layers(:hiking_paths).rows.find_by("values ->> '#{fields("hiking_paths_name").id}' = 'Tracé numéro un'"), :present?
     end
   end
 

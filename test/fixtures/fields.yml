@@ -50,6 +50,11 @@ restaurant_decision:
   label: "Decision"
   field_type: "boolean"
 
+hiking_paths_name:
+  layer: hiking_paths
+  label: "Name"
+  field_type: "text"
+
 hiking_paths_document:
   layer: hiking_paths
   label: "Document"

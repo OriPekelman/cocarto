@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wfs:FeatureCollection xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:wfs="http://www.opengis.net/wfs/2.0" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:test_namespace="http://localhost:9090" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" timeStamp="2023-06-26T14:39:04Z" numberMatched="unknown" numberReturned="4" xsi:schemaLocation="http://www.opengis.net/wfs/2.0 http://schemas.opengis.net/wfs/2.0/wfs.xsd http://www.opengis.net/gml/3.2 http://schemas.opengis.net/gml/3.2.1/gml.xsd http://localhost:9090">
+	<wfs:member>
+		<test_namespace:TEST_FEATURE_NAME gml:id="TEST_FEATURE_NAME.1">
+			<test_namespace:Name>Tracé numéro un</test_namespace:Name>
+			<test_namespace:SHAPE>
+				<gml:MultiCurve gml:id="TEST_FEATURE_NAME.1.ln" srsName="urn:ogc:def:crs:EPSG::2154">
+					<gml:curveMember>
+						<gml:LineString gml:id="TEST_FEATURE_NAME.1.ln.0">
+							<gml:posList>0 40 4 40 4 44 0 44</gml:posList>
+						</gml:LineString>
+					</gml:curveMember>
+				</gml:MultiCurve>
+			</test_namespace:SHAPE>
+		</test_namespace:TEST_FEATURE_NAME>
+	</wfs:member>
+	<wfs:member>
+		<test_namespace:TEST_FEATURE_NAME gml:id="TEST_FEATURE_NAME.2">
+			<test_namespace:Name>Tracé numéro deux</test_namespace:Name>
+			<test_namespace:SHAPE>
+				<gml:MultiCurve gml:id="TEST_FEATURE_NAME.2.ln" srsName="urn:ogc:def:crs:EPSG::2154">
+					<gml:curveMember>
+						<gml:LineString gml:id="TEST_FEATURE_NAME.2.ln.0">
+							<gml:posList>10 40 6 40 6 44 10 44</gml:posList>
+						</gml:LineString>
+					</gml:curveMember>
+				</gml:MultiCurve>
+			</test_namespace:SHAPE>
+		</test_namespace:TEST_FEATURE_NAME>
+	</wfs:member>
+	<wfs:member>
+		<test_namespace:TEST_FEATURE_NAME gml:id="TEST_FEATURE_NAME.3">
+			<test_namespace:Name>Tracé numéro trois</test_namespace:Name>
+			<test_namespace:SHAPE>
+				<gml:MultiCurve gml:id="TEST_FEATURE_NAME.3.ln" srsName="urn:ogc:def:crs:EPSG::2154">
+					<gml:curveMember>
+						<gml:LineString gml:id="TEST_FEATURE_NAME.3.ln.0">
+							<gml:posList>0 50 4 50 4 46 0 46</gml:posList>
+						</gml:LineString>
+					</gml:curveMember>
+				</gml:MultiCurve>
+			</test_namespace:SHAPE>
+		</test_namespace:TEST_FEATURE_NAME>
+	</wfs:member>
+	<wfs:member>
+		<test_namespace:TEST_FEATURE_NAME gml:id="TEST_FEATURE_NAME.4">
+			<test_namespace:Name>Tracé numéro quatre</test_namespace:Name>
+			<test_namespace:SHAPE>
+				<gml:MultiCurve gml:id="TEST_FEATURE_NAME.4.ln" srsName="urn:ogc:def:crs:EPSG::2154">
+					<gml:curveMember>
+						<gml:LineString gml:id="TEST_FEATURE_NAME.4.ln.0">
+							<gml:posList>10 50 6 50 6 46 10 46</gml:posList>
+						</gml:LineString>
+					</gml:curveMember>
+				</gml:MultiCurve>
+			</test_namespace:SHAPE>
+		</test_namespace:TEST_FEATURE_NAME>
+	</wfs:member>
+</wfs:FeatureCollection>
