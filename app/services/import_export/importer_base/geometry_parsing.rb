@@ -7,7 +7,7 @@ module ImportExport
         geojson: ->(value) { RGeo::GeoJSON.decode(value, geo_factory: RGEO_FACTORY) },
         wkt: ->(value) { RGEO_FACTORY.parse_wkt(value) },
         wkb: ->(value) { RGEO_FACTORY.parse_wkb(value) },
-        xy: ->(x, y) { RGEO_FACTORY.point(x, y) }
+        xy: ->(x, y) { RGEO_FACTORY.point(x.to_f, y.to_f) }
       }
 
       def extract_geometry(values, geometry_keys, geometry_format) # mutates the passed values hash, raises ImportGeometryError
