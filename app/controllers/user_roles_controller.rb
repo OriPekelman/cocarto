@@ -20,7 +20,6 @@ class UserRolesController < ApplicationController
     end
     if user_role.save
       user.deliver_invitation if user.previously_new_record?
-      user_role.user.invite! unless user_role.user.invited_to_sign_up?
       redirect_to map_user_roles_path(map), notice: t("helpers.message.user_role.created")
     else
       redirect_to map_user_roles_path(map), alert: t("common.failed", msg: user_role.errors.full_messages.to_sentence)
