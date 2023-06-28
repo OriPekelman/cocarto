@@ -278,7 +278,8 @@ class Row < ApplicationRecord
   end
 
   def take_first_of_geometry_collection
-    if geometry.is_a?(RGeo::Feature::GeometryCollection) && geometry.valid?
+    # Note: A Collection geometry of only one feature is invalid for RGeo; this method is called before validation.
+    if geometry.is_a? RGeo::Feature::GeometryCollection
       if geometry.size > 1
         warnings.add(:geometry, :multiple_items)
       end
