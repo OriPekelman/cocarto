@@ -1,40 +1,12 @@
-<%= turbo_frame_tag(@layer, :import) do %>
-  <%= form_with url: layer_import_path(@layer), html: {class: "form"} do |f| %>
-    <div class="card__main-content">
-      <h2 class="form__header"><%= t(".import_data") %></h2>
-      <div class="form__field">
-        <p class="message message--attention"><%= t(".attention") %></p>
-      </div>
-      <%= render "layouts/errors", resource: @layer %>
+<div class="card__main-content">
+  <h2 class="form__header"><%= t(".title") %></h2>
+  <div class="form__field">
+    <%= render "result", result: @result %>
+  </div>
+</div>
 
-      <div data-controller="file-list" class="form__field form__field--file">
-        <label>
-          <span class="button button--with-icon button--link">
-            <%= t "field.attach_file" %>
-            <%= embedded_svg "upload-cloud.svg", class: "icon--small" %>
-            <%= f.file_field :file, data: {file_list_target: "input", action: "change->file-list#update"}, hidden: true %>
-          </span>
-        </label>
-        <span data-file-list-target="list"></span>
-      </div>
-
-      <details class="form__field form__field--large form__details">
-        <summary class="form__details-summary">
-          <%= f.label t(".reimport") %>
-        </summary>
-        <div class="form__details-contents form__field">
-          <div class="form__field form__field--inline">
-            <%= f.label :key_field, t(".key_field") %>
-            <%= f.select :key_field, @layer.fields.map { [_1.label, _1.id] }, include_blank: true %>
-          </div>
-          <p class="message message--info">
-            <%= t(".key_field_info_html") %>
-          </p>
-        </div>
-      </details>
-    </div>
-    <div class="card__footer-content">
-      <%= f.submit t(".save"), class: "button button--confirm" %>
-    </div>
-  <% end %>
-<% end %>
+<div class="card__footer-content">
+  <button class="button button--confirm" data-action="modal#close">
+    <%= t("common.ok") %>
+  </button>
+</div>

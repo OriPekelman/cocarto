@@ -33,6 +33,52 @@ class ImporterTest < ActiveSupport::TestCase
     end
   end
 
+  class Result < ImporterTest
+    test "geojson parsing error" do
+      not_geojson = "Ceci n’est pas un geojson."
+      result = ImportExport.import(layers(:restaurants), :geojson, not_geojson, author: users(:reclus))
+
+      assert_not result.success?
+      assert_instance_of JSON::ParserError, result.global_error
+    end
+
+    test "csv parsing error" do
+      not_csv = 'Ceci,""n’est, pas un csv.'
+      result = ImportExport.import(layers(:restaurants), :csv, not_csv, col_sep: ",", author: users(:reclus))
+
+      assert_not result.success?
+      assert_instance_of ::CSV::MalformedCSVError, result.global_error
+    end
+
+    test "no geometry" do
+      layers(:restaurants).rows.destroy_all
+
+      csv = <<~CSV
+        Nom;Convives;geometry
+        L’Antipode;70;""
+      CSV
+
+      result = ImportExport.import(layers(:restaurants), :csv, csv, author: users(:reclus))
+
+      assert_not result.success?
+      assert_equal({geometry: [{error: :required}]}, result.entity_results[0].validation_errors.details)
+    end
+
+    test "bad geometry" do
+      layers(:restaurants).rows.destroy_all
+
+      csv = <<~CSV
+        Nom;Convives;geometry
+        L’Antipode;70;"NOT A GEOMETRY"
+      CSV
+
+      result = ImportExport.import(layers(:restaurants), :csv, csv, geometry_keys: "geometry", geometry_format: :wkt, author: users(:reclus))
+
+      assert_not result.success?
+      assert_instance_of RGeo::Error::ParseError, result.entity_results[0].parsing_error
+    end
+  end
+
   class Mapping < ImporterTest
     test "import with mapping" do
       layers(:restaurants).rows.destroy_all

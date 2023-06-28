@@ -17,15 +17,22 @@ module ImportExport
     def import_rows
       csv = CSV.new(@input, headers: true, encoding: encoding, col_sep: col_sep)
 
-      csv.each do |line|
+      csv.each_with_index do |line, index|
         values = line.to_h
-        geometry = if @geometry_keys && @geometry_format
-          extract_geometry(values, @geometry_keys, @geometry_format)
+        if @geometry_keys && @geometry_format
+          begin
+            geometry = extract_geometry(values, @geometry_keys, @geometry_format)
+            import_row(geometry, values, index)
+          rescue ImportGeometryError => e
+            set_entity_result(index, did_save: false, parsing_error: e.cause)
+          end
         else
-          guess_geometry(values)
+          geometry = guess_geometry(values)
+          import_row(geometry, values, index)
         end
-        import_row(geometry, values)
       end
+    rescue CSV::MalformedCSVError
+      raise ImportGlobalError
     end
 
     def encoding
@@ -49,15 +56,8 @@ module ImportExport
       ensure
         @input.rewind if @input.is_a? IO
       end
-      raise InconsistentSeparator if separator.nil?
-
-      separator
-    end
-
-    class InconsistentSeparator < StandardError
-      def to_s
-        I18n.t("import.errors.inconsistent_separator")
-      end
+      # fallback to ","
+      separator || ","
     end
   end
 end

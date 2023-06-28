@@ -1,6 +1,8 @@
 module ImportExport
   class ImporterBase
     module GeometryParsing
+      class ImportGeometryError < StandardError; end
+
       PARSERS = {
         geojson: ->(value) { RGeo::GeoJSON.decode(value, geo_factory: RGEO_FACTORY) },
         wkt: ->(value) { RGEO_FACTORY.parse_wkt(value) },
@@ -8,7 +10,7 @@ module ImportExport
         xy: ->(x, y) { RGEO_FACTORY.point(x, y) }
       }
 
-      def extract_geometry(values, geometry_keys, geometry_format) # mutates the passed values hash
+      def extract_geometry(values, geometry_keys, geometry_format) # mutates the passed values hash, raises ImportGeometryError
         geometry_values = values.values_at(*geometry_keys).compact
         return if geometry_values.size != Array(geometry_keys).size
 
@@ -17,7 +19,7 @@ module ImportExport
 
         geometry
       rescue JSON::ParserError, RGeo::Error::ParseError
-        # TODO: error reporting
+        raise ImportGeometryError
       end
 
       STRATEGIES = [
@@ -42,11 +44,11 @@ module ImportExport
         STRATEGIES.each do |strategy|
           geometry = extract_geometry(values, Array(strategy.first), strategy.second)
           break if geometry
+        rescue ImportGeometryError
+          # Ignore error when guessing
         end
 
         geometry
-      rescue JSON::ParserError, RGeo::Error::ParseError
-        # Ignore error
       end
     end
   end

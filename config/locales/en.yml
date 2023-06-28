@@ -31,6 +31,7 @@ en:
     latitude: Latitude
     length: Length
     longitude: Longitude
+    ok: OK
     save: Save
     settings: Settings
     territory_code: Code
@@ -42,14 +43,9 @@ en:
     attachments: Attachments
     take_picture: Take a picture
   import:
-    create:
-      import_failed: Import failed
-      import_successful: Import succeeded
-    errors:
-      inconsistent_separator: 'Invalid file: separator must be a comma, a semicolon or a tabulation. Please also make sure all the rows have the same column count.'
-    show:
+    new:
       attention: This feature is still experimental; expect bugs, and please do contact us if you get into trouble.
-      import_data: Import data
+      import_data: Data import
       key_field: ID column
       key_field_info_html: |
         If you want to update data, you need to specify a column to use  to identify preexisting data.<br/>
@@ -57,6 +53,14 @@ en:
         New rows in the imported file will be appended to the layer.
       reimport: Reimport existing data
       save: Import
+    result:
+      failure: Import failed
+      imported_rows: Imported %{size} rows
+      line_number: Line %{line_number}
+      row_failure: Not saved.
+      success: Import successful
+    show:
+      title: Import complete
   layers:
     layer:
       center_on_row: Center map on this row

@@ -4,17 +4,18 @@ class ImportController < ApplicationController
   def show
   end
 
+  def new
+  end
+
   def create
     path = import_params[:file].path
     csv = File.open(path)
-    ImportExport.import(@layer, :csv, csv, key_field: import_params[:key_field], author: current_user, stream: true)
-    respond_to do |format|
-      format.turbo_stream
-      format.html { redirect_to @layer, notice: t(".import_successful") }
+    @result = ImportExport.import(@layer, :csv, csv, key_field: import_params[:key_field], author: current_user, stream: true)
+    if @result.success?
+      render "show"
+    else
+      render "new", status: :unprocessable_entity
     end
-  rescue => e
-    @layer.errors.add(:base, e.message)
-    render "show", status: :unprocessable_entity, alert: t(".import_failed")
   end
 
   private

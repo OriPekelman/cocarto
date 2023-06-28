@@ -278,7 +278,7 @@ class Row < ApplicationRecord
   end
 
   def take_first_of_geometry_collection
-    if geometry.is_a? RGeo::Feature::GeometryCollection
+    if geometry.is_a?(RGeo::Feature::GeometryCollection) && geometry.valid?
       if geometry.size > 1
         warnings.add(:geometry, :multiple_items)
       end
