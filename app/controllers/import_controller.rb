@@ -11,9 +11,9 @@ class ImportController < ApplicationController
     if import_params[:file].present?
       path = import_params[:file].path
       csv = File.open(path)
-      @result = ImportExport.import(@layer, :csv, csv, key_field: import_params[:key_field], author: current_user, stream: true)
+      @result = ImportExport.import(@layer, :csv, csv, key_field: import_params[:key_field], author: current_user, stream: true, ignore_empty_geometry_rows: true)
     elsif import_params[:url].present?
-      @result = ImportExport.import(@layer, :wfs, import_params[:url], key_field: import_params[:key_field], input_layer_name: import_params[:input_layer_name], author: current_user, stream: true)
+      @result = ImportExport.import(@layer, :wfs, import_params[:url], key_field: import_params[:key_field], input_layer_name: import_params[:input_layer_name], author: current_user, stream: true, ignore_empty_geometry_rows: true)
     end
     if @result.success?
       render "show"
