@@ -1,1 +1,1 @@
-touladi_files_blob: <%= ActiveStorage::FixtureSet.blob filename: "touladi.png" %>
+touladi: <%= ActiveStorage::FixtureSet.blob filename: "touladi.png" %>

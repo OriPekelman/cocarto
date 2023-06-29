@@ -1,4 +1,4 @@
-touladi_files_attachment:
+touladi:
   name: files
   record: hiking_path (Row)
-  blob: touladi_files_blob
+  blob: touladi
