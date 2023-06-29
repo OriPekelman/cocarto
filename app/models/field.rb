@@ -26,6 +26,7 @@ class Field < ApplicationRecord
   # Relations
   belongs_to :layer, touch: true
   has_and_belongs_to_many :territory_categories
+  has_many :import_mappings, class_name: "Import::Mapping", inverse_of: :reimport_field, foreign_key: :reimport_field_id, dependent: :nullify
 
   # Validations
   validates :field_type, presence: true

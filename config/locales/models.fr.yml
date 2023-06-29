@@ -65,6 +65,15 @@ fr:
         viewer: Observateur
     errors:
       models:
+        import/configuration:
+          attributes:
+            source_type:
+              blank: Ce type de source n’est pas géré.
+              format: "%{message}"
+        import/operation/configuration:
+          attributes:
+            source_type:
+              format: "%{message}"
         map_token:
           attributes:
             role_type:

@@ -1,1 +1,3 @@
 touladi: <%= ActiveStorage::FixtureSet.blob filename: "touladi.png" %>
+
+restaurants: <%= ActiveStorage::FixtureSet.blob filename: "restaurants.csv" %>

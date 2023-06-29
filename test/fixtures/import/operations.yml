@@ -1,0 +1,21 @@
+# == Schema Information
+#
+# Table name: import_operations
+#
+#  id                :uuid             not null, primary key
+#  global_error      :string
+#  remote_source_url :string
+#  status            :enum             default("ready"), not null
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  configuration_id  :uuid             not null
+#
+# Indexes
+#
+#  index_import_operations_on_configuration_id  (configuration_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (configuration_id => import_configurations.id)
+#
+

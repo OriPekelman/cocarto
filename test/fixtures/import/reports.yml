@@ -1,0 +1,22 @@
+# == Schema Information
+#
+# Table name: import_reports
+#
+#  id           :uuid             not null, primary key
+#  row_results  :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  mapping_id   :uuid             not null
+#  operation_id :uuid             not null
+#
+# Indexes
+#
+#  index_import_reports_on_mapping_id    (mapping_id)
+#  index_import_reports_on_operation_id  (operation_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (mapping_id => import_mappings.id)
+#  fk_rails_...  (operation_id => import_operations.id)
+#
+
