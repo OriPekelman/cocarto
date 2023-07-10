@@ -37,7 +37,7 @@ class Field < ApplicationRecord
   after_create_commit -> do
     broadcast_i18n_before_to layer.map, target: dom_id(layer, :new_field)
     layer.rows.each do |row|
-      content = ApplicationController.render(FieldValueComponent.new(field: self, value: nil, row: row), layout: false)
+      content = ApplicationController.render(FieldValueComponent.new(field: self, value: nil, row: row, form_prefix: :inline_form), layout: false)
       html = ApplicationController.render(FieldTdComponent.new(field: self).with_content(content), layout: false)
       broadcast_i18n_before_to(layer.map, target: dom_id(row, "actions"), html: html)
     end
@@ -48,7 +48,7 @@ class Field < ApplicationRecord
     if type_enum? && enum_values_previously_changed?
       # issue #200: update all the rows so that the <select> options reflect the available enum values.
       layer.rows.each do |row|
-        content = ApplicationController.render(FieldValueComponent.new(field: self, value: nil, row: row), layout: false)
+        content = ApplicationController.render(FieldValueComponent.new(field: self, value: nil, row: row, form_prefix: :inline_form), layout: false)
         html = ApplicationController.render(FieldTdComponent.new(field: self).with_content(content), layout: false)
         target = "##{dom_id(row)} .#{dom_id(self)}"
         # note: we need to use the `targets:` param when using `replace_to` to a css selector.

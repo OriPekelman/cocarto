@@ -1,0 +1,25 @@
+<%# params: row, from_rows_new %>
+<%# used in rows/edit and rows/new %>
+
+<%= form_with model: [row.layer, row], id: dom_id(row, :form), multipart: true, class: "form" do |form| %>
+  <% if from_rows_new %>
+    <%= hidden_field_tag :from_rows_new, true %>
+    <%= form.hidden_field :geojson, data: {map_add_point_target: "geojson"} %>
+  <% end %>
+  <div class="card__main-content">
+    <% row.fields_values.each do |field, value| %>
+      <div class="form__field">
+        <%= form.label sanitize_to_id("fields_values[#{field.id}]"), field.label %>
+        <% if field.type_files? %>
+          <%# Special-case for file fields: directly embed FileFieldComponent instead of using FieldValueComponent. %>
+          <%= render FileFieldComponent.new(field: field, row: row) %>
+        <% else %>
+          <%= render FieldValueComponent.new(field: field, value: value, row: row, form_prefix: :form) %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  <div class="card__footer-content">
+    <%= form.submit from_rows_new ? t("helpers.link.row.add_this_point") : t("common.save"), class: "button button--confirm" %>
+  </div>
+<% end %>

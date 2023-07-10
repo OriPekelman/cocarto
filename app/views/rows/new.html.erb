@@ -9,20 +9,7 @@
   <div class="add-single-row__map" data-map-add-point-target="map">
     <%= embedded_svg "center.svg", class: "add-single-row__crosshair" %>
   </div>
-    <%= form_with model: [@row.layer, @row], id: dom_id(@row, :form), multipart: true, class: "add-single-row__form form" do |form| %>
-      <%= hidden_field_tag :from_rows_new, true %>
-      <%= form.hidden_field :geojson, data: {map_add_point_target: "geojson"} %>
-        <% @row.layer.fields.each do |field| %>
-          <div class="form__field">
-            <%= form.label sanitize_to_id("fields_values[#{field.id}]"), field.label %>
-            <% if field.type_files? %>
-              <%# Special-case for file fields: directly embed FileFieldComponent instead of using FieldValueComponent. %>
-              <%= render FileFieldComponent.new(field: field, row: @row) %>
-            <% else %>
-              <%= render FieldValueComponent.new(field: field, value: nil, row: @row) %>
-            <% end %>
-          </div>
-        <% end %>
-      <%= form.submit t("helpers.link.row.add_this_point"), class: "button button--confirm" %>
-    <% end %>
+  <div class="add-single-row__form">
+    <%= render "form", row: @row, from_rows_new: true %>
+  </div>
 </div>

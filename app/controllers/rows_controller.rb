@@ -9,9 +9,11 @@ class RowsController < ApplicationController
   end
 
   def edit
-    # Only used for files fields
-    @field = Field.find(params[:field_id])
-    raise NotImplementedError unless @field.type_files?
+    if params[:field_id]
+      # Only used for files fields
+      @field = Field.find(params[:field_id])
+      raise NotImplementedError unless @field.type_files?
+    end
   end
 
   def create
