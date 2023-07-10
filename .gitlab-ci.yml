@@ -18,6 +18,7 @@ variables:
   before_script:
     - bundle config set --local path 'vendor/ruby'
     - bundle install
+    - apt update && apt install --yes gdal-bin
 
 .node:
   image: node:18

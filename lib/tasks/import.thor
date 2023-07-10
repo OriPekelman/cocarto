@@ -3,8 +3,9 @@ class Import < Thor
 
   desc "import", "Import a file to an existing layer"
   option :layer, required: true, type: :string, aliases: :l, desc: "The layer in which to insert rows", banner: "layer_id"
-  option :file, required: true, type: :string, aliases: :f, desc: "Source file"
-  option :format, type: :string, enum: %w[csv geojson], default: :csv, desc: "File format"
+  option :file, required: false, type: :string, aliases: :f, desc: "Source file"
+  option :url, required: false, type: :string, aliases: :u, desc: "Source url"
+  option :format, type: :string, enum: %w[csv geojson wfs], default: :csv, desc: "Parser format"
   option :author, required: true, type: :string, aliases: :a, desc: "Row author", banner: "user_id"
   option :key_field, required: false, type: :string, aliases: :k, desc: "Identifier column name"
   option :stream, required: false, type: :boolean, aliases: :s, desc: "Stream broadcast to frontend (slower)"
@@ -12,11 +13,16 @@ class Import < Thor
   option :csv_encoding, required: false, type: :string, desc: "CSV encoding"
   option :geometry_keys, required: false, type: :array, desc: "geometry keys"
   option :geometry_format, required: false, type: :string, desc: "geometry format, one of #{ImportExport::ImporterBase::GeometryParsing::PARSERS.keys}"
+  option :input_layer_name, required: false, type: :string, desc: "input layer name (if the source has several layers)"
   def import
     opts = options.dup
     layer = Layer.find_by(id: opts.delete(:layer))
     format = opts.delete(:format).to_sym
-    input = File.read(opts.delete(:file))
+    input = if (file = opts.delete(:file))
+      File.read(file)
+    else
+      opts.delete(:url)
+    end
     opts[:author] = User.find_by(id: options[:author])
     opts[:key_field] = layer.fields.find_by(label: options[:key_field]).id if options[:key_field]
 

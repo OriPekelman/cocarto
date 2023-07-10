@@ -9,7 +9,7 @@ module ImportExport
     attr_accessor :global_error
     attr_reader :entity_results
 
-    EntityResult = Struct.new(:did_save, :parsing_error, :validation_errors, :validation_warnings)
+    EntityResult = Struct.new(:did_save, :parsing_error, :validation_errors, :validation_warnings, :ignored)
 
     def initialize
       @entity_results = []
@@ -20,7 +20,7 @@ module ImportExport
     end
 
     def success?
-      global_error.nil? && @entity_results.all? { |entity_result| entity_result.did_save }
+      global_error.nil? && @entity_results.all? { |entity_result| entity_result.did_save || entity_result.ignored }
     end
   end
 
@@ -28,6 +28,7 @@ module ImportExport
     # @options:
     # - author
     # - stream: bool
+    # - ignore_empty_geometry_rows
     def initialize(layer, input, **options)
       @layer = layer
       @input = input
@@ -35,6 +36,7 @@ module ImportExport
       @key_field = options[:key_field]
       @author = options[:author]
       @stream = options[:stream]
+      @ignore_empty_geometry_rows = options[:ignore_empty_geometry_rows] || false
     end
 
     def import
@@ -43,7 +45,7 @@ module ImportExport
         begin
           import_rows
         rescue ImportGlobalError => e
-          @result.global_error = e.cause
+          @result.global_error = e.cause || e
         end
 
         raise ActiveRecord::Rollback unless @result.success?
@@ -90,6 +92,10 @@ module ImportExport
       entity_result.parsing_error = parsing_error
       entity_result.validation_errors = validation_errors
       entity_result.validation_warnings = validation_warnings
+
+      if @ignore_empty_geometry_rows && !did_save && validation_errors&.details == {geometry: [{error: :required}]}
+        entity_result.ignored = true
+      end
     end
   end
 end

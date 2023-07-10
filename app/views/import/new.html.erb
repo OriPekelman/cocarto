@@ -5,20 +5,40 @@
       <p class="message message--attention"><%= t(".attention") %></p>
     </div>
 
-    <div class="form__field">
-      <%= render "result", result: @result if @result %>
-    </div>
+    <% if @result %>
+      <div class="form__field">
+        <%= render "result", result: @result %>
+      </div>
+    <% end %>
 
-    <div data-controller="file-list" class="form__field form__field--file">
-      <label>
-        <span class="button button--with-icon button--link">
-          <%= t "field.attach_file" %>
-          <%= embedded_svg "upload-cloud.svg", class: "icon--small" %>
-          <%= f.file_field :file, data: {file_list_target: "input", action: "change->file-list#update"}, hidden: true %>
-        </span>
-      </label>
-      <span data-file-list-target="list"></span>
-    </div>
+    <div class="import_form--source-inputs">
+      <div class="form__field">
+        <h3 class="form__header"><%= t(".from_file") %></h3>
+        <div data-controller="file-list" class="form__field form__field--file">
+          <label>
+          <span class="button button--with-icon button--link">
+            <%= t ".from_file_csv" %>
+            <%= embedded_svg "upload-cloud.svg", class: "icon--small" %>
+            <%= f.file_field :file, data: {file_list_target: "input", action: "change->file-list#update"}, hidden: true %>
+          </span>
+          </label>
+          <span data-file-list-target="list"></span>
+        </div>
+      </div>
+
+      <span><%= t(".or") %></span>
+
+      <div class="form__field">
+        <h3 class="form__header"><%= t(".from_url") %></h3>
+        <div class="form__field">
+          <%= f.label :url, t(".from_url_wfs") %>
+          <%= f.url_field :url %>
+        </div>
+        <div class="form__field">
+          <%= f.label :input_layer_name, t(".from_url_layer_name") %>
+          <%= f.text_field :input_layer_name %>
+        </div>
+      </div></div>
 
     <details class="form__field form__field--large form__details">
       <summary class="form__details-summary">

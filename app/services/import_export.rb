@@ -2,7 +2,8 @@ module ImportExport
   IMPORTERS = {
     random: RandomImporter,
     csv: CsvImporter,
-    geojson: GeojsonImporter
+    geojson: GeojsonImporter,
+    wfs: WfsImporter
   }
 
   # Import entry point

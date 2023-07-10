@@ -61,6 +61,7 @@ hiking_path:
   line_string: LINESTRING (2.7495973454757348 48.803795844321314, 2.834344424093956 48.752477596511795, 2.7702114997347564 48.728309677729015, 2.829763500925992 48.69354793463103)
   author: cassini
   values: <%= {
+    ActiveRecord::FixtureSet.identify(:hiking_paths_name, :uuid) => "Jean-Michel",
     ActiveRecord::FixtureSet.identify(:hiking_paths_document, :uuid) => [ActiveRecord::FixtureSet.identify(:touladi_files_blob, :uuid)]
   }.to_json %>
 
