@@ -114,7 +114,6 @@ fr:
         new: Nouvelle colonne
       layer:
         delete: Supprimer
-        edit: Modifier…
         export: Exporter…
         export_csv: CSV
         export_geojson: GeoJSON

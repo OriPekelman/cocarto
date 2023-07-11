@@ -13,7 +13,7 @@ class RowComponent < ViewComponent::Base
   end
 
   def form_id
-    dom_id(@row, :form)
+    dom_id(@row, :inline_form)
   end
 
   def calculated_columns

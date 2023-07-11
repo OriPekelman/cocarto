@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 class FieldValueComponent < ViewComponent::Base
-  def initialize(field:, value:, row:)
+  def initialize(field:, value:, row:, form_prefix:)
     @field = field
     @value = value
     @row = row
+    @form_prefix = form_prefix # form_prefix is needed to differentiate the inline form (in RowComponent) and the regular edit (in rows/_form). cf #196
   end
 
   def field_tag
@@ -45,7 +46,7 @@ class FieldValueComponent < ViewComponent::Base
         restricted_target: "restricted",
         restricted_authorizations: RowPolicy.authorizations(@row)
       },
-      form: dom_id(@row, :form),
+      form: dom_id(@row, @form_prefix),
       autocomplete: :off
     }
   end

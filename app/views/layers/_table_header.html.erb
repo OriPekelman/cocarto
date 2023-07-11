@@ -1,5 +1,5 @@
 <header class="layer-header" id="<%= dom_id(layer, :header) %>" data-action="click->layer#toggleTable:self">
-  <%= link_to edit_layer_path(layer), class: "layer-header__name-button", title: t("helpers.link.layer.edit"),
+  <%= link_to edit_layer_path(layer), class: "layer-header__name-button", title: t("common.edit"),
         data: {turbo_frame: "modal",
                restricted_target: "restricted", # cf LayerPolicy#update?
                restricted_authorizations: %w[owner editor].to_json} do %>

@@ -26,6 +26,7 @@ fr:
     close: Fermer
     confirm: Êtes-vous sûr ?
     dragbar_cursor: Curseur de la barre de défilement
+    edit: Modifier…
     ellipsis: "…"
     failed: 'Échec : %{msg}'
     latitude: Latitude
