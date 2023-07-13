@@ -16,9 +16,9 @@ variables:
     paths:
       - vendor/ruby
   before_script:
+    - apt update && apt install --yes gdal-bin libgeos-dev
     - bundle config set --local path 'vendor/ruby'
     - bundle install
-    - apt update && apt install --yes gdal-bin
 
 .node:
   image: node:18

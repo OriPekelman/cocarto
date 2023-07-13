@@ -62,7 +62,7 @@ class RowTest < ActiveSupport::TestCase
       row.validate
 
       assert_equal [{error: :multiple_items}], row.warnings.details[:geometry]
-      assert_equal RGEO_FACTORY.point(10, 40), RGEO_FACTORY.parse_wkt(row.geometry.as_text) # Make sure to use the same factory for comparison
+      assert_equal RGEO_FACTORY.point(10, 40), row.geometry
     end
 
     test "Line geometry collection is reunited as a single line string" do
@@ -70,7 +70,7 @@ class RowTest < ActiveSupport::TestCase
       row.validate
 
       assert_equal [{error: :multiple_line_strings_merged}], row.warnings.details[:geometry]
-      assert_equal RGEO_FACTORY.parse_wkt("LINESTRING (10 40, 40 30,20 20, 30 10)"), RGEO_FACTORY.parse_wkt(row.geometry.as_text) # Make sure to use the same factory for comparison
+      assert_equal RGEO_FACTORY.parse_wkt("LINESTRING (10 40, 40 30,20 20, 30 10)"), row.geometry
     end
 
     test "compute bounds" do # rubocop:disable Minitest/MultipleAssertions
