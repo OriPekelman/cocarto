@@ -28,13 +28,17 @@
 .maplibregl-ctrl-group:not(:empty) {
   border-radius: 4px;
   background-color: var(--color-bg);
-  box-shadow: inset 0 0 0 1px var(--color-grey-30),
-    inset 0 0 0 2px var(--color-bg), inset 0 0 0 2.5px var(--color-grey-50);
+  box-shadow:
+    inset 0 0 0 1px var(--color-grey-30),
+    inset 0 0 0 2px var(--color-bg),
+    inset 0 0 0 2.5px var(--color-grey-50);
 
   &:hover:not([disabled]) {
     background-color: var(--color-bg-ambient-20);
-    box-shadow: inset 0 0 0 1px var(--color-grey-30),
-      inset 0 0 0 2px var(--color-bg), inset 0 0 0 2.5px var(--color-grey-70);
+    box-shadow:
+      inset 0 0 0 1px var(--color-grey-30),
+      inset 0 0 0 2px var(--color-bg),
+      inset 0 0 0 2.5px var(--color-grey-70);
     fill: var(--color-green-80);
   }
 }
@@ -66,7 +70,10 @@
   &:focus {
     outline: none;
     border-color: var(--input-border-focus-color);
-    box-shadow: 0 0 0 1px #9cf, 0 0 5px 0 #4da2ff66, inset 0 0 5px 0 #1488f333;
+    box-shadow:
+      0 0 0 1px #9cf,
+      0 0 5px 0 #4da2ff66,
+      inset 0 0 5px 0 #1488f333;
   }
 }
 
@@ -78,14 +85,18 @@
   padding: 6px;
   border-radius: 4px;
   background-color: var(--color-bg);
-  box-shadow: inset 0 0 0 1px var(--color-grey-30),
-    inset 0 0 0 2px var(--color-bg), inset 0 0 0 2.5px var(--color-grey-50);
+  box-shadow:
+    inset 0 0 0 1px var(--color-grey-30),
+    inset 0 0 0 2px var(--color-bg),
+    inset 0 0 0 2.5px var(--color-grey-50);
   fill: black; // TODO use --color-green-40 / --color-green-80 here and for .maplibregl-ctrl-group
 
   &:hover:not([disabled]) {
     background-color: var(--color-bg-ambient-20);
-    box-shadow: inset 0 0 0 1px var(--color-grey-30),
-      inset 0 0 0 2px var(--color-bg), inset 0 0 0 2.5px var(--color-grey-70);
+    box-shadow:
+      inset 0 0 0 1px var(--color-grey-30),
+      inset 0 0 0 2px var(--color-bg),
+      inset 0 0 0 2.5px var(--color-grey-70);
   }
 
   // Sorry, I was a bit desperated to get those icons work correctly
