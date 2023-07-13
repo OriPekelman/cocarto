@@ -41,6 +41,18 @@ class Import::Mapping < ApplicationRecord
   validates :bulk_mode, inclusion: [true, false]
   validates :ignore_empty_geometry_rows, inclusion: [true, false]
 
+  ##
+  def fields_columns
+    super.presence || default_fields_columns
+  end
+
+  # Naive column mapping, field label => field id.
+  def default_fields_columns
+    layer.fields.to_h do |field|
+      [field.label, field.id]
+    end
+  end
+
   private
 
   def layer_belongs_to_configuration_map

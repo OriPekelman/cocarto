@@ -33,4 +33,19 @@ class Import::Configuration < ApplicationRecord
 
   # Validations
   validates :source_type, presence: true
+
+  IMPORTERS = {
+    random: Importers::Random,
+    csv: Importers::CSV,
+    geojson: Importers::GeoJSON,
+    wfs: Importers::WFS
+  }
+
+  def importer_class
+    IMPORTERS[source_type&.to_sym]
+  end
+
+  def importer(source, author)
+    importer_class.new(self, source, author, stream: true)
+  end
 end

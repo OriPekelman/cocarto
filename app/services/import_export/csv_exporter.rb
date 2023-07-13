@@ -1,7 +1,7 @@
 require "csv"
 
 module ImportExport
-  class CsvExporter < ExporterBase
+  class CSVExporter < ExporterBase
     def export_rows
       CSV.generate do |csv|
         csv << exported_row(rows.first).keys

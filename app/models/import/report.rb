@@ -59,6 +59,32 @@ class Import::Report < ApplicationRecord
     row_results.all? { |row_result| row_result.did_save || row_result.ignored }
   end
 
+  def add_entity_result(index, did_save, parsing_error: nil, errors: nil, warnings: nil)
+    result = RowResult.new(
+      did_save: did_save,
+      parsing_error: parsing_error&.detailed_message&.force_encoding("utf-8"),
+      errors: errors&.details,
+      warnings: warnings&.details
+    )
+
+    if mapping.ignore_empty_geometry_rows && !result.did_save && result.errors == {geometry: [{error: :required}]}
+      result.ignored = true
+    end
+    row_results[index] = result
+
+    # parsing_error is an Exception, just keep its name and message
+    # validation_errors and validation_warnings are instances of ActiveModel::Errors
+    # store the details and recreate using
+    # 0> other = ActiveModel::Errors.new(mapping.layer.rows.new)
+    # => #<ActiveModel::Errors []>
+    #
+    # 0> other.add(:geometry, :required) <--- loop on details
+    # => #<ActiveModel::Error attribute=geometry, type=required, options={}>
+    #
+    # 0> other.full_messages
+    # => ["The geometry is required."]
+  end
+
   private
 
   def operation_and_mapping_have_the_same_configuration

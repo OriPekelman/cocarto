@@ -38,6 +38,54 @@ class Import::Operation < ApplicationRecord
     global_error.nil? && reports.all?(&:success?)
   end
 
+  def import!(author)
+    with_fetched_source do |source|
+      import_source(source, author)
+    end
+
+    self
+  end
+
+  def with_fetched_source(&block)
+    if local_source_file.present?
+      raise ArgumentError if configuration.importer_class::SUPPORTED_SOURCES.exclude?(:local_source_file)
+
+      local_source_file.open do |file|
+        yield(file.open)
+      end
+    elsif configuration.importer_class::SUPPORTED_SOURCES.include?(:remote_source_url)
+      yield(remote_source_url)
+    else
+      update(status: :fetching)
+      io = URI.parse(remote_source_url).open
+      yield(io)
+    end
+  end
+
+  def import_source(source, author)
+    update(status: :importing)
+
+    ApplicationRecord.transaction do
+      configuration
+        .mappings.includes(:reimport_field, layer: [:fields, :map])
+        .map do |mapping|
+        import_in_layer(source, author, mapping)
+      end
+    rescue Importers::ImportGlobalError => e
+      self.global_error = (e.cause || e).detailed_message.force_encoding("utf-8")
+    ensure
+      raise ActiveRecord::Rollback unless success?
+    end
+
+    update(status: :done)
+  end
+
+  def import_in_layer(source, author, mapping)
+    report = reports.merge(mapping.reports).new
+    configuration.importer(source, author).import_rows(report)
+    report.save
+  end
+
   private
 
   def either_local_file_remote_url
