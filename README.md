@@ -95,25 +95,11 @@ If you want to set the parent of a territories, you need to pass as an extra-par
 
 ### Mock data
 
-The `import_rows:random` thor task inserts new random rows in a layer:
+The `import_data` thor task is a fronted to the import machinery. A preset configuration is included in the fixtures to add mock data quickly:
+
 ```
 Usage:
-  thor import_rows:random
-
-Options:
-  l, [--layer=layer_id]         # The layer in which to insert rows
-  c, [--count=N]                # How many new rows
-                                # Default: 100
-  a, [--author=user_id]         # Row author
-      [--lat-min=N]             # min latitude
-                                # Default: 42.3287
-      [--lat-max=N]             # max latitude
-                                # Default: 51.0857
-      [--long-min=N]            # min longitude
-                                # Default: -4.7955
-      [--long-max=N]            # max longitude
-                                # Default: 8.2581
-  s, [--stream], [--no-stream]  # Stream broadcast to frontend (slower)
+  thor import_data -c "Random Restaurants" -f test/fixtures/files/random_restaurants.json
 ```
 
 ## Hosting
