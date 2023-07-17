@@ -44,30 +44,31 @@ fr:
     attachments: Pièces jointes
     take_picture: Prendre une photo
   import:
-    new:
-      attention: Cette fonctionnalité est expérimentale; attendez-vous à des bugs, et n’hésitez pas à nous en parler.
-      from_file: À partir d’un fichier
-      from_file_csv: Ajouter un fichier (csv)
-      from_url: À partir d’une URL
-      from_url_layer_name: Nom de la couche (Feature Type)
-      from_url_wfs: URL d’un serveur WFS
-      import_data: Import de données
-      key_field: Colonne d’identifiant
-      key_field_info_html: |
-        Pour mettre à jour des données, spécifiez une colonne servant à identifier le rang préexistant.<br/>
-        Les attributs de chaque rang seront remplacés par ceux présents dans le fichier importé; les attributs absents du fichier ne seront pas supprimés. <br/>
-        Les nouveaux rangs dans le fichier seront rajoutés à la table.
-      or: ou
-      reimport: Réimport de données existantes
-      save: Importer
-    result:
-      failure: Échec de l’import
-      imported_rows: "%{size} rangées importées"
-      line_number: Ligne %{line_number}
-      row_failure: Non enregistré.
-      success: Import réussi
-    show:
-      title: Import terminé
+    operations:
+      new:
+        attention: Cette fonctionnalité est expérimentale; attendez-vous à des bugs, et n’hésitez pas à nous en parler.
+        from_file: À partir d’un fichier
+        from_file_csv: Ajouter un fichier (csv)
+        from_url: À partir d’une URL
+        from_url_layer_name: Nom de la couche (Feature Type)
+        from_url_wfs: URL d’un serveur WFS
+        import_data: Import de données
+        key_field: Colonne d’identifiant
+        key_field_info_html: |
+          Pour mettre à jour des données, spécifiez une colonne servant à identifier le rang préexistant.<br/>
+          Les attributs de chaque rang seront remplacés par ceux présents dans le fichier importé; les attributs absents du fichier ne seront pas supprimés. <br/>
+          Les nouveaux rangs dans le fichier seront rajoutés à la table.
+        or: ou
+        reimport: Réimport de données existantes
+        save: Importer
+      operation:
+        failure: Échec de l’import
+        imported_rows: "%{size} rangées importées"
+        line_number: Ligne %{line_number}
+        row_failure: Non enregistré.
+        success: Import réussi
+      show:
+        title: Import terminé
   layers:
     layer:
       center_on_row: Centrer la carte sur cette rangée

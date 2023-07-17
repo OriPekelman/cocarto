@@ -96,6 +96,9 @@ fr:
               format: "%{message}"
               must_have_an_owner: La carte doit avoir au moins un un utilisateur propriétaire. Commencez par donner le rôle de propriétaire à un autre utilisateur.
     models:
+      import/operation:
+        one: Import de données
+        other: Imports de données
       layer:
         one: Couche
         other: Couches

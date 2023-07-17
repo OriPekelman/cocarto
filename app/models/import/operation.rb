@@ -34,6 +34,9 @@ class Import::Operation < ApplicationRecord
   validate :either_local_file_remote_url
   validates :status, presence: true
 
+  # Hooks
+  after_update_commit -> { broadcast_i18n_replace_to configuration.map }
+
   def success?
     global_error.nil? && reports.all?(&:success?)
   end
