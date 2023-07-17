@@ -140,6 +140,7 @@
 
 // Layer contents (collapses)
 .layer-contents {
+  padding: 32px;
   flex-direction: column;
   gap: 16px;
   align-items: start;
@@ -154,16 +155,8 @@
   display: none;
 }
 
-.layer-table-container {
-  width: 100%;
-  overflow-x: scroll;
-  overflow-y: clip;
-}
-
 // Actual table of layer rows
 .layer-table {
-  padding: 32px 32px 0;
-
   // -- Fancy rounded borders --
   // We don’t collapse the borders to allow rounded cells
   border-spacing: 0;
@@ -380,7 +373,6 @@
 // Footer for each layer
 .layer-footer {
   width: 100%;
-  padding: 0 32px 32px;
   display: flex;
   gap: 16px;
   justify-content: flex-end;

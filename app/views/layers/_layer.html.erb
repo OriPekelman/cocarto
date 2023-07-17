@@ -10,9 +10,7 @@
   <%= render "layers/table_header", layer: layer %>
 
   <div class="layer-contents">
-    <div class="layer-table-container">
-      <%= render "layers/rows", layer: layer %>
-    </div>
+    <%= render "layers/rows", layer: layer %>
 
     <%= render "rows/new", row: Row.new(layer: layer) %>
 
