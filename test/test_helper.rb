@@ -5,7 +5,11 @@ require "rails/test_help"
 require "minitest/reporters"
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new if ENV["RM_INFO"].blank? # IntelliJ Minitest support conflicts with Minitest::Reporters
 
+require "fixtures/fixtures_server"
+
 class ActiveSupport::TestCase
+  include FixturesServer
+
   # Run tests in parallel with specified workers
   parallelize(workers: :number_of_processors)
 
