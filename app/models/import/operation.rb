@@ -41,6 +41,17 @@ class Import::Operation < ApplicationRecord
     global_error.nil? && reports.all?(&:success?)
   end
 
+  def import(author)
+    Job.perform_later(id, author)
+  end
+
+  class Job < ApplicationJob
+    def perform(operation_id, author)
+      operation = Import::Operation.includes(:reports, configuration: :map).with_attached_local_source_file.find(operation_id)
+      operation.import!(author)
+    end
+  end
+
   def import!(author)
     with_fetched_source do |source|
       import_source(source, author)

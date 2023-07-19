@@ -17,7 +17,7 @@ class Import::OperationsController < ApplicationController
 
     if @operation.save
       redirect_to @operation
-      @operation.import!(current_user) # TODO: do this in a job
+      @operation.import(current_user)
     else
       render "new", status: :unprocessable_entity
     end
