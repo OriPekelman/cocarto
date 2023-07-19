@@ -3,6 +3,7 @@
 # Table name: users
 #
 #  id                     :uuid             not null, primary key
+#  admin                  :boolean          default(FALSE), not null
 #  email                  :string           not null
 #  encrypted_password     :string           default(""), not null
 #  invitation_accepted_at :datetime
