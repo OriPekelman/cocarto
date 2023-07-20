@@ -15,7 +15,7 @@ module UserDeviseNotifications
     # delivery until the after_commit callback otherwise
     # send now because after_commit will not be called.
     # For Rails < 6 use `changed?` instead of `saved_changes?`.
-    if new_record? || saved_changes?
+    if new_record? || changed?
       pending_devise_notifications << [notification, args]
     else
       render_and_send_devise_message(notification, *args)
@@ -42,14 +42,6 @@ module UserDeviseNotifications
   def render_and_send_devise_message(notification, *args)
     message = devise_mailer.send(notification, self, *args)
 
-    # Deliver later with Active Job's `deliver_later`
-    if message.respond_to?(:deliver_later)
-      message.deliver_later
-    # Remove once we move to Rails 4.2+ only, as `deliver` is deprecated.
-    elsif message.respond_to?(:deliver_now)
-      message.deliver_now
-    else
-      message.deliver
-    end
+    message.deliver_later
   end
 end
