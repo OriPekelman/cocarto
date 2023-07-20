@@ -43,11 +43,6 @@ en:
         name: Description
         role_type: Role
         url_to_share: Link to share
-      role_types:
-        contributor: Contributor
-        editor: Editor
-        owner: Owner
-        viewer: Viewer
       row:
         files:
           one: 1 file
@@ -63,6 +58,11 @@ en:
         rows: rows
       user_role:
         role_type: Role
+      user_role/role_types:
+        contributor: Contributor
+        editor: Editor
+        owner: Owner
+        viewer: Viewer
     errors:
       models:
         map_token:
