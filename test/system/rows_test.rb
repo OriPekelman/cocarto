@@ -94,6 +94,7 @@ class RowsTest < ApplicationSystemTestCase
     sign_in_as(users("reclus"), "refleurir")
 
     visit layer_path(id: layers(:restaurants))
+    wait_until_map_loaded
 
     assert_selector "input[value='L’Antipode']", count: 1
 
