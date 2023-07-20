@@ -4,17 +4,21 @@
     100vh - var(--nav-height) - var(--footer-height) - var(--header-height)
   );
   width: 100%;
+
+  --dragbar-width: 6px;
+  --left-pane-width: calc(50vw - var(--dragbar-width) / 2);
+  --right-pane-width: calc(50vw - var(--dragbar-width) / 2);
 }
 
 .map_document__data {
-  overflow-y: auto;
-  width: 50%;
+  overflow: scroll;
+  width: var(--left-pane-width);
   display: flex;
   flex-direction: column;
 }
 
 .map_document__right_pane {
-  width: 50%;
+  width: var(--right-pane-width);
 }
 
 .map_document__dragbar {
@@ -23,7 +27,7 @@
   border-style: none solid;
   border-width: 1px;
   height: 100%;
-  width: 6px;
+  width: var(--dragbar-width);
   z-index: var(--dragbar-z-index);
   position: relative;
   cursor: ew-resize;

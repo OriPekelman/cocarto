@@ -2,7 +2,7 @@
 
 // left pane of main page
 .map-data__container {
-  overflow: auto;
+  width: fit-content;
   height: 100%;
   padding: 0;
 }
@@ -20,7 +20,10 @@
 
 // Layer header, in a layer-container. Always visible
 .layer-header {
-  width: 100%;
+  width: var(--left-pane-width);
+  position: sticky;
+  top: 0;
+  left: 0;
   padding-left: 16px;
   padding-right: 2px;
   background-color: var(--color-bg-ambient-30);
@@ -30,8 +33,6 @@
   justify-content: space-between;
   border-top: solid 1px white;
   border-bottom: solid 1px var(--color-grey-40);
-  position: sticky;
-  top: 0;
   z-index: var(--layer-header-z-index);
 
   h3 {
@@ -372,7 +373,9 @@
 
 // Footer for each layer
 .layer-footer {
-  width: 100%;
+  width: calc(var(--left-pane-width) - 64px);
+  position: sticky;
+  left: 32px;
   display: flex;
   gap: 16px;
   justify-content: flex-end;
@@ -381,5 +384,8 @@
 
 // Footer for the layer list
 .footer__layer-list {
+  width: var(--left-pane-width);
+  position: sticky;
+  left: 0;
   padding: 16px;
 }
