@@ -31,5 +31,7 @@ module Cocarto
 
     # We want to customize error messages
     config.active_model.i18n_customize_full_message = true
+
+    config.active_job.queue_adapter = :good_job
   end
 end

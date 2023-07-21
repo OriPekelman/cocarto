@@ -4,3 +4,10 @@ filetype: png
 exclude:
     - ActiveRecord::SchemaMigration
     - ActiveRecord::InternalMetadata
+    - GoodJob::BaseExecution
+    - GoodJob::BatchRecord
+    - GoodJob::DiscreteExecution
+    - GoodJob::Execution
+    - GoodJob::Job
+    - GoodJob::Process
+    - GoodJob::Setting

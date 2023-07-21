@@ -21,6 +21,8 @@ gem "hotwire-rails"
 gem "jbuilder"
 # Use Redis adapter to run Action Cable in production
 gem "redis"
+# Use GoodJob for ActiveJob
+gem "good_job"
 # Use Active Model has_secure_password
 # gem "bcrypt"
 gem "importmap-rails"

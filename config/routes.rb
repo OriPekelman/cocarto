@@ -51,4 +51,12 @@ Rails.application.routes.draw do
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
+
+  if Rails.env.development?
+    mount GoodJob::Engine, at: "good_job"
+  else
+    authenticate :user, ->(user) { user.admin? } do
+      mount GoodJob::Engine, at: "good_job"
+    end
+  end
 end
