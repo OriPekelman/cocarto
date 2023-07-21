@@ -1,5 +1,6 @@
 <%# params: @map %>
-<nav class="navbar">
+
+<%= content_for :header do %>
   <%= link_to maps_path, class: "button button--link" do %>
     <%= embedded_svg "chevron_gauche.svg", class: "icon--narrow icon--tinted" %>
     <%= t(".all_maps") %>
@@ -9,7 +10,11 @@
     <%= link_to t("maps.sharing.header"), map_user_roles_path(@map), class: "button button--link", data: {turbo_frame: "modal"} if policy(@map.user_roles.new).index? %>
     <%= link_to t("helpers.link.map.delete"), @map, data: {turbo_method: :delete, turbo_confirm: t("common.confirm")}, class: "button button--link" if policy(@map).destroy? %>
   </div>
-</nav>
+<% end %>
+
+<% content_for(:footer)do %>
+  <div hidden></div>
+<% end %>
 
 <% content_for :left_pane do %>
   <div

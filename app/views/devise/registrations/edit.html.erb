@@ -1,9 +1,9 @@
-<nav class="navbar">
-  <%= link_to :back, class: "button button--link" do %>
+<% content_for :header do %>
+  <%= link_to :back, class: "button button--link button--lowercase" do %>
     <%= embedded_svg "chevron_gauche.svg", class: "icon--narrow icon--tinted" %>
     <%= t("common.back") %>
+  <% end %>
 <% end %>
-</nav>
 
 <div class="container">
   <div class="section section--center">

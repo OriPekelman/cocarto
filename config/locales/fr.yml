@@ -106,7 +106,7 @@ fr:
     sharing:
       header: Partage et permissions
     show:
-      all_maps: Toutes les cartes
+      all_maps: Cartes
     toolbar:
       export_as_image: Exporter en tant qu’image
       set_center_and_zoom: Définir centre et zoom de la carte
