@@ -140,7 +140,7 @@ fr:
         import: Importer…
         new: Ajouter une nouvelle couche
       map:
-        delete: Supprimer cette carte
+        delete: Supprimer
         new: Créer une nouvelle carte
       map_token:
         delete: Supprimer
@@ -181,10 +181,11 @@ fr:
         create: Ajouter
         update: OK
       layer:
-        create: Créer une couche
+        create: Enregistrer
         update: OK
       map:
-        create: Créer une carte
+        create: Enregistrer
+        update: OK
       map_token:
         create: Créer le lien
         update: OK

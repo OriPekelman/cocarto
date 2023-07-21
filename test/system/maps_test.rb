@@ -9,8 +9,9 @@ class MapsTest < ApplicationSystemTestCase
     click_button "Create a map"
     fill_in "Name", with: "Test de nouvelle couche"
     click_button "Create a layer"
+    click_link "Test de nouvelle carte"
     accept_confirm do
-      click_link "Delete this map"
+      click_button "Delete"
     end
 
     assert_text "Map destroyed."
@@ -23,7 +24,7 @@ class MapsTest < ApplicationSystemTestCase
     # restaurants is owned by reclus
     visit map_path(id: maps("restaurants"))
 
-    assert_field "Name", with: "Restaurants"
+    assert_selector "h2", text: "Restaurants"
 
     # reclus has no access to hiking
     visit map_path(id: maps("hiking"))

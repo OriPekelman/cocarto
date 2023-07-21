@@ -65,6 +65,8 @@ en:
         line_number: Line %{line_number}
         row_failure: Not saved.
   layers:
+    form:
+      new: New layer
     layer:
       center_on_row: Center map on this row
       delete_row: Delete this row
@@ -96,6 +98,9 @@ en:
     new:
       header: New link
   maps:
+    form:
+      first_layer: First layer
+      new: New map
     index:
       create_account: Create an account
       role_description:
@@ -103,10 +108,13 @@ en:
         editor: You are an editor.
         owner: You have full ownership.
         viewer: You have readonly access.
+    name:
+      map_with_no_name: cocarto map
     sharing:
       header: Sharing and permissions
     show:
       all_maps: Maps
+      share: Share
     toolbar:
       export_as_image: Export as image
       set_center_and_zoom: Set center and zoom of the map

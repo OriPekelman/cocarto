@@ -5,9 +5,26 @@
 
 .header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   gap: 32px;
+}
+
+.header--start {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.header--center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.header--end {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .header--app {

@@ -24,12 +24,6 @@
             <%= t(".new_point_form") %>
           <% end %>
         <% end %>
-        <%= link_to layer, title: t("helpers.link.layer.delete"),
-              class: "icon-button icon-button--double-bordered icon-button--small",
-              data: {turbo_method: :delete, turbo_confirm: t("common.confirm"),
-                     restricted_target: "restricted", restricted_authorizations: '["owner", "editor"]'} do %> <%# Cf policy(layer).destroy? %>
-          <%= embedded_svg "supprimer.svg", class: "icon--tinted" %>
-        <% end %>
         <%= link_to new_map_import_operation_path(layer.map, layer_id: layer), title: t("helpers.link.layer.import"),
               class: "icon-button icon-button--double-bordered icon-button--small",
               data: {turbo_frame: "modal",
