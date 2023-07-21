@@ -1,6 +1,6 @@
 class TerritoriesController < ApplicationController
   def show
-    @territory = authorize Territory.includes(:territory_category).with_geojson.find(search_params[:id])
+    @territory = authorize Territory.includes(:territory_category).find(params[:id])
   end
 
   def search
