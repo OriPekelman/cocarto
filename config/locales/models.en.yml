@@ -16,6 +16,14 @@ en:
         integer: Integer
         territory: Territory
         text: Text
+      import/operation/status:
+        done: Done
+        fetching: Fetching
+        importing: Importing
+        ready: Ready
+      import/operation/success:
+        'false': Import failed
+        'true': Import successful
       layer:
         color: Color of the features
         geometry_type: Geometry type

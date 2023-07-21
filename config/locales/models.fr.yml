@@ -16,6 +16,14 @@ fr:
         integer: Nombre entier
         territory: Territoire
         text: Texte
+      import/operation/status:
+        done: Terminé
+        fetching: Téléchargement
+        importing: Import
+        ready: Prêt
+      import/operation/success:
+        'false': Échec
+        'true': Import réussi
       layer:
         color: Couleur des objets
         geometry_type: Type de géometrie

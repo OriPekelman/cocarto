@@ -1,31 +1,40 @@
-<div id="<%= dom_id(operation) %>" class="<%= class_names("message", "message--info": operation.success?, "message--error": !operation.success?) %>">
-  <h3 class="message__title"><%= operation.success? ? t(".success") : t(".failure") %></h3>
-  <%= operation.global_error %>
-  <% operation.reports.each do |report| %>
-    <%= t(".imported_rows", size: report.row_results.size) if operation.success? %>
-    <ul class="message__list">
-      <% report.row_results.each_with_index do |row_result, line_number| %>
-        <% if !row_result.did_save || row_result.parsing_error.present? || row_result.errors.present? || row_result.warnings.present? %>
-          <li>
-            <span><b><%= t(".line_number", line_number: line_number) %></b></span>
-            <% unless row_result.did_save %>
-              <span><%= t(".row_failure") %></span>
-            <% end %>
+<div id="<%= dom_id(operation) %>"
+     class="<%= class_names("message",
+                  "message--info": !operation.done?,
+                  "message--success": operation.done? && operation.success?,
+                  "message--error": operation.done? && !operation.success?) %>">
+  <% if !operation.done? %>
+    <h3 class="message__title"><%= Import::Operation.human_attribute_name("status.#{operation.status}") %></h3>
 
-            <% if row_result.parsing_error %>
-              <p><code><%= row_result.parsing_error %></code></p>
-            <% end %>
+  <% else %>
+    <h3 class="message__title"><%= Import::Operation.human_attribute_name("success.#{operation.success?}") %></h3>
+    <%= operation.global_error %>
+    <% operation.reports.each do |report| %>
+      <%= t(".imported_rows", size: report.row_results.size) if operation.success? %>
+      <ul class="message__list">
+        <% report.row_results.each_with_index do |row_result, line_number| %>
+          <% if !row_result.did_save || row_result.parsing_error.present? || row_result.errors.present? || row_result.warnings.present? %>
+            <li>
+              <span><b><%= t(".line_number", line_number: line_number) %></b></span>
+              <% unless row_result.did_save %>
+                <span><%= t(".row_failure") %></span>
+              <% end %>
 
-            <% if row_result.errors %>
-              <blockquote><%= report.full_error_messages(line_number).to_sentence %></blockquote>
-            <% end %>
+              <% if row_result.parsing_error %>
+                <p><code><%= row_result.parsing_error %></code></p>
+              <% end %>
 
-            <% if row_result.warnings %>
-              <blockquote><%= report.full_warning_messages(line_number).to_sentence %></blockquote>
-            <% end %>
-          </li>
+              <% if row_result.errors %>
+                <blockquote><%= report.full_error_messages(line_number).to_sentence %></blockquote>
+              <% end %>
+
+              <% if row_result.warnings %>
+                <blockquote><%= report.full_warning_messages(line_number).to_sentence %></blockquote>
+              <% end %>
+            </li>
+          <% end %>
         <% end %>
-      <% end %>
-    </ul>
+      </ul>
+    <% end %>
   <% end %>
 </div>

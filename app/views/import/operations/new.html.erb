@@ -1,6 +1,6 @@
 <%= form_with model: [@map, @operation], html: {class: "form"} do |f| %>
   <div class="card__main-content">
-    <h2 class="form__header"><%= t(".import_data") %></h2>
+    <h2 class="form__header"><%= Import::Operation.model_name.human %></h2>
     <div class="form__field">
       <p class="message message--attention"><%= t(".attention") %></p>
     </div>
