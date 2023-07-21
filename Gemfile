@@ -44,6 +44,8 @@ gem "view_component-fragment_caching"
 gem "active_link_to"
 gem "turbo_flash"
 
+gem "roo"
+
 # perfs and errors
 gem "sentry-ruby"
 gem "sentry-rails"
