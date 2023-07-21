@@ -1,0 +1,7 @@
+<div id="flash" class="flash__container" data-controller="flash" data-action="click->flash#clear">
+  <% flash.each do |flash_type, message| %>
+    <div class="<%= class_names("message", "flash__item", "message--#{flash_type}") %>" data-flash-target="flash">
+      <%= message %>
+    </div>
+  <% end %>
+</div>
