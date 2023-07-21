@@ -40,6 +40,7 @@ gem "premailer-rails"
 gem "view_component"
 gem "view_component-fragment_caching"
 gem "active_link_to"
+gem "turbo_flash"
 
 # perfs and errors
 gem "sentry-ruby"
