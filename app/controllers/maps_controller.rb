@@ -37,6 +37,7 @@ class MapsController < ApplicationController
   end
 
   def new
+    @map.layers.new
     render "form"
   end
 
@@ -88,6 +89,7 @@ class MapsController < ApplicationController
   end
 
   def map_params
-    params.require(:map).permit(:name, :default_latitude, :default_longitude, :default_zoom)
+    params.require(:map).permit(:name, :default_latitude, :default_longitude, :default_zoom,
+      layers_attributes: [:name, :geometry_type, :map_id, :color, territory_category_ids: []])
   end
 end

@@ -10,6 +10,15 @@
     <%= form.text_field :name, autofocus: true %>
   </div>
 
+  <% if @map.new_record? %><%# Also create the first layer %>
+    <h3 class="form__header">
+      <%= t(".first_layer") %>
+    </h3>
+    <%= form.fields_for :layers do |layer_form| %>
+      <%= render "layers/form_contents", form: layer_form %>
+    <% end %>
+  <% end %>
+
 <% end %>
 
 <div class="card__footer-content">

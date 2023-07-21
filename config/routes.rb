@@ -17,7 +17,7 @@ Rails.application.routes.draw do
       root "maps#index", as: :user_root
     end
 
-    resources :maps, except: [:edit] do
+    resources :maps do
       resources :layers, only: [:new]
       resources :user_roles, only: [:index, :create, :update, :destroy], shallow: true
       resources :map_tokens, only: [:index, :create, :update, :destroy], shallow: true

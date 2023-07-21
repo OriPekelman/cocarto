@@ -1,6 +1,6 @@
 <%# params: @layer %>
 
-<%= form_with(model: @layer, id: dom_id(@layer, :form), class: "form card__main-content", data: {controller: "layer-form"}) do |form| %>
+<%= form_with(model: @layer, id: dom_id(@layer, :form), class: "form card__main-content") do |form| %>
   <%= form.hidden_field :map_id %>
   <% if @layer.new_record? %>
     <h2 class="form__header"><%= t(".new") %></h2>
