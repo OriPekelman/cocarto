@@ -77,7 +77,7 @@ class LayersController < ApplicationController
   private
 
   def set_layer
-    @layer = authorize Layer.includes(:map, rows: :territory, fields: :territory_categories).find(params[:id])
+    @layer = authorize Layer.includes(:map, :import_mappings, rows: :territory, fields: :territory_categories).find(params[:id])
   end
 
   def layer_params
