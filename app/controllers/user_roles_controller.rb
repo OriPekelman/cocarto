@@ -38,9 +38,9 @@ class UserRolesController < ApplicationController
   def destroy
     @map = @user_role.map
     if @user_role.destroy
-      redirect_to map_user_roles_path(@map), alert: t("helpers.message.user_role.destroyed")
+      redirect_to map_user_roles_path(@map), alert: t("helpers.message.user_role.destroyed"), status: :see_other
     else
-      redirect_to map_user_roles_path(@map), alert: t("common.failed", msg: @user_role.errors.full_messages.to_sentence)
+      redirect_to map_user_roles_path(@map), alert: t("common.failed", msg: @user_role.errors.full_messages.to_sentence), status: :see_other
     end
   end
 

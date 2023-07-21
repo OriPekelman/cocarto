@@ -47,8 +47,8 @@ class RowsController < ApplicationController
   def destroy
     @row.destroy
     respond_to do |format|
-      format.html { redirect_to @row.layer, notice: t("helpers.message.row.destroyed") }
       format.turbo_stream { render turbo_stream: [] }
+      format.html { redirect_to @row.layer, notice: t("helpers.message.row.destroyed"), status: :see_other }
     end
   end
 

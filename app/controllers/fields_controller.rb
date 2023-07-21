@@ -42,8 +42,8 @@ class FieldsController < ApplicationController
     end
 
     respond_to do |format|
-      format.html { redirect_to @field.layer }
       format.turbo_stream { render turbo_stream: [] }
+      format.html { redirect_to @field.layer, status: :see_other }
     end
   end
 
