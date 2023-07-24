@@ -13,7 +13,7 @@ class MapsTest < ApplicationSystemTestCase
       click_link "Delete this map"
     end
 
-    assert_text "The map was successfully destroyed"
+    assert_text "Map destroyed."
     assert_no_text "Test de nouvelle carte"
   end
 

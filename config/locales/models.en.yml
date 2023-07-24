@@ -145,25 +145,25 @@ en:
     message:
       field:
         created: New column %{name} created.
-        destroyed: Column successfully destroyed.
-        updated: Column successfully updated.
+        destroyed: Column destroyed.
+        updated: Column updated.
       layer:
-        destroyed: Layer was successfully destroyed.
+        destroyed: Layer destroyed.
       map:
-        center_and_zoom_saved: The default center and zoom has been set.
-        destroyed: The map was successfully destroyed
+        center_and_zoom_saved: Default map zoom saved.
+        destroyed: Map destroyed.
       map_token:
-        created: Link successfully created.
-        destroyed: Link successfully destroyed.
-        updated: Link successfully updated.
+        created: Link created.
+        destroyed: Link destroyed.
+        updated: Link updated.
       row:
-        added: Geometry was successfully added.
-        destroyed: Geometry was successfully destroyed.
-        updated: Geometry properties were successfully updated.
+        added: Geometry added.
+        destroyed: Geometry destroyed.
+        updated: Geometry updated.
       user_role:
-        created: User was successfully invited.
-        destroyed: User access was successfully removed.
-        updated: User access was successfully updated.
+        created: User invited.
+        destroyed: User access revoked.
+        updated: User access updated.
     placeholder:
       field:
         enum_value: New option
