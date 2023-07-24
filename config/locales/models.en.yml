@@ -65,6 +65,15 @@ en:
         viewer: Viewer
     errors:
       models:
+        import/configuration:
+          attributes:
+            source_type:
+              blank: This source type is not supported.
+              format: "%{message}"
+        import/operation/configuration:
+          attributes:
+            source_type:
+              format: "%{message}"
         map_token:
           attributes:
             role_type:
@@ -87,6 +96,9 @@ en:
               format: "%{message}"
               must_have_an_owner: The map must have at least one owner. Please promote another user to “owner” first.
     models:
+      import/operation:
+        one: Data import
+        other: Data imports
       layer:
         one: Layer
         other: Layers

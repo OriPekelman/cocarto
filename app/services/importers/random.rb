@@ -1,38 +1,29 @@
-module ImportExport
-  class RandomImporter < ImporterBase
-    # Additional @options:
-    # row_count, lat_range, long_range
-    def initialize(*args, **options)
-      @row_count = options.delete(:row_count)
-      @lat_range = options.delete(:lat_range)
-      @long_range = options.delete(:long_range)
-      super
-    end
+module Importers
+  class Random < Base
+    SUPPORTED_SOURCES = %i[local_source_file]
 
-    def import_rows
-      geometry_proc = -> { random_geometry }
-      values_proc = proc { @layer.fields.to_h { [_1.id, random_value(_1)] } }
+    def _import_rows
+      # @source is a json string with keys:
+      # row_count, long_min, long_max, lat_min, lat_max
+      parameters = JSON.parse(@source.read)
+      geometry_proc = -> { random_geometry(parameters["long_min"]..parameters["long_max"], parameters["lat_min"]..parameters["lat_max"]) }
+      values_proc = proc { @mapping.layer.fields.to_h { [_1.id, random_value(_1)] } }
 
-      entries = Array.new(@row_count) do
-        {
-          layer_id: @layer.id,
-          author_id: @author.id,
-          values: values_proc.call
-        }.merge(geometry_proc.call)
+      parameters["row_count"].times do |index|
+        geometry = geometry_proc.call.values.first
+        values = values_proc.call
+
+        import_row(geometry, values, index)
       end
 
-      if @stream
-        Row.create!(entries)
-      else
-        Row.insert_all!(entries) # rubocop:disable Rails/SkipsModelValidations
-      end
+      # TODO handle fast mode with insert_all!
     end
 
     private
 
-    def random_geometry
-      point_generator = proc { RGEO_FACTORY.point(rand(@long_range), rand(@lat_range)) }
-      case @layer.geometry_type
+    def random_geometry(long_range, lat_range)
+      point_generator = proc { RGEO_FACTORY.point(rand(long_range), rand(lat_range)) }
+      case @mapping.layer.geometry_type
       when "point"
         {point: point_generator.call}
       when "line_string"

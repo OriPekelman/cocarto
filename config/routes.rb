@@ -21,13 +21,12 @@ Rails.application.routes.draw do
       resources :layers, only: [:new]
       resources :user_roles, only: [:index, :create, :update, :destroy], shallow: true
       resources :map_tokens, only: [:index, :create, :update, :destroy], shallow: true
+      namespace :import do
+        resources :operations, only: [:new, :create, :show], shallow: true, namespace: :import
+      end
     end
     resources :layers, except: [:index, :new] do
-      resources :rows, only: [:new, :create, :edit, :update, :destroy] do
-        collection do
-          resource :import, only: [:new, :create, :show], controller: :import
-        end
-      end
+      resources :rows, only: [:new, :create, :edit, :update, :destroy]
       member do
         get "/mvt/:z/:x/:y/", action: :mvt
       end

@@ -30,7 +30,7 @@
                      restricted_target: "restricted", restricted_authorizations: '["owner", "editor"]'} do %> <%# Cf policy(layer).destroy? %>
           <%= embedded_svg "supprimer.svg", class: "icon--tinted" %>
         <% end %>
-        <%= link_to new_layer_import_path(layer), title: t("helpers.link.layer.import"),
+        <%= link_to new_map_import_operation_path(layer.map, layer_id: layer), title: t("helpers.link.layer.import"),
               class: "icon-button icon-button--double-bordered icon-button--small",
               data: {turbo_frame: "modal",
                      restricted_target: "restricted", restricted_authorizations: '["owner", "editor", "contributor"]'} do %> <%# Cf policy(row).new? %>

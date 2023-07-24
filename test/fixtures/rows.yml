@@ -62,7 +62,7 @@ hiking_path:
   author: cassini
   values: <%= {
     ActiveRecord::FixtureSet.identify(:hiking_paths_name, :uuid) => "Jean-Michel",
-    ActiveRecord::FixtureSet.identify(:hiking_paths_document, :uuid) => [ActiveRecord::FixtureSet.identify(:touladi_files_blob, :uuid)]
+    ActiveRecord::FixtureSet.identify(:hiking_paths_document, :uuid) => [ActiveRecord::FixtureSet.identify(:touladi, :uuid)]
   }.to_json %>
 
 hiking_zone:

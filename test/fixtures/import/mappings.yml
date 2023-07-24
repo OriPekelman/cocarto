@@ -1,0 +1,47 @@
+# == Schema Information
+#
+# Table name: import_mappings
+#
+#  id                         :uuid             not null, primary key
+#  bulk_mode                  :boolean          default(FALSE), not null
+#  fields_columns             :jsonb
+#  geometry_columns           :string           is an Array
+#  geometry_encoding_format   :string
+#  geometry_srid              :integer
+#  ignore_empty_geometry_rows :boolean          default(TRUE), not null
+#  source_layer_name          :string
+#  created_at                 :datetime         not null
+#  updated_at                 :datetime         not null
+#  configuration_id           :uuid             not null
+#  layer_id                   :uuid             not null
+#  reimport_field_id          :uuid
+#
+# Indexes
+#
+#  index_import_mappings_on_configuration_id   (configuration_id)
+#  index_import_mappings_on_layer_id           (layer_id)
+#  index_import_mappings_on_reimport_field_id  (reimport_field_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (configuration_id => import_configurations.id)
+#  fk_rails_...  (layer_id => layers.id)
+#  fk_rails_...  (reimport_field_id => fields.id)
+#
+
+restaurants_csv:
+  configuration: restaurants_csv
+  layer: restaurants
+
+restaurants_geojson:
+  configuration: restaurants_geojson
+  layer: restaurants
+
+restaurants_random:
+  configuration: restaurants_random
+  layer: restaurants
+  bulk_mode: true
+
+hiking_paths_wfs:
+  configuration: hiking_paths_wfs
+  layer: hiking_paths

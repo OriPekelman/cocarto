@@ -1,0 +1,42 @@
+# == Schema Information
+#
+# Table name: import_configurations
+#
+#  id                          :uuid             not null, primary key
+#  name                        :string
+#  remote_source_url           :string
+#  source_csv_column_separator :string
+#  source_text_encoding        :string
+#  source_type                 :enum             not null
+#  created_at                  :datetime         not null
+#  updated_at                  :datetime         not null
+#  map_id                      :uuid             not null
+#
+# Indexes
+#
+#  index_import_configurations_on_map_id  (map_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (map_id => maps.id)
+#
+
+restaurants_csv:
+  map: restaurants
+  name: Restaurants from CSV
+  source_type: csv
+
+restaurants_geojson:
+  map: restaurants
+  name: Restaurants from GeoJSON
+  source_type: geojson
+
+restaurants_random:
+  map: restaurants
+  name: Random Restaurants
+  source_type: random
+
+hiking_paths_wfs:
+  map: hiking
+  name: Hiking Paths WFS
+  source_type: wfs

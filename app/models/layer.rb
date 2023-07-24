@@ -42,6 +42,7 @@ class Layer < ApplicationRecord
   has_many :fields, -> { order(:created_at) }, dependent: :destroy, inverse_of: :layer
   has_many :rows, dependent: :delete_all, inverse_of: :layer
   has_and_belongs_to_many :territory_categories
+  has_many :import_mappings, class_name: "Import::Mapping", dependent: :destroy
 
   # Query as scopes
   scope :with_last_updated_row_id, -> do

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_13_092152) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_29_085044) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -27,6 +27,20 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_13_092152) do
     "css_property",
     "enum",
     "files",
+  ], force: :cascade
+
+  create_enum :import_operation_status, [
+    "ready",
+    "fetching",
+    "importing",
+    "done",
+  ], force: :cascade
+
+  create_enum :import_source_type, [
+    "random",
+    "csv",
+    "geojson",
+    "wfs",
   ], force: :cascade
 
   create_enum :layer_geometry_type, [
@@ -88,6 +102,56 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_13_092152) do
     t.uuid "territory_category_id"
     t.index ["field_id"], name: "index_fields_territory_categories_on_field_id"
     t.index ["territory_category_id"], name: "index_fields_territory_categories_on_territory_category_id"
+  end
+
+  create_table "import_configurations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "map_id", null: false
+    t.string "name"
+    t.enum "source_type", null: false, enum_type: "import_source_type"
+    t.string "remote_source_url"
+    t.string "source_text_encoding"
+    t.string "source_csv_column_separator"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["map_id"], name: "index_import_configurations_on_map_id"
+  end
+
+  create_table "import_mappings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "configuration_id", null: false
+    t.uuid "layer_id", null: false
+    t.string "source_layer_name"
+    t.boolean "bulk_mode", default: false, null: false
+    t.boolean "ignore_empty_geometry_rows", default: true, null: false
+    t.string "geometry_encoding_format"
+    t.string "geometry_columns", array: true
+    t.integer "geometry_srid"
+    t.jsonb "fields_columns"
+    t.uuid "reimport_field_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["configuration_id"], name: "index_import_mappings_on_configuration_id"
+    t.index ["layer_id"], name: "index_import_mappings_on_layer_id"
+    t.index ["reimport_field_id"], name: "index_import_mappings_on_reimport_field_id"
+  end
+
+  create_table "import_operations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "configuration_id", null: false
+    t.string "remote_source_url"
+    t.enum "status", default: "ready", null: false, enum_type: "import_operation_status"
+    t.string "global_error"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["configuration_id"], name: "index_import_operations_on_configuration_id"
+  end
+
+  create_table "import_reports", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "operation_id", null: false
+    t.uuid "mapping_id", null: false
+    t.string "row_results"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["mapping_id"], name: "index_import_reports_on_mapping_id"
+    t.index ["operation_id"], name: "index_import_reports_on_operation_id"
   end
 
   create_table "layers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -226,6 +290,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_13_092152) do
   add_foreign_key "fields", "layers"
   add_foreign_key "fields_territory_categories", "fields"
   add_foreign_key "fields_territory_categories", "territory_categories"
+  add_foreign_key "import_configurations", "maps"
+  add_foreign_key "import_mappings", "fields", column: "reimport_field_id"
+  add_foreign_key "import_mappings", "import_configurations", column: "configuration_id"
+  add_foreign_key "import_mappings", "layers"
+  add_foreign_key "import_operations", "import_configurations", column: "configuration_id"
+  add_foreign_key "import_reports", "import_mappings", column: "mapping_id"
+  add_foreign_key "import_reports", "import_operations", column: "operation_id"
   add_foreign_key "layers", "maps"
   add_foreign_key "layers_territory_categories", "layers"
   add_foreign_key "layers_territory_categories", "territory_categories"

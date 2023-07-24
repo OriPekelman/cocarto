@@ -1,5 +1,4 @@
 require "application_system_test_case"
-require "fixtures/mock_wks_server"
 
 class ImportTest < ApplicationSystemTestCase
   class FileImportTest < ImportTest
@@ -33,18 +32,17 @@ class ImportTest < ApplicationSystemTestCase
       visit layer_path(id: layers("restaurants"))
       wait_until_turbo_stream_connected
 
-      # Import restaurants (with the Name as the key)
       click_on "Import…"
       attach_file("file", file_fixture("touladi.png").to_path, make_visible: true)
       click_on "Import"
 
-      assert_text "Import failed"
-      assert_text "Invalid byte sequence in UTF-8 in line 1."
+      assert_text "1 error prohibited this data import from being saved:"
+      assert_text "This source type is not supported."
     end
   end
 
   class ServerImportTest < ImportTest
-    include MockWfsServer
+    setup { start_fixtures_server }
 
     test "import from a wfs server" do  # rubocop:disable Minitest/MultipleAssertions
       sign_in_as(users("cassini"), "générations12345")
@@ -53,8 +51,8 @@ class ImportTest < ApplicationSystemTestCase
 
       # Reimport restaurants (with the Name as the key)
       click_on "Import…"
-      fill_in "url", with: "http://#{`hostname`.strip&.downcase}:9090"
-      fill_in "input_layer_name", with: "TEST_FEATURE_NAME"
+      fill_in "URL of a WFS server", with: "#{fixtures_server_url}/wfs"
+      fill_in "Layer name (Feature Type)", with: "TEST_FEATURE_NAME"
       click_on "Import"
 
       assert_text "Import successful"
