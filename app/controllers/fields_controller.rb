@@ -14,7 +14,6 @@ class FieldsController < ApplicationController
     respond_to do |format|
       format.turbo_stream do
         render turbo_stream: [
-          turbo_stream.update("flash", partial: "layouts/flash"),
           turbo_stream.replace(helpers.dom_id(@field.layer, :new_field), Field.new(layer: @field.layer)) # Clear the “new_field” form
         ]
       end
@@ -30,7 +29,7 @@ class FieldsController < ApplicationController
     end
 
     respond_to do |format|
-      format.turbo_stream { render turbo_stream: [turbo_stream.update("flash", partial: "layouts/flash")] }
+      format.turbo_stream { render turbo_stream: [] }
       format.html { redirect_to @field.layer }
     end
   end
@@ -43,8 +42,8 @@ class FieldsController < ApplicationController
     end
 
     respond_to do |format|
-      format.turbo_stream { render turbo_stream: [turbo_stream.update("flash", partial: "layouts/flash")] }
-      format.html { redirect_to @field.layer }
+      format.turbo_stream { render turbo_stream: [] }
+      format.html { redirect_to @field.layer, status: :see_other }
     end
   end
 

@@ -145,25 +145,25 @@ fr:
     message:
       field:
         created: Nouvelle colonne %{name} créée.
-        destroyed: La colonne a bien été détruite.
-        updated: La colonne a bien été mise à jour.
+        destroyed: Colonne détruite.
+        updated: Colonne mise à jour.
       layer:
-        destroyed: La couche a été détruite avec succès.
+        destroyed: Couche détruite.
       map:
-        center_and_zoom_saved: Le centrage et le zoom par défaut ont été sauvegardés.
-        destroyed: La carte a été détruite avec succès.
+        center_and_zoom_saved: Zoom par défaut sauvegardé.
+        destroyed: Carte détruite.
       map_token:
-        created: Lien créé avec succès.
+        created: Lien créé.
         destroyed: Lien supprimé.
         updated: Lien mis à jour.
       row:
-        added: La géométrie a été ajoutée avec succès.
-        destroyed: La géométrie a été détruite avec succès.
-        updated: Les propriétés géométriques ont été mises à jour avec succès.
+        added: Rangée ajoutée.
+        destroyed: Rangée supprimée.
+        updated: Rangée mise à jour.
       user_role:
-        created: Utilisateur invité avec succès.
-        destroyed: Accès de l’utilisateur retiré.
-        updated: Accès de l’utilisateur mis à jour.
+        created: Utilisateur invité.
+        destroyed: Accès retiré.
+        updated: Accès mis à jour.
     placeholder:
       field:
         enum_value: Nouvelle option

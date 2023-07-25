@@ -32,9 +32,9 @@ class MapTokensController < ApplicationController
   def destroy
     @map = @map_token.map
     if @map_token.destroy
-      redirect_to map_map_tokens_path(@map), alert: t("helpers.message.map_token.destroyed")
+      redirect_to map_map_tokens_path(@map), alert: t("helpers.message.map_token.destroyed", status: :see_other)
     else
-      redirect_to map_map_tokens_path(@map), alert: t("common.failed", msg: @map_token.errors.full_messages.to_sentence)
+      redirect_to map_map_tokens_path(@map), alert: t("common.failed", msg: @map_token.errors.full_messages.to_sentence, status: :see_other)
     end
   end
 

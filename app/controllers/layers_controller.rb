@@ -32,9 +32,13 @@ class LayersController < ApplicationController
     if layer.save
       respond_to do |format|
         format.turbo_stream do
-          # redirect to the layer if it’s the first layer (we’re actually creating a new map)
-          # otherwise do nothing, the new layer is streamed via turbo.
-          redirect_to layer if map.layers.length == 1
+          if map.layers.length == 1
+            # redirect to the layer if it’s the first layer (we’re actually creating a new map)
+            # otherwise do nothing, the new layer is streamed via turbo.
+            redirect_to layer
+          else
+            render turbo_stream: []
+          end
         end
         format.html { redirect_to layer }
       end
@@ -49,7 +53,7 @@ class LayersController < ApplicationController
     if @layer.update(layer_params)
       @layer.broadcast_i18n_replace_to @layer.map
       respond_to do |format|
-        format.turbo_stream
+        format.turbo_stream { render turbo_stream: [] }
         format.html { redirect_to @layer }
       end
     else
@@ -60,7 +64,7 @@ class LayersController < ApplicationController
   def destroy
     @layer.destroy
     respond_to do |format|
-      format.turbo_stream
+      format.turbo_stream { render turbo_stream: [] }
       format.html { redirect_to @layer.map, notice: t("helpers.message.layer.destroyed"), status: :see_other }
     end
   end

@@ -400,6 +400,8 @@ GEM
       actionpack (>= 6.0.0)
       activejob (>= 6.0.0)
       railties (>= 6.0.0)
+    turbo_flash (2.0.1)
+      hotwire-rails (~> 0.1.2)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.4.2)
@@ -480,6 +482,7 @@ DEPENDENCIES
   standard
   thor
   turbo-rails
+  turbo_flash
   tzinfo-data
   view_component
   view_component-fragment_caching
