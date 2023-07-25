@@ -1,6 +1,4 @@
 <%# params: @map %>
-<%= turbo_stream_from @map %>
-<%= turbo_stream_i18n_from @map %>
 <nav class="navbar">
   <%= link_to maps_path, class: "button button--link" do %>
     <%= embedded_svg "chevron_gauche.svg", class: "icon--narrow icon--tinted" %>
@@ -36,4 +34,7 @@
   </div>
 <% end %>
 
-<%= render "layouts/dragbar", map: @map, role_type: @role_type, current_user_id: current_user.id %>
+<%= turbo_stream_from @map %>
+<%= turbo_stream_i18n_from @map %>
+
+<%= render "shared/dragbar", map: @map, role_type: @role_type, current_user_id: current_user.id %>

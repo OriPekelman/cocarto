@@ -1,0 +1,9 @@
+<%# variables: header_mode (:app, :cartouche) %>
+
+<% header_mode ||= :app %>
+
+<header class="header--container">
+  <div class="<%= class_names("header", (header_mode == :app) ? "header--app" : "header--large") %>">
+    <%= content_for?(:header) ? yield(:header) : render("header_default", header_mode: header_mode) %>
+  </div>
+</header>

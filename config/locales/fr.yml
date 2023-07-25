@@ -76,9 +76,9 @@ fr:
       show_layer_on_map: Affiche cette couche sur la carte
       toggle_layer: Afficher la table de cette couche
   layouts:
-    application:
+    footer:
       footer_html: Développé par <a href="https://www.codeursenliberté.fr" target="_blank">codeurs en liberté</a>, une coopérative d’indépendant·e·s dans le domaine de l’informatique. <a href="/legal">Mentions légales</a>
-    header:
+    menu:
       change_language: Changer la langue
       preferences: Préférences
       sign_in: connexion

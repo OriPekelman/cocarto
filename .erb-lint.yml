@@ -15,13 +15,13 @@ linters:
     exclude:
       # Use inline disable comment once https://github.com/Shopify/erb-lint/pull/249 is merged
       - '**/app/views/territories/_geometry.html.erb'
-      - '**/app/views/layouts/_sentry.html.erb'
+      - '**/app/views/application/_sentry.html.erb'
   RequireScriptNonce:
     enabled: true
     exclude:
       # Use inline disable comment once https://github.com/Shopify/erb-lint/pull/249 is merged
       - '**/app/views/territories/_geometry.html.erb'
-      - '**/app/views/layouts/_sentry.html.erb'
+      - '**/app/views/application/_sentry.html.erb'
   Rubocop:
     enabled: true
     rubocop_config:
