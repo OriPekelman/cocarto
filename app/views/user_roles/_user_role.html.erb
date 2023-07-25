@@ -21,7 +21,7 @@
 
       <% delete_message = (user_role.user == current_user) ? t(".confirm_delete_self") : t("common.confirm") %>
       <%= link_to t("helpers.link.user_role.delete"), user_role,
-            class: "button button--slim button--link",
+            class: "button button--slim button--link button--lowercase",
             data: {turbo_method: :delete, turbo_confirm: delete_message} %>
     </div>
   </div>
