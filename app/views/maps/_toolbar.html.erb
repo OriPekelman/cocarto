@@ -1,3 +1,5 @@
+<%# variables: map %>
+
 <div class="map__toolbar__container">
   <div data-map-target="toolbarLeft">
   </div>
@@ -13,25 +15,21 @@
   </div>
   <div class="buttons-bar" data-map-target="toolbarRight">
     <div class="map__control__icon">
-      <a
-        download="<%= @map.name + ".png" %>"
+      <a download="<%= map.name + ".png" %>"
         data-action="map#exportMapAsImage"
         title="<%= t(".export_as_image") %>"
-        aria-label="<%= t(".export_as_image") %>"
-      >
+        aria-label="<%= t(".export_as_image") %>">
         <%= embedded_svg("export_as_image.svg") %>
       </a>
     </div>
     <div class="map__control__icon">
-      <%= form_for @map do |f| %>
+      <%= form_for map do |f| %>
         <%= f.hidden_field :default_latitude, data: {map_target: "defaultLatitude"} %>
         <%= f.hidden_field :default_longitude, data: {map_target: "defaultLongitude"} %>
         <%= f.hidden_field :default_zoom, data: {map_target: "defaultZoom"} %>
-        <button
-          data-action="map#setDefaultCenterZoom"
+        <button data-action="map#setDefaultCenterZoom"
           title="<%= t(".set_center_and_zoom") %>"
-          aria-label="<%= t(".set_center_and_zoom") %>"
-        >
+          aria-label="<%= t(".set_center_and_zoom") %>">
           <%= embedded_svg "map-pin.svg" %>
         </button>
       <% end %>

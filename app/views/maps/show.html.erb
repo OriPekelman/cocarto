@@ -32,7 +32,7 @@
 
 <% content_for :right_pane do %>
   <div class="map" data-map-target="map">
-    <%= render "toolbar" %>
+    <%= render "toolbar", map: @map %>
   </div>
 <% end %>
 
