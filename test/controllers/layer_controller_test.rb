@@ -79,4 +79,13 @@ class LayerControllerTest < ActionDispatch::IntegrationTest
       assert_in_delta(19720.582, geojson.dig("features", 0, "properties", "calculated_length"))
     end
   end
+
+  class DestroyTest < LayerControllerTest
+    test "destroy a layer" do
+      sign_in users(:cassini)
+      delete layer_url(layers(:hiking_paths))
+
+      assert_response :redirect
+    end
+  end
 end
