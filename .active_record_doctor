@@ -1,4 +1,22 @@
 ActiveRecordDoctor.configure do
+  global :ignore_tables, [
+    "schema_migrations",
+    "ar_internal_metadata",
+    "active_storage_attachments",
+    "good_jobs",
+    "good_job_executions"
+  ]
+
+  global :ignore_models, [
+    "GoodJob::DiscreteExecution",
+    "GoodJob::Job",
+    "GoodJob::Setting",
+    "GoodJob::Process",
+    "GoodJob::BatchRecord",
+    "GoodJob::BaseExecution",
+    "GoodJob::Execution"
+  ]
+
   detector :undefined_table_references, ignore_models: [
     "ApplicationRecord", # Remove after https://github.com/gregnavis/active_record_doctor/pull/91
     "ActiveStorage::Record"

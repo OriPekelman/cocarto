@@ -52,7 +52,6 @@ en:
         from_url: From an URL
         from_url_layer_name: Layer name (Feature Type)
         from_url_wfs: URL of a WFS server
-        import_data: Data import
         key_field: ID column
         key_field_info_html: |
           If you want to update data, you need to specify a column to use  to identify preexisting data.<br/>
@@ -62,13 +61,9 @@ en:
         reimport: Reimport existing data
         save: Import
       operation:
-        failure: Import failed
         imported_rows: Imported %{size} rows
         line_number: Line %{line_number}
         row_failure: Not saved.
-        success: Import successful
-      show:
-        title: Import complete
   layers:
     layer:
       center_on_row: Center map on this row

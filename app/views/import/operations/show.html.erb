@@ -1,5 +1,5 @@
 <div class="card__main-content">
-  <h2 class="form__header"><%= t(".title") %></h2>
+  <h2 class="form__header"><%= Import::Operation.model_name.human %></h2>
   <div class="form__field">
     <%= render @operation %>
   </div>
