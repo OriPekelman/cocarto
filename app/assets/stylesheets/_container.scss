@@ -49,24 +49,6 @@
   margin: 0;
 }
 
-.navbar {
-  width: 100%;
-  height: var(--nav-height);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 2px 8px 0;
-  border-bottom: 0.5px solid var(--color-grey-40);
-}
-
-.navbar__title {
-  margin: 0;
-}
-
-.navbar + .container {
-  padding-top: 8px;
-}
-
 .bordered-box {
   background-color: var(--color-bg-ambient-10);
   border-style: double;
