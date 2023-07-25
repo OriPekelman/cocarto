@@ -3,8 +3,6 @@ require "capybara/cuprite"
 require "ferrum_logger"
 
 class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
-  # Wait for at most DOWNLOAD_TIMEOUT seconds until all downloads are finished
-  DOWNLOAD_TIMEOUT = 10
   # Allow connections from the local network
   Capybara.server_host = "0.0.0.0"
   # Run server in https (using a self-signed certificate, automatically with the localhost gem)
@@ -70,10 +68,20 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     find "turbo-cable-stream-source[channel='Turbo::StreamsChannel'][connected]", match: :first, wait: 10
   end
 
-  def wait_all_downloads
+  def rm_downloaded_file(name)
     downloads = Pathname.new(Capybara.save_path)
-    Timeout.timeout(DOWNLOAD_TIMEOUT) do
-      sleep 0.1 until downloads.glob("*.crdownload").blank?
+    File.delete(downloads.join(name))
+  rescue
+    nil
+  end
+
+  def wait_until_downloaded_file(name)
+    downloads = Pathname.new(Capybara.save_path)
+    Timeout.timeout(Capybara.default_max_wait_time) do
+      break if downloads.glob("*.crdownload").blank? && File.exist?(downloads.join(name))
+      sleep 0.1
     end
+
+    assert_path_exists downloads.join(name)
   end
 end
