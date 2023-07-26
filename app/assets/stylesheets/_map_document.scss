@@ -7,17 +7,20 @@
   --dragbar-width: 6px;
   --left-pane-width: calc(50vw - var(--dragbar-width) / 2);
   --right-pane-width: calc(50vw - var(--dragbar-width) / 2);
+  --pane-transition: 0s;
 }
 
 .map_document__data {
   overflow: scroll;
   width: var(--left-pane-width);
+  transition: width var(--pane-transition);
   display: flex;
   flex-direction: column;
 }
 
 .map_document__right_pane {
   width: var(--right-pane-width);
+  transition: width var(--pane-transition);
 }
 
 .map_document__dragbar {

@@ -17,6 +17,7 @@ export default class extends Controller {
 
   mousemove (e) {
     if (this.dragging) {
+      this.element.style.setProperty('--pane-transition', '0s')
       this.#setPosition(e.clientX)
     }
   }
@@ -31,7 +32,9 @@ export default class extends Controller {
     this.dispatch('panel_changed', { detail: { value: this.#panelAtPosition(x) } })
   }
 
-  toggle(toggled) {
+  toggle (toggled) {
+    this.element.style.setProperty('--pane-transition', '200ms')
+
     const currentPanel = this.#panelAtPosition(this.leftTarget.offsetWidth)
     if (currentPanel === 'both') {
       if (toggled === 'table') {

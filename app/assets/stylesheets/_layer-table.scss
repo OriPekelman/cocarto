@@ -21,6 +21,7 @@
 // Layer header, in a layer-container. Always visible
 .layer-header {
   width: var(--left-pane-width);
+  transition: width var(--pane-transition);
   position: sticky;
   top: 0;
   left: 0;
@@ -376,6 +377,7 @@
 // Footer for each layer
 .layer-footer {
   width: calc(var(--left-pane-width) - 64px);
+  transition: width var(--pane-transition);
   position: sticky;
   left: 32px;
   display: flex;
@@ -387,6 +389,7 @@
 // Footer for the layer list
 .footer__layer-list {
   width: var(--left-pane-width);
+  transition: width var(--pane-transition);
   position: sticky;
   left: 0;
   padding: 16px;
