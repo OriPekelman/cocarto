@@ -2,10 +2,21 @@
 
 <% content_for :header do %>
   <div class="header--start">
-    <%= link_to maps_path, class: "button button--large button--text button--lowercase" do %>
-      <%= embedded_svg "chevron_gauche.svg", class: "icon--narrow icon--tinted" %>
-      <%= t(".all_maps") %>
-    <% end %>
+    <div class="buttons-bar buttons-bar--tight">
+      <%= link_to maps_path, class: "button button--large button--text button--lowercase" do %>
+        <%= embedded_svg "chevron_gauche.svg", class: "icon--narrow icon--tinted" %>
+        <%= t(".all_maps") %>
+      <% end %>
+      <div class="buttons-segmented-bar"
+           data-controller="segmented-bar" data-segmented-bar-dragbar-outlet=".map_document__container">
+        <button class="button button--large button--text button--lowercase" data-segmented-bar-target="button" data-segmented-bar-value-param="table" data-action="segmented-bar#toggle">
+          <%= t(".table") %>
+        </button>
+        <button class="button button--large button--text button--lowercase" data-segmented-bar-target="button" data-segmented-bar-value-param="map" data-action="segmented-bar#toggle">
+          <%= t(".map") %>
+        </button>
+      </div>
+    </div>
   </div>
   <div class="header--center">
     <%= render "name", map: @map %>
