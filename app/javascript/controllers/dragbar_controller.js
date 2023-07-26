@@ -17,8 +17,8 @@ export default class extends Controller {
 
   mousemove (e) {
     if (this.dragging) {
-      this.element.style.setProperty('--left-pane-width', `max(7em, calc(${e.clientX}px - var(--dragbar-width) / 2))`)
-      this.element.style.setProperty('--right-pane-width', `max(7em, calc(100vw - ${e.clientX}px - var(--dragbar-width) / 2))`)
+      this.element.style.setProperty('--left-pane-width', `calc(${e.clientX}px - var(--dragbar-width) / 2)`)
+      this.element.style.setProperty('--right-pane-width', `calc(100vw - ${e.clientX}px - var(--dragbar-width) / 2)`)
     }
   }
 
