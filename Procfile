@@ -1,3 +1,3 @@
 web: bundle exec rake assets:precompile && bundle exec rails s
-worker: bundle exec good_job start
+worker: bundle exec rake assets:precompile && bundle exec good_job start
 postdeploy: bundle exec rails db:migrate
