@@ -36,6 +36,8 @@ class User < ApplicationRecord
   devise :invitable, :database_authenticatable, :registerable,
     :recoverable, :rememberable, :validatable, :map_token_authenticatable
 
+  include UserDeviseNotifications
+
   # The belongs_to :invited_by relation is added automatically by invitable
   has_many :invitations, class_name: "User", foreign_key: :invited_by_id, inverse_of: :invited_by, dependent: :nullify
 
