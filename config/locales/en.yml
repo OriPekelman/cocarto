@@ -114,7 +114,9 @@ en:
       header: Sharing and permissions
     show:
       all_maps: Maps
+      map: Map
       share: Share
+      table: Table
     toolbar:
       export_as_image: Export as image
       set_center_and_zoom: Set center and zoom of the map
