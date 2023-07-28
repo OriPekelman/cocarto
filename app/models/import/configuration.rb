@@ -38,7 +38,8 @@ class Import::Configuration < ApplicationRecord
     random: Importers::Random,
     csv: Importers::CSV,
     geojson: Importers::GeoJSON,
-    wfs: Importers::WFS
+    wfs: Importers::WFS,
+    spreadsheet: Importers::Spreadsheet
   }
 
   def importer_class
