@@ -19,6 +19,8 @@ class Map < ApplicationRecord
   has_many :layers, dependent: :destroy
   has_many :import_configurations, class_name: "Import::Configuration", dependent: :destroy
 
+  accepts_nested_attributes_for :layers
+
   # Through relations
   has_many :users, through: :user_roles, inverse_of: :maps
   has_many :rows, through: :layers, inverse_of: :map

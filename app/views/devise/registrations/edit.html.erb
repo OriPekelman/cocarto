@@ -1,9 +1,14 @@
-<nav class="navbar">
-  <%= link_to :back, class: "button button--link" do %>
-    <%= embedded_svg "chevron_gauche.svg", class: "icon--narrow icon--tinted" %>
-    <%= t("common.back") %>
+<% content_for :header do %>
+  <div class="header--start">
+    <%= link_to :back, class: "button button--large button--text button--lowercase" do %>
+      <%= embedded_svg "chevron_gauche.svg", class: "icon--narrow icon--tinted" %>
+      <%= t("common.back") %>
+    <% end %>
+  </div>
+  <div class="header--end">
+    <%= render "header_menu_signed_in" %>
+  </div>
 <% end %>
-</nav>
 
 <div class="container">
   <div class="section section--center">

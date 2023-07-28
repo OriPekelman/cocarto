@@ -34,6 +34,15 @@
   min-width: 40px;
 }
 
+.button--extra-large {
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: 0.1px;
+  height: 48px;
+  min-width: 40px;
+  padding-inline: 24px;
+}
+
 .button--link {
   color: var(--color-green-70);
   background-color: transparent;
@@ -116,6 +125,10 @@
   &:hover:active {
     color: var(--color-green-100);
   }
+}
+
+.button--lowercase {
+  text-transform: lowercase;
 }
 
 // Icon buttons
@@ -265,6 +278,10 @@
 
 .buttons-bar--tight {
   gap: 2px;
+}
+
+.buttons-bar--loose {
+  gap: 32px;
 }
 
 // Special input with button

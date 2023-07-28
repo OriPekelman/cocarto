@@ -26,7 +26,7 @@ class LoginTest < ApplicationSystemTestCase
     sign_in_as(users("reclus"), "refleurir")
     visit map_path(id: maps("boat"))
 
-    assert_field "Name", with: "Boating trip"
+    assert_selector "h2", text: "Boating trip"
 
     sign_out
     visit map_path(id: maps("boat"))
@@ -44,7 +44,7 @@ class LoginTest < ApplicationSystemTestCase
     fill_in "user_password", with: "refleurir"
     click_button "Log in"
 
-    assert_field "Name", with: "Boating trip"
+    assert_selector "h2", text: "Boating trip"
     assert_current_path map_path(id: maps("boat"))
   end
 end

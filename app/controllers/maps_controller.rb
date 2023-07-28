@@ -1,7 +1,7 @@
 class MapsController < ApplicationController
   before_action :authenticate_user!
   before_action :new_map, only: %i[new create]
-  before_action :set_map, only: %i[show update destroy]
+  before_action :set_map, only: %i[show edit update destroy]
 
   after_action :verify_authorized, except: :index
   after_action :verify_policy_scoped, only: :index
@@ -37,11 +37,17 @@ class MapsController < ApplicationController
   end
 
   def new
+    @map.layers.new
+    render "form"
+  end
+
+  def edit
+    render "form"
   end
 
   def create
     if @map.update(map_params)
-      redirect_to new_map_layer_url(@map)
+      redirect_to map_path(@map, params: {open: helpers.dom_id(@map.layers.first)})
     else
       # This line overrides the default rendering behavior, which
       # would have been to render the "create" view.
@@ -56,7 +62,7 @@ class MapsController < ApplicationController
       end
       respond_to do |format|
         format.turbo_stream { render turbo_stream: [] }
-        format.html { redirect_to layer_path(@map) }
+        format.html { redirect_to map_path(@map) }
       end
     else
       render :show, status: :unprocessable_entity
@@ -83,6 +89,7 @@ class MapsController < ApplicationController
   end
 
   def map_params
-    params.require(:map).permit(:name, :default_latitude, :default_longitude, :default_zoom)
+    params.require(:map).permit(:name, :default_latitude, :default_longitude, :default_zoom,
+      layers_attributes: [:name, :geometry_type, :map_id, :color, territory_category_ids: []])
   end
 end

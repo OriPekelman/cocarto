@@ -1,10 +1,10 @@
 import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
-  static targets = ['icon', 'territoryCategories']
+  static targets = ['icon', 'colorInput', 'territoryCategories']
 
   connect () {
-    const defaultValue = this.element.elements['layer[color]'].value
+    const defaultValue = this.colorInputTargets.find(e => e.checked).value
     this.setColor(defaultValue)
   }
 

@@ -17,6 +17,7 @@
   border-radius: 0 0 var(--border-radius) var(--border-radius);
   padding: 16px;
   display: flex;
-  justify-content: end;
+  flex-direction: row-reverse;
+  justify-content: space-between;
   gap: 16px;
 }

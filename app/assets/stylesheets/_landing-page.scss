@@ -19,7 +19,7 @@
   }
 }
 
-@media print, (width <= 850px) {
+@media (width <= 850px) {
   .section--landing-page {
     flex-direction: column;
 
@@ -87,14 +87,4 @@
   align-items: center;
   justify-content: center;
   gap: 32px;
-}
-
-@media print {
-  .container--landing-page {
-    margin-top: 0;
-  }
-
-  .landing-section__block--actions {
-    display: none;
-  }
 }

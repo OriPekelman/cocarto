@@ -1,8 +1,6 @@
 .map_document__container {
   display: flex;
-  height: calc(
-    100vh - var(--nav-height) - var(--footer-height) - var(--header-height)
-  );
+  height: calc(100vh - var(--header-height) - 0.5px);
   width: 100%;
 
   --dragbar-width: 6px;

@@ -77,7 +77,7 @@ Used in layers/rows, broadcast from FieldsController and from Field hooks. %>
         <%= submit_tag t("helpers.submit.field.update"), class: "button button--confirm", form: form_id, data: {restricted_target: "restricted", restricted_authorizations: %w[owner editor].to_json} %>
         <%# Don’t display the delete button for new fields, and disable it if unauthorized. cf LayerPolicy#update? %>
         <% if field.persisted? %>
-          <%= button_to field, method: :delete, class: "button button--delete",
+          <%= button_to field, method: :delete, class: "button button--delete button--lowercase",
                 data: {restricted_target: "restricted", restricted_authorizations: %w[owner editor].to_json} do %>
             <%= t("helpers.link.field.delete") %>
           <% end %>

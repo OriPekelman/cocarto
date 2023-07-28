@@ -15,7 +15,7 @@ class FieldsTest < ApplicationSystemTestCase
     fill_in "field[label]", with: "Un beau nombre"
     choose "Decimal"
 
-    click_on "Save"
+    click_on "OK"
 
     assert_selector ".layer-table__th--field", text: "UN BEAU NOMBRE"
 
@@ -23,7 +23,7 @@ class FieldsTest < ApplicationSystemTestCase
     find(".layer-table__th--field", text: "UN BEAU NOMBRE").click
 
     fill_in "field[label]", with: "Un nombre renommé"
-    click_on "Save"
+    click_on "OK"
 
     refute_selector ".layer-table__th--field", text: "UN BEAU NOMBRE"
     assert_selector ".layer-table__th--field", text: "UN NOMBRE RENOMMÉ"

@@ -1,0 +1,21 @@
+<%# variables: header_mode (:app, :cartouche) %>
+
+<div class="header--start">
+  <% if header_mode == :cartouche %>
+    <%= image_tag("cartouche_color.svg", class: "header__cartouche") %>
+  <% else %>
+    <h1>
+      <%= link_to root_path, class: "header__logo", title: t("common.app_title") do %>
+        <%= embedded_svg("cocarto_logotype.svg") %>
+      <% end %>
+    </h1>
+  <% end %>
+</div>
+
+<div class="header--end">
+  <% if user_signed_in? %>
+    <%= render "header_menu_signed_in" %>
+  <% else %>
+    <%= render "header_menu_signed_out" %>
+  <% end %>
+</div>

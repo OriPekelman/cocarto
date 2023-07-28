@@ -1,17 +1,28 @@
 <%# params: @map %>
-<%= turbo_stream_from @map %>
-<%= turbo_stream_i18n_from @map %>
-<nav class="navbar">
-  <%= link_to maps_path, class: "button button--link" do %>
-    <%= embedded_svg "chevron_gauche.svg", class: "icon--narrow icon--tinted" %>
-    <%= t(".all_maps") %>
-  <% end %>
-  <%= render "name", map: @map %>
-  <div class="buttons-bar buttons-bar--tight">
-    <%= link_to t("maps.sharing.header"), map_user_roles_path(@map), class: "button button--link", data: {turbo_frame: "modal"} if policy(@map.user_roles.new).index? %>
-    <%= link_to t("helpers.link.map.delete"), @map, data: {turbo_method: :delete, turbo_confirm: t("common.confirm")}, class: "button button--link" if policy(@map).destroy? %>
+
+<% content_for :header do %>
+  <div class="header--start">
+    <%= link_to maps_path, class: "button button--large button--text button--lowercase" do %>
+      <%= embedded_svg "chevron_gauche.svg", class: "icon--narrow icon--tinted" %>
+      <%= t(".all_maps") %>
+    <% end %>
   </div>
-</nav>
+  <div class="header--center">
+    <%= render "name", map: @map %>
+  </div>
+  <div class="header--end">
+    <div class="buttons-bar buttons-bar--tight">
+      <% if policy(@map.user_roles.new).index? %>
+        <%= link_to t(".share"), map_user_roles_path(@map), class: "button button--large button--text button--lowercase", data: {turbo_frame: "modal"} %>
+      <% end %>
+      <%= render "header_menu_signed_in" %>
+    </div>
+  </div>
+<% end %>
+
+<% content_for(:footer)do %>
+  <div hidden></div>
+<% end %>
 
 <% content_for :left_pane do %>
   <div
@@ -32,8 +43,11 @@
 
 <% content_for :right_pane do %>
   <div class="map" data-map-target="map">
-    <%= render "toolbar" %>
+    <%= render "toolbar", map: @map %>
   </div>
 <% end %>
 
-<%= render "layouts/dragbar", map: @map, role_type: @role_type, current_user_id: current_user.id %>
+<%= turbo_stream_from @map %>
+<%= turbo_stream_i18n_from @map %>
+
+<%= render "shared/dragbar", map: @map, role_type: @role_type, current_user_id: current_user.id %>

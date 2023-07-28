@@ -140,8 +140,8 @@ en:
         import: Import…
         new: Add a new layer
       map:
-        delete: Delete this map
-        new: Build a new map
+        delete: Delete
+        new: Create a new map
       map_token:
         delete: Delete
       row:
@@ -179,12 +179,13 @@ en:
       _comment: The helpers.submit.create and helpers.submit.update keys are standard in Rails.
       field:
         create: Add
-        update: Save
+        update: OK
       layer:
-        create: Create a layer
-        update: Save
+        create: Save
+        update: OK
       map:
-        create: Create a map
+        create: Save
+        update: OK
       map_token:
         create: Create link
         update: OK

@@ -12,7 +12,7 @@ TurboFlash.config do |config|
   # config.action = :update
 
   # the default TurboStream partial
-  # config.partial = 'shared/flash'
+  config.partial = "application/flash"
 
   # the default flash key variable name
   # config.key = :role

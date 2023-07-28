@@ -1,0 +1,21 @@
+<div class="dropdown" data-controller="dropdown" data-action="click->dropdown#toggle" data-dropdown-target="trigger">
+  <button class="button button--large button--text" title="<%= t("common.settings") %>">
+    <%= current_user.display_name %>
+    <%= embedded_svg "chevron_droite.svg", class: "icon--smaller icon--tinted dropdown__indicator" %>
+  </button>
+  <div class="dropdown__content" data-dropdown-target="content">
+    <div class="card__main-content">
+      <%= link_to "Français", url_for(locale: :fr) %>
+      <%= link_to "English", url_for(locale: :en) %>
+      <%= link_to t("layouts.menu.preferences"), edit_user_registration_url unless current_user.anonymous? %>
+    </div>
+    <div class="card__footer-content">
+      <% if current_user.anonymous? %>
+        <%= link_to t("layouts.menu.sign_up"), new_user_registration_path, class: "button button--confirm" %>
+        <%= link_to t("layouts.menu.sign_in"), new_user_session_path, class: "button button--link" %>
+      <% else %>
+        <%= button_to t("layouts.menu.sign_out"), destroy_user_session_path, method: :delete, class: "button button--delete button--lowercase" %>
+      <% end %>
+    </div>
+  </div>
+</div>

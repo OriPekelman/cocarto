@@ -4,13 +4,14 @@ class MapsTest < ApplicationSystemTestCase
   test "create and destroy a map" do
     sign_in_as(users("reclus"), "refleurir")
 
-    click_on "Build a new map"
-    fill_in "Name", with: "Test de nouvelle carte"
-    click_button "Create a map"
-    fill_in "Name", with: "Test de nouvelle couche"
-    click_button "Create a layer"
+    click_on "Create a new map"
+    fill_in "map[name]", with: "Test de nouvelle carte"
+    fill_in "map[layers_attributes][0][name]", with: "Test de nouvelle couche"
+    click_button "Save"
+
+    click_link "Test de nouvelle carte"
     accept_confirm do
-      click_link "Delete this map"
+      click_button "Delete"
     end
 
     assert_text "Map destroyed."
@@ -23,7 +24,7 @@ class MapsTest < ApplicationSystemTestCase
     # restaurants is owned by reclus
     visit map_path(id: maps("restaurants"))
 
-    assert_field "Name", with: "Restaurants"
+    assert_selector "h2", text: "Restaurants"
 
     # reclus has no access to hiking
     visit map_path(id: maps("hiking"))

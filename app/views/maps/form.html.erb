@@ -1,0 +1,34 @@
+<%# params: @map %>
+
+<%= form_with(model: @map, id: dom_id(@map, :form), class: "form card__main-content") do |form| %>
+  <% if @map.new_record? %>
+    <h2 class="form__header"><%= t(".new") %></h2>
+  <% end %>
+
+  <div class="form__field form__field--large">
+    <%= form.label :name %>
+    <%= form.text_field :name, autofocus: true %>
+  </div>
+
+  <% if @map.new_record? %><%# Also create the first layer %>
+    <h3 class="form__header">
+      <%= t(".first_layer") %>
+    </h3>
+    <%= form.fields_for :layers do |layer_form| %>
+      <%= render "layers/form_contents", form: layer_form %>
+    <% end %>
+  <% end %>
+
+<% end %>
+
+<div class="card__footer-content">
+  <%= submit_tag t(@map.new_record? ? :create : :update, scope: "helpers.submit.map"), class: "button button--confirm",
+        form: dom_id(@map, :form), data: {turbo_frame: "_top"} %>
+
+  <% if @map.persisted? && policy(@map).destroy? %>
+    <%= button_to @map, method: :delete, class: "button button--delete button--lowercase",
+          data: {turbo_confirm: t("common.confirm"), turbo_frame: "_top"} do %>
+      <%= t("helpers.link.map.delete") %>
+    <% end %>
+  <% end %>
+</div>

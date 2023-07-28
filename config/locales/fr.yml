@@ -65,6 +65,8 @@ fr:
         line_number: Ligne %{line_number}
         row_failure: Non enregistré.
   layers:
+    form:
+      new: Nouvelle couche
     layer:
       center_on_row: Centrer la carte sur cette rangée
       delete_row: Supprimer cette rangée
@@ -76,9 +78,9 @@ fr:
       show_layer_on_map: Affiche cette couche sur la carte
       toggle_layer: Afficher la table de cette couche
   layouts:
-    application:
+    footer:
       footer_html: Développé par <a href="https://www.codeursenliberté.fr" target="_blank">codeurs en liberté</a>, une coopérative d’indépendant·e·s dans le domaine de l’informatique. <a href="/legal">Mentions légales</a>
-    header:
+    menu:
       change_language: Changer la langue
       preferences: Préférences
       sign_in: connexion
@@ -96,6 +98,9 @@ fr:
     new:
       header: Nouveau lien
   maps:
+    form:
+      first_layer: Première couche
+      new: Nouvelle carte
     index:
       create_account: Créer un compte
       role_description:
@@ -103,10 +108,13 @@ fr:
         editor: Vous êtes éditeur.
         owner: Vous êtes propriétaire.
         viewer: Vous avec accès en lecture seule.
+    name:
+      map_with_no_name: carte cocarto
     sharing:
       header: Partage et permissions
     show:
-      all_maps: Toutes les cartes
+      all_maps: Cartes
+      share: Partager
     toolbar:
       export_as_image: Exporter en tant qu’image
       set_center_and_zoom: Définir centre et zoom de la carte
