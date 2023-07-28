@@ -14,7 +14,7 @@ class PresenceTracker {
         </svg>
         <span></span>`
     this.setName(name)
-    this.marker = new maplibre.Marker(this.el, { anchor: 'top-left' }).setLngLat(lngLat)
+    this.marker = new maplibre.Marker({ element: this.el, anchor: 'top-left' }).setLngLat(lngLat)
   }
 
   setName (name) {
