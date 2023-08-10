@@ -24,6 +24,11 @@ class Field < ApplicationRecord
   enum :field_type, {text: "text", float: "float", integer: "integer", territory: "territory", date: "date", boolean: "boolean", css_property: "css_property", enum: "enum", files: "files"}, prefix: :type
   attr_readonly :field_type
 
+  # Ordering
+  include RankedModel
+  ranks :sort_order, with_same: :layer_id
+  attribute :sort_order, default: :last
+
   # Relations
   belongs_to :layer, touch: true
   has_and_belongs_to_many :territory_categories
