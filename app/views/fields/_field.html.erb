@@ -16,6 +16,7 @@ Used in layers/rows, broadcast from FieldsController and from Field hooks. %>
        data-action="click->dropdown#toggle"
        aria-haspopup="true">
     <% if field.persisted? %>
+      <%= embedded_svg "lock-closed.svg", class: "icon--smaller" if field.locked? %>
       <%= field.label %>
       <%= embedded_svg "chevron_droite.svg", class: "icon--smaller icon--tinted dropdown__indicator" %>
     <% else %>
