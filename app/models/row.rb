@@ -133,8 +133,11 @@ class Row < ApplicationRecord
   end
 
   def fields_values=(new_fields_values)
-    # Filter invalid field IDs
-    filtered_values = new_fields_values.filter { _1.in? layer.field_ids }
+    # Filter invalid field IDs and locked fields
+    filtered_values = new_fields_values.filter do |field_id, _value|
+      field = layer.fields.find_by(id: field_id)
+      field.present? && !field.locked?
+    end
 
     # Cast values
     casted_values = filtered_values.to_h do |field_id, value|

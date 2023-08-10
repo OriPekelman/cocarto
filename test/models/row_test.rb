@@ -153,5 +153,13 @@ class RowTest < ActiveSupport::TestCase
       assert_equal "Le Bistrot", row.values[fields(:restaurant_name).id]
       assert_equal 5, row.values[fields(:restaurant_rating).id]
     end
+
+    test "can't set value for locked fields" do
+      fields(:restaurant_name).update(locked: true)
+      row = rows(:antipode)
+      row.fields_values = {fields(:restaurant_name).id => "Le Bastringue"}
+
+      assert_equal "L’Antipode", row.values[fields(:restaurant_name).id]
+    end
   end
 end
