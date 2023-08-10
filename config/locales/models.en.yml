@@ -6,7 +6,7 @@ en:
         enum_values: Menu options
         field_type: Type
         label: Name
-        text_is_large: Long text
+        text_is_long: Long text
       field/field_types:
         boolean: Boolean
         css_property: CSS Property

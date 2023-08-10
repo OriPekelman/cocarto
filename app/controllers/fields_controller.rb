@@ -54,6 +54,6 @@ class FieldsController < ApplicationController
   end
 
   def field_params
-    params.require(:field).permit(:label, :layer_id, :field_type, enum_values: [], territory_category_ids: [])
+    params.require(:field).permit(:label, :layer_id, :field_type, :text_is_long, enum_values: [], territory_category_ids: [])
   end
 end
