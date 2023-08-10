@@ -36,6 +36,24 @@ class FieldTest < ActiveSupport::TestCase
     end
   end
 
+  class Ordering < FieldTest
+    test "new field is appended at the end" do
+      new_field = layers(:restaurants).fields.type_text.create!
+
+      assert_equal new_field.sort_order_rank, layers(:restaurants).fields.count - 1
+    end
+
+    test "reordering a row correctly updates the ranks" do
+      field_1 = layers(:restaurants).fields.first
+      field_2 = layers(:restaurants).fields.second
+
+      field_1.update(sort_order_position: :down)
+
+      assert_equal 1, field_1.sort_order_rank
+      assert_equal 0, field_2.reload.sort_order_rank
+    end
+  end
+
   class Enum < FieldTest
     test "some enum value is allowed" do
       field = Field.type_enum.new(enum_values: ["value"])
