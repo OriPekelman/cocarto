@@ -6,13 +6,14 @@
 #  enum_values :string           is an Array
 #  field_type  :enum             not null
 #  label       :string
+#  sort_order  :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  layer_id    :uuid             not null
 #
 # Indexes
 #
-#  index_fields_on_layer_id  (layer_id)
+#  index_fields_on_layer_id_and_sort_order  (layer_id,sort_order) UNIQUE
 #
 # Foreign Keys
 #
@@ -23,39 +24,47 @@ restaurant_name:
   layer: restaurants
   label: "Name"
   field_type: "text"
+  sort_order: 0
 
 restaurant_rating:
   layer: restaurants
   label: "Rating"
   field_type: "float"
+  sort_order: 1
 
 restaurant_table_size:
   layer: restaurants
   label: "Table Size"
   field_type: "integer"
+  sort_order: 2
 
 restaurant_ville:
   layer: restaurants
   label: "Ville"
   field_type: "territory"
   territory_categories: ["communes"]
+  sort_order: 3
 
 restaurant_date:
   layer: restaurants
   label: "Date"
   field_type: "date"
+  sort_order: 4
 
 restaurant_decision:
   layer: restaurants
   label: "Decision"
   field_type: "boolean"
+  sort_order: 5
 
 hiking_paths_name:
   layer: hiking_paths
   label: "Name"
   field_type: "text"
+  sort_order: 0
 
 hiking_paths_document:
   layer: hiking_paths
   label: "Document"
   field_type: "files"
+  sort_order: 1
