@@ -56,7 +56,7 @@ class Field < ApplicationRecord
 
   after_update_commit -> do
     broadcast_i18n_replace_to layer.map
-    needs_rows_broadcast = type_enum? && enum_values_previously_changed? || type_text? && text_is_long_previously_changed?
+    needs_rows_broadcast = type_enum? && enum_values_previously_changed? || type_text? && text_is_long_previously_changed? || locked_previously_changed?
     if needs_rows_broadcast
       # issue #200: update all the rows so that the <select> options reflect the available enum values.
       layer.rows_with_fields_values.each do |row|
