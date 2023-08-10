@@ -1,4 +1,4 @@
-<%# params: row, from_rows_new %>
+<%# params: row, focus_field, from_rows_new %>
 <%# used in rows/edit and rows/new %>
 
 <%= form_with model: [row.layer, row], id: dom_id(row, :form), multipart: true, class: "form" do |form| %>
@@ -10,12 +10,7 @@
     <% row.fields_values.each do |field, value| %>
       <div class="form__field">
         <%= form.label sanitize_to_id("fields_values[#{field.id}]"), field.label %>
-        <% if field.type_files? %>
-          <%# Special-case for file fields: directly embed FileFieldComponent instead of using FieldValueComponent. %>
-          <%= render FileFieldComponent.new(field: field, row: row) %>
-        <% else %>
-          <%= render FieldValueComponent.new(field: field, value: value, row: row, form_prefix: :form) %>
-        <% end %>
+        <%= render FieldValueComponent.new(field: field, value: value, row: row, form_prefix: :form, autofocus: focus_field == field) %>
       </div>
     <% end %>
   </div>

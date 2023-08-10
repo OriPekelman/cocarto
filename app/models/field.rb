@@ -54,7 +54,8 @@ class Field < ApplicationRecord
 
   after_update_commit -> do
     broadcast_i18n_replace_to layer.map
-    if type_enum? && enum_values_previously_changed?
+    needs_rows_broadcast = type_enum? && enum_values_previously_changed? || type_text? && text_is_long_previously_changed?
+    if needs_rows_broadcast
       # issue #200: update all the rows so that the <select> options reflect the available enum values.
       layer.rows.each do |row|
         content = ApplicationController.render(FieldValueComponent.new(field: self, value: nil, row: row, form_prefix: :inline_form), layout: false)
