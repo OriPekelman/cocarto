@@ -6,13 +6,14 @@
 #  enum_values :string           is an Array
 #  field_type  :enum             not null
 #  label       :string
+#  sort_order  :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  layer_id    :uuid             not null
 #
 # Indexes
 #
-#  index_fields_on_layer_id  (layer_id)
+#  index_fields_on_layer_id_and_sort_order  (layer_id,sort_order) UNIQUE
 #
 # Foreign Keys
 #
@@ -22,6 +23,11 @@ class Field < ApplicationRecord
   # Attributes
   enum :field_type, {text: "text", float: "float", integer: "integer", territory: "territory", date: "date", boolean: "boolean", css_property: "css_property", enum: "enum", files: "files"}, prefix: :type
   attr_readonly :field_type
+
+  # Ordering
+  include RankedModel
+  ranks :sort_order, with_same: :layer_id
+  attribute :sort_order, default: :last
 
   # Relations
   belongs_to :layer, touch: true

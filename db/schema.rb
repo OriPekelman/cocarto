@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_20_142410) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_10_080546) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -93,7 +93,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_20_142410) do
     t.datetime "updated_at", null: false
     t.enum "field_type", null: false, enum_type: "field_type"
     t.string "enum_values", array: true
-    t.index ["layer_id"], name: "index_fields_on_layer_id"
+    t.integer "sort_order"
+    t.index ["layer_id", "sort_order"], name: "index_fields_on_layer_id_and_sort_order", unique: true
   end
 
   create_table "fields_territory_categories", force: :cascade do |t|

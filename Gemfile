@@ -43,6 +43,7 @@ gem "view_component"
 gem "view_component-fragment_caching"
 gem "active_link_to"
 gem "turbo_flash"
+gem "ranked-model"
 
 gem "roo"
 

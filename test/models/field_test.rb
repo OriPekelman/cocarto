@@ -6,13 +6,14 @@
 #  enum_values :string           is an Array
 #  field_type  :enum             not null
 #  label       :string
+#  sort_order  :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  layer_id    :uuid             not null
 #
 # Indexes
 #
-#  index_fields_on_layer_id  (layer_id)
+#  index_fields_on_layer_id_and_sort_order  (layer_id,sort_order) UNIQUE
 #
 # Foreign Keys
 #
@@ -32,6 +33,24 @@ class FieldTest < ActiveSupport::TestCase
       field.reload
 
       assert_predicate field, :type_text?
+    end
+  end
+
+  class Ordering < FieldTest
+    test "new field is appended at the end" do
+      new_field = layers(:restaurants).fields.type_text.create!
+
+      assert_equal new_field.sort_order_rank, layers(:restaurants).fields.count - 1
+    end
+
+    test "reordering a row correctly updates the ranks" do
+      field_1 = layers(:restaurants).fields.first
+      field_2 = layers(:restaurants).fields.second
+
+      field_1.update(sort_order_position: :down)
+
+      assert_equal 1, field_1.sort_order_rank
+      assert_equal 0, field_2.reload.sort_order_rank
     end
   end
 
