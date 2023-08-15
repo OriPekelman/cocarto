@@ -2,14 +2,15 @@
 #
 # Table name: fields
 #
-#  id          :uuid             not null, primary key
-#  enum_values :string           is an Array
-#  field_type  :enum             not null
-#  label       :string
-#  sort_order  :integer
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  layer_id    :uuid             not null
+#  id           :uuid             not null, primary key
+#  enum_values  :string           is an Array
+#  field_type   :enum             not null
+#  label        :string
+#  sort_order   :integer
+#  text_is_long :boolean          default(FALSE), not null
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  layer_id     :uuid             not null
 #
 # Indexes
 #
