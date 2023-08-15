@@ -31,7 +31,7 @@ class FieldValueComponent < ViewComponent::Base
         name = @value.present? ? Row.human_attribute_name(:files, count: @value.length) : ""
         link_to name,
           edit_layer_row_path(@row.layer_id, @row.id, focus_field_id: @field.id),
-          data: {turbo_frame: "modal"},
+          data: {turbo_frame: "modal", restricted_target: "restricted", restricted_authorizations: RowPolicy.authorizations(@row)},
           title: t("field.attachments"),
           class: "layer-table-td__button"
       else
@@ -42,7 +42,7 @@ class FieldValueComponent < ViewComponent::Base
         if @form_prefix == :inline_form
           link_to @value || "",
             edit_layer_row_path(@row.layer_id, @row.id, focus_field_id: @field.id),
-            data: {turbo_frame: "modal"},
+            data: {turbo_frame: "modal", restricted_target: "restricted", restricted_authorizations: RowPolicy.authorizations(@row)},
             title: t("common.edit"),
             class: "layer-table-td__button"
         else
