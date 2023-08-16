@@ -57,8 +57,8 @@ class Field < ApplicationRecord
     needs_rows_broadcast = type_enum? && enum_values_previously_changed? || type_text? && text_is_long_previously_changed?
     if needs_rows_broadcast
       # issue #200: update all the rows so that the <select> options reflect the available enum values.
-      layer.rows.each do |row|
-        content = ApplicationController.render(FieldValueComponent.new(field: self, value: nil, row: row, form_prefix: :inline_form), layout: false)
+      layer.rows_with_fields_values.each do |row|
+        content = ApplicationController.render(FieldValueComponent.new(field: self, value: row.fields_values[self], row: row, form_prefix: :inline_form), layout: false)
         html = ApplicationController.render(FieldTdComponent.new(field: self).with_content(content), layout: false)
         target = "##{dom_id(row)} .#{dom_id(self)}"
         # note: we need to use the `targets:` param when using `replace_to` to a css selector.
