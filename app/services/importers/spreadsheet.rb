@@ -5,7 +5,11 @@ module Importers
     def _import_rows
       spreadsheet = Roo::Spreadsheet.open(@source)
 
-      sheet = spreadsheet.sheet(@mapping.source_layer_name || 0)
+      begin
+        sheet = spreadsheet.sheet(@mapping.source_layer_name.presence || 0)
+      rescue RangeError
+        raise ImportGlobalError
+      end
 
       sheet.parse(headers: :first_row).each_with_index do |line, index|
         values = line

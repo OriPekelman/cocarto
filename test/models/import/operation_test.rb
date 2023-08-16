@@ -77,6 +77,16 @@ class Import::OperationTest < ActiveSupport::TestCase
       assert_equal "ERROR:  Geometry type (Point) does not match column type (LineString) (PG::InvalidParameterValue)", operation.global_error
     end
 
+    test "wrong sheet name" do
+      import_mappings(:restaurants_spreadsheet).update(source_layer_name: "invalid sheet name")
+      operation = import_configurations(:restaurants_spreadsheet)
+        .operations.create!(local_source_file: attachable_fixture("restaurants.xlsx"))
+        .import!(users(:reclus))
+
+      assert_not operation.success?
+      assert_equal "sheet 'invalid sheet name' not found (RangeError)", operation.global_error
+    end
+
     test "success" do
       operation = import_configurations(:restaurants_csv)
         .operations.create!(local_source_file: attachable_fixture("restaurants.csv"))

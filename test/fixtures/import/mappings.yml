@@ -33,6 +33,10 @@ restaurants_csv:
   configuration: restaurants_csv
   layer: restaurants
 
+restaurants_spreadsheet:
+  configuration: restaurants_spreadsheet
+  layer: restaurants
+
 restaurants_geojson:
   configuration: restaurants_geojson
   layer: restaurants
