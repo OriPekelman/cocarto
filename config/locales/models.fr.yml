@@ -6,6 +6,7 @@ fr:
         enum_values: Options du menu
         field_type: Type
         label: Nom
+        locked: Verrouillé
         text_is_long: Texte long
       field/field_types:
         boolean: Booléen
