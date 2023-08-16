@@ -64,6 +64,25 @@ class RowTest < ActiveSupport::TestCase
       assert_equal [{error: :multiple_items}], row.warnings.details[:geometry]
       assert_equal RGEO_FACTORY.point(10, 40), RGEO_FACTORY.parse_wkt(row.geometry.as_text) # Make sure to use the same factory for comparison
     end
+
+    test "compute bounds" do # rubocop:disable Minitest/MultipleAssertions
+      layer = layers(:restaurants)
+      bounds = layer.rows.bounding_box
+
+      assert_in_epsilon 2.37516, bounds[0]
+      assert_in_epsilon 48.88661, bounds[1]
+      assert_in_epsilon 2.37516, bounds[2]
+      assert_in_epsilon 48.88661, bounds[3]
+
+      layer.rows.create(point: "POINT(2 40)", author: users("reclus"))
+      layer.rows.create(point: "POINT(3 50)", author: users("reclus"))
+      extended_bounds = layer.rows.bounding_box
+
+      assert_in_epsilon 2, extended_bounds[0]
+      assert_in_epsilon 40, extended_bounds[1]
+      assert_in_epsilon 3, extended_bounds[2]
+      assert_in_epsilon 50, extended_bounds[3]
+    end
   end
 
   class FieldsValuesTest < RowTest
@@ -135,23 +154,12 @@ class RowTest < ActiveSupport::TestCase
       assert_equal 5, row.values[fields(:restaurant_rating).id]
     end
 
-    test "compute bounds" do # rubocop:disable Minitest/MultipleAssertions
-      layer = layers(:restaurants)
-      bounds = layer.rows.bounding_box
+    test "can't set value for locked fields" do
+      fields(:restaurant_name).update(locked: true)
+      row = rows(:antipode)
+      row.fields_values = {fields(:restaurant_name).id => "Le Bastringue"}
 
-      assert_in_epsilon 2.37516, bounds[0]
-      assert_in_epsilon 48.88661, bounds[1]
-      assert_in_epsilon 2.37516, bounds[2]
-      assert_in_epsilon 48.88661, bounds[3]
-
-      layer.rows.create(point: "POINT(2 40)", author: users("reclus"))
-      layer.rows.create(point: "POINT(3 50)", author: users("reclus"))
-      extended_bounds = layer.rows.bounding_box
-
-      assert_in_epsilon 2, extended_bounds[0]
-      assert_in_epsilon 40, extended_bounds[1]
-      assert_in_epsilon 3, extended_bounds[2]
-      assert_in_epsilon 50, extended_bounds[3]
+      assert_equal "L’Antipode", row.values[fields(:restaurant_name).id]
     end
   end
 end

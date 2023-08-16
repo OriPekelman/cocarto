@@ -63,7 +63,7 @@ class FieldValueComponent < ViewComponent::Base
       data: {
         action: "input->row#setDirty focusout->row#save",
         restricted_target: "restricted",
-        restricted_authorizations: RowPolicy.authorizations(@row)
+        restricted_authorizations: @field.locked? ? %W[locked].to_json : RowPolicy.authorizations(@row)
       },
       form: dom_id(@row, @form_prefix),
       autocomplete: :off,

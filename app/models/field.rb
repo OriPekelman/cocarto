@@ -6,6 +6,7 @@
 #  enum_values  :string           is an Array
 #  field_type   :enum             not null
 #  label        :string
+#  locked       :boolean          default(FALSE), not null
 #  sort_order   :integer
 #  text_is_long :boolean          default(FALSE), not null
 #  created_at   :datetime         not null
@@ -38,6 +39,7 @@ class Field < ApplicationRecord
   # Validations
   validates :field_type, presence: true
   validates :text_is_long, inclusion: [true, false]
+  validates :locked, inclusion: [true, false]
 
   # Type-specific validations
   validates :enum_values, presence: true, if: -> { type_enum? }
@@ -54,7 +56,7 @@ class Field < ApplicationRecord
 
   after_update_commit -> do
     broadcast_i18n_replace_to layer.map
-    needs_rows_broadcast = type_enum? && enum_values_previously_changed? || type_text? && text_is_long_previously_changed?
+    needs_rows_broadcast = type_enum? && enum_values_previously_changed? || type_text? && text_is_long_previously_changed? || locked_previously_changed?
     if needs_rows_broadcast
       # issue #200: update all the rows so that the <select> options reflect the available enum values.
       layer.rows_with_fields_values.each do |row|
