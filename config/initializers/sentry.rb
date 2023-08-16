@@ -20,7 +20,5 @@ if Rails.env.production? || ENV["COCARTO_DEBUG_SENTRY"].present?
       end
     end
     config.profiles_sample_rate = 1 # The profiles_sample_rate setting is relative to the traces_sample_rate setting.
-
-    config.async = lambda { |event, hint| Sentry::SendEventJob.perform_later(event, hint) }
   end
 end
