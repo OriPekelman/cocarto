@@ -29,7 +29,8 @@ class Import::OperationsController < ApplicationController
     # TODO: Proper Analysis system, see #305
     mapping = {
       "text/csv" => :csv,
-      "application/json" => :geojson
+      "application/json" => :geojson,
+      "application/geo+json" => :geojson
     }
 
     if params[:local_source_file].present?
