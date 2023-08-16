@@ -30,7 +30,10 @@ class Import::OperationsController < ApplicationController
     mapping = {
       "text/csv" => :csv,
       "application/json" => :geojson,
-      "application/geo+json" => :geojson
+      "application/geo+json" => :geojson,
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" => :spreadsheet,
+      "application/vnd.oasis.opendocument.spreadsheet" => :spreadsheet,
+      "application/vnd.ms-excel" => :spreadsheet
     }
 
     if params[:local_source_file].present?
