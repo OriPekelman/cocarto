@@ -10,12 +10,12 @@
     </div>
 
     <div class="import_form--source-inputs">
-      <div class="form__field">
+      <div class="form__field" title="<%= t ".file_formats" %>">
         <h3 class="form__header"><%= t(".from_file") %></h3>
         <div data-controller="file-list" class="form__field form__field--file">
           <label>
           <span class="button button--with-icon button--link">
-            <%= t ".from_file_csv" %>
+            <%= t ".attach_file" %>
             <%= embedded_svg "upload-cloud.svg", class: "icon--small" %>
             <%= f.file_field :local_source_file, data: {file_list_target: "input", action: "change->file-list#update"}, hidden: true %>
           </span>
