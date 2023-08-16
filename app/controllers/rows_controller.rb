@@ -12,6 +12,7 @@ class RowsController < ApplicationController
     if params[:focus_field_id]
       @focus_field = Field.find(params[:focus_field_id])
     end
+    @role_type = current_user.access_for_map(@row.map).role_type
   end
 
   def create
@@ -61,7 +62,7 @@ class RowsController < ApplicationController
   private
 
   def set_row
-    @row = authorize Row.find(params[:id]).reload_with_fields_values(layer: [:fields, :map])
+    @row = authorize Row.find(params[:id]).reload_with_fields_values(:map, layer: [:fields, :map])
   end
 
   def set_layer

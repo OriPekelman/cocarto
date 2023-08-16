@@ -106,7 +106,7 @@ class Row < ApplicationRecord
   end
 
   # Reload self with the fields values (and additional associations)
-  def reload_with_fields_values(additional_includes = nil)
+  def reload_with_fields_values(*additional_includes)
     relation = layer.rows_with_fields_values
     relation = relation.includes(additional_includes) if additional_includes.present?
     relation.find(id)
