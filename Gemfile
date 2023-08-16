@@ -46,6 +46,7 @@ gem "turbo_flash"
 gem "ranked-model"
 
 gem "roo"
+gem "roo-xls"
 
 # perfs and errors
 gem "sentry-ruby"
