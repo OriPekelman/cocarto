@@ -40,7 +40,7 @@ class FieldValueComponent < ViewComponent::Base
     when "text"
       if @field.text_is_long?
         if @form_prefix == :inline_form
-          link_to @value || "",
+          link_to @value&.truncate_words(4, omission: "…") || "",
             edit_layer_row_path(@row.layer_id, @row.id, focus_field_id: @field.id),
             data: {turbo_frame: "modal", restricted_target: "restricted", restricted_authorizations: RowPolicy.authorizations(@row)},
             title: t("common.edit"),
