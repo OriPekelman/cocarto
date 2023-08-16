@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_10_114416) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_10_144943) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -95,6 +95,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_10_114416) do
     t.string "enum_values", array: true
     t.integer "sort_order"
     t.boolean "text_is_long", default: false, null: false
+    t.boolean "locked", default: false, null: false
     t.index ["layer_id", "sort_order"], name: "index_fields_on_layer_id_and_sort_order", unique: true
   end
 

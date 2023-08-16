@@ -6,6 +6,7 @@
 #  enum_values  :string           is an Array
 #  field_type   :enum             not null
 #  label        :string
+#  locked       :boolean          default(FALSE), not null
 #  sort_order   :integer
 #  text_is_long :boolean          default(FALSE), not null
 #  created_at   :datetime         not null
@@ -38,6 +39,7 @@ class Field < ApplicationRecord
   # Validations
   validates :field_type, presence: true
   validates :text_is_long, inclusion: [true, false]
+  validates :locked, inclusion: [true, false]
 
   # Type-specific validations
   validates :enum_values, presence: true, if: -> { type_enum? }

@@ -6,6 +6,7 @@
 #  enum_values  :string           is an Array
 #  field_type   :enum             not null
 #  label        :string
+#  locked       :boolean          default(FALSE), not null
 #  sort_order   :integer
 #  text_is_long :boolean          default(FALSE), not null
 #  created_at   :datetime         not null
