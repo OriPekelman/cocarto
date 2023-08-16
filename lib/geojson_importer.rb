@@ -47,7 +47,7 @@ module GeojsonImporter
 
         {
           name: name,
-          geometry: geometry.as_text,
+          geometry: geometry,
           territory_category_id: cat.id,
           code: code,
           parent_id: parent_id
