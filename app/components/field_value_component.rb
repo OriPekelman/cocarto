@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
 class FieldValueComponent < ViewComponent::Base
-  def initialize(field:, value:, row:, form_prefix:)
+  def initialize(field:, value:, row:, form_prefix:, autofocus: false)
     @field = field
     @value = value
     @row = row
     @form_prefix = form_prefix # form_prefix is needed to differentiate the inline form (in RowComponent) and the regular edit (in rows/_form). cf #196
+    @autofocus = autofocus
   end
 
   def field_tag
@@ -26,12 +27,30 @@ class FieldValueComponent < ViewComponent::Base
     when "enum"
       select_tag field_name, options_for_select(@field.enum_values, @value), opts.merge(include_blank: true)
     when "files"
-      name = @value.present? ? Row.human_attribute_name(:files, count: @value.length) : t("common.ellipsis")
-      link_to name,
-        edit_layer_row_path(@row.layer_id, @row.id, field_id: @field.id),
-        data: {turbo_frame: "modal"},
-        title: t("field.attachments"),
-        class: "layer-table-td__files-button"
+      if @form_prefix == :inline_form
+        name = @value.present? ? Row.human_attribute_name(:files, count: @value.length) : ""
+        link_to name,
+          edit_layer_row_path(@row.layer_id, @row.id, focus_field_id: @field.id),
+          data: {turbo_frame: "modal", restricted_target: "restricted", restricted_authorizations: RowPolicy.authorizations(@row)},
+          title: t("field.attachments"),
+          class: "layer-table-td__button"
+      else
+        render FileFieldComponent.new(field: @field, row: @row)
+      end
+    when "text"
+      if @field.text_is_long?
+        if @form_prefix == :inline_form
+          link_to @value&.truncate_words(4, omission: "…") || "",
+            edit_layer_row_path(@row.layer_id, @row.id, focus_field_id: @field.id),
+            data: {turbo_frame: "modal", restricted_target: "restricted", restricted_authorizations: RowPolicy.authorizations(@row)},
+            title: t("common.edit"),
+            class: "layer-table-td__button"
+        else
+          text_area_tag field_name, @value, opts.merge(class: "input")
+        end
+      else
+        text_field_tag field_name, @value, opts.merge(class: "input")
+      end
     else
       text_field_tag field_name, @value, opts.merge(class: "input")
     end
@@ -47,7 +66,8 @@ class FieldValueComponent < ViewComponent::Base
         restricted_authorizations: RowPolicy.authorizations(@row)
       },
       form: dom_id(@row, @form_prefix),
-      autocomplete: :off
+      autocomplete: :off,
+      autofocus: @autofocus
     }
   end
 

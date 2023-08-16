@@ -9,10 +9,8 @@ class RowsController < ApplicationController
   end
 
   def edit
-    if params[:field_id]
-      # Only used for files fields
-      @field = Field.find(params[:field_id])
-      raise NotImplementedError unless @field.type_files?
+    if params[:focus_field_id]
+      @focus_field = Field.find(params[:focus_field_id])
     end
   end
 

@@ -2,14 +2,15 @@
 #
 # Table name: fields
 #
-#  id          :uuid             not null, primary key
-#  enum_values :string           is an Array
-#  field_type  :enum             not null
-#  label       :string
-#  sort_order  :integer
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  layer_id    :uuid             not null
+#  id           :uuid             not null, primary key
+#  enum_values  :string           is an Array
+#  field_type   :enum             not null
+#  label        :string
+#  sort_order   :integer
+#  text_is_long :boolean          default(FALSE), not null
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  layer_id     :uuid             not null
 #
 # Indexes
 #
@@ -36,6 +37,7 @@ class Field < ApplicationRecord
 
   # Validations
   validates :field_type, presence: true
+  validates :text_is_long, inclusion: [true, false]
 
   # Type-specific validations
   validates :enum_values, presence: true, if: -> { type_enum? }
@@ -52,10 +54,11 @@ class Field < ApplicationRecord
 
   after_update_commit -> do
     broadcast_i18n_replace_to layer.map
-    if type_enum? && enum_values_previously_changed?
+    needs_rows_broadcast = type_enum? && enum_values_previously_changed? || type_text? && text_is_long_previously_changed?
+    if needs_rows_broadcast
       # issue #200: update all the rows so that the <select> options reflect the available enum values.
-      layer.rows.each do |row|
-        content = ApplicationController.render(FieldValueComponent.new(field: self, value: nil, row: row, form_prefix: :inline_form), layout: false)
+      layer.rows_with_fields_values.each do |row|
+        content = ApplicationController.render(FieldValueComponent.new(field: self, value: row.fields_values[self], row: row, form_prefix: :inline_form), layout: false)
         html = ApplicationController.render(FieldTdComponent.new(field: self).with_content(content), layout: false)
         target = "##{dom_id(row)} .#{dom_id(self)}"
         # note: we need to use the `targets:` param when using `replace_to` to a css selector.

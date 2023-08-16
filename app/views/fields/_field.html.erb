@@ -45,7 +45,12 @@ Used in layers/rows, broadcast from FieldsController and from Field hooks. %>
                 <%= radio.label do %>
                   <%= radio.radio_button class: "field-form__type-radio", required: field.new_record?, disabled: field.persisted? %>
                   <%= radio.text %>
-                  <% if radio.object == "enum" %>
+                  <% if radio.object == "text" %>
+                    <div class="field-form__type-param form__field form__field--inline">
+                      <%= form.check_box :text_is_long %>
+                      <%= form.label :text_is_long %>
+                    </div>
+                  <% elsif radio.object == "enum" %>
                     <div class="field-form__type-param form__field" data-controller="enum-values">
                       <template data-enum-values-target="template">
                         <%= form.text_field :enum_values, value: nil, multiple: true, placeholder: t("helpers.placeholder.field.enum_value"), data: {enum_values_target: "value", action: "input->enum-values#valueInput"} %>

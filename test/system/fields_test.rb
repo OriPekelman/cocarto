@@ -37,4 +37,29 @@ class FieldsTest < ApplicationSystemTestCase
 
     refute_selector ".layer-table__th--field", text: "TABLE SIZE"
   end
+
+  test "Make a text field long" do # rubocop:disable Minitest/MultipleAssertions
+    sign_in_as(users("reclus"), "refleurir")
+    visit map_path(id: maps("restaurants"))
+    wait_until_map_loaded
+    click_on "Display the table for this layer", match: :first
+
+    assert_selector("input[value='L’Antipode']")
+
+    # Make “Name” long
+    find(".layer-table__th--field", text: "NAME").click
+    check "field[text_is_long]"
+    click_on "OK"
+
+    assert_link "L’Antipode"
+    refute_selector "input[value='L’Antipode']"
+
+    click_on "L’Antipode"
+
+    assert_field "Name", type: :textarea
+    fill_in "Name", type: :textarea, with: "Nouveau nom!"
+    click_on "Save"
+
+    assert_link "Nouveau nom!"
+  end
 end

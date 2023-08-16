@@ -10,6 +10,6 @@
     <%= embedded_svg "center.svg", class: "add-single-row__crosshair" %>
   </div>
   <div class="add-single-row__form">
-    <%= render "form", row: @row, from_rows_new: true %>
+    <%= render "form", row: @row, focus_field: @row.layer.fields.first, from_rows_new: true %>
   </div>
 </div>
