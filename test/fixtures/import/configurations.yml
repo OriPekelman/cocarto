@@ -26,6 +26,11 @@ restaurants_csv:
   name: Restaurants from CSV
   source_type: csv
 
+restaurants_spreadsheet:
+  map: restaurants
+  name: Restaurants from spreadsheets
+  source_type: spreadsheet
+
 restaurants_geojson:
   map: restaurants
   name: Restaurants from GeoJSON

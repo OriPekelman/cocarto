@@ -45,9 +45,10 @@ en:
   import:
     operations:
       new:
+        attach_file: Upload a file
         attention: This feature is still experimental; expect bugs, and please do contact us if you get into trouble.
+        file_formats: 'Supported formats : GeoJSON, CSV, Excel (.xls, .xlsx), OpenOffice (.ods)'
         from_file: From a file
-        from_file_csv: Upload a file (csv)
         from_url: From an URL
         from_url_layer_name: Layer name (Feature Type)
         from_url_wfs: URL of a WFS server

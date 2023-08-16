@@ -22,7 +22,7 @@
 #
 class Import::Configuration < ApplicationRecord
   # Attributes
-  enum :source_type, {random: "random", csv: "csv", geojson: "geojson", wfs: "wfs"}
+  enum :source_type, {random: "random", csv: "csv", geojson: "geojson", wfs: "wfs", spreadsheet: "spreadsheet"}
 
   # Relations
   belongs_to :map
