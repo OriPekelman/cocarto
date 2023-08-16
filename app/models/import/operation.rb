@@ -85,7 +85,7 @@ class Import::Operation < ApplicationRecord
         .map do |mapping|
         import_in_layer(source, author, mapping)
       end
-    rescue Importers::ImportGlobalError => e
+    rescue Importers::ImportGlobalError, ActiveRecord::ActiveRecordError => e
       self.global_error = (e.cause || e).detailed_message.force_encoding("utf-8")
     ensure
       raise ActiveRecord::Rollback unless success?

@@ -66,6 +66,17 @@ class Import::OperationTest < ActiveSupport::TestCase
       assert_equal "Any value after quoted field isn't allowed in line 1. (CSV::MalformedCSVError)", operation.global_error
     end
 
+    test "wrong geometry type" do
+      conf = Import::Configuration.create(map: maps(:hiking), source_type: :csv)
+      conf.mappings.create(layer: layers(:hiking_paths))
+      operation = conf
+        .operations.create!(local_source_file: attachable_fixture("restaurants.csv"))
+        .import!(users(:reclus))
+
+      assert_not operation.success?
+      assert_equal "ERROR:  Geometry type (Point) does not match column type (LineString) (PG::InvalidParameterValue)", operation.global_error
+    end
+
     test "success" do
       operation = import_configurations(:restaurants_csv)
         .operations.create!(local_source_file: attachable_fixture("restaurants.csv"))
