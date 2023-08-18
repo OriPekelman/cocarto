@@ -11,11 +11,17 @@ class ApplicationController < ActionController::Base
 
   def render_to_body(options = {})
     # When the request is made to be displayed in a turbo-frame modal, we wrap in a specific component.
-    if turbo_frame_request_id == "modal"
-      ModalComponent.new.with_content(super).render_in(view_context)
-    else
-      super
+    # This is a bit complex, especially when returning from a POST after a create or update in turbo.
+    # - If we redirect, render_to_body isn’t called, and the client clears the modal. That is OK.
+    # - If we call format.turbo_stream with no block, 204 no content is returned by implicit_render.
+    #   This is not what we want for TurboFlash, as we want the flash messages to be implicitely added to the response.
+    # - If we call format.turbo_stream { render turbo_stream: [] }, this method (render_to_body) is called and we have the opportunity to
+    #   embed the response in a modal frame.
+    result = super
+    if turbo_frame_request_id == "modal" && result.present?
+      result = ModalComponent.new.with_content(result).render_in(view_context)
     end
+    result
   end
 
   def default_url_options
