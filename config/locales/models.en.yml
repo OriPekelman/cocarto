@@ -18,6 +18,27 @@ en:
         integer: Integer
         territory: Territory
         text: Text
+      import/configuration:
+        source_csv_column_separator: Separator
+        source_text_encoding: Encoding
+      import/configuration/source_type:
+        csv: CSV
+        geojson: GeoJSON
+        spreadsheet: Spreadsheet
+        wfs: WFS
+      import/mapping:
+        geometry_columns:
+          one: Column
+          other: Columns
+        geometry_encoding_format: Format
+      import/mapping/geometry_encoding_format:
+        geojson: GeoJSON
+        wkb: WKB
+        wkt: WKT
+        xy: longitude, latitude
+      import/operation:
+        local_source_file: Data file
+        remote_source_url: Data source URL
       import/operation/status:
         done: Done
         fetching: Fetching

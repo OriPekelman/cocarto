@@ -1,0 +1,6 @@
+<%# params: configuration_form %>
+
+<%= configuration_form.label :source_csv_column_separator %>
+<%= configuration_form.text_field :source_csv_column_separator, onchange: "this.form.requestSubmit()", class: "form__input-narrow" %>
+<%= configuration_form.label :source_text_encoding %>
+<%= configuration_form.text_field :source_text_encoding, onchange: "this.form.requestSubmit()", class: "form__input-narrow" %>

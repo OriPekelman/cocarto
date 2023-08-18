@@ -29,7 +29,7 @@ class Import::Configuration < ApplicationRecord
   has_many :mappings, class_name: "Import::Mapping", dependent: :destroy
   has_many :operations, class_name: "Import::Operation", dependent: :destroy
 
-  accepts_nested_attributes_for :mappings
+  accepts_nested_attributes_for :mappings, allow_destroy: true, reject_if: :all_blank # Note: :allow_destroy and :reject_if will be needed for multi-layer import configurations
 
   # Validations
   validates :source_type, presence: true

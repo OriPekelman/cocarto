@@ -1,0 +1,17 @@
+<%# params: operation %>
+
+<%= form_with model: operation, id: dom_id(operation, :form), class: "form" do |form| %>
+  <%= render "import/operations/form/configuration", form: form %>
+
+  <%= form.fields_for :configuration do |configuration_form| %>
+    <% configuration = configuration_form.object %>
+
+    <%= configuration_form.hidden_field :map_id %>
+
+    <%= configuration_form.fields_for :mappings do |mapping_form| %>
+      <%= render "import/operations/form/mapping_analysis", form: mapping_form, operation: operation, configuration: configuration %>
+      <%= render "import/operations/form/mapping_destination", form: mapping_form, operation: operation, configuration: configuration %>
+      <%= render "import/operations/form/mapping_columns", form: mapping_form, operation: operation, configuration: configuration %>
+    <% end %>
+  <% end %>
+<% end %>

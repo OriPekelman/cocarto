@@ -1,12 +1,18 @@
-<div class="card__main-content">
+<div class="card__main-content card__main-content--wide">
   <h2 class="form__header"><%= Import::Operation.model_name.human %></h2>
-  <div class="form__field">
+  <% if @operation.ready? %>
+    <%= render "form", operation: @operation %>
+  <% else %>
     <%= render @operation %>
-  </div>
+  <% end %>
 </div>
 
 <div class="card__footer-content">
-  <button class="button button--confirm" data-action="modal#close">
-    <%= t("common.ok") %>
-  </button>
+  <% if @operation.ready? %>
+    <%= submit_tag "Démarrer", class: "button button--confirm", form: dom_id(@operation, :form) %>
+  <% else %>
+    <button class="button button--confirm" data-action="modal#close">
+      <%= t("common.ok") %>
+    </button>
+  <% end %>
 </div>

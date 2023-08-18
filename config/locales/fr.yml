@@ -44,6 +44,29 @@ fr:
     take_picture: Prendre une photo
   import:
     operations:
+      form:
+        configuration:
+          import_as: Importer comme
+          source_type_help: |-
+            Ce sera le type de format utilisé pour interpréter la source de données.
+             Il est défini automatiquement par cocarto mais vous pouvez en spécifier un autre.
+        mapping_analysis:
+          geometry_type: Type de géométrie
+          source: Source
+          source_layer_name:
+            spreadsheet: Feuille
+            wfs: Nom de la couche (“Feature Type”)
+        mapping_columns:
+          columns: Correspondance des attributs
+        mapping_destination:
+          destination: Destination
+          geometry_type: Type de géométrie
+          key_field: ID de réimport
+          key_field_info_html: |
+            Pour mettre à jour des données, spécifiez une colonne servant à identifier le rang préexistant.<br/>
+            Les attributs de chaque rang seront remplacés par ceux présents dans le fichier importé; les attributs absents du fichier ne seront pas supprimés. <br/>
+            Les nouveaux rangs dans le fichier seront rajoutés au tableau.
+          layer: Importer vers
       new:
         help_html: cocarto peut importer des données de fichiers <b>geojson</b>, tabulaires (<b>csv</b>), Excel ou OpenOffice (<b>xls</b>, <b>xlsx</b>, <b>ods</b>), ainsi que depuis un serveur <b>WFS</b>.
         or: ou

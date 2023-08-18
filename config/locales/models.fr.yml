@@ -18,6 +18,27 @@ fr:
         integer: Nombre entier
         territory: Territoire
         text: Texte
+      import/configuration:
+        source_csv_column_separator: Séparateur
+        source_text_encoding: Encodage
+      import/configuration/source_type:
+        csv: CSV
+        geojson: GeoJSON
+        spreadsheet: Tableur
+        wfs: WFS
+      import/mapping:
+        geometry_columns:
+          one: Colonne
+          other: Colonnes
+        geometry_encoding_format: Format
+      import/mapping/geometry_encoding_format:
+        geojson: GeoJSON
+        wkb: WKB
+        wkt: WKT
+        xy: longitude, latitude
+      import/operation:
+        local_source_file: Fichier de données
+        remote_source_url: URL de la source de données
       import/operation/status:
         done: Terminé
         fetching: Téléchargement

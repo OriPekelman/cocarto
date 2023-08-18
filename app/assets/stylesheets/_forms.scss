@@ -127,7 +127,7 @@ input[type="number"] {
 }
 
 .form__field--inline {
-  align-items: center;
+  align-items: baseline;
   flex-direction: row;
 }
 
@@ -144,4 +144,8 @@ input[type="number"] {
 .form__field--file {
   align-items: center;
   flex-direction: row;
+}
+
+.form__input-narrow {
+  max-width: 72px;
 }

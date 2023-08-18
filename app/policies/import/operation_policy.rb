@@ -5,6 +5,10 @@ class Import::OperationPolicy < ApplicationPolicy
 
   def show? = create?
 
+  def update? = create?
+
+  def destroy? = create?
+
   private
 
   def map_access
