@@ -1,6 +1,17 @@
 module Importers
   class Spreadsheet < Base
-    SUPPORTED_SOURCES = %i[local_source_file]
+    def self.support = {
+      public: true,
+      remote_only: false,
+      multiple_layers: true,
+      indeterminate_geometry: true,
+      mimes: %w[
+        application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+        application/vnd.oasis.opendocument.spreadsheet
+        application/vnd.ms-excel
+      ]
+    }
+
     def _source_layers
       spreadsheet = Roo::Spreadsheet.open(@source)
       spreadsheet.sheets

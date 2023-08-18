@@ -1,6 +1,13 @@
 module Importers
   class CSV < Base
-    SUPPORTED_SOURCES = %i[local_source_file]
+    def self.support = {
+      public: true,
+      remote_only: false,
+      multiple_layers: false,
+      indeterminate_geometry: true,
+      mimes: %w[text/csv]
+    }
+
     def _source_configuration
       {
         source_csv_column_separator: col_sep,

@@ -1,6 +1,12 @@
 module Importers
   class Random < Base
-    SUPPORTED_SOURCES = %i[local_source_file]
+    def self.support = {
+      public: false,
+      remote_only: false,
+      multiple_layers: false,
+      indeterminate_geometry: false,
+      mimes: %w[application/json]
+    }
 
     def _source_layers
       @configuration.map.layers.pluck(:name)

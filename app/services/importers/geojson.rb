@@ -1,6 +1,13 @@
 module Importers
   class GeoJSON < Base
-    SUPPORTED_SOURCES = %i[local_source_file]
+    def self.support = {
+      public: true,
+      remote_only: false,
+      multiple_layers: false,
+      indeterminate_geometry: false,
+      mimes: %w[application/json application/geo+json]
+    }
+
     def _source_layers = ["default"]
 
     def _source_columns(source_layer_name)

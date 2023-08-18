@@ -10,6 +10,16 @@ module Importers
       @author = author
     end
 
+    def self.support
+      raise NotImplementedError
+      # {
+      #   public: bool,                  # appears in the UI selection
+      #   remote_only: bool,             # a remote service (the source file can not be downloaded)
+      #   multiple_layers: bool,         # source has multiple sheets (that can be imported at once to multiple layers)
+      #   indeterminate_geometry: bool   # source data does not clearly encode geometry
+      # }
+    end
+
     ## Source Analysis (Implemented by subclasses)
 
     # returns guessed attributes for Import::Configuration

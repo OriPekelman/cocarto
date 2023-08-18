@@ -2,7 +2,14 @@ require "open3"
 
 module Importers
   class WFS < Base
-    SUPPORTED_SOURCES = %i[remote_source_url local_source_file]
+    def self.support = {
+      public: true,
+      remote_only: true,
+      multiple_layers: true,
+      indeterminate_geometry: false,
+      mimes: %w[application/gml+xml application/xml text/xml]
+    }
+
     def source_info
       @source_info ||= begin
         stdout, stderr, status = Open3.capture3("ogrinfo", "-json", "WFS:#{@source}")
