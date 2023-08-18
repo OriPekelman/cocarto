@@ -26,7 +26,7 @@ Rails.application.routes.draw do
       end
     end
     resources :layers, except: [:index, :new] do
-      resources :rows, only: [:new, :create, :edit, :update, :destroy]
+      resources :rows, only: [:new, :create, :edit, :update, :destroy], shallow: true
       member do
         get "/mvt/:z/:x/:y/", action: :mvt
       end

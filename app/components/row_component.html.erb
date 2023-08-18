@@ -19,7 +19,7 @@ https://github.com/ViewComponent/view_component/discussions/42#discussioncomment
 
     <td id="<%= dom_id(@row, "actions") %>" class="layer-table__td layer-table__td--actions">
       <div class="buttons-bar buttons-bar--tight">
-        <%= button_to([@row.layer, @row],
+        <%= button_to(@row,
               class: "icon-button icon-button--small",
               method: :delete,
               title: t("layers.layer.delete_row"),
@@ -27,7 +27,7 @@ https://github.com/ViewComponent/view_component/discussions/42#discussioncomment
               data: {restricted_target: "restricted", restricted_hidden: true, restricted_authorizations: %w[owner editor].to_json}) do %>
           <%= helpers.embedded_svg("remove_item.svg", class: "icon--small icon--tinted") %>
         <% end %>
-        <%= link_to(edit_layer_row_path(@row.layer, @row),
+        <%= link_to(edit_row_path(@row),
               class: "icon-button icon-button--small",
               title: t("common.edit"),
               data: {turbo_frame: "modal", restricted_target: "restricted", restricted_hidden: true, restricted_authorizations: %w[owner editor].to_json}) do %>
