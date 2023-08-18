@@ -10,6 +10,22 @@ module Importers
       @author = author
     end
 
+    ## Source Analysis (Implemented by subclasses)
+
+    # returns guessed attributes for Import::Configuration
+    def _source_configuration = {}
+
+    # Source layer names
+    def _source_layers = raise NotImplementedError
+
+    # Column names of a specific source layer
+    def _source_columns(source_layer_name) = raise NotImplementedError
+
+    # The GeometryParsing::GeometryAnalysis of a specific source layer. We want to guess the format and columns if indeterminate, and we want the geometry type in any case.
+    def _source_geometry_analysis(source_layer_name, columns: nil, format: nil) = raise NotImplementedError
+
+    ## Layer import
+    #
     def import_rows(report)
       @report = report
       @mapping = @report.mapping

@@ -1,6 +1,36 @@
 module Importers
   class Spreadsheet < Base
     SUPPORTED_SOURCES = %i[local_source_file]
+    def _source_layers
+      spreadsheet = Roo::Spreadsheet.open(@source)
+      spreadsheet.sheets
+    rescue ArgumentError
+      raise ImportGlobalError
+    end
+
+    def _source_columns(source_layer_name)
+      spreadsheet = Roo::Spreadsheet.open(@source)
+
+      begin
+        sheet = spreadsheet.sheet(source_layer_name)
+        values = sheet.parse(headers: :first_row).first
+        values&.transform_values { _1.class }
+      rescue RangeError
+        raise ImportGlobalError
+      end
+    end
+
+    def _source_geometry_analysis(source_layer_name, columns: nil, format: nil)
+      spreadsheet = Roo::Spreadsheet.open(@source)
+
+      begin
+        sheet = spreadsheet.sheet(source_layer_name)
+        values = sheet.parse(headers: :first_row).first
+        GeometryParsing.analyse_geometry(values) if values
+      rescue RangeError
+        raise ImportGlobalError
+      end
+    end
 
     def _import_rows
       spreadsheet = Roo::Spreadsheet.open(@source)

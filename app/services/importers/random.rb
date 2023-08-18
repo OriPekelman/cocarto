@@ -2,6 +2,20 @@ module Importers
   class Random < Base
     SUPPORTED_SOURCES = %i[local_source_file]
 
+    def _source_layers
+      @configuration.map.layers.pluck(:name)
+    end
+
+    def _source_columns(source_layer_name)
+      target_layer = @configuration.map.layers.find_by(name: source_layer_name)
+      target_layer.fields.pluck(:label, :field_type).to_h
+    end
+
+    def _source_geometry_analysis(source_layer_name, columns: nil, format: nil)
+      target_layer = @configuration.map.layers.find_by(name: source_layer_name)
+      GeometryParsing::GeometryAnalysis.new(type: target_layer.geometry_type)
+    end
+
     def _import_rows
       # @source is a json string with keys:
       # row_count, long_min, long_max, lat_min, lat_max
