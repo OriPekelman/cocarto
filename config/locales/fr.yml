@@ -45,23 +45,11 @@ fr:
   import:
     operations:
       new:
-        attach_file: Ajouter un fichier
-        attention: Cette fonctionnalité est expérimentale; attendez-vous à des bugs, et n’hésitez pas à nous en parler.
-        file_formats: 'Formats supportés : GeoJSON, CSV, Excel (.xls, .xlsx), OpenOffice (.ods)'
-        from_file: À partir d’un fichier
-        from_url: À partir d’une URL
-        from_url_layer_name: Nom de la couche (Feature Type)
-        from_url_wfs: URL d’un serveur WFS
-        key_field: Colonne d’identifiant
-        key_field_info_html: |
-          Pour mettre à jour des données, spécifiez une colonne servant à identifier le rang préexistant.<br/>
-          Les attributs de chaque rang seront remplacés par ceux présents dans le fichier importé; les attributs absents du fichier ne seront pas supprimés. <br/>
-          Les nouveaux rangs dans le fichier seront rajoutés au tableau.
+        help_html: cocarto peut importer des données de fichiers <b>geojson</b>, tabulaires (<b>csv</b>), Excel ou OpenOffice (<b>xls</b>, <b>xlsx</b>, <b>ods</b>), ainsi que depuis un serveur <b>WFS</b>.
         or: ou
-        reimport: Réimport de données existantes
-        save: Importer
-      operation:
-        imported_rows: "%{size} rangées importées"
+        url_placeholder: https://example.com/wfs
+      operation_done:
+        imported_rows: "%{size} rangées importées (%{new} nouvelles, %{updated} mises à jour)"
         line_number: Ligne %{line_number}
         row_failure: Non enregistré.
   layers:

@@ -1,7 +1,27 @@
-.import_form--source-inputs {
+.import__drop-zone {
+  width: revert;
+  height: revert;
+  background-color: var(--color-green-10);
+  border: 2px dashed var(--color-green-60);
+  border-radius: var(--border-radius);
+  padding: 16px;
   display: flex;
-  align-items: start;
-  align-self: center;
-  flex-direction: row;
-  gap: 48px;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-green-70);
+  font-family: var(--font-sans);
+
+  &:hover:not([disabled], :active) {
+    background-color: var(--color-green-20);
+  }
+
+  &.button--drop-area-active,
+  &:hover:active {
+    background-color: var(--color-green-30);
+  }
+}
+
+.import__help {
+  padding-top: 8px;
+  border-top: 1px solid var(--color-grey-40);
 }

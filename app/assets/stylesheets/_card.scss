@@ -7,6 +7,10 @@
   gap: 12px;
 }
 
+.card__main-content--wide {
+  min-width: 800px;
+}
+
 .card__main-content--slim {
   padding: 8px;
   gap: 6px;

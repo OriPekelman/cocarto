@@ -45,23 +45,11 @@ en:
   import:
     operations:
       new:
-        attach_file: Upload a file
-        attention: This feature is still experimental; expect bugs, and please do contact us if you get into trouble.
-        file_formats: 'Supported formats : GeoJSON, CSV, Excel (.xls, .xlsx), OpenOffice (.ods)'
-        from_file: From a file
-        from_url: From an URL
-        from_url_layer_name: Layer name (Feature Type)
-        from_url_wfs: URL of a WFS server
-        key_field: ID column
-        key_field_info_html: |
-          If you want to update data, you need to specify a column to use  to identify preexisting data.<br/>
-          The row attributes will be replaced by the ones from the imported file; attributes missing from the files will be left as-is.<br/>
-          New rows in the imported file will be appended to the layer.
+        help_html: 'cocarto can import data from the following file types: <b>geojson</b>, tabular (<b>csv</b>), Excel or OpenOffice (<b>xls</b>, <b>xlsx</b>, <b>ods</b>), as well as from a <b>WFS</b> server.'
         or: or
-        reimport: Reimport existing data
-        save: Import
-      operation:
-        imported_rows: Imported %{size} rows
+        url_placeholder: https://example.com/wfs
+      operation_done:
+        imported_rows: Imported %{size} rows (%{new} new, %{updated} updated)
         line_number: Line %{line_number}
         row_failure: Not saved.
   layers:
