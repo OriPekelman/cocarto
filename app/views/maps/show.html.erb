@@ -28,7 +28,7 @@
        data-presence-indicator-on-title-value="<%= t("presence_indicator.connected") %>"
        data-presence-indicator-off-title-value="<%= t("presence_indicator.disconnected") %>">
     <div class="buttons-bar buttons-bar--tight">
-      <% if policy(@map.user_roles.new).index? %>
+      <% if policy(@map.user_roles.new).new? %>
         <%= link_to t(".share"), map_user_roles_path(@map), class: "button button--large button--text button--lowercase", data: {turbo_frame: "modal"} %>
       <% end %>
       <%= render "header_menu_signed_in" %>
