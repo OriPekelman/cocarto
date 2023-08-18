@@ -1,7 +1,7 @@
 <%# params: row, focus_field, from_rows_new %>
 <%# used in rows/edit and rows/new %>
 
-<%= form_with model: [row.layer, row], id: dom_id(row, :form), multipart: true, class: "form" do |form| %>
+<%= form_with model: row.new_record? ? [row.layer, row] : row, id: dom_id(row, :form), multipart: true, class: "form" do |form| %>
   <% if from_rows_new %>
     <%= hidden_field_tag :from_rows_new, true %>
     <%= form.hidden_field :geojson, data: {map_add_point_target: "geojson"} %>

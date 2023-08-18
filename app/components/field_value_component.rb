@@ -30,7 +30,7 @@ class FieldValueComponent < ViewComponent::Base
       if @form_prefix == :inline_form
         name = @value.present? ? Row.human_attribute_name(:files, count: @value.length) : ""
         link_to name,
-          edit_layer_row_path(@row.layer_id, @row.id, focus_field_id: @field.id),
+          edit_row_path(@row.id, focus_field_id: @field.id),
           data: {turbo_frame: "modal", restricted_target: "restricted", restricted_authorizations: RowPolicy.authorizations(@row)},
           title: t("field.attachments"),
           class: "layer-table-td__button"
@@ -41,7 +41,7 @@ class FieldValueComponent < ViewComponent::Base
       if @field.text_is_long?
         if @form_prefix == :inline_form
           link_to @value&.truncate_words(4, omission: "…") || "",
-            edit_layer_row_path(@row.layer_id, @row.id, focus_field_id: @field.id),
+            edit_row_path(@row.id, focus_field_id: @field.id),
             data: {turbo_frame: "modal", restricted_target: "restricted", restricted_authorizations: RowPolicy.authorizations(@row)},
             title: t("common.edit"),
             class: "layer-table-td__button"
