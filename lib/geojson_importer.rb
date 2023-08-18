@@ -11,13 +11,12 @@ module GeojsonImporter
     else
       File.read(uri)
     end
-    geojson = RGeo::GeoJSON.decode(file)
+    geojson = RGeo::GeoJSON.decode(file, geo_factory: RGEO_FACTORY)
     Rails.logger.debug { "Reading #{uri} with #{geojson.size} features" } unless silent
 
     parent_category = find_parent_category!(parent, revision)
     parents_cache = {}
 
-    factory = RGeo::Cartesian.factory(srid: 4326)
     ActiveRecord::Base.transaction do
       TerritoryCategory.upsert({name: category, revision: revision}, unique_by: %i[name revision]) # rubocop:disable Rails/SkipsModelValidations
       cat = TerritoryCategory.find_by!(name: category, revision: revision)
@@ -30,7 +29,7 @@ module GeojsonImporter
         # We store territories as multipolygon in Postgis
         # We must make them multi if they are simple
         if geometry.geometry_type == RGeo::Feature::Polygon
-          geometry = factory.multi_polygon([geometry])
+          geometry = RGEO_FACTORY.multi_polygon([geometry])
         elsif geometry.geometry_type != RGeo::Feature::MultiPolygon
           raise "Invalid geometry type #{geometry.type} for feature with name: #{name} and code: #{code}"
         end
