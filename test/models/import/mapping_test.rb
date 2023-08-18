@@ -31,7 +31,7 @@
 require "test_helper"
 
 class Import::MappingTest < ActiveSupport::TestCase
-  class Validation < Import::MappingTest
+  class Validation < self
     test "layer must be a layer of the configuration’s map" do
       mapping = Import::Mapping.new(configuration: import_configurations(:restaurants_csv), layer: layers(:restaurants))
 
@@ -56,7 +56,23 @@ class Import::MappingTest < ActiveSupport::TestCase
     end
   end
 
-  class Mapping < Import::MappingTest
+  class BestNameMatching < self
+    test "best_source_layer_name" do
+      mapping = Layer.new(name: "restaurants").import_mappings.new
+
+      assert_equal "restaurants", mapping.best_source_layer_name(["no name", "restaurants", "other"])
+      assert_equal "Restaus", mapping.best_source_layer_name(["no name", "Restaus", "other"])
+      assert_equal "other", mapping.best_source_layer_name(["other"])
+    end
+
+    test "best_fields_columns" do
+      mapping = layers(:restaurants).import_mappings.new
+
+      assert_equal({"name" => fields(:restaurant_name).id, "date 1" => fields(:restaurant_date).id, "x" => nil}, mapping.best_fields_columns(["name", "date 1", "x"]))
+    end
+  end
+
+  class Mapping < self
     test "import with mapping" do
       layers(:restaurants).rows.destroy_all
 
@@ -79,7 +95,7 @@ class Import::MappingTest < ActiveSupport::TestCase
     end
   end
 
-  class Reimport < Import::MappingTest
+  class Reimport < self
     test "reimport should only update the values" do
       layers(:restaurants).rows.destroy_all
       import_mappings(:restaurants_csv).update(reimport_field: fields(:restaurant_name))
@@ -101,7 +117,7 @@ class Import::MappingTest < ActiveSupport::TestCase
     end
   end
 
-  class BulkMode < Import::MappingTest
+  class BulkMode < self
     test "bulk mode should bulk import" do
       layers(:restaurants).rows.destroy_all
       import_mappings(:restaurants_csv).update(bulk_mode: true)

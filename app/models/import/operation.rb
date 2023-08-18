@@ -26,6 +26,7 @@ class Import::Operation < ApplicationRecord
   # Relations
   belongs_to :configuration, class_name: "Import::Configuration"
   has_many :reports, class_name: "Import::Report", dependent: :delete_all
+  after_create_commit :configure_from_source # has to be before has_one_attached :local_source_file
   has_one_attached :local_source_file
 
   accepts_nested_attributes_for :configuration
@@ -35,10 +36,29 @@ class Import::Operation < ApplicationRecord
   validates :status, presence: true
 
   # Hooks
+  before_validation :set_initial_source_type, on: :create
   after_update_commit -> { broadcast_i18n_replace_to configuration.map }
 
-  def success?
-    global_error.nil? && reports.all?(&:success?)
+  def possible_source_types
+    Import::Configuration.possible_source_types(remote: remote_source_url.present?)
+  end
+
+  def good_source_types
+    Import::Configuration.possible_source_types(remote: remote_source_url.present?, content_type: local_source_file&.content_type)
+  end
+
+  # Analysis is made according to the current source and configuration.source_type
+  def analysis
+    @analysis ||= with_fetched_source do |source|
+      @analysis = configuration.analysis(source)
+    end
+  rescue Importers::ImportGlobalError => e
+    errors.add(:base, (e.cause || e).detailed_message.force_encoding("utf-8"))
+    Import::Configuration::SourceAnalysis.new({}, {})
+  end
+
+  def configure_from_source
+    configuration.configure_from_analysis(analysis)
   end
 
   def import(author)
@@ -61,15 +81,16 @@ class Import::Operation < ApplicationRecord
   end
 
   def with_fetched_source(&block)
-    if local_source_file.present?
-      raise ArgumentError if configuration.importer_class::SUPPORTED_SOURCES.exclude?(:local_source_file)
+    if configuration.importer_class.support[:remote_only]
+      raise ArgumentError if remote_source_url.blank?
 
+      yield(remote_source_url)
+    elsif local_source_file.present?
       local_source_file.open do |file|
         yield(file.open)
       end
-    elsif configuration.importer_class::SUPPORTED_SOURCES.include?(:remote_source_url)
-      yield(remote_source_url)
     else
+      # TODO: fetching a remote file for a local importer is not supported in the app yet, but it works for unit tests
       update(status: :fetching)
       io = URI.parse(remote_source_url).open
       yield(io)
@@ -100,10 +121,20 @@ class Import::Operation < ApplicationRecord
     report.save
   end
 
+  def success?
+    global_error.nil? && reports.all?(&:success?)
+  end
+
   private
 
   def either_local_file_remote_url
     errors.add(:remote_source_url, :present) if local_source_file.present? && remote_source_url.present?
     errors.add(:remote_source_url, :blank) if local_source_file.blank? && remote_source_url.blank?
+  end
+
+  def set_initial_source_type
+    if configuration.present? && configuration&.new_record? && configuration&.source_type.blank?
+      configuration.source_type = good_source_types.first
+    end
   end
 end

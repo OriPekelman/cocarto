@@ -148,6 +148,7 @@ GEM
     devise_invitable (2.0.8)
       actionmailer (>= 5.0)
       devise (>= 4.6)
+    did_you_mean (1.6.3)
     dotenv (2.8.1)
     dotenv-rails (2.8.1)
       dotenv (= 2.8.1)
@@ -480,6 +481,7 @@ DEPENDENCIES
   dartsass-rails
   devise
   devise_invitable
+  did_you_mean
   dotenv-rails
   erb_lint
   foreman

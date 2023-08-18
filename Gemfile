@@ -48,6 +48,7 @@ gem "ranked-model"
 
 gem "roo"
 gem "roo-xls"
+gem "did_you_mean"
 
 # perfs and errors
 gem "sentry-ruby"

@@ -23,13 +23,11 @@ class Importers::WFSTest < ActiveSupport::TestCase
 
   class Import < self
     test "wfs import" do
+      wfs_url = "#{fixtures_server_url}/wfs"
+      config, mapping = preconfigured_import(:hiking_paths, :wfs, wfs_url)
+
       assert_changes -> { layers(:hiking_paths).rows.count }, from: 1, to: 5 do
-        config = {}
-        mapping = import_mappings(:hiking_paths_wfs)
-        mapping.source_layer_name = "TEST_FEATURE_NAME"
-        report = mapping.reports.new
-        Importers::WFS.new(config, "#{fixtures_server_url}/wfs", users(:reclus))
-          .import_rows(report)
+        Importers::WFS.new(config, wfs_url, users(:reclus)).import_rows(mapping.reports.new)
       end
 
       assert_predicate layers(:hiking_paths).rows.find_by("values ->> '#{fields("hiking_paths_name").id}' = 'Tracé numéro un'"), :present?
