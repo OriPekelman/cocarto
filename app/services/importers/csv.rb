@@ -10,12 +10,13 @@ module Importers
         if @mapping.geometry_columns && @mapping.geometry_encoding_format
           begin
             geometry = GeometryParsing.extract_geometry(values, @mapping.geometry_columns, @mapping.geometry_encoding_format)
+            @mapping.geometry_columns.each { values.delete(_1) } if geometry
             import_row(geometry, values, index)
           rescue GeometryParsing::ImportGeometryError => e
             @report.add_entity_result(index, false, parsing_error: e.cause)
           end
         else
-          geometry = GeometryParsing.guess_geometry(values)
+          geometry = GeometryParsing.analyse_geometry(values).geometry
           import_row(geometry, values, index)
         end
       end
