@@ -135,7 +135,7 @@ class Row < ApplicationRecord
   def fields_values=(new_fields_values)
     # Filter invalid field IDs and locked fields
     filtered_values = new_fields_values.filter do |field_id, _value|
-      field = layer.fields.find_by(id: field_id)
+      field = layer.fields_by_id[field_id]
       field.present? && !field.locked?
     end
 

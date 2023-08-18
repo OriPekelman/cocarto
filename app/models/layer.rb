@@ -52,9 +52,6 @@ class Layer < ApplicationRecord
   end
   belongs_to :last_updated_row, class_name: "Row", optional: true, foreign_key: "computed_last_updated_row_id" # rubocop:disable Rails/InverseOf
 
-  # Helper to preload rows fields values
-  def rows_with_fields_values = rows.with_fields_values(self)
-
   # Hooks
   after_create_commit -> { broadcast_i18n_append_to map, target: dom_id(map, "layers") }
   after_update_commit -> do
@@ -63,6 +60,16 @@ class Layer < ApplicationRecord
     broadcast_i18n_replace_to map, target: dom_id(self, :header), partial: "layers/table_header"
   end
   after_destroy_commit -> { broadcast_remove_to map }
+
+  after_touch -> { @fields_by_id = nil }
+
+  # Avoid querying the database when looking up a field by its ID
+  def fields_by_id
+    @fields_by_id ||= fields.index_by(&:id)
+  end
+
+  # Helper to preload rows fields values
+  def rows_with_fields_values = rows.with_fields_values(self)
 
   def geometry_type_description
     Layer.human_attribute_name("geometry_type_description.#{geometry_type}")
