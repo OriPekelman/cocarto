@@ -9,7 +9,7 @@ TurboFlash.config do |config|
   # config.target = "flash"
 
   # the default TurboStream action
-  # config.action = :update
+  config.action = :replace
 
   # the default TurboStream partial
   config.partial = "application/flash"
