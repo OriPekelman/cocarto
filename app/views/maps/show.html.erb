@@ -21,13 +21,19 @@
   <div class="header--center">
     <%= render "name", map: @map %>
   </div>
-  <div class="header--end">
+  <div class="header--end"
+       data-controller="presence-indicator"
+       data-action="presence-tracker.connection-changed@document->presence-indicator#presenceChanged"
+       data-presence-indicator-event-detail-attribute-value="connected"
+       data-presence-indicator-on-title-value="<%= t("presence_indicator.connected") %>"
+       data-presence-indicator-off-title-value="<%= t("presence_indicator.disconnected") %>">
     <div class="buttons-bar buttons-bar--tight">
       <% if policy(@map.user_roles.new).index? %>
         <%= link_to t(".share"), map_user_roles_path(@map), class: "button button--large button--text button--lowercase", data: {turbo_frame: "modal"} %>
       <% end %>
       <%= render "header_menu_signed_in" %>
     </div>
+    <div data-presence-indicator-target="indicator"></div>
   </div>
 <% end %>
 

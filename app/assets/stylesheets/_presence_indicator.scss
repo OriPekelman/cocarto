@@ -1,0 +1,26 @@
+[data-presence-indicator] {
+  position: relative;
+}
+
+[data-presence-indicator]::after {
+  content: "";
+  width: 6px;
+  height: auto;
+  aspect-ratio: 1;
+  position: absolute;
+  right: -3px;
+  top: -2px;
+  background-color: var(--presence-indicator-color);
+  border-radius: 50%;
+  border: 0.5px solid var(--presence-indicator-border);
+}
+
+[data-presence-indicator="on"] {
+  --presence-indicator-color: var(--color-green-30);
+  --presence-indicator-border: var(--color-green-70);
+}
+
+[data-presence-indicator="off"] {
+  --presence-indicator-color: var(--color-attention-20);
+  --presence-indicator-border: var(--color-attention-40);
+}

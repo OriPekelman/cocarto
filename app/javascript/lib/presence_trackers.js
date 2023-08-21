@@ -107,10 +107,10 @@ class PresenceTrackers {
     this.cid = window.crypto.randomUUID()
     this.channel = consumer.subscriptions.create({ channel: 'PresenceTrackerChannel', map: mapId, cid: this.cid }, {
       connected () {
-        console.log('PresenceTrackerChannel connected')
+        document.dispatchEvent(new window.CustomEvent('presence-tracker.connection-changed', { detail: { connected: true } }))
       },
       disconnected () {
-        console.log('PresenceTrackerChannel disconnected')
+        document.dispatchEvent(new window.CustomEvent('presence-tracker.connection-changed', { detail: { connected: false } }))
       },
       received (data) {
         if (data.cid !== _this.cid) {

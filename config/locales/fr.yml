@@ -177,6 +177,9 @@ fr:
         <p>
           <b><a href="mailto:bonjour@cocarto.com">Contactez-nous</a> pour nous faire part de vos idées.</b>
         </p>
+  presence_indicator:
+    connected: Connecté
+    disconnected: Déconnecté
   territories:
     search_results:
       no_result: Pas de résultat
