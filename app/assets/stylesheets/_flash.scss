@@ -1,10 +1,14 @@
 // Flash styling, see also _message.scss
 
 .flash__container {
+  z-index: var(--flash-z-index);
   position: absolute;
   top: 16px;
-  z-index: var(--flash-z-index);
-  width: 100vw;
+  left: 0;
+  right: 0;
+  width: fit-content;
+  max-width: var(--content-max-width);
+  margin: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,7 +33,7 @@
 }
 
 .flash__item-removing {
-  animation: flash-item-removing 0.2s ease-in;
+  animation: flash-item-removing 0.2s forwards ease-in;
   @keyframes flash-item-removing {
     from {
       translate: 0;
