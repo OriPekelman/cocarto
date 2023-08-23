@@ -23,12 +23,6 @@ export default class extends Controller {
     }
   }
 
-  closeFromOutside (event) {
-    if (!this.contentTarget.contains(event.target)) {
-      this.close(event)
-    }
-  }
-
   submitEnd (event) {
     if (event.detail.success) {
       this.close(event)
