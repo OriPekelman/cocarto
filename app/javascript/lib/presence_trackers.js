@@ -2,6 +2,9 @@ import maplibre from 'maplibre-gl'
 import consumer from 'channels/consumer'
 
 class PresenceTracker {
+  static messageDelay = 100 // milliseconds
+  static timeoutDelay = 10 * 1000 // milliseconds
+
   constructor ({ name, lngLat, cid }) {
     this.name = name || 'Anonymous'
     this.cid = cid
@@ -36,15 +39,38 @@ class PresenceTracker {
   update ({ name, lngLat }) {
     this.name = name || 'Anonymous'
     this.setName(this.name)
-    this.marker.setLngLat(lngLat)
+
+    this.moveTo(lngLat)
     this.lost = false
+  }
+
+  moveTo (lngLat) {
+    const marker = this.marker
+    const old = marker.getLngLat()
+    const target = lngLat
+    const start = performance.now()
+
+    function animate (timestamp) {
+      if (timestamp - start < PresenceTracker.messageDelay) {
+        const ratio = (timestamp - start) / PresenceTracker.messageDelay
+        const cosRatio = (1 - Math.cos(ratio * Math.PI)) / 2
+        const lng = cosRatio * target.lng + (1 - cosRatio) * old.lng
+        const lat = cosRatio * target.lat + (1 - cosRatio) * old.lat
+        marker.setLngLat([lng, lat])
+        window.requestAnimationFrame(animate)
+      } else {
+        marker.setLngLat(target)
+      }
+    }
+
+    window.requestAnimationFrame(animate)
   }
 
   resetTimeout (trackers) {
     if (this.timer) {
       clearInterval(this.timer)
     }
-    this.timer = window.setTimeout(() => this.timeout(trackers), 10 * 1000)
+    this.timer = window.setTimeout(() => this.timeout(trackers), PresenceTracker.timeoutDelay)
   }
 }
 
@@ -57,21 +83,23 @@ class PresenceTrackers {
   }
 
   mousemove ({ lngLat }) {
-    if (Date.now() - this.lastMoveSent > 20) {
+    if (Date.now() - this.lastMoveSent > PresenceTracker.messageDelay) {
       this.channel.mouse_moved(lngLat)
       this.lastMoveSent = Date.now()
     }
   }
 
   #upsert (data) {
+    let tracker
     if (this.trackers.has(data.cid)) {
-      this.trackers.get(data.cid).update(data)
+      tracker = this.trackers.get(data.cid)
+      tracker.update(data)
     } else {
-      const tracker = new PresenceTracker(data)
+      tracker = new PresenceTracker(data)
       tracker.marker.addTo(this.map)
-      tracker.resetTimeout(this.trackers)
       this.trackers.set(data.cid, tracker)
     }
+    tracker.resetTimeout(this.trackers)
   }
 
   #initActionCable (mapId) {
@@ -79,10 +107,10 @@ class PresenceTrackers {
     this.cid = window.crypto.randomUUID()
     this.channel = consumer.subscriptions.create({ channel: 'PresenceTrackerChannel', map: mapId, cid: this.cid }, {
       connected () {
-        console.log('PresenceTrackerChannel connected')
+        document.dispatchEvent(new window.CustomEvent('presence-tracker.connection-changed', { detail: { connected: true } }))
       },
       disconnected () {
-        console.log('PresenceTrackerChannel disconnected')
+        document.dispatchEvent(new window.CustomEvent('presence-tracker.connection-changed', { detail: { connected: false } }))
       },
       received (data) {
         if (data.cid !== _this.cid) {
