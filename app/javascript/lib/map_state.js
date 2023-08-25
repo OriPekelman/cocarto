@@ -4,16 +4,13 @@ import MapboxDraw from '@mapbox/mapbox-gl-draw'
 import MaplibreGeocoder from '@maplibre/maplibre-gl-geocoder'
 import maplibregl from 'maplibre-gl'
 import PresenceTrackers from 'lib/presence_trackers'
-
-export const MODE_DEFAULT = 'default'
-export const MODE_EDIT_FEATURE = 'edit_feature'
-export const MODE_ADD_FEATURE = 'add_feature'
+import * as modes from 'lib/modes'
 
 class MapState {
   constructor ({ target, mapId, lng, lat, zoom, leftToolbar, rightToolbar, style }) {
     this.map = newMap(target, [lng, lat], zoom, style)
     this.layers = {}
-    this.mode = MODE_DEFAULT
+    this.mode = modes.DEFAULT
     this.style = style
 
     this.draw = new MapboxDraw({
@@ -70,16 +67,16 @@ class MapState {
     this.mode = mode
 
     switch (mode) {
-      case MODE_DEFAULT:
+      case modes.DEFAULT:
         this.draw.deleteAll()
         this.#mapSelectionChanged([])
         break
-      case MODE_EDIT_FEATURE:
+      case modes.EDIT_FEATURE:
         this.draw.deleteAll()
         this.#mapSelectionChanged(args.features)
         this.currentFeatureId = args.featureIid
         break
-      case MODE_ADD_FEATURE:
+      case modes.ADD_FEATURE:
         this.draw.changeMode(this.drawMode)
         break
     }
@@ -141,13 +138,13 @@ class MapState {
     //       and not post right away the change
     const row = getRowFromId(feature.id)
     row.rowController.update(feature.geometry)
-    this.setMode(MODE_DEFAULT)
+    this.setMode(modes.DEFAULT)
   }
 
   #featureCreated (feature) {
     this.currentLayerController.createRow(feature.geometry)
     this.draw.delete(feature.id)
-    this.setMode(MODE_DEFAULT)
+    this.setMode(modes.DEFAULT)
   }
 
   #setActive (feature, state) {
@@ -174,7 +171,7 @@ class MapState {
   }
 
   #editFeature (e) {
-    if (this.mode === MODE_ADD_FEATURE) {
+    if (this.mode === modes.ADD_FEATURE) {
       // When we are adding a feature, we don’t do anything and let draw handle it
       return
     }
@@ -186,7 +183,7 @@ class MapState {
     if (features.length > 0 && drawFeature.length === 0) {
       const featureId = features[0].properties.original_id
       if (featureId !== this.currentFeatureId) {
-        this.setMode(MODE_EDIT_FEATURE, { features, featureId })
+        this.setMode(modes.EDIT_FEATURE, { features, featureId })
 
         const path = `/rows/${featureId}`
         const url = new URL(path, window.location.origin)
@@ -209,7 +206,7 @@ class MapState {
       }
     } else if (drawFeature.length === 0) {
       // We clicked on no feature, we switch back to the default mode
-      this.setMode(MODE_DEFAULT)
+      this.setMode(modes.DEFAULT)
     }
   }
 }
