@@ -5,11 +5,15 @@ import MaplibreGeocoder from '@maplibre/maplibre-gl-geocoder'
 import maplibregl from 'maplibre-gl'
 import PresenceTrackers from 'lib/presence_trackers'
 
+export const MODE_DEFAULT = 'default'
+export const MODE_EDIT_FEATURE = 'edit_feature'
+export const MODE_ADD_FEATURE = 'add_feature'
+
 class MapState {
   constructor ({ target, mapId, lng, lat, zoom, leftToolbar, rightToolbar, style }) {
     this.map = newMap(target, [lng, lat], zoom, style)
     this.layers = {}
-    this.mode = 'default'
+    this.mode = MODE_DEFAULT
     this.style = style
 
     this.draw = new MapboxDraw({
@@ -31,8 +35,54 @@ class MapState {
     this.map.on('draw.create', ({ features }) => this.#featureCreated(features[0]))
     this.map.on('draw.update', ({ features }) => this.#featureUpdated(features[0]))
     this.map.on('mousemove', e => this.trackers.mousemove(e))
-    this.map.on('click', e => this.#editFeature(e))
+    this.map.on('mouseup', e => this.#editFeature(e))
     this.activeFeature = null
+  }
+
+  setMode (mode, args) {
+    switch (mode) {
+      case modes.DEFAULT:
+        this.#unsetActive()
+        this.draw.deleteAll()
+        this.#mapSelectionChanged([])
+        this.currentFeatureId = null;
+        break
+      case modes.EDIT_FEATURE:
+        this.draw.deleteAll()
+        this.#mapSelectionChanged(args.features)
+        this.currentFeatureId = args.featureId
+        this.map.doubleClickZoom.disable();
+        break
+      case modes.ADD_FEATURE:
+        this.draw.changeMode(this.drawMode)
+        break
+      case modes.HOVER_FEATURE:
+        this.#unsetActive()
+        this.#setActive(args, 'hover')
+        break
+    }
+
+    if (!modes.validModes.includes(mode)) {
+      console.error(`Unknown mode ${mode}, previous mode ${this.mode}`)
+      return
+    }
+    console.debug(`Switch from mode ${this.mode} to mode ${mode}`)
+    this.mode = mode
+
+    switch (mode) {
+      case MODE_DEFAULT:
+        this.draw.deleteAll()
+        this.#mapSelectionChanged([])
+        break
+      case MODE_EDIT_FEATURE:
+        this.draw.deleteAll()
+        this.#mapSelectionChanged(args.features)
+        this.currentFeatureId = args.featureIid
+        break
+      case MODE_ADD_FEATURE:
+        this.draw.changeMode(this.drawMode)
+        break
+    }
   }
 
   getMap () {
@@ -59,6 +109,8 @@ class MapState {
   }
 
   setSelectedFeature (featureId) {
+    // TODO: we want just a hover state
+    // TODO: this should be a mode change
     this.draw.changeMode('simple_select', { featureIds: [featureId] })
   }
 
@@ -80,32 +132,22 @@ class MapState {
     this.map.on('mouseleave', layerId, e => this.#mouseLeaveFeature(e))
   }
 
-  addFeatureMode () {
-    if (this.mode === 'default') {
-      this.mode = 'adding'
-      this.draw.changeMode(this.drawMode)
-    }
-  }
-
-  setDefaultMode () {
-    this.mode == 'default'
-    this.draw.changeMode('simple_select')
-    this.draw.deleteAll()
-  }
-
   #mapSelectionChanged (features) {
     features.map(f => getRowFromId(f.properties.original_id)).forEach(row => row.rowController.highlight())
   }
 
   #featureUpdated (feature) {
+    // TODO: when it’s a linestring or a polygon, we want to wait until the editing is done
+    //       and not post right away the change
     const row = getRowFromId(feature.id)
     row.rowController.update(feature.geometry)
+    this.setMode(MODE_DEFAULT)
   }
 
   #featureCreated (feature) {
     this.currentLayerController.createRow(feature.geometry)
     this.draw.delete(feature.id)
-    this.mode = 'default'
+    this.setMode(MODE_DEFAULT)
   }
 
   #setActive (feature, state) {
@@ -132,31 +174,42 @@ class MapState {
   }
 
   #editFeature (e) {
+    if (this.mode === MODE_ADD_FEATURE) {
+      // When we are adding a feature, we don’t do anything and let draw handle it
+      return
+    }
     const features = this.map.queryRenderedFeatures(e.point, {
       layers: Object.keys(this.layers)
-    });
-    if (this.mode !== 'adding') {
-      this.draw.deleteAll()
-    }
-    if (features.length > 0) {
-      this.#mapSelectionChanged(features)
-      const feature = features[0]
+    })
+    const drawFeature = this.draw.getFeatureIdsAt(e.point)
 
-      const feature_id = feature.properties.original_id
-      const path = `/rows/${feature_id}`
-      const url = new URL(path, window.location.origin)
-      fetch(url)
-        .then( (response) => response.json())
-        .then((geojson) => {
-          geojson.id = feature_id
-          const res = this.draw.add(geojson)
-          const geometryType = this.layers[feature.layer.id]
-          if(geometryType === "point"){
-            this.draw.changeMode('simple_select', {features: [feature_id]})
-          } else {
-            this.draw.changeMode('direct_select', {featureId: feature_id})
-          }
-        })
+    if (features.length > 0 && drawFeature.length === 0) {
+      const featureId = features[0].properties.original_id
+      if (featureId !== this.currentFeatureId) {
+        this.setMode(MODE_EDIT_FEATURE, { features, featureId })
+
+        const path = `/rows/${featureId}`
+        const url = new URL(path, window.location.origin)
+        // queryRenderedFeatures may split the features geometries.
+        // See https://docs.mapbox.com/mapbox-gl-js/api/map/#map#queryrenderedfeatures
+        // We need to fetch the full geometry before adding it to draw.
+        // TODO: when it’s a point, no need to fetch the data, we have the exact coordinates in the MVT
+        fetch(url)
+          .then((response) => response.json())
+          .then((geojson) => {
+            geojson.id = featureId
+            this.draw.add(geojson)
+            const geometryType = this.layers[features[0].layer.id]
+            if (geometryType === 'point') {
+              this.draw.changeMode('simple_select', { featureIds: [featureId] })
+            } else {
+              this.draw.changeMode('direct_select', { featureId })
+            }
+          }).catch(() => this.setMode(modes.DEFAULT))
+      }
+    } else if (drawFeature.length === 0) {
+      // We clicked on no feature, we switch back to the default mode
+      this.setMode(MODE_DEFAULT)
     }
   }
 }

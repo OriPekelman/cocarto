@@ -1,5 +1,6 @@
 import { Controller } from '@hotwired/stimulus'
 import MapState from 'lib/map_state'
+import * as modes from 'lib/map_state'
 
 export default class extends Controller {
   static targets = ['map', 'row', 'addButton', 'defaultLatitude', 'defaultLongitude', 'defaultZoom', 'toolbarLeft', 'toolbarRight', 'layerUpdate']
@@ -54,10 +55,10 @@ export default class extends Controller {
   }
 
   toggleMode () {
-    if (this.mapState.getMode() === 'default') {
-      this.mapState.addFeatureMode()
+    if (this.mapState.getMode() === modes.MODE_DEFAULT) {
+      this.mapState.setMode(modes.MODE_ADD_FEATURE)
     } else {
-      this.mapState.defaultMode()
+      this.mapState.setMode(modes.MODE_DEFAULT)
     }
   }
 
