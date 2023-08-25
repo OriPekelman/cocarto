@@ -129,6 +129,23 @@ class MapState {
     this.map.on('mouseleave', layerId, e => this.#mouseLeaveFeature(e))
   }
 
+  #maplibreLayers (layerId) {
+    // For each layer in cocarto, we have multiple layers in maplibre
+    // When hiding/showing them, we need to work on each of them
+    // Depending on each geometry type, not all extra layers are defined, so test their existence
+    // See models/concerns/mvt.rb
+    const layerSuffixes = ['', '--outline', '--hover']
+    return layerSuffixes.map(suffix => layerId + suffix).filter(layer => this.map.getLayer(layer))
+  }
+
+  showLayer (layerId) {
+    this.#maplibreLayers(layerId).forEach(layer => this.map.setLayoutProperty(layer, 'visibility', 'visible'))
+  }
+
+  hideLayer (layerId) {
+    this.#maplibreLayers(layerId).forEach(layer => this.map.setLayoutProperty(layer, 'visibility', 'none'))
+  }
+
   #mapSelectionChanged (features) {
     features.map(f => getRowFromId(f.properties.original_id)).forEach(row => row.rowController.highlight())
   }

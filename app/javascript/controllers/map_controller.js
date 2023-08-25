@@ -27,11 +27,11 @@ export default class extends Controller {
   }
 
   showLayer (layerId) {
-    this.mapState.getMap().setLayoutProperty(layerId, 'visibility', 'visible')
+    this.mapState.showLayer(layerId)
   }
 
   hideLayer (layerId) {
-    this.mapState.getMap().setLayoutProperty(layerId, 'visibility', 'none')
+    this.mapState.hideLayer(layerId)
   }
 
   layerToggled (detail) {
