@@ -58,13 +58,13 @@ class Row < ApplicationRecord
     notify_geometry_changed
   end
 
+  # Validations
+  before_validation :take_first_of_geometry_collection
   after_commit :notify_geometry_changed, on: [:create, :update], if: proc { previous_changes.key?(layer.geometry_type) }
 
   # Dynamic Fields Associations
   include FieldValuesAssociations::RowAssociations
 
-  # Validations
-  before_validation :take_first_of_geometry_collection
   validate :validate_geometry_presence
   validate :validate_geometry
   validate :either_author_or_anonymous

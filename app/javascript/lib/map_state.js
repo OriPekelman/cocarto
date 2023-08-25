@@ -126,7 +126,7 @@ class MapState {
   }
 
   registerLayer ({ layerId, geometryType }) {
-    this.map.setStyle(this.style, {diff: true})
+    this.map.setStyle(this.style, { diff: true })
     this.layers[layerId] = geometryType
     this.map.on('mouseenter', layerId, e => this.#mouseEnterFeature(e))
     this.map.on('mouseleave', layerId, e => this.#mouseLeaveFeature(e))
