@@ -4,6 +4,7 @@ import MapboxDraw from '@mapbox/mapbox-gl-draw'
 import MaplibreGeocoder from '@maplibre/maplibre-gl-geocoder'
 import maplibregl from 'maplibre-gl'
 import PresenceTrackers from 'lib/presence_trackers'
+import onMapUpdate from 'lib/map_update_channel'
 import * as modes from 'lib/modes'
 
 class MapState {
@@ -27,6 +28,7 @@ class MapState {
     leftToolbar.appendChild(new MaplibreGeocoder(geocoderApi, { maplibregl }).onAdd(this.map))
 
     this.trackers = new PresenceTrackers(this.map, mapId)
+    onMapUpdate(mapId, layer => this.refresh(layer))
 
     this.map.on('load', e => { target.dataset.loaded = 'loaded' }) // System tests: Avoid interacting with the map before it's ready
     this.map.on('draw.create', ({ features }) => this.#featureCreated(features[0]))

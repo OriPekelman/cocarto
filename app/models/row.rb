@@ -78,7 +78,7 @@ class Row < ApplicationRecord
     left_outer_joins(:territory)
       .select(<<-SQL.squish
       rows.id, layer_id, author_id, anonymous_tag,
-      line_string,  
+      line_string,
       point,
       polygon,
       values,
@@ -296,6 +296,6 @@ class Row < ApplicationRecord
   end
 
   def notify_geometry_changed
-    broadcast_i18n_append_to layer.map, target: dom_id(layer, :updates), partial: "layers/update", locals: {layer_id: dom_id(layer)}
+    MapUpdateChannel.broadcast_to(layer.map, layer: dom_id(layer))
   end
 end
