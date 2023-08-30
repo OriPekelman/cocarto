@@ -4,10 +4,10 @@
     <div class="modal__overlay" data-action="click->modal#close"></div>
     <div class="bordered-box modal__box">
       <div class="modal__close-button">
-        <button class="button button--close" data-action="modal#close" title="<%= t("common.close") %>"><%= helpers.embedded_svg "close.svg" %></button>
+        <button class="button button--close" data-action="modal#close" title="<%= t("common.close") %>"><%= embedded_svg "close.svg" %></button>
       </div>
       <div data-modal-target="content" class="modal">
-        <%= content %>
+        <%= yield %>
       </div>
     </div>
   </div>
