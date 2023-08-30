@@ -1,12 +1,10 @@
 class UserRolePolicy < ApplicationPolicy
   # Only owners can see or modify the roles of a map;
-  def index? = map_access&.is_at_least(:owner)
+  def create? = map_access&.is_at_least(:owner)
 
-  def create? = index?
+  def update? = create?
 
-  def update? = index?
-
-  def destroy? = index?
+  def destroy? = create?
 
   class Scope < Scope
     def resolve
