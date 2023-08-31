@@ -38,7 +38,7 @@ class MapState {
     this.map.on('load', e => { target.dataset.loaded = 'loaded' }) // System tests: Avoid interacting with the map before it's ready
     this.map.on('draw.create', ({ features }) => this.#featureCreated(features[0]))
     this.map.on('draw.update', ({ features }) => this.#featureUpdated(features[0]))
-    this.map.on('mousemove', e => this.trackers.mousemove(e))
+    this.map.on('mousemove', e => this.#mouseMove(e))
     this.map.on('mouseup', e => this.#editFeature(e))
     this.activeFeature = null
   }
@@ -123,16 +123,31 @@ class MapState {
   registerLayer ({ layerId, geometryType }) {
     this.map.setStyle(this.style, { diff: true })
     this.layers[layerId] = geometryType
-    this.map.on('mouseenter', layerId, e => {
-      if (this.mode === modes.DEFAULT) {
-        this.setMode(modes.HOVER_FEATURE, e.features[0])
-      }
+  }
+
+  #mouseMove (e) {
+    // Notifies other screens where our cursor is
+    this.trackers.mousemove(e)
+
+    // Find all the features at the mouse positions
+    const features = this.map.queryRenderedFeatures(e.point, {
+      layers: Object.keys(this.layers)
     })
-    this.map.on('mouseleave', layerId, _e => {
-      if (this.mode === modes.HOVER_FEATURE) {
-        this.setMode(modes.DEFAULT)
+
+    // We exited a feature, we go back to default mode
+    if (features.length === 0 && this.mode === modes.HOVER_FEATURE) {
+      this.setMode(modes.DEFAULT)
+    }
+
+    // We entered a feature from nothing or from an other feature
+    const ids = features.map(feature => feature.id)
+    if (features.length >= 1) {
+      // when two features overlap, we change the hover only if the current feature is not under the pointer
+      const otherFeature = this.mode === modes.HOVER_FEATURE && !ids.includes(this.activeFeature.id)
+      if (this.mode === modes.DEFAULT || otherFeature) {
+        this.setMode(modes.HOVER_FEATURE, features[0])
       }
-    })
+    }
   }
 
   #maplibreLayers (layerId) {
