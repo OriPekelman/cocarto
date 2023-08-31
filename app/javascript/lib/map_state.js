@@ -50,7 +50,6 @@ class MapState {
         this.draw.deleteAll()
         this.#mapSelectionChanged(args.features)
         this.currentFeatureId = args.featureId
-        this.map.doubleClickZoom.disable();
         break
       case modes.ADD_FEATURE:
         this.draw.changeMode(this.drawMode)
@@ -67,21 +66,7 @@ class MapState {
     }
     console.debug(`Switch from mode ${this.mode} to mode ${mode}`)
     this.mode = mode
-
-    switch (mode) {
-      case modes.DEFAULT:
-        this.draw.deleteAll()
-        this.#mapSelectionChanged([])
-        break
-      case modes.EDIT_FEATURE:
-        this.draw.deleteAll()
-        this.#mapSelectionChanged(args.features)
-        this.currentFeatureId = args.featureIid
-        break
-      case modes.ADD_FEATURE:
-        this.draw.changeMode(this.drawMode)
-        break
-    }
+    this.map.getContainer().setAttribute('map-state', mode)
   }
 
   getMap () {
@@ -127,8 +112,16 @@ class MapState {
   registerLayer ({ layerId, geometryType }) {
     this.map.setStyle(this.style, { diff: true })
     this.layers[layerId] = geometryType
-    this.map.on('mouseenter', layerId, e => this.#mouseEnterFeature(e))
-    this.map.on('mouseleave', layerId, e => this.#mouseLeaveFeature(e))
+    this.map.on('mouseenter', layerId, e => {
+      if (this.mode === modes.DEFAULT) {
+        this.setMode(modes.HOVER_FEATURE, e.features[0])
+      }
+    })
+    this.map.on('mouseleave', layerId, _e => {
+      if (this.mode === modes.HOVER_FEATURE) {
+        this.setMode(modes.DEFAULT)
+      }
+    })
   }
 
   #maplibreLayers (layerId) {
@@ -176,17 +169,6 @@ class MapState {
       this.map.setFeatureState(this.activeFeature, { state: 'default' })
       this.activeFeature = null
     }
-  }
-
-  #mouseEnterFeature (e) {
-    this.map.getCanvas().style.cursor = 'pointer'
-    this.#unsetActive()
-    this.#setActive(e.features[0], 'hover')
-  }
-
-  #mouseLeaveFeature (e) {
-    this.map.getCanvas().style.cursor = ''
-    this.#unsetActive()
   }
 
   #editFeature (e) {

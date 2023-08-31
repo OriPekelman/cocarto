@@ -116,3 +116,15 @@
     pointer-events: none;
   }
 }
+
+.maplibregl-map[map-state="add_feature"] {
+  canvas {
+    cursor: crosshair;
+  }
+}
+
+.maplibregl-map[map-state="hover_feature"] {
+  canvas {
+    cursor: pointer;
+  }
+}
