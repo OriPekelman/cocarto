@@ -28,7 +28,12 @@ class MapState {
     leftToolbar.appendChild(new MaplibreGeocoder(geocoderApi, { maplibregl }).onAdd(this.map))
 
     this.trackers = new PresenceTrackers(this.map, mapId)
-    onMapUpdate(mapId, layer => this.refresh(layer))
+    onMapUpdate(mapId,
+      layer => this.refresh(layer),
+      deletedFeature => {
+        this.draw.delete(deletedFeature)
+        this.setMode(modes.DEFAULT)
+      })
 
     this.map.on('load', e => { target.dataset.loaded = 'loaded' }) // System tests: Avoid interacting with the map before it's ready
     this.map.on('draw.create', ({ features }) => this.#featureCreated(features[0]))

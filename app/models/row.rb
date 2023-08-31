@@ -55,7 +55,7 @@ class Row < ApplicationRecord
   after_update_commit -> { broadcast_i18n_replace_to layer.map, html: render }
   after_destroy_commit -> do
     broadcast_remove_to layer.map
-    notify_geometry_changed
+    notify_geometry_changed id
   end
 
   # Validations
@@ -295,7 +295,7 @@ class Row < ApplicationRecord
     end
   end
 
-  def notify_geometry_changed
-    MapUpdateChannel.broadcast_to(layer.map, layer: dom_id(layer))
+  def notify_geometry_changed(deleted_feature = nil)
+    MapUpdateChannel.broadcast_to(layer.map, layer: dom_id(layer), deleted_feature:)
   end
 end
