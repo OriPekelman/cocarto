@@ -49,15 +49,21 @@ class MapState {
         this.#unsetActive()
         this.draw.deleteAll()
         this.#mapSelectionChanged([])
-        this.currentFeatureId = null;
+        // When we enable the double click _during_ the double click
+        // e.g. when finishing a polygon, it still triggers it
+        // https://stackoverflow.com/a/29917394/202083
+        setTimeout(500, () => this.map.doubleClickZoom.enable())
+        this.currentFeatureId = null
         break
       case modes.EDIT_FEATURE:
         this.draw.deleteAll()
         this.#mapSelectionChanged(args.features)
         this.currentFeatureId = args.featureId
+        this.map.doubleClickZoom.disable()
         break
       case modes.ADD_FEATURE:
         this.draw.changeMode(this.drawMode)
+        this.map.doubleClickZoom.disable()
         break
       case modes.HOVER_FEATURE:
         this.#unsetActive()
