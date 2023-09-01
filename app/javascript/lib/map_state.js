@@ -1,17 +1,21 @@
 /* global ResizeObserver */
-import { newMap, drawStyles, geocoderApi, newGeolocateControl } from 'lib/map_helpers'
+import { newMap, geocoderApi, newGeolocateControl } from 'lib/map_helpers'
 import MapboxDraw from '@mapbox/mapbox-gl-draw'
 import MaplibreGeocoder from '@maplibre/maplibre-gl-geocoder'
 import maplibregl from 'maplibre-gl'
 import PresenceTrackers from 'lib/presence_trackers'
+import onMapUpdate from 'lib/map_update_channel'
+import * as modes from 'lib/modes'
 
 class MapState {
-  constructor ({ target, mapId, lng, lat, zoom, leftToolbar, rightToolbar }) {
-    this.map = newMap(target, [lng, lat], zoom)
+  constructor ({ target, mapId, lng, lat, zoom, leftToolbar, rightToolbar, style }) {
+    this.map = newMap(target, [lng, lat], zoom, style)
+    this.layers = {}
+    this.mode = modes.DEFAULT
+    this.style = style
 
     this.draw = new MapboxDraw({
       displayControlsDefault: false,
-      styles: drawStyles,
       userProperties: true
     })
     this.map.addControl(this.draw)
@@ -24,24 +28,64 @@ class MapState {
     leftToolbar.appendChild(new MaplibreGeocoder(geocoderApi, { maplibregl }).onAdd(this.map))
 
     this.trackers = new PresenceTrackers(this.map, mapId)
+    onMapUpdate(mapId,
+      layer => this.refresh(layer),
+      deletedFeature => {
+        this.draw.delete(deletedFeature)
+        this.setMode(modes.DEFAULT)
+      })
 
     this.map.on('load', e => { target.dataset.loaded = 'loaded' }) // System tests: Avoid interacting with the map before it's ready
-    this.map.on('draw.selectionchange', e => this.#mapSelectionChanged(e))
     this.map.on('draw.create', ({ features }) => this.#featureCreated(features[0]))
     this.map.on('draw.update', ({ features }) => this.#featureUpdated(features[0]))
-    this.map.on('mousemove', e => this.trackers.mousemove(e))
+    this.map.on('mousemove', e => this.#mouseMove(e))
+    this.map.on('mouseup', e => this.#editFeature(e))
+    this.activeFeature = null
+  }
+
+  setMode (mode, args) {
+    switch (mode) {
+      case modes.DEFAULT:
+        this.#unsetActive()
+        this.draw.deleteAll()
+        this.#mapSelectionChanged([])
+        // When we enable the double click _during_ the double click
+        // e.g. when finishing a polygon, it still triggers it
+        // https://stackoverflow.com/a/29917394/202083
+        setTimeout(500, () => this.map.doubleClickZoom.enable())
+        this.currentFeatureId = null
+        break
+      case modes.EDIT_FEATURE:
+        this.draw.deleteAll()
+        this.#mapSelectionChanged(args.features)
+        this.currentFeatureId = args.featureId
+        this.map.doubleClickZoom.disable()
+        break
+      case modes.ADD_FEATURE:
+        this.draw.changeMode(this.drawMode)
+        this.map.doubleClickZoom.disable()
+        break
+      case modes.HOVER_FEATURE:
+        this.#unsetActive()
+        this.#setActive(args, 'hover')
+        break
+    }
+
+    if (!modes.validModes.includes(mode)) {
+      console.error(`Unknown mode ${mode}, previous mode ${this.mode}`)
+      return
+    }
+    console.debug(`Switch from mode ${this.mode} to mode ${mode}`)
+    this.mode = mode
+    this.map.getContainer().setAttribute('map-state', mode)
   }
 
   getMap () {
     return this.map
   }
 
-  getDraw () {
-    return this.draw
-  }
-
-  getDrawMode () {
-    return this.drawMode
+  getMode () {
+    return this.mode
   }
 
   getImage () {
@@ -60,6 +104,8 @@ class MapState {
   }
 
   setSelectedFeature (featureId) {
+    // TODO: we want just a hover state
+    // TODO: this should be a mode change
     this.draw.changeMode('simple_select', { featureIds: [featureId] })
   }
 
@@ -68,41 +114,132 @@ class MapState {
     this.drawMode = `draw_${geometryType}`
   }
 
-  addRow (controller) {
-    if (controller == null) {
-      // Prevent trying to add a row to the map if its controller is nil.
-      // This may happen during turbo restoration visits (cache), because the row target is connected to the mapController before it is connected to its rowController.
-      // See #262
-      return
-    }
-    this.draw.add({
-      id: controller.element.id,
-      type: 'Feature',
-      properties: controller.propertiesValue,
-      geometry: controller.geojson()
-    })
+  refresh (layer) {
+    const cache = this.map.style.sourceCaches[layer]
+    cache.clearTiles()
+    cache.update(this.map.transform)
   }
 
-  #mapSelectionChanged ({ features }) {
-    features.map(getRowFromFeature).forEach(row => row.rowController.highlight())
+  registerLayer ({ layerId, geometryType }) {
+    this.map.setStyle(this.style, { diff: true })
+    this.layers[layerId] = geometryType
+  }
+
+  #mouseMove (e) {
+    // Notifies other screens where our cursor is
+    this.trackers.mousemove(e)
+
+    // Find all the features at the mouse positions
+    const features = this.map.queryRenderedFeatures(e.point, {
+      layers: Object.keys(this.layers)
+    })
+
+    // We exited a feature, we go back to default mode
+    if (features.length === 0 && this.mode === modes.HOVER_FEATURE) {
+      this.setMode(modes.DEFAULT)
+    }
+
+    // We entered a feature from nothing or from an other feature
+    const ids = features.map(feature => feature.id)
+    if (features.length >= 1) {
+      // when two features overlap, we change the hover only if the current feature is not under the pointer
+      const otherFeature = this.mode === modes.HOVER_FEATURE && !ids.includes(this.activeFeature.id)
+      if (this.mode === modes.DEFAULT || otherFeature) {
+        this.setMode(modes.HOVER_FEATURE, features[0])
+      }
+    }
+  }
+
+  #maplibreLayers (layerId) {
+    // For each layer in cocarto, we have multiple layers in maplibre
+    // When hiding/showing them, we need to work on each of them
+    // Depending on each geometry type, not all extra layers are defined, so test their existence
+    // See models/concerns/mvt.rb
+    const layerSuffixes = ['', '--outline', '--hover']
+    return layerSuffixes.map(suffix => layerId + suffix).filter(layer => this.map.getLayer(layer))
+  }
+
+  showLayer (layerId) {
+    this.#maplibreLayers(layerId).forEach(layer => this.map.setLayoutProperty(layer, 'visibility', 'visible'))
+  }
+
+  hideLayer (layerId) {
+    this.#maplibreLayers(layerId).forEach(layer => this.map.setLayoutProperty(layer, 'visibility', 'none'))
+  }
+
+  #mapSelectionChanged (features) {
+    features.map(f => getRowFromId(f.properties.original_id)).forEach(row => row.rowController.highlight())
   }
 
   #featureUpdated (feature) {
-    const row = getRowFromFeature(feature)
+    // TODO: when it’s a linestring or a polygon, we want to wait until the editing is done
+    //       and not post right away the change
+    const row = getRowFromId(feature.id)
     row.rowController.update(feature.geometry)
+    this.setMode(modes.DEFAULT)
   }
 
   #featureCreated (feature) {
     this.currentLayerController.createRow(feature.geometry)
-    // When we submit the drawn row, we get one back from the server through turbo
-    // So we remove the one we’ve just drawn
-    // Later we’ll be smarter to avoid destruction and recreation
     this.draw.delete(feature.id)
+    this.setMode(modes.DEFAULT)
+  }
+
+  #setActive (feature, state) {
+    this.activeFeature = feature
+    this.map.setFeatureState(this.activeFeature, { state })
+  }
+
+  #unsetActive () {
+    if (this.activeFeature) {
+      this.map.setFeatureState(this.activeFeature, { state: 'default' })
+      this.activeFeature = null
+    }
+  }
+
+  #editFeature (e) {
+    if (this.mode === modes.ADD_FEATURE) {
+      // When we are adding a feature, we don’t do anything and let draw handle it
+      return
+    }
+    const features = this.map.queryRenderedFeatures(e.point, {
+      layers: Object.keys(this.layers)
+    })
+    const drawFeature = this.draw.getFeatureIdsAt(e.point)
+
+    if (features.length > 0 && drawFeature.length === 0) {
+      const featureId = features[0].properties.original_id
+      if (featureId !== this.currentFeatureId) {
+        this.setMode(modes.EDIT_FEATURE, { features, featureId })
+
+        const path = `/rows/${featureId}`
+        const url = new URL(path, window.location.origin)
+        // queryRenderedFeatures may split the features geometries.
+        // See https://docs.mapbox.com/mapbox-gl-js/api/map/#map#queryrenderedfeatures
+        // We need to fetch the full geometry before adding it to draw.
+        // TODO: when it’s a point, no need to fetch the data, we have the exact coordinates in the MVT
+        fetch(url)
+          .then((response) => response.json())
+          .then((geojson) => {
+            geojson.id = featureId
+            this.draw.add(geojson)
+            const geometryType = this.layers[features[0].layer.id]
+            if (geometryType === 'point') {
+              this.draw.changeMode('simple_select', { featureIds: [featureId] })
+            } else {
+              this.draw.changeMode('direct_select', { featureId })
+            }
+          }).catch(() => this.setMode(modes.DEFAULT))
+      }
+    } else if (drawFeature.length === 0) {
+      // We clicked on no feature, we switch back to the default mode
+      this.setMode(modes.DEFAULT)
+    }
   }
 }
 
-function getRowFromFeature (feature) {
-  return document.getElementById(feature.id)
+function getRowFromId (id) {
+  return document.getElementById('row_' + id)
 }
 
 export default MapState

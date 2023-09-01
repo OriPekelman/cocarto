@@ -21,7 +21,9 @@ module Mvt
           -- first select the geometries that might be in the tiles
           geoms AS (
             SELECT
-              COALESCE(rows.geom_web_mercator, territories.geom_web_mercator) AS geom
+              COALESCE(rows.geom_web_mercator, territories.geom_web_mercator) AS geom,
+              feature_id AS id,
+              rows.id as original_id
             FROM
               rows
             LEFT JOIN
@@ -33,7 +35,9 @@ module Mvt
           -- transform those geometries into the right format for MVT
           mvt_geom AS (
             SELECT
-              ST_AsMVTGeom(geom, ST_TileEnvelope(:z, :x, :y))
+              ST_AsMVTGeom(geom, ST_TileEnvelope(:z, :x, :y)) as geom,
+              id,
+              original_id
             FROM
               geoms
             WHERE
@@ -46,7 +50,7 @@ module Mvt
           -- generate the tile
           -- the parameter of ST_AsMVT must be rows, not records
           -- that is why we must do sub-requests
-          ST_AsMVT(mvt_geom.*, :tile_layer_id) AS mvt
+          ST_AsMVT(mvt_geom.*, :tile_layer_id, NULL, NULL, 'id') AS mvt
         FROM
           mvt_geom
       SQL
@@ -69,17 +73,28 @@ module Mvt
       case geometry_type
       when "point"
         [{
-          id: layer_id,
+          id: layer_id + "--hover",
           source: layer_id,
           type: "circle",
           paint: {
-            "circle-color": color,
-            "circle-radius": 6
+            "circle-color": "#fff",
+            "circle-radius": 8,
+            "circle-opacity": ["match", ["feature-state", "state"], "hover", 1, 0]
           },
           "source-layer": TILE_LAYER_ID
         },
           {
-            id: layer_id + "outline",
+            id: layer_id,
+            source: layer_id,
+            type: "circle",
+            paint: {
+              "circle-color": color,
+              "circle-radius": 6
+            },
+            "source-layer": TILE_LAYER_ID
+          },
+          {
+            id: layer_id + "--outline",
             source: layer_id,
             type: "circle",
             paint: {
@@ -92,15 +107,26 @@ module Mvt
           }]
       when "line_string"
         [{
-          id: layer_id,
+          id: layer_id + "--hover",
           source: layer_id,
           type: "line",
           paint: {
-            "line-color": color,
-            "line-width": 2
+            "line-color": "#fff",
+            "line-width": 6,
+            "line-opacity": ["match", ["feature-state", "state"], "hover", 1, 0]
           },
           "source-layer": TILE_LAYER_ID
-        }]
+        },
+          {
+            id: layer_id,
+            source: layer_id,
+            type: "line",
+            paint: {
+              "line-color": color,
+              "line-width": 2
+            },
+            "source-layer": TILE_LAYER_ID
+          }]
       when "polygon", "territory"
         [{
           id: layer_id,
@@ -108,12 +134,12 @@ module Mvt
           type: "fill",
           paint: {
             "fill-color": color,
-            "fill-opacity": 0.1
+            "fill-opacity": ["match", ["feature-state", "state"], "hover", 0.8, 0.1]
           },
           "source-layer": TILE_LAYER_ID
         },
           {
-            id: layer_id + "outline",
+            id: layer_id + "--outline",
             source: layer_id,
             type: "line",
             paint: {

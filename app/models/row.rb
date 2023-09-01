@@ -51,15 +51,20 @@ class Row < ApplicationRecord
   has_one :map, through: :layer, inverse_of: :rows
 
   # Hooks
-  after_update_commit -> { broadcast_i18n_replace_to layer.map, html: render }
-  after_destroy_commit -> { broadcast_remove_to layer.map }
   after_create_commit -> { broadcast_i18n_append_to map, target: dom_id(layer, :rows), html: render(extra_class: "layer-table__tr--transition layer-table__tr--created") }
+  after_update_commit -> { broadcast_i18n_replace_to layer.map, html: render }
+  after_destroy_commit -> do
+    broadcast_remove_to layer.map
+    notify_geometry_changed id
+  end
+
+  # Validations
+  before_validation :take_first_of_geometry_collection
+  after_commit :notify_geometry_changed, on: [:create, :update], if: proc { previous_changes.key?(layer.geometry_type) }
 
   # Dynamic Fields Associations
   include FieldValuesAssociations::RowAssociations
 
-  # Validations
-  before_validation :take_first_of_geometry_collection
   validate :validate_geometry_presence
   validate :validate_geometry
   validate :either_author_or_anonymous
@@ -73,7 +78,7 @@ class Row < ApplicationRecord
     left_outer_joins(:territory)
       .select(<<-SQL.squish
       rows.id, layer_id, author_id, anonymous_tag,
-      line_string,  
+      line_string,
       point,
       polygon,
       values,
@@ -288,5 +293,9 @@ class Row < ApplicationRecord
       end
       self.geometry = geometry.first
     end
+  end
+
+  def notify_geometry_changed(deleted_feature = nil)
+    MapUpdateChannel.broadcast_to(layer.map, layer: dom_id(layer), deleted_feature:)
   end
 end

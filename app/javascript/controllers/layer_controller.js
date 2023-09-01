@@ -22,6 +22,7 @@ export default class extends Controller {
       if (id === this.element.id && !this.element.classList.contains('is-active')) {
         this.toggleTable()
       }
+      this.mapOutlet.registerLayer({ layerId: this.element.id, geometryType: this.geometryTypeValue })
     })
   }
 
@@ -55,12 +56,12 @@ export default class extends Controller {
   showOnMap () {
     this.hideButtonTarget.hidden = false
     this.showButtonTarget.hidden = true
-    this.mapOutlet.addRows(this.rowTargets)
+    this.mapOutlet.showLayer(this.element.id)
   }
 
   hideOnMap () {
     this.hideButtonTarget.hidden = true
     this.showButtonTarget.hidden = false
-    this.mapOutlet.removeRows(this.rowTargets)
+    this.mapOutlet.hideLayer(this.element.id)
   }
 }

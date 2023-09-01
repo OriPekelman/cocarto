@@ -1,7 +1,16 @@
 class RowsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_row, only: %i[destroy update edit]
+  before_action :set_row, only: %i[show edit update destroy]
   before_action :set_layer, only: %i[create new]
+
+  def show
+    respond_to do |format|
+      format.geojson do
+        geojson = RGeo::GeoJSON.encode(ImportExport::GeojsonExporter.new(@row.layer, with_ids: true).exported_row(@row))
+        render json: geojson
+      end
+    end
+  end
 
   def new
     @row = authorize @layer.rows.new

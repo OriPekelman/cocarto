@@ -33,18 +33,7 @@ class RowComponent < ViewComponent::Base
 
   def row_tag_form
     form_with method: :patch, model: @row, id: form_id, data: {row_target: "form", action: "row#save"}, html: {hidden: true} do |form|
-      row_tag_geojson(form) +
-        form.button("save", hidden: true)
-    end
-  end
-
-  def row_tag_geojson(form)
-    # If our layer is a territory, we need the geojson for display
-    # but we don’t want it in the from
-    if !@row.layer.geometry_territory?
-      form.hidden_field "geojson", data: {row_target: "geojson"}
-    else
-      hidden_field_tag "geojson", @row.territory.geojson, data: {row_target: "geojson"}
+      form.button("save", hidden: true)
     end
   end
 end

@@ -1,4 +1,6 @@
 class RowPolicy < ApplicationPolicy
+  def show? = map_access&.is_at_least(:viewer)
+
   def new? = create?
 
   def create? = map_access&.is_at_least(:contributor)

@@ -7,6 +7,7 @@ https://github.com/ViewComponent/view_component/discussions/42#discussioncomment
     data-controller="row"
     data-layer-target="row"
     data-action="focusin->row#focus row:highlighted->map#selectFeature row:highlighted->layer#activate"
+    data-row-path-value="<%= row_path @row %>"
     data-row-properties-value="<%= @row.css_properties.to_json %>">
 
       <%= calculated_columns %>

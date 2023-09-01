@@ -1,11 +1,13 @@
 import { Controller } from '@hotwired/stimulus'
 import MapState from 'lib/map_state'
+import * as modes from 'lib/modes'
 
 export default class extends Controller {
-  static targets = ['map', 'row', 'addButton', 'defaultLatitude', 'defaultLongitude', 'defaultZoom', 'toolbarLeft', 'toolbarRight']
+  static targets = ['map', 'row', 'addButton', 'defaultLatitude', 'defaultLongitude', 'defaultZoom', 'toolbarLeft', 'toolbarRight', 'layerUpdate']
 
   static values = {
     mapId: String,
+    styleUrl: String,
     defaultLatitude: Number,
     defaultLongitude: Number,
     defaultZoom: Number
@@ -19,30 +21,17 @@ export default class extends Controller {
       lat: this.defaultLatitudeValue,
       zoom: this.defaultZoomValue,
       leftToolbar: this.toolbarLeftTarget,
-      rightToolbar: this.toolbarRightTarget
+      rightToolbar: this.toolbarRightTarget,
+      style: this.styleUrlValue
     })
-
-    this.addRows(this.rowTargets)
   }
 
-  rowTargetConnected (row) {
-    // a row can be connected when the map isn’t initialized yet
-    if (this.mapState) {
-      this.mapState.addRow(row.rowController)
-    }
+  showLayer (layerId) {
+    this.mapState.showLayer(layerId)
   }
 
-  rowTargetDisconnected (row) {
-    this.mapState.getDraw().delete(row.id)
-  }
-
-  addRows (rows) {
-    rows.forEach(row => this.mapState.addRow(row.rowController))
-  }
-
-  removeRows (rows) {
-    const ids = rows.map(row => row.id)
-    this.mapState.getDraw().delete(ids)
+  hideLayer (layerId) {
+    this.mapState.hideLayer(layerId)
   }
 
   layerToggled (detail) {
@@ -66,8 +55,12 @@ export default class extends Controller {
   }
 
   toggleMode () {
-    const newMode = this.mapState.getDraw().getMode() === this.mapState.getDrawMode() ? 'simple_select' : this.mapState.getDrawMode()
-    this.mapState.getDraw().changeMode(newMode)
+    console.log(modes)
+    if (this.mapState.getMode() === modes.DEFAULT) {
+      this.mapState.setMode(modes.ADD_FEATURE)
+    } else {
+      this.mapState.setMode(modes.DEFAULT)
+    }
   }
 
   exportMapAsImage ({ target }) {
@@ -80,5 +73,13 @@ export default class extends Controller {
 
   center ({ params: { bounds } }) {
     this.mapState.setVisibleBounds(bounds)
+  }
+
+  layerUpdateTargetConnected (update) {
+    this.mapState.refresh(update.dataset.layerId)
+  }
+
+  registerLayer (layerId) {
+    this.mapState.registerLayer(layerId)
   }
 }
