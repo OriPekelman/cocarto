@@ -32,6 +32,17 @@ export default class extends Controller {
     }
   }
 
+  row_focused (event) {
+    const rowController = event.currentTarget.rowController
+    rowController.focus()
+    const feature = {
+      id: rowController.featureIdValue,
+      source: this.element.id,
+      sourceLayer: 'layer'
+    }
+    this.dispatch('row_focused', { detail: { feature } })
+  }
+
   toggleTable () {
     // Close the other active layer if it exists
     if (this.hasLayerOutlet && this.layerOutletElement !== this.element) {

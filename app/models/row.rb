@@ -77,7 +77,7 @@ class Row < ApplicationRecord
   scope :with_territory, -> do
     left_outer_joins(:territory)
       .select(<<-SQL.squish
-      rows.id, layer_id, author_id, anonymous_tag,
+      rows.id, layer_id, author_id, anonymous_tag, feature_id,
       line_string,
       point,
       polygon,

@@ -67,8 +67,8 @@ export default class extends Controller {
     target.href = this.mapState.getImage()
   }
 
-  selectFeature (event) {
-    this.mapState.setSelectedFeature(event.currentTarget.id)
+  selectFeature ({ detail }) {
+    this.mapState.setSelectedFeature(detail.feature)
   }
 
   center ({ params: { bounds } }) {
