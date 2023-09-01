@@ -41,8 +41,8 @@ en:
         remote_source_url: Data source URL
       import/operation/status:
         done: Done
-        fetching: Fetching
-        importing: Importing
+        fetching: Fetching…
+        importing: Importing…
         ready: Ready
       import/operation/success:
         'false': Import failed

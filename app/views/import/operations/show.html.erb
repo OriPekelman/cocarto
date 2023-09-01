@@ -7,12 +7,14 @@
   <% end %>
 </div>
 
-<div class="card__footer-content">
-  <% if @operation.ready? %>
-    <%= submit_tag t("common.start"), class: "button button--confirm", form: dom_id(@operation, :form) %>
-  <% else %>
-    <button class="button button--confirm" data-action="modal#close">
-      <%= t("common.ok") %>
-    </button>
-  <% end %>
-</div>
+<% if @operation.ready? || @operation.done? %>
+  <div class="card__footer-content">
+    <% if @operation.ready? %>
+      <%= submit_tag t("common.start"), class: "button button--confirm", form: dom_id(@operation, :form) %>
+    <% elsif @operation.done? %>
+      <button class="button button--confirm" data-action="modal#close">
+        <%= t("common.ok") %>
+      </button>
+    <% end %>
+  </div>
+<% end %>

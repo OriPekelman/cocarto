@@ -72,10 +72,12 @@ fr:
         help_html: cocarto peut importer des données de fichiers <b>geojson</b>, tabulaires (<b>csv</b>), Excel ou OpenOffice (<b>xls</b>, <b>xlsx</b>, <b>ods</b>), ainsi que depuis un serveur <b>WFS</b>.
         or: ou
         url_placeholder: https://example.com/wfs
-      operation_done:
-        imported_rows: "%{size} rangées importées (%{new} nouvelles, %{updated} mises à jour)"
-        line_number: Ligne %{line_number}
+      operation:
+        from_to_html: De <b>%{from}</b> vers <b>%{to}</b>
+        imported_rows: "%{size} rangées importées sur %{total}"
+        imported_rows_details: "%{new} nouvelles, %{updated} mises à jour"
         row_failure: Non enregistré.
+        to_html: Vers <b>%{to}</b>
   layers:
     form:
       new: Nouvelle couche

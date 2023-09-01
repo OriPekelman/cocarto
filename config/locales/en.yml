@@ -72,10 +72,12 @@ en:
         help_html: 'cocarto can import data from the following file types: <b>geojson</b>, tabular (<b>csv</b>), Excel or OpenOffice (<b>xls</b>, <b>xlsx</b>, <b>ods</b>), as well as from a <b>WFS</b> server.'
         or: or
         url_placeholder: https://example.com/wfs
-      operation_done:
-        imported_rows: Imported %{size} rows (%{new} new, %{updated} updated)
-        line_number: Line %{line_number}
+      operation:
+        from_to_html: From <b>%{from}</b> to <b>%{to}</b>
+        imported_rows: "%{size} rows imported out of %{total}"
+        imported_rows_details: "%{new} new rows, %{updated} updated rows"
         row_failure: Not saved.
+        to_html: To <b>%{to}</b>
   layers:
     form:
       new: New layer

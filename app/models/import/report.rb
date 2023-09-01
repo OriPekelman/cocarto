@@ -27,6 +27,7 @@ class Import::Report < ApplicationRecord
   # Attributes
   serialize :row_results, Array # of RowResult
   RowResult = Struct.new(:did_save, # boolean
+    :new_record, # boolean
     :ignored, # boolean
     :parsing_error, # String (from Exception#detailed_message)
     :errors,  # Hash (from ActiveModel::Errors#details)
@@ -59,9 +60,22 @@ class Import::Report < ApplicationRecord
     row_results.all? { |row_result| row_result.did_save || row_result.ignored }
   end
 
-  def add_entity_result(index, did_save, parsing_error: nil, errors: nil, warnings: nil)
+  def saved_rows_count
+    row_results.filter { _1.did_save }.size
+  end
+
+  def new_rows_count
+    row_results.filter { _1.did_save && _1.new_record }.size
+  end
+
+  def updated_rows_count
+    row_results.filter { _1.did_save && !_1.new_record }.size
+  end
+
+  def add_entity_result(index, did_save, new_record: false, parsing_error: nil, errors: nil, warnings: nil)
     result = RowResult.new(
       did_save: did_save,
+      new_record: new_record,
       parsing_error: parsing_error&.detailed_message&.force_encoding("utf-8"),
       errors: errors&.details,
       warnings: warnings&.details

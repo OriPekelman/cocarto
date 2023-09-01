@@ -82,7 +82,7 @@ module Importers
 
       did_save = row.save
 
-      @report.add_entity_result(index, did_save, errors: row.errors, warnings: row.warnings)
+      @report.add_entity_result(index, did_save, new_record: row.id_previously_was.nil?, errors: row.errors, warnings: row.warnings)
     end
 
     # fast mode

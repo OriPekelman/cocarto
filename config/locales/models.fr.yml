@@ -41,11 +41,11 @@ fr:
         remote_source_url: URL de la source de données
       import/operation/status:
         done: Terminé
-        fetching: Téléchargement
-        importing: Import
+        fetching: Téléchargement…
+        importing: Import en cours…
         ready: Prêt
       import/operation/success:
-        'false': Échec
+        'false': Échec de l’import
         'true': Import réussi
       layer:
         color: Couleur des objets

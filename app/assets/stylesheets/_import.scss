@@ -62,3 +62,41 @@
     }
   }
 }
+
+.import-operation--section + .import-operation--section {
+  margin-top: 24px;
+}
+
+.import-operation--report-detail {
+  margin-inline: 16px;
+}
+
+.import-operation--report-summary {
+  margin-inline: -16px;
+  height: auto;
+}
+
+.import-operation--report-summary--detail {
+  margin-inline: 16px;
+  margin-block: 8px;
+}
+
+.import-operation--report-summary--table {
+  border-spacing: 8px 2px;
+  margin-inline-start: 16px;
+}
+
+.import-operation--report-line {
+  th {
+    font-family: var(--font-sans);
+    font-weight: 400;
+    text-align: right;
+    font-size: 12px;
+  }
+
+  td {
+    font-family: var(--font-mono);
+    font-weight: 400;
+    font-size: 12px;
+  }
+}
