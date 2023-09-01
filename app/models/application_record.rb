@@ -4,6 +4,8 @@ class ApplicationRecord < ActiveRecord::Base
 
   self.abstract_class = true
 
+  self.strict_loading_by_default = true unless defined?(Rails::Console)
+
   # Basic “warnings" management reusing the ActiveModel::Errors class
   # It does not change the validation behaviour;
   # it’s up to subclasses to populate warnings and to the calling code to make something out of it.
