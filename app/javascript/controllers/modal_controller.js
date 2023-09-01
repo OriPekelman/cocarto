@@ -24,7 +24,7 @@ export default class extends Controller {
   }
 
   submitEnd (event) {
-    if (event.detail.success) {
+    if (event.detail.success && event.detail.formSubmission.submitter) {
       this.close(event)
     }
   }
