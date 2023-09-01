@@ -47,6 +47,7 @@ Rails.application.routes.draw do
     get "/presentation" => "pages#presentation"
     get "share/:token", to: "maps#shared", as: "map_shared"
     get "layers/:id/geojson", to: redirect("layers/%{id}.geojson")
+    get "/s/geodatadays", to: redirect("/share/dg4V524mFETB5Zoo")
   end
 
   if Rails.env.development?
