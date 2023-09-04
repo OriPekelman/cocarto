@@ -156,8 +156,9 @@ main {
 
 .footer__application {
   align-items: center;
+  padding-inline: 8px;
   display: flex;
-  height: var(--footer-height);
+  min-height: var(--footer-height);
   background-color: var(--color-bg-ambient-30);
   justify-content: center;
   font-size: 14px;
