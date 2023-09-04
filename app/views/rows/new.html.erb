@@ -1,5 +1,14 @@
 <%# params: row %>
 
+<% content_for :header do %>
+  <div class="header--bar">
+    <%= link_to :root, class: "button button--link" do %>
+      <%= embedded_svg "c-logo.svg", class: "icon icon icon--narrow icon--tinted" %>
+    <% end %>
+    <%= render "header_menu_signed_in" %>
+  </div>
+<% end %>
+
 <div
   class="add-single-row__container"
   data-controller="map-add-point"

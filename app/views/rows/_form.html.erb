@@ -7,6 +7,11 @@
     <%= form.hidden_field :geojson, data: {map_add_point_target: "geojson"} %>
   <% end %>
   <div class="card__main-content">
+    <% if from_rows_new %>
+      <h3 class="form__header">
+        <span><%= row.map.name %></span> / <span><%= row.layer.name %></span>
+      </h3>
+    <% end %>
     <% row.fields_values.each do |field, value| %>
       <div class="form__field">
         <%= form.label sanitize_to_id("fields_values[#{field.id}]"), field.label %>

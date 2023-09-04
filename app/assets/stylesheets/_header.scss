@@ -27,6 +27,14 @@
   justify-content: flex-end;
 }
 
+.header--bar {
+  flex-basis: 100%;
+  align-self: stretch;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .header--app {
   height: var(--header-height);
   min-height: var(--header-height);
