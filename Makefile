@@ -48,7 +48,7 @@ lint: lint-bundler lint-node lint-active-record ## Run all linters
 autocorrect-rubocop: ## rubocop autocorrect
 	bundle exec rubocop --autocorrect-all
 
-erb: ## erblint autocorrect
+autocorrect-erb: ## erblint autocorrect
 	bundle exec erblint --lint-all --autocorrect
 
 autocorrect-i18n: ## i18n-tasks autocorrect
