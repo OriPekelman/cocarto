@@ -6,7 +6,11 @@
     <tr class="layer-table__tr">
       <%# calculated columns first %>
       <% if layer.geometry_territory? %>
-        <th class="layer-table__th "></th>
+        <th class="layer-table__th layer-table__th--field">
+          <div class="layer-table-th__contents layer-table-th__contents--resizable">
+            <%= Territory.model_name.human %>
+          </div>
+        </th>
         <th class="layer-table__th layer-table__th--stats"><%= t("common.territory_code") %></th>
       <% elsif layer.geometry_point? %>
         <th class="layer-table__th layer-table__th--stats"><%= t("common.longitude") %></th>

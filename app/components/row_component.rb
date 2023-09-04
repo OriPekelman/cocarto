@@ -19,7 +19,8 @@ class RowComponent < ViewComponent::Base
   def calculated_columns
     case @row.layer.geometry_type
     when "territory"
-      tag.td(render(SearchComponent.new(form: form_id, field: "row[territory_id]", territory: @row.territory, field_id: nil, layer_id: @row.layer_id)), class: "layer-table__td") +
+      tag.td(render(SearchComponent.new(form: form_id, field: "row[territory_id]", territory: @row.territory, field_id: nil, layer_id: @row.layer_id)),
+        class: "layer-table__td layer-table__td--field layer-table__td--text") +
         tag.td(@row.territory.code, class: "layer-table__td layer-table__td--stats")
     when "point"
       tag.td(number_with_precision(@row.geo_lng_min, precision: 6), class: "layer-table__td layer-table__td--stats") +
