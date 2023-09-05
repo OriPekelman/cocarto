@@ -1,11 +1,14 @@
 .add-single-row__container {
   width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .add-single-row__map {
   right: 0;
   bottom: 0;
-  height: 200px;
+  flex-basis: 200px;
 }
 
 .add-single-row__crosshair {
@@ -22,16 +25,12 @@
 }
 
 .add-single-row__form {
-  padding: 2rem;
-  width: 400px;
-  max-width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-}
+  width: 100%;
+  max-width: 600px;
+  margin-inline: auto;
+  flex-grow: 1;
 
-@media (width <= 850px) {
-  .add-single-row__form {
-    padding: 1rem;
-    margin-left: 0;
+  > :last-child {
+    flex-grow: 2;
   }
 }

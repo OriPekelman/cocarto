@@ -1,12 +1,17 @@
 <%# params: row, focus_field, from_rows_new %>
 <%# used in rows/edit and rows/new %>
 
-<%= form_with model: row.new_record? ? [row.layer, row] : row, id: dom_id(row, :form), multipart: true, class: "form" do |form| %>
+<%= form_with model: row.new_record? ? [row.layer, row] : row, id: dom_id(row, :form), multipart: true, class: class_names("form", "add-single-row__form": from_rows_new) do |form| %>
   <% if from_rows_new %>
     <%= hidden_field_tag :from_rows_new, true %>
     <%= form.hidden_field :geojson, data: {map_add_point_target: "geojson"} %>
   <% end %>
   <div class="card__main-content">
+    <% if from_rows_new %>
+      <h3 class="form__header">
+        <span><%= row.map.name %></span> / <span><%= row.layer.name %></span>
+      </h3>
+    <% end %>
     <% row.fields_values.each do |field, value| %>
       <div class="form__field">
         <%= form.label sanitize_to_id("fields_values[#{field.id}]"), field.label %>
