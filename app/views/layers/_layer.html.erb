@@ -2,6 +2,7 @@
   id="<%= dom_id(layer) %>"
   class="layer-container"
   data-controller="layer"
+  data-action="layer:row_focused->map#selectFeature"
   data-layer-layer-outlet=".layer-container.is-active"
   data-layer-map-outlet=".map_document__container"
   data-layer-add-feature-text-value="<%= t("common.add_geometry.#{layer.geometry_type}") %>"

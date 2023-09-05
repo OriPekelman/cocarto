@@ -56,6 +56,7 @@ class MapState {
         this.currentFeatureId = null
         break
       case modes.EDIT_FEATURE:
+        this.#unsetActive()
         this.draw.deleteAll()
         this.#mapSelectionChanged(args.features)
         this.currentFeatureId = args.featureId
@@ -104,9 +105,7 @@ class MapState {
   }
 
   setSelectedFeature (featureId) {
-    // TODO: we want just a hover state
-    // TODO: this should be a mode change
-    this.draw.changeMode('simple_select', { featureIds: [featureId] })
+    this.setMode(modes.HOVER_FEATURE, featureId)
   }
 
   setActiveLayer ({ geometryType, layerController }) {

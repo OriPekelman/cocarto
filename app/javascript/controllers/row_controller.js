@@ -2,7 +2,7 @@ import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
   static targets = ['form']
-  static values = { properties: Object, geojson: Object, path: String }
+  static values = { properties: Object, geojson: Object, path: String, featureId: Number }
 
   connect () {
     this.dirty = false
