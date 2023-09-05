@@ -4,7 +4,7 @@ class Importers::WFSTest < ActiveSupport::TestCase
   setup { start_fixtures_server }
 
   class Analyse < self
-    test "layer_names" do
+    test "_source_layers" do
       config = maps(:restaurants).import_configurations.new
 
       layer_names = Importers::WFS.new(config, "#{fixtures_server_url}/wfs", nil)._source_layers
@@ -12,12 +12,21 @@ class Importers::WFSTest < ActiveSupport::TestCase
       assert_equal ["TEST_FEATURE_NAME"], layer_names
     end
 
-    test "layer_columns" do
+    test "_source_columns" do
       config = maps(:restaurants).import_configurations.new
 
       layer_names = Importers::WFS.new(config, "#{fixtures_server_url}/wfs", nil)._source_columns("TEST_FEATURE_NAME")
 
-      assert_equal({"gml_id" => "String", "Name" => "String"}, layer_names)
+      assert_equal({"gml_id" => "String (0.0) NOT NULL", "Name" => "String (50.0)"}, layer_names)
+    end
+
+    test "_source_geometry" do # rubocop:disable MiniTest/MultipleAssertions
+      config = maps(:restaurants).import_configurations.new
+
+      geometry_analysis = Importers::WFS.new(config, "#{fixtures_server_url}/wfs", nil)._source_geometry_analysis("TEST_FEATURE_NAME")
+
+      assert_equal ["SHAPE"], geometry_analysis.columns
+      assert_equal "Multi Curve", geometry_analysis.type
     end
   end
 

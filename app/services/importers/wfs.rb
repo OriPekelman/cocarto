@@ -10,28 +10,50 @@ module Importers
       mimes: %w[application/gml+xml application/xml text/xml]
     }
 
-    def source_info
-      @source_info ||= begin
-        stdout, stderr, status = Open3.capture3("ogrinfo", "-json", "WFS:#{@source}")
-        if status.success?
-          JSON.parse(stdout)
-        else
-          raise ImportGlobalError, stderr
+    def _source_layers
+      stdout, stderr, status = Open3.capture3("ogrinfo", "-q", "WFS:#{@source}")
+      if status.success?
+        scanner = StringScanner.new(stdout)
+
+        result = []
+        while scanner.scan_until(/(?<index>\d+): (?<feature_type>.*?)[ $]/)
+          result << scanner.named_captures["feature_type"]
         end
+
+        result
+      else
+        raise ImportGlobalError, stderr
       end
     end
 
-    def _source_layers
-      source_info["layers"]&.pluck("name")
-    end
-
     def _source_columns(source_layer_name)
-      source_info["layers"].find { _1["name"] == source_layer_name }["fields"].pluck("name", "type").to_h
+      stdout, stderr, status = Open3.capture3("ogrinfo", "-so", "-nocount", "-noextent", "-nomd", "WFS:#{@source}", source_layer_name)
+      if status.success?
+        scanner = StringScanner.new(stdout)
+        # Attributes are described as “<key>: <type>” pairs after the “Geometry Column = <column>” line
+        scanner.scan_until(/^Geometry Column = (?<geometry_column>.*)$/)
+        result = {}
+        while scanner.scan_until(/^(?<attribute>.*?): (?<type>.*?)$/)
+          result[scanner.named_captures["attribute"]] = scanner.named_captures["type"]
+        end
+        result
+      else
+        raise ImportGlobalError, stderr
+      end
     end
 
     def _source_geometry_analysis(source_layer_name, columns: nil, format: nil)
-      type = source_info["layers"].find { _1["name"] == source_layer_name }["geometryFields"].first["type"]
-      GeometryParsing::GeometryAnalysis.new(type: type)
+      stdout, stderr, status = Open3.capture3("ogrinfo", "-so", "-nocount", "-noextent", "-nomd", "WFS:#{@source}", source_layer_name)
+      if status.success?
+        scanner = StringScanner.new(stdout)
+        scanner.scan_until(/^Geometry: (?<geometry_type>.*)$/)
+        geometry_type = scanner.named_captures["geometry_type"]
+        scanner.scan_until(/^Geometry Column = (?<geometry_column>.*)$/)
+        geometry_column = scanner.named_captures["geometry_column"]
+        GeometryParsing::GeometryAnalysis.new(columns: [geometry_column], type: geometry_type)
+      else
+        raise ImportGlobalError, stderr
+      end
     end
 
     def _import_rows
