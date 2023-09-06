@@ -34,6 +34,7 @@ fr:
     ok: OK
     save: Sauvegarder
     settings: Réglages
+    start: Démarrer
     territory_code: Code
     updated_at: Modifié il y a %{date}
     updated_at_by: Modifié il y a %{date} par %{user}

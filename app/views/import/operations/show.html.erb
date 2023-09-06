@@ -9,7 +9,7 @@
 
 <div class="card__footer-content">
   <% if @operation.ready? %>
-    <%= submit_tag "Démarrer", class: "button button--confirm", form: dom_id(@operation, :form) %>
+    <%= submit_tag t("common.start"), class: "button button--confirm", form: dom_id(@operation, :form) %>
   <% else %>
     <button class="button button--confirm" data-action="modal#close">
       <%= t("common.ok") %>

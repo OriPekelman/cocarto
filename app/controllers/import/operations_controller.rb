@@ -54,6 +54,6 @@ class Import::OperationsController < ApplicationController
   end
 
   def set_operation
-    @operation = authorize Import::Operation.with_attached_local_source_file.includes(configuration: [map: :layers, mappings: [layer: :fields]]).find(params[:id])
+    @operation = authorize Import::Operation.with_attached_local_source_file.includes(configuration: [map: :layers, mappings: [layer: :fields]], reports: [mapping: :layer]).find(params[:id])
   end
 end

@@ -34,6 +34,7 @@ en:
     ok: OK
     save: Save
     settings: Settings
+    start: Start
     territory_code: Code
     updated_at: Updated %{date} ago
     updated_at_by: Updated %{date} ago by %{user}
