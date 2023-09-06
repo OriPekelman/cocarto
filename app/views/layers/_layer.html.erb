@@ -1,6 +1,6 @@
 <div
   id="<%= dom_id(layer) %>"
-  class="layer-container"
+  class="<%= class_names("layer-container", {"is-active": local_assigns[:index] && index == 0}) %>"
   data-controller="layer"
   data-action="layer:row_focused->map#selectFeature"
   data-layer-layer-outlet=".layer-container.is-active"

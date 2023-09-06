@@ -46,10 +46,10 @@
     class="map-data__container"
     data-controller="layer-selection">
     <div id="<%= dom_id(@map, "layers") %>">
-      <% @map.layers.includes(:fields, :territory_categories).order(:created_at, :id).each do |layer| %>
+      <% @map.layers.includes(:fields, :territory_categories).order(:created_at, :id).each_with_index do |layer, index| %>
         <% cache layer do %>
-          <%= render layer %>
-        <% end %>
+          <%= render layer, index: %>
+          <% end %>
       <% end %>
     </div>
     <footer class="footer__layer-list">
