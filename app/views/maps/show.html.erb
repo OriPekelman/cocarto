@@ -47,7 +47,7 @@
     class="map-data__container"
     data-controller="layer-selection">
     <div id="<%= dom_id(@map, "layers") %>">
-      <% @map.layers.includes(:fields, :territory_categories).order(:created_at, :id).each_with_index do |layer, index| %>
+      <% @map.layers.includes(:fields, :territory_categories).order(:sort_order).each_with_index do |layer, index| %>
         <% cache layer do %>
           <%= render layer, initially_active: layer == @initially_active_layer %>
           <% end %>

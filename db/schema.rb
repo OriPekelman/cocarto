@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_10_144943) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_06_151746) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -242,7 +242,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_10_144943) do
     t.datetime "updated_at", null: false
     t.uuid "map_id", null: false
     t.jsonb "style", default: {}, null: false
-    t.index ["map_id"], name: "index_layers_on_map_id"
+    t.integer "sort_order"
+    t.index ["map_id", "sort_order"], name: "index_layers_on_map_id_and_sort_order", unique: true
   end
 
   create_table "layers_territory_categories", id: false, force: :cascade do |t|

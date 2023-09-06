@@ -5,6 +5,7 @@
 #  id            :uuid             not null, primary key
 #  geometry_type :enum             geometry, 0
 #  name          :string
+#  sort_order    :integer
 #  style         :jsonb            not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
@@ -12,7 +13,7 @@
 #
 # Indexes
 #
-#  index_layers_on_map_id  (map_id)
+#  index_layers_on_map_id_and_sort_order  (map_id,sort_order) UNIQUE
 #
 # Foreign Keys
 #
