@@ -48,17 +48,34 @@ class Import::Operation < ApplicationRecord
   end
 
   # Analysis is made according to the current source and configuration.source_type
+  # - may fail if the importer does not actually support the file (e.g. the content_type is misleading)
+  # - returns a SourceAnalysis
   def analysis
-    @analysis ||= with_fetched_source do |source|
-      @analysis = configuration.analysis(source)
+    Rails.cache.fetch(["analysis", id, remote_source_url, local_source_file&.id]) do
+      with_importer { |importer| configuration.analysis(importer) }
     end
   rescue Importers::ImportGlobalError => e
     errors.add(:base, (e.cause || e).detailed_message.force_encoding("utf-8"))
-    Import::Configuration::SourceAnalysis.new({}, {})
+    Import::Configuration::Analysis.new({}, [])
+  end
+
+  # Analyse a specific source layer
+  def layer_analysis(mapping)
+    Rails.cache.fetch(["layer_analysis", id, remote_source_url, local_source_file&.id, mapping.source_layer_name]) do
+      with_importer { |importer| mapping.analysis(importer) }
+    end
+  rescue Importers::ImportGlobalError => e
+    errors.add(:base, (e.cause || e).detailed_message.force_encoding("utf-8"))
+    Import::Mapping::Analysis.new({}, Importers::GeometryParsing::GeometryAnalysis.new)
   end
 
   def configure_from_source
     configuration.configure_from_analysis(analysis)
+    configuration.mappings.each do |mapping|
+      layer_analysis = layer_analysis(mapping)
+      mapping.configure_from_analysis(layer_analysis)
+      mapping.save
+    end
   end
 
   def import(author)
@@ -73,11 +90,17 @@ class Import::Operation < ApplicationRecord
   end
 
   def import!(author)
-    with_fetched_source do |source|
-      import_source(source, author)
+    with_importer(author) do |importer|
+      import_source(importer)
     end
 
     self
+  end
+
+  def with_importer(author = nil)
+    with_fetched_source do |source|
+      yield(configuration.importer(source, author, id))
+    end
   end
 
   def with_fetched_source(&block)
@@ -97,14 +120,14 @@ class Import::Operation < ApplicationRecord
     end
   end
 
-  def import_source(source, author)
+  def import_source(importer)
     update(status: :importing)
 
     ApplicationRecord.transaction do
       configuration
         .mappings.includes(:reimport_field, layer: [:fields, :map])
         .map do |mapping|
-        import_in_layer(source, author, mapping)
+        import_in_layer(importer, mapping)
       end
     rescue Importers::ImportGlobalError, ActiveRecord::ActiveRecordError => e
       self.global_error = (e.cause || e).detailed_message.force_encoding("utf-8")
@@ -115,9 +138,9 @@ class Import::Operation < ApplicationRecord
     update(status: :done)
   end
 
-  def import_in_layer(source, author, mapping)
+  def import_in_layer(importer, mapping)
     report = reports.merge(mapping.reports).new
-    configuration.importer(source, author).import_rows(report)
+    importer.import_rows(report)
     report.save
   end
 

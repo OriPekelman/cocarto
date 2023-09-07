@@ -72,6 +72,21 @@ class Import::MappingTest < ActiveSupport::TestCase
     end
   end
 
+  class Analysis < self
+    test "#configure_from_analysis" do
+      analysis = Import::Mapping::Analysis.new(
+        columns: {"Name" => String, "Rating" => String},
+        geometry: Importers::GeometryParsing::GeometryAnalysis.new(columns: %w[long lat], format: :xy)
+      )
+      layer = layers(:restaurants)
+      mapping = layer.import_mappings.new
+      # config = layer.map.import_configurations.new(source_type: :csv, mappings: [mapping])
+      mapping.configure_from_analysis(analysis)
+
+      assert_equal %w[long lat], mapping.geometry_columns
+    end
+  end
+
   class Mapping < self
     test "import with mapping" do
       layers(:restaurants).rows.destroy_all

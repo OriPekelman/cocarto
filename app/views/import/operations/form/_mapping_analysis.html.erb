@@ -8,11 +8,11 @@
 
     <% if configuration.importer_class.support[:multiple_layers] %>
       <%= form.label :source_layer_name, t(".source_layer_name.#{configuration.source_type}") %>
-      <%= form.select :source_layer_name, operation.analysis.layers.keys, {}, onchange: "this.form.requestSubmit()" %>
+      <%= form.select :source_layer_name, operation.analysis.layers, {}, onchange: "this.form.requestSubmit()" %>
     <% end %>
 
     <label><%= t(".geometry_type") %></label>
-    <code><%= operation.analysis.layers[mapping.source_layer_name]&.geometry&.type %></code>
+    <code><%= operation.layer_analysis(mapping)&.geometry&.type %></code>
 
     <% if configuration.importer_class.support[:indeterminate_geometry] %>
       <%= form.label :geometry_encoding_format %>
@@ -22,9 +22,10 @@
       <%= form.label :geometry_columns, label %>
       <div>
         <% name = field_name(form.object_name, :geometry_columns, multiple: true) %> <%# Note: we override the name to allow plural selects without a plural %>
-        <%= form.select :geometry_columns, operation.analysis.layers[mapping.source_layer_name]&.columns&.keys || [], {selected: mapping.geometry_columns&.first, onchange: "this.form.requestSubmit()"}, name: name %>
+        <%= form.select :geometry_columns, operation.layer_analysis(mapping)&.columns&.keys || [], {selected: mapping.geometry_columns&.first, onchange: "this.form.requestSubmit()"}, name: name %>
         <% if mapping.geometry_encoding_format == 'xy' %>
-          <%= form.select :geometry_columns, operation.analysis.layers[mapping.source_layer_name]&.columns&.keys || [], {selected: mapping.geometry_columns&.last, onchange: "this.form.requestSubmit()"}, name: name %>
+          <%# TODO remove safe navigation above and below %>
+          <%= form.select :geometry_columns, operation.layer_analysis(mapping)&.columns&.keys || [], {selected: mapping.geometry_columns&.last, onchange: "this.form.requestSubmit()"}, name: name %>
         <% end %>
       </div>
     <% end %>

@@ -42,19 +42,25 @@ class Import::Mapping < ApplicationRecord
   validates :ignore_empty_geometry_rows, inclusion: [true, false]
 
   # Hooks
-  before_update :reset_columns_when_layer_changes, if: -> { layer_id_changed? }
+  before_update :reset_columns_when_layer_changes
 
-  def configure_from_analysis(analysis)
-    # Note: these attributes are cleared when the target layer is changed
-    self.source_layer_name ||= best_source_layer_name(analysis.layers.keys)
-    layer_analysis = analysis.layers[self.source_layer_name]
-    if layer_analysis
-      self.fields_columns ||= best_fields_columns(layer_analysis.columns)
-      self.geometry_columns ||= layer_analysis.geometry.columns
-      self.geometry_encoding_format ||= layer_analysis.geometry.format
-    end
+  ## Analysis
+  #
+  Analysis = Struct.new(
+    :columns, # Hash of column name -> analysed data type
+    :geometry # GeometryAnalysis
+  )
 
-    save
+  def analysis(importer)
+    columns = importer._source_columns(source_layer_name)
+    geometry_analysis = importer._source_geometry_analysis(source_layer_name, columns: geometry_columns, format: geometry_encoding_format)
+    Analysis.new(columns, geometry_analysis)
+  end
+
+  def configure_from_analysis(layer_analysis)
+    self.fields_columns ||= best_fields_columns(layer_analysis.columns)
+    self.geometry_columns ||= layer_analysis.geometry.columns
+    self.geometry_encoding_format ||= layer_analysis.geometry.format
   end
 
   # Find the best source layer name matching the target layer; fallback to the first source layer.
@@ -80,7 +86,8 @@ class Import::Mapping < ApplicationRecord
   private
 
   def reset_columns_when_layer_changes
-    self.source_layer_name = nil
+    return unless layer_id_changed? || (source_layer_name_changed? && !source_layer_name_was.nil?)
+
     self.fields_columns = nil
     self.geometry_columns = nil
     self.geometry_encoding_format = nil

@@ -31,7 +31,9 @@ class ActiveSupport::TestCase
     layer = layers(layer_fixture_name)
     mapping = layer.import_mappings.new
     config = layer.map.import_configurations.new(source_type: source_type, mappings: [mapping])
-    config.configure_from_analysis(config.analysis(source))
+    importer = config.importer(source, nil, nil)
+    config.configure_from_analysis(config.analysis(importer))
+    mapping.configure_from_analysis(mapping.analysis(importer))
 
     [config, mapping]
   end

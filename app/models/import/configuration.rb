@@ -78,39 +78,18 @@ class Import::Configuration < ApplicationRecord
 
   # Instance of an importer for the source, ready to perform analysis and import
   #   - source is either open file or an URL, depending on the importer
-  def importer(source, author)
-    importer_class.new(self, source, author, stream: true)
+  def importer(source, author, cache_key)
+    importer_class.new(self, source, author, cache_key, stream: true)
   end
 
   ## Analysis
   #
-  SourceAnalysis = Struct.new(
+  Analysis = Struct.new(
     :configuration, # Hash of Import::Configuration attributes
-    :layers # Hash of source layer_name => SourceLayerAnalysis
+    :layers # Array of layer_names
   )
-
-  SourceLayerAnalysis = Struct.new(
-    :columns, # Hash of column name -> analysed data type
-    :geometry # GeometryAnalysis
-  )
-
-  # Analyse the passed source using the importer for the current source_type
-  # - may fail if the importer does not actually support the file (e.g. the content_type is misleading)
-  # - returns a nested structure of SourceAnalysis / SourceLayerAnalysis / GeometryAnalysis
-  def analysis(source)
-    importer = importer(source, nil)
-
-    source_configuration = importer._source_configuration
-    layers_analyses = importer._source_layers.index_with do |layer_name|
-      columns = importer._source_columns(layer_name)
-      # If there’s already a mapping for this source layer, and that mapping has geometry attributes, use them.
-      # (In that case we only use _source_geometry_analysis to find the geometry type)
-      mapping = mappings.find_by(source_layer_name: layer_name)
-      geometry_analysis = importer._source_geometry_analysis(layer_name, columns: mapping&.geometry_columns, format: mapping&.geometry_encoding_format)
-      SourceLayerAnalysis.new(columns, geometry_analysis)
-    end
-
-    SourceAnalysis.new(source_configuration, layers_analyses)
+  def analysis(importer)
+    Analysis.new(importer._source_configuration, importer._source_layers)
   end
 
   # Update using a source_analysis
@@ -118,7 +97,8 @@ class Import::Configuration < ApplicationRecord
     update(source_analysis.configuration)
 
     mappings.each do |mapping|
-      mapping.configure_from_analysis(source_analysis)
+      mapping.source_layer_name ||= mapping.best_source_layer_name(source_analysis.layers)
+      mapping.save
     end
   end
 end

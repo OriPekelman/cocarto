@@ -4,10 +4,11 @@ module Importers
   class ImportGlobalError < StandardError; end
 
   class Base
-    def initialize(configuration, source, author, **options)
+    def initialize(configuration, source, author, cache_key = nil, **options)
       @configuration = configuration
       @source = source
       @author = author
+      @cache_key = cache_key
     end
 
     def self.support

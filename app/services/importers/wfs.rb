@@ -10,8 +10,14 @@ module Importers
       mimes: %w[application/gml+xml application/xml text/xml]
     }
 
+    def cached_tool_command(*command)
+      Rails.cache.fetch(["wfs", @cache_key, command]) do
+        Open3.capture3(*command)
+      end
+    end
+
     def _source_layers
-      stdout, stderr, status = Open3.capture3("ogrinfo", "-q", "WFS:#{@source}")
+      stdout, stderr, status = cached_tool_command("ogrinfo", "-q", "WFS:#{@source}")
       if status.success?
         scanner = StringScanner.new(stdout)
 
@@ -27,7 +33,7 @@ module Importers
     end
 
     def _source_columns(source_layer_name)
-      stdout, stderr, status = Open3.capture3("ogrinfo", "-so", "-nocount", "-noextent", "-nomd", "WFS:#{@source}", source_layer_name)
+      stdout, stderr, status = cached_tool_command("ogrinfo", "-so", "-nocount", "-noextent", "-nomd", "WFS:#{@source}", source_layer_name)
       if status.success?
         scanner = StringScanner.new(stdout)
         # Attributes are described as “<key>: <type>” pairs after the “Geometry Column = <column>” line
@@ -43,7 +49,7 @@ module Importers
     end
 
     def _source_geometry_analysis(source_layer_name, columns: nil, format: nil)
-      stdout, stderr, status = Open3.capture3("ogrinfo", "-so", "-nocount", "-noextent", "-nomd", "WFS:#{@source}", source_layer_name)
+      stdout, stderr, status = cached_tool_command("ogrinfo", "-so", "-nocount", "-noextent", "-nomd", "WFS:#{@source}", source_layer_name)
       if status.success?
         scanner = StringScanner.new(stdout)
         scanner.scan_until(/^Geometry: (?<geometry_type>.*)$/)

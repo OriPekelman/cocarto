@@ -57,22 +57,17 @@ class Import::ConfigurationTest < ActiveSupport::TestCase
     test "#analysis" do
       layer = layers(:restaurants)
       config = layer.map.import_configurations.new(source_type: :csv, mappings: [layer.import_mappings.new])
-      analysis = config.analysis(file_fixture("restaurants.csv").open)
+      importer = config.importer(file_fixture("restaurants.csv").open, nil, nil)
+      analysis = config.analysis(importer)
 
       assert_kind_of Hash, analysis.configuration
-      assert_kind_of Hash, analysis.layers
-      assert_kind_of Import::Configuration::SourceLayerAnalysis, analysis.layers.values.first
+      assert_kind_of Array, analysis.layers
     end
 
     test "#configure_from_analysis" do
-      analysis = Import::Configuration::SourceAnalysis.new(
+      analysis = Import::Configuration::Analysis.new(
         configuration: {source_csv_column_separator: "\t"},
-        layers: {
-          "restaurants" => Import::Configuration::SourceLayerAnalysis.new(
-            columns: {"Name" => String, "Rating" => String},
-            geometry: Importers::GeometryParsing::GeometryAnalysis.new(columns: %w[long lat], format: :xy)
-          )
-        }
+        layers: ["restaurants"]
       )
       layer = layers(:restaurants)
       mapping = layer.import_mappings.new
@@ -81,7 +76,6 @@ class Import::ConfigurationTest < ActiveSupport::TestCase
 
       assert_equal "\t", config.source_csv_column_separator
       assert_equal "restaurants", mapping.source_layer_name
-      assert_equal %w[long lat], mapping.geometry_columns
     end
   end
 end
