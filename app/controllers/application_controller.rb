@@ -46,10 +46,10 @@ class ApplicationController < ActionController::Base
     yield
   rescue Pundit::NotAuthorizedError
     flash[:alert] = t("common.user_not_authorized")
-    if request.referer.present? && request.referer != request.url
-      redirect_back(fallback_location: root_path)
+    if request.get? && request.referer != request.url
+      redirect_back_or_to(root_path)
     else
-      redirect_to root_path
+      head :not_found
     end
   end
 end
