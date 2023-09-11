@@ -211,14 +211,16 @@ class MapState {
         // - queryRenderedFeatures may split the features geometries (https://docs.mapbox.com/mapbox-gl-js/api/map/#map#queryrenderedfeatures)
         // - we also need to get the row author_id to know if we can edit it.
         // We need to fetch the full geometry and the author_id before switching to draw.
-        this.#fetchFeature(featureId).then((geojson)=> {
+        this.#fetchFeature(featureId).then((geojson) => {
           this.setMode(modes.EDIT_FEATURE, { features, featureId })
-          this.draw.add(geojson)
-          const geometryType = this.layers[features[0].layer.id]
-          if (geometryType === 'point') {
-            this.draw.changeMode('simple_select', { featureIds: [featureId] })
-          } else {
-            this.draw.changeMode('direct_select', { featureId })
+          if (this.#canUpdate(geojson)) {
+            this.draw.add(geojson)
+            const geometryType = this.layers[features[0].layer.id]
+            if (geometryType === 'point') {
+              this.draw.changeMode('simple_select', { featureIds: [featureId] })
+            } else {
+              this.draw.changeMode('direct_select', { featureId })
+            }
           }
         }).catch(() => this.setMode(modes.DEFAULT))
       }
@@ -233,7 +235,16 @@ class MapState {
     return fetch(url).then((response) => response.json())
   }
 
-  #sendUpdate(feature) {
+  #canUpdate (feature) {
+    // Cf RowPolicy#update?, cf restricted_controller.js
+    // We can’t use restricted normally since we’re not in stimulus, and it wouldn't be very practical anyway since our data comes from json.
+    // Let’s just fetch the data attributes and implement the match here as well.
+    const role = this.map.getContainer().closest('[data-controller~=restricted]').dataset.restrictedRoleValue
+    const authorizations = ['owner', 'editor', `contributor-${feature.properties.author_id}`]
+    return authorizations.some(authorization => role.startsWith(authorization))
+  }
+
+  #sendUpdate (feature) {
     const token = document.head.querySelector('meta[name="csrf-token"]').content
     const formData = new FormData()
     formData.append('row[geojson]', JSON.stringify(feature.geometry))
