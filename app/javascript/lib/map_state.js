@@ -173,8 +173,7 @@ class MapState {
   #featureUpdated (feature) {
     // TODO: when it’s a linestring or a polygon, we want to wait until the editing is done
     //       and not post right away the change
-    const row = getRowFromId(feature.id)
-    row.rowController.update(feature.geometry)
+    this.#sendUpdate(feature)
     this.setMode(modes.DEFAULT)
   }
 
@@ -209,31 +208,38 @@ class MapState {
     if (features.length > 0 && drawFeature.length === 0) {
       const featureId = features[0].properties.original_id
       if (featureId !== this.currentFeatureId) {
-        this.setMode(modes.EDIT_FEATURE, { features, featureId })
-
-        const path = `/rows/${featureId}`
-        const url = new URL(path, window.location.origin)
-        // queryRenderedFeatures may split the features geometries.
-        // See https://docs.mapbox.com/mapbox-gl-js/api/map/#map#queryrenderedfeatures
-        // We need to fetch the full geometry before adding it to draw.
-        // TODO: when it’s a point, no need to fetch the data, we have the exact coordinates in the MVT
-        fetch(url)
-          .then((response) => response.json())
-          .then((geojson) => {
-            geojson.id = featureId
-            this.draw.add(geojson)
-            const geometryType = this.layers[features[0].layer.id]
-            if (geometryType === 'point') {
-              this.draw.changeMode('simple_select', { featureIds: [featureId] })
-            } else {
-              this.draw.changeMode('direct_select', { featureId })
-            }
-          }).catch(() => this.setMode(modes.DEFAULT))
+        // - queryRenderedFeatures may split the features geometries (https://docs.mapbox.com/mapbox-gl-js/api/map/#map#queryrenderedfeatures)
+        // - we also need to get the row author_id to know if we can edit it.
+        // We need to fetch the full geometry and the author_id before switching to draw.
+        this.#fetchFeature(featureId).then((geojson)=> {
+          this.setMode(modes.EDIT_FEATURE, { features, featureId })
+          this.draw.add(geojson)
+          const geometryType = this.layers[features[0].layer.id]
+          if (geometryType === 'point') {
+            this.draw.changeMode('simple_select', { featureIds: [featureId] })
+          } else {
+            this.draw.changeMode('direct_select', { featureId })
+          }
+        }).catch(() => this.setMode(modes.DEFAULT))
       }
     } else if (drawFeature.length === 0) {
       // We clicked on no feature, we switch back to the default mode
       this.setMode(modes.DEFAULT)
     }
+  }
+
+  #fetchFeature (featureId) {
+    const url = new URL(`/rows/${featureId}`, window.location.origin)
+    return fetch(url).then((response) => response.json())
+  }
+
+  #sendUpdate(feature) {
+    const token = document.head.querySelector('meta[name="csrf-token"]').content
+    const formData = new FormData()
+    formData.append('row[geojson]', JSON.stringify(feature.geometry))
+
+    const url = new URL(`/rows/${feature.id}`, window.location.origin)
+    fetch(url, { method: 'PATCH', headers: { 'X-CSRF-Token': token }, body: formData }).then() // Ignore the response :shrug:
   }
 }
 

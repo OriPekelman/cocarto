@@ -2,7 +2,7 @@ import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
   static targets = ['form']
-  static values = { properties: Object, geojson: Object, path: String, featureId: Number }
+  static values = { properties: Object, geojson: Object, featureId: Number }
 
   connect () {
     this.dirty = false
@@ -29,20 +29,6 @@ export default class extends Controller {
 
   geojson () {
     return this.geojsonValue
-  }
-
-  update (geojson) {
-    const token = document.head.querySelector('meta[name="csrf-token"]').content
-    const formData = new FormData()
-    formData.append('row[geojson]', JSON.stringify(geojson))
-
-    fetch(this.pathValue, {
-      method: 'PATCH',
-      body: formData,
-      headers: {
-        'X-CSRF-Token': token
-      }
-    })
   }
 
   focus () {
