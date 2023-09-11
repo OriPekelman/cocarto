@@ -32,7 +32,7 @@ https://github.com/ViewComponent/view_component/discussions/42#discussioncomment
         <%= link_to(edit_row_path(@row),
               class: "icon-button icon-button--small",
               title: t("common.edit"),
-              data: {turbo_frame: "modal", restricted_target: "restricted", restricted_hidden: true, restricted_authorizations: %w[owner editor].to_json}) do %>
+              data: {turbo_frame: "modal", restricted_target: "restricted", restricted_hidden: true, restricted_authorizations: RowPolicy.authorizations(@row)}) do %>
           <%= helpers.embedded_svg("edit.svg", class: "icon--small") %>
         <% end %>
         <%= row_tag_form %>
