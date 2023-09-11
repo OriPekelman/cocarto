@@ -8,7 +8,6 @@ class FieldsTest < ApplicationSystemTestCase
     sign_in_as(users("reclus"), "refleurir")
     visit map_path(id: maps("restaurants"))
     wait_until_map_loaded
-    click_on "Display the table for this layer", match: :first
 
     # Create
     click_on "New column"
@@ -42,7 +41,6 @@ class FieldsTest < ApplicationSystemTestCase
     sign_in_as(users("reclus"), "refleurir")
     visit map_path(id: maps("restaurants"))
     wait_until_map_loaded
-    click_on "Display the table for this layer", match: :first
 
     assert_selector("input[value='L’Antipode']")
 

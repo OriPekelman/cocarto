@@ -61,7 +61,7 @@ class MapSharingTest < ApplicationSystemTestCase
     sign_in_as(users(:bakounine), "refleurir")
     click_link "Restaurants"
 
-    assert_selector "h2", text: "Restaurants"
+    assert_current_path map_path(id: maps("restaurants"), locale: "en")
 
     sign_out
     visit maps_url
@@ -80,7 +80,7 @@ class MapSharingTest < ApplicationSystemTestCase
     click_button "Sign up"
     click_link "Restaurants"
 
-    assert_selector "h2", text: "Restaurants"
+    assert_current_path map_path(id: maps("restaurants"), locale: "en")
 
     sign_out
     visit maps_url
