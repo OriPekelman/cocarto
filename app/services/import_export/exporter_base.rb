@@ -15,8 +15,8 @@ module ImportExport
     def export_rows = raise NotImplementedError
 
     # Subclass helpers
-    def exported_row_id(row)
-      @with_ids ? {id: row.id} : {}
+    def exported_row_ids(row)
+      @with_ids ? {id: row.id, feature_id: row.feature_id, author_id: row.author_id} : {}
     end
 
     def exported_row_geometry(row)

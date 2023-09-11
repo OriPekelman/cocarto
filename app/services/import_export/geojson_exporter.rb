@@ -11,7 +11,11 @@ module ImportExport
         .merge(exported_row_field_values(row))
         .merge(exported_row_statistics(row))
 
-      RGeo::GeoJSON::Feature.new(feature, exported_row_id(row)[:id], properties)
+      identifiers = exported_row_ids(row)
+      id = identifiers.delete(:id)
+      properties.merge!(identifiers)
+
+      RGeo::GeoJSON::Feature.new(feature, id, properties)
     end
   end
 end

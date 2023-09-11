@@ -12,7 +12,7 @@ module ImportExport
     end
 
     def exported_row(row)
-      exported_row_id(row)
+      exported_row_ids(row)
         .merge(exported_row_geometry(row))
         .merge(exported_row_territory(row))
         .merge(exported_row_field_values(row))
