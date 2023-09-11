@@ -35,7 +35,7 @@ export default class extends Controller {
     const rowController = event.currentTarget.rowController
     rowController.focus()
     const feature = {
-      id: rowController.featureIdValue,
+      id: event.params.featureId,
       source: this.element.id,
       sourceLayer: 'layer'
     }
