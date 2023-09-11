@@ -2,7 +2,6 @@ import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
   static targets = ['form']
-  static values = { properties: Object, geojson: Object, featureId: Number }
 
   connect () {
     this.dirty = false
@@ -25,10 +24,6 @@ export default class extends Controller {
     if (this.dirty || event.params.autosave) {
       this.formTarget.requestSubmit()
     }
-  }
-
-  geojson () {
-    return this.geojsonValue
   }
 
   focus () {
