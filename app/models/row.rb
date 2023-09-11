@@ -146,7 +146,7 @@ class Row < ApplicationRecord
 
     # Cast values
     casted_values = filtered_values.to_h do |field_id, value|
-      field = layer.fields.find(field_id)
+      field = layer.fields_by_id[field_id]
 
       if field.type_files?
         # Create blobs for Files fields
