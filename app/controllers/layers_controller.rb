@@ -6,7 +6,7 @@ class LayersController < ApplicationController
 
   def show
     respond_to do |format|
-      format.html { redirect_to map_path(@layer.map, params: {open: helpers.dom_id(@layer)}) }
+      format.html { redirect_to map_path(@layer.map, params: {open: @layer}) }
       format.any(*ImportExport::EXPORTERS.keys) do
         allow_origin_everywhere
         data = ImportExport.export(@layer, request.format.to_sym)

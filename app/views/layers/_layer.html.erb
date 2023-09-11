@@ -1,12 +1,16 @@
+<%# params: layer, initially_active %>
+<% initially_active = local_assigns[:initially_active] || false %>
+
 <div
   id="<%= dom_id(layer) %>"
-  class="<%= class_names("layer-container", {"is-active": local_assigns[:index] && index == 0}) %>"
+  class="layer-container"
   data-controller="layer"
   data-action="layer:row_focused->map#selectFeature"
   data-layer-layer-outlet=".layer-container.is-active"
   data-layer-map-outlet=".map_document__container"
   data-layer-add-feature-text-value="<%= t("common.add_geometry.#{layer.geometry_type}") %>"
-  data-layer-geometry-type-value="<%= layer.geometry_type %>">
+  data-layer-geometry-type-value="<%= layer.geometry_type %>"
+  data-layer-initially-active-value="<%= initially_active %>">
 
   <%= render "layers/table_header", layer: layer %>
   <div id="<%= dom_id(layer, :updates) %>" hidden></div>

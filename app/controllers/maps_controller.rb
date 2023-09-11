@@ -14,6 +14,8 @@ class MapsController < ApplicationController
 
   def show
     @role_type = current_user.access_for_map(@map).role_type
+    @initially_active_layer = @map.layers.find_by(id: params["open"])
+
     respond_to do |format|
       format.html
       format.style { render json: @map.style(url_for(Layer)) }
@@ -47,7 +49,7 @@ class MapsController < ApplicationController
 
   def create
     if @map.update(map_params)
-      redirect_to map_path(@map, params: {open: helpers.dom_id(@map.layers.first)})
+      redirect_to map_path(@map, params: {open: @map.layers.first})
     else
       # This line overrides the default rendering behavior, which
       # would have been to render the "create" view.

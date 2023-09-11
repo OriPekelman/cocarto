@@ -53,7 +53,7 @@ class Layer < ApplicationRecord
   belongs_to :last_updated_row, class_name: "Row", optional: true, foreign_key: "computed_last_updated_row_id" # rubocop:disable Rails/InverseOf
 
   # Hooks
-  after_create_commit -> { broadcast_i18n_append_to map, target: dom_id(map, "layers") }
+  after_create_commit -> { broadcast_i18n_append_to map, target: dom_id(map, "layers"), locals: {initially_active: true} }
   after_update_commit -> do
     html = ApplicationController.render(StatsFooterComponent.new(layer: self), layout: false)
     broadcast_i18n_replace_to map, target: dom_id(self, :stats), html: html

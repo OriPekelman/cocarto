@@ -7,7 +7,8 @@ import { Controller } from '@hotwired/stimulus'
 export default class extends Controller {
   static values = {
     geometryType: String,
-    addFeatureText: String
+    addFeatureText: String,
+    initiallyActive: Boolean
   }
 
   static targets = ['geojsonField', 'newRowForm', 'row', 'hideButton', 'showButton']
@@ -15,12 +16,8 @@ export default class extends Controller {
 
   mapOutletConnected () {
     queueMicrotask(() => {
-      // If the url contains ?open=id we open this layer
-      // We use the query string and not an anchor because of a turbo bug with redirections
-      // See https://github.com/hotwired/turbo/issues/211
-      const id = new URL(document.location).searchParams.get('open')
-      if (id === this.element.id && !this.element.classList.contains('is-active')) {
-        this.toggleTable()
+      if (this.initiallyActiveValue) {
+        this.activate()
       }
       this.mapOutlet.registerLayer({ layerId: this.element.id, geometryType: this.geometryTypeValue })
     })
@@ -28,6 +25,8 @@ export default class extends Controller {
 
   activate () {
     if (!this.element.classList.contains('is-active')) {
+      // Note: we may want to use turbo frames for each layer and
+      // use data-turbo-action="advance" to switch the url when activating a frame
       this.toggleTable()
     }
   }
