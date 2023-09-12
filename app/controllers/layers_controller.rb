@@ -31,15 +31,7 @@ class LayersController < ApplicationController
     layer = authorize map.layers.new(layer_params)
     if layer.save
       respond_to do |format|
-        format.turbo_stream do
-          if map.layers.length == 1
-            # redirect to the layer if it’s the first layer (we’re actually creating a new map)
-            # otherwise do nothing, the new layer is streamed via turbo.
-            redirect_to layer
-          else
-            render turbo_stream: []
-          end
-        end
+        format.turbo_stream { render turbo_stream: [] }
         format.html { redirect_to layer }
       end
     else
