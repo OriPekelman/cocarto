@@ -17,11 +17,7 @@ class RowPolicy < ApplicationPolicy
   # This method is used to generate data-attributes
   # that will be used to disable client-side some features
   def self.authorizations(row)
-    if row
-      %W[owner editor contributor-#{row.author_id}].to_json
-    else
-      %W[owner editor].to_json
-    end
+    %W[owner editor contributor-#{row.author_id}].to_json
   end
 
   private
