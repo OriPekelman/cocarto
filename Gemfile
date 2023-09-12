@@ -38,6 +38,7 @@ gem "http_accept_language"
 gem "rails-i18n"
 gem "cache_with_locale"
 # rails additions
+gem "image_processing"
 gem "premailer-rails"
 gem "view_component"
 gem "view_component-fragment_caching"
