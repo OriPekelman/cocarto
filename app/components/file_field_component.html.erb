@@ -1,15 +1,20 @@
 <% if files.present? %>
   <div class="files-collection">
     <% files.each do |file| %>
-      <%= link_to url_for(file), class: "files-item", target: "_blank", rel: "noopener" do %>
+      <%= link_to url_for(file), class: "files-item", title: file.filename, target: "_blank", rel: "noopener" do %>
         <% if file.representable? %>
           <%= image_tag file.representation(resize_to_limit: [200, 200]), class: "files-item--preview" %>
         <% else %>
           <%= helpers.embedded_svg "file.svg", class: "icon--extra-large" %>
         <% end %>
-        <div class="files-item--title">
-          <%= file.filename %>
-        </div>
+        <div class="files-item--title"><%= file.filename %></div>
+        <div class="files-item--metadata"><%= number_to_human_size(file.byte_size) %></div>
+        <% if file.metadata[:width] && file.metadata[:height] %>
+          <div class="files-item--metadata"><%= "#{file.metadata[:width].to_i} × #{file.metadata[:height].to_i}" %></div>
+        <% end %>
+        <% if file.metadata[:duration] %>
+          <div class="files-item--metadata"><%= I18n.l(Time.zone.at(file.metadata[:duration]), format: :media_duration) %></div>
+        <% end %>
       <% end %>
     <% end %>
   </div>

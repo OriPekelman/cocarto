@@ -185,6 +185,7 @@ fr:
       no_result: Pas de résultat
   time:
     formats:
+      media_duration: "%M:%s"
       sentence: le %d %B %Y à %H:%M
   user_roles:
     new:
