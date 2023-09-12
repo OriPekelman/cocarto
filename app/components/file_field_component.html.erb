@@ -1,7 +1,16 @@
 <% if files.present? %>
-  <div class="form__field form__field--file">
+  <div class="files-collection">
     <% files.each do |file| %>
-      <%= link_to file.filename, url_for(file) %>
+      <%= link_to url_for(file), class: "files-item", target: "_blank", rel: "noopener" do %>
+        <% if file.representable? %>
+          <%= image_tag file.representation(resize_to_limit: [200, 200]), class: "files-item--preview" %>
+        <% else %>
+          <%= helpers.embedded_svg "file.svg", class: "icon--extra-large" %>
+        <% end %>
+        <div class="files-item--title">
+          <%= file.filename %>
+        </div>
+      <% end %>
     <% end %>
   </div>
 <% end %>
