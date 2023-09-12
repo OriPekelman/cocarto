@@ -6,9 +6,10 @@
   </div>
 <% end %>
 
-<div class="form__field">
-  <div data-controller="camera-feature-detection file-list" class="form__field form__field--file">
-    <label>
+<% if helpers.policy(@row).update? && !@field.locked? %>
+  <div class="form__field">
+    <div data-controller="camera-feature-detection file-list" class="form__field form__field--file">
+      <label>
         <span class="button button--with-icon button--alternate">
           <%= t "field.take_picture" %>
           <%= helpers.embedded_svg "camera.svg", class: "icon--small" %>
@@ -22,12 +23,12 @@
             multiple
             hidden>
         </span>
-    </label>
-    <span data-file-list-target="list"></span>
-  </div>
+      </label>
+      <span data-file-list-target="list"></span>
+    </div>
 
-  <div data-controller="file-list" class="form__field form__field--file">
-    <label>
+    <div data-controller="file-list" class="form__field form__field--file">
+      <label>
         <span class="button button--with-icon button--alternate">
           <%= t "field.attach_file" %>
           <%= helpers.embedded_svg "upload-cloud.svg", class: "icon--small" %>
@@ -39,7 +40,8 @@
             multiple
             hidden>
         </span>
-    </label>
-    <span data-file-list-target="list"></span>
+      </label>
+      <span data-file-list-target="list"></span>
+    </div>
   </div>
-</div>
+<% end %>
