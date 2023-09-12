@@ -1,3 +1,6 @@
+<%# params: layer, initially_active %>
+<% initially_active = local_assigns[:initially_active] || false %>
+
 <div
   id="<%= dom_id(layer) %>"
   class="layer-container"
@@ -6,7 +9,8 @@
   data-layer-layer-outlet=".layer-container.is-active"
   data-layer-map-outlet=".map_document__container"
   data-layer-add-feature-text-value="<%= t("common.add_geometry.#{layer.geometry_type}") %>"
-  data-layer-geometry-type-value="<%= layer.geometry_type %>">
+  data-layer-geometry-type-value="<%= layer.geometry_type %>"
+  data-layer-initially-active-value="<%= initially_active %>">
 
   <%= render "layers/table_header", layer: layer %>
   <div id="<%= dom_id(layer, :updates) %>" hidden></div>
@@ -32,7 +36,7 @@
                      restricted_target: "restricted", restricted_authorizations: '["owner", "editor", "contributor"]'} do %> <%# Cf policy(row).new? %>
           <%= embedded_svg "file-up.svg" %>
         <% end %>
-        <div class="dropdown" data-controller="dropdown" data-action="click->dropdown#toggle" data-dropdown-target="trigger" title="<%= t("common.settings") %>">
+        <div class="dropdown" data-controller="dropdown" data-action="click->dropdown#toggle" data-dropdown-target="trigger">
           <button class="icon-button icon-button--double-bordered icon-button--small" title="<%= t("helpers.link.layer.export") %>">
             <%= embedded_svg "file-down.svg" %>
           </button>

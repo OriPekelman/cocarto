@@ -54,7 +54,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   # We want to make sure that the dropdown controller is loaded
   # Otherwise capybara will click on the button, and nothing happens
   def wait_until_dropdown_controller_ready
-    find "[data-dropdown-controller=connected]", wait: 10
+    find ".header--container [data-dropdown-controller=connected]", wait: 10
   end
 
   def wait_until_map_loaded

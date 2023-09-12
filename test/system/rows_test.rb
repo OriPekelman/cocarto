@@ -7,7 +7,6 @@ class RowsTest < ApplicationSystemTestCase
     visit map_path(id: maps("restaurants"))
     # We make sure to wait that the map is loaded
     map = wait_until_map_loaded
-    click_on "Display the table for this layer", match: :first
     click_on "Add a point"
 
     assert_changes -> { layers(:restaurants).rows.count("*") }, from: 1, to: 2 do
@@ -20,9 +19,6 @@ class RowsTest < ApplicationSystemTestCase
 
     visit map_path(id: maps("restaurants"))
     map = wait_until_map_loaded
-
-    # Open the layer table
-    click_on "Display the table for this layer", match: :first
 
     assert_selector ".layer-container.is-active"
     assert_selector ".row", count: 1

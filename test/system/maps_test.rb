@@ -26,6 +26,9 @@ class MapsTest < ApplicationSystemTestCase
 
     assert_selector "h2", text: "Restaurants"
 
+    # The layer is open and we can see its content
+    assert_selector("input[value='L’Antipode']")
+
     # reclus has no access to hiking
     visit map_path(id: maps("hiking"))
 
