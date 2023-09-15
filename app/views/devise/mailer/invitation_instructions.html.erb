@@ -1,11 +1,21 @@
-<p><%= t("devise.mailer.invitation_instructions.hello", email: @resource.email) %></p>
+<div class="container">
+  <section class="section section--center">
+    <p><%= t("devise.mailer.invitation_instructions.hello", email: @resource.display_name) %>,</p>
+      <% @resource.strict_loading!(false) %>
+    <% if @resource.invited_by.present? %>
+      <p><%= t("devise.mailer.invitation_instructions.someone_invited_you", name: @resource.invited_by.display_name, url: root_url) %></p>
+      <% else %>
+      <p><%= t("devise.mailer.invitation_instructions.anonymous_invitation", url: root_url) %></p>
+    <% end %>
 
-<p><%= t("devise.mailer.invitation_instructions.someone_invited_you", url: root_url) %></p>
+    <%= link_to t("devise.mailer.invitation_instructions.accept"), accept_invitation_url(@resource, invitation_token: @token), class: "button button--confirm button--large" %>
 
-<p><%= link_to t("devise.mailer.invitation_instructions.accept"), accept_invitation_url(@resource, invitation_token: @token) %></p>
+    <% if @resource.invitation_due_at %>
+      <p><%= t("devise.mailer.invitation_instructions.accept_until", due_date: l(@resource.invitation_due_at, format: :"devise.mailer.invitation_instructions.accept_until_format")) %></p>
+    <% end %>
 
-<% if @resource.invitation_due_at %>
-  <p><%= t("devise.mailer.invitation_instructions.accept_until", due_date: l(@resource.invitation_due_at, format: :"devise.mailer.invitation_instructions.accept_until_format")) %></p>
-<% end %>
+    <p><%= t("devise.mailer.invitation_instructions.ignore_html") %></p>
 
-<p><%= t("devise.mailer.invitation_instructions.ignore_html") %></p>
+    <%= render "application/footer_default" %>
+  </section>
+</div>

@@ -16,7 +16,7 @@ class UserRolesController < ApplicationController
     user = user_role.user
     if user.new_record?
       user.skip_invitation = true
-      user.invite!
+      user.invite!(current_user)
     end
     if user_role.save
       user.deliver_invitation if user.previously_new_record?
