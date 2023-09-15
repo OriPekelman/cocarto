@@ -2,4 +2,4 @@ gdal-bin
 libgeos-dev
 libvips
 ffmpeg
-mupdf
+mupdf-tools
