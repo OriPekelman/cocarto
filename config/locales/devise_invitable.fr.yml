@@ -20,9 +20,10 @@ fr:
       invitation_instructions:
         accept: Accepter l'invitation
         accept_until: Cette invitation sera valable jusqu'au %{due_date}.
+        anonymous_invitation: Vous avez été invité à rejoindre %{url}, vous pouvez accepter cette invitation via le lien ci-dessous.
         hello: Bonjour %{email}
         ignore_html: Si vous ne souhaitez pas accepter cette invitation, veuillez ignorer cet e-mail.<br />Votre compte ne sera pas créé tant que vous n'accéderez pas au lien ci-dessous et que vous ayez défini votre mot de passe.
-        someone_invited_you: Vous avez été invité à rejoindre %{url}, vous pouvez accepter cette invitation via le lien ci-dessous.
+        someone_invited_you: Vous avez été invité par %{name} à rejoindre %{url}, vous pouvez accepter cette invitation via le lien ci-dessous.
         subject: Vous avez reçu une invitation
   time:
     formats:
