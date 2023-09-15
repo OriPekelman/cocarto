@@ -185,6 +185,7 @@ en:
       no_result: No result
   time:
     formats:
+      media_duration: "%M:%s"
       sentence: on %d %b %Y at %H:%M
   user_roles:
     new:

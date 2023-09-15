@@ -205,6 +205,9 @@ GEM
       rails-i18n
       rainbow (>= 2.2.2, < 4.0)
       terminal-table (>= 1.5.1)
+    image_processing (1.12.2)
+      mini_magick (>= 4.9.5, < 5)
+      ruby-vips (>= 2.0.17, < 3)
     importmap-rails (1.2.1)
       actionpack (>= 6.0.0)
       railties (>= 6.0.0)
@@ -239,6 +242,7 @@ GEM
     marcel (1.0.2)
     matrix (0.4.2)
     method_source (1.0.0)
+    mini_magick (4.12.0)
     mini_mime (1.1.2)
     minitest (5.18.1)
     minitest-reporters (1.6.0)
@@ -388,6 +392,8 @@ GEM
       rexml
     ruby-ole (1.2.12.2)
     ruby-progressbar (1.13.0)
+    ruby-vips (2.1.4)
+      ffi (~> 1.12)
     rubyzip (2.3.2)
     sass-embedded (1.63.6-arm64-darwin)
       google-protobuf (~> 3.23)
@@ -481,6 +487,7 @@ DEPENDENCIES
   hotwire-rails
   http_accept_language
   i18n-tasks
+  image_processing
   importmap-rails
   jbuilder
   letter_opener_web

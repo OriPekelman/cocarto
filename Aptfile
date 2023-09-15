@@ -1,2 +1,5 @@
 gdal-bin
 libgeos-dev
+libvips
+ffmpeg
+mupdf-tools
