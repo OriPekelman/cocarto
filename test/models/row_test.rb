@@ -57,12 +57,20 @@ class RowTest < ActiveSupport::TestCase
       assert_equal [{error: :invalid, reason: "Self-intersection"}], row.errors.details[:geometry]
     end
 
-    test "Only first geometry of geometry collection is taken" do
+    test "Only first geometry of point collection is taken" do
       row = Row.new(author: users(:reclus), layer: layers(:restaurants), geometry: "MULTIPOINT (10 40, 40 30, 20 20, 30 10)")
       row.validate
 
       assert_equal [{error: :multiple_items}], row.warnings.details[:geometry]
       assert_equal RGEO_FACTORY.point(10, 40), RGEO_FACTORY.parse_wkt(row.geometry.as_text) # Make sure to use the same factory for comparison
+    end
+
+    test "Line geometry collection is reunited as a single line string" do
+      row = Row.new(author: users(:reclus), layer: layers(:hiking_paths), geometry: "MULTILINESTRING ((10 40, 40 30),(20 20, 30 10))")
+      row.validate
+
+      assert_equal [{error: :multiple_line_strings_merged}], row.warnings.details[:geometry]
+      assert_equal RGEO_FACTORY.parse_wkt("LINESTRING (10 40, 40 30,20 20, 30 10)"), RGEO_FACTORY.parse_wkt(row.geometry.as_text) # Make sure to use the same factory for comparison
     end
 
     test "compute bounds" do # rubocop:disable Minitest/MultipleAssertions

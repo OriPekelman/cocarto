@@ -18,13 +18,34 @@ fr:
         integer: Nombre entier
         territory: Territoire
         text: Texte
+      import/configuration:
+        source_csv_column_separator: Séparateur
+        source_text_encoding: Encodage
+      import/configuration/source_type:
+        csv: CSV
+        geojson: GeoJSON
+        spreadsheet: Tableur
+        wfs: WFS
+      import/mapping:
+        geometry_columns:
+          one: Colonne
+          other: Colonnes
+        geometry_encoding_format: Format
+      import/mapping/geometry_encoding_format:
+        geojson: GeoJSON
+        wkb: WKB
+        wkt: WKT
+        xy: longitude, latitude
+      import/operation:
+        local_source_file: Fichier de données
+        remote_source_url: URL de la source de données
       import/operation/status:
         done: Terminé
-        fetching: Téléchargement
-        importing: Import
+        fetching: Téléchargement…
+        importing: Import en cours…
         ready: Prêt
       import/operation/success:
-        'false': Échec
+        'false': Échec de l’import
         'true': Import réussi
       layer:
         color: Couleur des objets
@@ -94,6 +115,7 @@ fr:
               format: "%{message}"
               invalid: La géométrie est invalide. (%{reason})
               multiple_items: La géométrie ajoutée a plusieurs éléments ; seul le premier sera pris en compte.
+              multiple_line_strings_merged: La géométrie ajoutée est une multi-ligne ; elle est importée sous forme réunifiée.
               required: La géométrie est requise.
         user:
           attributes:

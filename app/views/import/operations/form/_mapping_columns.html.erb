@@ -1,0 +1,15 @@
+<%# params: form, operation, configuration %>
+<% mapping = form.object %>
+
+<div class="form__section">
+  <h3 class="form__header"><%= t(".columns") %></h3>
+
+  <div class="form__field form__field--inline import__form-grid">
+    <%= form.fields_for :fields_columns do |columns_form| %>
+      <% mapping.fields_columns&.each do |label, field_id| %>
+        <%= columns_form.label label %>
+        <%= columns_form.select label, mapping.layer.fields.map { [_1.label, _1.id] }, selected: field_id, include_blank: true %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

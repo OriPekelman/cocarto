@@ -14,12 +14,11 @@ class ImportTest < ApplicationSystemTestCase
       # Reimport restaurants (with the Name as the key)
       click_on "Import…"
       attach_file("file", file_fixture("restaurants.csv").to_path, make_visible: true)
-      find(".form__details-summary").click
-      select "Name", from: "ID column"
-      click_on "Import"
+      select "Name", from: "Reimport ID"
+      click_on "Start"
 
       assert_text "Import successful"
-      assert_text "Imported 2 rows"
+      assert_text "2 rows imported out of 2"
 
       click_on "OK"
 
@@ -34,7 +33,6 @@ class ImportTest < ApplicationSystemTestCase
 
       click_on "Import…"
       attach_file("file", file_fixture("touladi.png").to_path, make_visible: true)
-      click_on "Import"
 
       assert_text "1 error prohibited this data import from being saved:"
       assert_text "This source type is not supported."
@@ -49,14 +47,13 @@ class ImportTest < ApplicationSystemTestCase
       visit layer_path(id: layers("hiking_paths"))
       wait_until_turbo_stream_connected
 
-      # Reimport restaurants (with the Name as the key)
       click_on "Import…"
-      fill_in "URL of a WFS server", with: "#{fixtures_server_url}/wfs"
-      fill_in "Layer name (Feature Type)", with: "TEST_FEATURE_NAME"
-      click_on "Import"
+      fill_in "Data source URL", with: "#{fixtures_server_url}/wfs"
+      click_on "OK"
+      click_on "Start"
 
       assert_text "Import successful"
-      assert_text "Imported 4 rows"
+      assert_text "4 rows imported out of 4"
 
       click_on "OK"
 

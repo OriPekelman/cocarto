@@ -34,6 +34,7 @@ en:
     ok: OK
     save: Save
     settings: Settings
+    start: Start
     territory_code: Code
     updated_at: Updated %{date} ago
     updated_at_by: Updated %{date} ago by %{user}
@@ -44,26 +45,39 @@ en:
     take_picture: Take a picture
   import:
     operations:
+      form:
+        configuration:
+          import_as: Import as
+          source_type_help: |-
+            The format used to interpret the data source.
+             It is automatically chosen by cocarto but you can override it if needed.
+        mapping_analysis:
+          geometry_type: Geometry type
+          source: Source
+          source_layer_name:
+            spreadsheet: Sheet
+            wfs: Layer name (“Feature Type”)
+        mapping_columns:
+          columns: Attribute mapping
+        mapping_destination:
+          destination: Destination
+          geometry_type: Geometry type
+          key_field: Reimport ID
+          key_field_info_html: |
+            If you want to update data, you need to specify a column to use  to identify preexisting data.<br/>
+            The row attributes will be replaced by the ones from the imported file; attributes missing from the files will be left as-is.<br/>
+            New rows in the imported file will be appended to the layer.
+          layer: Import to
       new:
-        attach_file: Upload a file
-        attention: This feature is still experimental; expect bugs, and please do contact us if you get into trouble.
-        file_formats: 'Supported formats : GeoJSON, CSV, Excel (.xls, .xlsx), OpenOffice (.ods)'
-        from_file: From a file
-        from_url: From an URL
-        from_url_layer_name: Layer name (Feature Type)
-        from_url_wfs: URL of a WFS server
-        key_field: ID column
-        key_field_info_html: |
-          If you want to update data, you need to specify a column to use  to identify preexisting data.<br/>
-          The row attributes will be replaced by the ones from the imported file; attributes missing from the files will be left as-is.<br/>
-          New rows in the imported file will be appended to the layer.
+        help_html: 'cocarto can import data from the following file types: <b>geojson</b>, tabular (<b>csv</b>), Excel or OpenOffice (<b>xls</b>, <b>xlsx</b>, <b>ods</b>), as well as from a <b>WFS</b> server.'
         or: or
-        reimport: Reimport existing data
-        save: Import
+        url_placeholder: https://example.com/wfs
       operation:
-        imported_rows: Imported %{size} rows
-        line_number: Line %{line_number}
+        from_to_html: From <b>%{from}</b> to <b>%{to}</b>
+        imported_rows: "%{size} rows imported out of %{total}"
+        imported_rows_details: "%{new} new rows, %{updated} updated rows"
         row_failure: Not saved.
+        to_html: To <b>%{to}</b>
   layers:
     form:
       new: New layer

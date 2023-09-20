@@ -1,40 +1,75 @@
-<div id="<%= dom_id(operation) %>"
-     class="<%= class_names("message",
-                  "message--info": !operation.done?,
-                  "message--success": operation.done? && operation.success?,
-                  "message--error": operation.done? && !operation.success?) %>">
-  <% if !operation.done? %>
-    <h3 class="message__title"><%= Import::Operation.human_attribute_name("status.#{operation.status}") %></h3>
+<%# cache this %>
 
-  <% else %>
-    <h3 class="message__title"><%= Import::Operation.human_attribute_name("success.#{operation.success?}") %></h3>
-    <%= operation.global_error %>
-    <% operation.reports.each do |report| %>
-      <%= t(".imported_rows", size: report.row_results.size) if operation.success? %>
-      <ul class="message__list">
-        <% report.row_results.each_with_index do |row_result, line_number| %>
-          <% if !row_result.did_save || row_result.parsing_error.present? || row_result.errors.present? || row_result.warnings.present? %>
-            <li>
-              <span><b><%= t(".line_number", line_number: line_number) %></b></span>
-              <% unless row_result.did_save %>
-                <span><%= t(".row_failure") %></span>
-              <% end %>
-
-              <% if row_result.parsing_error %>
-                <p><code><%= row_result.parsing_error %></code></p>
-              <% end %>
-
-              <% if row_result.errors %>
-                <blockquote><%= report.full_error_messages(line_number).to_sentence %></blockquote>
-              <% end %>
-
-              <% if row_result.warnings %>
-                <blockquote><%= report.full_warning_messages(line_number).to_sentence %></blockquote>
-              <% end %>
-            </li>
-          <% end %>
-        <% end %>
-      </ul>
+<div id="<%= dom_id(operation) %>">
+  <section class="import-operation--section">
+    <% if operation.local_source_file.present? %>
+      <div class="import__local-source">
+        <%= embedded_svg("file-up.svg", class: "icon--regular") %>
+        <%= operation.local_source_file.blob.filename %>
+      </div>
+    <% else %>
+      <div class="form__field form__field--large">
+        <div class="form__input-with-button">
+          <%= url_field_tag :remote_source_url, operation.remote_source_url, readonly: true, autocomplete: "off" %>
+        </div>
+      </div>
     <% end %>
-  <% end %>
+  </section>
+
+  <section class="import-operation--section">
+    <% if !operation.done? %>
+      <h3><%= Import::Operation.human_attribute_name("status.#{operation.status}") %></h3>
+    <% else %>
+      <h3><%= Import::Operation.human_attribute_name("success.#{operation.success?}") %></h3>
+      <% if operation.global_error.present? %>
+        <code><%= operation.global_error %></code>
+      <% end %>
+    <% end %>
+  </section>
+
+  <% if operation.done? %>
+    <% operation.reports.each do |report| %>
+      <section class="import-operation--section">
+        <details class="import-operation--report-detail">
+          <summary class="button button--text import-operation--report-summary">
+            <div>
+              <% if operation.configuration.importer_class.support[:multiple_layers] %>
+                <div><%= t(".from_to_html", from: report.mapping.source_layer_name, to: report.mapping.layer.name) %></div>
+              <% else %>
+                <div><%= t(".to_html", to: report.mapping.layer.name) %></div>
+              <% end %>
+              <div><%= t(".imported_rows", total: report.row_results.size, size: report.saved_rows_count) %></div>
+            </div>
+          </summary>
+          <div class="import-operation--report-summary--detail">
+            <%= t(".imported_rows_details", new: report.new_rows_count, updated: report.updated_rows_count) %>
+          </div>
+          <table class="import-operation--report-summary--table">
+            <% report.row_results.each_with_index do |row_result, index| %>
+              <% if !row_result.did_save || row_result.parsing_error.present? || row_result.errors.present? || row_result.warnings.present? %>
+                <tr class="import-operation--report-line">
+                  <th><%= index %></th>
+                  <td>
+                    <%= t(".row_failure") unless row_result.did_save %>
+
+                    <% if row_result.parsing_error %>
+                      <div><%= row_result.parsing_error %></div>
+                    <% end %>
+
+                    <% if row_result.errors %>
+                      <div><%= report.full_error_messages(index).to_sentence %></div>
+                    <% end %>
+
+                    <% if row_result.warnings %>
+                      <div><%= report.full_warning_messages(index).to_sentence %></div>
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+            <% end %>
+          </table>
+        </details>
+      </section>
+    <% end %>
+<% end %>
 </div>

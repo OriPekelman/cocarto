@@ -1,0 +1,33 @@
+<%# params: form, operation, configuration %>
+<% mapping = form.object %>
+
+<div class="form__section">
+  <h3 class="form__header"><%= t(".source") %></h3>
+
+  <div class="form__field form__field--inline import__form-grid">
+
+    <% if configuration.importer_class.support[:multiple_layers] %>
+      <%= form.label :source_layer_name, t(".source_layer_name.#{configuration.source_type}") %>
+      <%= form.select :source_layer_name, operation.analysis.layers, {}, onchange: "this.form.requestSubmit()" %>
+    <% end %>
+
+    <label><%= t(".geometry_type") %></label>
+    <code><%= operation.layer_analysis(mapping)&.geometry&.type %></code>
+
+    <% if configuration.importer_class.support[:indeterminate_geometry] %>
+      <%= form.label :geometry_encoding_format %>
+      <% parser_options = Importers::GeometryParsing::PARSERS.keys.index_by { Import::Mapping.human_attribute_name("geometry_encoding_format.#{_1}") } %>
+      <%= form.select :geometry_encoding_format, parser_options, {}, onchange: "this.form.requestSubmit()" %>
+      <% label = Import::Mapping.human_attribute_name(:geometry_columns, count: ((mapping.geometry_encoding_format == "xy") ? 2 : 1)) %>
+      <%= form.label :geometry_columns, label %>
+      <div>
+        <% name = field_name(form.object_name, :geometry_columns, multiple: true) %> <%# Note: we override the name to allow plural selects without a plural %>
+        <%= form.select :geometry_columns, operation.layer_analysis(mapping)&.columns&.keys || [], {selected: mapping.geometry_columns&.first, onchange: "this.form.requestSubmit()"}, name: name %>
+        <% if mapping.geometry_encoding_format == 'xy' %>
+          <%# TODO remove safe navigation above and below %>
+          <%= form.select :geometry_columns, operation.layer_analysis(mapping)&.columns&.keys || [], {selected: mapping.geometry_columns&.last, onchange: "this.form.requestSubmit()"}, name: name %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

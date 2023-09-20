@@ -1,0 +1,36 @@
+<%# params: form %>
+<% operation = form.object %>
+
+<div class="form__section">
+  <% if operation.local_source_file.present? %>
+    <div class="import__local-source">
+      <%= embedded_svg("file-up.svg", class: "icon--regular") %>
+      <%= operation.local_source_file.blob.filename %>
+      <%= link_to operation, data: {turbo_method: :delete}, class: "icon-button icon-button--small import__local-source__delete" do %>
+        <% embedded_svg("remove_item.svg", class: "icon--small icon--tinted") %>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="form__field form__field--large">
+      <%= form.label :remote_source_url %>
+      <div class="form__input-with-button">
+        <%= form.url_field :remote_source_url, readonly: true %>
+        <%= link_to operation, data: {turbo_method: :delete}, class: "icon-button icon-button--alternate" do %>
+          <% embedded_svg("remove_item.svg", class: "icon--regular icon--tinted") %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <%= form.fields_for :configuration do |configuration_form| %>
+    <div class="form__field form__field--large form__field--inline import__form-grid"
+         title="<%= t(".source_type_help") %>">
+      <%= configuration_form.label :source_type, t(".import_as"), class: "form__field--large" %>
+      <%= configuration_form.select :source_type, operation.possible_source_types.index_by { Import::Configuration.human_attribute_name("source_type.#{_1}") }, {}, class: "form__field--large", onchange: "this.form.requestSubmit()" %>
+      <%= partial_name = "import/operations/form/configuration/#{configuration_form.object.source_type}"
+          render(partial_name, configuration_form: configuration_form) if lookup_context.exists?(partial_name, [], true) %>
+    </div>
+  <% end %>
+
+  <%= render "shared/errors", resource: operation %>
+</div>

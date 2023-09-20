@@ -1,0 +1,15 @@
+<%# params: form, operation, configuration %>
+<% mapping = form.object %>
+
+<div class="form__section">
+  <h3 class="form__header"><%= t(".destination") %></h3>
+
+  <div class="form__field form__field--inline import__form-grid">
+    <%= form.label :layer_id, t(".layer") %>
+    <%= form.select :layer_id, configuration.map.layers.map { [_1.name, _1.id] }, {}, onchange: "this.form.requestSubmit()" %>
+    <label><%= t(".geometry_type") %></label>
+    <code><%= mapping.layer&.geometry_type %></code>
+    <%= form.label :reimport_field_id, t(".key_field"), title: t(".key_field_info_html") %>
+    <%= form.select :reimport_field_id, mapping.layer.fields.map { [_1.label, _1.id] }, include_blank: true %>
+  </div>
+</div>

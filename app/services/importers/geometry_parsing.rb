@@ -11,45 +11,68 @@ module Importers
       xy: ->(x, y) { RGEO_FACTORY.point(x.to_f, y.to_f) }
     }
 
-    def extract_geometry(values, geometry_keys, geometry_format) # mutates the passed values hash, raises ImportGeometryError
-      geometry_values = values.values_at(*geometry_keys).compact
-      return if geometry_values.size != Array(geometry_keys).size
+    def extract_geometry(values, columns, format) # raises ImportGeometryError
+      geometry_values = values.values_at(*columns).compact
+      return if geometry_values.size != Array(columns).size
 
-      geometry = PARSERS[geometry_format.to_sym].call(*geometry_values)
-      Array(geometry_keys).each { values.delete(_1) } if geometry
-
-      geometry
+      PARSERS[format.to_sym].call(*geometry_values)
     rescue JSON::ParserError, RGeo::Error::ParseError
       raise ImportGeometryError
     end
 
     STRATEGIES = [
-      ["geojson", :geojson],
-      ["wkt", :wkt],
-      ["wkb", :wkb],
-      ["geometry", :geojson],
-      ["geometry", :wkt],
-      ["geometry", :wkb],
-      ["geom", :geojson],
-      ["geom", :wkt],
-      ["geom", :wkb],
-      [%w[longitude latitude], :xy],
-      [%w[long lat], :xy],
-      [%w[lon lat], :xy],
-      [%w[lng lat], :xy],
-      [%w[x y], :xy]
+      {columns: %w[geojson], format: :geojson},
+      {columns: %w[wkt], format: :wkt},
+      {columns: %w[wkb], format: :wkb},
+      {columns: %w[geometry], format: :geojson},
+      {columns: %w[geometry], format: :wkt},
+      {columns: %w[geometry], format: :wkb},
+      {columns: %w[geom], format: :geojson},
+      {columns: %w[geom], format: :wkt},
+      {columns: %w[geom], format: :wkb},
+      {columns: %w[longitude latitude], format: :xy},
+      {columns: %w[long lat], format: :xy},
+      {columns: %w[lon lat], format: :xy},
+      {columns: %w[lng lat], format: :xy},
+      {columns: %w[xlong ylat], format: :xy},
+      {columns: %w[x y], format: :xy}
     ]
 
-    def guess_geometry(values)
+    GeometryAnalysis = Struct.new(
+      :columns,  # Columns where the geometry was found
+      :format,   # Format of the columns
+      :geometry, # Found geometry
+      :type      # Found geometry type
+    )
+
+    # Find a working strategy to extract a geometry from the passed values
+    # Returns the columns, format, type of geometry (and the found geometry)
+    def analyse_geometry(values, columns: nil, format: nil)
       geometry = nil
-      STRATEGIES.each do |strategy|
-        geometry = extract_geometry(values, Array(strategy.first), strategy.second)
-        break if geometry
-      rescue ImportGeometryError
-        # Ignore error when guessing
+      working_strategy = nil
+
+      strategies = if columns.present? && format.present?
+        [{columns: columns, format: format}]
+      else
+        STRATEGIES
       end
 
-      geometry
+      strategies.each do |strategy|
+        geometry = extract_geometry(values, strategy[:columns], strategy[:format])
+        if geometry
+          working_strategy = strategy
+          break
+        end
+      rescue ImportGeometryError
+        # Ignore error when analysing
+      end
+
+      GeometryAnalysis.new(
+        columns: working_strategy&.fetch(:columns),
+        format: working_strategy&.fetch(:format),
+        type: geometry&.geometry_type&.type_name,
+        geometry: geometry
+      )
     end
   end
 end

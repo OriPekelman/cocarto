@@ -25,6 +25,18 @@ class ActiveSupport::TestCase
   def attachable_data(filename, data)
     {io: StringIO.new(data), filename: filename, content_type: Mime[File.extname(filename)[1..]]}
   end
+
+  # Setup the whole layer/mapping/map/config for an Importer
+  def preconfigured_import(layer_fixture_name, source_type, source)
+    layer = layers(layer_fixture_name)
+    mapping = layer.import_mappings.new
+    config = layer.map.import_configurations.new(source_type: source_type, mappings: [mapping])
+    importer = config.importer(source, nil, nil)
+    config.configure_from_analysis(config.analysis(importer))
+    mapping.configure_from_analysis(mapping.analysis(importer))
+
+    [config, mapping]
+  end
 end
 
 class ActionDispatch::IntegrationTest

@@ -21,7 +21,7 @@
 require "test_helper"
 
 class Import::OperationTest < ActiveSupport::TestCase
-  class Validation < Import::OperationTest
+  class Validation < self
     test "neither local nor remote" do
       operation = Import::Operation.new(configuration: import_configurations(:restaurants_csv))
 
@@ -38,7 +38,19 @@ class Import::OperationTest < ActiveSupport::TestCase
     end
   end
 
-  class GlobalResult < Import::OperationTest
+  class Hooks < self
+    test "source_type is automatically set from the first operation" do
+      conf = Import::Configuration.new(map: maps(:restaurants))
+      op = Import::Operation.new(local_source_file: attachable_fixture("restaurants.csv"), configuration: conf)
+      op.save
+
+      assert_predicate op, :persisted?
+
+      assert_equal "csv", conf.source_type
+    end
+  end
+
+  class GlobalResult < self
     test "unknown type error" do
       operation = import_configurations(:restaurants_geojson)
         .operations.create!(local_source_file: attachable_data("restaurants.txt", "some data"))
@@ -96,7 +108,7 @@ class Import::OperationTest < ActiveSupport::TestCase
     end
   end
 
-  class RemoteSourceToLocalFile < Import::OperationTest
+  class RemoteSourceToLocalFile < self
     setup { start_fixtures_server }
 
     test "download a remote csv" do

@@ -1,71 +1,42 @@
-<%= form_with model: [@map, @operation], html: {class: "form"} do |f| %>
-  <div class="card__main-content">
-    <h2 class="form__header"><%= Import::Operation.model_name.human %></h2>
-    <div class="form__field">
-      <p class="message message--attention"><%= t(".attention") %></p>
-    </div>
+<div class="card__main-content card__main-content--wide">
+  <h2 class="form__header"><%= Import::Operation.model_name.human %></h2>
 
-    <div class="form__field">
-      <%= render "shared/errors", resource: @operation %>
-    </div>
+  <%= form_with model: [@operation.configuration.map, @operation], id: dom_id(@operation, :form), class: "form" do |form| %>
 
-    <div class="import_form--source-inputs">
-      <div class="form__field" title="<%= t ".file_formats" %>">
-        <h3 class="form__header"><%= t(".from_file") %></h3>
-        <div data-controller="file-list" class="form__field form__field--file">
-          <label>
-          <span class="button button--with-icon button--link">
-            <%= t ".attach_file" %>
-            <%= embedded_svg "upload-cloud.svg", class: "icon--small" %>
-            <%= f.file_field :local_source_file, data: {file_list_target: "input", action: "change->file-list#update"}, hidden: true %>
-          </span>
-          </label>
-          <span data-file-list-target="list"></span>
+    <%= render "shared/errors", resource: @operation %>
+
+    <div class="form__section">
+      <label data-controller="file-list"
+             class="button button--large button--with-icon import__drop-zone"
+             data-action="dragover->file-list#drag_start dragenter->file-list#drag_start drop->file-list#drop dragleave->file-list#drag_leave"
+             data-file-list-target="dropzone"
+             data-file-list-types-value="<%= Import::Configuration.all_mimes.to_json %>">
+        <%= embedded_svg "upload-cloud.svg", class: "icon--regular" %>
+        <%= form.label :local_source_file %>
+        <%= form.file_field :local_source_file, data: {file_list_target: "input"}, onchange: "this.form.requestSubmit()", hidden: true %>
+      </label>
+
+      <h3><%= t(".or") %></h3>
+
+      <div class="form__field form__field--large">
+        <%= form.label :remote_source_url %>
+        <div class="form__input-with-button">
+          <%= form.url_field :remote_source_url, placeholder: t(".url_placeholder") %>
+          <%= form.button t("common.ok"), class: "button button--alternate" %>
         </div>
       </div>
 
-      <span><%= t(".or") %></span>
-
-      <div class="form__field">
-        <h3 class="form__header"><%= t(".from_url") %></h3>
-        <div class="form__field">
-          <%= f.label :remote_source_url, t(".from_url_wfs") %>
-          <%= f.url_field :remote_source_url %>
-        </div>
-      </div>
+      <label class="import__help">
+        <%= t(".help_html") %>
+      </label>
     </div>
 
-    <%= f.fields_for :configuration do |f2| %>
-      <%= f2.hidden_field :map_id %>
-
-      <%= f2.fields_for :mappings do |f3| %>
-        <%= f3.hidden_field :layer_id %>
-
-        <div class="form__field">
-          <%= f3.label :source_layer_name, t(".from_url_layer_name") %>
-          <%= f3.text_field :source_layer_name %>
-        </div>
-
-        <details class="form__field form__field--large form__details">
-          <summary class="form__details-summary">
-            <%= f3.label t(".reimport") %>
-          </summary>
-          <div class="form__details-contents form__field">
-            <div class="form__field form__field--inline">
-              <%= f3.label :reimport_field_id, t(".key_field") %>
-              <%= f3.select :reimport_field_id, f3.object.layer.fields.map { [_1.label, _1.id] }, include_blank: true %>
-            </div>
-            <label class="form__field">
-              <i><%= t(".key_field_info_html") %></i>
-            </label>
-          </div>
-        </details>
+    <%# Nest the map_id and layer_id hiddenf fields to create the right configuration objects %>
+    <%= form.fields_for :configuration do |configuration_form| %>
+      <%= configuration_form.hidden_field :map_id %>
+      <%= configuration_form.fields_for :mappings do |mapping_form| %>
+        <%= mapping_form.hidden_field :layer_id %>
       <% end %>
-
     <% end %>
-
-  </div>
-  <div class="card__footer-content">
-    <%= f.submit t(".save"), class: "button button--confirm" %>
-  </div>
-<% end %>
+  <% end %>
+</div>

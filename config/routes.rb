@@ -22,7 +22,7 @@ Rails.application.routes.draw do
       resources :user_roles, only: [:index, :create, :update, :destroy], shallow: true
       resources :map_tokens, only: [:index, :create, :update, :destroy], shallow: true
       namespace :import do
-        resources :operations, only: [:new, :create, :show], shallow: true, namespace: :import
+        resources :operations, only: [:new, :create, :show, :update, :destroy], shallow: true, namespace: :import
       end
     end
     resources :layers, except: [:index, :new] do

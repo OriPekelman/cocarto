@@ -4,12 +4,39 @@ module Importers
   class ImportGlobalError < StandardError; end
 
   class Base
-    def initialize(configuration, source, author, **options)
+    def initialize(configuration, source, author, cache_key = nil, **options)
       @configuration = configuration
       @source = source
       @author = author
+      @cache_key = cache_key
     end
 
+    def self.support
+      raise NotImplementedError
+      # {
+      #   public: bool,                  # appears in the UI selection
+      #   remote_only: bool,             # a remote service (the source file can not be downloaded)
+      #   multiple_layers: bool,         # source has multiple sheets (that can be imported at once to multiple layers)
+      #   indeterminate_geometry: bool   # source data does not clearly encode geometry
+      # }
+    end
+
+    ## Source Analysis (Implemented by subclasses)
+
+    # returns guessed attributes for Import::Configuration
+    def _source_configuration = {}
+
+    # Source layer names
+    def _source_layers = raise NotImplementedError
+
+    # Column names of a specific source layer
+    def _source_columns(source_layer_name) = raise NotImplementedError
+
+    # The GeometryParsing::GeometryAnalysis of a specific source layer. We want to guess the format and columns if indeterminate, and we want the geometry type in any case.
+    def _source_geometry_analysis(source_layer_name, columns: nil, format: nil) = raise NotImplementedError
+
+    ## Layer import
+    #
     def import_rows(report)
       @report = report
       @mapping = @report.mapping
@@ -55,7 +82,7 @@ module Importers
 
       did_save = row.save
 
-      @report.add_entity_result(index, did_save, errors: row.errors, warnings: row.warnings)
+      @report.add_entity_result(index, did_save, new_record: row.id_previously_was.nil?, errors: row.errors, warnings: row.warnings)
     end
 
     # fast mode

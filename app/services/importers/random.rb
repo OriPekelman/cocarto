@@ -1,6 +1,26 @@
 module Importers
   class Random < Base
-    SUPPORTED_SOURCES = %i[local_source_file]
+    def self.support = {
+      public: false,
+      remote_only: false,
+      multiple_layers: false,
+      indeterminate_geometry: false,
+      mimes: %w[application/json]
+    }
+
+    def _source_layers
+      @configuration.map.layers.pluck(:name)
+    end
+
+    def _source_columns(source_layer_name)
+      target_layer = @configuration.map.layers.find_by(name: source_layer_name)
+      target_layer.fields.pluck(:label, :field_type).to_h
+    end
+
+    def _source_geometry_analysis(source_layer_name, columns: nil, format: nil)
+      target_layer = @configuration.map.layers.find_by(name: source_layer_name)
+      GeometryParsing::GeometryAnalysis.new(type: target_layer.geometry_type)
+    end
 
     def _import_rows
       # @source is a json string with keys:

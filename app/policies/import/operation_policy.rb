@@ -5,6 +5,16 @@ class Import::OperationPolicy < ApplicationPolicy
 
   def show? = create?
 
+  def update? = create?
+
+  def destroy? = create?
+
+  class Scope < Scope
+    def resolve
+      scope.joins(:map).where(maps: user.maps.where(user_roles: {role_type: [:owner, :editor, :contributor]}))
+    end
+  end
+
   private
 
   def map_access
