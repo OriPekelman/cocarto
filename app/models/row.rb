@@ -289,9 +289,16 @@ class Row < ApplicationRecord
     # Note: A Collection geometry of only one feature is invalid for RGeo; this method is called before validation.
     if geometry.is_a? RGeo::Feature::GeometryCollection
       if geometry.unsafe_size > 1 # See RGeo::ImplHelper::ValidityCheck; we don’t want to check for validity here.
-        warnings.add(:geometry, :multiple_items)
+        if layer.geometry_line_string?
+          warnings.add(:geometry, :multiple_line_strings_merged)
+          self.geometry = RGEO_FACTORY.line_string(geometry.flat_map(&:points))
+        else
+          warnings.add(:geometry, :multiple_items)
+          self.geometry = geometry.first
+        end
+      else
+        self.geometry = geometry.first
       end
-      self.geometry = geometry.first
     end
   end
 

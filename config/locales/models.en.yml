@@ -115,6 +115,7 @@ en:
               format: "%{message}"
               invalid: The geometry is invalid. (%{reason})
               multiple_items: The geometry being added has multiple elements; only the first one will be used.
+              multiple_line_strings_merged: The geometry being added is a multi line; it will be merged as a single line string.
               required: The geometry is required.
         user:
           attributes:

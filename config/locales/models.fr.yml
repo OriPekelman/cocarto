@@ -115,6 +115,7 @@ fr:
               format: "%{message}"
               invalid: La géométrie est invalide. (%{reason})
               multiple_items: La géométrie ajoutée a plusieurs éléments ; seul le premier sera pris en compte.
+              multiple_line_strings_merged: La géométrie ajoutée est une multi-ligne ; elle est importée sous forme réunifiée.
               required: La géométrie est requise.
         user:
           attributes:
