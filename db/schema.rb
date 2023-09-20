@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_06_151746) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_20_143302) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -34,6 +34,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_06_151746) do
     "fetching",
     "importing",
     "done",
+    "started",
   ], force: :cascade
 
   create_enum :import_source_type, [

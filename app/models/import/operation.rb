@@ -20,7 +20,7 @@
 #
 class Import::Operation < ApplicationRecord
   # Attributes
-  enum :status, {ready: "ready", fetching: "fetching", importing: "importing", done: "done"}
+  enum :status, {ready: "ready", started: "started", fetching: "fetching", importing: "importing", done: "done"}
   serialize :global_error
 
   # Relations
@@ -79,6 +79,7 @@ class Import::Operation < ApplicationRecord
   end
 
   def import(author)
+    update!(status: :started)
     Job.perform_later(id, author)
   end
 
