@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+#
+# Install system dependencies
+#
+
 function linux() {
   sudo apt install graphviz
   sudo apt install npm nodejs
@@ -13,6 +17,7 @@ function macos() {
   brew install npm node
   brew install redis
   brew install vips ffmpeg mupdf-tools
+  brew upgrade ruby-build
 }
 
 case $(uname -s) in
@@ -21,3 +26,7 @@ case $(uname -s) in
     *)          echo "Unknow system '$(uname -s)'"; exit 1
 esac
 
+#
+# Install the required ruby version
+#
+rbenv install --skip-existing `cat .ruby-version`
