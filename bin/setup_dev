@@ -21,4 +21,3 @@ case $(uname -s) in
     *)          echo "Unknow system '$(uname -s)'"; exit 1
 esac
 
-npm install
