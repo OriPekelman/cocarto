@@ -12,11 +12,7 @@ function linux() {
 }
 
 function macos() {
-  brew install postgis
-  brew install graphviz
-  brew install npm node
-  brew install redis
-  brew install vips ffmpeg mupdf-tools
+  brew install postgis graphviz npm node redis vips ffmpeg mupdf-tools
   brew upgrade ruby-build
 }
 
