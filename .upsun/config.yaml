@@ -97,6 +97,7 @@ applications:
       build: |
         set -eux
         n lts
+        bundle install
         hash -r
         npm i
         exec rake assets:precompile
