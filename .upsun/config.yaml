@@ -96,7 +96,7 @@ applications:
       # More information: https://docs.upsun.com/create-apps/hooks/hooks-comparison.html#build-hook
       build: |
         set -eux
-        n auto
+        n lts
         hash -r
         npm i
         exec rake assets:precompile
