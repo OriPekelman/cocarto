@@ -25,6 +25,9 @@ applications:
     # Mounts define directories that are writable after the build is complete.
     # More information: https://docs.upsun.com/create-apps/app-reference.html#mounts
     mounts:
+       "/storage": # Represents the path in the app.
+         source: "local" # "local" sources are unique to the app, while "service" sources can be shared among apps.
+         source_path: "storage" # The subdirectory within the mounted disk (the source) where the mount should point.
        "/tmp": # Represents the path in the app.
          source: "local" # "local" sources are unique to the app, while "service" sources can be shared among apps.
          source_path: "tmp" # The subdirectory within the mounted disk (the source) where the mount should point.
