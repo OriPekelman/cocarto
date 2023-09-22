@@ -5,7 +5,7 @@ class Importers::GeometryParsingTest < ActiveSupport::TestCase
     test "wkt column" do
       geom = Importers::GeometryParsing
         .extract_geometry({"geometry" => "POINT (10 20)"},
-          "geometry",
+          %w[geometry],
           :wkt)
 
       assert_equal RGEO_FACTORY.point(10, 20), geom

@@ -13,7 +13,7 @@ module Importers
 
     def extract_geometry(values, columns, format) # raises ImportGeometryError
       geometry_values = values.values_at(*columns).compact
-      return if geometry_values.size != Array(columns).size
+      return if geometry_values.size != columns.size
 
       PARSERS[format.to_sym].call(*geometry_values)
     rescue JSON::ParserError, RGeo::Error::ParseError
