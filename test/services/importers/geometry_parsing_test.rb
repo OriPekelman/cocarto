@@ -49,5 +49,21 @@ class Importers::GeometryParsingTest < ActiveSupport::TestCase
       assert_equal :xy, analysis.format
       assert_equal "Point", analysis.type
     end
+
+    test "auto analyse with different casing" do
+      analysis = Importers::GeometryParsing.analyse_geometry({"X" => "10", "Y" => "20"})
+
+      assert_equal RGEO_FACTORY.point(10, 20), analysis.geometry
+      assert_equal %w[X Y], analysis.columns
+      assert_equal :xy, analysis.format
+    end
+
+    test "analyse with specified columns enforce casing" do # rubocop: disable Minitest/MultipleAssertions
+      analysis = Importers::GeometryParsing.analyse_geometry({"coord1" => "10", "coord2" => "20", "COORD1" => "15"},
+        columns: %w[coord1 coord2], format: :xy)
+
+      assert_equal RGEO_FACTORY.point(10, 20), analysis.geometry
+      assert_equal %w[coord1 coord2], analysis.columns
+    end
   end
 end

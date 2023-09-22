@@ -48,31 +48,35 @@ module Importers
     # Find a working strategy to extract a geometry from the passed values
     # Returns the columns, format, type of geometry (and the found geometry)
     def analyse_geometry(values, columns: nil, format: nil)
-      geometry = nil
-      working_strategy = nil
-
-      strategies = if columns.present? && format.present?
-        [{columns: columns, format: format}]
-      else
-        STRATEGIES
-      end
-
-      strategies.each do |strategy|
-        geometry = extract_geometry(values, strategy[:columns], strategy[:format])
-        if geometry
-          working_strategy = strategy
-          break
+      if columns.present? && format.present?
+        begin
+          geometry = extract_geometry(values, columns, format)
+          if geometry
+            return GeometryAnalysis.new(columns: columns, format: format, type: geometry.geometry_type.type_name, geometry: geometry)
+          end
+        rescue ImportGeometryError
+          # Ignore error when analysing
         end
-      rescue ImportGeometryError
-        # Ignore error when analysing
+      else
+        STRATEGIES.each do |strategy|
+          # Look for different-casing keys
+          existing_columns = strategy[:columns].map { |col| values.to_h.keys.find { |k| k.casecmp(col) == 0 } || col }
+
+          geometry = extract_geometry(values, existing_columns, strategy[:format])
+          if geometry
+            return GeometryAnalysis.new(
+              columns: existing_columns,
+              format: strategy[:format],
+              type: geometry.geometry_type.type_name,
+              geometry: geometry
+            )
+          end
+        rescue ImportGeometryError
+          # Ignore error when analysing
+        end
       end
 
-      GeometryAnalysis.new(
-        columns: working_strategy&.fetch(:columns),
-        format: working_strategy&.fetch(:format),
-        type: geometry&.geometry_type&.type_name,
-        geometry: geometry
-      )
+      GeometryAnalysis.new
     end
   end
 end
