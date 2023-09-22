@@ -69,7 +69,7 @@ applications:
     variables:
       env:
         N_PREFIX: "/app/.global"
-        
+        RAILS_ENV: "prod"
 
     # Outbound firewall rules for the application. More information: https://docs.upsun.com/create-apps/app-reference.html#firewall
     # firewall:
