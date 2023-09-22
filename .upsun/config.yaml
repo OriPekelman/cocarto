@@ -74,6 +74,33 @@ applications:
         N_PREFIX: "/app/.global"
         RAILS_ENV: "production"
         RAILS_LOG_TO_STDOUT: "true"
+        # Maplibre style
+        DEFAULT_MAP_STYLE: ""
+
+        # Email setup
+        PUBLIC_URL : ""
+        EMAIL_FROM :  ""
+        SMTP_USERNAME: ""
+        SMTP_PASSWORD: ""
+        SMTP_PORT : 25
+
+        # Sentry
+        SENTRY_DSN: "" # server-side ruby on rails
+        SENTRY_PUBLIC_KEY: "" # client-side javascript
+
+        # Debug flags
+        COCARTO_DEBUG_SENTRY: "" # Enable Sentry in development
+        COCARTO_DEBUG_SMTP: "" # Really send emails SMTP in development
+        COCARTO_DEBUG_WORKAROUND_HEADLESS_CHROME_WEBGL_MAC: "" # Workaround for chrome mac breaking webgl in headless
+
+        # S3 configuration for active storage
+        # Example is for a bucket called cocarto-prod on scaleway
+        COCARTO_S3_ENDPOINT: https://cocarto-prod.s3.fr-par.scw.cloud
+        COCARTO_S3_BUCKET: cocarto-prod
+        COCARTO_S3_ACCESS_KEY:
+        COCARTO_S3_SECRET_KEY:
+        COCARTO_S3_REGION: fr-par
+
 
     # Outbound firewall rules for the application. More information: https://docs.upsun.com/create-apps/app-reference.html#firewall
     # firewall:
