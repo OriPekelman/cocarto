@@ -48,6 +48,7 @@ applications:
       # More information: https://docs.upsun.com/create-apps/app-reference.html#locations
       locations:
         "/":
+          root: 'public'
           passthru: true
     workers:
       good_job:
