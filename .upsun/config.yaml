@@ -117,9 +117,7 @@ applications:
     # More information: https://docs.upsun.com/create-apps/app-reference.html#dependencies
     dependencies:
       nodejs:
-        n: "*"
-        npx: "*"
-        sharp: "*"
+        n: "*" # Allow installing the latest version of Node.js
 
     # Hooks allow you to customize your code/environment as the project moves through the build and deploy stages
     # More information: https://docs.upsun.com/create-apps/app-reference.html#hooks
