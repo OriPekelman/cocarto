@@ -26,11 +26,11 @@ class SplitMapTokensAndUserRoles < ActiveRecord::Migration[7.0]
     end
 
     up_only do
-      AccessGroup.includes(:map, :users).where(token: nil).each do |group|
+      AccessGroup.includes(:map, :users).where(token: nil).find_each do |group|
         UserRole.create!(map: group.map, role_type: group.role_type, user: group.users[0])
       end
 
-      AccessGroup.includes(:map, :users).where.not(token: nil).each do |group|
+      AccessGroup.includes(:map, :users).where.not(token: nil).find_each do |group|
         MapToken.create!(map: group.map, role_type: group.role_type, name: group.name, token: group.token, access_count: group.users.count)
       end
     end

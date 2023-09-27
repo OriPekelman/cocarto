@@ -3,7 +3,7 @@ class AddFieldOrder < ActiveRecord::Migration[7.0]
     add_column :fields, :sort_order, :integer
 
     up_only do
-      Layer.all.each do |layer|
+      Layer.find_each do |layer|
         layer.fields.order(:created_at).each_with_index do |field, index|
           field.update_column(:sort_order, index) # rubocop:disable Rails/SkipsModelValidations
         end

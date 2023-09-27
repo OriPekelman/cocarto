@@ -86,7 +86,7 @@ class Import::Mapping < ApplicationRecord
   private
 
   def reset_columns_when_layer_changes
-    return unless layer_id_changed? || (source_layer_name_changed? && !source_layer_name_was.nil?)
+    return unless layer_id_changed? || (source_layer_name_changed? && !source_layer_name_was.nil?)  # rubocop:disable Style/UnlessLogicalOperators
 
     self.fields_columns = nil
     self.geometry_columns = nil

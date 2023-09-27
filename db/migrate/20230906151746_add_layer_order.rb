@@ -3,7 +3,7 @@ class AddLayerOrder < ActiveRecord::Migration[7.0]
     add_column :layers, :sort_order, :integer
 
     up_only do
-      Map.all.each do |map|
+      Map.find_each do |map|
         map.layers.order(:created_at).each_with_index do |layer, index|
           layer.update_column(:sort_order, index) # rubocop:disable Rails/SkipsModelValidations
         end

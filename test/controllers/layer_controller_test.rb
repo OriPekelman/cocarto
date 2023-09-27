@@ -61,7 +61,7 @@ class LayerControllerTest < ActionDispatch::IntegrationTest
       sign_in users(:reclus)
       get url_for(controller: :layers, action: :mvt, id: layers(:restaurants).id, x: 518, y: 352, z: 10)
 
-      assert @response.body.size > 0
+      assert_operator @response.body.size, :>, 0
     end
 
     test "mvt of a layer with no data because there is nothing on that tile" do
