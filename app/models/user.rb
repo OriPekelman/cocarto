@@ -64,7 +64,7 @@ class User < ApplicationRecord
   ## These methods are overridden in MapTokenAuthenticatable, for anonymous Users
   #
   def display_name
-    email.split("@")[0]
+    super || email.split("@")[0]
   end
 
   def access_for_map(map)

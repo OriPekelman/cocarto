@@ -53,6 +53,15 @@ class UserTest < ActiveSupport::TestCase
       assert_not_predicate u2, :persisted?
       assert_equal [{error: :taken, value: "a@a.a"}], u2.errors.details[:email]
     end
+
+    test "default display name" do
+      user = User.create(email: "toto@name.com", password: "secret")
+
+      assert_equal "toto", user.display_name
+      user.display_name = "titi"
+
+      assert_equal "titi", user.display_name
+    end
   end
 
   class Hooks < UserTest
