@@ -61,6 +61,11 @@ class User < ApplicationRecord
     super.nil? ? true : super
   end
 
+  def update_without_password(params, *options)
+    params.delete(:email)
+    super(params)
+  end
+
   ## These methods are overridden in MapTokenAuthenticatable, for anonymous Users
   #
   def display_name
