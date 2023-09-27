@@ -19,7 +19,7 @@ applications:
     # side is in the form `<service name>:<endpoint name>`.
     # More information: https://docs.upsun.com/create-apps/app-reference.html#relationships
     relationships:
-      postgres: "db:postgresql"
+      postgres: "postgres:postgresql"
       redis: "redis:redis"
 
     # Mounts define directories that are writable after the build is complete.
@@ -136,7 +136,7 @@ applications:
       # More information: https://docs.upsun.com/create-apps/hooks/hooks-comparison.html#deploy-hook
       deploy: |
         set -eux
-        #bundle exec rails db:migrate
+        bundle exec rake db:prepare
         
 
       # The post_deploy hook is run after the app container has been started and after it has started accepting requests.
@@ -160,7 +160,7 @@ applications:
 # More information: https://docs.upsun.com/add-services.html
 # Full list of available services: https://docs.upsun.com/add-services.html#available-services
 services:
-  db:
+  postgres:
     type: postgresql:15 # All available versions are: 15, 14, 13, 12, 11
     configuration:
         extensions:
