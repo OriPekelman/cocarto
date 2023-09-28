@@ -130,6 +130,29 @@ class Import::MappingTest < ActiveSupport::TestCase
       assert_equal 2, layers(:restaurants).rows.count
       assert_equal 10, bastringue.reload.fields_values[fields(:restaurant_rating)]
     end
+
+    test "reimport using an integer field as id" do
+      import_mappings(:restaurants_geojson).update(reimport_field: fields(:restaurant_rating))
+      # Use geojson, not csv, because in csv everything is a string
+      attachable = attachable_data "restaurants.geojson", <<~GEOJSON
+        {"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[1,1]},
+        "properties":{"Name":"L’Atalante","Rating":9}}]}
+      GEOJSON
+      import_configurations(:restaurants_geojson).operations.create(local_source_file: attachable).import!(users(:reclus))
+
+      assert_equal "L’Atalante", rows(:antipode).fields_values[fields(:restaurant_name)]
+    end
+
+    test "reimport using a string field as id" do
+      import_mappings(:restaurants_geojson).update(reimport_field: fields(:restaurant_name))
+      attachable = attachable_data "restaurants.geojson", <<~GEOJSON
+        {"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[1,1]},
+        "properties":{"Name":"L’Antipode","Rating":7}}]}
+      GEOJSON
+      import_configurations(:restaurants_geojson).operations.create(local_source_file: attachable).import!(users(:reclus))
+
+      assert_equal 7, rows(:antipode).fields_values[fields(:restaurant_rating)]
+    end
   end
 
   class BulkMode < self

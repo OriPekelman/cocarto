@@ -72,7 +72,7 @@ module Importers
     # slow mode
     def create_or_update_row(geometry, values, index)
       row = if @mapping.reimport_field.present?
-        @layer.rows.find_by("values->>? ilike ? ", @mapping.reimport_field.id, values[@mapping.reimport_field.id])
+        @layer.rows.find_by("values->>? = ?::text", @mapping.reimport_field.id, values[@mapping.reimport_field.id])
       end
       row ||= @layer.rows.new
 
