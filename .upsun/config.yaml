@@ -76,7 +76,7 @@ applications:
         RAILS_ENV: "production"
         RAILS_LOG_TO_STDOUT: "true"
         # Maplibre style
-        DEFAULT_MAP_STYLE: ""
+        DEFAULT_MAP_STYLE: "https://demotiles.maplibre.org/style.json"
 
         # Email setup
         PUBLIC_URL : ""
