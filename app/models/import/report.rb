@@ -85,18 +85,6 @@ class Import::Report < ApplicationRecord
       result.ignored = true
     end
     row_results[index] = result
-
-    # parsing_error is an Exception, just keep its name and message
-    # validation_errors and validation_warnings are instances of ActiveModel::Errors
-    # store the details and recreate using
-    # 0> other = ActiveModel::Errors.new(mapping.layer.rows.new)
-    # => #<ActiveModel::Errors []>
-    #
-    # 0> other.add(:geometry, :required) <--- loop on details
-    # => #<ActiveModel::Error attribute=geometry, type=required, options={}>
-    #
-    # 0> other.full_messages
-    # => ["The geometry is required."]
   end
 
   private
