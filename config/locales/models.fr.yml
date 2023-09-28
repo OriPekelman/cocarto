@@ -87,6 +87,7 @@ fr:
       user:
         maps: cartes
         rows: rangées
+        display_name: Nom affiché
       user_role:
         role_type: Rôle
       user_role/role_types:

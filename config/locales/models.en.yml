@@ -87,6 +87,7 @@ en:
       user:
         maps: maps
         rows: rows
+        display_name: Display name
       user_role:
         role_type: Role
       user_role/role_types:
