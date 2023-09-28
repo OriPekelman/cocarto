@@ -14,4 +14,4 @@ export REDIS_USERNAME=$(echo $RELATIONSHIPS_JSON | jq -r ".redis[0].username")
 export REDIS_PASSWORD=$(echo $RELATIONSHIPS_JSON | jq -r ".redis[0].password")
 export REDIS_CONNECTION=$(echo $RELATIONSHIPS_JSON | jq -r ".redis[0].scheme")
 export DATABASE_URL="postgres://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_DATABASE}"
-export REDIS_URL="${REDIS_CONNECTION}://${REDIS_HOST}:${REDIS_PORT}/${REDIS_DATABASE}"
+export REDIS_URL="${REDIS_CONNECTION}://${REDIS_HOST}:${REDIS_PORT}"
