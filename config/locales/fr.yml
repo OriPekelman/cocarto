@@ -142,6 +142,7 @@ fr:
       action_mastodon: Mastodon
       action_newsletter: Infolettre
       section_1_html: |
+        <h2>Accès facile</h2>
         <p>
           <b>cocarto</b> est un outil de saisie <b>collaborative</b> de données <b>structurées</b> et <b>géospatialisées</b>.
         </p>
@@ -152,6 +153,7 @@ fr:
           <li>les infrastructures cyclables dans le 19e à Paris.</li>
         </ul>
       section_2_html: |
+        <h2>Les cartographes vont aimer</h2>
         <span>Pas besoin d’être spécialiste pour créer une base de données <b>cohérente</b> et <b>réutilisable</b> :</span>
         <ul>
           <li>Une carte est composée de plusieurs couches d’objets géographiques homogènes : des points, tracés, polygones, territoires administratifs.</li>
@@ -162,6 +164,7 @@ fr:
           Les territoires administratifs sont référencés : pas d’ambigüité sur le code postal ou INSEE, ou sur l’orthographe.
         </p>
       section_3_html: |
+        <h2>Travailler ensemble</h2>
         <p>
           <b>cocarto</b> est pensé pour le travail d’équipe.
         </p>

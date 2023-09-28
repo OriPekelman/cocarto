@@ -142,6 +142,7 @@ en:
       action_mastodon: Mastodon
       action_newsletter: Newsletter
       section_1_html: |
+        <h2>Easy access</h2>
         <p>
           <b>cocarto</b> is a <b>collaborative</b> tool for collecting and managing <b>structured</b> and <b>geospatialized</b> data.
         </p>
@@ -152,6 +153,7 @@ en:
           <li>the cycling infrastructure in the 19th district of Paris.</li>
         </ul>
       section_2_html: |
+        <h2>Cartographers will love it</h2>
         <span>You don't need to be a specialist to create a <b>cohesive</b> and <b>reusable</b> database:</span>
         <ul>
           <li>A map is composed of several layers of homogeneous geographical objects: points, lines, polygons, administrative territories.</li>
@@ -162,6 +164,7 @@ en:
           The administrative territories are referenced: no ambiguity on the postal or INSEE code, or on the spelling.
         </p>
       section_3_html: |
+        <h2>Working together</h2>
         <p>
           <b>cocarto</b> is designed for teamwork.
         </p>
