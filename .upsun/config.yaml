@@ -86,11 +86,11 @@ applications:
         SMTP_PORT : 25
 
         # Sentry
-        #SENTRY_DSN: "" # server-side ruby on rails
-        #SENTRY_PUBLIC_KEY: "" # client-side javascript
+        SENTRY_DSN: "" # server-side ruby on rails
+        SENTRY_PUBLIC_KEY: "" # client-side javascript
 
         # Debug flags
-        #COCARTO_DEBUG_SENTRY: "" # Enable Sentry in development
+        COCARTO_DEBUG_SENTRY: false # Enable Sentry in development
         #COCARTO_DEBUG_SMTP: "" # Really send emails SMTP in development
         #COCARTO_DEBUG_WORKAROUND_HEADLESS_CHROME_WEBGL_MAC: "" # Workaround for chrome mac breaking webgl in headless
 
