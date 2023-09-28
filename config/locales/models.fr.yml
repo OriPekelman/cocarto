@@ -85,9 +85,9 @@ fr:
       territory_category:
         revision: version
       user:
+        display_name: Nom affiché
         maps: cartes
         rows: rangées
-        display_name: Nom affiché
       user_role:
         role_type: Rôle
       user_role/role_types:

@@ -85,9 +85,9 @@ en:
       territory_category:
         revision: revision
       user:
+        display_name: Display name
         maps: maps
         rows: rows
-        display_name: Display name
       user_role:
         role_type: Role
       user_role/role_types:
