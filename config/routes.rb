@@ -47,8 +47,12 @@ Rails.application.routes.draw do
     get "/presentation" => "pages#presentation"
     get "share/:token", to: "maps#shared", as: "map_shared"
     get "layers/:id/geojson", to: redirect("layers/%{id}.geojson")
-    get "/s/geodatadays", to: redirect("/share/dg4V524mFETB5Zoo")
+
+    # URLs specific to the instance on cocarto.com
     get "/s/infolettre", to: redirect("https://buttondown.email/cocarto")
+    get "/s/geodatadays", to: redirect("https://cocarto.com/share/dg4V524mFETB5Zoo")
+    get "/s/commune_de_paris", to: redirect("https://cocarto.com/share/kxw8CL5tD42Do26z"), as: "share_commune_de_paris"
+    get "/s/manifs_retraites", to: redirect("https://cocarto.com/share/xuzDBpYpv7jyH_aC"), as: "share_manifs_retraites"
   end
 
   if Rails.env.development?

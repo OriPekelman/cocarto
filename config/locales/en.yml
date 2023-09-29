@@ -136,9 +136,9 @@ en:
       set_center_and_zoom: Set center and zoom of the map
   pages:
     presentation:
-      action_create_account: Create an account
       action_email: Contact
       action_gitlab: Code
+      action_go_to_map: Display map
       action_mastodon: Mastodon
       action_newsletter: Newsletter
       section_1_html: |

@@ -136,9 +136,9 @@ fr:
       set_center_and_zoom: Définir centre et zoom de la carte
   pages:
     presentation:
-      action_create_account: Créer mon compte
       action_email: Contact
       action_gitlab: Code
+      action_go_to_map: Afficher la carte
       action_mastodon: Mastodon
       action_newsletter: Infolettre
       section_1_html: |
