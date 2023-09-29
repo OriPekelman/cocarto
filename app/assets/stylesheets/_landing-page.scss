@@ -20,6 +20,10 @@
 }
 
 @media (width <= 850px) {
+  .container--landing-page {
+    margin-top: 16px;
+  }
+
   .section--landing-page {
     flex-direction: column;
 
