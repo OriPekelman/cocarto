@@ -4,8 +4,10 @@
       <%= t(".section_1_html") %>
     </div>
     <div class="landing-section__block landing-section__block--illustration">
-      <%= image_tag("screenshots/map.jpg") %>
-      <%= link_to t('.action_go_to_map'), share_commune_de_paris_path, class: "button button--large button--confirm landing-section__call-to-action", target: "_blank" %>
+      <%= link_to share_commune_de_paris_path, target: "_blank", rel: "noopener" do %>
+        <%= image_tag("screenshots/map.jpg") %>
+        <%= content_tag :span, t(".action_go_to_map"), class: "button button--large button--confirm landing-section__call-to-action" %>
+      <% end %>
     </div>
   </div>
 
@@ -14,8 +16,10 @@
       <%= t(".section_2_html") %>
     </div>
     <div class="landing-section__block landing-section__block--illustration">
-      <%= image_tag("screenshots/table.png") %>
-      <%= link_to t('.action_go_to_map'), share_manifs_retraites_path, class: "button button--large button--confirm landing-section__call-to-action", target: "_blank" %>
+      <%= link_to share_manifs_retraites_path, target: "_blank", rel: "noopener" do %>
+        <%= image_tag("screenshots/table.png") %>
+        <%= content_tag :span, t(".action_go_to_map"), class: "button button--large button--confirm landing-section__call-to-action" %>
+      <% end %>
     </div>
   </div>
 
@@ -24,8 +28,10 @@
       <%= t(".section_3_html") %>
     </div>
     <div class="landing-section__block landing-section__block--illustration">
-      <%= image_tag("screenshots/cooperation.png") %>
-      <%= link_to t('.action_go_to_map'), share_commune_de_paris_path, class: "button button--large button--confirm landing-section__call-to-action", target: "_blank" %>
+      <%= link_to share_commune_de_paris_path, target: "_blank", rel: "noopener" do %>
+        <%= image_tag("screenshots/cooperation.png") %>
+        <%= content_tag :span, t(".action_go_to_map"), class: "button button--large button--confirm landing-section__call-to-action" %>
+      <% end %>
     </div>
   </div>
 
