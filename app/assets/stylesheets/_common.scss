@@ -100,7 +100,6 @@ body {
   /* APP SIZES */
   --header-height: 56px;
   --nav-height: 52px;
-  --footer-height: 2.4rem;
   --border-radius: 4px;
   --content-max-width: 1440px;
   --content-padding: 4rem;
@@ -155,10 +154,11 @@ main {
 }
 
 .footer__application {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
   align-items: center;
   padding-inline: 8px;
-  display: flex;
-  min-height: var(--footer-height);
   background-color: var(--color-bg-ambient-30);
   justify-content: center;
   font-size: 14px;
