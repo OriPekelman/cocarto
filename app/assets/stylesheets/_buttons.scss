@@ -230,27 +230,17 @@
   text-align: center;
   font-family: var(--font-sans);
   font-size: 16px;
+  filter: brightness(1.2) grayscale(1);
+  transition: filter 0.3s;
 
   svg {
     width: 56px;
     height: 56px;
-    filter: brightness(1.2) grayscale(1);
     color: var(--color-grey-70);
-    transition: filter 0.3s;
-  }
-
-  span {
-    visibility: hidden;
   }
 
   &:hover:not([disabled]) {
-    svg {
-      filter: revert;
-    }
-
-    span {
-      visibility: revert;
-    }
+    filter: revert;
   }
 }
 
