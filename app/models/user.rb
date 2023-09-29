@@ -61,6 +61,7 @@ class User < ApplicationRecord
     super.nil? ? true : super
   end
 
+  # override from Devise::Models::DatabaseAuthenticatable
   def update_without_password(params, *options)
     params.delete(:email)
     super(params)

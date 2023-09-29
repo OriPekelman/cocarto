@@ -32,7 +32,7 @@
       <% end %>
 
       <div class="form__field">
-        <%= f.label :password, t("devise.passwords.password") %> <i><%= t("devise.passwords.change_password_if_you_want") %></i>
+        <%= f.label :password, t("devise.passwords.new_password") %> <i><%= t("devise.passwords.change_password_if_you_want") %></i>
         <%= f.password_field :password, autocomplete: "new-password" %>
         <% if @minimum_password_length %>
           <i><%= @minimum_password_length %> <%= t("devise.registrations.characters_minimum") %></i>
