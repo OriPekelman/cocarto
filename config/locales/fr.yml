@@ -155,8 +155,8 @@ fr:
         <h2>Accès facile</h2>
         <span>Pas besoin d’être spécialiste pour créer une base de données <b>cohérente</b> et <b>réutilisable</b> :</span>
         <ul>
-          <li>Une carte est composée de plusieurs couches d’objets géographiques homogènes : des points, tracés, polygones, territoires administratifs.</li>
-          <li>Chaque couche définit des attributs typés : nombres, texte, dates, liste, booléens, images…</li>
+          <li>Une carte est composée de plusieurs couches d’objets géographiques homogènes : des points, tracés, polygones, territoires administratifs.</li>
+          <li>Chaque couche définit des attributs typés : nombres, texte, dates, liste, booléens, images…</li>
         </ul>
         <p>
           cocarto garantit la <b>validité des données</b> saisies. Il est impossible de mettre du texte pour un attribut booléen ou un nombre.<br>
