@@ -2,12 +2,10 @@ MAKEFLAGS += --jobs 8 --output-sync --keep-going
 .DEFAULT_GOAL := help
 
 install: ## Install or update dependencies
+	bin/setup_system
 	bin/setup
 
 setup: install
-
-setup-dev: ## Install development dependencies
-	bin/setup_dev
 
 setup-pg-users: ## Creates the required postgresql users
 	bin/setup_pg_users
@@ -83,4 +81,4 @@ import-france-territories: ## Import Régions, Départements and Communes
 help: ## Display this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-.PHONY: install setup setup-dev setup-pg-users dev lint lint-bundler lint-node $(LINT-BUNDLER) $(LINT-NODE) lint-active-record autocorrect $(AUTOCORRECT) test $(TEST) help
+.PHONY: install setup setup-pg-users dev lint lint-bundler lint-node $(LINT-BUNDLER) $(LINT-NODE) lint-active-record autocorrect $(AUTOCORRECT) test $(TEST) help

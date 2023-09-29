@@ -43,10 +43,9 @@ Those values can also be modified in `config/database.yml`.
 
 On a new installation, run
 
-    make setup-dev 
     make setup
 
-That command will install the gem `bundler`, the dependencies and will initialize the database. The database will contain two users:
+That command will install the project ruby version, the gem `bundler`, the dependencies and will initialize the database. The database will contain two users:
 
 * `elisee.reclus@commune.paris`, password: `refleurir`
 * `cassini@carto.gouv.fr`, password: `générations12345`

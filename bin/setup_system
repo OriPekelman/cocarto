@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 #
-# Install system dependencies
+# Install Ruby and system dependencies
 #
 
 function linux() {
