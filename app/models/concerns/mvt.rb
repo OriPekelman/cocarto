@@ -112,7 +112,10 @@ module Mvt
           type: "line",
           paint: {
             "line-color": "#fff",
-            "line-width": 6,
+            "line-width": ["interpolate", ["linear"], ["zoom"],
+              10, 6,
+              15, 9,
+              20, 12],
             "line-opacity": ["match", ["feature-state", "state"], "hover", 1, 0]
           },
           "source-layer": TILE_LAYER_ID
@@ -123,7 +126,10 @@ module Mvt
             type: "line",
             paint: {
               "line-color": color,
-              "line-width": 2
+              "line-width": ["interpolate", ["linear"], ["zoom"],
+                10, 1.5,
+                15, 3,
+                20, 6]
             },
             "source-layer": TILE_LAYER_ID
           }]
@@ -144,7 +150,10 @@ module Mvt
             type: "line",
             paint: {
               "line-color": color,
-              "line-width": 2
+              "line-width": ["interpolate", ["linear"], ["zoom"],
+                10, 1.5,
+                15, 3,
+                20, 6]
             },
             "source-layer": TILE_LAYER_ID
           }]
