@@ -114,7 +114,6 @@ module Mvt
             "line-color": "#fff",
             "line-width": ["interpolate", ["linear"], ["zoom"],
               10, 6,
-              15, 9,
               20, 12],
             "line-opacity": ["match", ["feature-state", "state"], "hover", 1, 0]
           },
