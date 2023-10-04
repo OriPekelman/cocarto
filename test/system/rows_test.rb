@@ -86,7 +86,7 @@ class RowsTest < ApplicationSystemTestCase
     end
   end
 
-  test "edit a row" do
+  test "edit a row" do # rubocop:disable Minitest/MultipleAssertions
     sign_in_as(users("reclus"), "refleurir")
 
     visit layer_path(id: layers(:restaurants))
@@ -95,8 +95,10 @@ class RowsTest < ApplicationSystemTestCase
     assert_selector "input[value='L’Antipode']", count: 1
 
     find("input[value='L’Antipode']").set("Le Bastringue").native.send_keys(:return)
+    check "row[fields_values][#{fields("restaurant_decision").id}]"
 
     assert_selector "input[value='Le Bastringue']", count: 1
+    assert_checked_field "row[fields_values][#{fields("restaurant_decision").id}]"
 
     within("##{dom_id(rows(:antipode))}") do
       click_on "Edit…"
@@ -104,9 +106,12 @@ class RowsTest < ApplicationSystemTestCase
 
     within(".modal") do
       find("input[value='Le Bastringue']").set("Le Hang’Art")
+      uncheck "row[fields_values][#{fields("restaurant_decision").id}]"
+
       click_on "Save"
     end
 
     assert_selector "input[value='Le Hang’Art']", count: 1
+    assert_unchecked_field "row[fields_values][#{fields("restaurant_decision").id}]"
   end
 end
