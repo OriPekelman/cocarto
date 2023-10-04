@@ -61,9 +61,13 @@ class FieldValueComponent < ViewComponent::Base
   private
 
   def opts
+    autosave = @field.field_type.in? %w[boolean enum] # checkboxes and selects are saved immediately
+    action = autosave ? "row#save" : "row#setDirty focusout->row#save"
+
     {
       data: {
-        action: "input->row#setDirty focusout->row#save",
+        action: action,
+        row_autosave_param: autosave,
         restricted_target: "restricted",
         restricted_authorizations: @field.locked? ? %W[locked].to_json : RowPolicy.authorizations(@row)
       },
