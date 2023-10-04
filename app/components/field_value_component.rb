@@ -22,7 +22,9 @@ class FieldValueComponent < ViewComponent::Base
     when "boolean"
       full_name = "#{dom_id(@row)}-#{field_name}"
       label_tag full_name do
-        check_box_tag field_name, "1", @value, opts.merge(id: sanitize_to_id(full_name))
+        hidden_field = hidden_field_tag(field_name, "0", opts) # needed to allow unchecking checkboxes, see #338
+        check_box = check_box_tag(field_name, "1", @value, opts.merge(id: sanitize_to_id(full_name)))
+        hidden_field + check_box
       end
     when "enum"
       select_tag field_name, options_for_select(@field.enum_values, @value), opts.merge(include_blank: true)
