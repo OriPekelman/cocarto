@@ -80,10 +80,9 @@ module Mvt
             "circle-color": "#fff",
             "circle-radius": [
               "interpolate", ["linear"], ["zoom"],
-              4, 2.8,
-              5, 4.8,
-              6, 6.8,
-              7, 7.8
+              4, 2.5,
+              6, 6,
+              7, 8
             ],
             "circle-opacity": ["match", ["feature-state", "state"], "hover", 1, 0]
           },
@@ -98,7 +97,6 @@ module Mvt
               "circle-radius": [
                 "interpolate", ["linear"], ["zoom"],
                 4, 1.5,
-                5, 3,
                 6, 4.5,
                 7, 6
               ]
@@ -119,7 +117,6 @@ module Mvt
               "circle-stroke-width": [
                 "interpolate", ["linear"], ["zoom"],
                 6.9, 0,
-                # 6.1, 0.5,
                 7, 1
               ],
               "circle-opacity": 0
