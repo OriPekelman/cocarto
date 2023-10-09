@@ -78,7 +78,13 @@ module Mvt
           type: "circle",
           paint: {
             "circle-color": "#fff",
-            "circle-radius": 8,
+            "circle-radius": [
+              "interpolate", ["linear"], ["zoom"],
+              4, 2.8,
+              5, 4.8,
+              6, 6.8,
+              7, 7.8
+            ],
             "circle-opacity": ["match", ["feature-state", "state"], "hover", 1, 0]
           },
           "source-layer": TILE_LAYER_ID
@@ -89,7 +95,13 @@ module Mvt
             type: "circle",
             paint: {
               "circle-color": color,
-              "circle-radius": 6
+              "circle-radius": [
+                "interpolate", ["linear"], ["zoom"],
+                4, 1.5,
+                5, 3,
+                6, 4.5,
+                7, 6
+              ]
             },
             "source-layer": TILE_LAYER_ID
           },
@@ -99,8 +111,17 @@ module Mvt
             type: "circle",
             paint: {
               "circle-stroke-color": "#fff",
-              "circle-radius": 4,
-              "circle-stroke-width": 1,
+              "circle-radius": [
+                "interpolate", ["linear"], ["zoom"],
+                5, 0,
+                7, 4
+              ],
+              "circle-stroke-width": [
+                "interpolate", ["linear"], ["zoom"],
+                6.9, 0,
+                # 6.1, 0.5,
+                7, 1
+              ],
               "circle-opacity": 0
             },
             "source-layer": TILE_LAYER_ID
