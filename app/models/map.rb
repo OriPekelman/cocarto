@@ -12,6 +12,10 @@
 #
 class Map < ApplicationRecord
   include Mvt::MapStyle
+  searchable do
+    text :name
+    time    :created_at
+  end
 
   # Relations
   has_many :user_roles, dependent: :destroy, inverse_of: :map

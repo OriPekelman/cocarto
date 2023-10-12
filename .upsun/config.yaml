@@ -21,18 +21,19 @@ applications:
     relationships:
       postgres: "db:postgresql"
       redis: "redis:redis"
+      solrsearch: "searchsolr:solr"
 
     # Mounts define directories that are writable after the build is complete.
     # More information: https://docs.upsun.com/create-apps/app-reference.html#mounts
     mounts:
        "/storage": # Represents the path in the app.
-         source: "local" # "local" sources are unique to the app, while "service" sources can be shared among apps.
+         source: "shared" # "local" sources are unique to the app, while "service" sources can be shared among apps.
          source_path: "storage" # The subdirectory within the mounted disk (the source) where the mount should point.
        "/tmp": # Represents the path in the app.
-         source: "local" # "local" sources are unique to the app, while "service" sources can be shared among apps.
+         source: "shared" # "local" sources are unique to the app, while "service" sources can be shared among apps.
          source_path: "tmp" # The subdirectory within the mounted disk (the source) where the mount should point.
        "/log": # Represents the path in the app.
-         source: "local" # "local" sources are unique to the app, while "service" sources can be shared among apps.
+         source: "shared" # "local" sources are unique to the app, while "service" sources can be shared among apps.
          source_path: "log" # The subdirectory within the mounted disk (the source) where the mount should point.
 
     # The web key configures the web server running in front of your app.
@@ -167,8 +168,10 @@ services:
             - postgis
   redis:
     type: redis:7.0
-
-
+  searchsolr:
+    type: solr:9.2
+    configuration:
+        core_config: !archive "solr/conf/"
 
 # The routes of the project.
 #
